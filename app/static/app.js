@@ -32,7 +32,8 @@
     criticality: { high: '高', medium: '中', low: '低' },
     trust: {
       authoritative: '权威来源', vendor_blog: '厂商博客', preprint: '预印本',
-      community_standard: '社区标准', government: '政府来源', fixture: '测试夹具'
+      scholarly_index: '学术索引', community_standard: '社区标准',
+      government: '政府来源', fixture: '测试夹具'
     },
     dimension: {
       affected_versions: '受影响版本范围', remediation: '修复版本 / 缓解',
@@ -1725,7 +1726,7 @@
     });
     const selectedCount = h('span', { class: 'muted' });
     const startBtn = h('button', { type: 'button', class: 'btn btn--primary', onclick: () => startCollect(false) }, icon('play'), '开始采集选中来源');
-    const allBtn = h('button', { type: 'button', class: 'btn', onclick: () => startCollect(true) }, icon('play'), '采集全部来源');
+    const allBtn = h('button', { type: 'button', class: 'btn', onclick: () => startCollect(true) }, icon('play'), '采集推荐来源');
     const refreshBtn = h('button', { type: 'button', class: 'btn btn--ghost', onclick: () => { refreshBtn.disabled = true; loadSources().finally(() => { refreshBtn.disabled = false; }); } }, icon('refresh'), '刷新来源列表');
     const seedBtn = h('button', { type: 'button', class: 'btn btn--ghost', onclick: () => runSeed(seedBtn, state.dom.collect.seedResult) }, icon('plus'), '初始化演示数据');
 
@@ -1753,7 +1754,7 @@
           selectedCount,
           h('span', { class: 'spacer' }),
           startBtn, allBtn, refreshBtn, seedBtn),
-        h('p', { class: 'dim' }, '数据源清单与 URL 固定在后端注册表，本界面不接收任何 URL 输入；采集为增量方式。'),
+        h('p', { class: 'dim' }, '推荐来源自动排除需要 Token 的 GitHub Advisory 和当前网络不稳定的 arXiv；仍可在表格中手动选择这些来源。'),
         seedResult),
       statusBox,
       tableBox,
@@ -1817,7 +1818,9 @@
 
       return [
         checkboxLabel,
-        h('div', {}, h('div', {}, textOr(source.name, source.id)), mono(source.id, 'dim')),
+        h('div', {},
+          h('div', {}, textOr(source.name, source.id)),
+          h('div', {}, mono(source.id, 'dim'), ' ', source.auto_default === false ? badge('plain', '需手动选择') : badge('ok', '推荐'))),
         h('div', {},
           mono(labelOf(L.sourceMode, source.mode) || textOr(source.mode)),
           source.requires_token_env ? h('div', {}, badge('plain', '需 Token：' + String(source.requires_token_env))) : null),

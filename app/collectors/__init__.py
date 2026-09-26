@@ -17,7 +17,10 @@ import httpx
 from .. import config, provenance, storage, sources
 
 USER_AGENT = f"ai-sec-intel/{config.APP_VERSION} (competition research; +https://localhost)"
-RETRY_STATUS = {408, 425, 429, 500, 502, 503, 504, 522, 524}
+# arXiv has intermittently returned 406 from specific edge nodes even for a
+# valid Atom request.  Retrying is bounded by BACKOFF_SECONDS and a permanent
+# incompatibility is still surfaced after the retry budget is exhausted.
+RETRY_STATUS = {406, 408, 425, 429, 500, 502, 503, 504, 522, 524}
 BACKOFF_SECONDS = (1.0, 2.0, 4.0)
 MAX_DETAIL_FETCHES = 80  # per run, bounds a single collection's cost
 
@@ -147,6 +150,7 @@ def _load_collectors() -> dict[str, Callable[..., CollectOutcome]]:
         "cisa_kev": vuln.collect_cisa_kev,
         "msrc": vuln.collect_msrc,
         "arxiv": knowledge.collect_arxiv,
+        "openalex": knowledge.collect_openalex,
         "rss": knowledge.collect_rss,
         "page": knowledge.collect_page,
     }

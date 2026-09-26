@@ -47,3 +47,15 @@ def test_collection_persists_per_source_action_audit(monkeypatch):
     assert result["tool_calls"][0]["action"] == "collect_registered_source"
     run = agents.storage.latest_run("collect")
     assert "collect_registered_source" in run["detail"]["agent_plan"]["allowed_actions"]
+
+
+def test_default_collection_uses_recommended_sources(monkeypatch):
+    monkeypatch.setattr(
+        collectors, "collect",
+        lambda source_id, since=None: collectors.CollectOutcome(source_id=source_id, status="ok"),
+    )
+    result = agents.run_collection()
+    source_ids = {item["source_id"] for item in result["results"]}
+    assert "openalex" in source_ids
+    assert "arxiv" not in source_ids
+    assert "ghsa" not in source_ids

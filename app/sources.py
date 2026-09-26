@@ -29,6 +29,7 @@ class SourceSpec:
     trust: str
     license_note: str
     description: str
+    auto_default: bool = True
     requires_token_env: str | None = None
 
 
@@ -87,7 +88,8 @@ SOURCES: tuple[SourceSpec, ...] = (
         independent_origin=False,
         trust="authoritative",
         license_note="CC-BY-4.0 for the advisory database.",
-        description="GitHub 已审核安全公告，支持 updated 增量过滤。未配置 GITHUB_TOKEN 时会返回 403 限流，系统如实记录失败而非伪造结果。",
+        description="GitHub 已审核安全公告，支持 updated 增量过滤。未配置 GITHUB_TOKEN 时标记为已跳过，不以空结果冒充成功。",
+        auto_default=False,
         requires_token_env="GITHUB_TOKEN",
     ),
     SourceSpec(
@@ -137,7 +139,7 @@ SOURCES: tuple[SourceSpec, ...] = (
         name="arXiv (cs.CR / cs.LG)",
         category="academic_paper",
         category_label="学术论文",
-        url="http://export.arxiv.org/api/query",
+        url="https://export.arxiv.org/api/query",
         collector="arxiv",
         mode="api",
         realtime=False,
@@ -145,6 +147,21 @@ SOURCES: tuple[SourceSpec, ...] = (
         trust="preprint",
         license_note="arXiv content is provided under the arXiv API terms; preprints are not peer-reviewed.",
         description="AI 安全方向论文预印本，为知识底座提供研究线索。标注为 preprint，不等同于同行评审结论。",
+        auto_default=False,
+    ),
+    SourceSpec(
+        id="openalex",
+        name="OpenAlex Scholarly Index",
+        category="academic_paper",
+        category_label="学术论文",
+        url="https://api.openalex.org/works",
+        collector="openalex",
+        mode="api",
+        realtime=False,
+        independent_origin=False,
+        trust="scholarly_index",
+        license_note="OpenAlex data is available under CC0; records link to their original publications.",
+        description="AI 安全方向的开放学术索引，作为 arXiv 接口不可用时的论文备用来源。",
     ),
     SourceSpec(
         id="owasp_genai",
@@ -286,3 +303,8 @@ def coverage() -> dict:
 def describe(source_id: str) -> dict:
     spec = BY_ID[source_id]
     return asdict(spec)
+
+
+def recommended_sources() -> tuple[str, ...]:
+    """Sources safe for unattended collection without a known token dependency."""
+    return tuple(spec.id for spec in SOURCES if spec.auto_default)

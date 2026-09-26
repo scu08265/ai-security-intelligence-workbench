@@ -9,6 +9,7 @@ finding.
 
 from __future__ import annotations
 
+import os
 import re
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -20,6 +21,13 @@ from . import CollectOutcome, FetchError, http_request, record_snapshot
 
 ATOM = "{http://www.w3.org/2005/Atom}"
 ARXIV_MAX_RESULTS = 40
+ARXIV_ACCEPT = "application/atom+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.1"
+OPENALEX_MAX_RESULTS = 50
+OPENALEX_QUERY = (
+    "prompt injection OR adversarial machine learning OR model poisoning "
+    "OR large language model security OR AI agent security "
+    "OR model extraction OR membership inference OR supply chain attack"
+)
 
 # AI-security oriented arXiv query: category-bounded, then topic-filtered.
 ARXIV_QUERY = (
@@ -73,7 +81,10 @@ def collect_arxiv(spec: SourceSpec, since: str | None) -> CollectOutcome:
         "sortOrder": "descending",
         "max_results": ARXIV_MAX_RESULTS,
     }
-    response = http_request("GET", spec.url, params=params, timeout=60)
+    response = http_request(
+        "GET", spec.url, params=params, timeout=60,
+        headers={"Accept": ARXIV_ACCEPT},
+    )
     if response.status_code >= 400:
         raise FetchError(f"HTTP {response.status_code}")
     raw = response.text
@@ -126,6 +137,51 @@ def collect_arxiv(spec: SourceSpec, since: str | None) -> CollectOutcome:
     outcome.notes.append(
         f"arXiv 查询返回 {outcome.fetched} 条：{skipped_old} 条早于窗口起点 {cutoff:%Y-%m-%d}，"
         f"{outcome.filtered} 条判定与 AI 无关，{len(outcome.events)} 条入库"
+    )
+    return outcome
+
+
+# --------------------------------------------------------------------------
+# OpenAlex
+# --------------------------------------------------------------------------
+
+def collect_openalex(spec: SourceSpec, since: str | None) -> CollectOutcome:
+    """Collect AI-security papers from OpenAlex without requiring a token."""
+    outcome = CollectOutcome(source_id=spec.id, status="ok", cursor=_now().isoformat(timespec="milliseconds"))
+    cutoff = _parse_iso(since) or (_now() - timedelta(days=30))
+    params = {
+        "search": OPENALEX_QUERY,
+        "filter": f"from_publication_date:{cutoff.date().isoformat()},is_retracted:false",
+        "sort": "publication_date:desc",
+        "per-page": OPENALEX_MAX_RESULTS,
+    }
+    mailto = os.getenv("OPENALEX_MAILTO", "").strip()
+    if mailto:
+        params["mailto"] = mailto
+    response = http_request(
+        "GET", spec.url, params=params, timeout=60,
+        headers={"Accept": "application/json"},
+    )
+    if response.status_code >= 400:
+        raise FetchError(f"HTTP {response.status_code}")
+    raw = response.text
+    outcome.snapshot_hash = record_snapshot(spec.id, raw, suffix="json")
+    try:
+        payload = response.json()
+    except ValueError as exc:
+        raise FetchError(f"OpenAlex 响应不是有效 JSON：{exc}") from exc
+
+    works = payload.get("results") or []
+    outcome.fetched = len(works)
+    for work in works:
+        event = normalize.openalex_work_to_event(work)
+        if event is None or not (event.get("ai_relevance") or {}).get("included"):
+            outcome.filtered += 1
+            continue
+        outcome.events.append(event)
+    outcome.notes.append(
+        f"OpenAlex 查询返回 {outcome.fetched} 条，"
+        f"{outcome.filtered} 条判定与 AI 安全无关，{len(outcome.events)} 条入库"
     )
     return outcome
 

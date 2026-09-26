@@ -544,7 +544,7 @@ def run_collection(source_ids: list[str] | None = None, *, close_gaps: bool = Fa
     plan is persisted with the observable per-source results; without a model,
     the same executor runs a deterministic plan.
     """
-    requested = source_ids or [source.id for source in sources.SOURCES]
+    requested = source_ids or list(sources.recommended_sources())
     valid = [source_id for source_id in requested if sources.get(source_id) is not None]
     plan = agent_orchestration.collection_plan(valid, config.model_config() or None)
     return _run_collection_deterministic(requested, close_gaps=close_gaps, agent_plan=plan)
@@ -827,6 +827,7 @@ def monitoring_summary() -> dict:
             "id": spec.id, "name": spec.name, "category": spec.category,
             "category_label": spec.category_label, "mode": spec.mode,
             "realtime": spec.realtime, "independent_origin": spec.independent_origin,
+            "auto_default": spec.auto_default,
             "requires_token_env": spec.requires_token_env,
             "status": state.get("status") or "idle",
             "last_run": state.get("last_run"), "last_success": state.get("last_success"),

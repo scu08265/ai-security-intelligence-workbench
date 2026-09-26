@@ -178,6 +178,40 @@ ARXIV_SYNTHETIC = """<?xml version="1.0" encoding="UTF-8"?>
 </feed>
 """
 
+OPENALEX_SYNTHETIC = {
+    "meta": {"count": 2},
+    "results": [
+        {
+            "id": "https://openalex.org/W2099000001",
+            "display_name": "Synthetic study of prompt injection in large language models",
+            "publication_date": "2099-06-01",
+            "doi": "https://doi.org/10.0000/synthetic-ai-security",
+            "primary_location": {
+                "landing_page_url": "https://example.invalid/openalex/ai-security",
+                "pdf_url": "https://example.invalid/openalex/ai-security.pdf",
+            },
+            "best_oa_location": {
+                "landing_page_url": "https://example.invalid/openalex/ai-security",
+                "pdf_url": "https://example.invalid/openalex/ai-security.pdf",
+            },
+            "abstract_inverted_index": {
+                "Synthetic": [0], "study": [1], "about": [2],
+                "prompt": [3], "injection": [4], "and": [5],
+                "large": [6], "language": [7], "model": [8], "security": [9],
+            },
+            "primary_topic": {"display_name": "Language model security"},
+            "topics": [{"display_name": "Language model security"}],
+        },
+        {
+            "id": "https://openalex.org/W2099000002",
+            "display_name": "Unrelated synthetic food science paper",
+            "publication_date": "2099-06-01",
+            "abstract_inverted_index": {"Food": [0], "storage": [1], "temperature": [2]},
+            "topics": [{"display_name": "Food preservation"}],
+        },
+    ],
+}
+
 HTML_SYNTHETIC = """<html><head><title>Synthetic Standard Page</title></head>
 <body><script>ignored()</script><h1>Prompt injection</h1>
 <p>Synthetic standard text about prompt injection.</p></body></html>"""

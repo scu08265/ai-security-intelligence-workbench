@@ -891,6 +891,79 @@ def arxiv_entry_to_event(entry: dict) -> dict | None:
     return _apply_relevance(event, abstract, primary)
 
 
+def _openalex_abstract(work: dict) -> str:
+    inverted = work.get("abstract_inverted_index")
+    if not isinstance(inverted, dict):
+        return ""
+    positions: dict[int, str] = {}
+    for token, offsets in inverted.items():
+        for offset in offsets or []:
+            if isinstance(offset, int):
+                positions[offset] = str(token)
+    return " ".join(positions[index] for index in sorted(positions))
+
+
+def openalex_work_to_event(work: dict) -> dict | None:
+    """Convert one OpenAlex work into the project's knowledge-event contract."""
+    title = re.sub(r"\s+", " ", _text(work.get("display_name") or work.get("title"))).strip()
+    if not title:
+        return None
+    abstract = re.sub(r"\s+", " ", _text(work.get("abstract") or _openalex_abstract(work))).strip()
+    primary_location = work.get("primary_location") or {}
+    best_location = work.get("best_oa_location") or {}
+    landing_url = _text(
+        best_location.get("landing_page_url")
+        or primary_location.get("landing_page_url")
+        or work.get("doi")
+        or work.get("id")
+    )
+    pdf_url = _text(best_location.get("pdf_url") or primary_location.get("pdf_url"))
+    openalex_id = _text(work.get("id"))
+    short_id = openalex_id.rstrip("/").rsplit("/", 1)[-1] or storage.content_hash(title)[:16]
+    topics = [
+        _text(item.get("display_name"))
+        for item in (work.get("topics") or [])
+        if isinstance(item, dict) and item.get("display_name")
+    ]
+    primary_topic = (work.get("primary_topic") or {}).get("display_name") if isinstance(
+        work.get("primary_topic"), dict
+    ) else ""
+    tags = list(dict.fromkeys(["scholarly_index", primary_topic, *topics]))
+    source_entry = {
+        "id": _source_id("openalex", openalex_id or landing_url or title),
+        "url": landing_url,
+        "title": title,
+        "publisher": "OpenAlex",
+        "source_type": "scholarly_index",
+        "excerpt": _excerpt(abstract or title),
+        "published_at": _iso(work.get("publication_date")),
+        "collected_at": storage.utcnow(),
+        "content_hash": storage.content_hash(abstract or title),
+        "trust": "scholarly_index",
+    }
+    references = [url for url in (landing_url, pdf_url) if url]
+    event = canonical_event(
+        event_id=f"OPENALEX-{short_id}",
+        title=title,
+        summary=_excerpt(abstract or title, 400),
+        component=primary_topic or (topics[0] if topics else ""),
+        ecosystem="OpenAlex",
+        kind="knowledge",
+        published_at=work.get("publication_date"),
+        sources=[source_entry],
+        references=references,
+        tags=tags,
+        content_hash=storage.content_hash(abstract or title),
+    )
+    if pdf_url:
+        event["paper"] = {
+            "openalex_id": short_id,
+            "pdf_url": pdf_url,
+            "full_text": {"status": "not_attempted", "has_full_text": False},
+        }
+    return _apply_relevance(event, abstract, " ".join(tags))
+
+
 def page_to_event(*, source_key: str, url: str, title: str, text: str,
                   publisher: str, trust: str, tags: Iterable[str] = ()) -> dict:
     source_entry = {

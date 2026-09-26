@@ -17,7 +17,7 @@ from app.sources import BY_ID
 
 from fixtures import (
     ARXIV_SYNTHETIC, GHSA_SYNTHETIC, HTML_SYNTHETIC, KEV_SYNTHETIC, NVD_SYNTHETIC,
-    OSV_QUERYBATCH_SYNTHETIC, OSV_SYNTHETIC, RSS_SYNTHETIC,
+    OPENALEX_SYNTHETIC, OSV_QUERYBATCH_SYNTHETIC, OSV_SYNTHETIC, RSS_SYNTHETIC,
 )
 
 MSRC_INDEX = {
@@ -76,6 +76,8 @@ def _router(request: httpx.Request) -> httpx.Response:
     if host == "export.arxiv.org":
         return httpx.Response(200, text=ARXIV_SYNTHETIC,
                               headers={"content-type": "application/atom+xml"})
+    if host == "api.openalex.org":
+        return _json_response(OPENALEX_SYNTHETIC)
     if host == "github.blog":
         return httpx.Response(200, text=RSS_SYNTHETIC, headers={"content-type": "application/rss+xml"})
     if host == "genai.owasp.org":
@@ -139,6 +141,52 @@ def test_arxiv_collector_produces_knowledge_events():
     assert outcome.events
     assert all(e["kind"] == "knowledge" for e in outcome.events)
     assert outcome.events[0]["sources"][0]["trust"] == "preprint"
+
+
+def test_arxiv_collector_uses_https_and_an_atom_accept_header():
+    seen = {}
+
+    def arxiv_router(request: httpx.Request) -> httpx.Response:
+        seen["scheme"] = request.url.scheme
+        seen["accept"] = request.headers.get("accept")
+        return httpx.Response(200, text=ARXIV_SYNTHETIC,
+                              headers={"content-type": "application/atom+xml"})
+
+    collectors.set_transport(httpx.MockTransport(arxiv_router))
+    outcome = collectors.collect("arxiv")
+    assert outcome.status == "ok"
+    assert seen["scheme"] == "https"
+    assert "application/atom+xml" in (seen["accept"] or "")
+
+
+def test_arxiv_406_is_retried_before_reporting_failure(monkeypatch):
+    calls = {"n": 0}
+
+    def flaky_arxiv(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return httpx.Response(406, text="not acceptable")
+        return httpx.Response(200, text=ARXIV_SYNTHETIC,
+                              headers={"content-type": "application/atom+xml"})
+
+    monkeypatch.setattr(collectors, "BACKOFF_SECONDS", (0.0, 0.0))
+    collectors.set_transport(httpx.MockTransport(flaky_arxiv))
+    outcome = collectors.collect("arxiv")
+    assert calls["n"] == 2
+    assert outcome.status == "ok"
+    assert outcome.events
+
+
+def test_openalex_collector_is_the_tokenless_paper_fallback():
+    outcome = collectors.collect("openalex")
+    assert outcome.status == "ok"
+    assert outcome.fetched == 2
+    assert len(outcome.events) == 1
+    event = outcome.events[0]
+    assert event["kind"] == "knowledge"
+    assert event["sources"][0]["publisher"] == "OpenAlex"
+    assert "prompt injection" in event["summary"].casefold()
+    assert event["paper"]["pdf_url"].endswith("ai-security.pdf")
 
 
 def test_page_collector_does_not_re_emit_unchanged_content():

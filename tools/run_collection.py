@@ -18,7 +18,7 @@ if str(ROOT) not in sys.path:
 
 from app import agents, config, storage  # noqa: E402
 
-DEFAULT_SOURCES = "cisa_kev,arxiv,owasp_genai,nist_ai_rmf,mitre_atlas,eu_ai_act"
+DEFAULT_SOURCES = "cisa_kev,openalex,owasp_genai,nist_ai_rmf,mitre_atlas,eu_ai_act"
 
 
 def main() -> int:
