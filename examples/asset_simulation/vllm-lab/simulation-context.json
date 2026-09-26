@@ -1,0 +1,15 @@
+{
+  "simulation": true,
+  "asset_name": "vLLM 视频推理服务（标准 SBOM 仿真）",
+  "inventory_source": "Syft directory scan",
+  "deployment_context": {
+    "exposure": null,
+    "business_criticality": null,
+    "conditions": null
+  },
+  "assumptions": [
+    "组件版本来自仿真 requirements.txt，不代表真实部署",
+    "SBOM 不能证明服务正在运行或公网暴露",
+    "未提供漏洞触发配置，相关条件必须保持待确认"
+  ]
+}

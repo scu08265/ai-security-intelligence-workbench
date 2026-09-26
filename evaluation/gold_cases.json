@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "description": "Small reusable regression set. real_verified cases derive only from research/cases.json; synthetic cases are explicit regression fixtures, not third-party labels.",
+  "cases": [
+    {
+      "id": "real-vllm-video-retrieval",
+      "provenance": "real_verified",
+      "source_ref": "research/cases.json#CVE-2026-22778",
+      "question": "哪个 vLLM 视频处理漏洞可能导致远程代码执行？",
+      "expected_event_ids": ["CVE-2026-22778"],
+      "required_answer_terms": ["CVE-2026-22778"],
+      "expected_evidence_ids": [],
+      "should_refuse": false
+    },
+    {
+      "id": "real-ollama-remediation",
+      "provenance": "real_verified",
+      "source_ref": "research/cases.json#CVE-2026-7482",
+      "question": "CVE-2026-7482 的修复版本是什么？",
+      "expected_event_ids": ["CVE-2026-7482"],
+      "required_answer_terms": ["0.17.1"],
+      "expected_evidence_ids": [],
+      "should_refuse": false
+    },
+    {
+      "id": "synthetic-multiturn-pronoun",
+      "provenance": "synthetic_regression",
+      "source_ref": "tests synthetic fixture",
+      "question": "它的修复版本是什么？",
+      "history": [{"role": "assistant", "content": "此前讨论 SYNTHETIC-CVE-0001"}],
+      "expected_event_ids": ["SYNTHETIC-CVE-0001"],
+      "required_answer_terms": ["2.0.0"],
+      "expected_evidence_ids": ["synthetic-src"],
+      "should_refuse": false
+    },
+    {
+      "id": "synthetic-unsupported-refusal",
+      "provenance": "synthetic_regression",
+      "source_ref": "tests synthetic fixture",
+      "question": "请告诉我明天的天气",
+      "expected_event_ids": [],
+      "required_answer_terms": [],
+      "expected_evidence_ids": [],
+      "should_refuse": true
+    }
+  ]
+}

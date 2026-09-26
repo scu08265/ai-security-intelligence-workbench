@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/*.sqlite*
+data/snapshots/
+data/runtime.json
+.env
+artifacts/browser/
+.omc/
+.test-tmp*/
+.tmp_*/
+.ui-server-job
+data/evidence/
+artifacts/tools/

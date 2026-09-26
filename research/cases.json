@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "accessed_at": "2026-09-19",
+  "verification_policy": "Official project advisories, official repository fix/release records, and authoritative vulnerability databases only. No PoC was downloaded or executed.",
+  "cases": [
+    {
+      "id": "CVE-2026-7482",
+      "aliases": ["GHSA-x8qc-fggm-mpqg"],
+      "component": "Ollama",
+      "package": "github.com/ollama/ollama",
+      "ecosystem": "Go",
+      "title": "Heap out-of-bounds read in the GGUF model loader",
+      "severity": {"label": "High", "cvss_version": "4.0", "score": 8.8},
+      "affected_versions": "< 0.17.1",
+      "patched_versions": "0.17.1",
+      "published_date": "2026-05-04",
+      "reviewed_date": "2026-05-08",
+      "prerequisites": [
+        "Attacker can submit a crafted GGUF file to /api/create.",
+        "The declared tensor offset or size exceeds the actual file length.",
+        "Remote exploitation additionally requires the Ollama API to be reachable; the upstream default bind is 127.0.0.1."
+      ],
+      "impact": "Potential process-memory disclosure and availability impact; the advisory describes an exfiltration chain using /api/push.",
+      "cwe": ["CWE-125"],
+      "evidence": [
+        {"type": "reviewed_advisory", "url": "https://github.com/advisories/GHSA-x8qc-fggm-mpqg", "publisher": "GitHub Advisory Database"},
+        {"type": "official_release", "url": "https://github.com/ollama/ollama/releases/tag/v0.17.1", "publisher": "ollama/ollama"},
+        {"type": "official_fix_commit", "url": "https://github.com/ollama/ollama/commit/88d57d0", "publisher": "ollama/ollama"},
+        {"type": "nvd", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7482", "publisher": "NIST NVD"}
+      ],
+      "evidence_grade": "authoritative_database_cross_checked_with_official_repository",
+      "unknown_fields": [
+        "initial_private_report_time",
+        "known_exploitation_in_the_wild",
+        "exploitability_across_all_os_quantization_and_proxy_configurations",
+        "full_fix_commit_sha"
+      ],
+      "poc_executed": false
+    },
+    {
+      "id": "CVE-2026-22778",
+      "aliases": ["GHSA-4r2x-xpjr-7cvv"],
+      "component": "vLLM",
+      "package": "vllm",
+      "ecosystem": "PyPI",
+      "title": "Remote code execution chain in video processing",
+      "severity": {"label": "Critical", "cvss_version": "3.1", "score": 9.8},
+      "affected_versions": ">= 0.8.3, < 0.14.1",
+      "patched_versions": "0.14.1",
+      "published_date": "2026-02-02",
+      "reviewed_date": null,
+      "prerequisites": [
+        "The deployment serves a video model.",
+        "An attacker can submit a request with a remote video_url to /v1/chat/completions or /v1/invocations.",
+        "The fetched media is decoded through the vulnerable OpenCV/FFmpeg JPEG2000 processing chain."
+      ],
+      "impact": "The official advisory describes an address disclosure followed by a heap overflow chain resulting in remote command execution.",
+      "cwe": ["CWE-122", "CWE-532"],
+      "evidence": [
+        {"type": "official_advisory", "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-4r2x-xpjr-7cvv", "publisher": "vllm-project/vllm"},
+        {"type": "official_release", "url": "https://github.com/vllm-project/vllm/releases/tag/v0.14.1", "publisher": "vllm-project/vllm"},
+        {"type": "official_fix_pr", "url": "https://github.com/vllm-project/vllm/pull/31987", "publisher": "vllm-project/vllm"},
+        {"type": "official_fix_pr", "url": "https://github.com/vllm-project/vllm/pull/32319", "publisher": "vllm-project/vllm"},
+        {"type": "official_fix_pr", "url": "https://github.com/vllm-project/vllm/pull/32668", "publisher": "vllm-project/vllm"},
+        {"type": "nvd", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22778", "publisher": "NIST NVD"}
+      ],
+      "evidence_grade": "official_project_advisory",
+      "unknown_fields": [
+        "initial_private_report_time",
+        "known_exploitation_in_the_wild",
+        "exploitability_across_all_opencv_ffmpeg_builds",
+        "additional_reachable_endpoints"
+      ],
+      "poc_executed": false
+    },
+    {
+      "id": "CVE-2026-54235",
+      "aliases": ["GHSA-7h4p-rffg-7823"],
+      "component": "vLLM",
+      "package": "vllm",
+      "ecosystem": "PyPI",
+      "title": "Non-finite temperature values bypass validation and reach GPU kernels",
+      "severity": {"label": "Moderate", "cvss_version": null, "score": null},
+      "affected_versions": "<= 0.8.5",
+      "patched_versions": ">= 0.24.0",
+      "published_date": "2026-06-11",
+      "reviewed_date": null,
+      "prerequisites": [
+        "A request supplies temperature as NaN or positive Infinity.",
+        "The value reaches GPU sampling kernels; negative Infinity is rejected by the pre-existing comparison."
+      ],
+      "impact": "Undefined GPU-kernel behavior or CUDA errors can crash the inference worker and disrupt concurrent users.",
+      "cwe": ["CWE-1287"],
+      "evidence": [
+        {"type": "official_advisory", "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-7h4p-rffg-7823", "publisher": "vllm-project/vllm"},
+        {"type": "official_fix_pr", "url": "https://github.com/vllm-project/vllm/pull/45116", "publisher": "vllm-project/vllm"},
+        {"type": "nvd", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-54235", "publisher": "NIST NVD"}
+      ],
+      "evidence_grade": "official_project_advisory",
+      "unknown_fields": [
+        "official_cvss_score_and_vector",
+        "initial_private_report_time",
+        "known_exploitation_in_the_wild",
+        "affected_gpu_driver_kernel_matrix",
+        "reason_for_version_gap_between_affected_upper_bound_and_first_patched_version"
+      ],
+      "poc_executed": false
+    }
+  ]
+}

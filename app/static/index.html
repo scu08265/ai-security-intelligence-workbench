@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="dark">
+  <title>安全情报任务工作台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#panels">跳到主要内容</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M12 2.6 4.5 5.4v6.1c0 4.6 3.1 8.4 7.5 9.9 4.4-1.5 7.5-5.3 7.5-9.9V5.4L12 2.6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M8.6 11.9l2.4 2.4 4.4-4.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">安全情报工作台</span>
+        <span class="brand-sub">TASK · KNOWLEDGE · EVIDENCE</span>
+      </span>
+    </div>
+    <div class="mode-banner" id="mode-banner" role="status" aria-live="polite">
+      <span class="mode-dot" aria-hidden="true"></span>
+      <span class="mode-stack">
+        <span class="mode-text" id="mode-text">正在读取运行模式…</span>
+        <span class="mode-sub" id="mode-sub"></span>
+      </span>
+      <button class="mode-link" type="button" id="mode-link">查看赛题证据 →</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="rail" aria-label="功能面板">
+      <div class="tablist" role="tablist" aria-orientation="vertical" aria-label="控制台面板">
+        <button class="tab tab--lead" id="tab-overview" type="button" role="tab" aria-selected="true" aria-controls="panel-overview" data-tab="overview">
+          <span class="tab-label">任务工作台</span><span class="tab-sub">从输入到结论</span>
+        </button>
+        <button class="tab" id="tab-knowledge" type="button" role="tab" aria-selected="false" aria-controls="panel-knowledge" data-tab="knowledge" tabindex="-1">
+          <span class="tab-label">知识图谱</span><span class="tab-sub">全文 · 分块 · 关系</span>
+        </button>
+        <button class="tab" id="tab-scorecard" type="button" role="tab" aria-selected="false" aria-controls="panel-scorecard" data-tab="scorecard" tabindex="-1">
+          <span class="tab-label">赛题指标</span><span class="tab-sub">能力 · 性能 · 证据</span>
+        </button>
+      </div>
+      <div class="rail-foot">
+        <span class="mono rail-line" id="rail-version">版本 —</span>
+        <span class="mono rail-line rail-datadir" id="rail-datadir" title="后端数据目录">数据目录 —</span>
+        <span class="rail-note">仅本机使用：服务默认监听 127.0.0.1，公开部署须另加身份鉴权。</span>
+      </div>
+    </nav>
+
+    <main class="main" id="panels">
+
+      <!-- ============================================ 任务工作台 =========== -->
+      <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+        <header class="panel-head">
+          <p class="eyebrow">从这里开始 · START HERE</p>
+          <h2>任务工作台</h2>
+        </header>
+        <section class="onboarding-shell" aria-labelledby="onboarding-title">
+          <div id="body-onboarding"></div>
+        </section>
+        <section class="simulation-shell" aria-labelledby="simulation-title">
+          <header class="simulation-hero">
+            <span class="step-kicker">01 · 标准资产仿真</span>
+            <h3 id="simulation-title">软件清单研判</h3>
+          </header>
+          <div id="body-simulation"></div>
+        </section>
+        <div class="panel-body" id="body-overview"></div>
+        <section class="workbench-orchestration" aria-labelledby="orchestration-map-title">
+          <header class="inline-head"><span class="step-kicker">02 · 编排</span><h3 id="orchestration-map-title">任务如何交接</h3></header>
+          <div class="panel-body" id="body-orchestration-map"></div>
+        </section>
+        <section class="workbench-run" aria-label="任务执行过程">
+          <header class="inline-head"><span class="step-kicker">03 · 执行</span><h3>流式生成与工具调用</h3></header>
+          <div class="panel-body" id="body-live"></div>
+        </section>
+        <div class="inline-tools" aria-label="工作台就地视图">
+          <details class="workspace-module" data-module="assessments"><summary>最终结论与处置清单</summary><div id="body-assessments"></div></details>
+          <details class="workspace-module" data-module="chat"><summary>基于证据提问</summary><div id="body-chat"></div></details>
+          <details class="workspace-module" data-module="assets"><summary>任务上下文：资产清单</summary><div id="body-assets"></div></details>
+          <details class="workspace-module" data-module="sources"><summary>可用工具与数据源</summary><div id="body-collect"></div><div id="body-tools"></div></details>
+        </div>
+      </section>
+
+      <!-- ============================================ 知识库 =============== -->
+      <section class="panel" id="panel-knowledge" role="tabpanel" aria-labelledby="tab-knowledge" tabindex="0" hidden>
+        <header class="panel-head">
+          <p class="eyebrow">可追溯知识 · KNOWLEDGE</p>
+          <h2>知识图谱</h2>
+        </header>
+        <div class="panel-body" id="body-knowledge"></div>
+        <details class="workspace-module knowledge-detail" data-module="events"><summary>下钻风险文档与证据详情</summary><div id="body-events"></div></details>
+      </section>
+
+      <!-- ============================================ 赛题指标 ============= -->
+      <section class="panel" id="panel-scorecard" role="tabpanel" aria-labelledby="tab-scorecard" tabindex="0" hidden>
+        <header class="panel-head">
+          <p class="eyebrow">赛题能力证据 · SCORECARD</p>
+          <h2>赛题指标</h2>
+        </header>
+        <div class="panel-body" id="body-scorecard"></div>
+        <details class="workspace-module" data-module="quality"><summary>查看运行记录与质量详情</summary><div id="body-runs"></div><div id="body-evaluation"></div></details>
+        <details class="workspace-module" data-module="agent-evidence"><summary>查看 Agent 编排与边界证据</summary><div id="subpanel-ai"></div><div id="body-labels"></div></details>
+      </section>
+
+      <noscript>
+        <div class="alert alert--error" role="alert">
+          <p class="alert-title">未启用 JavaScript</p>
+          <p>本控制台需要浏览器启用 JavaScript 才能加载数据。</p>
+        </div>
+      </noscript>
+    </main>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

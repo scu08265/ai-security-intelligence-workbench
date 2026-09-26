@@ -1,0 +1,12 @@
+# Runtime + test dependencies.  Install with:  pip install -r requirements.txt
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+httpx>=0.27,<1
+packaging>=24,<27
+pytest>=8,<10
+pypdf>=5,<7
+
+# NOT listed above, on purpose:
+#   playwright  -- only needed for `tools/browser_check.py`, an optional
+#                  browser self-check.  The application runs without it.
+#                  To run that check:  pip install playwright && playwright install chromium

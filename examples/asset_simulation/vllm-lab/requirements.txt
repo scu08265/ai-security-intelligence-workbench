@@ -1,0 +1,4 @@
+# Inventory-only simulation input. Nothing in this file is installed or run.
+vllm==0.10.0
+fastapi==0.115.0
+uvicorn==0.30.6

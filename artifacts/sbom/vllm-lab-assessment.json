@@ -1,0 +1,210 @@
+{
+  "tool": "Application:   syft\nVersion:       1.52.0\nBuildDate:     2026-09-17T14:32:25Z\nGitCommit:     02ba369d13b4248395b20a504eca94b0cab564d8\nGitDescription: v1.52.0\nPlatform:      windows/amd64\nGoVersion:     go1.26.3\nCompiler:      gc\nSchemaVersion: 16.1.10\n",
+  "target": "D:\\prj\\.2\\competition\\examples\\asset_simulation\\vllm-lab",
+  "sbom_path": "D:\\prj\\.2\\competition\\artifacts\\sbom\\vllm-lab.cdx.json",
+  "preview": {
+    "batch_id": "cdx-395ea495f6d0c74aaf4a",
+    "spec_version": "1.7",
+    "serial_number": "urn:uuid:bfbc43dd-1b6c-478b-8fe0-8bf10b8c2d85",
+    "inventory_timestamp": "2026-09-21T08:20:03+08:00",
+    "generation_tools": [
+      {
+        "name": "syft",
+        "version": "1.52.0"
+      }
+    ],
+    "input_component_count": 3,
+    "deduplicated_asset_count": 3,
+    "duplicate_component_count": 0,
+    "assumptions": [
+      "每个唯一 bom-ref 代表该 SBOM 快照中的一个组件资产。",
+      "目录或镜像盘点只能证明清单可见组件，不能证明组件正在运行。",
+      "SBOM 未声明 exposure、business_criticality 或 runtime conditions；这些字段保持未知。",
+      "导入授权范围必须由调用方显式确认，不从 SBOM 推断。"
+    ],
+    "dry_run": true,
+    "mutated": false,
+    "assessment_relationship_count": 0
+  },
+  "components": [
+    {
+      "name": "fastapi",
+      "version": "0.115.0",
+      "purl": "pkg:pypi/fastapi@0.115.0",
+      "bom_ref": "pkg:pypi/fastapi@0.115.0?package-id=443ac79dc089c5c8"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.30.6",
+      "purl": "pkg:pypi/uvicorn@0.30.6",
+      "bom_ref": "pkg:pypi/uvicorn@0.30.6?package-id=35ea39fc66e92c7d"
+    },
+    {
+      "name": "vllm",
+      "version": "0.10.0",
+      "purl": "pkg:pypi/vllm@0.10.0",
+      "bom_ref": "pkg:pypi/vllm@0.10.0?package-id=3ec42f4138de5b67"
+    }
+  ],
+  "import": {
+    "batch_id": "cdx-395ea495f6d0c74aaf4a",
+    "spec_version": "1.7",
+    "serial_number": "urn:uuid:bfbc43dd-1b6c-478b-8fe0-8bf10b8c2d85",
+    "inventory_timestamp": "2026-09-21T08:20:03+08:00",
+    "generation_tools": [
+      {
+        "name": "syft",
+        "version": "1.52.0"
+      }
+    ],
+    "input_component_count": 3,
+    "deduplicated_asset_count": 3,
+    "duplicate_component_count": 0,
+    "assumptions": [
+      "每个唯一 bom-ref 代表该 SBOM 快照中的一个组件资产。",
+      "目录或镜像盘点只能证明清单可见组件，不能证明组件正在运行。",
+      "SBOM 未声明 exposure、business_criticality 或 runtime conditions；这些字段保持未知。",
+      "导入授权范围必须由调用方显式确认，不从 SBOM 推断。"
+    ],
+    "dry_run": false,
+    "created": 0,
+    "updated": 3,
+    "authorized": true,
+    "assessment_relationship_count": 0,
+    "idempotent": true
+  },
+  "assessment": {
+    "batch_id": "cdx-395ea495f6d0c74aaf4a",
+    "deduplicated_asset_count": 3,
+    "assessment_relationship_count": 2,
+    "status_counts": {
+      "not_affected": 1,
+      "needs_confirmation": 1
+    },
+    "relationships": [
+      {
+        "event_id": "CVE-2026-54235",
+        "asset_id": "asset-cdx-529bf0826120f8823b7f",
+        "event_title": "Non-finite temperature values bypass validation and reach GPU kernels",
+        "asset_name": "vllm",
+        "status": "not_affected",
+        "priority": "low",
+        "reasons": [
+          "资产版本 0.10.0 不在已知受影响区间"
+        ],
+        "evidence_ids": [
+          "research:ff85dffcdd"
+        ],
+        "decision_factors": {
+          "component_match": {
+            "matched": true,
+            "event_component": "vLLM",
+            "asset_component": "vllm",
+            "basis": "normalized exact component/package match"
+          },
+          "inventory_identity": {
+            "bom_ref": "pkg:pypi/vllm@0.10.0?package-id=3ec42f4138de5b67",
+            "purl": "pkg:pypi/vllm@0.10.0",
+            "version": "0.10.0",
+            "type": "library",
+            "source": "CycloneDX SBOM"
+          },
+          "deployment_context": {
+            "exposure": null,
+            "business_criticality": null,
+            "conditions": null,
+            "status": "not_asserted_by_sbom"
+          },
+          "condition_evaluation": {
+            "applicable": false,
+            "status": "not_applicable_version_outside_range",
+            "declared_condition_count": 2,
+            "reason": "资产版本明确不在已知受影响区间，触发条件不参与结论。"
+          },
+          "authorization": {
+            "value": true,
+            "source": "cyclonedx import request",
+            "note": "调用方声明是否允许本系统对该批次执行影响研判；不是 SBOM 字段。"
+          },
+          "rule_result": {
+            "status": "not_affected",
+            "reasons": [
+              "资产版本 0.10.0 不在已知受影响区间"
+            ],
+            "evidence_ids": [
+              "research:ff85dffcdd"
+            ]
+          }
+        }
+      },
+      {
+        "event_id": "CVE-2026-22778",
+        "asset_id": "asset-cdx-529bf0826120f8823b7f",
+        "event_title": "Remote code execution chain in video processing",
+        "asset_name": "vllm",
+        "status": "needs_confirmation",
+        "priority": "critical",
+        "reasons": [
+          "资产版本 0.10.0 命中受影响区间",
+          "关键配置 prerequisite_1 未知",
+          "关键配置 prerequisite_2 未知",
+          "关键配置 prerequisite_3 未知"
+        ],
+        "evidence_ids": [
+          "research:0740bc3123",
+          "research:a8306e608b",
+          "research:041ffb83e8",
+          "research:94e95aad5d"
+        ],
+        "decision_factors": {
+          "component_match": {
+            "matched": true,
+            "event_component": "vLLM",
+            "asset_component": "vllm",
+            "basis": "normalized exact component/package match"
+          },
+          "inventory_identity": {
+            "bom_ref": "pkg:pypi/vllm@0.10.0?package-id=3ec42f4138de5b67",
+            "purl": "pkg:pypi/vllm@0.10.0",
+            "version": "0.10.0",
+            "type": "library",
+            "source": "CycloneDX SBOM"
+          },
+          "deployment_context": {
+            "exposure": null,
+            "business_criticality": null,
+            "conditions": null,
+            "status": "not_asserted_by_sbom"
+          },
+          "condition_evaluation": {
+            "applicable": true,
+            "status": "evaluated",
+            "declared_condition_count": 3,
+            "reason": "仅在版本命中受影响区间时，触发条件才会缩小适用范围。"
+          },
+          "authorization": {
+            "value": true,
+            "source": "cyclonedx import request",
+            "note": "调用方声明是否允许本系统对该批次执行影响研判；不是 SBOM 字段。"
+          },
+          "rule_result": {
+            "status": "needs_confirmation",
+            "reasons": [
+              "资产版本 0.10.0 命中受影响区间",
+              "关键配置 prerequisite_1 未知",
+              "关键配置 prerequisite_2 未知",
+              "关键配置 prerequisite_3 未知"
+            ],
+            "evidence_ids": [
+              "research:0740bc3123",
+              "research:a8306e608b",
+              "research:041ffb83e8",
+              "research:94e95aad5d"
+            ]
+          }
+        }
+      }
+    ],
+    "note": "只为组件匹配的事件-资产对保存关系；未知部署上下文不会被补写。"
+  }
+}
