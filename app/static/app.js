@@ -68,7 +68,7 @@
       local_evidence_extraction: '本地证据抽取',
       model_assisted_evidence_selection: '模型辅助事件选择（结论仍由证据拼装）'
     },
-    sourceMode: { api: 'API', feed: 'Feed', rss: 'RSS', page: '页面' }
+    sourceMode: { api: 'API', feed: 'Feed', rss: 'RSS', page: '页面', pdf: 'PDF 文档' }
   };
 
   const DASH = '—';
@@ -1813,6 +1813,9 @@
 
       const statusCell = [
         runStatusBadge(source.status || 'idle'),
+        source.status === 'failed' && countValue(source.events_count) > 0
+          ? badge('plain', '历史数据仍可用')
+          : null,
         source.last_error ? h('p', { class: 'err-text break' }, '最近错误：' + String(source.last_error)) : null
       ];
 

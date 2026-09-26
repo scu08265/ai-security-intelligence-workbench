@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from .. import normalize, storage
+from .. import normalize, rag_corpus, storage
 from ..sources import SourceSpec
 from . import CollectOutcome, FetchError, http_request, record_snapshot
 
@@ -41,6 +41,15 @@ ARXIV_QUERY = (
 _TAG = re.compile(r"<(script|style)[^>]*>.*?</\1>", re.S | re.I)
 _BLOCK = re.compile(r"</(p|div|li|h[1-6]|tr|section|article)>", re.I)
 _ALL_TAGS = re.compile(r"<[^>]+>")
+PAGE_BROWSER_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/153.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
 
 
 def _now() -> datetime:
@@ -267,7 +276,7 @@ def _parse_rfc822(value: str | None) -> datetime | None:
 def collect_page(spec: SourceSpec, since: str | None) -> CollectOutcome:
     """Fetch one registered page and record it only when its content changed."""
     outcome = CollectOutcome(source_id=spec.id, status="ok")
-    response = http_request("GET", spec.url, timeout=45, headers={"Accept": "text/html"})
+    response = http_request("GET", spec.url, timeout=45, headers=PAGE_BROWSER_HEADERS)
     if response.status_code >= 400:
         raise FetchError(f"HTTP {response.status_code}")
     raw = response.text
@@ -296,4 +305,53 @@ def collect_page(spec: SourceSpec, since: str | None) -> CollectOutcome:
     else:
         outcome.filtered += 1
     outcome.notes.append(f"页面内容较上次发生变化（{len(text)} 字符），已生成知识条目")
+    return outcome
+
+
+def collect_document(spec: SourceSpec, since: str | None) -> CollectOutcome:
+    """Collect a fixed official PDF, preserve its bytes, and index full text."""
+    outcome = CollectOutcome(source_id=spec.id, status="ok")
+    response = http_request(
+        "GET", spec.url, timeout=90,
+        headers={
+            **PAGE_BROWSER_HEADERS,
+            "Accept": "application/pdf,application/octet-stream;q=0.9,*/*;q=0.8",
+        },
+    )
+    if response.status_code >= 400:
+        raise FetchError(f"HTTP {response.status_code}")
+    raw = response.content
+    if not raw:
+        raise FetchError("官方文档响应为空")
+    outcome.fetched = 1
+    outcome.snapshot_hash = storage.save_snapshot(spec.id, raw, suffix="pdf")
+    try:
+        sections, _encoding = rag_corpus.parse_document(raw, "application/pdf")
+    except (OSError, ValueError) as exc:
+        raise FetchError(f"官方 PDF 无法解析：{exc}") from exc
+    text = "\n\n".join(section.text for section in sections if section.text).strip()
+    if not text:
+        raise FetchError("官方 PDF 未提取出可检索正文")
+    event = normalize.page_to_event(
+        source_key=spec.id, url=spec.url, title=spec.name,
+        text=text, publisher=spec.name, trust=spec.trust, tags=[spec.category],
+    )
+    ingestion = rag_corpus.ingest_bytes(
+        raw, source_id=spec.id, document_key=f"official:{spec.id}",
+        title=spec.name, canonical_url=spec.url, media_type="application/pdf",
+        snapshot_hash=outcome.snapshot_hash,
+        metadata={"source_type": "official_policy", "mode": "pdf"},
+    )
+    event["document_ingestion"] = {
+        key: ingestion[key]
+        for key in ("document_id", "version_id", "chunks", "characters", "sections")
+    }
+    if (event.get("ai_relevance") or {}).get("included"):
+        outcome.events.append(event)
+    else:
+        outcome.filtered += 1
+    outcome.notes.append(
+        f"官方 PDF 已保存并提取 {ingestion['characters']} 字符、"
+        f"{ingestion['sections']} 个章节、{ingestion['chunks']} 个检索块"
+    )
     return outcome

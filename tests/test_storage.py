@@ -77,6 +77,13 @@ def test_source_state_is_honest_about_failure():
     assert state["last_success"] is None
 
 
+def test_source_event_inventory_counts_unique_events_not_runs():
+    storage.upsert_event(_event("CVE-2099-00010", sources=[{"id": "msrc:a"}]))
+    storage.upsert_event(_event("CVE-2099-00011", sources=[{"id": "msrc:b"}]))
+    storage.upsert_event(_event("CVE-2099-00010", title="updated", sources=[{"id": "msrc:a"}]))
+    assert storage.count_events_for_source_prefix("msrc") == 2
+
+
 def test_assets_round_trip_and_delete_cascades_assessments():
     asset = storage.upsert_asset({"name": "synthetic host", "component": "vllm",
                                   "version": "1.0.0", "authorized": True, "is_demo": True})

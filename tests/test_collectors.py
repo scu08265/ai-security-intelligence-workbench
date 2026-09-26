@@ -8,6 +8,7 @@ silent success or an invented record.
 from __future__ import annotations
 
 import json
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -204,6 +205,47 @@ def test_page_collector_strips_scripts_from_extracted_text():
     excerpt = outcome.events[0]["sources"][0]["excerpt"]
     assert "ignored()" not in excerpt
     assert "prompt injection" in excerpt.casefold()
+
+
+def test_page_collector_uses_browser_compatible_headers():
+    seen = {}
+
+    def page_router(request: httpx.Request) -> httpx.Response:
+        seen["ua"] = request.headers.get("user-agent")
+        seen["language"] = request.headers.get("accept-language")
+        return httpx.Response(200, text=HTML_SYNTHETIC, headers={"content-type": "text/html"})
+
+    collectors.set_transport(httpx.MockTransport(page_router))
+    outcome = collectors.collect("owasp_genai")
+    assert outcome.status == "ok"
+    assert (seen["ua"] or "").startswith("Mozilla/5.0")
+    assert "en-US" in (seen["language"] or "")
+
+
+def test_official_pdf_collector_preserves_snapshot_and_indexes_text(monkeypatch):
+    from app.collectors import knowledge
+
+    monkeypatch.setattr(
+        knowledge.rag_corpus, "parse_document",
+        lambda raw, media_type: ([SimpleNamespace(text="Artificial intelligence regulation and security.")], "utf-8"),
+    )
+    monkeypatch.setattr(
+        knowledge.rag_corpus, "ingest_bytes",
+        lambda raw, **kwargs: {
+            "document_id": "doc-fixture", "version_id": "ver-fixture",
+            "sections": 1, "chunks": 2, "characters": 50,
+        },
+    )
+    collectors.set_transport(httpx.MockTransport(
+        lambda request: httpx.Response(
+            200, content=b"%PDF-1.4 synthetic", headers={"content-type": "application/pdf"}
+        )
+    ))
+    outcome = collectors.collect("eu_ai_act")
+    assert outcome.status == "ok"
+    assert outcome.snapshot_hash
+    assert len(outcome.events) == 1
+    assert outcome.events[0]["document_ingestion"]["chunks"] == 2
 
 
 def test_ghsa_without_a_token_is_skipped_and_says_so():

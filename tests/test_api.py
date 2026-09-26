@@ -298,6 +298,9 @@ def test_display_group_reads_the_registry_rather_than_a_hardcoded_list():
     assert sources.display_group("eu_ai_act") == "政策法规"
     assert sources.display_group("nvd") == "漏洞"
     assert sources.display_group("not-registered") == "漏洞"
+    assert sources.event_source_prefix("cisa_kev") == "kev"
+    assert sources.event_source_prefix("mitre_cve") == "mitre"
+    assert sources.event_source_prefix("openalex") == "openalex"
 
 
 def test_event_group_follows_the_first_source():

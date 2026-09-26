@@ -145,7 +145,7 @@ def _make_cases() -> list[EvalCase]:
             ok = result["status"] == "needs_confirmation"
             return ok, f"版本未知时期望 needs_confirmation，实际 {result['status']}"
 
-        def missing_condition(event=event):
+        def missing_condition(event=event, inside=inside):
             asset = _asset_for(event, None)
             asset["version"] = inside or "1.0.0"
             asset["conditions"] = {}

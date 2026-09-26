@@ -43,7 +43,7 @@ AI_PACKAGES: frozenset[str] = frozenset(
 
 # Specific, unambiguous phrases.  Matching one is sufficient.
 STRONG_TERMS: tuple[str, ...] = (
-    "large language model", "llm", "llms", "prompt injection", "jailbreak",
+    "artificial intelligence", "large language model", "llm", "llms", "prompt injection", "jailbreak",
     "jailbreaking", "adversarial example", "adversarial patch", "model poisoning",
     "data poisoning", "training data poisoning", "model extraction", "model stealing",
     "membership inference", "model inversion", "system prompt", "prompt leak",

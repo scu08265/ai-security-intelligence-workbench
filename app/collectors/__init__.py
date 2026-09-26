@@ -153,6 +153,7 @@ def _load_collectors() -> dict[str, Callable[..., CollectOutcome]]:
         "openalex": knowledge.collect_openalex,
         "rss": knowledge.collect_rss,
         "page": knowledge.collect_page,
+        "document": knowledge.collect_document,
     }
 
 

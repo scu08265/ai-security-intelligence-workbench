@@ -480,7 +480,9 @@ def _run_collection_deterministic(
             "status": outcome.status,
             "last_run": storage.utcnow(),
             "last_error": outcome.error,
-            "events_count": (state.get("events_count") or 0) + len(outcome.events),
+            "events_count": storage.count_events_for_source_prefix(
+                sources.event_source_prefix(source_id)
+            ),
         }
         if outcome.ok:
             fields["last_success"] = storage.utcnow()
@@ -841,6 +843,20 @@ def monitoring_summary() -> dict:
         "note": "仅登记而未产生有效数据的端点不计为已接入",
     })
     return {"items": items, "coverage": coverage}
+
+
+def refresh_source_event_counts() -> dict[str, int]:
+    """Repair source inventories from deduplicated events.
+
+    This is safe to run on every startup and after schema upgrades.  It never
+    changes source health or evidence; only the displayed inventory count.
+    """
+    counts: dict[str, int] = {}
+    for spec in sources.SOURCES:
+        count = storage.count_events_for_source_prefix(sources.event_source_prefix(spec.id))
+        counts[spec.id] = count
+        storage.update_source_state(spec.id, events_count=count)
+    return counts
 
 
 def monitoring_evidence(days: int = 7) -> dict:

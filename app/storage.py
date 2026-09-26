@@ -532,6 +532,19 @@ def all_source_states() -> dict[str, dict]:
     return {r["id"]: dict(r) for r in rows}
 
 
+def count_events_for_source_prefix(source_prefix: str) -> int:
+    """Count unique events that contain an evidence entry for one source."""
+    pattern = f"{source_prefix}:%"
+    with connect() as conn:
+        row = conn.execute(
+            """SELECT COUNT(DISTINCT e.id) AS n
+               FROM events e, json_each(json_extract(e.doc, '$.sources')) s
+               WHERE json_extract(s.value, '$.id') LIKE ?""",
+            (pattern,),
+        ).fetchone()
+    return int(row["n"] or 0) if row else 0
+
+
 def update_source_state(source_id: str, **fields: Any) -> None:
     allowed = {"status", "last_run", "last_success", "last_error", "events_count", "cursor", "last_hash"}
     updates = {k: v for k, v in fields.items() if k in allowed}

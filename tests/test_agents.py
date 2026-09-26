@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from app import agents, collectors, intelligence, storage
+from app import agents, collectors, evaluation, intelligence, storage
 
 from fixtures import KEV_SYNTHETIC, OSV_SYNTHETIC
 
@@ -167,3 +167,10 @@ def test_collection_does_not_run_the_gap_scheduler_by_default(monkeypatch):
     assert called["n"] == 0
     agents.process_and_store(_event("CVE-2099-00002"), close_gaps=True)
     assert called["n"] == 1
+
+
+def test_research_case_evaluation_binds_each_case_version():
+    agents.seed_research_cases()
+    result = evaluation.run_evaluation()
+    assert result["metrics"]["real_case_count"] > 0
+    assert result["metrics"]["cases_failed"] == 0

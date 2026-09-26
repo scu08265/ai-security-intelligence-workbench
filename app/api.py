@@ -33,6 +33,7 @@ CORPUS_LIMIT = 500
 
 app = FastAPI(title="AI 安全知识情报系统", version=config.APP_VERSION)
 storage.init_db()
+agents.refresh_source_event_counts()
 
 
 # --------------------------------------------------------------------------

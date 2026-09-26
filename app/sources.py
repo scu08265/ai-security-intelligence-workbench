@@ -210,14 +210,14 @@ SOURCES: tuple[SourceSpec, ...] = (
         name="European Commission AI Act",
         category="policy_regulation",
         category_label="政策法规与标准动态",
-        url="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
-        collector="page",
-        mode="page",
+        url="https://data.consilium.europa.eu/doc/document/PE-24-2024-INIT/en/pdf",
+        collector="document",
+        mode="pdf",
         realtime=False,
         independent_origin=True,
         trust="government",
         license_note="European Commission reuse policy applies.",
-        description="欧盟委员会 AI Act 官方政策页，按内容哈希监测法规说明更新。",
+        description="欧盟理事会托管的 AI Act 官方 PDF，保存快照并建立可检索全文。",
     ),
     SourceSpec(
         id="nist_news",
@@ -237,6 +237,14 @@ SOURCES: tuple[SourceSpec, ...] = (
 
 BY_ID: dict[str, SourceSpec] = {s.id: s for s in SOURCES}
 
+# Collector-specific prefixes used inside evidence IDs.  Most sources use
+# their registry ID, but these historical aliases remain stable so existing
+# events do not need to be migrated.
+EVENT_SOURCE_PREFIXES = {
+    "cisa_kev": "kev",
+    "mitre_cve": "mitre",
+}
+
 CATEGORIES: dict[str, str] = {}
 for _spec in SOURCES:
     CATEGORIES.setdefault(_spec.category, _spec.category_label)
@@ -244,6 +252,10 @@ for _spec in SOURCES:
 
 def get(source_id: str) -> SourceSpec | None:
     return BY_ID.get(source_id)
+
+
+def event_source_prefix(source_id: str) -> str:
+    return EVENT_SOURCE_PREFIXES.get(source_id, source_id)
 
 
 # Four coarse buckets for the user-facing type filter.  These are derived from
