@@ -41,6 +41,8 @@ def _iso(value: Any) -> str | None:
         parsed = datetime.fromisoformat(candidate)
     except ValueError:
         return raw  # keep the upstream string rather than fabricate a time
+    if parsed.year <= 1970:
+        return None  # CVE feeds sometimes emit 0001-01-01 as an empty timestamp
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=timezone.utc)
     return parsed.astimezone(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -496,13 +498,24 @@ def mitre_to_event(raw: dict) -> dict | None:
             status = _text(version.get("status")).casefold()
             if status in {"unaffected"}:
                 continue
-            spec = UNKNOWN_RANGE
-            if version.get("lessThan") and version.get("version"):
-                spec = f">= {_text(version['version'])}, < {_text(version['lessThan'])}"
-            elif version.get("lessThanOrEqual") and version.get("version"):
-                spec = f">= {_text(version['version'])}, <= {_text(version['lessThanOrEqual'])}"
-            elif version.get("version"):
-                spec = f"= {_text(version['version'])}"
+            version_value = _text(version.get("version"))
+            less_than = _text(version.get("lessThan"))
+            less_than_or_equal = _text(version.get("lessThanOrEqual"))
+            if version_value and version_value[0] in "<>=^~":
+                # Some CNA records put a full range expression in `version`.
+                spec = version_value
+            elif less_than and version_value:
+                spec = f">= {version_value}, < {less_than}"
+            elif less_than_or_equal and version_value:
+                spec = f">= {version_value}, <= {less_than_or_equal}"
+            elif less_than:
+                spec = f"< {less_than}"
+            elif less_than_or_equal:
+                spec = f"<= {less_than_or_equal}"
+            elif version_value:
+                spec = f"= {version_value}"
+            else:
+                spec = UNKNOWN_RANGE
             affected.append({
                 "package": package,
                 "ecosystem": _text(entry.get("packageName")),

@@ -16,6 +16,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
+from packaging.specifiers import InvalidSpecifier, SpecifierSet
+
 from . import storage
 
 SEVERITY_ORDER = ["none", "low", "medium", "high", "critical"]
@@ -89,6 +91,13 @@ def _merge_affected(left: list[dict], right: list[dict]) -> tuple[list[dict], li
     """Union ranges, keeping provenance; flag ranges that disagree."""
     merged: dict[tuple[str, str], dict] = {}
     for item in [*(left or []), *(right or [])]:
+        range_text = str(item.get("range") or "").strip()
+        if range_text and not range_text.casefold().startswith("in ") \
+                and range_text.casefold() not in {"unknown", "unconfirmed"}:
+            try:
+                SpecifierSet(range_text)
+            except InvalidSpecifier:
+                continue
         key = (_normalize_component(item.get("package")), str(item.get("range") or ""))
         if key not in merged:
             merged[key] = dict(item)

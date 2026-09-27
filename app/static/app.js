@@ -26,7 +26,7 @@
     assessStatus: { affected: '受影响', not_affected: '当前规则下不受影响', needs_confirmation: '待补信息', not_applicable: '未评估' },
     assessStatusClass: { affected: 'affected', not_affected: 'not-affected', needs_confirmation: 'needs-confirmation', not_applicable: 'not-applicable' },
     priority: { critical: '紧急', high: '高', medium: '中', low: '低', unknown: '未知' },
-    runStatus: { ok: '成功', partial: '部分成功', failed: '失败', skipped: '已跳过', idle: '未运行', completed: '已完成', running: '执行中', aborted: '已中断' },
+    runStatus: { ok: '成功', partial: '部分成功', failed: '失败', skipped: '已跳过', idle: '未运行', completed: '已完成', running: '执行中', aborted: '已中断', stale: '历史数据可用' },
     severity: { critical: '严重', high: '高', medium: '中', low: '低', none: '无评级', unknown: '未知' },
     exposure: { public: '公网', internal: '内网', unknown: '未知' },
     criticality: { high: '高', medium: '中', low: '低' },
@@ -1813,7 +1813,7 @@
 
       const statusCell = [
         runStatusBadge(source.status || 'idle'),
-        source.status === 'failed' && countValue(source.events_count) > 0
+        (source.status === 'failed' || source.status === 'stale') && countValue(source.events_count) > 0
           ? badge('plain', '历史数据仍可用')
           : null,
         source.last_error ? h('p', { class: 'err-text break' }, '最近错误：' + String(source.last_error)) : null

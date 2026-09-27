@@ -476,8 +476,14 @@ def _run_collection_deterministic(
         updated += per_source_updated
         merged_total += sum(1 for e in outcome.events)
 
+        history_available = bool(
+            int(state.get("events_count") or 0) > 0 and state.get("last_success")
+        )
+        effective_status = (
+            "stale" if outcome.status == "failed" and history_available else outcome.status
+        )
         fields: dict[str, Any] = {
-            "status": outcome.status,
+            "status": effective_status,
             "last_run": storage.utcnow(),
             "last_error": outcome.error,
             "events_count": storage.count_events_for_source_prefix(
@@ -495,7 +501,7 @@ def _run_collection_deterministic(
         results.append({
             "source_id": source_id,
             "name": spec.name,
-            "status": outcome.status,
+            "status": effective_status,
             "fetched": outcome.fetched,
             "kept": len(outcome.events),
             "filtered": outcome.filtered,
@@ -511,6 +517,7 @@ def _run_collection_deterministic(
         })
 
     failed = [r for r in results if r["status"] == "failed"]
+    stale = [r for r in results if r["status"] == "stale"]
     status = "completed" if not failed else ("partial" if len(failed) < len(results) else "failed")
     detail = {
         "results": results,
@@ -527,7 +534,10 @@ def _run_collection_deterministic(
     storage.save_run({
         "id": run_id, "kind": "collect", "status": status,
         "started_at": started_at, "finished_at": finished_at,
-        "summary": f"采集 {len(selected)} 个来源：新增 {added}，更新 {updated}，失败 {len(failed)}",
+        "summary": (
+            f"采集 {len(selected)} 个来源：新增 {added}，更新 {updated}，失败 {len(failed)}"
+            + (f"，历史数据可用 {len(stale)}" if stale else "")
+        ),
         "detail": detail,
     })
     return {

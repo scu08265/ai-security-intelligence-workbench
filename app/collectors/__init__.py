@@ -92,7 +92,7 @@ def http_request(
 def _retry_delay(response: httpx.Response, attempt: int) -> float:
     retry_after = response.headers.get("Retry-After", "").strip()
     if retry_after.isdigit():
-        return min(float(retry_after), 15.0)
+        return min(float(retry_after), 60.0)
     return BACKOFF_SECONDS[min(attempt, len(BACKOFF_SECONDS) - 1)]
 
 

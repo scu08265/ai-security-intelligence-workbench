@@ -290,6 +290,11 @@ def test_transient_server_errors_are_retried_then_reported(monkeypatch):
     assert outcome.events
 
 
+def test_retry_after_header_is_honored_up_to_a_minute():
+    response = httpx.Response(503, headers={"Retry-After": "60"})
+    assert collectors._retry_delay(response, 0) == 60.0
+
+
 def test_malformed_json_is_reported_rather_than_parsed_loosely():
     def broken(request: httpx.Request) -> httpx.Response:
         return httpx.Response(200, text="<html>not json</html>",
@@ -321,3 +326,21 @@ def test_collector_failure_is_recorded_against_the_source_by_the_runner():
     assert state["status"] == "failed"
     assert state["last_success"] is None
     assert storage.latest_run("collect")["status"] == "failed"
+
+
+def test_failed_source_with_history_is_marked_stale_not_failed(monkeypatch):
+    from app import agents
+
+    storage.update_source_state(
+        "nvd", events_count=3, last_success="2099-01-01T00:00:00Z",
+    )
+    monkeypatch.setattr(
+        collectors, "collect",
+        lambda source_id, since=None: collectors.CollectOutcome(
+            source_id=source_id, status="failed", error="HTTP 503",
+        ),
+    )
+    result = agents.run_collection(["nvd"])
+    assert result["status"] == "completed"
+    assert result["results"][0]["status"] == "stale"
+    assert storage.source_state("nvd")["status"] == "stale"

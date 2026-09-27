@@ -158,3 +158,25 @@ def test_research_cases_file_normalizes_with_real_evidence():
 def test_osv_open_ended_record_normalizes_conservatively():
     event = normalize.osv_to_event(OSV_OPEN_ENDED_SYNTHETIC)
     assert event["affected"][0]["range"] == "< 0.17.1"
+
+
+def test_ancient_upstream_timestamp_is_treated_as_missing():
+    assert normalize._iso("0001-01-01T00:00:00Z") is None
+
+
+def test_mitre_range_expression_is_not_double_prefixed():
+    event = normalize.mitre_to_event({
+        "cveMetadata": {
+            "cveId": "CVE-2099-99999",
+            "datePublished": "2099-01-01T00:00:00Z",
+            "state": "PUBLISHED",
+        },
+        "containers": {"cna": {
+            "descriptions": [{"lang": "en", "value": "prompt injection"}],
+            "affected": [{
+                "product": "vllm",
+                "versions": [{"version": ">= 0.8.3, < 0.14.1"}],
+            }],
+        }},
+    })
+    assert event["affected"][0]["range"] == ">= 0.8.3, < 0.14.1"

@@ -11,13 +11,14 @@ nothing more.
 
 from __future__ import annotations
 
+import json
 import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from packaging.version import InvalidVersion, Version
 
-from . import config, intelligence, storage
+from . import config, intelligence, normalize, storage
 from .eval_dataset import run_labelled_evaluation
 
 FIXTURE_NOTICE = (
@@ -109,8 +110,12 @@ def _asset_for(event: dict, version: str | None, **overrides: Any) -> dict:
 
 def _make_cases() -> list[EvalCase]:
     cases: list[EvalCase] = []
-    events, _ = storage.list_events(limit=500)
-    research = [e for e in events if "verified_research" in (e.get("tags") or [])]
+    case_path = config.BASE_DIR / "research" / "cases.json"
+    payload = json.loads(case_path.read_text(encoding="utf-8"))
+    research = [
+        normalize.research_case_to_event(case)
+        for case in payload.get("cases") or []
+    ]
 
     for event in research:
         event_id = str(event.get("id"))
