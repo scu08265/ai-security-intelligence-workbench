@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- Completed engineering delivery for Docker, Compose, CI, health checks, structured logs, and alerts.
+- Added deployment, health-check, and rollback scripts.
+- Added CI dependency consistency, Compose validation, and container build checks.
+- Added engineering delivery documentation.
+
 ## 0.2.0
 
 - Added daily scheduled collection with task ID, planned time, and actual time.

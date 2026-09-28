@@ -1,6 +1,6 @@
 # AI 安全知识情报工作台
 
-当前版本：`0.2.0`
+当前版本：`0.2.1`
 
 面向 AI 推理框架、模型供应链和 AI 应用风险的本地安全情报系统。它把公开漏洞、论文、标准与资产清单汇聚为可追溯的证据，并输出资产影响和处置建议。
 
@@ -93,6 +93,8 @@ python tools\browser_check.py --base http://127.0.0.1:8000
 [运维文档](docs/OPERATIONS.md)，容器和 CI 说明见
 [Docker/CI 指南](docs/DOCKER_CI_GUIDE.md)，A 项完成状态见
 [A 项实施说明](docs/A_TASK_IMPLEMENTATION.md)。
+
+工程化交付逐项映射见 [工程化交付说明](docs/ENGINEERING_DELIVERY.md)。
 
 ## 项目结构
 

@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -15,6 +17,8 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
+      - name: Check dependency consistency
+        run: python -m pip check
       - name: Run Python tests
         run: python -m pytest -q
       - name: Generate reliability report
@@ -27,7 +31,14 @@ jobs:
 
   container:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
+      - name: Validate Compose configuration
+        run: docker compose config
       - name: Build container
-        run: docker build -t ai-security-intelligence-workbench:ci .
+        run: |
+          docker build \
+            --build-arg APP_VERSION=ci \
+            -t ai-security-intelligence-workbench:ci .

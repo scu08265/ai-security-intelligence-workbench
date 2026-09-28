@@ -50,6 +50,10 @@ def log_event(event: str, level: str = "info", **fields: Any) -> dict[str, Any]:
         **fields,
     })
     _append(log_path(), payload)
+    if os.getenv("INTEL_JSON_LOGS", "0").strip().casefold() in {
+        "1", "true", "yes", "on", "enabled",
+    }:
+        print(json.dumps(payload, ensure_ascii=False, sort_keys=True), flush=True)
     return payload
 
 

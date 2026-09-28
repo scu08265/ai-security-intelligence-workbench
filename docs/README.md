@@ -12,3 +12,4 @@
 | [部署、调度、备份与回滚](OPERATIONS.md) | 每日计划任务、日志告警、备份恢复和 7 天证据口径。 |
 | [Docker、Compose 与 CI](DOCKER_CI_GUIDE.md) | 容器运行、CI、健康检查和运维截图说明。 |
 | [A 项任务实施说明](A_TASK_IMPLEMENTATION.md) | 每日采集、7 天进度、产出文件与检查命令。 |
+| [工程化交付说明](ENGINEERING_DELIVERY.md) | Docker、CI、健康检查、日志、告警、部署与回滚映射。 |

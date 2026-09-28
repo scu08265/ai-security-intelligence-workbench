@@ -126,6 +126,7 @@ def _commit_payload(github: GitHub, repo: str) -> tuple[str, str, str]:
 def push(
     *, repo: str, branch: str, tag: str | None,
     full_tree: bool, base_commit: str | None,
+    sync_tags: list[str] | None = None,
 ) -> dict[str, Any]:
     token = os.getenv("GITHUB_TOKEN", "").strip()
     if not token:
@@ -176,32 +177,43 @@ def push(
         json={"sha": commit["sha"], "force": True},
     )
 
-    if tag:
+    def update_tag(tag_name: str, commit_sha: str, tagger: dict[str, Any]) -> str:
         tag_object = github.request(
             "POST", f"/repos/{repo}/git/tags",
             json={
-                "tag": tag,
-                "message": f"Release {tag}",
-                "object": commit["sha"],
+                "tag": tag_name,
+                "message": f"Release {tag_name}",
+                "object": commit_sha,
                 "type": "commit",
-                "tagger": json.loads(author),
+                "tagger": tagger,
             },
         )
         try:
-            github.request("GET", f"/repos/{repo}/git/ref/tags/{tag}")
+            github.request("GET", f"/repos/{repo}/git/ref/tags/{tag_name}")
             github.request(
-                "PATCH", f"/repos/{repo}/git/refs/tags/{tag}",
+                "PATCH", f"/repos/{repo}/git/refs/tags/{tag_name}",
                 json={"sha": tag_object["sha"], "force": True},
             )
         except RuntimeError:
             github.request(
                 "POST", f"/repos/{repo}/git/refs",
-                json={"ref": f"refs/tags/{tag}", "sha": tag_object["sha"]},
+                json={"ref": f"refs/tags/{tag_name}", "sha": tag_object["sha"]},
             )
+        return str(tag_object["sha"])
+
+    tagger = json.loads(author)
+    updated_tags: dict[str, str] = {}
+    if tag:
+        updated_tags[tag] = update_tag(tag, commit["sha"], tagger)
+    for tag_name in sync_tags or []:
+        local_commit = _git("rev-list", "-n", "1", tag_name).strip()
+        if local_commit:
+            updated_tags[tag_name] = update_tag(tag_name, local_commit, tagger)
     return {
         "branch": branch,
         "commit": commit["sha"],
         "tag": tag,
+        "updated_tags": updated_tags,
         "remote_previous_commit": remote_commit_sha,
         "full_tree": full_tree,
     }
@@ -212,6 +224,7 @@ def main() -> int:
     parser.add_argument("--repo", default="scu08265/ai-security-intelligence-workbench")
     parser.add_argument("--branch", default="main")
     parser.add_argument("--tag", default="")
+    parser.add_argument("--sync-tag", action="append", default=[])
     parser.add_argument("--full-tree", action="store_true")
     parser.add_argument("--base-commit", default="")
     args = parser.parse_args()
@@ -222,6 +235,7 @@ def main() -> int:
             tag=args.tag or None,
             full_tree=args.full_tree,
             base_commit=args.base_commit or None,
+            sync_tags=args.sync_tag,
         )
     except Exception as exc:  # noqa: BLE001 - CLI must return actionable output
         print(json.dumps({
