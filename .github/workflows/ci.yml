@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run Python tests
+        run: python -m pytest -q
+      - name: Generate reliability report
+        run: python tools/build_reliability_report.py --days 7 --output-dir reports
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check frontend syntax
+        run: node --check app/static/app.js
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build container
+        run: docker build -t ai-security-intelligence-workbench:ci .

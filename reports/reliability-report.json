@@ -1,0 +1,1448 @@
+{
+  "generated_at": "2026-09-28T05:06:19Z",
+  "definition": {
+    "first_observation": "每个事件只取最早一次 discovered_at，重复更新不重复计入时延。",
+    "invalid_publisher_time": "缺失、0001 等异常年份、发布时间晚于发现时间均记为未知。",
+    "scheduled_run": "运行详情中 trigger=scheduled，即由外部计划任务触发。"
+  },
+  "timeliness": {
+    "sample_size": 91,
+    "computable_samples": 1,
+    "unknown_samples": 13,
+    "baseline_excluded_samples": 77,
+    "monitoring_started_at": "2026-09-27T10:43:32Z",
+    "unknown_reasons": {
+      "invalid_or_missing_publisher_time": 13
+    },
+    "latency_seconds_p50": 27870.0,
+    "latency_seconds_p95": 27870.0,
+    "records": [
+      {
+        "event_id": "CVE-2026-101065",
+        "source_id": "nvd",
+        "published_at": "2026-09-27T21:17:02Z",
+        "discovered_at": "2026-09-28T05:01:32Z",
+        "latency_seconds": 27870.0,
+        "latency_hours": 7.742,
+        "valid": true,
+        "unknown_reason": null
+      },
+      {
+        "event_id": "EU_AI_ACT-ca6810dcd2",
+        "source_id": "eu_ai_act",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:44:50Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "NIST_AI_RMF-54dbc15413",
+        "source_id": "nist_ai_rmf",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:44:48Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "OWASP_GENAI-430c5292e0",
+        "source_id": "owasp_genai",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:44:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-100841",
+        "source_id": "nvd",
+        "published_at": "2026-09-27T02:17:22Z",
+        "discovered_at": "2026-09-28T05:01:32Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7163333744",
+        "source_id": "openalex",
+        "published_at": "2026-09-26T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7163389061",
+        "source_id": "openalex",
+        "published_at": "2026-09-26T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214468787",
+        "source_id": "openalex",
+        "published_at": "2026-09-26T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W4406794439",
+        "source_id": "openalex",
+        "published_at": "2026-09-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7125151750",
+        "source_id": "openalex",
+        "published_at": "2026-09-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7151534166",
+        "source_id": "openalex",
+        "published_at": "2026-09-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214295679",
+        "source_id": "openalex",
+        "published_at": "2026-09-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214338629",
+        "source_id": "openalex",
+        "published_at": "2026-09-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214339430",
+        "source_id": "openalex",
+        "published_at": "2026-09-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7164892115",
+        "source_id": "openalex",
+        "published_at": "2026-09-24T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214152392",
+        "source_id": "openalex",
+        "published_at": "2026-09-24T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214241047",
+        "source_id": "openalex",
+        "published_at": "2026-09-24T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7204236562",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214062101",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214100311",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214109085",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214122214",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214129187",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214147774",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214164747",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214208361",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214214788",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214235739",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214244384",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214244769",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214405942",
+        "source_id": "openalex",
+        "published_at": "2026-09-23T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7160916619",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7213969437",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7213970598",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7213972664",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7213974959",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7213980805",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7213986937",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214025583",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214065368",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214081802",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "OPENALEX-W7214086309",
+        "source_id": "openalex",
+        "published_at": "2026-09-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:44:44Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-8pw2-6jv3-mj5j",
+        "source_id": "osv",
+        "published_at": "2026-09-17T17:17:39Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-hcwq-8wjf-3gcr",
+        "source_id": "osv",
+        "published_at": "2026-09-16T22:12:17Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "PYSEC-2026-3985",
+        "source_id": "osv",
+        "published_at": "2026-09-12T13:16:53Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-wvm9-9g5j-623f",
+        "source_id": "osv",
+        "published_at": "2026-09-10T23:04:57Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-3g9q-v48f-hh9w",
+        "source_id": "osv",
+        "published_at": "2026-09-10T22:44:42Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-v39v-59xw-j98g",
+        "source_id": "osv",
+        "published_at": "2026-09-10T22:42:48Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-8r35-5x5r-hv74",
+        "source_id": "osv",
+        "published_at": "2026-09-10T22:42:25Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-wjwr-xfp9-r66p",
+        "source_id": "osv",
+        "published_at": "2026-09-10T22:41:34Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-p78m-89r6-pgf7",
+        "source_id": "osv",
+        "published_at": "2026-09-10T21:23:44Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-wpmr-8h3q-fwj7",
+        "source_id": "osv",
+        "published_at": "2026-09-10T21:23:25Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-jmc6-2wr8-h3wj",
+        "source_id": "osv",
+        "published_at": "2026-09-10T15:10:20Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2026-64849",
+        "source_id": "cisa_kev",
+        "published_at": "2026-08-19T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2026-9198",
+        "source_id": "cisa_kev",
+        "published_at": "2026-08-04T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2026-55255",
+        "source_id": "cisa_kev",
+        "published_at": "2026-07-07T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2026-33017",
+        "source_id": "cisa_kev",
+        "published_at": "2026-03-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2026-0770",
+        "source_id": "cisa_kev",
+        "published_at": "2026-07-21T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "GHSA-mcmc-2m55-j8jj",
+        "source_id": "osv",
+        "published_at": "2026-01-08T21:47:43Z",
+        "discovered_at": "2026-09-27T10:43:37Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2025-68613",
+        "source_id": "cisa_kev",
+        "published_at": "2026-03-11T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2025-34291",
+        "source_id": "cisa_kev",
+        "published_at": "2026-05-21T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2025-62593",
+        "source_id": "cisa_kev",
+        "published_at": "2026-08-17T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2025-9959",
+        "source_id": "nvd",
+        "published_at": "2025-09-03T17:15:35Z",
+        "discovered_at": "2026-09-27T10:43:32Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2025-6558",
+        "source_id": "cisa_kev",
+        "published_at": "2025-07-22T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2025-3248",
+        "source_id": "cisa_kev",
+        "published_at": "2025-05-05T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2024-4610",
+        "source_id": "cisa_kev",
+        "published_at": "2024-06-12T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2024-29988",
+        "source_id": "cisa_kev",
+        "published_at": "2024-04-30T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2023-4211",
+        "source_id": "cisa_kev",
+        "published_at": "2023-10-03T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2021-29256",
+        "source_id": "cisa_kev",
+        "published_at": "2023-07-07T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2021-27876",
+        "source_id": "cisa_kev",
+        "published_at": "2023-04-07T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2021-27877",
+        "source_id": "cisa_kev",
+        "published_at": "2023-04-07T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2021-27878",
+        "source_id": "cisa_kev",
+        "published_at": "2023-04-07T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2023-26083",
+        "source_id": "cisa_kev",
+        "published_at": "2023-04-07T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2022-22706",
+        "source_id": "cisa_kev",
+        "published_at": "2023-03-30T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2022-38181",
+        "source_id": "cisa_kev",
+        "published_at": "2023-03-30T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2022-4135",
+        "source_id": "cisa_kev",
+        "published_at": "2022-11-28T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2014-6332",
+        "source_id": "cisa_kev",
+        "published_at": "2022-03-25T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2014-4114",
+        "source_id": "cisa_kev",
+        "published_at": "2022-03-03T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2020-10987",
+        "source_id": "cisa_kev",
+        "published_at": "2021-11-03T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2021-28663",
+        "source_id": "cisa_kev",
+        "published_at": "2021-11-03T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2021-28664",
+        "source_id": "cisa_kev",
+        "published_at": "2021-11-03T00:00:00Z",
+        "discovered_at": "2026-09-27T10:43:47Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "baseline_backfill_before_monitoring_start"
+      },
+      {
+        "event_id": "CVE-2026-55946",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-70352",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-78501",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-80098",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-81380",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-81381",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-85885",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-85887",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-85889",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      },
+      {
+        "event_id": "CVE-2026-85917",
+        "source_id": "msrc",
+        "published_at": null,
+        "discovered_at": "2026-09-27T10:43:49Z",
+        "latency_seconds": null,
+        "latency_hours": null,
+        "valid": false,
+        "unknown_reason": "invalid_or_missing_publisher_time"
+      }
+    ],
+    "within_6h": {
+      "count": 0,
+      "rate": 0.0,
+      "target": "优秀目标 <= 6h"
+    },
+    "within_12h": {
+      "count": 1,
+      "rate": 1.0,
+      "target": "良好目标 <= 12h"
+    },
+    "within_24h": {
+      "count": 1,
+      "rate": 1.0,
+      "target": "合格目标 <= 24h"
+    }
+  },
+  "sources": {
+    "generated_at": "2026-09-28T05:06:19Z",
+    "source_count": 14,
+    "healthy_source_count": 11,
+    "items": [
+      {
+        "id": "nvd",
+        "name": "NIST National Vulnerability Database",
+        "category": "cve_database",
+        "auto_default": true,
+        "events_count": 3,
+        "last_run": "2026-09-28T05:01:44Z",
+        "last_success": "2026-09-28T05:01:44Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 1,
+        "success_rate": 1.0,
+        "duration_ms_p50": 2875.0,
+        "duration_ms_p95": 11686.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "历史事件可继续查询。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "mitre_cve",
+        "name": "MITRE CVE Program (CVE Services)",
+        "category": "cve_database",
+        "auto_default": true,
+        "events_count": 10,
+        "last_run": "2026-09-28T05:01:55Z",
+        "last_success": "2026-09-28T05:01:55Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 1641.0,
+        "duration_ms_p95": 10781.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "历史事件可继续查询。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "osv",
+        "name": "OSV (Open Source Vulnerabilities)",
+        "category": "ecosystem_advisory",
+        "auto_default": true,
+        "events_count": 12,
+        "last_run": "2026-09-28T05:03:26Z",
+        "last_success": "2026-09-27T10:43:47Z",
+        "last_error": "ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+        "attempts": 2,
+        "successful_attempts": 1,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 1,
+        "success_rate": 1.0,
+        "duration_ms_p50": 9360.0,
+        "duration_ms_p95": 91625.0,
+        "current_status": "stale",
+        "health_class": "not_run",
+        "failure_reason": "ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+        "degradation_strategy": {
+          "failure_reason": "批量查询、详情请求超时或单次详情预算耗尽。",
+          "degradation": "只把本轮成功解析的记录标记为成功，预算未处理项标记为部分成功。",
+          "data_availability": "历史 OSV 事件可继续使用；缺口保留并进入下一轮。",
+          "manual_action": "提高详情预算或增加下一轮排空任务。"
+        }
+      },
+      {
+        "id": "ghsa",
+        "name": "GitHub Advisory Database",
+        "category": "community_advisory",
+        "auto_default": false,
+        "events_count": 0,
+        "last_run": null,
+        "last_success": null,
+        "last_error": null,
+        "attempts": 0,
+        "successful_attempts": 0,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": null,
+        "duration_ms_p50": null,
+        "duration_ms_p95": null,
+        "current_status": "idle",
+        "health_class": "not_run",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "未配置 GITHUB_TOKEN 或 GitHub API 限流。",
+          "degradation": "未配置令牌时主动跳过，不使用空结果冒充成功。",
+          "data_availability": "已保存的 GHSA 历史事件仍可检索。",
+          "manual_action": "在 .env 中配置具有只读权限的 GITHUB_TOKEN。"
+        }
+      },
+      {
+        "id": "cisa_kev",
+        "name": "CISA Known Exploited Vulnerabilities",
+        "category": "exploitation_intel",
+        "auto_default": true,
+        "events_count": 26,
+        "last_run": "2026-09-28T05:03:28Z",
+        "last_success": "2026-09-28T05:03:28Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 1280.0,
+        "duration_ms_p95": 1796.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "历史事件可继续查询。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "msrc",
+        "name": "Microsoft Security Response Center (CVRF)",
+        "category": "vendor_advisory",
+        "auto_default": true,
+        "events_count": 10,
+        "last_run": "2026-09-28T05:03:48Z",
+        "last_success": "2026-09-28T05:03:48Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 20250.0,
+        "duration_ms_p95": 54577.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "微软 CVRF 索引或月度文档不可用、结构变化或超时。",
+          "degradation": "保留最近成功的厂商公告和快照，本轮明确标记失败或部分成功。",
+          "data_availability": "历史厂商公告仍可用；新月份更新不能视为已完成。",
+          "manual_action": "核对 MSRC API 和 CVRF 字段结构。"
+        }
+      },
+      {
+        "id": "security_blog",
+        "name": "GitHub Security Blog",
+        "category": "security_blog",
+        "auto_default": true,
+        "events_count": 0,
+        "last_run": "2026-09-28T05:03:49Z",
+        "last_success": "2026-09-28T05:03:49Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 234.0,
+        "duration_ms_p95": 312.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "当前没有可用历史事件。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "arxiv",
+        "name": "arXiv (cs.CR / cs.LG)",
+        "category": "academic_paper",
+        "auto_default": false,
+        "events_count": 0,
+        "last_run": null,
+        "last_success": null,
+        "last_error": null,
+        "attempts": 0,
+        "successful_attempts": 0,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": null,
+        "duration_ms_p50": null,
+        "duration_ms_p95": null,
+        "current_status": "idle",
+        "health_class": "not_run",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前网络出口访问 arXiv API 返回 HTTP 406。",
+          "degradation": "保留真实失败记录，使用 OpenAlex 作为论文元数据与摘要备用源。",
+          "data_availability": "历史快照与已入库论文仍可检索；不伪造 arXiv 新数据。",
+          "manual_action": "更换可访问 arXiv API 的网络出口后重新运行。"
+        }
+      },
+      {
+        "id": "openalex",
+        "name": "OpenAlex Scholarly Index",
+        "category": "academic_paper",
+        "auto_default": true,
+        "events_count": 37,
+        "last_run": "2026-09-28T05:04:54Z",
+        "last_success": "2026-09-28T05:04:54Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 1703.0,
+        "duration_ms_p95": 65468.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "OpenAlex 限流、超时或响应格式变化。",
+          "degradation": "保留上次成功快照和已入库论文；下一计划周期重试。",
+          "data_availability": "历史论文元数据可继续查询，但不能宣称本周期已更新。",
+          "manual_action": "检查 OpenAlex 服务状态和查询语法。"
+        }
+      },
+      {
+        "id": "owasp_genai",
+        "name": "OWASP GenAI Security Project",
+        "category": "technical_standard",
+        "auto_default": true,
+        "events_count": 1,
+        "last_run": "2026-09-28T05:04:56Z",
+        "last_success": "2026-09-28T05:04:56Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 843.0,
+        "duration_ms_p95": 1858.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "历史事件可继续查询。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "nist_ai_rmf",
+        "name": "NIST AI Risk Management Framework",
+        "category": "risk_framework",
+        "auto_default": true,
+        "events_count": 1,
+        "last_run": "2026-09-28T05:04:57Z",
+        "last_success": "2026-09-28T05:04:57Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 671.0,
+        "duration_ms_p95": 1000.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "历史事件可继续查询。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "mitre_atlas",
+        "name": "MITRE ATLAS",
+        "category": "threat_framework",
+        "auto_default": true,
+        "events_count": 0,
+        "last_run": "2026-09-28T05:04:59Z",
+        "last_success": "2026-09-28T05:04:59Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 1000.0,
+        "duration_ms_p95": 2343.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "当前没有可用历史事件。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "eu_ai_act",
+        "name": "European Commission AI Act",
+        "category": "policy_regulation",
+        "auto_default": true,
+        "events_count": 1,
+        "last_run": "2026-09-28T05:05:14Z",
+        "last_success": "2026-09-28T05:05:14Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 14921.0,
+        "duration_ms_p95": 39780.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "历史事件可继续查询。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      },
+      {
+        "id": "nist_news",
+        "name": "NIST News and Events",
+        "category": "policy_regulation",
+        "auto_default": true,
+        "events_count": 0,
+        "last_run": "2026-09-28T05:06:04Z",
+        "last_success": "2026-09-28T05:06:04Z",
+        "last_error": null,
+        "attempts": 2,
+        "successful_attempts": 2,
+        "failed_attempts": 0,
+        "skipped_attempts": 0,
+        "partial_attempts": 0,
+        "success_rate": 1.0,
+        "duration_ms_p50": 812.0,
+        "duration_ms_p95": 49889.0,
+        "current_status": "ok",
+        "health_class": "succeeded",
+        "failure_reason": null,
+        "degradation_strategy": {
+          "failure_reason": "当前无失败记录。",
+          "degradation": "保留历史证据并在下一计划周期重试。",
+          "data_availability": "当前没有可用历史事件。",
+          "manual_action": "检查上游状态、鉴权和响应结构。"
+        }
+      }
+    ]
+  },
+  "continuous_runs": {
+    "target_days": 7,
+    "observed_days": 2,
+    "consecutive_executed_days": 2,
+    "target_met": false,
+    "ledger": [
+      {
+        "date": "2026-09-22",
+        "executed": false,
+        "run_count": 0,
+        "successful_run_count": 0,
+        "partial_run_count": 0,
+        "failed_run_count": 0,
+        "run_ids": []
+      },
+      {
+        "date": "2026-09-23",
+        "executed": false,
+        "run_count": 0,
+        "successful_run_count": 0,
+        "partial_run_count": 0,
+        "failed_run_count": 0,
+        "run_ids": []
+      },
+      {
+        "date": "2026-09-24",
+        "executed": false,
+        "run_count": 0,
+        "successful_run_count": 0,
+        "partial_run_count": 0,
+        "failed_run_count": 0,
+        "run_ids": []
+      },
+      {
+        "date": "2026-09-25",
+        "executed": false,
+        "run_count": 0,
+        "successful_run_count": 0,
+        "partial_run_count": 0,
+        "failed_run_count": 0,
+        "run_ids": []
+      },
+      {
+        "date": "2026-09-26",
+        "executed": false,
+        "run_count": 0,
+        "successful_run_count": 0,
+        "partial_run_count": 0,
+        "failed_run_count": 0,
+        "run_ids": []
+      },
+      {
+        "date": "2026-09-27",
+        "executed": true,
+        "run_count": 1,
+        "successful_run_count": 0,
+        "partial_run_count": 1,
+        "failed_run_count": 0,
+        "run_ids": [
+          "run-8fecc0b6c3df"
+        ]
+      },
+      {
+        "date": "2026-09-28",
+        "executed": true,
+        "run_count": 1,
+        "successful_run_count": 1,
+        "partial_run_count": 0,
+        "failed_run_count": 0,
+        "run_ids": [
+          "run-c67653dd9ca6"
+        ]
+      }
+    ],
+    "scheduled_run_count": 2,
+    "note": "只有带 trigger=scheduled 的运行才计入每日定时任务证据；人工触发和应用内普通采集不计入连续运行天数。"
+  },
+  "degradation_strategies": {
+    "arxiv": {
+      "failure_reason": "当前网络出口访问 arXiv API 返回 HTTP 406。",
+      "degradation": "保留真实失败记录，使用 OpenAlex 作为论文元数据与摘要备用源。",
+      "data_availability": "历史快照与已入库论文仍可检索；不伪造 arXiv 新数据。",
+      "manual_action": "更换可访问 arXiv API 的网络出口后重新运行。"
+    },
+    "openalex": {
+      "failure_reason": "OpenAlex 限流、超时或响应格式变化。",
+      "degradation": "保留上次成功快照和已入库论文；下一计划周期重试。",
+      "data_availability": "历史论文元数据可继续查询，但不能宣称本周期已更新。",
+      "manual_action": "检查 OpenAlex 服务状态和查询语法。"
+    },
+    "osv": {
+      "failure_reason": "批量查询、详情请求超时或单次详情预算耗尽。",
+      "degradation": "只把本轮成功解析的记录标记为成功，预算未处理项标记为部分成功。",
+      "data_availability": "历史 OSV 事件可继续使用；缺口保留并进入下一轮。",
+      "manual_action": "提高详情预算或增加下一轮排空任务。"
+    },
+    "msrc": {
+      "failure_reason": "微软 CVRF 索引或月度文档不可用、结构变化或超时。",
+      "degradation": "保留最近成功的厂商公告和快照，本轮明确标记失败或部分成功。",
+      "data_availability": "历史厂商公告仍可用；新月份更新不能视为已完成。",
+      "manual_action": "核对 MSRC API 和 CVRF 字段结构。"
+    },
+    "ghsa": {
+      "failure_reason": "未配置 GITHUB_TOKEN 或 GitHub API 限流。",
+      "degradation": "未配置令牌时主动跳过，不使用空结果冒充成功。",
+      "data_availability": "已保存的 GHSA 历史事件仍可检索。",
+      "manual_action": "在 .env 中配置具有只读权限的 GITHUB_TOKEN。"
+    }
+  },
+  "warnings": [
+    {
+      "severity": "info",
+      "code": "continuous_evidence_incomplete",
+      "message": "定时运行证据 2/7 天，尚未满足连续 7 天要求。"
+    }
+  ]
+}

@@ -502,7 +502,6 @@ def mitre_to_event(raw: dict) -> dict | None:
             less_than = _text(version.get("lessThan"))
             less_than_or_equal = _text(version.get("lessThanOrEqual"))
             if version_value and version_value[0] in "<>=^~":
-                # Some CNA records put a full range expression in `version`.
                 spec = version_value
             elif less_than and version_value:
                 spec = f">= {version_value}, < {less_than}"

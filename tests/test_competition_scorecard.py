@@ -57,12 +57,12 @@ def test_seven_day_monitoring_uses_persisted_observations_and_runs():
     })
     result = TestClient(app).get("/api/competition/scorecard").json()["monitoring_7d"]
     assert result["actual_run_days"]["value"] == 1
-    assert result["observed_events"]["value"] == 3
-    assert result["publication_latency_samples"]["value"] == 2
+    # Latency counts the first discovery per event, not every later update.
+    assert result["observed_events"]["value"] == 1
+    assert result["publication_latency_samples"]["value"] == 1
     assert result["within_24h_samples"]["value"] == 1
-    assert result["within_24h_rate"] == {
-        "value": 0.5, "source": "event.monitoring_observations", "sample_size": 2,
-    }
+    assert result["within_24h_rate"]["value"] == 1.0
+    assert result["within_24h_rate"]["sample_size"] == 1
 
 
 def test_enrichment_coverage_uses_exact_stored_fields():

@@ -55,6 +55,14 @@ def test_monitoring_evidence_keeps_empty_days(client):
     assert "不补写历史数据" in body["note"]
 
 
+def test_reliability_and_alert_endpoints_are_available(client):
+    report = client.get("/api/system/reliability").json()
+    assert report["timeliness"]["sample_size"] == 0
+    assert report["continuous_runs"]["target_met"] is False
+    alerts = client.get("/api/system/alerts").json()
+    assert alerts["items"] == []
+
+
 def test_seed_loads_research_cases_and_flags_demo_assets(client):
     _seed(client)
     events = client.get("/api/events").json()

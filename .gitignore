@@ -4,8 +4,12 @@ __pycache__/
 data/*.sqlite*
 data/snapshots/
 data/runtime.json
+data/logs/
 .env
 artifacts/browser/
+artifacts/logs/
+artifacts/backups/
+artifacts/server-*.log
 .omc/
 .test-tmp*/
 .tmp_*/

@@ -1,0 +1,159 @@
+{
+  "date": "2026-09-28",
+  "generated_at": "2026-09-28T05:06:19Z",
+  "version": "0.2.0",
+  "scheduled_runs": [
+    {
+      "id": "run-c67653dd9ca6",
+      "status": "completed",
+      "started_at": "2026-09-28T05:01:32Z",
+      "finished_at": "2026-09-28T05:06:04Z",
+      "summary": "采集 12 个来源：新增 2，更新 9，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "daily-recommended-sources",
+        "planned_at": "2026-09-28T02:30:00+08:00",
+        "actual_at": "2026-09-28T05:01:32Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 152,
+          "kept": 2,
+          "duration_ms": 11686,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-27 04:43 → 2026-09-28 05:01，扫描 152 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 9,
+          "duration_ms": 10781,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 91625,
+          "error": "ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1728,
+          "kept": 0,
+          "duration_ms": 1796,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.27（发布 2026-09-27T21:30:35.5521Z），全量 1728 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2136,
+          "kept": 10,
+          "duration_ms": 20250,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 234,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-09-27，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 65468,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1858,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1000,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7173 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 2343,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 14921,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 49889,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-09-27，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    }
+  ],
+  "alerts": [],
+  "summary": {
+    "run_count": 1,
+    "successful_run_count": 1,
+    "partial_run_count": 0,
+    "failed_run_count": 0
+  }
+}

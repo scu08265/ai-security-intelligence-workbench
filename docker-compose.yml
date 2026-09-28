@@ -1,0 +1,30 @@
+services:
+  workbench:
+    build: .
+    image: "ai-security-intelligence-workbench:${APP_VERSION:-0.2.0}"
+    container_name: ai-security-intelligence-workbench
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEEPSEEK_API_KEY: "${DEEPSEEK_API_KEY:-}"
+      INTEL_USE_MODEL: "${INTEL_USE_MODEL:-1}"
+      INTEL_MODEL_BASE_URL: "${INTEL_MODEL_BASE_URL:-https://api.deepseek.com/v1}"
+      INTEL_MODEL_NAME: "${INTEL_MODEL_NAME:-deepseek-chat}"
+      GITHUB_TOKEN: "${GITHUB_TOKEN:-}"
+      INTEL_ALERT_WEBHOOK_URL: "${INTEL_ALERT_WEBHOOK_URL:-}"
+      INTEL_JSON_LOGS: "1"
+    volumes:
+      - ./data:/app/data
+      - ./artifacts:/app/artifacts
+      - ./reports:/app/reports
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3).read()"
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3

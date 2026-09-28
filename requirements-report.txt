@@ -1,0 +1,2 @@
+# Optional local reporting and screenshot dependencies.
+playwright>=1.50,<2

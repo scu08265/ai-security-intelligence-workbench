@@ -11,6 +11,7 @@ here rather than left to callers:
 
 from __future__ import annotations
 
+import time
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query, Request
@@ -18,8 +19,9 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import (agent_context, agents, competition_scorecard, config, cyclonedx_assets, evaluation, intelligence,
-               knowledge_views, rag_corpus, sources, storage, streaming)
+from . import (agent_context, agents, competition_scorecard, config, cyclonedx_assets,
+               evaluation, intelligence, knowledge_views, observability, rag_corpus,
+               reliability, sources, storage, streaming)
 from . import dag_executor, task_dag
 
 MAX_QUESTION = 2000
@@ -232,7 +234,15 @@ async def local_origin_guard(request: Request, call_next):
                 status_code=403,
                 content={"detail": "拒绝跨源写请求：本服务仅接受来自本机前端的操作"},
             )
+    started = time.monotonic()
     response = await call_next(request)
+    observability.log_event(
+        "http_request",
+        method=request.method,
+        path=request.url.path,
+        status_code=response.status_code,
+        duration_ms=int((time.monotonic() - started) * 1000),
+    )
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     return response
@@ -248,12 +258,27 @@ def _bad(message: str, status: int = 400) -> HTTPException:
 
 @app.get("/api/health")
 def health() -> dict:
+    source_states = storage.all_source_states()
+    failed_sources = [
+        source_id for source_id, state in source_states.items()
+        if state.get("status") == "failed"
+    ]
+    skipped_sources = [
+        source_id for source_id, state in source_states.items()
+        if state.get("status") == "skipped"
+    ]
     return {
         "status": "ok",
         "version": config.APP_VERSION,
         "mode": config.mode_label(),
         "model_configured": config.model_configured(),
         "data_dir": str(config.DATA_DIR),
+        "checks": {
+            "database": "ok",
+            "events": storage.count_events()["events"],
+            "failed_sources": failed_sources,
+            "skipped_sources": skipped_sources,
+        },
     }
 
 
@@ -417,6 +442,21 @@ def competition_metrics_scorecard() -> dict:
     return competition_scorecard.scorecard()
 
 
+@app.get("/api/system/reliability")
+def system_reliability(days: int = Query(default=7, ge=1, le=31)) -> dict:
+    return reliability.build_reliability_report(days=days)
+
+
+@app.get("/api/system/alerts")
+def system_alerts(limit: int = Query(default=100, ge=1, le=1000)) -> dict:
+    return observability.recent_alerts(limit=limit)
+
+
+@app.get("/api/system/logs")
+def system_logs(limit: int = Query(default=100, ge=1, le=1000)) -> dict:
+    return observability.recent_logs(limit=limit)
+
+
 @app.post("/api/collect")
 def collect(payload: CollectRequest | None = None) -> dict:
     requested = (payload.source_ids if payload else None) or None
@@ -424,7 +464,7 @@ def collect(payload: CollectRequest | None = None) -> dict:
         unknown = [s for s in requested if sources.get(s) is None]
         if unknown:
             raise _bad(f"未登记的数据源：{', '.join(unknown)}")
-    return agents.run_collection(requested)
+    return agents.run_collection(requested, trigger="manual")
 
 
 @app.post("/api/seed")

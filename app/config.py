@@ -11,9 +11,12 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-APP_VERSION = "0.1.0"
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+VERSION_FILE = BASE_DIR / "VERSION"
+try:
+    APP_VERSION = VERSION_FILE.read_text(encoding="utf-8").strip() or "0.2.0"
+except OSError:
+    APP_VERSION = "0.2.0"
 DATA_DIR = Path(os.getenv("INTEL_DATA_DIR") or (BASE_DIR / "data"))
 SNAPSHOT_DIR = DATA_DIR / "snapshots"
 DB_PATH = DATA_DIR / "intel.sqlite"

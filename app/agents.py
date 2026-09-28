@@ -20,7 +20,8 @@ import time
 from typing import Any, Callable
 
 from . import (agent_context, agent_orchestration, collectors, config, dedupe,
-               intelligence, normalize, paper_fulltext, provenance, rag_corpus, storage, sources)
+               intelligence, normalize, paper_fulltext, provenance, rag_corpus,
+               reliability, storage, sources)
 
 STATE_DISCOVERED = "discovered"
 STATE_NORMALIZED = "normalized"
@@ -399,7 +400,8 @@ def seed_research_cases(path=None) -> dict:
 
 def _run_collection_deterministic(
     source_ids: list[str] | None = None, *, close_gaps: bool = False,
-    agent_plan: dict | None = None,
+    agent_plan: dict | None = None, trigger: str = "manual",
+    scheduler: dict | None = None,
 ) -> dict:
     """Execute a pre-validated collection plan against registered sources."""
     started_at = storage.utcnow()
@@ -518,7 +520,14 @@ def _run_collection_deterministic(
 
     failed = [r for r in results if r["status"] == "failed"]
     stale = [r for r in results if r["status"] == "stale"]
-    status = "completed" if not failed else ("partial" if len(failed) < len(results) else "failed")
+    degraded = [
+        result for result in results
+        if result["status"] in {"failed", "partial", "skipped"}
+    ]
+    status = (
+        "failed" if results and len(failed) == len(results)
+        else ("partial" if degraded else "completed")
+    )
     detail = {
         "results": results,
         "unknown_source_ids": unknown,
@@ -526,6 +535,8 @@ def _run_collection_deterministic(
         "timeliness": provenance.summarize(observed_events),
         "agent_plan": agent_plan or {"kind": "collection", "planner": "legacy"},
         "tool_calls": tool_audit,
+        "trigger": trigger,
+        "scheduler": dict(scheduler or {}),
     }
     if not close_gaps:
         detail["note"] = "采集阶段只做规范化与去重；富化在大批量任务中单独执行以控制外网调用开销"
@@ -549,7 +560,10 @@ def _run_collection_deterministic(
     }
 
 
-def run_collection(source_ids: list[str] | None = None, *, close_gaps: bool = False) -> dict:
+def run_collection(
+    source_ids: list[str] | None = None, *, close_gaps: bool = False,
+    trigger: str = "manual", scheduler: dict | None = None,
+) -> dict:
     """Let the bounded Agent plan, then execute only registered collectors.
 
     The LLM, when configured, cannot add sources or network destinations.  Its
@@ -559,7 +573,10 @@ def run_collection(source_ids: list[str] | None = None, *, close_gaps: bool = Fa
     requested = source_ids or list(sources.recommended_sources())
     valid = [source_id for source_id in requested if sources.get(source_id) is not None]
     plan = agent_orchestration.collection_plan(valid, config.model_config() or None)
-    return _run_collection_deterministic(requested, close_gaps=close_gaps, agent_plan=plan)
+    return _run_collection_deterministic(
+        requested, close_gaps=close_gaps, agent_plan=plan,
+        trigger=trigger, scheduler=scheduler,
+    )
 
 
 def _elapsed_ms(started_at: str) -> int:
@@ -884,7 +901,9 @@ def monitoring_evidence(days: int = 7) -> dict:
         day.isoformat(): {
             "date": day.isoformat(), "collection_runs": 0, "successful_runs": 0,
             "partial_or_failed_runs": 0, "events_observed": 0,
-            "events_with_publisher_time": 0, "within_24h": 0, "over_24h": 0,
+            "events_with_publisher_time": 0, "unknown_latency": 0,
+            "within_6h": 0, "over_6h": 0, "within_12h": 0, "over_12h": 0,
+            "within_24h": 0, "over_24h": 0,
             "sources": [],
         }
         for day in dates
@@ -906,22 +925,31 @@ def monitoring_evidence(days: int = 7) -> dict:
                 bucket["sources"].append(result.get("source_id"))
 
     events, _ = storage.list_events(limit=2000)
-    for event in events:
-        for observation in event.get("monitoring_observations") or []:
-            day = str(observation.get("discovered_at") or "")[:10]
-            if day not in buckets:
-                continue
-            bucket = buckets[day]
-            bucket["events_observed"] += 1
-            latency = observation.get("publication_to_discovery_seconds")
-            if latency is not None:
-                bucket["events_with_publisher_time"] += 1
-                bucket["within_24h" if float(latency) <= 86400 else "over_24h"] += 1
+    for record in reliability.latency_records(events):
+        day = str(record.get("discovered_at") or "")[:10]
+        if day not in buckets:
+            continue
+        bucket = buckets[day]
+        bucket["events_observed"] += 1
+        latency = record.get("latency_seconds")
+        if latency is None:
+            bucket["unknown_latency"] += 1
+            continue
+        bucket["events_with_publisher_time"] += 1
+        bucket["within_6h" if float(latency) <= 21600 else "over_6h"] += 1
+        bucket["within_12h" if float(latency) <= 43200 else "over_12h"] += 1
+        bucket["within_24h" if float(latency) <= 86400 else "over_24h"] += 1
     for bucket in buckets.values():
         bucket["sources"] = sorted(set(x for x in bucket["sources"] if x))
         measured = bucket["events_with_publisher_time"]
         bucket["within_24h_rate"] = (
             round(bucket["within_24h"] / measured, 4) if measured else None
+        )
+        bucket["within_12h_rate"] = (
+            round(bucket["within_12h"] / measured, 4) if measured else None
+        )
+        bucket["within_6h_rate"] = (
+            round(bucket["within_6h"] / measured, 4) if measured else None
         )
     return {
         "window_days": days,

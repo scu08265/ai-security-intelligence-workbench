@@ -1,0 +1,164 @@
+{
+  "date": "2026-09-27",
+  "generated_at": "2026-09-28T05:06:19Z",
+  "version": "0.2.0",
+  "scheduled_runs": [
+    {
+      "id": "run-8fecc0b6c3df",
+      "status": "partial",
+      "started_at": "2026-09-27T10:43:32Z",
+      "finished_at": "2026-09-27T10:45:31Z",
+      "summary": "采集 12 个来源：新增 89，更新 1，失败 0",
+      "scheduler": {
+        "task_id": "daily-recommended-sources",
+        "planned_at": "2026-09-27T10:43:31.7867907Z",
+        "actual_at": "2026-09-27T10:43:32Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "partial",
+          "fetched": 400,
+          "kept": 1,
+          "duration_ms": 2875,
+          "error": null,
+          "notes": [
+            "NVD 在窗口内共 7170 条，本次仅扫描 400 条（上限 2 页）",
+            "窗口 2026-09-20 04:43 → 2026-09-27 10:43，扫描 400 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1641,
+          "error": null,
+          "notes": [
+            "逐条核验 1 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "partial",
+          "fetched": 1894,
+          "kept": 12,
+          "duration_ms": 9360,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1894 条 OSV 记录",
+            "窗口内共 1894 条更新，本次取最新 12 条（单次上限 12）",
+            "已取详细记录 12 条（并发 6 路）"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1726,
+          "kept": 26,
+          "duration_ms": 1280,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.25（发布 2026-09-25T18:58:16.5029Z），全量 1726 条，窗口内新增 26 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2136,
+          "kept": 10,
+          "duration_ms": 54577,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 312,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-08-28，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 50,
+          "kept": 39,
+          "duration_ms": 1703,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 50 条，11 条判定与 AI 安全无关，39 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 843,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 671,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7173 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1000,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 39780,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 812,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：36 条早于窗口起点 2026-08-28，4 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    }
+  ],
+  "alerts": [],
+  "summary": {
+    "run_count": 1,
+    "successful_run_count": 0,
+    "partial_run_count": 1,
+    "failed_run_count": 0
+  }
+}

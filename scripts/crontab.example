@@ -1,0 +1,2 @@
+# Run every day at 02:30 using the project virtual environment.
+30 2 * * * cd /opt/ai-security-intelligence-workbench && .venv/bin/python tools/run_scheduled_collection.py --task-id daily-recommended-sources --planned-at "$(date -Iseconds)" >> artifacts/logs/scheduled-collection.log 2>&1

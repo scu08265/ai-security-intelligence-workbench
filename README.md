@@ -1,5 +1,7 @@
 # AI 安全知识情报工作台
 
+当前版本：`0.2.0`
+
 面向 AI 推理框架、模型供应链和 AI 应用风险的本地安全情报系统。它把公开漏洞、论文、标准与资产清单汇聚为可追溯的证据，并输出资产影响和处置建议。
 
 ## 它解决什么问题
@@ -41,6 +43,30 @@ python -m uvicorn app.api:app --host 127.0.0.1 --port 8000
 
 首次演示可先导入 SBOM 仿真样例，再在工作台运行采集与资产研判；知识图谱和证据问答会使用本机已保存的数据。
 
+## 每日计划采集
+
+```powershell
+.\.venv\Scripts\python.exe tools\run_scheduled_collection.py --task-id daily-recommended-sources
+```
+
+Windows 任务计划安装脚本：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -DailyAt "02:30"
+```
+
+每天的计划采集会记录任务 ID、计划时间、实际时间、来源结果和失败原因。Linux 可参考
+[scripts/crontab.example](scripts/crontab.example)。
+
+## 可靠性报告
+
+```powershell
+.\.venv\Scripts\python.exe tools\build_reliability_report.py --days 7 --output-dir reports
+```
+
+报告输出时延分档、未知样本、历史回填排除项、来源成功率、失败次数、P50/P95 和降级策略。
+未真实积累满 7 天时，报告只显示“积累中”，不补写历史。
+
 ## 可选模型配置
 
 复制 `.env.example` 为 `.env`，按需配置兼容 OpenAI API 的云端模型。密钥不会写入数据库或 Git。
@@ -62,6 +88,11 @@ python -m pytest -q
 node --check app\static\app.js
 python tools\browser_check.py --base http://127.0.0.1:8000
 ```
+
+部署、调度、备份、回滚和告警说明见
+[运维文档](docs/OPERATIONS.md)，容器和 CI 说明见
+[Docker/CI 指南](docs/DOCKER_CI_GUIDE.md)，A 项完成状态见
+[A 项实施说明](docs/A_TASK_IMPLEMENTATION.md)。
 
 ## 项目结构
 

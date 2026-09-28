@@ -60,13 +60,23 @@ def _source_metrics() -> dict:
 def _monitoring_metrics() -> dict:
     evidence = agents.monitoring_evidence(days=7)
     measured = sum(day["events_with_publisher_time"] for day in evidence["days"])
+    within_6h = sum(day["within_6h"] for day in evidence["days"])
+    within_12h = sum(day["within_12h"] for day in evidence["days"])
     within = sum(day["within_24h"] for day in evidence["days"])
     observed = sum(day["events_observed"] for day in evidence["days"])
+    unknown = sum(day["unknown_latency"] for day in evidence["days"])
     return {
         "window_days": 7,
         "actual_run_days": _metric(evidence["complete_days"], source="runs(kind=collect)"),
         "observed_events": _metric(observed, source="event.monitoring_observations"),
         "publication_latency_samples": _metric(measured, source="event.monitoring_observations"),
+        "unknown_latency_samples": _metric(unknown, source="event.monitoring_observations"),
+        "within_6h_samples": _metric(within_6h, source="event.monitoring_observations"),
+        "within_6h_rate": _metric(_rate(within_6h, measured), source="event.monitoring_observations",
+                                  sample_size=measured),
+        "within_12h_samples": _metric(within_12h, source="event.monitoring_observations"),
+        "within_12h_rate": _metric(_rate(within_12h, measured), source="event.monitoring_observations",
+                                   sample_size=measured),
         "within_24h_samples": _metric(within, source="event.monitoring_observations"),
         "within_24h_rate": _metric(_rate(within, measured), source="event.monitoring_observations",
                                    sample_size=measured),
@@ -147,6 +157,10 @@ def _evaluation_metrics() -> dict:
 
 def _agent_metrics(events: list[dict]) -> dict:
     runs = storage.list_runs(limit=200)
+    scheduled_runs = [
+        run for run in runs
+        if (run.get("detail") or {}).get("trigger") == "scheduled"
+    ]
     role_counts: Counter[str] = Counter()
     for event in events:
         pipeline = event.get("pipeline") or {}
@@ -177,8 +191,25 @@ def _agent_metrics(events: list[dict]) -> dict:
         "runs_by_kind": dict(run_counts),
         "runs_by_status": dict(status_counts),
         "external_automation_verified": _metric(
-            None, source="not recorded",
-            note="DB 记录流程运行，但未记录由外部定时器还是人工触发，不能宣称自动化触发。"),
+            True if scheduled_runs else None,
+            source="runs.detail.trigger",
+            sample_size=len(scheduled_runs),
+            note=("存在外部计划任务触发的采集记录。" if scheduled_runs
+                  else "尚无外部计划任务触发记录，保持未知。"),
+        ),
+        "scheduled_runs": _metric(
+            len(scheduled_runs) if scheduled_runs else None,
+            source="runs.detail.trigger",
+            sample_size=len(scheduled_runs),
+        ),
+        "scheduled_evidence": [{
+            "id": run.get("id"),
+            "status": run.get("status"),
+            "started_at": run.get("started_at"),
+            "task_id": (run.get("detail") or {}).get("scheduler", {}).get("task_id"),
+            "planned_at": (run.get("detail") or {}).get("scheduler", {}).get("planned_at"),
+            "actual_at": (run.get("detail") or {}).get("scheduler", {}).get("actual_at"),
+        } for run in scheduled_runs[:10]],
         "recent_evidence": [{"id": run.get("id"), "kind": run.get("kind"),
                              "status": run.get("status"), "started_at": run.get("started_at"),
                              "finished_at": run.get("finished_at")}
