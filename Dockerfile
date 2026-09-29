@@ -19,6 +19,7 @@ COPY research ./research
 COPY scripts ./scripts
 COPY tools ./tools
 COPY README.md ./
+COPY VERSION ./
 
 RUN mkdir -p /app/data /app/artifacts /app/reports
 
