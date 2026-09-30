@@ -106,6 +106,7 @@ def _markdown_report(report: dict[str, Any]) -> str:
     lines = [
         "# 7 天连续运行与来源可靠性报告",
         "",
+        f"- 版本：{report.get('version') or config.APP_VERSION}",
         f"- 生成时间：{report['generated_at']}",
         f"- 连续运行证据：{continuous['consecutive_executed_days']} / {continuous['target_days']} 天（{status}）",
         "- 统计口径：每个事件只取最早一次发现时间；异常发布时间和未来发布时间不进入时延分母。",
@@ -242,8 +243,16 @@ def main() -> int:
     report = reliability.build_reliability_report(days=args.days)
     rows = reliability.source_health_rows(report)
 
-    _write_json(output / "source-health.json", report["sources"])
-    _write_json(output / "latency-summary.json", report["timeliness"])
+    _write_json(output / "source-health.json", {
+        "version": report.get("version") or config.APP_VERSION,
+        "generated_at": report["generated_at"],
+        **report["sources"],
+    })
+    _write_json(output / "latency-summary.json", {
+        "version": report.get("version") or config.APP_VERSION,
+        "generated_at": report["generated_at"],
+        **report["timeliness"],
+    })
     _write_json(output / "reliability-report.json", report)
     _write_source_csv(output / "source-health.csv", rows)
     (output / "latency-chart.svg").write_text(_latency_chart_svg(report), encoding="utf-8")

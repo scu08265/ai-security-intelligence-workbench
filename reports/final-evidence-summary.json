@@ -1,0 +1,910 @@
+{
+  "version": "0.2.2",
+  "generated_at": "2026-09-30T08:33:36.275125+00:00",
+  "git_tag": "v0.2.2",
+  "author": "longyi0512",
+  "nvd_completeness": {
+    "version": "0.2.2",
+    "generated_at": "2026-09-30T05:45:30Z",
+    "implementation_effective_at": "2026-09-30T04:50:00Z",
+    "direct_full_scan": {
+      "captured_at": "2026-09-30T04:44:40Z",
+      "status": "ok",
+      "fetched": 7176,
+      "pages": 36,
+      "duration_ms": 509562,
+      "note": "Real NVD API full pagination validation before interval scheduler."
+    },
+    "post_fix_scheduled_runs": [
+      {
+        "run_id": "run-2eda584fec85",
+        "started_at": "2026-09-30T05:25:40Z",
+        "status": "ok",
+        "fetched": 207,
+        "kept": 1,
+        "filtered": 206,
+        "duration_ms": 13562,
+        "error": null,
+        "notes": [
+          "窗口 2026-09-29 23:22 → 2026-09-30 05:25，共 207 条，分 2 页扫描 207 条"
+        ]
+      },
+      {
+        "run_id": "run-9f4c9bf28bba",
+        "started_at": "2026-09-30T05:22:27Z",
+        "status": "ok",
+        "fetched": 207,
+        "kept": 1,
+        "filtered": 206,
+        "duration_ms": 10030,
+        "error": null,
+        "notes": [
+          "窗口 2026-09-29 23:19 → 2026-09-30 05:22，共 207 条，分 2 页扫描 207 条"
+        ]
+      },
+      {
+        "run_id": "run-5adab7fcabde",
+        "started_at": "2026-09-30T05:19:06Z",
+        "status": "ok",
+        "fetched": 231,
+        "kept": 1,
+        "filtered": 230,
+        "duration_ms": 8530,
+        "error": null,
+        "notes": [
+          "窗口 2026-09-29 23:13 → 2026-09-30 05:19，共 231 条，分 2 页扫描 231 条"
+        ]
+      },
+      {
+        "run_id": "run-b9a4936d74e5",
+        "started_at": "2026-09-30T05:13:51Z",
+        "status": "ok",
+        "fetched": 229,
+        "kept": 1,
+        "filtered": 228,
+        "duration_ms": 10405,
+        "error": null,
+        "notes": [
+          "窗口 2026-09-29 23:02 → 2026-09-30 05:13，共 229 条，分 2 页扫描 229 条"
+        ]
+      },
+      {
+        "run_id": "run-2e3e0d4d6206",
+        "started_at": "2026-09-30T05:02:17Z",
+        "status": "ok",
+        "fetched": 229,
+        "kept": 1,
+        "filtered": 228,
+        "duration_ms": 11609,
+        "error": null,
+        "notes": [
+          "窗口 2026-09-29 22:56 → 2026-09-30 05:02，共 229 条，分 2 页扫描 229 条"
+        ]
+      },
+      {
+        "run_id": "run-9629821a26ca",
+        "started_at": "2026-09-30T04:56:05Z",
+        "status": "ok",
+        "fetched": 229,
+        "kept": 1,
+        "filtered": 228,
+        "duration_ms": 12077,
+        "error": null,
+        "notes": [
+          "窗口 2026-09-29 22:55 → 2026-09-30 04:56，共 229 条，分 2 页扫描 229 条"
+        ]
+      }
+    ],
+    "pre_fix_runs_excluded": [
+      {
+        "run_id": "run-e79f865108da",
+        "started_at": "2026-09-30T04:36:51Z",
+        "status": "partial",
+        "fetched": 400,
+        "kept": 14,
+        "filtered": 386,
+        "duration_ms": 56062,
+        "error": null,
+        "notes": [
+          "NVD 在窗口内共 2603 条，本次仅扫描 400 条（上限 2 页）",
+          "窗口 2026-09-27 23:01 → 2026-09-30 04:36，扫描 400 条"
+        ]
+      }
+    ],
+    "post_fix_all_ok": true,
+    "post_fix_run_count": 6
+  },
+  "scheduler": {
+    "version": "0.2.2",
+    "generated_at": "2026-09-30T05:46:32Z",
+    "automation": {
+      "id": "ai-a",
+      "status": "ACTIVE",
+      "rrule": "FREQ=HOURLY;INTERVAL=1"
+    },
+    "windows_task_install_attempt": {
+      "passed": false,
+      "reason": "PermissionDenied in Codex sandbox",
+      "script": "scripts/install_windows_task.ps1"
+    },
+    "validation_interval_seconds": 120,
+    "today_scheduled_run_count": 7,
+    "validation_run_count": 6,
+    "runs": [
+      {
+        "run_id": "run-9629821a26ca",
+        "status": "completed",
+        "started_at": "2026-09-30T04:56:05Z",
+        "finished_at": "2026-09-30T05:00:17Z",
+        "task_id": "hourly-recommended-sources"
+      },
+      {
+        "run_id": "run-2e3e0d4d6206",
+        "status": "completed",
+        "started_at": "2026-09-30T05:02:17Z",
+        "finished_at": "2026-09-30T05:11:51Z",
+        "task_id": "hourly-recommended-sources-2"
+      },
+      {
+        "run_id": "run-b9a4936d74e5",
+        "status": "completed",
+        "started_at": "2026-09-30T05:13:51Z",
+        "finished_at": "2026-09-30T05:17:06Z",
+        "task_id": "hourly-recommended-sources-3"
+      },
+      {
+        "run_id": "run-5adab7fcabde",
+        "status": "completed",
+        "started_at": "2026-09-30T05:19:06Z",
+        "finished_at": "2026-09-30T05:20:27Z",
+        "task_id": "hourly-recommended-sources-4"
+      },
+      {
+        "run_id": "run-9f4c9bf28bba",
+        "status": "completed",
+        "started_at": "2026-09-30T05:22:27Z",
+        "finished_at": "2026-09-30T05:23:40Z",
+        "task_id": "hourly-recommended-sources-5"
+      },
+      {
+        "run_id": "run-2eda584fec85",
+        "status": "completed",
+        "started_at": "2026-09-30T05:25:40Z",
+        "finished_at": "2026-09-30T05:26:49Z",
+        "task_id": "hourly-recommended-sources-6"
+      }
+    ]
+  },
+  "ci": {
+    "workflow": "CI",
+    "workflow_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/workflows/ci.yml",
+    "run_id": 36552527224,
+    "run_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36552527224",
+    "head_sha": "3dc91b17995002f0a0d8c9e4ea76317b270e8146",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-29T09:57:41Z",
+    "updated_at": "2026-09-29T09:58:11Z",
+    "jobs": [
+      {
+        "name": "container",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36552527224/job/109353868894"
+      },
+      {
+        "name": "test",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36552527224/job/109353869167"
+      }
+    ]
+  },
+  "local_validation": {
+    "generated_at": "2026-09-30T08:32:45.256886+00:00",
+    "version": "0.2.2",
+    "checks": [
+      {
+        "name": "pytest",
+        "command": [
+          "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\.venv\\Scripts\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "--basetemp=D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\pytest-basetemp"
+        ],
+        "passed": true,
+        "exit_code": 0,
+        "stdout_tail": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 77%]\n................................................................         [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n280 passed, 1 warning in 17.97s\n",
+        "stderr_tail": ""
+      },
+      {
+        "name": "pip_check",
+        "command": [
+          "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\.venv\\Scripts\\python.exe",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "passed": true,
+        "exit_code": 0,
+        "stdout_tail": "No broken requirements found.\n",
+        "stderr_tail": ""
+      },
+      {
+        "name": "frontend_syntax",
+        "command": [
+          "E:\\node.EXE",
+          "--check",
+          "app/static/app.js"
+        ],
+        "passed": true,
+        "exit_code": 0,
+        "stdout_tail": "",
+        "stderr_tail": ""
+      },
+      {
+        "name": "compose_yaml",
+        "command": [
+          "yaml.safe_load",
+          "docker-compose.yml"
+        ],
+        "passed": true,
+        "exit_code": 0,
+        "stderr_tail": ""
+      }
+    ],
+    "all_local_checks_passed": true,
+    "docker": {
+      "available": true,
+      "path": null,
+      "build_verified": true,
+      "healthy_container_verified": true,
+      "container_health": "healthy",
+      "blocker": null
+    }
+  },
+  "docker": {
+    "version": "0.2.2",
+    "generated_at": "2026-09-30T08:17:00.991136+00:00",
+    "docker_cli_available": true,
+    "docker_server": "Docker Desktop 4.93.0 / Engine 29.8.1",
+    "compose_config_valid": true,
+    "image": "ai-security-intelligence-workbench:0.2.2",
+    "container_name": "ai-security-intelligence-workbench",
+    "container_running": true,
+    "container_health": "healthy",
+    "host_port": 18000,
+    "health_response": {
+      "status": "ok",
+      "version": "0.2.2",
+      "mode": "local_evidence_extraction",
+      "model_configured": false,
+      "data_dir": "/app/data",
+      "checks": {
+        "database": "ok",
+        "events": 124,
+        "failed_sources": [],
+        "skipped_sources": []
+      }
+    },
+    "health_endpoint_http_status": 200,
+    "evidence_log": "reports/docker-acceptance.log",
+    "screenshot": "docs/screenshots/08-docker-healthy.png",
+    "verified": true
+  },
+  "backup_restore": {
+    "integrity_check": "ok",
+    "source_events": 124,
+    "restored_events": 124,
+    "source_assets": 0,
+    "restored_assets": 0,
+    "counts_match": true,
+    "version": "0.2.2",
+    "backup_path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20260930-135010.sqlite",
+    "restored_path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\restore-test\\intel-restored-20260930-135010.sqlite",
+    "generated_at": "2026-09-30T05:50:10.7211012Z"
+  },
+  "fault_injection": {
+    "version": "0.2.2",
+    "status": "recovered",
+    "scenario": "NVD mock HTTP 503 followed by successful retry",
+    "before": {
+      "id": "nvd",
+      "status": "ok",
+      "last_run": "2026-09-30T05:47:59Z",
+      "last_success": "2026-09-30T05:47:59Z",
+      "last_error": null,
+      "events_count": 18,
+      "cursor": "2026-09-30T05:47:59.000+00:00",
+      "last_hash": "f0af4cfe41ef7902fdc54eb8c4e40b6a1ce590984e16dbaf5baa57df9d5354f6"
+    },
+    "after_failure": {
+      "id": "nvd",
+      "status": "stale",
+      "last_run": "2026-09-30T05:50:09Z",
+      "last_success": "2026-09-30T05:47:59Z",
+      "last_error": "HTTP 503：synthetic upstream outage",
+      "events_count": 18,
+      "cursor": "2026-09-30T05:47:59.000+00:00",
+      "last_hash": "f0af4cfe41ef7902fdc54eb8c4e40b6a1ce590984e16dbaf5baa57df9d5354f6"
+    },
+    "after_recovery": {
+      "id": "nvd",
+      "status": "ok",
+      "last_run": "2026-09-30T05:50:09Z",
+      "last_success": "2026-09-30T05:50:09Z",
+      "last_error": null,
+      "events_count": 18,
+      "cursor": "2026-09-30T05:50:09.000+00:00",
+      "last_hash": "f0af4cfe41ef7902fdc54eb8c4e40b6a1ce590984e16dbaf5baa57df9d5354f6"
+    },
+    "failed_run": {
+      "run_id": "run-530bce35f7f8",
+      "status": "completed",
+      "results": [
+        {
+          "source_id": "nvd",
+          "name": "NIST National Vulnerability Database",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "filtered": 0,
+          "events_added": 0,
+          "events_updated": 0,
+          "duration_ms": 0,
+          "error": "HTTP 503：synthetic upstream outage",
+          "snapshot_hash": null,
+          "notes": [],
+          "timeliness": {
+            "events_seen": 0,
+            "events_with_publisher_time": 0,
+            "within_24h": 0,
+            "over_24h": 0,
+            "within_24h_rate": null,
+            "latency_seconds_p50": null,
+            "latency_seconds_p95": null,
+            "note": "仅统计来源提供公开时间的条目；未知时间不计为达标。"
+          },
+          "events": [],
+          "paper_fulltext_attempted": 0
+        }
+      ]
+    },
+    "first_self_healing": {
+      "status": "completed",
+      "candidates": 1,
+      "decisions": [
+        {
+          "source_id": "nvd",
+          "retry": true,
+          "failure_class": "upstream_timeout",
+          "reason": "允许一次受控恢复重试：upstream_timeout"
+        }
+      ],
+      "recovered": [],
+      "failed_after_retry": [
+        {
+          "source_id": "nvd",
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovery_run_id": "run-3e11b32bd541",
+          "run_status": "completed",
+          "source_status_after": "stale",
+          "status": "stale",
+          "recovered": false,
+          "attempts": 2,
+          "retry_count": 1
+        }
+      ],
+      "recovery_rate": 0.0,
+      "policy": {
+        "automatic_actions": [
+          "有限重试",
+          "历史数据降级",
+          "来源跳过"
+        ],
+        "manual_action": "超过自动重试预算后转人工处理",
+        "retry_budget_per_source": 1
+      }
+    },
+    "second_self_healing": {
+      "status": "completed",
+      "candidates": 1,
+      "decisions": [
+        {
+          "source_id": "nvd",
+          "retry": true,
+          "failure_class": "upstream_timeout",
+          "reason": "允许一次受控恢复重试：upstream_timeout"
+        }
+      ],
+      "recovered": [
+        {
+          "source_id": "nvd",
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovery_run_id": "run-588b1665b8ae",
+          "run_status": "completed",
+          "source_status_after": "ok",
+          "status": "ok",
+          "recovered": true,
+          "attempts": 2,
+          "retry_count": 1
+        }
+      ],
+      "failed_after_retry": [],
+      "recovery_rate": 1.0,
+      "policy": {
+        "automatic_actions": [
+          "有限重试",
+          "历史数据降级",
+          "来源跳过"
+        ],
+        "manual_action": "超过自动重试预算后转人工处理",
+        "retry_budget_per_source": 1
+      }
+    },
+    "alert_codes": [
+      "self_healing_failed",
+      "self_healing_recovered"
+    ],
+    "alerts": [
+      {
+        "code": "self_healing_failed",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": false,
+          "recovery_run_id": "run-3e11b32bd541",
+          "retry_count": 1,
+          "run_status": "completed",
+          "source_id": "nvd",
+          "source_status_after": "stale",
+          "status": "stale"
+        },
+        "message": "nvd 自动恢复后仍不可用",
+        "severity": "warning",
+        "timestamp": "2026-09-30T05:50:09Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-588b1665b8ae",
+          "retry_count": 1,
+          "run_status": "completed",
+          "source_id": "nvd",
+          "source_status_after": "ok",
+          "status": "ok"
+        },
+        "message": "nvd 自动恢复成功",
+        "severity": "info",
+        "timestamp": "2026-09-30T05:50:09Z"
+      }
+    ]
+  },
+  "observability": {
+    "version": "0.2.2",
+    "log_path": "data/logs/workbench.jsonl",
+    "alert_path": "data/logs/alerts.jsonl",
+    "recent_logs": [
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T02:30:00+08:00",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "daily-recommended-sources",
+        "timestamp": "2026-09-30T04:36:51Z"
+      },
+      {
+        "code": "scheduled_collection_partial",
+        "context": {
+          "planned_at": "2026-09-30T02:30:00+08:00",
+          "run_id": "run-e79f865108da",
+          "status": "partial",
+          "task_id": "daily-recommended-sources"
+        },
+        "event": "alert",
+        "level": "WARNING",
+        "message": "每日计划采集部分成功",
+        "timestamp": "2026-09-30T04:38:46Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 32,
+        "events_updated": 0,
+        "level": "INFO",
+        "run_id": "run-e79f865108da",
+        "status": "partial",
+        "task_id": "daily-recommended-sources",
+        "timestamp": "2026-09-30T04:38:46Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T04:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources",
+        "timestamp": "2026-09-30T04:53:24Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-7a7e14ef4660",
+          "retry_count": 1,
+          "source_id": "nvd",
+          "status": "completed"
+        },
+        "event": "alert",
+        "level": "INFO",
+        "message": "nvd 自动恢复成功",
+        "timestamp": "2026-09-30T04:55:00Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-5f683fe50e8b",
+          "retry_count": 1,
+          "source_id": "nvd",
+          "status": "completed"
+        },
+        "event": "alert",
+        "level": "INFO",
+        "message": "nvd 自动恢复成功",
+        "timestamp": "2026-09-30T04:55:00Z"
+      },
+      {
+        "code": "self_healing_failed",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": false,
+          "recovery_run_id": "run-76b277c84d90",
+          "retry_count": 1,
+          "run_status": "completed",
+          "source_id": "nvd",
+          "source_status_after": "stale",
+          "status": "stale"
+        },
+        "event": "alert",
+        "level": "WARNING",
+        "message": "nvd 自动恢复后仍不可用",
+        "timestamp": "2026-09-30T04:55:36Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-e35abdf29aa8",
+          "retry_count": 1,
+          "run_status": "completed",
+          "source_id": "nvd",
+          "source_status_after": "ok",
+          "status": "ok"
+        },
+        "event": "alert",
+        "level": "INFO",
+        "message": "nvd 自动恢复成功",
+        "timestamp": "2026-09-30T04:55:36Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T04:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources",
+        "timestamp": "2026-09-30T04:56:05Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 0,
+        "events_updated": 9,
+        "level": "INFO",
+        "run_id": "run-9629821a26ca",
+        "status": "completed",
+        "task_id": "hourly-recommended-sources",
+        "timestamp": "2026-09-30T05:00:17Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T05:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources-2",
+        "timestamp": "2026-09-30T05:02:17Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 0,
+        "events_updated": 8,
+        "level": "INFO",
+        "run_id": "run-2e3e0d4d6206",
+        "status": "completed",
+        "task_id": "hourly-recommended-sources-2",
+        "timestamp": "2026-09-30T05:11:51Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T05:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources-3",
+        "timestamp": "2026-09-30T05:13:51Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 0,
+        "events_updated": 5,
+        "level": "INFO",
+        "run_id": "run-b9a4936d74e5",
+        "status": "completed",
+        "task_id": "hourly-recommended-sources-3",
+        "timestamp": "2026-09-30T05:17:06Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T05:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources-4",
+        "timestamp": "2026-09-30T05:19:06Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 0,
+        "events_updated": 1,
+        "level": "INFO",
+        "run_id": "run-5adab7fcabde",
+        "status": "completed",
+        "task_id": "hourly-recommended-sources-4",
+        "timestamp": "2026-09-30T05:20:27Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T05:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources-5",
+        "timestamp": "2026-09-30T05:22:27Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 0,
+        "events_updated": 1,
+        "level": "INFO",
+        "run_id": "run-9f4c9bf28bba",
+        "status": "completed",
+        "task_id": "hourly-recommended-sources-5",
+        "timestamp": "2026-09-30T05:23:40Z"
+      },
+      {
+        "event": "scheduled_collection_started",
+        "level": "INFO",
+        "planned_at": "2026-09-30T05:00:00Z",
+        "source_ids": [
+          "nvd",
+          "mitre_cve",
+          "osv",
+          "cisa_kev",
+          "msrc",
+          "security_blog",
+          "openalex",
+          "owasp_genai",
+          "nist_ai_rmf",
+          "mitre_atlas",
+          "eu_ai_act",
+          "nist_news"
+        ],
+        "task_id": "hourly-recommended-sources-6",
+        "timestamp": "2026-09-30T05:25:40Z"
+      },
+      {
+        "event": "scheduled_collection_finished",
+        "events_added": 0,
+        "events_updated": 1,
+        "level": "INFO",
+        "run_id": "run-2eda584fec85",
+        "status": "completed",
+        "task_id": "hourly-recommended-sources-6",
+        "timestamp": "2026-09-30T05:26:49Z"
+      }
+    ],
+    "recent_alerts": [
+      {
+        "code": "scheduled_collection_partial",
+        "context": {
+          "planned_at": "2026-09-30T02:30:00+08:00",
+          "run_id": "run-e79f865108da",
+          "status": "partial",
+          "task_id": "daily-recommended-sources"
+        },
+        "message": "每日计划采集部分成功",
+        "severity": "warning",
+        "timestamp": "2026-09-30T04:38:46Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-7a7e14ef4660",
+          "retry_count": 1,
+          "source_id": "nvd",
+          "status": "completed"
+        },
+        "message": "nvd 自动恢复成功",
+        "severity": "info",
+        "timestamp": "2026-09-30T04:55:00Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-5f683fe50e8b",
+          "retry_count": 1,
+          "source_id": "nvd",
+          "status": "completed"
+        },
+        "message": "nvd 自动恢复成功",
+        "severity": "info",
+        "timestamp": "2026-09-30T04:55:00Z"
+      },
+      {
+        "code": "self_healing_failed",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": false,
+          "recovery_run_id": "run-76b277c84d90",
+          "retry_count": 1,
+          "run_status": "completed",
+          "source_id": "nvd",
+          "source_status_after": "stale",
+          "status": "stale"
+        },
+        "message": "nvd 自动恢复后仍不可用",
+        "severity": "warning",
+        "timestamp": "2026-09-30T04:55:36Z"
+      },
+      {
+        "code": "self_healing_recovered",
+        "context": {
+          "attempts": 2,
+          "failure_class": "upstream_timeout",
+          "previous_status": "stale",
+          "recovered": true,
+          "recovery_run_id": "run-e35abdf29aa8",
+          "retry_count": 1,
+          "run_status": "completed",
+          "source_id": "nvd",
+          "source_status_after": "ok",
+          "status": "ok"
+        },
+        "message": "nvd 自动恢复成功",
+        "severity": "info",
+        "timestamp": "2026-09-30T04:55:36Z"
+      }
+    ]
+  },
+  "outputs": {
+    "reliability_report": "reports/7-day-continuous-run-report.md",
+    "source_health_csv": "reports/source-health.csv",
+    "latency_chart": "reports/latency-chart.svg",
+    "ci_screenshot": "docs/screenshots/06-ci-success.png",
+    "docker_healthy_screenshot": "docs/screenshots/08-docker-healthy.png"
+  }
+}

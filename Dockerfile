@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-ARG APP_VERSION=0.2.1
+ARG APP_VERSION=0.2.2
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
@@ -19,6 +19,7 @@ COPY research ./research
 COPY scripts ./scripts
 COPY tools ./tools
 COPY README.md ./
+COPY VERSION ./
 
 RUN mkdir -p /app/data /app/artifacts /app/reports
 

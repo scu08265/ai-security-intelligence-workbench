@@ -3,6 +3,7 @@ name: ci
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -42,3 +43,36 @@ jobs:
           docker build \
             --build-arg APP_VERSION=ci \
             -t ai-security-intelligence-workbench:ci .
+      - name: Start Compose stack
+        env:
+          APP_VERSION: ci
+        run: docker compose up -d
+      - name: Verify container health
+        id: health
+        run: |
+          for attempt in $(seq 1 30); do
+            status=$(docker inspect --format='{{.State.Health.Status}}' ai-security-intelligence-workbench 2>/dev/null || true)
+            if [ "$status" = "healthy" ]; then
+              break
+            fi
+            sleep 2
+          done
+          docker inspect --format='{{.State.Health.Status}}' ai-security-intelligence-workbench | grep -qx healthy
+          curl -fsS http://127.0.0.1:8000/api/health | tee container-health.json
+          docker compose ps
+      - name: Capture container evidence
+        if: always()
+        run: |
+          mkdir -p container-evidence
+          docker compose ps > container-evidence/compose-ps.txt 2>&1 || true
+          docker inspect ai-security-intelligence-workbench > container-evidence/container-inspect.json 2>&1 || true
+          curl -fsS http://127.0.0.1:8000/api/health > container-evidence/health.json 2>&1 || true
+          docker compose logs --no-color > container-evidence/compose.log 2>&1 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: container-health-evidence
+          path: container-evidence
+      - name: Stop Compose stack
+        if: always()
+        run: docker compose down -v

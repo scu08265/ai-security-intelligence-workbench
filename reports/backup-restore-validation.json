@@ -1,0 +1,12 @@
+﻿{
+    "integrity_check":  "ok",
+    "source_events":  124,
+    "restored_events":  124,
+    "source_assets":  0,
+    "restored_assets":  0,
+    "counts_match":  true,
+    "version":  "0.2.2",
+    "backup_path":  "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20260930-135010.sqlite",
+    "restored_path":  "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\restore-test\\intel-restored-20260930-135010.sqlite",
+    "generated_at":  "2026-09-30T05:50:10.7211012Z"
+}

@@ -1,0 +1,29 @@
+{
+  "version": "0.2.2",
+  "generated_at": "2026-09-30T08:17:00.991136+00:00",
+  "docker_cli_available": true,
+  "docker_server": "Docker Desktop 4.93.0 / Engine 29.8.1",
+  "compose_config_valid": true,
+  "image": "ai-security-intelligence-workbench:0.2.2",
+  "container_name": "ai-security-intelligence-workbench",
+  "container_running": true,
+  "container_health": "healthy",
+  "host_port": 18000,
+  "health_response": {
+    "status": "ok",
+    "version": "0.2.2",
+    "mode": "local_evidence_extraction",
+    "model_configured": false,
+    "data_dir": "/app/data",
+    "checks": {
+      "database": "ok",
+      "events": 124,
+      "failed_sources": [],
+      "skipped_sources": []
+    }
+  },
+  "health_endpoint_http_status": 200,
+  "evidence_log": "reports/docker-acceptance.log",
+  "screenshot": "docs/screenshots/08-docker-healthy.png",
+  "verified": true
+}

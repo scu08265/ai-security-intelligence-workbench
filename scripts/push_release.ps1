@@ -1,6 +1,6 @@
 param(
     [string]$Branch = "main",
-    [string]$Tag = "v0.2.1"
+    [string]$Tag = "v0.2.2"
 )
 
 $ErrorActionPreference = "Stop"
@@ -21,7 +21,8 @@ try {
         --repo "scu08265/ai-security-intelligence-workbench" `
         --branch $Branch `
         --tag $Tag `
-        --sync-tag "v0.2.0"
+        --sync-tag "v0.2.0" `
+        --sync-tag "v0.2.1"
     if ($LASTEXITCODE -ne 0) {
         throw "GitHub API release push failed."
     }

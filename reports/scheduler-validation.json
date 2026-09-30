@@ -1,0 +1,61 @@
+{
+  "version": "0.2.2",
+  "generated_at": "2026-09-30T05:46:32Z",
+  "automation": {
+    "id": "ai-a",
+    "status": "ACTIVE",
+    "rrule": "FREQ=HOURLY;INTERVAL=1"
+  },
+  "windows_task_install_attempt": {
+    "passed": false,
+    "reason": "PermissionDenied in Codex sandbox",
+    "script": "scripts/install_windows_task.ps1"
+  },
+  "validation_interval_seconds": 120,
+  "today_scheduled_run_count": 7,
+  "validation_run_count": 6,
+  "runs": [
+    {
+      "run_id": "run-9629821a26ca",
+      "status": "completed",
+      "started_at": "2026-09-30T04:56:05Z",
+      "finished_at": "2026-09-30T05:00:17Z",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "run_id": "run-2e3e0d4d6206",
+      "status": "completed",
+      "started_at": "2026-09-30T05:02:17Z",
+      "finished_at": "2026-09-30T05:11:51Z",
+      "task_id": "hourly-recommended-sources-2"
+    },
+    {
+      "run_id": "run-b9a4936d74e5",
+      "status": "completed",
+      "started_at": "2026-09-30T05:13:51Z",
+      "finished_at": "2026-09-30T05:17:06Z",
+      "task_id": "hourly-recommended-sources-3"
+    },
+    {
+      "run_id": "run-5adab7fcabde",
+      "status": "completed",
+      "started_at": "2026-09-30T05:19:06Z",
+      "finished_at": "2026-09-30T05:20:27Z",
+      "task_id": "hourly-recommended-sources-4"
+    },
+    {
+      "run_id": "run-9f4c9bf28bba",
+      "status": "completed",
+      "started_at": "2026-09-30T05:22:27Z",
+      "finished_at": "2026-09-30T05:23:40Z",
+      "task_id": "hourly-recommended-sources-5"
+    },
+    {
+      "run_id": "run-2eda584fec85",
+      "status": "completed",
+      "started_at": "2026-09-30T05:25:40Z",
+      "finished_at": "2026-09-30T05:26:49Z",
+      "task_id": "hourly-recommended-sources-6"
+    }
+  ]
+}

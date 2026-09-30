@@ -1,0 +1,183 @@
+{
+  "version": "0.2.2",
+  "status": "recovered",
+  "scenario": "NVD mock HTTP 503 followed by successful retry",
+  "before": {
+    "id": "nvd",
+    "status": "ok",
+    "last_run": "2026-09-30T05:47:59Z",
+    "last_success": "2026-09-30T05:47:59Z",
+    "last_error": null,
+    "events_count": 18,
+    "cursor": "2026-09-30T05:47:59.000+00:00",
+    "last_hash": "f0af4cfe41ef7902fdc54eb8c4e40b6a1ce590984e16dbaf5baa57df9d5354f6"
+  },
+  "after_failure": {
+    "id": "nvd",
+    "status": "stale",
+    "last_run": "2026-09-30T05:50:09Z",
+    "last_success": "2026-09-30T05:47:59Z",
+    "last_error": "HTTP 503：synthetic upstream outage",
+    "events_count": 18,
+    "cursor": "2026-09-30T05:47:59.000+00:00",
+    "last_hash": "f0af4cfe41ef7902fdc54eb8c4e40b6a1ce590984e16dbaf5baa57df9d5354f6"
+  },
+  "after_recovery": {
+    "id": "nvd",
+    "status": "ok",
+    "last_run": "2026-09-30T05:50:09Z",
+    "last_success": "2026-09-30T05:50:09Z",
+    "last_error": null,
+    "events_count": 18,
+    "cursor": "2026-09-30T05:50:09.000+00:00",
+    "last_hash": "f0af4cfe41ef7902fdc54eb8c4e40b6a1ce590984e16dbaf5baa57df9d5354f6"
+  },
+  "failed_run": {
+    "run_id": "run-530bce35f7f8",
+    "status": "completed",
+    "results": [
+      {
+        "source_id": "nvd",
+        "name": "NIST National Vulnerability Database",
+        "status": "stale",
+        "fetched": 0,
+        "kept": 0,
+        "filtered": 0,
+        "events_added": 0,
+        "events_updated": 0,
+        "duration_ms": 0,
+        "error": "HTTP 503：synthetic upstream outage",
+        "snapshot_hash": null,
+        "notes": [],
+        "timeliness": {
+          "events_seen": 0,
+          "events_with_publisher_time": 0,
+          "within_24h": 0,
+          "over_24h": 0,
+          "within_24h_rate": null,
+          "latency_seconds_p50": null,
+          "latency_seconds_p95": null,
+          "note": "仅统计来源提供公开时间的条目；未知时间不计为达标。"
+        },
+        "events": [],
+        "paper_fulltext_attempted": 0
+      }
+    ]
+  },
+  "first_self_healing": {
+    "status": "completed",
+    "candidates": 1,
+    "decisions": [
+      {
+        "source_id": "nvd",
+        "retry": true,
+        "failure_class": "upstream_timeout",
+        "reason": "允许一次受控恢复重试：upstream_timeout"
+      }
+    ],
+    "recovered": [],
+    "failed_after_retry": [
+      {
+        "source_id": "nvd",
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovery_run_id": "run-3e11b32bd541",
+        "run_status": "completed",
+        "source_status_after": "stale",
+        "status": "stale",
+        "recovered": false,
+        "attempts": 2,
+        "retry_count": 1
+      }
+    ],
+    "recovery_rate": 0.0,
+    "policy": {
+      "automatic_actions": [
+        "有限重试",
+        "历史数据降级",
+        "来源跳过"
+      ],
+      "manual_action": "超过自动重试预算后转人工处理",
+      "retry_budget_per_source": 1
+    }
+  },
+  "second_self_healing": {
+    "status": "completed",
+    "candidates": 1,
+    "decisions": [
+      {
+        "source_id": "nvd",
+        "retry": true,
+        "failure_class": "upstream_timeout",
+        "reason": "允许一次受控恢复重试：upstream_timeout"
+      }
+    ],
+    "recovered": [
+      {
+        "source_id": "nvd",
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovery_run_id": "run-588b1665b8ae",
+        "run_status": "completed",
+        "source_status_after": "ok",
+        "status": "ok",
+        "recovered": true,
+        "attempts": 2,
+        "retry_count": 1
+      }
+    ],
+    "failed_after_retry": [],
+    "recovery_rate": 1.0,
+    "policy": {
+      "automatic_actions": [
+        "有限重试",
+        "历史数据降级",
+        "来源跳过"
+      ],
+      "manual_action": "超过自动重试预算后转人工处理",
+      "retry_budget_per_source": 1
+    }
+  },
+  "alert_codes": [
+    "self_healing_failed",
+    "self_healing_recovered"
+  ],
+  "alerts": [
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-3e11b32bd541",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nvd 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T05:50:09Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-588b1665b8ae",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "ok",
+        "status": "ok"
+      },
+      "message": "nvd 自动恢复成功",
+      "severity": "info",
+      "timestamp": "2026-09-30T05:50:09Z"
+    }
+  ]
+}

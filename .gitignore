@@ -9,7 +9,9 @@ data/logs/
 artifacts/browser/
 artifacts/logs/
 artifacts/backups/
+artifacts/restore-test/
 artifacts/server-*.log
+work/
 .omc/
 .test-tmp*/
 .tmp_*/

@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from . import agents, observability, sources, storage
+from . import agents, observability, self_healing, sources, storage
 
 
 def run_scheduled_collection(
@@ -55,6 +55,17 @@ def run_scheduled_collection(
                 "status": result.get("status"),
             },
         )
+    if result.get("status") in {"failed", "partial"}:
+        recoverable = [
+            item.get("source_id")
+            for item in (result.get("results") or [])
+            if item.get("status") in {"failed", "stale"}
+        ]
+        if recoverable:
+            result["self_healing"] = self_healing.run_self_healing(
+                recoverable,
+                parent_run_id=result.get("run_id"),
+            )
     observability.log_event(
         "scheduled_collection_finished",
         task_id=task_id,

@@ -8,6 +8,8 @@ its fetch budget reports `partial` rather than quietly truncating.
 
 from __future__ import annotations
 
+import os
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -19,8 +21,9 @@ from . import MAX_DETAIL_FETCHES, CollectOutcome, FetchError, get_json, post_jso
 # Per-run work budgets.  These bound how long one collection may take; a
 # collector that hits its budget reports `partial` rather than silently
 # truncating.
-NVD_MAX_PAGES = 2
+NVD_MAX_PAGES = int(os.getenv("NVD_MAX_PAGES", "100") or 100)
 NVD_PAGE_SIZE = 200
+NVD_PAGE_DELAY_SECONDS = float(os.getenv("NVD_PAGE_DELAY_SECONDS", "6.0") or 6.0)
 OSV_DETAIL_BUDGET = 12
 MITRE_BUDGET = 10
 MSRC_RELEASES = 1
@@ -80,39 +83,52 @@ def collect_nvd(spec: SourceSpec, since: str | None) -> CollectOutcome:
     start = _parse_iso(since) or (_now() - timedelta(days=7))
     start = (start - timedelta(hours=6)).replace(microsecond=0)  # overlap window
     end = _now().replace(microsecond=0)
-    outcome = CollectOutcome(source_id=spec.id, status="ok", cursor=end.isoformat(timespec="milliseconds"))
+    outcome = CollectOutcome(source_id=spec.id, status="ok")
 
     scanned = 0
     pages = 0
     start_index = 0
     hashes: list[str] = []
-    while pages < NVD_MAX_PAGES:
+    total = 0
+    complete = False
+    api_key = os.getenv("NVD_API_KEY", "").strip()
+    while NVD_MAX_PAGES <= 0 or pages < NVD_MAX_PAGES:
         params = {
             "lastModStartDate": start.strftime("%Y-%m-%dT%H:%M:%S.000"),
             "lastModEndDate": end.strftime("%Y-%m-%dT%H:%M:%S.000"),
             "resultsPerPage": NVD_PAGE_SIZE,
             "startIndex": start_index,
         }
+        if api_key:
+            params["apiKey"] = api_key
         payload, raw = get_json(spec.url, params=params, timeout=45)
         hashes.append(record_snapshot(spec.id, raw))
         page = payload.get("vulnerabilities") or []
+        total = int(payload.get("totalResults") or total or 0)
         outcome.fetched += len(page)
         scanned += len(page)
         for item in page:
             _keep(normalize.nvd_to_event(item), outcome)
         pages += 1
-        total = int(payload.get("totalResults") or 0)
         start_index += NVD_PAGE_SIZE
         if start_index >= total or not page:
+            complete = True
             break
+        if NVD_PAGE_DELAY_SECONDS > 0:
+            time.sleep(NVD_PAGE_DELAY_SECONDS)
     else:
         outcome.status = "partial"
         outcome.notes.append(
             f"NVD 在窗口内共 {total} 条，本次仅扫描 {scanned} 条（上限 {NVD_MAX_PAGES} 页）"
         )
 
+    if complete:
+        outcome.cursor = end.isoformat(timespec="milliseconds")
     outcome.snapshot_hash = hashes[-1] if hashes else None
-    outcome.notes.append(f"窗口 {start:%Y-%m-%d %H:%M} → {end:%Y-%m-%d %H:%M}，扫描 {scanned} 条")
+    outcome.notes.append(
+        f"窗口 {start:%Y-%m-%d %H:%M} → {end:%Y-%m-%d %H:%M}，"
+        f"共 {total} 条，分 {pages} 页扫描 {scanned} 条"
+    )
     return outcome
 
 

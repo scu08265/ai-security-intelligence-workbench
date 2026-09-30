@@ -1,0 +1,412 @@
+{
+  "version": "0.2.2",
+  "log_path": "data/logs/workbench.jsonl",
+  "alert_path": "data/logs/alerts.jsonl",
+  "recent_logs": [
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T02:30:00+08:00",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "daily-recommended-sources",
+      "timestamp": "2026-09-30T04:36:51Z"
+    },
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-09-30T02:30:00+08:00",
+        "run_id": "run-e79f865108da",
+        "status": "partial",
+        "task_id": "daily-recommended-sources"
+      },
+      "event": "alert",
+      "level": "WARNING",
+      "message": "每日计划采集部分成功",
+      "timestamp": "2026-09-30T04:38:46Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 32,
+      "events_updated": 0,
+      "level": "INFO",
+      "run_id": "run-e79f865108da",
+      "status": "partial",
+      "task_id": "daily-recommended-sources",
+      "timestamp": "2026-09-30T04:38:46Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T04:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources",
+      "timestamp": "2026-09-30T04:53:24Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-7a7e14ef4660",
+        "retry_count": 1,
+        "source_id": "nvd",
+        "status": "completed"
+      },
+      "event": "alert",
+      "level": "INFO",
+      "message": "nvd 自动恢复成功",
+      "timestamp": "2026-09-30T04:55:00Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-5f683fe50e8b",
+        "retry_count": 1,
+        "source_id": "nvd",
+        "status": "completed"
+      },
+      "event": "alert",
+      "level": "INFO",
+      "message": "nvd 自动恢复成功",
+      "timestamp": "2026-09-30T04:55:00Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-76b277c84d90",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "event": "alert",
+      "level": "WARNING",
+      "message": "nvd 自动恢复后仍不可用",
+      "timestamp": "2026-09-30T04:55:36Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-e35abdf29aa8",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "ok",
+        "status": "ok"
+      },
+      "event": "alert",
+      "level": "INFO",
+      "message": "nvd 自动恢复成功",
+      "timestamp": "2026-09-30T04:55:36Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T04:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources",
+      "timestamp": "2026-09-30T04:56:05Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 0,
+      "events_updated": 9,
+      "level": "INFO",
+      "run_id": "run-9629821a26ca",
+      "status": "completed",
+      "task_id": "hourly-recommended-sources",
+      "timestamp": "2026-09-30T05:00:17Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T05:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources-2",
+      "timestamp": "2026-09-30T05:02:17Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 0,
+      "events_updated": 8,
+      "level": "INFO",
+      "run_id": "run-2e3e0d4d6206",
+      "status": "completed",
+      "task_id": "hourly-recommended-sources-2",
+      "timestamp": "2026-09-30T05:11:51Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T05:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources-3",
+      "timestamp": "2026-09-30T05:13:51Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 0,
+      "events_updated": 5,
+      "level": "INFO",
+      "run_id": "run-b9a4936d74e5",
+      "status": "completed",
+      "task_id": "hourly-recommended-sources-3",
+      "timestamp": "2026-09-30T05:17:06Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T05:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources-4",
+      "timestamp": "2026-09-30T05:19:06Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 0,
+      "events_updated": 1,
+      "level": "INFO",
+      "run_id": "run-5adab7fcabde",
+      "status": "completed",
+      "task_id": "hourly-recommended-sources-4",
+      "timestamp": "2026-09-30T05:20:27Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T05:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources-5",
+      "timestamp": "2026-09-30T05:22:27Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 0,
+      "events_updated": 1,
+      "level": "INFO",
+      "run_id": "run-9f4c9bf28bba",
+      "status": "completed",
+      "task_id": "hourly-recommended-sources-5",
+      "timestamp": "2026-09-30T05:23:40Z"
+    },
+    {
+      "event": "scheduled_collection_started",
+      "level": "INFO",
+      "planned_at": "2026-09-30T05:00:00Z",
+      "source_ids": [
+        "nvd",
+        "mitre_cve",
+        "osv",
+        "cisa_kev",
+        "msrc",
+        "security_blog",
+        "openalex",
+        "owasp_genai",
+        "nist_ai_rmf",
+        "mitre_atlas",
+        "eu_ai_act",
+        "nist_news"
+      ],
+      "task_id": "hourly-recommended-sources-6",
+      "timestamp": "2026-09-30T05:25:40Z"
+    },
+    {
+      "event": "scheduled_collection_finished",
+      "events_added": 0,
+      "events_updated": 1,
+      "level": "INFO",
+      "run_id": "run-2eda584fec85",
+      "status": "completed",
+      "task_id": "hourly-recommended-sources-6",
+      "timestamp": "2026-09-30T05:26:49Z"
+    }
+  ],
+  "recent_alerts": [
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-09-30T02:30:00+08:00",
+        "run_id": "run-e79f865108da",
+        "status": "partial",
+        "task_id": "daily-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-09-30T04:38:46Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-7a7e14ef4660",
+        "retry_count": 1,
+        "source_id": "nvd",
+        "status": "completed"
+      },
+      "message": "nvd 自动恢复成功",
+      "severity": "info",
+      "timestamp": "2026-09-30T04:55:00Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-5f683fe50e8b",
+        "retry_count": 1,
+        "source_id": "nvd",
+        "status": "completed"
+      },
+      "message": "nvd 自动恢复成功",
+      "severity": "info",
+      "timestamp": "2026-09-30T04:55:00Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-76b277c84d90",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nvd 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T04:55:36Z"
+    },
+    {
+      "code": "self_healing_recovered",
+      "context": {
+        "attempts": 2,
+        "failure_class": "upstream_timeout",
+        "previous_status": "stale",
+        "recovered": true,
+        "recovery_run_id": "run-e35abdf29aa8",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "ok",
+        "status": "ok"
+      },
+      "message": "nvd 自动恢复成功",
+      "severity": "info",
+      "timestamp": "2026-09-30T04:55:36Z"
+    }
+  ]
+}

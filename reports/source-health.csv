@@ -1,15 +1,15 @@
-﻿source_id,name,category,auto_default,current_status,health_class,events_count,attempts,successful_attempts,failed_attempts,skipped_attempts,success_rate,duration_ms_p50,duration_ms_p95,last_success,last_error,degradation
-nvd,NIST National Vulnerability Database,cve_database,True,ok,succeeded,3,2,2,0,0,1.0,2875.0,11686.0,2026-09-28T05:01:44Z,,保留历史证据并在下一计划周期重试。
-mitre_cve,MITRE CVE Program (CVE Services),cve_database,True,ok,succeeded,10,2,2,0,0,1.0,1641.0,10781.0,2026-09-28T05:01:55Z,,保留历史证据并在下一计划周期重试。
-osv,OSV (Open Source Vulnerabilities),ecosystem_advisory,True,stale,not_run,12,2,1,0,0,1.0,9360.0,91625.0,2026-09-27T10:43:47Z,ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。,只把本轮成功解析的记录标记为成功，预算未处理项标记为部分成功。
-ghsa,GitHub Advisory Database,community_advisory,False,idle,not_run,0,0,0,0,0,,,,,,未配置令牌时主动跳过，不使用空结果冒充成功。
-cisa_kev,CISA Known Exploited Vulnerabilities,exploitation_intel,True,ok,succeeded,26,2,2,0,0,1.0,1280.0,1796.0,2026-09-28T05:03:28Z,,保留历史证据并在下一计划周期重试。
-msrc,Microsoft Security Response Center (CVRF),vendor_advisory,True,ok,succeeded,10,2,2,0,0,1.0,20250.0,54577.0,2026-09-28T05:03:48Z,,保留最近成功的厂商公告和快照，本轮明确标记失败或部分成功。
-security_blog,GitHub Security Blog,security_blog,True,ok,succeeded,0,2,2,0,0,1.0,234.0,312.0,2026-09-28T05:03:49Z,,保留历史证据并在下一计划周期重试。
-arxiv,arXiv (cs.CR / cs.LG),academic_paper,False,idle,not_run,0,0,0,0,0,,,,,,保留真实失败记录，使用 OpenAlex 作为论文元数据与摘要备用源。
-openalex,OpenAlex Scholarly Index,academic_paper,True,ok,succeeded,37,2,2,0,0,1.0,1703.0,65468.0,2026-09-28T05:04:54Z,,保留上次成功快照和已入库论文；下一计划周期重试。
-owasp_genai,OWASP GenAI Security Project,technical_standard,True,ok,succeeded,1,2,2,0,0,1.0,843.0,1858.0,2026-09-28T05:04:56Z,,保留历史证据并在下一计划周期重试。
-nist_ai_rmf,NIST AI Risk Management Framework,risk_framework,True,ok,succeeded,1,2,2,0,0,1.0,671.0,1000.0,2026-09-28T05:04:57Z,,保留历史证据并在下一计划周期重试。
-mitre_atlas,MITRE ATLAS,threat_framework,True,ok,succeeded,0,2,2,0,0,1.0,1000.0,2343.0,2026-09-28T05:04:59Z,,保留历史证据并在下一计划周期重试。
-eu_ai_act,European Commission AI Act,policy_regulation,True,ok,succeeded,1,2,2,0,0,1.0,14921.0,39780.0,2026-09-28T05:05:14Z,,保留历史证据并在下一计划周期重试。
-nist_news,NIST News and Events,policy_regulation,True,ok,succeeded,0,2,2,0,0,1.0,812.0,49889.0,2026-09-28T05:06:04Z,,保留历史证据并在下一计划周期重试。
+﻿version,source_id,name,category,auto_default,current_status,health_class,events_count,attempts,successful_attempts,failed_attempts,skipped_attempts,success_rate,duration_ms_p50,duration_ms_p95,last_success,last_error,degradation
+0.2.2,nvd,NIST National Vulnerability Database,cve_database,True,ok,succeeded,18,23,15,0,0,1.0,16.0,56062.0,2026-09-30T07:52:43Z,,保留历史证据并在下一计划周期重试。
+0.2.2,mitre_cve,MITRE CVE Program (CVE Services),cve_database,True,ok,succeeded,47,11,10,0,0,1.0,11500.0,434671.0,2026-09-30T07:52:54Z,,保留历史证据并在下一计划周期重试。
+0.2.2,osv,OSV (Open Source Vulnerabilities),ecosystem_advisory,True,ok,succeeded,17,11,8,0,0,1.0,5766.0,91625.0,2026-09-30T07:52:59Z,,只把本轮成功解析的记录标记为成功，预算未处理项标记为部分成功。
+0.2.2,ghsa,GitHub Advisory Database,community_advisory,False,idle,not_run,0,0,0,0,0,,,,,,未配置令牌时主动跳过，不使用空结果冒充成功。
+0.2.2,cisa_kev,CISA Known Exploited Vulnerabilities,exploitation_intel,True,ok,succeeded,26,11,11,0,0,1.0,1375.0,2858.0,2026-09-30T07:53:00Z,,保留历史证据并在下一计划周期重试。
+0.2.2,msrc,Microsoft Security Response Center (CVRF),vendor_advisory,True,ok,succeeded,19,11,11,0,0,1.0,20250.0,87609.0,2026-09-30T07:53:27Z,,保留最近成功的厂商公告和快照，本轮明确标记失败或部分成功。
+0.2.2,security_blog,GitHub Security Blog,security_blog,True,ok,succeeded,0,11,11,0,0,1.0,375.0,25452.0,2026-09-30T07:53:27Z,,保留历史证据并在下一计划周期重试。
+0.2.2,arxiv,arXiv (cs.CR / cs.LG),academic_paper,False,idle,not_run,0,0,0,0,0,,,,,,保留真实失败记录，使用 OpenAlex 作为论文元数据与摘要备用源。
+0.2.2,openalex,OpenAlex Scholarly Index,academic_paper,True,ok,succeeded,41,11,11,0,0,1.0,1796.0,65468.0,2026-09-30T07:53:34Z,,保留上次成功快照和已入库论文；下一计划周期重试。
+0.2.2,owasp_genai,OWASP GenAI Security Project,technical_standard,True,ok,succeeded,1,11,11,0,0,1.0,905.0,1858.0,2026-09-30T07:53:35Z,,保留历史证据并在下一计划周期重试。
+0.2.2,nist_ai_rmf,NIST AI Risk Management Framework,risk_framework,True,ok,succeeded,1,11,11,0,0,1.0,812.0,49171.0,2026-09-30T07:54:24Z,,保留历史证据并在下一计划周期重试。
+0.2.2,mitre_atlas,MITRE ATLAS,threat_framework,True,ok,succeeded,0,11,11,0,0,1.0,562.0,2343.0,2026-09-30T07:54:24Z,,保留历史证据并在下一计划周期重试。
+0.2.2,eu_ai_act,European Commission AI Act,policy_regulation,True,ok,succeeded,1,11,11,0,0,1.0,18078.0,152969.0,2026-09-30T07:54:44Z,,保留历史证据并在下一计划周期重试。
+0.2.2,nist_news,NIST News and Events,policy_regulation,True,ok,succeeded,0,11,11,0,0,1.0,812.0,152282.0,2026-09-30T07:57:16Z,,保留历史证据并在下一计划周期重试。

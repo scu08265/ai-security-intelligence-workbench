@@ -1,6 +1,6 @@
 param(
-    [string]$TaskName = "AI-Security-Intelligence-Daily-Collection",
-    [string]$DailyAt = "02:30",
+    [string]$TaskName = "AI-Security-Intelligence-Hourly-Collection",
+    [int]$IntervalHours = 1,
     [string]$UserId = "$env:USERDOMAIN\$env:USERNAME"
 )
 
@@ -15,9 +15,14 @@ if (-not (Test-Path -LiteralPath $Runner)) {
 
 $Action = New-ScheduledTaskAction `
     -Execute $PowerShell `
-    -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$Runner`" -TaskId `"$TaskName`" -ScheduledTime `"$DailyAt`"" `
+    -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$Runner`" -TaskId `"$TaskName`" -Hourly" `
     -WorkingDirectory $Root
-$Trigger = New-ScheduledTaskTrigger -Daily -At $DailyAt
+$StartAt = (Get-Date).AddMinutes(1)
+$Trigger = New-ScheduledTaskTrigger `
+    -Once `
+    -At $StartAt `
+    -RepetitionInterval (New-TimeSpan -Hours $IntervalHours) `
+    -RepetitionDuration (New-TimeSpan -Days 3650)
 $Settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
@@ -34,9 +39,9 @@ Register-ScheduledTask `
     -Trigger $Trigger `
     -Settings $Settings `
     -Principal $Principal `
-    -Description "Run the recommended AI security intelligence sources once per day." `
+    -Description "Run recommended AI security intelligence sources every $IntervalHours hour(s)." `
     -Force | Out-Null
 
 Write-Host "Installed scheduled task: $TaskName"
-Write-Host "Schedule: daily at $DailyAt"
+Write-Host "Schedule: every $IntervalHours hour(s), starting $StartAt"
 Write-Host "Manual test: Start-ScheduledTask -TaskName '$TaskName'"

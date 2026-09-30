@@ -12,7 +12,7 @@ from datetime import datetime, timedelta, timezone
 from statistics import mean
 from typing import Any, Iterable
 
-from . import sources, storage
+from . import config, sources, storage
 
 
 TIMELINESS_TARGETS = (
@@ -266,6 +266,7 @@ def source_health(runs: Iterable[dict]) -> dict[str, Any]:
             }),
         })
     return {
+        "version": config.APP_VERSION,
         "generated_at": storage.utcnow(),
         "source_count": len(items),
         "healthy_source_count": sum(
@@ -379,6 +380,7 @@ def build_reliability_report(
             ),
         })
     return {
+        "version": config.APP_VERSION,
         "generated_at": storage.utcnow(),
         "definition": {
             "first_observation": "每个事件只取最早一次 discovered_at，重复更新不重复计入时延。",
@@ -398,6 +400,7 @@ def source_health_rows(report: dict[str, Any] | None = None) -> list[dict[str, A
     rows: list[dict[str, Any]] = []
     for item in payload["sources"]["items"]:
         rows.append({
+            "version": config.APP_VERSION,
             "source_id": item["id"],
             "name": item["name"],
             "category": item["category"],

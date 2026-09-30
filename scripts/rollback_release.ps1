@@ -1,7 +1,8 @@
 param(
     [Parameter(Mandatory = $true)]
     [string]$Version,
-    [string]$BaseUrl = "http://127.0.0.1:8000"
+    [string]$BaseUrl = "http://127.0.0.1:8000",
+    [switch]$DryRun
 )
 
 $ErrorActionPreference = "Stop"
@@ -9,6 +10,16 @@ $Root = Split-Path -Parent $PSScriptRoot
 $BackupScript = Join-Path $PSScriptRoot "backup_database.ps1"
 $HealthScript = Join-Path $PSScriptRoot "check_health.ps1"
 $Image = "ai-security-intelligence-workbench:$Version"
+
+if ($DryRun) {
+    Write-Host "Rollback dry run:"
+    Write-Host "1. Backup current database."
+    Write-Host "2. Verify image $Image exists."
+    Write-Host "3. docker compose down."
+    Write-Host "4. Start APP_VERSION=$Version."
+    Write-Host "5. Check $BaseUrl/api/health."
+    exit 0
+}
 
 if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
     throw "Docker is not installed or not on PATH."

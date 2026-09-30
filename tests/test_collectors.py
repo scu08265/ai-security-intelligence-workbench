@@ -7,6 +7,7 @@ silent success or an invented record.
 
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 from types import SimpleNamespace
 
@@ -14,11 +15,12 @@ import httpx
 import pytest
 
 from app import collectors, storage
+from app.collectors import vuln
 from app.sources import BY_ID
 
 from fixtures import (
-    ARXIV_SYNTHETIC, GHSA_SYNTHETIC, HTML_SYNTHETIC, KEV_SYNTHETIC, NVD_SYNTHETIC,
-    OPENALEX_SYNTHETIC, OSV_QUERYBATCH_SYNTHETIC, OSV_SYNTHETIC, RSS_SYNTHETIC,
+    ARXIV_SYNTHETIC, GHSA_SYNTHETIC, HTML_SYNTHETIC, KEV_SYNTHETIC, NVD_ITEM_SYNTHETIC,
+    NVD_SYNTHETIC, OPENALEX_SYNTHETIC, OSV_QUERYBATCH_SYNTHETIC, OSV_SYNTHETIC, RSS_SYNTHETIC,
 )
 
 MSRC_INDEX = {
@@ -98,6 +100,38 @@ def test_nvd_collector_keeps_only_ai_relevant_records():
     assert outcome.fetched >= 1
     assert [e["id"] for e in outcome.events] == ["CVE-2099-00003"]
     assert outcome.snapshot_hash
+
+
+def test_nvd_collector_drains_all_pages_instead_of_stopping_at_two(monkeypatch):
+    total = 1424
+    requested_indexes: list[int] = []
+
+    def paginated_nvd(request: httpx.Request) -> httpx.Response:
+        start = int(request.url.params.get("startIndex") or 0)
+        requested_indexes.append(start)
+        count = min(200, max(0, total - start))
+        vulnerabilities = []
+        for offset in range(count):
+            item = deepcopy(NVD_ITEM_SYNTHETIC)
+            item["cve"]["id"] = f"CVE-2099-{100000 + start + offset}"
+            vulnerabilities.append(item)
+        return _json_response({
+            "vulnerabilities": vulnerabilities,
+            "totalResults": total,
+            "resultsPerPage": 200,
+            "startIndex": start,
+        })
+
+    monkeypatch.setattr(vuln, "NVD_PAGE_DELAY_SECONDS", 0.0)
+    collectors.set_transport(httpx.MockTransport(paginated_nvd))
+    outcome = collectors.collect("nvd")
+
+    assert requested_indexes == [0, 200, 400, 600, 800, 1000, 1200, 1400]
+    assert outcome.status == "ok"
+    assert outcome.fetched == total
+    assert len(outcome.events) == total
+    assert outcome.cursor
+    assert any("分 8 页扫描 1424 条" in note for note in outcome.notes)
 
 
 def test_osv_collector_resolves_ranges_and_fetches_details():

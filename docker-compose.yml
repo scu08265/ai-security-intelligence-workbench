@@ -1,10 +1,10 @@
 services:
   workbench:
     build: .
-    image: "ai-security-intelligence-workbench:${APP_VERSION:-0.2.1}"
+    image: "ai-security-intelligence-workbench:${APP_VERSION:-0.2.2}"
     container_name: ai-security-intelligence-workbench
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${HOST_PORT:-8000}:8000"
     environment:
       DEEPSEEK_API_KEY: "${DEEPSEEK_API_KEY:-}"
       INTEL_USE_MODEL: "${INTEL_USE_MODEL:-1}"

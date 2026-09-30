@@ -1,0 +1,17 @@
+{
+  "version": "0.2.2",
+  "generated_at": "2026-09-30T08:32:45Z",
+  "checks": {
+    "version_consistent": true,
+    "version_mismatches": [],
+    "scheduler_run_ids_persisted": true,
+    "missing_run_ids": [],
+    "nvd_post_fix_all_ok": true,
+    "backup_restore_counts_match": true,
+    "fault_injection_recovered": true,
+    "local_checks_passed": true,
+    "docker_runtime_verified": true,
+    "docker_health": "healthy"
+  },
+  "all_consistent": true
+}

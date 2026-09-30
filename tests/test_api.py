@@ -372,6 +372,28 @@ def test_orchestration_reports_the_real_budgets(client):
         "the orchestration must not be described as independent agents")
 
 
+def test_multi_agent_endpoint_returns_message_and_audit_evidence(client):
+    response = client.post("/api/agent/multi/execute", json={
+        "objective": "验证本地证据与缓存快照",
+        "actions": ["count_events", "read_cached_snapshot"],
+    })
+    assert response.status_code == 200
+    body = response.json()
+    assert body["run_id"]
+    assert {"plan_proposed", "execution_result", "audit_decision"} <= {
+        item["kind"] for item in body["messages"]
+    }
+    assert body["agents"]["auditor"]["decisions"]
+
+
+def test_self_healing_endpoint_accepts_only_registered_sources(client):
+    denied = client.post("/api/self-healing/run", json={"source_ids": ["not-real"]})
+    assert denied.status_code == 400
+    accepted = client.post("/api/self-healing/run", json={"source_ids": ["nvd"]})
+    assert accepted.status_code == 200
+    assert accepted.json()["policy"]["automatic_actions"]
+
+
 def test_how_it_works_endpoints_leak_nothing(client, monkeypatch):
     monkeypatch.setenv(config.API_KEY_ENV, "sk-canary-do-not-emit")
     for path in ("/api/ai-participation", "/api/orchestration"):

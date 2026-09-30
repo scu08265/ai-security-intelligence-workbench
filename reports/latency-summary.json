@@ -1,15 +1,67 @@
 {
-  "sample_size": 91,
-  "computable_samples": 1,
+  "version": "0.2.2",
+  "generated_at": "2026-09-30T07:58:05Z",
+  "sample_size": 124,
+  "computable_samples": 6,
   "unknown_samples": 13,
-  "baseline_excluded_samples": 77,
+  "baseline_excluded_samples": 105,
   "monitoring_started_at": "2026-09-27T10:43:32Z",
   "unknown_reasons": {
     "invalid_or_missing_publisher_time": 13
   },
-  "latency_seconds_p50": 27870.0,
-  "latency_seconds_p95": 27870.0,
+  "latency_seconds_p50": 189499.0,
+  "latency_seconds_p95": 189499.0,
   "records": [
+    {
+      "event_id": "CVE-2026-102911",
+      "source_id": "nvd",
+      "published_at": "2026-09-30T04:18:28Z",
+      "discovered_at": "2026-09-30T04:53:24Z",
+      "latency_seconds": 2096.0,
+      "latency_hours": 0.582,
+      "valid": true,
+      "unknown_reason": null
+    },
+    {
+      "event_id": "OPENALEX-W7128805264",
+      "source_id": "openalex",
+      "published_at": "2026-09-28T00:00:00Z",
+      "discovered_at": "2026-09-30T04:38:19Z",
+      "latency_seconds": 189499.0,
+      "latency_hours": 52.639,
+      "valid": true,
+      "unknown_reason": null
+    },
+    {
+      "event_id": "OPENALEX-W7214527440",
+      "source_id": "openalex",
+      "published_at": "2026-09-28T00:00:00Z",
+      "discovered_at": "2026-09-30T04:38:19Z",
+      "latency_seconds": 189499.0,
+      "latency_hours": 52.639,
+      "valid": true,
+      "unknown_reason": null
+    },
+    {
+      "event_id": "OPENALEX-W7214558721",
+      "source_id": "openalex",
+      "published_at": "2026-09-28T00:00:00Z",
+      "discovered_at": "2026-09-30T04:38:19Z",
+      "latency_seconds": 189499.0,
+      "latency_hours": 52.639,
+      "valid": true,
+      "unknown_reason": null
+    },
+    {
+      "event_id": "OPENALEX-W7214600341",
+      "source_id": "openalex",
+      "published_at": "2026-09-28T00:00:00Z",
+      "discovered_at": "2026-09-30T04:38:19Z",
+      "latency_seconds": 189499.0,
+      "latency_hours": 52.639,
+      "valid": true,
+      "unknown_reason": null
+    },
     {
       "event_id": "CVE-2026-101065",
       "source_id": "nvd",
@@ -431,6 +483,56 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
+      "event_id": "PYSEC-2026-4000",
+      "source_id": "osv",
+      "published_at": "2026-09-19T23:17:10Z",
+      "discovered_at": "2026-09-30T04:37:59Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "PYSEC-2026-3998",
+      "source_id": "osv",
+      "published_at": "2026-09-18T20:17:34Z",
+      "discovered_at": "2026-09-30T04:37:59Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "PYSEC-2026-3999",
+      "source_id": "osv",
+      "published_at": "2026-09-18T20:17:34Z",
+      "discovered_at": "2026-09-30T04:37:59Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "PYSEC-2026-3997",
+      "source_id": "osv",
+      "published_at": "2026-09-18T14:19:10Z",
+      "discovered_at": "2026-09-30T04:37:59Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "PYSEC-2026-3996",
+      "source_id": "osv",
+      "published_at": "2026-09-17T23:18:54Z",
+      "discovered_at": "2026-09-30T04:37:59Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
       "event_id": "GHSA-8pw2-6jv3-mj5j",
       "source_id": "osv",
       "published_at": "2026-09-17T17:17:39Z",
@@ -551,6 +653,86 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
+      "event_id": "CVE-2026-73560",
+      "source_id": "nvd",
+      "published_at": "2026-08-17T21:16:48Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-27772",
+      "source_id": "nvd",
+      "published_at": "2026-08-17T16:16:46Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-27771",
+      "source_id": "nvd",
+      "published_at": "2026-08-17T16:16:46Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-27770",
+      "source_id": "nvd",
+      "published_at": "2026-08-17T16:16:46Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-27621",
+      "source_id": "nvd",
+      "published_at": "2026-08-17T16:16:46Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-73559",
+      "source_id": "nvd",
+      "published_at": "2026-08-13T16:19:05Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-73558",
+      "source_id": "nvd",
+      "published_at": "2026-08-13T15:20:18Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-73556",
+      "source_id": "nvd",
+      "published_at": "2026-08-13T15:20:17Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
       "event_id": "CVE-2026-9198",
       "source_id": "cisa_kev",
       "published_at": "2026-08-04T00:00:00Z",
@@ -561,10 +743,160 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
+      "event_id": "CVE-2026-50517",
+      "source_id": "msrc",
+      "published_at": "2026-07-24T00:01:11Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-56167",
+      "source_id": "msrc",
+      "published_at": "2026-07-23T23:55:11Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-58617",
+      "source_id": "msrc",
+      "published_at": "2026-07-14T17:10:11Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-55145",
+      "source_id": "msrc",
+      "published_at": "2026-07-14T17:09:09Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-50510",
+      "source_id": "msrc",
+      "published_at": "2026-07-14T17:08:02Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-48561",
+      "source_id": "msrc",
+      "published_at": "2026-07-14T17:04:12Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-41106",
+      "source_id": "msrc",
+      "published_at": "2026-07-02T22:18:57Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-45499",
+      "source_id": "msrc",
+      "published_at": "2026-07-02T22:18:56Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-32394",
+      "source_id": "nvd",
+      "published_at": "2026-06-26T17:16:31Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-32423",
+      "source_id": "nvd",
+      "published_at": "2026-06-26T17:16:31Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
       "event_id": "CVE-2026-55255",
       "source_id": "cisa_kev",
       "published_at": "2026-07-07T00:00:00Z",
       "discovered_at": "2026-09-27T10:43:47Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-32437",
+      "source_id": "nvd",
+      "published_at": "2026-06-18T17:16:26Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-32436",
+      "source_id": "nvd",
+      "published_at": "2026-06-18T17:16:26Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-32424",
+      "source_id": "nvd",
+      "published_at": "2026-06-18T17:16:26Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2025-32422",
+      "source_id": "nvd",
+      "published_at": "2026-06-18T17:16:26Z",
+      "discovered_at": "2026-09-30T04:36:51Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2026-41109",
+      "source_id": "msrc",
+      "published_at": "2026-05-12T16:58:55Z",
+      "discovered_at": "2026-09-30T04:38:08Z",
       "latency_seconds": null,
       "latency_hours": null,
       "valid": false,
@@ -691,16 +1023,6 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
-      "event_id": "CVE-2021-29256",
-      "source_id": "cisa_kev",
-      "published_at": "2023-07-07T00:00:00Z",
-      "discovered_at": "2026-09-27T10:43:47Z",
-      "latency_seconds": null,
-      "latency_hours": null,
-      "valid": false,
-      "unknown_reason": "baseline_backfill_before_monitoring_start"
-    },
-    {
       "event_id": "CVE-2021-27876",
       "source_id": "cisa_kev",
       "published_at": "2023-04-07T00:00:00Z",
@@ -741,9 +1063,9 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
-      "event_id": "CVE-2022-22706",
+      "event_id": "CVE-2022-4135",
       "source_id": "cisa_kev",
-      "published_at": "2023-03-30T00:00:00Z",
+      "published_at": "2022-11-28T00:00:00Z",
       "discovered_at": "2026-09-27T10:43:47Z",
       "latency_seconds": null,
       "latency_hours": null,
@@ -761,9 +1083,9 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
-      "event_id": "CVE-2022-4135",
+      "event_id": "CVE-2014-6332",
       "source_id": "cisa_kev",
-      "published_at": "2022-11-28T00:00:00Z",
+      "published_at": "2022-03-25T00:00:00Z",
       "discovered_at": "2026-09-27T10:43:47Z",
       "latency_seconds": null,
       "latency_hours": null,
@@ -771,9 +1093,9 @@
       "unknown_reason": "baseline_backfill_before_monitoring_start"
     },
     {
-      "event_id": "CVE-2014-6332",
+      "event_id": "CVE-2022-22706",
       "source_id": "cisa_kev",
-      "published_at": "2022-03-25T00:00:00Z",
+      "published_at": "2023-03-30T00:00:00Z",
       "discovered_at": "2026-09-27T10:43:47Z",
       "latency_seconds": null,
       "latency_hours": null,
@@ -794,6 +1116,16 @@
       "event_id": "CVE-2020-10987",
       "source_id": "cisa_kev",
       "published_at": "2021-11-03T00:00:00Z",
+      "discovered_at": "2026-09-27T10:43:47Z",
+      "latency_seconds": null,
+      "latency_hours": null,
+      "valid": false,
+      "unknown_reason": "baseline_backfill_before_monitoring_start"
+    },
+    {
+      "event_id": "CVE-2021-29256",
+      "source_id": "cisa_kev",
+      "published_at": "2023-07-07T00:00:00Z",
       "discovered_at": "2026-09-27T10:43:47Z",
       "latency_seconds": null,
       "latency_hours": null,
@@ -922,18 +1254,18 @@
     }
   ],
   "within_6h": {
-    "count": 0,
-    "rate": 0.0,
+    "count": 1,
+    "rate": 0.1667,
     "target": "优秀目标 <= 6h"
   },
   "within_12h": {
-    "count": 1,
-    "rate": 1.0,
+    "count": 2,
+    "rate": 0.3333,
     "target": "良好目标 <= 12h"
   },
   "within_24h": {
-    "count": 1,
-    "rate": 1.0,
+    "count": 2,
+    "rate": 0.3333,
     "target": "合格目标 <= 24h"
   }
 }

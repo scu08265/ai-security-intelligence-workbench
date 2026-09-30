@@ -4,9 +4,9 @@
 
 已完成：
 
-- 每日推荐来源采集入口。
+- 每小时推荐来源采集入口。
 - 任务 ID、计划时间、实际时间、来源结果和失败原因持久化。
-- Codex 每日 02:30 自动化 `ai-a`，只使用推荐来源。
+- Codex 每小时自动化 `ai-a`，只使用推荐来源。
 - Windows 任务计划和 Linux cron 安装脚本。
 - `<=24h / <=12h / <=6h` 数量、比例、可计算样本和未知样本。
 - `0001-01-01`、缺失日期和未来发布日期排除。
@@ -17,36 +17,36 @@
 - JSONL 结构化日志、告警记录和可选 Webhook。
 - Markdown、CSV、JSON、SVG 图表和真实页面截图。
 
-连续运行当前为 **1 / 7 天，积累中**。7 天必须靠真实日历时间完成，不能补写。
+9 月 29 日发生过漏运行，连续天数从恢复日重新计算。7 天必须靠真实日历时间完成，不能补写。
 
 ## 2. 每日计划采集
 
 Codex 自动化：
 
 - ID：`ai-a`
-- 时间：每天 02:30，Asia/Shanghai
+- 时间：每小时一次
 - 通知：仅失败时
 
 Windows 任务计划：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -DailyAt "02:30"
+powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1
 ```
 
 当前受限会话没有 Windows Task Scheduler 注册权限，因此没有在系统层注册任务；
-安装脚本已完成并可在普通 PowerShell 中运行。Codex 自动化已经启用，保证每日
-证据能够继续积累。
+安装脚本已完成并可在普通 PowerShell 中运行。Codex 自动化已经启用，用于继续积累
+每小时证据。
 
 ## 3. 本次真实运行
 
-- 运行 ID：`run-8fecc0b6c3df`
-- 任务 ID：`daily-recommended-sources`
-- 状态：`partial`
-- 新增事件：89
+- 验证运行：`run-9629821a26ca` 至 `run-2eda584fec85`
+- 任务 ID：`hourly-recommended-sources`
+- 状态：六个周期均为 `completed`
+- 今日自动计划运行：7 条
 - 推荐来源：12
-- 首次报告：1 / 7 天
 
-推荐来源中 NVD 和 OSV 为 `partial`，原因是分页/详情预算上限；其余来源成功。
+推荐来源中的 NVD 已完成 36 页全量扫描，状态为 `ok`，不再因两页上限标记 partial。
+OSV 等来源继续按详情预算记录 partial 或 stale，并保留下一次增量证据。
 arXiv 和 GHSA 不在每日推荐来源中：
 
 - arXiv 当前网络出口返回 HTTP 406；

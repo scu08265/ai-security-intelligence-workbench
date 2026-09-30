@@ -44,3 +44,27 @@ def test_structured_logs_redact_secret_values():
     assert payload["nested"]["GITHUB_TOKEN"] == "[redacted]"
     alerts = observability.recent_alerts()
     assert alerts["items"] == []
+
+
+def test_scheduled_partial_run_invokes_self_healing(monkeypatch):
+    healing_calls: list[list] = []
+    monkeypatch.setattr(
+        scheduled_job.agents,
+        "run_collection",
+        lambda source_ids, **kwargs: {
+            "run_id": "run-partial",
+            "status": "partial",
+            "results": [
+                {"source_id": "msrc", "status": "stale"},
+                {"source_id": "nvd", "status": "ok"},
+            ],
+        },
+    )
+    monkeypatch.setattr(
+        scheduled_job.self_healing,
+        "run_self_healing",
+        lambda source_ids, **kwargs: healing_calls.append(source_ids) or {"status": "completed"},
+    )
+    result = scheduled_job.run_scheduled_collection(task_id="heal-task")
+    assert healing_calls == [["msrc"]]
+    assert result["self_healing"]["status"] == "completed"

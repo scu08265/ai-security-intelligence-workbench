@@ -1,7 +1,8 @@
 param(
     [string]$TaskId = "daily-recommended-sources",
     [string]$PlannedAt = "",
-    [string]$ScheduledTime = "02:30"
+    [string]$ScheduledTime = "02:30",
+    [switch]$Hourly
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,7 +17,12 @@ if (-not (Test-Path -LiteralPath $Python)) {
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 if (-not $PlannedAt) {
-    $TimeOfDay = [TimeSpan]::Parse($ScheduledTime)
+    $Now = Get-Date
+    $TimeOfDay = if ($Hourly) {
+        [TimeSpan]::FromHours($Now.Hour)
+    } else {
+        [TimeSpan]::Parse($ScheduledTime)
+    }
     $PlannedAt = [DateTimeOffset]::new(
         [DateTime]::Today.Add($TimeOfDay),
         [TimeZoneInfo]::Local.GetUtcOffset([DateTime]::Today.Add($TimeOfDay))

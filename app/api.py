@@ -21,7 +21,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import (agent_context, agents, competition_scorecard, config, cyclonedx_assets,
                evaluation, intelligence, knowledge_views, observability, rag_corpus,
-               reliability, sources, storage, streaming)
+               reliability, self_healing, sources, storage, streaming,
+               multi_agent_runtime)
 from . import dag_executor, task_dag
 
 MAX_QUESTION = 2000
@@ -214,6 +215,16 @@ class BoundedPlanRequest(StrictRequest):
     enrich_limit: int = Field(default=6, ge=0, le=20)
     question: str = Field(default="", max_length=2000)
     thread_id: str | None = Field(default=None, max_length=160)
+
+
+class MultiAgentRunRequest(StrictRequest):
+    objective: str = Field(min_length=1, max_length=2000)
+    actions: list[str] = Field(default_factory=list, min_length=1, max_length=20)
+    run_id: str | None = Field(default=None, max_length=160)
+
+
+class SelfHealingRunRequest(StrictRequest):
+    source_ids: list[str] | None = Field(default=None, max_length=20)
 
 
 # --------------------------------------------------------------------------
@@ -853,6 +864,44 @@ def execute_bounded_plan(payload: BoundedPlanRequest) -> dict:
         return dag_executor.execute_plan(dag_executor.build_plan(payload.model_dump()))
     except ValueError as exc:
         raise _bad(str(exc)) from exc
+
+
+@app.post("/api/agent/multi/execute")
+def execute_multi_agent_task(payload: MultiAgentRunRequest) -> dict:
+    allowed = set(payload.actions)
+    registry = {
+        "count_events": lambda: {
+            "status": "ok",
+            "evidence_ids": ["storage.events"],
+            "count": storage.list_events(limit=1)[1],
+        },
+        "read_cached_snapshot": lambda: {
+            "status": "ok",
+            "snapshot_hash": "cached-snapshot",
+            "evidence_ids": ["cached-snapshot"],
+        },
+        "run_assessment": lambda: {
+            "status": "ok",
+            "evidence_ids": ["assessment.run"],
+            **agents.run_assessment(),
+        },
+    }
+    actions = [action for action in payload.actions if action in registry]
+    if not actions:
+        raise _bad("未提供任何可执行的受限工具名称")
+    return multi_agent_runtime.run_multi_agent_task(
+        payload.objective, actions, registry, run_id=payload.run_id,
+    )
+
+
+@app.post("/api/self-healing/run")
+def run_self_healing_endpoint(payload: SelfHealingRunRequest | None = None) -> dict:
+    source_ids = payload.source_ids if payload else None
+    if source_ids:
+        unknown = [item for item in source_ids if sources.get(item) is None]
+        if unknown:
+            raise _bad(f"未登记的数据源：{', '.join(unknown)}")
+    return self_healing.run_self_healing(source_ids)
 
 @app.post("/api/agent/tasks")
 def create_agent_task(payload: AgentTaskRequest) -> dict:

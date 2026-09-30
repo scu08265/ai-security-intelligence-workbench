@@ -14,9 +14,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 VERSION_FILE = BASE_DIR / "VERSION"
 try:
-    APP_VERSION = VERSION_FILE.read_text(encoding="utf-8").strip() or "0.2.0"
+    _FILE_VERSION = VERSION_FILE.read_text(encoding="utf-8").strip()
 except OSError:
-    APP_VERSION = "0.2.0"
+    _FILE_VERSION = ""
+APP_VERSION = (
+    os.getenv("APP_VERSION", "").strip()
+    or _FILE_VERSION
+    or "0.2.2"
+)
 DATA_DIR = Path(os.getenv("INTEL_DATA_DIR") or (BASE_DIR / "data"))
 SNAPSHOT_DIR = DATA_DIR / "snapshots"
 DB_PATH = DATA_DIR / "intel.sqlite"

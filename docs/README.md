@@ -5,6 +5,7 @@
 | [产品故事](PRODUCT_STORY.md) | 说明产品面向的用户、场景和展示主线。 |
 | [使用说明](USER_GUIDE.md) | 本地启动、主要操作和验证步骤。 |
 | [智能体界面架构](AGENT_UI_ARCHITECTURE.md) | 输入、编排、工具与知识视图的设计。 |
+| [多 Agent 运行时与自愈](MULTI_AGENT_RUNTIME.md) | 独立 Agent 消息契约、审核、冲突保留、重规划与自愈策略。 |
 | [智能体升级计划](AGENT_UPGRADE_PLAN.md) | 后续能力建设、数据契约与验收门。 |
 | [赛题界面要求](COMPETITION_UI_REQUIREMENTS.md) | 赛题评分项在界面中的可见证据。 |
 | [审查与问答能力](AUDIT_QA_AGENT_CAPABILITIES.md) | 从评委视角的能力审查和缺口。 |

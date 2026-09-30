@@ -1,0 +1,571 @@
+==== Docker acceptance started 2026/09/30 ���� 16:08:35.28 ==== 
+Client:
+ Version:           29.8.1
+ API version:       1.56
+ Go version:        go1.26.8
+ Git commit:        4a63305
+ Built:             Tue Sep 15 16:28:39 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.93.0 (240920)
+ Engine:
+  Version:          29.8.1
+  API version:      1.56 (minimum version 1.40)
+  Go version:       go1.26.8
+  Git commit:       464cd50
+  Built:            Tue Sep 15 16:25:38 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.3.5
+  GitCommit:        1294c24a7da8e5a793ed378161673abe94118892
+ runc:
+  Version:          1.5.1
+  GitCommit:        v1.5.1-0-g8f2685a4
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+name: ai-security-intelligence-workbench
+services:
+  workbench:
+    build:
+      context: D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench
+      dockerfile: Dockerfile
+    container_name: ai-security-intelligence-workbench
+    environment:
+      DEEPSEEK_API_KEY: ""
+      GITHUB_TOKEN: ""
+      INTEL_ALERT_WEBHOOK_URL: ""
+      INTEL_JSON_LOGS: "1"
+      INTEL_MODEL_BASE_URL: https://api.deepseek.com/v1
+      INTEL_MODEL_NAME: deepseek-chat
+      INTEL_USE_MODEL: "1"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health',
+          timeout=3).read()
+      timeout: 5s
+      interval: 30s
+      retries: 3
+      start_period: 15s
+    image: ai-security-intelligence-workbench:0.2.2
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8000
+        published: "18000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench\data
+        target: /app/data
+        bind: {}
+      - type: bind
+        source: D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench\artifacts
+        target: /app/artifacts
+        bind: {}
+      - type: bind
+        source: D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench\reports
+        target: /app/reports
+        bind: {}
+networks:
+  default:
+    name: ai-security-intelligence-workbench_default
+Base image available: python:3.12-slim 
+ Image ai-security-intelligence-workbench:0.2.2 Building 
+ Image ai-security-intelligence-workbench:0.2.2 Building 
+Sending build context to Docker daemon  524.4kBSending build context to Docker daemon  1.573MBSending build context to Docker daemon  2.622MBSending build context to Docker daemon  3.671MBSending build context to Docker daemon   4.72MBSending build context to Docker daemon  5.376MB
+Step 1/19 : FROM python:3.12-slim
+ ---> f77ac9e44ae9
+Step 2/19 : ARG APP_VERSION=0.2.2
+ ---> Running in 3b0ddb975e60
+ ---> Removed intermediate container 3b0ddb975e60
+ ---> 0518860b2610
+Step 3/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     INTEL_JSON_LOGS=1     APP_VERSION=${APP_VERSION}
+ ---> Running in da0ed1abe236
+ ---> Removed intermediate container da0ed1abe236
+ ---> dd491cf1c7cc
+Step 4/19 : WORKDIR /app
+ ---> Running in 1c930bbda17a
+ ---> Removed intermediate container 1c930bbda17a
+ ---> f1c155f5e31c
+Step 5/19 : COPY requirements.txt ./
+ ---> 8012c9c5b7c7
+Step 6/19 : RUN python -m pip install --disable-pip-version-check -r requirements.txt
+ ---> Running in e0617bf76f9f
+Collecting fastapi<1,>=0.115 (from -r requirements.txt (line 2))
+  Downloading fastapi-0.142.1-py3-none-any.whl.metadata (27 kB)
+Collecting uvicorn<1,>=0.30 (from -r requirements.txt (line 3))
+  Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting httpx<1,>=0.27 (from -r requirements.txt (line 4))
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting packaging<27,>=24 (from -r requirements.txt (line 5))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pytest<10,>=8 (from -r requirements.txt (line 6))
+  Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting pypdf<7,>=5 (from -r requirements.txt (line 7))
+  Downloading pypdf-6.19.0-py3-none-any.whl.metadata (7.5 kB)
+Collecting starlette>=0.46.0 (from fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting pydantic>=2.9.0 (from fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+Collecting opentelemetry-api>=1.44.0 (from fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading opentelemetry_api-1.45.0-py3-none-any.whl.metadata (1.4 kB)
+Collecting click>=7.0 (from uvicorn<1,>=0.30->-r requirements.txt (line 3))
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting h11>=0.8 (from uvicorn<1,>=0.30->-r requirements.txt (line 3))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting anyio (from httpx<1,>=0.27->-r requirements.txt (line 4))
+  Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting certifi (from httpx<1,>=0.27->-r requirements.txt (line 4))
+  Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx<1,>=0.27->-r requirements.txt (line 4))
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx<1,>=0.27->-r requirements.txt (line 4))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting iniconfig>=1.0.1 (from pytest<10,>=8->-r requirements.txt (line 6))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest<10,>=8->-r requirements.txt (line 6))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting pygments>=2.7.2 (from pytest<10,>=8->-r requirements.txt (line 6))
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi<1,>=0.115->-r requirements.txt (line 2))
+  Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Downloading fastapi-0.142.1-py3-none-any.whl (144 kB)
+Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+Downloading pypdf-6.19.0-py3-none-any.whl (395 kB)
+Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+Downloading click-8.5.0-py3-none-any.whl (125 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading opentelemetry_api-1.45.0-py3-none-any.whl (60 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 200.0 kB/s eta 0:00:00
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 1.1 MB/s eta 0:00:00
+Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Installing collected packages: typing-extensions, pypdf, pygments, pluggy, packaging, iniconfig, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pytest, pydantic-core, opentelemetry-api, httpcore, anyio, starlette, pydantic, httpx, fastapi
+Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.142.1 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.0 opentelemetry-api-1.45.0 packaging-26.3 pluggy-1.6.0 pydantic-2.13.5 pydantic-core-2.46.5 pygments-2.21.0 pypdf-6.19.0 pytest-9.1.1 starlette-1.7.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m ---> Removed intermediate container e0617bf76f9f
+ ---> a9dea9691000
+Step 7/19 : COPY app ./app
+ ---> 08c627ccb7a9
+Step 8/19 : COPY docs ./docs
+ ---> 9764a31e438c
+Step 9/19 : COPY evaluation ./evaluation
+ ---> cf114a2ce03f
+Step 10/19 : COPY research ./research
+ ---> ca9ee6e11e65
+Step 11/19 : COPY scripts ./scripts
+ ---> 0c103e9951b9
+Step 12/19 : COPY tools ./tools
+ ---> d0fa581d6db0
+Step 13/19 : COPY README.md ./
+ ---> 4aed19e7b582
+Step 14/19 : COPY VERSION ./
+ ---> 2c1708a6b30d
+Step 15/19 : RUN mkdir -p /app/data /app/artifacts /app/reports
+ ---> Running in 0acd8625881b
+ ---> Removed intermediate container 0acd8625881b
+ ---> af6805192ce1
+Step 16/19 : EXPOSE 8000
+ ---> Running in 5adb8ecd2746
+ ---> Removed intermediate container 5adb8ecd2746
+ ---> bf1575e417f2
+Step 17/19 : HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3   CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3).read()"
+ ---> Running in 8dfaa9d03aed
+ ---> Removed intermediate container 8dfaa9d03aed
+ ---> 6d164fef5129
+Step 18/19 : CMD ["python", "-m", "uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+ ---> Running in 66743cb86ac3
+ ---> Removed intermediate container 66743cb86ac3
+ ---> 010c1eb5d602
+Step 19/19 : LABEL com.docker.compose.image.builder=classic
+ ---> Running in a759057ddc70
+ ---> Removed intermediate container a759057ddc70
+ ---> 07bbffabe54c
+Successfully built 07bbffabe54c
+Successfully tagged ai-security-intelligence-workbench:0.2.2
+ Image ai-security-intelligence-workbench:0.2.2 Built 
+ Image ai-security-intelligence-workbench:0.2.2 Built 
+ Network ai-security-intelligence-workbench_default Creating 
+ Network ai-security-intelligence-workbench_default Creating 
+ Network ai-security-intelligence-workbench_default Created 
+ Network ai-security-intelligence-workbench_default Created 
+ Container ai-security-intelligence-workbench Creating 
+ Container ai-security-intelligence-workbench Created 
+ Container ai-security-intelligence-workbench Starting 
+ Container ai-security-intelligence-workbench Started 
+NAME                                 IMAGE                                      COMMAND                   SERVICE     CREATED         STATUS                        PORTS
+ai-security-intelligence-workbench   ai-security-intelligence-workbench:0.2.2   "python -m uvicorn a…"   workbench   2 minutes ago   Up About a minute (healthy)   127.0.0.1:18000->8000/tcp
+[
+    {
+        "Id": "bb2b825fa6fd68d5801733729692d757f3210c597713c22bdecc2894cc57694b",
+        "Created": "2026-09-30T08:09:22.577770918Z",
+        "Path": "python",
+        "Args": [
+            "-m",
+            "uvicorn",
+            "app.api:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8000"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 738,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-09-30T08:09:22.805488518Z",
+            "FinishedAt": "0001-01-01T00:00:00Z",
+            "Health": {
+                "Status": "healthy",
+                "FailingStreak": 0,
+                "Log": [
+                    {
+                        "Start": "2026-09-30T08:09:27.919296809Z",
+                        "End": "2026-09-30T08:09:28.166343827Z",
+                        "ExitCode": 0,
+                        "Output": ""
+                    },
+                    {
+                        "Start": "2026-09-30T08:09:58.166547667Z",
+                        "End": "2026-09-30T08:09:58.393054552Z",
+                        "ExitCode": 0,
+                        "Output": ""
+                    },
+                    {
+                        "Start": "2026-09-30T08:10:28.39339254Z",
+                        "End": "2026-09-30T08:10:28.624923837Z",
+                        "ExitCode": 0,
+                        "Output": ""
+                    },
+                    {
+                        "Start": "2026-09-30T08:10:58.626227772Z",
+                        "End": "2026-09-30T08:10:58.915766806Z",
+                        "ExitCode": 0,
+                        "Output": ""
+                    }
+                ]
+            }
+        },
+        "Image": "sha256:07bbffabe54c770e9593e3b22c42f38f55742faae3d01545d9b6e47fed0e6863",
+        "ResolvConfPath": "/var/lib/docker/containers/bb2b825fa6fd68d5801733729692d757f3210c597713c22bdecc2894cc57694b/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/bb2b825fa6fd68d5801733729692d757f3210c597713c22bdecc2894cc57694b/hostname",
+        "HostsPath": "/var/lib/docker/containers/bb2b825fa6fd68d5801733729692d757f3210c597713c22bdecc2894cc57694b/hosts",
+        "LogPath": "/var/lib/docker/containers/bb2b825fa6fd68d5801733729692d757f3210c597713c22bdecc2894cc57694b/bb2b825fa6fd68d5801733729692d757f3210c597713c22bdecc2894cc57694b-json.log",
+        "Name": "/ai-security-intelligence-workbench",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data:/app/data:rw",
+                "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts:/app/artifacts:rw",
+                "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\reports:/app/reports:rw"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "ai-security-intelligence-workbench_default",
+            "PortBindings": {
+                "8000/tcp": [
+                    {
+                        "HostIp": "127.0.0.1",
+                        "HostPort": "18000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts",
+                "Destination": "/app/artifacts",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data",
+                "Destination": "/app/data",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\reports",
+                "Destination": "/app/reports",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "bb2b825fa6fd",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "DEEPSEEK_API_KEY=",
+                "INTEL_USE_MODEL=1",
+                "INTEL_MODEL_BASE_URL=https://api.deepseek.com/v1",
+                "INTEL_MODEL_NAME=deepseek-chat",
+                "GITHUB_TOKEN=",
+                "INTEL_ALERT_WEBHOOK_URL=",
+                "INTEL_JSON_LOGS=1",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.12.14",
+                "PYTHON_SHA256=5c8462af5790baf43a321a1559dbe0db06d1be4300fb85fb53c40060668e548a",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "PIP_NO_CACHE_DIR=1",
+                "APP_VERSION=0.2.2"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "uvicorn",
+                "app.api:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "Healthcheck": {
+                "Test": [
+                    "CMD",
+                    "python",
+                    "-c",
+                    "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3).read()"
+                ],
+                "Interval": 30000000000,
+                "Timeout": 5000000000,
+                "StartPeriod": 15000000000,
+                "Retries": 3
+            },
+            "Image": "ai-security-intelligence-workbench:0.2.2",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "32047170a1a35d81df8344761eee515bddaf879f4fe640782851ca29ba2e835f",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "",
+                "com.docker.compose.image": "sha256:07bbffabe54c770e9593e3b22c42f38f55742faae3d01545d9b6e47fed0e6863",
+                "com.docker.compose.image.builder": "classic",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "ai-security-intelligence-workbench",
+                "com.docker.compose.project.config_files": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\docker-compose.yml",
+                "com.docker.compose.project.working_dir": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench",
+                "com.docker.compose.service": "workbench",
+                "com.docker.compose.version": "5.5.1"
+            }
+        },
+        "NetworkSettings": {
+            "SandboxID": "769c7e812f2a698e60237c528cb2955b33f20eabc49210329ca73fdd2a321b6c",
+            "SandboxKey": "/var/run/docker/netns/769c7e812f2a",
+            "Ports": {
+                "8000/tcp": [
+                    {
+                        "HostIp": "127.0.0.1",
+                        "HostPort": "18000"
+                    }
+                ]
+            },
+            "Networks": {
+                "ai-security-intelligence-workbench_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "ai-security-intelligence-workbench",
+                        "workbench"
+                    ],
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "c1a0e31e5d7eb8b90eb1c96ceaea97bcf4d5b3398f5ca201848ce4b9f572eff8",
+                    "EndpointID": "65696e956f1c0d97891c19fb004e0fcecc4fe5e7a1b0d4395fa567d36c4435fe",
+                    "Gateway": "172.18.0.1",
+                    "IPAddress": "172.18.0.2",
+                    "MacAddress": "f2:8c:67:75:ec:ee",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": [
+                        "ai-security-intelligence-workbench",
+                        "workbench",
+                        "bb2b825fa6fd"
+                    ]
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:07bbffabe54c770e9593e3b22c42f38f55742faae3d01545d9b6e47fed0e6863",
+            "size": 3820,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]
+{"status":"ok","version":"0.2.2","mode":"local_evidence_extraction","model_configured":false,"data_dir":"/app/data","checks":{"database":"ok","events":124,"failed_sources":[],"skipped_sources":[]}} 
+ai-security-intelligence-workbench  | INFO:     Started server process [1]
+ai-security-intelligence-workbench  | INFO:     Waiting for application startup.
+ai-security-intelligence-workbench  | INFO:     Application startup complete.
+ai-security-intelligence-workbench  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+ai-security-intelligence-workbench  | {"duration_ms": 45, "event": "http_request", "level": "INFO", "method": "GET", "path": "/api/health", "status_code": 200, "timestamp": "2026-09-30T08:09:28Z"}
+ai-security-intelligence-workbench  | INFO:     127.0.0.1:48360 - "GET /api/health HTTP/1.1" 200 OK
+ai-security-intelligence-workbench  | {"duration_ms": 48, "event": "http_request", "level": "INFO", "method": "GET", "path": "/api/health", "status_code": 200, "timestamp": "2026-09-30T08:09:58Z"}
+ai-security-intelligence-workbench  | INFO:     127.0.0.1:38950 - "GET /api/health HTTP/1.1" 200 OK
+ai-security-intelligence-workbench  | {"duration_ms": 43, "event": "http_request", "level": "INFO", "method": "GET", "path": "/api/health", "status_code": 200, "timestamp": "2026-09-30T08:10:28Z"}
+ai-security-intelligence-workbench  | INFO:     127.0.0.1:50046 - "GET /api/health HTTP/1.1" 200 OK
+ai-security-intelligence-workbench  | {"duration_ms": 42, "event": "http_request", "level": "INFO", "method": "GET", "path": "/api/health", "status_code": 200, "timestamp": "2026-09-30T08:10:58Z"}
+ai-security-intelligence-workbench  | INFO:     127.0.0.1:55740 - "GET /api/health HTTP/1.1" 200 OK
+ai-security-intelligence-workbench  | {"duration_ms": 87, "event": "http_request", "level": "INFO", "method": "GET", "path": "/api/health", "status_code": 200, "timestamp": "2026-09-30T08:11:22Z"}
+ai-security-intelligence-workbench  | INFO:     172.18.0.1:54660 - "GET /api/health HTTP/1.1" 200 OK
+==== Docker acceptance finished 2026/09/30 ���� 16:11:22.67 ==== 

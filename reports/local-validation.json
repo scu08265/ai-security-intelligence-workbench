@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-09-30T08:32:45.256886+00:00",
+  "version": "0.2.2",
+  "checks": [
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp=D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\pytest-basetemp"
+      ],
+      "passed": true,
+      "exit_code": 0,
+      "stdout_tail": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 77%]\n................................................................         [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n280 passed, 1 warning in 17.97s\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "pip_check",
+      "command": [
+        "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "passed": true,
+      "exit_code": 0,
+      "stdout_tail": "No broken requirements found.\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "frontend_syntax",
+      "command": [
+        "E:\\node.EXE",
+        "--check",
+        "app/static/app.js"
+      ],
+      "passed": true,
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "compose_yaml",
+      "command": [
+        "yaml.safe_load",
+        "docker-compose.yml"
+      ],
+      "passed": true,
+      "exit_code": 0,
+      "stderr_tail": ""
+    }
+  ],
+  "all_local_checks_passed": true,
+  "docker": {
+    "available": true,
+    "path": null,
+    "build_verified": true,
+    "healthy_container_verified": true,
+    "container_health": "healthy",
+    "blocker": null
+  }
+}
