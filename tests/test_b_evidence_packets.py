@@ -240,12 +240,15 @@ def test_generator_does_not_clobber_labeled_sheet(tmp_path, monkeypatch):
     original = RELATION_SHEET.read_text(encoding="utf-8-sig")
     if "positive" not in original:
         pytest.skip("当前回收表还没有人工标签，无需验证保护逻辑")
+    data_dir = Path(r"D:\ICT\intel-data-b")
+    if not (data_dir / "intel.sqlite").is_file():
+        pytest.skip("本机没有独立数据目录（CI 的 ubuntu runner 上不存在），跳过生成器落盘测试")
     import shutil
     shutil.copy2(RELATION_SHEET, tmp_path / RELATION_SHEET.name)
     shutil.copy2(QA_SHEET, tmp_path / QA_SHEET.name)
     monkeypatch.setattr(sys, "argv", [
         "build_b_evidence_packets.py", "--outdir", str(tmp_path),
-        "--source-data-dir", r"D:\ICT\intel-data-b"])
+        "--source-data-dir", str(data_dir)])
     # main() 会改写全局 config，注册还原以免污染后续测试
     for name in ("DATA_DIR", "SNAPSHOT_DIR", "DB_PATH"):
         monkeypatch.setattr(config, name, getattr(config, name))
