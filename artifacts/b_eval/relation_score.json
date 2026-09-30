@@ -1,0 +1,69 @@
+{
+ "computable": false,
+ "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
+ "per_dimension": {
+  "cvss": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 22,
+   "total": 22,
+   "precision": null,
+   "recall": null,
+   "evaluable": false
+  },
+  "fixed_version": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 12,
+   "total": 12,
+   "precision": null,
+   "recall": null,
+   "evaluable": false
+  },
+  "paper_link": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 37,
+   "total": 37,
+   "precision": null,
+   "recall": null,
+   "evaluable": false
+  },
+  "version_range": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 50,
+   "total": 50,
+   "precision": null,
+   "recall": null,
+   "evaluable": false
+  }
+ },
+ "micro": {
+  "tp": 0,
+  "fp": 0,
+  "fn": 0,
+  "tn": 0,
+  "precision": null,
+  "recall": null,
+  "evaluable_samples": 0
+ },
+ "macro": {
+  "precision": null,
+  "recall": null,
+  "dimensions_with_metrics": 0
+ },
+ "note": "当前没有任何人工核验标注，TP/FP/FN 不可计算；pending 数量见各维度。"
+}

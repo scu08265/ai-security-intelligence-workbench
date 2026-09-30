@@ -158,13 +158,13 @@ def _make_cases() -> list[EvalCase]:
             ok = result["status"] == "needs_confirmation"
             return ok, f"关键配置未知时期望 needs_confirmation，实际 {result['status']}"
 
-        def out_of_scope(event=event):
+        def out_of_scope(event=event, inside=inside):
             asset = _asset_for(event, inside or "1.0.0", authorized=False)
             result = intelligence.assess_asset(event, asset)
             ok = result["status"] == "not_applicable"
             return ok, f"未授权资产期望 not_applicable，实际 {result['status']}"
 
-        def withdrawn(event=event):
+        def withdrawn(event=event, inside=inside):
             withdrawn_event = dict(event)
             withdrawn_event["withdrawn"] = True
             withdrawn_event["status"] = "withdrawn"

@@ -1,0 +1,3251 @@
+{
+ "schema_version": "b-relation-candidates-1.0",
+ "description": "B 任务关系富化标注候选（六个维度），由现有事件/研判字段拉平而成。",
+ "annotation_policy": "所有候选的 annotation.status 均为 pending_human_review，label 为 null。未标注的候选**不得**计入 TP/FP/FN。",
+ "event_sample_size": 93,
+ "events_total": 93,
+ "asset_count": 0,
+ "dimension_coverage": {
+  "paper_link": 37,
+  "version_range": 50,
+  "fixed_version": 12,
+  "cvss": 22,
+  "poc": 0,
+  "asset_assessment": 0
+ },
+ "coverage_gaps": [
+  {
+   "dimension": "poc",
+   "reason": "当前 14 个登记来源中没有任何专门的 POC 采集逻辑，事件里 poc 字段全部为空。",
+   "impact": "该维度的准确率/召回率在现有数据下无法评测。"
+  },
+  {
+   "dimension": "asset_assessment",
+   "reason": "资产表当前有 0 条记录，没有可匹配的资产，因此没有任何资产研判记录。",
+   "impact": "该维度在现有数据下无法评测。"
+  }
+ ],
+ "counts": {
+  "candidates": 121
+ },
+ "cases": [
+  {
+   "relation_id": "BREL-VE-0001",
+   "dimension": "version_range",
+   "subject": "CVE-2026-41106",
+   "relation": "affects",
+   "object": "Microsoft 365 Copilot@unknown",
+   "candidate_value": {
+    "package": "Microsoft 365 Copilot",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-41106",
+    "field": "affected[].range",
+    "source_id": "msrc:965ac81937"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0001",
+   "dimension": "cvss",
+   "subject": "CVE-2026-41106",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 9.3,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-41106",
+    "field": "cvss[]",
+    "source_id": "msrc:d097411336"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0002",
+   "dimension": "version_range",
+   "subject": "CVE-2026-41109",
+   "relation": "affects",
+   "object": "Visual Studio Code@unknown",
+   "candidate_value": {
+    "package": "Visual Studio Code",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-41109",
+    "field": "affected[].range",
+    "source_id": "msrc:be7311139e"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0002",
+   "dimension": "cvss",
+   "subject": "CVE-2026-41109",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 8.8,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-41109",
+    "field": "cvss[]",
+    "source_id": "msrc:013f663531"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0003",
+   "dimension": "version_range",
+   "subject": "CVE-2026-45499",
+   "relation": "affects",
+   "object": "Azure Open AI@unknown",
+   "candidate_value": {
+    "package": "Azure Open AI",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-45499",
+    "field": "affected[].range",
+    "source_id": "msrc:fc713234bc"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0003",
+   "dimension": "cvss",
+   "subject": "CVE-2026-45499",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 9.9,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-45499",
+    "field": "cvss[]",
+    "source_id": "msrc:2ea371f32e"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0004",
+   "dimension": "version_range",
+   "subject": "CVE-2026-47282",
+   "relation": "affects",
+   "object": "Visual Studio Code@unknown",
+   "candidate_value": {
+    "package": "Visual Studio Code",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-47282",
+    "field": "affected[].range",
+    "source_id": "msrc:f0c1bd7783"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0004",
+   "dimension": "cvss",
+   "subject": "CVE-2026-47282",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 6.5,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-47282",
+    "field": "cvss[]",
+    "source_id": "msrc:6d91495036"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0005",
+   "dimension": "version_range",
+   "subject": "CVE-2026-48561",
+   "relation": "affects",
+   "object": "Microsoft Edge Copilot for Android@unknown",
+   "candidate_value": {
+    "package": "Microsoft Edge Copilot for Android",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-48561",
+    "field": "affected[].range",
+    "source_id": "msrc:db40986f3a"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0006",
+   "dimension": "version_range",
+   "subject": "CVE-2026-48561",
+   "relation": "affects",
+   "object": "Microsoft Edge Copilot for IOS@unknown",
+   "candidate_value": {
+    "package": "Microsoft Edge Copilot for IOS",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-48561",
+    "field": "affected[].range",
+    "source_id": "msrc:a42308afa7"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0007",
+   "dimension": "version_range",
+   "subject": "CVE-2026-50510",
+   "relation": "affects",
+   "object": "GitHub Copilot Plugin for JetBrains IDEs@unknown",
+   "candidate_value": {
+    "package": "GitHub Copilot Plugin for JetBrains IDEs",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-50510",
+    "field": "affected[].range",
+    "source_id": "msrc:d9bec3708c"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0005",
+   "dimension": "cvss",
+   "subject": "CVE-2026-50510",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 7.8,
+    "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-50510",
+    "field": "cvss[]",
+    "source_id": "msrc:9f8efaa643"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0008",
+   "dimension": "version_range",
+   "subject": "CVE-2026-50517",
+   "relation": "affects",
+   "object": "Microsoft 365 Copilot@unknown",
+   "candidate_value": {
+    "package": "Microsoft 365 Copilot",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-50517",
+    "field": "affected[].range",
+    "source_id": "msrc:5ac70d5d54"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0006",
+   "dimension": "cvss",
+   "subject": "CVE-2026-50517",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 9.9,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-50517",
+    "field": "cvss[]",
+    "source_id": "msrc:2ea371f32e"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0009",
+   "dimension": "version_range",
+   "subject": "CVE-2026-55145",
+   "relation": "affects",
+   "object": "Microsoft Copilot@unknown",
+   "candidate_value": {
+    "package": "Microsoft Copilot",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-55145",
+    "field": "affected[].range",
+    "source_id": "msrc:cc090e2b24"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0007",
+   "dimension": "cvss",
+   "subject": "CVE-2026-55145",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:L/A:N/E:P/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 6.3,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:L/A:N/E:P/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-55145",
+    "field": "cvss[]",
+    "source_id": "msrc:54e206685a"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0010",
+   "dimension": "version_range",
+   "subject": "CVE-2026-56167",
+   "relation": "affects",
+   "object": "Azure AI Search@unknown",
+   "candidate_value": {
+    "package": "Azure AI Search",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-56167",
+    "field": "affected[].range",
+    "source_id": "msrc:bc19886686"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0008",
+   "dimension": "cvss",
+   "subject": "CVE-2026-56167",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:L/A:N/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 8.5,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:L/A:N/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-56167",
+    "field": "cvss[]",
+    "source_id": "msrc:8d5c0b91d5"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0011",
+   "dimension": "version_range",
+   "subject": "CVE-2026-58617",
+   "relation": "affects",
+   "object": "Microsoft 365 Copilot for iOS@unknown",
+   "candidate_value": {
+    "package": "Microsoft 365 Copilot for iOS",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-58617",
+    "field": "affected[].range",
+    "source_id": "msrc:a4811c223f"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0009",
+   "dimension": "cvss",
+   "subject": "CVE-2026-58617",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N/E:U/RL:O/RC:C",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 8.1,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N/E:U/RL:O/RC:C"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-58617",
+    "field": "cvss[]",
+    "source_id": "msrc:3e68448fa2"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-PA-0001",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214527440",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1186/s43556-026-00600-7.pdf",
+   "candidate_value": {
+    "pdf_url": "https://link.springer.com/content/pdf/10.1186/s43556-026-00600-7.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214527440",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0002",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214558721",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1007/s44265-026-00088-7.pdf",
+   "candidate_value": {
+    "pdf_url": "https://link.springer.com/content/pdf/10.1007/s44265-026-00088-7.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214558721",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0003",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214600341",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1186/s42400-026-00649-5.pdf",
+   "candidate_value": {
+    "pdf_url": "https://link.springer.com/content/pdf/10.1186/s42400-026-00649-5.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214600341",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0004",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214526768",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1007/s44163-026-02344-3.pdf",
+   "candidate_value": {
+    "pdf_url": "https://link.springer.com/content/pdf/10.1007/s44163-026-02344-3.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214526768",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0005",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214542908",
+   "relation": "has_paper",
+   "object": "https://www.nature.com/articles/s41598-026-72755-w_reference.pdf",
+   "candidate_value": {
+    "pdf_url": "https://www.nature.com/articles/s41598-026-72755-w_reference.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214542908",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0006",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214553113",
+   "relation": "has_paper",
+   "object": "https://www.cambridge.org/engage/api-gateway/coe/assets/orp/resource/item/6ab904c4810b9dcc828178e4/original/override-theatre-governing-the-human-override-of-ai-agent-decisions-as-a-segregated-accountable-control.pdf",
+   "candidate_value": {
+    "pdf_url": "https://www.cambridge.org/engage/api-gateway/coe/assets/orp/resource/item/6ab904c4810b9dcc828178e4/original/override-theatre-governing-the-human-override-of-ai-agent-decisions-as-a-segregated-accountable-control.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214553113",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0007",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214449097",
+   "relation": "has_paper",
+   "object": "https://www.ijisrt.com/assets/upload/files/IJISRT26SEP879.pdf",
+   "candidate_value": {
+    "pdf_url": "https://www.ijisrt.com/assets/upload/files/IJISRT26SEP879.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214449097",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0008",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214468787",
+   "relation": "has_paper",
+   "object": "https://doi.org/10.34218/ijaiml_05_02_007",
+   "candidate_value": {
+    "pdf_url": "https://doi.org/10.34218/ijaiml_05_02_007",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214468787",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0009",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W4406794439",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2501.13787",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2501.13787",
+    "arxiv_id": "2501.13787",
+    "linked_document_key": "paper:2501.13787"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W4406794439",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0010",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7125151750",
+   "relation": "has_paper",
+   "object": "https://s-rsa.com/index.php/agi/article/download/18747/12429",
+   "candidate_value": {
+    "pdf_url": "https://s-rsa.com/index.php/agi/article/download/18747/12429",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7125151750",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0011",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7151534166",
+   "relation": "has_paper",
+   "object": "https://s-rsa.com/index.php/agi/article/download/18746/12428",
+   "candidate_value": {
+    "pdf_url": "https://s-rsa.com/index.php/agi/article/download/18746/12428",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7151534166",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0012",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7213611819",
+   "relation": "has_paper",
+   "object": "https://s-rsa.com/index.php/agi/article/download/18734/12426",
+   "candidate_value": {
+    "pdf_url": "https://s-rsa.com/index.php/agi/article/download/18734/12426",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7213611819",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0013",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214295679",
+   "relation": "has_paper",
+   "object": "https://iiardjournals.org/get/RJPST/VOL. 8 NO. 8 2025/Advances in NLP-Driven Analytics 142-212.pdf",
+   "candidate_value": {
+    "pdf_url": "https://iiardjournals.org/get/RJPST/VOL. 8 NO. 8 2025/Advances in NLP-Driven Analytics 142-212.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214295679",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0014",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214338629",
+   "relation": "has_paper",
+   "object": "https://theamericanjournals.com/index.php/tajmei/article/download/8413/7697/12737",
+   "candidate_value": {
+    "pdf_url": "https://theamericanjournals.com/index.php/tajmei/article/download/8413/7697/12737",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214338629",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0015",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214339430",
+   "relation": "has_paper",
+   "object": "https://annals-csis.org/Volume_48/drp/pdf/6361.pdf",
+   "candidate_value": {
+    "pdf_url": "https://annals-csis.org/Volume_48/drp/pdf/6361.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214339430",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0016",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7164892115",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2606.15617",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2606.15617",
+    "arxiv_id": "2606.15617",
+    "linked_document_key": "paper:2606.15617"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7164892115",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0017",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214152392",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1007/s10270-026-01425-2.pdf",
+   "candidate_value": {
+    "pdf_url": "https://link.springer.com/content/pdf/10.1007/s10270-026-01425-2.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214152392",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0018",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214194099",
+   "relation": "has_paper",
+   "object": "https://jyx.jyu.fi/bitstreams/db4ece2d-fa81-48a1-b8aa-cc3ea87b9b85/download",
+   "candidate_value": {
+    "pdf_url": "https://jyx.jyu.fi/bitstreams/db4ece2d-fa81-48a1-b8aa-cc3ea87b9b85/download",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214194099",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0019",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214198864",
+   "relation": "has_paper",
+   "object": "https://cdn.openai.com/pdf/d04913be-3f6f-4d2b-b283-ff432ef4aaa5/why-language-models-hallucinate.pdf",
+   "candidate_value": {
+    "pdf_url": "https://cdn.openai.com/pdf/d04913be-3f6f-4d2b-b283-ff432ef4aaa5/why-language-models-hallucinate.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214198864",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0020",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214222573",
+   "relation": "has_paper",
+   "object": "https://jyx.jyu.fi/bitstreams/e176a9a3-450d-463a-b755-da56c748c709/download",
+   "candidate_value": {
+    "pdf_url": "https://jyx.jyu.fi/bitstreams/e176a9a3-450d-463a-b755-da56c748c709/download",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214222573",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0021",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214241047",
+   "relation": "has_paper",
+   "object": "https://ijirt.org/publishedpaper/IJIRT208799_PAPER.pdf",
+   "candidate_value": {
+    "pdf_url": "https://ijirt.org/publishedpaper/IJIRT208799_PAPER.pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214241047",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0022",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214288902",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.28915",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.28915",
+    "arxiv_id": "2609.28915",
+    "linked_document_key": "paper:2609.28915"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214288902",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0023",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214294325",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29808",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.29808",
+    "arxiv_id": "2609.29808",
+    "linked_document_key": "paper:2609.29808"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214294325",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0024",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214307780",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30266",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.30266",
+    "arxiv_id": "2609.30266",
+    "linked_document_key": "paper:2609.30266"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214307780",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0025",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214313011",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30243",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.30243",
+    "arxiv_id": "2609.30243",
+    "linked_document_key": "paper:2609.30243"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214313011",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0026",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214329963",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29429",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.29429",
+    "arxiv_id": "2609.29429",
+    "linked_document_key": "paper:2609.29429"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214329963",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0027",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214342592",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29230",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.29230",
+    "arxiv_id": "2609.29230",
+    "linked_document_key": "paper:2609.29230"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214342592",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0028",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214358407",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30192",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.30192",
+    "arxiv_id": "2609.30192",
+    "linked_document_key": "paper:2609.30192"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214358407",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0029",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214375324",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.28900",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.28900",
+    "arxiv_id": "2609.28900",
+    "linked_document_key": "paper:2609.28900"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214375324",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0030",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214399041",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30028",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.30028",
+    "arxiv_id": "2609.30028",
+    "linked_document_key": "paper:2609.30028"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214399041",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0031",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214401639",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29228",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.29228",
+    "arxiv_id": "2609.29228",
+    "linked_document_key": "paper:2609.29228"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214401639",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0032",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214403218",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29757",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.29757",
+    "arxiv_id": "2609.29757",
+    "linked_document_key": "paper:2609.29757"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214403218",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0033",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214404543",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30217",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.30217",
+    "arxiv_id": "2609.30217",
+    "linked_document_key": "paper:2609.30217"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214404543",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0034",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214508238",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29333",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.29333",
+    "arxiv_id": "2609.29333",
+    "linked_document_key": "paper:2609.29333"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214508238",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0035",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214508255",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.28996",
+   "candidate_value": {
+    "pdf_url": "https://arxiv.org/pdf/2609.28996",
+    "arxiv_id": "2609.28996",
+    "linked_document_key": "paper:2609.28996"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214508255",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；"
+  },
+  {
+   "relation_id": "BREL-PA-0036",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214062101",
+   "relation": "has_paper",
+   "object": "https://www.sciencedirect.com/science/article/pii/S2590174526007701/pdf",
+   "candidate_value": {
+    "pdf_url": "https://www.sciencedirect.com/science/article/pii/S2590174526007701/pdf",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214062101",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-PA-0037",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214100311",
+   "relation": "has_paper",
+   "object": "https://jasianresearch.com/index.php/AJOAIR/article/download/575/832",
+   "candidate_value": {
+    "pdf_url": "https://jasianresearch.com/index.php/AJOAIR/article/download/575/832",
+    "arxiv_id": null,
+    "linked_document_key": null
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "OPENALEX-W7214100311",
+    "field": "paper.pdf_url"
+   },
+   "verification_method": "核对事件保存的 PDF/落地页链接与对应 RAG 文档的标题、正文主题是否一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "尚未确认该论文与事件主题是否同一工作；本地 RAG 中没有对应全文文档（非 arXiv 链接未抓取）。"
+  },
+  {
+   "relation_id": "BREL-VE-0012",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-4000",
+   "relation": "affects",
+   "object": "vllm@< 0.30.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.30.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-4000",
+    "field": "affected[].range",
+    "source_id": "osv:acca1ed12f"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0001",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-4000",
+   "relation": "fixed_by",
+   "object": "vllm@0.30.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.30.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-4000",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:acca1ed12f"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0010",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-4000",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-4000",
+    "field": "cvss[]",
+    "source_id": "osv:7819297e5f"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0013",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3998",
+   "relation": "affects",
+   "object": "vllm@< 0.29.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.29.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3998",
+    "field": "affected[].range",
+    "source_id": "osv:e0084a3c87"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0002",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3998",
+   "relation": "fixed_by",
+   "object": "vllm@0.29.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.29.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3998",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:e0084a3c87"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0011",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3998",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3998",
+    "field": "cvss[]",
+    "source_id": "osv:0433c36f31"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0014",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3999",
+   "relation": "affects",
+   "object": "vllm@< 0.30.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.30.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3999",
+    "field": "affected[].range",
+    "source_id": "osv:0f6a728d1b"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0003",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3999",
+   "relation": "fixed_by",
+   "object": "vllm@0.30.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.30.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3999",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:0f6a728d1b"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0012",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3999",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3999",
+    "field": "cvss[]",
+    "source_id": "osv:481782e92b"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0015",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3997",
+   "relation": "affects",
+   "object": "vllm@< 0.28.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.28.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3997",
+    "field": "affected[].range",
+    "source_id": "osv:eb4ff39e9b"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0004",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3997",
+   "relation": "fixed_by",
+   "object": "vllm@0.28.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.28.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3997",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:eb4ff39e9b"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0013",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3997",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "candidate_value": {
+    "version": "4.0",
+    "score": null,
+    "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3997",
+    "field": "cvss[]",
+    "source_id": "osv:79d583057f"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0016",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3996",
+   "relation": "affects",
+   "object": "vllm@< 0.30.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.30.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3996",
+    "field": "affected[].range",
+    "source_id": "osv:5c0b10d9f5"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0005",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3996",
+   "relation": "fixed_by",
+   "object": "vllm@0.30.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.30.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3996",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:5c0b10d9f5"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0014",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3996",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "candidate_value": {
+    "version": "4.0",
+    "score": null,
+    "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3996",
+    "field": "cvss[]",
+    "source_id": "osv:4f35217972"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0017",
+   "dimension": "version_range",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "relation": "affects",
+   "object": "vllm@< 0.28.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.28.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-8pw2-6jv3-mj5j",
+    "field": "affected[].range",
+    "source_id": "osv:c8c0660a20"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0006",
+   "dimension": "fixed_version",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "relation": "fixed_by",
+   "object": "vllm@0.28.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.28.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-8pw2-6jv3-mj5j",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:c8c0660a20"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0015",
+   "dimension": "cvss",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-8pw2-6jv3-mj5j",
+    "field": "cvss[]",
+    "source_id": "osv:8334ecbb11"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0018",
+   "dimension": "version_range",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "relation": "affects",
+   "object": "vllm@< 0.24.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.24.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-hcwq-8wjf-3gcr",
+    "field": "affected[].range",
+    "source_id": "osv:c8928ad5c4"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0007",
+   "dimension": "fixed_version",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "relation": "fixed_by",
+   "object": "vllm@0.24.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.24.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-hcwq-8wjf-3gcr",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:c8928ad5c4"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0016",
+   "dimension": "cvss",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-hcwq-8wjf-3gcr",
+    "field": "cvss[]",
+    "source_id": "osv:cbbeac1a7e"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0019",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3985",
+   "relation": "affects",
+   "object": "vllm@< 0.28.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": "< 0.28.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3985",
+    "field": "affected[].range",
+    "source_id": "osv:f18ed0a7b2"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0008",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3985",
+   "relation": "fixed_by",
+   "object": "vllm@0.28.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.28.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3985",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:f18ed0a7b2"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0017",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3985",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "candidate_value": {
+    "version": "4.0",
+    "score": null,
+    "vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "PYSEC-2026-3985",
+    "field": "cvss[]",
+    "source_id": "osv:0eb384018c"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0020",
+   "dimension": "version_range",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "relation": "affects",
+   "object": "open-webui@>= 0.8.0, < 0.11.1",
+   "candidate_value": {
+    "package": "open-webui",
+    "ecosystem": "PyPI",
+    "range": ">= 0.8.0, < 0.11.1"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-wvm9-9g5j-623f",
+    "field": "affected[].range",
+    "source_id": "osv:54efcd8db9"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0009",
+   "dimension": "fixed_version",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "relation": "fixed_by",
+   "object": "open-webui@0.11.1",
+   "candidate_value": {
+    "package": "open-webui",
+    "fixed_version": "0.11.1"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-wvm9-9g5j-623f",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:54efcd8db9"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0018",
+   "dimension": "cvss",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-wvm9-9g5j-623f",
+    "field": "cvss[]",
+    "source_id": "osv:14612d1d78"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0021",
+   "dimension": "version_range",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "relation": "affects",
+   "object": "open-webui@>= 0.9.0, < 0.11.1",
+   "candidate_value": {
+    "package": "open-webui",
+    "ecosystem": "PyPI",
+    "range": ">= 0.9.0, < 0.11.1"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-3g9q-v48f-hh9w",
+    "field": "affected[].range",
+    "source_id": "osv:70515ee5f5"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0010",
+   "dimension": "fixed_version",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "relation": "fixed_by",
+   "object": "open-webui@0.11.1",
+   "candidate_value": {
+    "package": "open-webui",
+    "fixed_version": "0.11.1"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-3g9q-v48f-hh9w",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:70515ee5f5"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0019",
+   "dimension": "cvss",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-3g9q-v48f-hh9w",
+    "field": "cvss[]",
+    "source_id": "osv:2a6ec98dc3"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0022",
+   "dimension": "version_range",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "relation": "affects",
+   "object": "open-webui@>= 0.9.0, < 0.11.1",
+   "candidate_value": {
+    "package": "open-webui",
+    "ecosystem": "PyPI",
+    "range": ">= 0.9.0, < 0.11.1"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-v39v-59xw-j98g",
+    "field": "affected[].range",
+    "source_id": "osv:1e61cca71c"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0011",
+   "dimension": "fixed_version",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "relation": "fixed_by",
+   "object": "open-webui@0.11.1",
+   "candidate_value": {
+    "package": "open-webui",
+    "fixed_version": "0.11.1"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-v39v-59xw-j98g",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:1e61cca71c"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0020",
+   "dimension": "cvss",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-v39v-59xw-j98g",
+    "field": "cvss[]",
+    "source_id": "osv:93abe9fe20"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0023",
+   "dimension": "version_range",
+   "subject": "CVE-2026-64849",
+   "relation": "affects",
+   "object": "MLflow@unknown",
+   "candidate_value": {
+    "package": "MLflow",
+    "ecosystem": "MLflow",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-64849",
+    "field": "affected[].range",
+    "source_id": "kev:9dd6ba7cd5"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0024",
+   "dimension": "version_range",
+   "subject": "CVE-2025-62593",
+   "relation": "affects",
+   "object": "Ray@unknown",
+   "candidate_value": {
+    "package": "Ray",
+    "ecosystem": "Ray-Project",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-62593",
+    "field": "affected[].range",
+    "source_id": "kev:a820ca6fd8"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0025",
+   "dimension": "version_range",
+   "subject": "CVE-2026-9198",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "candidate_value": {
+    "package": "Langflow",
+    "ecosystem": "IBM",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-9198",
+    "field": "affected[].range",
+    "source_id": "kev:60fb54585b"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0026",
+   "dimension": "version_range",
+   "subject": "CVE-2026-0770",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "candidate_value": {
+    "package": "Langflow",
+    "ecosystem": "Langflow",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-0770",
+    "field": "affected[].range",
+    "source_id": "kev:e2836e1985"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0027",
+   "dimension": "version_range",
+   "subject": "CVE-2026-55255",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "candidate_value": {
+    "package": "Langflow",
+    "ecosystem": "Langflow",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-55255",
+    "field": "affected[].range",
+    "source_id": "kev:17bfdcf2bb"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0028",
+   "dimension": "version_range",
+   "subject": "CVE-2025-34291",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "candidate_value": {
+    "package": "Langflow",
+    "ecosystem": "Langflow",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-34291",
+    "field": "affected[].range",
+    "source_id": "kev:0238e5afaa"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0029",
+   "dimension": "version_range",
+   "subject": "CVE-2026-33017",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "candidate_value": {
+    "package": "Langflow",
+    "ecosystem": "Langflow",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2026-33017",
+    "field": "affected[].range",
+    "source_id": "kev:cc774f968c"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0030",
+   "dimension": "version_range",
+   "subject": "CVE-2025-68613",
+   "relation": "affects",
+   "object": "n8n@unknown",
+   "candidate_value": {
+    "package": "n8n",
+    "ecosystem": "n8n",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-68613",
+    "field": "affected[].range",
+    "source_id": "kev:bcf2511640"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0031",
+   "dimension": "version_range",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "relation": "affects",
+   "object": "vllm@>= 0.10.2, < 0.13.0",
+   "candidate_value": {
+    "package": "vllm",
+    "ecosystem": "PyPI",
+    "range": ">= 0.10.2, < 0.13.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-mcmc-2m55-j8jj",
+    "field": "affected[].range",
+    "source_id": "osv:31793381df"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-FI-0012",
+   "dimension": "fixed_version",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "relation": "fixed_by",
+   "object": "vllm@0.13.0",
+   "candidate_value": {
+    "package": "vllm",
+    "fixed_version": "0.13.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-mcmc-2m55-j8jj",
+    "field": "affected[].fixed_version",
+    "source_id": "osv:31793381df"
+   },
+   "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+  },
+  {
+   "relation_id": "BREL-CV-0021",
+   "dimension": "cvss",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+   "candidate_value": {
+    "version": "3.1",
+    "score": null,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "GHSA-mcmc-2m55-j8jj",
+    "field": "cvss[]",
+    "source_id": "osv:c7dc69d620"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0032",
+   "dimension": "version_range",
+   "subject": "CVE-2025-9959",
+   "relation": "affects",
+   "object": "smolagents@>= 0, < 1.21.0",
+   "candidate_value": {
+    "package": "smolagents",
+    "ecosystem": "smolagents",
+    "range": ">= 0, < 1.21.0"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-9959",
+    "field": "affected[].range",
+    "source_id": "mitre:7e4dafe046"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-CV-0022",
+   "dimension": "cvss",
+   "subject": "CVE-2025-9959",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:H/A:L",
+   "candidate_value": {
+    "version": "3.1",
+    "score": 7.6,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:H/A:L"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-9959",
+    "field": "cvss[]",
+    "source_id": "nvd:e9fca148bb"
+   },
+   "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+  },
+  {
+   "relation_id": "BREL-VE-0033",
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "relation": "affects",
+   "object": "Chromium@unknown",
+   "candidate_value": {
+    "package": "Chromium",
+    "ecosystem": "Google",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-6558",
+    "field": "affected[].range",
+    "source_id": "kev:e46fde0723"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0034",
+   "dimension": "version_range",
+   "subject": "CVE-2025-3248",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "candidate_value": {
+    "package": "Langflow",
+    "ecosystem": "Langflow",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2025-3248",
+    "field": "affected[].range",
+    "source_id": "kev:1eacce3542"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0035",
+   "dimension": "version_range",
+   "subject": "CVE-2024-4610",
+   "relation": "affects",
+   "object": "Mali GPU Kernel Driver@unknown",
+   "candidate_value": {
+    "package": "Mali GPU Kernel Driver",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2024-4610",
+    "field": "affected[].range",
+    "source_id": "kev:c293276891"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0036",
+   "dimension": "version_range",
+   "subject": "CVE-2024-29988",
+   "relation": "affects",
+   "object": "SmartScreen Prompt@unknown",
+   "candidate_value": {
+    "package": "SmartScreen Prompt",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2024-29988",
+    "field": "affected[].range",
+    "source_id": "kev:88cb839535"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0037",
+   "dimension": "version_range",
+   "subject": "CVE-2023-4211",
+   "relation": "affects",
+   "object": "Mali GPU Kernel Driver@unknown",
+   "candidate_value": {
+    "package": "Mali GPU Kernel Driver",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2023-4211",
+    "field": "affected[].range",
+    "source_id": "kev:dc65c96f55"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0038",
+   "dimension": "version_range",
+   "subject": "CVE-2021-29256",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "candidate_value": {
+    "package": "Mali Graphics Processing Unit (GPU)",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2021-29256",
+    "field": "affected[].range",
+    "source_id": "kev:f041cb213d"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0039",
+   "dimension": "version_range",
+   "subject": "CVE-2021-27876",
+   "relation": "affects",
+   "object": "Backup Exec Agent@unknown",
+   "candidate_value": {
+    "package": "Backup Exec Agent",
+    "ecosystem": "Veritas",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2021-27876",
+    "field": "affected[].range",
+    "source_id": "kev:cd73f65cd7"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0040",
+   "dimension": "version_range",
+   "subject": "CVE-2021-27877",
+   "relation": "affects",
+   "object": "Backup Exec Agent@unknown",
+   "candidate_value": {
+    "package": "Backup Exec Agent",
+    "ecosystem": "Veritas",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2021-27877",
+    "field": "affected[].range",
+    "source_id": "kev:71ac15a41b"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0041",
+   "dimension": "version_range",
+   "subject": "CVE-2021-27878",
+   "relation": "affects",
+   "object": "Backup Exec Agent@unknown",
+   "candidate_value": {
+    "package": "Backup Exec Agent",
+    "ecosystem": "Veritas",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2021-27878",
+    "field": "affected[].range",
+    "source_id": "kev:e2e8e74de1"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0042",
+   "dimension": "version_range",
+   "subject": "CVE-2023-26083",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "candidate_value": {
+    "package": "Mali Graphics Processing Unit (GPU)",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2023-26083",
+    "field": "affected[].range",
+    "source_id": "kev:61e498deab"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0043",
+   "dimension": "version_range",
+   "subject": "CVE-2022-22706",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "candidate_value": {
+    "package": "Mali Graphics Processing Unit (GPU)",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2022-22706",
+    "field": "affected[].range",
+    "source_id": "kev:b644099a5f"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0044",
+   "dimension": "version_range",
+   "subject": "CVE-2022-38181",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "candidate_value": {
+    "package": "Mali Graphics Processing Unit (GPU)",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2022-38181",
+    "field": "affected[].range",
+    "source_id": "kev:c4b140217d"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0045",
+   "dimension": "version_range",
+   "subject": "CVE-2022-4135",
+   "relation": "affects",
+   "object": "Chromium GPU@unknown",
+   "candidate_value": {
+    "package": "Chromium GPU",
+    "ecosystem": "Google",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2022-4135",
+    "field": "affected[].range",
+    "source_id": "kev:ae99c22581"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0046",
+   "dimension": "version_range",
+   "subject": "CVE-2014-6332",
+   "relation": "affects",
+   "object": "Windows@unknown",
+   "candidate_value": {
+    "package": "Windows",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2014-6332",
+    "field": "affected[].range",
+    "source_id": "kev:6e45befc4a"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0047",
+   "dimension": "version_range",
+   "subject": "CVE-2014-4114",
+   "relation": "affects",
+   "object": "Windows@unknown",
+   "candidate_value": {
+    "package": "Windows",
+    "ecosystem": "Microsoft",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2014-4114",
+    "field": "affected[].range",
+    "source_id": "kev:eaf4f137b1"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0048",
+   "dimension": "version_range",
+   "subject": "CVE-2020-10987",
+   "relation": "affects",
+   "object": "AC1900 Router AC15 Model@unknown",
+   "candidate_value": {
+    "package": "AC1900 Router AC15 Model",
+    "ecosystem": "Tenda",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2020-10987",
+    "field": "affected[].range",
+    "source_id": "kev:6058689232"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0049",
+   "dimension": "version_range",
+   "subject": "CVE-2021-28663",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "candidate_value": {
+    "package": "Mali Graphics Processing Unit (GPU)",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2021-28663",
+    "field": "affected[].range",
+    "source_id": "kev:e970a840a0"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  },
+  {
+   "relation_id": "BREL-VE-0050",
+   "dimension": "version_range",
+   "subject": "CVE-2021-28664",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "candidate_value": {
+    "package": "Mali Graphics Processing Unit (GPU)",
+    "ecosystem": "Arm",
+    "range": "unknown"
+   },
+   "evidence": {
+    "type": "event_field",
+    "event_id": "CVE-2021-28664",
+    "field": "affected[].range",
+    "source_id": "kev:64634e014d"
+   },
+   "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
+   "annotation": {
+    "status": "pending_human_review",
+    "label": null,
+    "verified_by": null,
+    "verified_at": null,
+    "note": null
+   },
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+  }
+ ]
+}

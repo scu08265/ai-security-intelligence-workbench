@@ -1,0 +1,54 @@
+{
+ "generated_at_note": "由 tools/build_b_review_workpackets.py 生成；不含任何人工作业结果",
+ "qa_worksheet": {
+  "rows": 50,
+  "priority": {
+   "high": 36,
+   "medium": 12,
+   "low": 2
+  },
+  "label_options": "correct|incorrect|partially_correct|undetermined",
+  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\qa_review_worksheet.csv"
+ },
+ "relation_worksheet": {
+  "rows": 121,
+  "per_dimension": {
+   "version_range": 50,
+   "cvss": 22,
+   "paper_link": 37,
+   "fixed_version": 12
+  },
+  "dimensions_without_evidence": {
+   "poc": "当前 14 个登记来源中没有任何专门的 POC 采集逻辑，事件里 poc 字段全部为空。",
+   "asset_assessment": "资产表当前有 0 条记录，没有可匹配的资产，因此没有任何资产研判记录。"
+  },
+  "label_options": "positive|negative|unknown|not_applicable",
+  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\relation_review_worksheet.csv"
+ },
+ "relation_final_review_worksheet": {
+  "rows": 121,
+  "auto_judgment_counts": {
+   "supported": 63,
+   "insufficient_evidence": 58
+  },
+  "label_options": "positive|negative|unknown|not_applicable",
+  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\relation_final_review_worksheet.csv"
+ },
+ "relation_annotation_worksheet_v2": {
+  "rows": 121,
+  "per_priority": {
+   "1-最高": 12,
+   "3-中": 50,
+   "2-高": 22,
+   "4-较低": 37
+  },
+  "label_options": "positive|negative|unknown|not_applicable",
+  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\relation_annotation_worksheet_v2.csv"
+ },
+ "instructions": {
+  "qa": "在'人工判定_*'列填写；答案正确性取值 correct|incorrect|partially_correct|undetermined",
+  "relation": "在'人工判定'列填写；取值 positive|negative|unknown|not_applicable",
+  "relation_final": "在'待人工填写_最终标签'列填写；取值 positive|negative|unknown|not_applicable。该表同时给出自动核验结论与理由，便于逐条复核。",
+  "then": "运行 python tools/score_b_relation_annotations.py 得到 TP/FP/FN"
+ }
+}

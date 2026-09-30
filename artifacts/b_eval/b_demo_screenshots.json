@@ -1,0 +1,167 @@
+{
+ "schema_version": "b-demo-screenshots-1.0",
+ "source_results": "artifacts\\b_eval\\demo_evidence.json",
+ "note": "截图为真实运行结果的渲染页；未伪造 run_id/引用/耗时。",
+ "shots": [
+  {
+   "kind": "app_ui",
+   "scenario": "工作台首页",
+   "url": "http://127.0.0.1:8010/",
+   "file": "docs\\screenshots\\b-qa-00-workbench.png"
+  },
+  {
+   "kind": "rendered_run_evidence",
+   "scenario": "DEMO-01",
+   "name": "基础事实问答",
+   "run_id": "run-124ed9b12439",
+   "question": "DistillGuard 这篇论文的标题是什么？",
+   "citation_count": 5,
+   "citations": [
+    {
+     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 23478,
+     "char_end": 24466
+    },
+    {
+     "chunk_id": "chunk-c58221ed9828a62061aaeec7",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 49027,
+     "char_end": 49374
+    },
+    {
+     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 4192,
+     "char_end": 5175
+    },
+    {
+     "chunk_id": "chunk-3e02e30d18b6d9d534a09cad",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 48189,
+     "char_end": 49147
+    },
+    {
+     "chunk_id": "chunk-60353af87ed264ff1ebf2e47",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 792,
+     "char_end": 1343
+    }
+   ],
+   "duration_ms": 457.9,
+   "file": "docs\\screenshots\\b-qa-01-basic.png"
+  },
+  {
+   "kind": "rendered_run_evidence",
+   "scenario": "DEMO-02",
+   "name": "多轮追问",
+   "run_id": "run-9f802e61ccbe",
+   "question": "它检测什么？",
+   "citation_count": 0,
+   "citations": [],
+   "duration_ms": 362.1,
+   "file": "docs\\screenshots\\b-qa-02-multiturn.png"
+  },
+  {
+   "kind": "rendered_run_evidence",
+   "scenario": "DEMO-03",
+   "name": "跨文档问答",
+   "run_id": "run-44937f5490a7",
+   "question": "AUROC 在哪些文档中被讨论？",
+   "citation_count": 5,
+   "citations": [
+    {
+     "chunk_id": "chunk-2c548b7cb0cbd3d90614329e",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "char_start": 186074,
+     "char_end": 187052
+    },
+    {
+     "chunk_id": "chunk-44cd582860c79d6783e5fbed",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "char_start": 128975,
+     "char_end": 129927
+    },
+    {
+     "chunk_id": "chunk-20a31f7b632b76ef56327c75",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "char_start": 140666,
+     "char_end": 141593
+    },
+    {
+     "chunk_id": "chunk-ddc8ff128228b8a2c57cf5cb",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "char_start": 112024,
+     "char_end": 112951
+    },
+    {
+     "chunk_id": "chunk-b6e12a610c133c01a06e9ac8",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "char_start": 147960,
+     "char_end": 148003
+    }
+   ],
+   "duration_ms": 418.9,
+   "file": "docs\\screenshots\\b-qa-03-crossdoc.png"
+  },
+  {
+   "kind": "rendered_run_evidence",
+   "scenario": "DEMO-04",
+   "name": "证据不足拒答",
+   "run_id": "run-d388cbcb0c92",
+   "question": "明天的天气怎么样？",
+   "citation_count": 0,
+   "citations": [],
+   "duration_ms": 397.3,
+   "file": "docs\\screenshots\\b-qa-04-refusal.png"
+  },
+  {
+   "kind": "rendered_run_evidence",
+   "scenario": "DEMO-05",
+   "name": "引用定位与导出",
+   "run_id": "run-89a8e774a919",
+   "question": "什么是提示词注入？",
+   "citation_count": 6,
+   "citations": [
+    {
+     "chunk_id": "chunk-90c768cd5de7c577f26397d2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 816,
+     "char_end": 1447
+    },
+    {
+     "chunk_id": "chunk-e8cc2b6834a2c530e2fcad10",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 3363,
+     "char_end": 3672
+    },
+    {
+     "chunk_id": "chunk-ff8a87d0d88c14f7168efde2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 2146,
+     "char_end": 2470
+    },
+    {
+     "chunk_id": "chunk-7061149ba14708176205f246",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 307,
+     "char_end": 814
+    },
+    {
+     "chunk_id": "chunk-71ae55e2e6545c119a797617",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 7371,
+     "char_end": 7503
+    },
+    {
+     "chunk_id": "chunk-b9d2b917a3e216d060bdd256",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 8671,
+     "char_end": 8799
+    }
+   ],
+   "duration_ms": 426.9,
+   "file": "docs\\screenshots\\b-qa-05-citation.png"
+  }
+ ]
+}

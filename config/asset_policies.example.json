@@ -1,0 +1,79 @@
+{
+  "synthetic": true,
+  "_comment": "B 任务四策略示例（合成数据，非真实资产信息）。位置：config/asset_policies.example.json；用法：--policies 指向本文件，或复制成自己的策略文件后修改。六个必需字段：asset_id / maintenance_window / business_importance / prohibited_actions / owner / acceptable_downtime_minutes。",
+  "policies": [
+    {
+      "asset_id": "asset-demo-smolagents-prod",
+      "maintenance_window": {
+        "weekday": "Sat",
+        "start": "22:00",
+        "end": "23:30",
+        "timezone": "Asia/Shanghai"
+      },
+      "business_importance": "critical",
+      "prohibited_actions": ["restart_service"],
+      "owner": "team-agent-platform@example.invalid",
+      "acceptable_downtime_minutes": 20
+    },
+    {
+      "asset_id": "asset-demo-vllm-prod",
+      "maintenance_window": {
+        "weekday": "Sun",
+        "start": "02:00",
+        "end": "05:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "business_importance": "high",
+      "prohibited_actions": [],
+      "owner": "team-inference@example.invalid",
+      "acceptable_downtime_minutes": 30
+    },
+    {
+      "asset_id": "asset-demo-vllm-lab",
+      "maintenance_window": {
+        "weekday": "Wed",
+        "start": "09:00",
+        "end": "18:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "business_importance": "low",
+      "prohibited_actions": [],
+      "owner": "team-inference@example.invalid",
+      "acceptable_downtime_minutes": 240
+    },
+    {
+      "asset_id": "asset-demo-vllm-edge",
+      "maintenance_window": {
+        "weekday": "Mon",
+        "start": "01:00",
+        "end": "02:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "business_importance": "critical",
+      "prohibited_actions": [],
+      "owner": "team-edge@example.invalid",
+      "acceptable_downtime_minutes": 5
+    },
+    {
+      "asset_id": "asset-demo-copilot-prod",
+      "maintenance_window": {
+        "weekday": "Sat",
+        "start": "01:00",
+        "end": "03:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "business_importance": "critical",
+      "prohibited_actions": ["restart_service"],
+      "owner": null,
+      "acceptable_downtime_minutes": 10
+    },
+    {
+      "asset_id": "asset-demo-openwebui",
+      "maintenance_window": null,
+      "business_importance": "medium",
+      "prohibited_actions": ["apply_patch", "restart_service"],
+      "owner": null,
+      "acceptable_downtime_minutes": 0
+    }
+  ]
+}

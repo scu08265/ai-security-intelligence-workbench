@@ -1,0 +1,4364 @@
+{
+ "schema_version": "b-relation-auto-review-1.0",
+ "method": "按维度匹配规则；规则结果与判定一起输出。自动判定只写入 auto_* 字段，不写人工列。",
+ "evidence_sources": [
+  "本地 SQLite 事件字段",
+  "来源原始快照（JSON/HTML/XML，PDF 跳过）",
+  "本地 RAG 全文文档与分块"
+ ],
+ "caution": "自动判定不等于人工核验；字符串命中不等于关系成立。",
+ "counts": {
+  "total": 121,
+  "by_judgment": {
+   "supported": 63,
+   "insufficient_evidence": 58
+  },
+  "by_dimension": {
+   "fixed_version": {
+    "supported": 12
+   },
+   "version_range": {
+    "insufficient_evidence": 37,
+    "supported": 13
+   },
+   "cvss": {
+    "supported": 22
+   },
+   "paper_link": {
+    "insufficient_evidence": 21,
+    "supported": 16
+   }
+  }
+ },
+ "coverage": {
+  "reviewed": 121,
+  "auto_judged": 63,
+  "undetermined": 58
+ },
+ "cases": [
+  {
+   "relation_id": "BREL-FI-0001",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-4000",
+   "relation": "fixed_by",
+   "object": "vllm@0.30.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.30.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.30.0 不落在受影响区间 < 0.30.0；R-FV-SNAPSHOT: 原始快照 包含 '0.30.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.30.0']，候选='0.30.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.30.0"
+    },
+    "affected_range": "< 0.30.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.30.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.30.0 不落在受影响区间 < 0.30.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.30.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.30.0']，候选='0.30.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0002",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3998",
+   "relation": "fixed_by",
+   "object": "vllm@0.29.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.29.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.29.0 不落在受影响区间 < 0.29.0；R-FV-SNAPSHOT: 原始快照 包含 '0.29.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.29.0']，候选='0.29.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.29.0"
+    },
+    "affected_range": "< 0.29.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.29.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.29.0 不落在受影响区间 < 0.29.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.29.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.29.0']，候选='0.29.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0003",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3999",
+   "relation": "fixed_by",
+   "object": "vllm@0.30.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.30.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.30.0 不落在受影响区间 < 0.30.0；R-FV-SNAPSHOT: 原始快照 包含 '0.30.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.30.0']，候选='0.30.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.30.0"
+    },
+    "affected_range": "< 0.30.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.30.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.30.0 不落在受影响区间 < 0.30.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.30.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.30.0']，候选='0.30.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0004",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3997",
+   "relation": "fixed_by",
+   "object": "vllm@0.28.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.28.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.28.0 不落在受影响区间 < 0.28.0；R-FV-SNAPSHOT: 原始快照 包含 '0.28.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.28.0']，候选='0.28.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.28.0"
+    },
+    "affected_range": "< 0.28.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.28.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.28.0 不落在受影响区间 < 0.28.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.28.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.28.0']，候选='0.28.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0005",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3996",
+   "relation": "fixed_by",
+   "object": "vllm@0.30.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.30.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.30.0 不落在受影响区间 < 0.30.0；R-FV-SNAPSHOT: 原始快照 包含 '0.30.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.30.0']，候选='0.30.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.30.0"
+    },
+    "affected_range": "< 0.30.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.30.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.30.0 不落在受影响区间 < 0.30.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.30.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.30.0']，候选='0.30.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0006",
+   "dimension": "fixed_version",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "relation": "fixed_by",
+   "object": "vllm@0.28.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.28.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.28.0 不落在受影响区间 < 0.28.0；R-FV-SNAPSHOT: 原始快照 包含 '0.28.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.28.0']，候选='0.28.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.28.0"
+    },
+    "affected_range": "< 0.28.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.28.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.28.0 不落在受影响区间 < 0.28.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.28.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.28.0']，候选='0.28.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0007",
+   "dimension": "fixed_version",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "relation": "fixed_by",
+   "object": "vllm@0.24.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.24.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.24.0 不落在受影响区间 < 0.24.0；R-FV-SNAPSHOT: 原始快照 包含 '0.24.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.24.0']，候选='0.24.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.24.0"
+    },
+    "affected_range": "< 0.24.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.24.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.24.0 不落在受影响区间 < 0.24.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.24.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.24.0']，候选='0.24.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0008",
+   "dimension": "fixed_version",
+   "subject": "PYSEC-2026-3985",
+   "relation": "fixed_by",
+   "object": "vllm@0.28.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.28.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.28.0 不落在受影响区间 < 0.28.0；R-FV-SNAPSHOT: 原始快照 包含 '0.28.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.28.0']，候选='0.28.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.28.0"
+    },
+    "affected_range": "< 0.28.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.28.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.28.0 不落在受影响区间 < 0.28.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.28.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.28.0']，候选='0.28.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0009",
+   "dimension": "fixed_version",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "relation": "fixed_by",
+   "object": "open-webui@0.11.1",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.11.1 可解析为版本；R-FV-CONSISTENCY: fixed=0.11.1 不落在受影响区间 >= 0.8.0, < 0.11.1；R-FV-SNAPSHOT: 原始快照 包含 '0.11.1' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.11.1']，候选='0.11.1'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "open-webui",
+     "fixed_version": "0.11.1"
+    },
+    "affected_range": ">= 0.8.0, < 0.11.1",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.11.1 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.11.1 不落在受影响区间 >= 0.8.0, < 0.11.1"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.11.1' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.11.1']，候选='0.11.1'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0010",
+   "dimension": "fixed_version",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "relation": "fixed_by",
+   "object": "open-webui@0.11.1",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.11.1 可解析为版本；R-FV-CONSISTENCY: fixed=0.11.1 不落在受影响区间 >= 0.9.0, < 0.11.1；R-FV-SNAPSHOT: 原始快照 包含 '0.11.1' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.11.1']，候选='0.11.1'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "open-webui",
+     "fixed_version": "0.11.1"
+    },
+    "affected_range": ">= 0.9.0, < 0.11.1",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.11.1 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.11.1 不落在受影响区间 >= 0.9.0, < 0.11.1"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.11.1' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.11.1']，候选='0.11.1'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0011",
+   "dimension": "fixed_version",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "relation": "fixed_by",
+   "object": "open-webui@0.11.1",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.11.1 可解析为版本；R-FV-CONSISTENCY: fixed=0.11.1 不落在受影响区间 >= 0.9.0, < 0.11.1；R-FV-SNAPSHOT: 原始快照 包含 '0.11.1' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.11.1']，候选='0.11.1'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "open-webui",
+     "fixed_version": "0.11.1"
+    },
+    "affected_range": ">= 0.9.0, < 0.11.1",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.11.1 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.11.1 不落在受影响区间 >= 0.9.0, < 0.11.1"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.11.1' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.11.1']，候选='0.11.1'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-FI-0012",
+   "dimension": "fixed_version",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "relation": "fixed_by",
+   "object": "vllm@0.13.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-FV-PARSE: 0.13.0 可解析为版本；R-FV-CONSISTENCY: fixed=0.13.0 不落在受影响区间 >= 0.10.2, < 0.13.0；R-FV-SNAPSHOT: 原始快照 包含 '0.13.0' 的版本号；R-FV-STRUCTURED: OSV 结构化事件 fixed=['0.13.0']，候选='0.13.0'",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "fixed_version": "0.13.0"
+    },
+    "affected_range": ">= 0.10.2, < 0.13.0",
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-FV-PARSE",
+     "result": "pass",
+     "detail": "0.13.0 可解析为版本"
+    },
+    {
+     "rule": "R-FV-CONSISTENCY",
+     "result": "pass",
+     "detail": "fixed=0.13.0 不落在受影响区间 >= 0.10.2, < 0.13.0"
+    },
+    {
+     "rule": "R-FV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 包含 '0.13.0' 的版本号"
+    },
+    {
+     "rule": "R-FV-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件 fixed=['0.13.0']，候选='0.13.0'"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0001",
+   "dimension": "version_range",
+   "subject": "CVE-2026-41106",
+   "relation": "affects",
+   "object": "Microsoft 365 Copilot@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Microsoft 365 Copilot",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0001",
+   "dimension": "cvss",
+   "subject": "CVE-2026-41106",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=9.3 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 9.3,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=9.3 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0002",
+   "dimension": "version_range",
+   "subject": "CVE-2026-41109",
+   "relation": "affects",
+   "object": "Visual Studio Code@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Visual Studio Code",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0002",
+   "dimension": "cvss",
+   "subject": "CVE-2026-41109",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=8.8 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 8.8,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=8.8 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0003",
+   "dimension": "version_range",
+   "subject": "CVE-2026-45499",
+   "relation": "affects",
+   "object": "Azure Open AI@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Azure Open AI",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0003",
+   "dimension": "cvss",
+   "subject": "CVE-2026-45499",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=9.9 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 9.9,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=9.9 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0004",
+   "dimension": "version_range",
+   "subject": "CVE-2026-47282",
+   "relation": "affects",
+   "object": "Visual Studio Code@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Visual Studio Code",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0004",
+   "dimension": "cvss",
+   "subject": "CVE-2026-47282",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=6.5 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 6.5,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=6.5 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0005",
+   "dimension": "version_range",
+   "subject": "CVE-2026-48561",
+   "relation": "affects",
+   "object": "Microsoft Edge Copilot for Android@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Microsoft Edge Copilot for Android",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0006",
+   "dimension": "version_range",
+   "subject": "CVE-2026-48561",
+   "relation": "affects",
+   "object": "Microsoft Edge Copilot for IOS@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Microsoft Edge Copilot for IOS",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0007",
+   "dimension": "version_range",
+   "subject": "CVE-2026-50510",
+   "relation": "affects",
+   "object": "GitHub Copilot Plugin for JetBrains IDEs@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "GitHub Copilot Plugin for JetBrains IDEs",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0005",
+   "dimension": "cvss",
+   "subject": "CVE-2026-50510",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=7.8 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 7.8,
+     "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=7.8 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0008",
+   "dimension": "version_range",
+   "subject": "CVE-2026-50517",
+   "relation": "affects",
+   "object": "Microsoft 365 Copilot@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Microsoft 365 Copilot",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0006",
+   "dimension": "cvss",
+   "subject": "CVE-2026-50517",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=9.9 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 9.9,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=9.9 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0009",
+   "dimension": "version_range",
+   "subject": "CVE-2026-55145",
+   "relation": "affects",
+   "object": "Microsoft Copilot@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Microsoft Copilot",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0007",
+   "dimension": "cvss",
+   "subject": "CVE-2026-55145",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:L/A:N/E:P/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=6.3 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 6.3,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:L/A:N/E:P/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=6.3 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0010",
+   "dimension": "version_range",
+   "subject": "CVE-2026-56167",
+   "relation": "affects",
+   "object": "Azure AI Search@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Azure AI Search",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0008",
+   "dimension": "cvss",
+   "subject": "CVE-2026-56167",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:L/A:N/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=8.5 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 8.5,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:L/A:N/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=8.5 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0011",
+   "dimension": "version_range",
+   "subject": "CVE-2026-58617",
+   "relation": "affects",
+   "object": "Microsoft 365 Copilot for iOS@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Microsoft 365 Copilot for iOS",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "原始快照未出现 'unknown' 的任何版本端点；来源可能以结构化 introduced/fixed 表达区间，需人工核验"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0009",
+   "dimension": "cvss",
+   "subject": "CVE-2026-58617",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N/E:U/RL:O/RC:C",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=8.1 在 0–10；R-CV-VECTOR: vector 含 11 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 8.1,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N/E:U/RL:O/RC:C"
+    },
+    "snapshot_source": "msrc"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=8.1 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 11 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0001",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214527440",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1186/s43556-026-00600-7.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://link.springer.com/content/pdf/10.1186/s43556-026-00600-7.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0002",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214558721",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1007/s44265-026-00088-7.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://link.springer.com/content/pdf/10.1007/s44265-026-00088-7.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0003",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214600341",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1186/s42400-026-00649-5.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://link.springer.com/content/pdf/10.1186/s42400-026-00649-5.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0004",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214526768",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1007/s44163-026-02344-3.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://link.springer.com/content/pdf/10.1007/s44163-026-02344-3.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0005",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214542908",
+   "relation": "has_paper",
+   "object": "https://www.nature.com/articles/s41598-026-72755-w_reference.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://www.nature.com/articles/s41598-026-72755-w_reference.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0006",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214553113",
+   "relation": "has_paper",
+   "object": "https://www.cambridge.org/engage/api-gateway/coe/assets/orp/resource/item/6ab904c4810b9dcc828178e4/original/override-theatre-governing-the-human-override-of-ai-agent-decisions-as-a-segregated-accountable-control.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://www.cambridge.org/engage/api-gateway/coe/assets/orp/resource/item/6ab904c4810b9dcc828178e4/original/override-theatre-governing-the-human-override-of-ai-agent-decisions-as-a-segregated-accountable-control.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0007",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214449097",
+   "relation": "has_paper",
+   "object": "https://www.ijisrt.com/assets/upload/files/IJISRT26SEP879.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://www.ijisrt.com/assets/upload/files/IJISRT26SEP879.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0008",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214468787",
+   "relation": "has_paper",
+   "object": "https://doi.org/10.34218/ijaiml_05_02_007",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://doi.org/10.34218/ijaiml_05_02_007",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0009",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W4406794439",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2501.13787",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2501.13787；R-PL-DOC: 本地存在全文文档 paper:2501.13787；R-PL-TITLE: 事件标题与文档首块词元重合 6 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2501.13787",
+     "arxiv_id": "2501.13787",
+     "linked_document_key": "paper:2501.13787"
+    },
+    "document_key": "paper:2501.13787"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2501.13787"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2501.13787"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 6 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0010",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7125151750",
+   "relation": "has_paper",
+   "object": "https://s-rsa.com/index.php/agi/article/download/18747/12429",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://s-rsa.com/index.php/agi/article/download/18747/12429",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0011",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7151534166",
+   "relation": "has_paper",
+   "object": "https://s-rsa.com/index.php/agi/article/download/18746/12428",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://s-rsa.com/index.php/agi/article/download/18746/12428",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0012",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7213611819",
+   "relation": "has_paper",
+   "object": "https://s-rsa.com/index.php/agi/article/download/18734/12426",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://s-rsa.com/index.php/agi/article/download/18734/12426",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0013",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214295679",
+   "relation": "has_paper",
+   "object": "https://iiardjournals.org/get/RJPST/VOL. 8 NO. 8 2025/Advances in NLP-Driven Analytics 142-212.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://iiardjournals.org/get/RJPST/VOL. 8 NO. 8 2025/Advances in NLP-Driven Analytics 142-212.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0014",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214338629",
+   "relation": "has_paper",
+   "object": "https://theamericanjournals.com/index.php/tajmei/article/download/8413/7697/12737",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://theamericanjournals.com/index.php/tajmei/article/download/8413/7697/12737",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0015",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214339430",
+   "relation": "has_paper",
+   "object": "https://annals-csis.org/Volume_48/drp/pdf/6361.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://annals-csis.org/Volume_48/drp/pdf/6361.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0016",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7164892115",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2606.15617",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2606.15617；R-PL-DOC: 本地存在全文文档 paper:2606.15617；R-PL-TITLE: 事件标题与文档首块词元重合 13 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2606.15617",
+     "arxiv_id": "2606.15617",
+     "linked_document_key": "paper:2606.15617"
+    },
+    "document_key": "paper:2606.15617"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2606.15617"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2606.15617"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 13 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0017",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214152392",
+   "relation": "has_paper",
+   "object": "https://link.springer.com/content/pdf/10.1007/s10270-026-01425-2.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://link.springer.com/content/pdf/10.1007/s10270-026-01425-2.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0018",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214194099",
+   "relation": "has_paper",
+   "object": "https://jyx.jyu.fi/bitstreams/db4ece2d-fa81-48a1-b8aa-cc3ea87b9b85/download",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://jyx.jyu.fi/bitstreams/db4ece2d-fa81-48a1-b8aa-cc3ea87b9b85/download",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0019",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214198864",
+   "relation": "has_paper",
+   "object": "https://cdn.openai.com/pdf/d04913be-3f6f-4d2b-b283-ff432ef4aaa5/why-language-models-hallucinate.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://cdn.openai.com/pdf/d04913be-3f6f-4d2b-b283-ff432ef4aaa5/why-language-models-hallucinate.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0020",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214222573",
+   "relation": "has_paper",
+   "object": "https://jyx.jyu.fi/bitstreams/e176a9a3-450d-463a-b755-da56c748c709/download",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://jyx.jyu.fi/bitstreams/e176a9a3-450d-463a-b755-da56c748c709/download",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0021",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214241047",
+   "relation": "has_paper",
+   "object": "https://ijirt.org/publishedpaper/IJIRT208799_PAPER.pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://ijirt.org/publishedpaper/IJIRT208799_PAPER.pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0022",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214288902",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.28915",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.28915；R-PL-DOC: 本地存在全文文档 paper:2609.28915；R-PL-TITLE: 事件标题与文档首块词元重合 5 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.28915",
+     "arxiv_id": "2609.28915",
+     "linked_document_key": "paper:2609.28915"
+    },
+    "document_key": "paper:2609.28915"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.28915"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.28915"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 5 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0023",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214294325",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29808",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.29808；R-PL-DOC: 本地存在全文文档 paper:2609.29808；R-PL-TITLE: 事件标题与文档首块词元重合 9 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.29808",
+     "arxiv_id": "2609.29808",
+     "linked_document_key": "paper:2609.29808"
+    },
+    "document_key": "paper:2609.29808"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.29808"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.29808"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 9 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0024",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214307780",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30266",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.30266；R-PL-DOC: 本地存在全文文档 paper:2609.30266；R-PL-TITLE: 事件标题与文档首块词元重合 6 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.30266",
+     "arxiv_id": "2609.30266",
+     "linked_document_key": "paper:2609.30266"
+    },
+    "document_key": "paper:2609.30266"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.30266"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.30266"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 6 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0025",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214313011",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30243",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.30243；R-PL-DOC: 本地存在全文文档 paper:2609.30243；R-PL-TITLE: 事件标题与文档首块词元重合 6 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.30243",
+     "arxiv_id": "2609.30243",
+     "linked_document_key": "paper:2609.30243"
+    },
+    "document_key": "paper:2609.30243"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.30243"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.30243"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 6 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0026",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214329963",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29429",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.29429；R-PL-DOC: 本地存在全文文档 paper:2609.29429；R-PL-TITLE: 事件标题与文档首块词元重合 7 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.29429",
+     "arxiv_id": "2609.29429",
+     "linked_document_key": "paper:2609.29429"
+    },
+    "document_key": "paper:2609.29429"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.29429"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.29429"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 7 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0027",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214342592",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29230",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.29230；R-PL-DOC: 本地存在全文文档 paper:2609.29230；R-PL-TITLE: 事件标题与文档首块词元重合 10 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.29230",
+     "arxiv_id": "2609.29230",
+     "linked_document_key": "paper:2609.29230"
+    },
+    "document_key": "paper:2609.29230"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.29230"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.29230"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 10 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0028",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214358407",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30192",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.30192；R-PL-DOC: 本地存在全文文档 paper:2609.30192；R-PL-TITLE: 事件标题与文档首块词元重合 8 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.30192",
+     "arxiv_id": "2609.30192",
+     "linked_document_key": "paper:2609.30192"
+    },
+    "document_key": "paper:2609.30192"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.30192"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.30192"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 8 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0029",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214375324",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.28900",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.28900；R-PL-DOC: 本地存在全文文档 paper:2609.28900；R-PL-TITLE: 事件标题与文档首块词元重合 8 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.28900",
+     "arxiv_id": "2609.28900",
+     "linked_document_key": "paper:2609.28900"
+    },
+    "document_key": "paper:2609.28900"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.28900"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.28900"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 8 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0030",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214399041",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30028",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.30028；R-PL-DOC: 本地存在全文文档 paper:2609.30028；R-PL-TITLE: 事件标题与文档首块词元重合 7 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.30028",
+     "arxiv_id": "2609.30028",
+     "linked_document_key": "paper:2609.30028"
+    },
+    "document_key": "paper:2609.30028"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.30028"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.30028"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 7 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0031",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214401639",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29228",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.29228；R-PL-DOC: 本地存在全文文档 paper:2609.29228；R-PL-TITLE: 事件标题与文档首块词元重合 7 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.29228",
+     "arxiv_id": "2609.29228",
+     "linked_document_key": "paper:2609.29228"
+    },
+    "document_key": "paper:2609.29228"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.29228"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.29228"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 7 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0032",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214403218",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29757",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.29757；R-PL-DOC: 本地存在全文文档 paper:2609.29757；R-PL-TITLE: 事件标题与文档首块词元重合 8 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.29757",
+     "arxiv_id": "2609.29757",
+     "linked_document_key": "paper:2609.29757"
+    },
+    "document_key": "paper:2609.29757"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.29757"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.29757"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 8 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0033",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214404543",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.30217",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.30217；R-PL-DOC: 本地存在全文文档 paper:2609.30217；R-PL-TITLE: 事件标题与文档首块词元重合 8 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.30217",
+     "arxiv_id": "2609.30217",
+     "linked_document_key": "paper:2609.30217"
+    },
+    "document_key": "paper:2609.30217"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.30217"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.30217"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 8 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0034",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214508238",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.29333",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.29333；R-PL-DOC: 本地存在全文文档 paper:2609.29333；R-PL-TITLE: 事件标题与文档首块词元重合 4 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.29333",
+     "arxiv_id": "2609.29333",
+     "linked_document_key": "paper:2609.29333"
+    },
+    "document_key": "paper:2609.29333"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.29333"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.29333"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 4 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0035",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214508255",
+   "relation": "has_paper",
+   "object": "https://arxiv.org/pdf/2609.28996",
+   "auto_judgment": "supported",
+   "auto_reason": "R-PL-ARXIV: 可解析出 arXiv 标识符 2609.28996；R-PL-DOC: 本地存在全文文档 paper:2609.28996；R-PL-TITLE: 事件标题与文档首块词元重合 10 个（阈值 3）",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://arxiv.org/pdf/2609.28996",
+     "arxiv_id": "2609.28996",
+     "linked_document_key": "paper:2609.28996"
+    },
+    "document_key": "paper:2609.28996"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "pass",
+     "detail": "可解析出 arXiv 标识符 2609.28996"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "pass",
+     "detail": "本地存在全文文档 paper:2609.28996"
+    },
+    {
+     "rule": "R-PL-TITLE",
+     "result": "pass",
+     "detail": "事件标题与文档首块词元重合 10 个（阈值 3）"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0036",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214062101",
+   "relation": "has_paper",
+   "object": "https://www.sciencedirect.com/science/article/pii/S2590174526007701/pdf",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://www.sciencedirect.com/science/article/pii/S2590174526007701/pdf",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-PA-0037",
+   "dimension": "paper_link",
+   "subject": "OPENALEX-W7214100311",
+   "relation": "has_paper",
+   "object": "https://jasianresearch.com/index.php/AJOAIR/article/download/575/832",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-PL-ARXIV: pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文；R-PL-DOC: 没有 arXiv 标识符，无法定位本地文档",
+   "auto_evidence": {
+    "candidate_value": {
+     "pdf_url": "https://jasianresearch.com/index.php/AJOAIR/article/download/575/832",
+     "arxiv_id": null,
+     "linked_document_key": null
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-PL-ARXIV",
+     "result": "unavailable",
+     "detail": "pdf_url 指向非 arXiv 出版商，本地未抓取该 PDF，无法核对正文"
+    },
+    {
+     "rule": "R-PL-DOC",
+     "result": "unavailable",
+     "detail": "没有 arXiv 标识符，无法定位本地文档"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0012",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-4000",
+   "relation": "affects",
+   "object": "vllm@< 0.30.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.30.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.30.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.30.0'，候选='< 0.30.0'；R-VR-VERSIONS: OSV 列出的 97 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.30.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.30.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.30.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.30.0'，候选='< 0.30.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 97 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0010",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-4000",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0013",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3998",
+   "relation": "affects",
+   "object": "vllm@< 0.29.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.29.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.29.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.29.0'，候选='< 0.29.0'；R-VR-VERSIONS: OSV 列出的 96 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.29.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.29.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.29.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.29.0'，候选='< 0.29.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 96 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0011",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3998",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0014",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3999",
+   "relation": "affects",
+   "object": "vllm@< 0.30.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.30.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.30.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.30.0'，候选='< 0.30.0'；R-VR-VERSIONS: OSV 列出的 97 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.30.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.30.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.30.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.30.0'，候选='< 0.30.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 97 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0012",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3999",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0015",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3997",
+   "relation": "affects",
+   "object": "vllm@< 0.28.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.28.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.28.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.28.0'，候选='< 0.28.0'；R-VR-VERSIONS: OSV 列出的 95 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.28.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.28.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.28.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.28.0'，候选='< 0.28.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 95 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0013",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3997",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 32 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "4.0",
+     "score": null,
+     "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 32 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0016",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3996",
+   "relation": "affects",
+   "object": "vllm@< 0.30.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.30.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.30.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.30.0'，候选='< 0.30.0'；R-VR-VERSIONS: OSV 列出的 97 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.30.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.30.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.30.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.30.0'，候选='< 0.30.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 97 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0014",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3996",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 32 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "4.0",
+     "score": null,
+     "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 32 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0017",
+   "dimension": "version_range",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "relation": "affects",
+   "object": "vllm@< 0.28.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.28.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.28.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.28.0'，候选='< 0.28.0'；R-VR-VERSIONS: OSV 列出的 95 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.28.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.28.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.28.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.28.0'，候选='< 0.28.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 95 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0015",
+   "dimension": "cvss",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0018",
+   "dimension": "version_range",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "relation": "affects",
+   "object": "vllm@< 0.24.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.24.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.24.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.24.0'，候选='< 0.24.0'；R-VR-VERSIONS: OSV 列出的 89 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.24.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.24.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.24.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.24.0'，候选='< 0.24.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 89 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0016",
+   "dimension": "cvss",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0019",
+   "dimension": "version_range",
+   "subject": "PYSEC-2026-3985",
+   "relation": "affects",
+   "object": "vllm@< 0.28.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '< 0.28.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.28.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '< 0.28.0'，候选='< 0.28.0'；R-VR-VERSIONS: OSV 列出的 95 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": "< 0.28.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'< 0.28.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.28.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '< 0.28.0'，候选='< 0.28.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 95 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0017",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3985",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 32 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "4.0",
+     "score": null,
+     "vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 32 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0020",
+   "dimension": "version_range",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "relation": "affects",
+   "object": "open-webui@>= 0.8.0, < 0.11.1",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '>= 0.8.0, < 0.11.1' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.8.0', '0.11.1']；R-VR-STRUCTURED: OSV 结构化事件还原出 '>= 0.8.0, < 0.11.1'，候选='>= 0.8.0, < 0.11.1'；R-VR-VERSIONS: OSV 列出的 24 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "open-webui",
+     "ecosystem": "PyPI",
+     "range": ">= 0.8.0, < 0.11.1"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'>= 0.8.0, < 0.11.1' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.8.0', '0.11.1']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '>= 0.8.0, < 0.11.1'，候选='>= 0.8.0, < 0.11.1'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 24 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0018",
+   "dimension": "cvss",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0021",
+   "dimension": "version_range",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "relation": "affects",
+   "object": "open-webui@>= 0.9.0, < 0.11.1",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '>= 0.9.0, < 0.11.1' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.9.0', '0.11.1']；R-VR-STRUCTURED: OSV 结构化事件还原出 '>= 0.9.0, < 0.11.1'，候选='>= 0.9.0, < 0.11.1'；R-VR-VERSIONS: OSV 列出的 11 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "open-webui",
+     "ecosystem": "PyPI",
+     "range": ">= 0.9.0, < 0.11.1"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'>= 0.9.0, < 0.11.1' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.9.0', '0.11.1']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '>= 0.9.0, < 0.11.1'，候选='>= 0.9.0, < 0.11.1'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 11 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0019",
+   "dimension": "cvss",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0022",
+   "dimension": "version_range",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "relation": "affects",
+   "object": "open-webui@>= 0.9.0, < 0.11.1",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '>= 0.9.0, < 0.11.1' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.9.0', '0.11.1']；R-VR-STRUCTURED: OSV 结构化事件还原出 '>= 0.9.0, < 0.11.1'，候选='>= 0.9.0, < 0.11.1'；R-VR-VERSIONS: OSV 列出的 11 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "open-webui",
+     "ecosystem": "PyPI",
+     "range": ">= 0.9.0, < 0.11.1"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'>= 0.9.0, < 0.11.1' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.9.0', '0.11.1']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '>= 0.9.0, < 0.11.1'，候选='>= 0.9.0, < 0.11.1'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 11 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0020",
+   "dimension": "cvss",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0023",
+   "dimension": "version_range",
+   "subject": "CVE-2026-64849",
+   "relation": "affects",
+   "object": "MLflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "MLflow",
+     "ecosystem": "MLflow",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0024",
+   "dimension": "version_range",
+   "subject": "CVE-2025-62593",
+   "relation": "affects",
+   "object": "Ray@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Ray",
+     "ecosystem": "Ray-Project",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0025",
+   "dimension": "version_range",
+   "subject": "CVE-2026-9198",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Langflow",
+     "ecosystem": "IBM",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0026",
+   "dimension": "version_range",
+   "subject": "CVE-2026-0770",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Langflow",
+     "ecosystem": "Langflow",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0027",
+   "dimension": "version_range",
+   "subject": "CVE-2026-55255",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Langflow",
+     "ecosystem": "Langflow",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0028",
+   "dimension": "version_range",
+   "subject": "CVE-2025-34291",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Langflow",
+     "ecosystem": "Langflow",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0029",
+   "dimension": "version_range",
+   "subject": "CVE-2026-33017",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Langflow",
+     "ecosystem": "Langflow",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0030",
+   "dimension": "version_range",
+   "subject": "CVE-2025-68613",
+   "relation": "affects",
+   "object": "n8n@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "n8n",
+     "ecosystem": "n8n",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0031",
+   "dimension": "version_range",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "relation": "affects",
+   "object": "vllm@>= 0.10.2, < 0.13.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '>= 0.10.2, < 0.13.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['0.10.2', '0.13.0']；R-VR-STRUCTURED: OSV 结构化事件还原出 '>= 0.10.2, < 0.13.0'，候选='>= 0.10.2, < 0.13.0'；R-VR-VERSIONS: OSV 列出的 5 个受影响版本中，0 个不在候选区间内",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "vllm",
+     "ecosystem": "PyPI",
+     "range": ">= 0.10.2, < 0.13.0"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'>= 0.10.2, < 0.13.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['0.10.2', '0.13.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "pass",
+     "detail": "OSV 结构化事件还原出 '>= 0.10.2, < 0.13.0'，候选='>= 0.10.2, < 0.13.0'"
+    },
+    {
+     "rule": "R-VR-VERSIONS",
+     "result": "pass",
+     "detail": "OSV 列出的 5 个受影响版本中，0 个不在候选区间内"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0021",
+   "dimension": "cvss",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=未命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": null,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+    },
+    "snapshot_source": "osv"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "unavailable",
+     "detail": "来源未给出数值分数（不得当作 0）"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=未命中"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0032",
+   "dimension": "version_range",
+   "subject": "CVE-2025-9959",
+   "relation": "affects",
+   "object": "smolagents@>= 0, < 1.21.0",
+   "auto_judgment": "supported",
+   "auto_reason": "R-VR-PARSE: '>= 0, < 1.21.0' 可解析为版本区间；R-VR-SNAPSHOT: 原始快照包含区间端点 ['1.21.0']",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "smolagents",
+     "ecosystem": "smolagents",
+     "range": ">= 0, < 1.21.0"
+    },
+    "snapshot_source": "nvd"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "pass",
+     "detail": "'>= 0, < 1.21.0' 可解析为版本区间"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照包含区间端点 ['1.21.0']"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "medium",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-CV-0022",
+   "dimension": "cvss",
+   "subject": "CVE-2025-9959",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:H/A:L",
+   "auto_judgment": "supported",
+   "auto_reason": "R-CV-RANGE: score=7.6 在 0–10；R-CV-VECTOR: vector 含 8 个度量项，前缀正确；R-CV-SNAPSHOT: 原始快照 vector=命中 score=命中",
+   "auto_evidence": {
+    "candidate_value": {
+     "version": "3.1",
+     "score": 7.6,
+     "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:H/A:L"
+    },
+    "snapshot_source": "nvd"
+   },
+   "auto_rules": [
+    {
+     "rule": "R-CV-RANGE",
+     "result": "pass",
+     "detail": "score=7.6 在 0–10"
+    },
+    {
+     "rule": "R-CV-VECTOR",
+     "result": "pass",
+     "detail": "vector 含 8 个度量项，前缀正确"
+    },
+    {
+     "rule": "R-CV-SNAPSHOT",
+     "result": "pass",
+     "detail": "原始快照 vector=命中 score=命中"
+    }
+   ],
+   "auto_confidence": "high",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0033",
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "relation": "affects",
+   "object": "Chromium@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Chromium",
+     "ecosystem": "Google",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0034",
+   "dimension": "version_range",
+   "subject": "CVE-2025-3248",
+   "relation": "affects",
+   "object": "Langflow@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Langflow",
+     "ecosystem": "Langflow",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0035",
+   "dimension": "version_range",
+   "subject": "CVE-2024-4610",
+   "relation": "affects",
+   "object": "Mali GPU Kernel Driver@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali GPU Kernel Driver",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0036",
+   "dimension": "version_range",
+   "subject": "CVE-2024-29988",
+   "relation": "affects",
+   "object": "SmartScreen Prompt@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "SmartScreen Prompt",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0037",
+   "dimension": "version_range",
+   "subject": "CVE-2023-4211",
+   "relation": "affects",
+   "object": "Mali GPU Kernel Driver@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali GPU Kernel Driver",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0038",
+   "dimension": "version_range",
+   "subject": "CVE-2021-29256",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali Graphics Processing Unit (GPU)",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0039",
+   "dimension": "version_range",
+   "subject": "CVE-2021-27876",
+   "relation": "affects",
+   "object": "Backup Exec Agent@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Backup Exec Agent",
+     "ecosystem": "Veritas",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0040",
+   "dimension": "version_range",
+   "subject": "CVE-2021-27877",
+   "relation": "affects",
+   "object": "Backup Exec Agent@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Backup Exec Agent",
+     "ecosystem": "Veritas",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0041",
+   "dimension": "version_range",
+   "subject": "CVE-2021-27878",
+   "relation": "affects",
+   "object": "Backup Exec Agent@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Backup Exec Agent",
+     "ecosystem": "Veritas",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0042",
+   "dimension": "version_range",
+   "subject": "CVE-2023-26083",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali Graphics Processing Unit (GPU)",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0043",
+   "dimension": "version_range",
+   "subject": "CVE-2022-22706",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali Graphics Processing Unit (GPU)",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0044",
+   "dimension": "version_range",
+   "subject": "CVE-2022-38181",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali Graphics Processing Unit (GPU)",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0045",
+   "dimension": "version_range",
+   "subject": "CVE-2022-4135",
+   "relation": "affects",
+   "object": "Chromium GPU@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Chromium GPU",
+     "ecosystem": "Google",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0046",
+   "dimension": "version_range",
+   "subject": "CVE-2014-6332",
+   "relation": "affects",
+   "object": "Windows@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Windows",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0047",
+   "dimension": "version_range",
+   "subject": "CVE-2014-4114",
+   "relation": "affects",
+   "object": "Windows@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Windows",
+     "ecosystem": "Microsoft",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0048",
+   "dimension": "version_range",
+   "subject": "CVE-2020-10987",
+   "relation": "affects",
+   "object": "AC1900 Router AC15 Model@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "AC1900 Router AC15 Model",
+     "ecosystem": "Tenda",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0049",
+   "dimension": "version_range",
+   "subject": "CVE-2021-28663",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali Graphics Processing Unit (GPU)",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  },
+  {
+   "relation_id": "BREL-VE-0050",
+   "dimension": "version_range",
+   "subject": "CVE-2021-28664",
+   "relation": "affects",
+   "object": "Mali Graphics Processing Unit (GPU)@unknown",
+   "auto_judgment": "insufficient_evidence",
+   "auto_reason": "R-VR-PARSE: 'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定；R-VR-SNAPSHOT: 来源 kev 没有可读的文本快照；R-VR-STRUCTURED: 本地没有该事件的 OSV 结构化快照（可能来自其他来源）",
+   "auto_evidence": {
+    "candidate_value": {
+     "package": "Mali Graphics Processing Unit (GPU)",
+     "ecosystem": "Arm",
+     "range": "unknown"
+    }
+   },
+   "auto_rules": [
+    {
+     "rule": "R-VR-PARSE",
+     "result": "unavailable",
+     "detail": "'unknown' 不是 PEP 440 区间（可能是厂商自有版本号），无法判定"
+    },
+    {
+     "rule": "R-VR-SNAPSHOT",
+     "result": "unavailable",
+     "detail": "来源 kev 没有可读的文本快照"
+    },
+    {
+     "rule": "R-VR-STRUCTURED",
+     "result": "unavailable",
+     "detail": "本地没有该事件的 OSV 结构化快照（可能来自其他来源）"
+    }
+   ],
+   "auto_confidence": "low",
+   "manual_label_preserved": "pending_human_review"
+  }
+ ]
+}

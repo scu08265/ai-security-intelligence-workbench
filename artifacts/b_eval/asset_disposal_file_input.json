@@ -1,0 +1,858 @@
+{
+ "schema_version": "b-asset-disposal-1.0",
+ "disclaimer": "本文件是处置建议，不是执行记录；系统不执行任何生产动作。合成资产/策略一律标记 synthetic=true。",
+ "action_catalog": {
+  "verify_version": {
+   "label": "核对资产实际版本与配置",
+   "disruptive": false,
+   "estimated_downtime_minutes": 0,
+   "basis": "只读核查，不改变运行状态"
+  },
+  "apply_patch": {
+   "label": "升级/打补丁到修复版本",
+   "disruptive": true,
+   "estimated_downtime_minutes": 15,
+   "basis": "动作目录配置的停机估算（需按实际发布流程调整）"
+  },
+  "restart_service": {
+   "label": "重启相关服务使缓解配置生效",
+   "disruptive": true,
+   "estimated_downtime_minutes": 5,
+   "basis": "动作目录配置的停机估算"
+  },
+  "limit_exposure": {
+   "label": "评估并降低对外暴露面（限流/白名单/关闭入口）",
+   "disruptive": true,
+   "estimated_downtime_minutes": 10,
+   "basis": "可能影响可用性，必须经负责人批准"
+  },
+  "enhanced_monitoring": {
+   "label": "加强监测与告警（针对该漏洞特征）",
+   "disruptive": false,
+   "estimated_downtime_minutes": 0,
+   "basis": "只增加观测，不改变运行状态"
+  },
+  "further_verification": {
+   "label": "进一步核实（补充版本/配置/影响证据）",
+   "disruptive": false,
+   "estimated_downtime_minutes": 0,
+   "basis": "信息补全动作，不改变运行状态"
+  }
+ },
+ "priority_weights": {
+  "severity": {
+   "critical": 40,
+   "high": 30,
+   "medium": 15,
+   "low": 5,
+   "unknown": 0
+  },
+  "exploitation": {
+   "known_exploited": 25,
+   "poc_recorded": 15,
+   "none_recorded": 0
+  },
+  "business_importance": {
+   "critical": 20,
+   "high": 15,
+   "medium": 8,
+   "low": 3,
+   "unknown": 0
+  },
+  "exposure": {
+   "public": 10,
+   "internal": 5,
+   "unknown": 0
+  },
+  "link_confidence": {
+   "affected": 5,
+   "needs_confirmation": 0
+  }
+ },
+ "assets": [
+  {
+   "asset": {
+    "id": "asset-demo-smolagents-prod",
+    "name": "Agent 工具链生产服务（合成）",
+    "component": "smolagents",
+    "ecosystem": "smolagents",
+    "version": "1.20.0",
+    "exposure": "public",
+    "business_criticality": "critical",
+    "authorized": true,
+    "synthetic": true,
+    "source": "file"
+   },
+   "policy": {
+    "asset_id": "asset-demo-smolagents-prod",
+    "maintenance_window": {
+     "weekday": "Sat",
+     "start": "22:00",
+     "end": "23:30",
+     "timezone": "Asia/Shanghai"
+    },
+    "business_importance": "critical",
+    "prohibited_actions": [
+     "restart_service"
+    ],
+    "owner": "team-agent-platform@example.invalid",
+    "acceptable_downtime_minutes": 20,
+    "explicit": true,
+    "warnings": []
+   },
+   "findings": [
+    {
+     "event_id": "CVE-2025-9959",
+     "event_title": "Sandbox escape in smolagents Local Python execution environment via dunder attributes",
+     "asset_id": "asset-demo-smolagents-prod",
+     "link_status": "affected",
+     "link_reasons": [
+      "资产版本 1.20.0 命中受影响区间"
+     ],
+     "priority": {
+      "level": "high",
+      "score": 65,
+      "score_is_provisional": false,
+      "components": {
+       "severity": 30,
+       "exploitation": 0,
+       "business_importance": 20,
+       "exposure": 10,
+       "link_confidence": 5
+      },
+      "weights": {
+       "severity": {
+        "critical": 40,
+        "high": 30,
+        "medium": 15,
+        "low": 5,
+        "unknown": 0
+       },
+       "exploitation": {
+        "known_exploited": 25,
+        "poc_recorded": 15,
+        "none_recorded": 0
+       },
+       "business_importance": {
+        "critical": 20,
+        "high": 15,
+        "medium": 8,
+        "low": 3,
+        "unknown": 0
+       },
+       "exposure": {
+        "public": 10,
+        "internal": 5,
+        "unknown": 0
+       },
+       "link_confidence": {
+        "affected": 5,
+        "needs_confirmation": 0
+       }
+      },
+      "inputs": {
+       "severity": "high",
+       "exploitation": "none_recorded",
+       "business_importance": "critical",
+       "exposure": "public",
+       "link_status": "affected"
+      },
+      "gaps": [
+       "未收录 POC/在野利用：exploitation 分量记 0 分（不等于不存在）"
+      ],
+      "exploitation_evidence_ids": [],
+      "note": "分值=分量之和（0–100）；状态非 affected 时不给出精确分值，仅输出『待核实』与参考分量，避免用推断风险冒充确定风险"
+     },
+     "recommended_actions": [
+      {
+       "action": "verify_version",
+       "rationale": "确认线上实例与受影响版本一致（版本来自资产登记）",
+       "evidence_ids": [
+        "mitre:7e4dafe046"
+       ],
+       "label": "核对资产实际版本与配置",
+       "disruptive": false,
+       "estimated_downtime_minutes": 0,
+       "basis": "只读核查，不改变运行状态",
+       "scheduling": {
+        "status": "not_required",
+        "detail": "非破坏性动作，无需维护窗口"
+       },
+       "requires_approval": false
+      },
+      {
+       "action": "enhanced_monitoring",
+       "rationale": "命中受影响区间但事件未给出修复版本，先加强监测",
+       "evidence_ids": [
+        "mitre:7e4dafe046"
+       ],
+       "label": "加强监测与告警（针对该漏洞特征）",
+       "disruptive": false,
+       "estimated_downtime_minutes": 0,
+       "basis": "只增加观测，不改变运行状态",
+       "scheduling": {
+        "status": "not_required",
+        "detail": "非破坏性动作，无需维护窗口"
+       },
+       "requires_approval": false
+      },
+      {
+       "action": "further_verification",
+       "rationale": "缺失修复版本信息，需要人工核实厂商公告",
+       "evidence_ids": [
+        "mitre:7e4dafe046"
+       ],
+       "label": "进一步核实（补充版本/配置/影响证据）",
+       "disruptive": false,
+       "estimated_downtime_minutes": 0,
+       "basis": "信息补全动作，不改变运行状态",
+       "scheduling": {
+        "status": "not_required",
+        "detail": "非破坏性动作，无需维护窗口"
+       },
+       "requires_approval": false
+      }
+     ],
+     "blocked_actions": [],
+     "scheduling": {
+      "maintenance_window": {
+       "weekday": "Sat",
+       "start": "22:00",
+       "end": "23:30",
+       "timezone": "Asia/Shanghai"
+      },
+      "acceptable_downtime_minutes": 20,
+      "window_source": "policy"
+     },
+     "conflicts": [],
+     "owner": "team-agent-platform@example.invalid",
+     "owner_known": true,
+     "policy_explicit": true,
+     "policy_warnings": [],
+     "evidence_ids": [
+      "mitre:7e4dafe046",
+      "nvd:c58ddca110",
+      "mitre:c58ddca110"
+     ],
+     "enrichment_gaps": [],
+     "poc_status": null,
+     "confidence": "confirmed",
+     "needs_human_review": false,
+     "limitations": [
+      "系统只输出建议，不执行任何扫描/隔离/升级/关机动作",
+      "风险分值基于事件严重性、利用证据、业务重要性与暴露面；缺少的输入记 0 分并列入 gaps",
+      "POC『未收录』不等于不存在；在野利用以已接入来源（CISA KEV）为准"
+     ],
+     "rank": 1
+    }
+   ],
+   "summary": {
+    "findings": 1,
+    "affected": 1,
+    "needs_confirmation": 0,
+    "needs_human_review": 0,
+    "blocked_actions": 0
+   }
+  },
+  {
+   "asset": {
+    "id": "asset-demo-copilot-prod",
+    "name": "Copilot 生产网关（合成）",
+    "component": "Microsoft 365 Copilot",
+    "ecosystem": "Microsoft",
+    "version": "unknown",
+    "exposure": "public",
+    "business_criticality": "high",
+    "authorized": true,
+    "synthetic": true,
+    "source": "file"
+   },
+   "policy": {
+    "asset_id": "asset-demo-copilot-prod",
+    "maintenance_window": {
+     "weekday": "Sat",
+     "start": "01:00",
+     "end": "03:00",
+     "timezone": "Asia/Shanghai"
+    },
+    "business_importance": "critical",
+    "prohibited_actions": [
+     "restart_service"
+    ],
+    "owner": null,
+    "acceptable_downtime_minutes": 10,
+    "explicit": true,
+    "warnings": [
+     "owner 缺失：建议会标注为『负责人未知，需人工指派』"
+    ]
+   },
+   "findings": [],
+   "summary": {
+    "findings": 0,
+    "affected": 0,
+    "needs_confirmation": 0,
+    "needs_human_review": 0,
+    "blocked_actions": 0
+   }
+  },
+  {
+   "asset": {
+    "id": "asset-demo-vllm-prod",
+    "name": "推理服务生产集群（合成）",
+    "component": "vllm",
+    "ecosystem": "PyPI",
+    "version": "0.29.0",
+    "exposure": "internal",
+    "business_criticality": "high",
+    "authorized": true,
+    "synthetic": true,
+    "source": "file"
+   },
+   "policy": {
+    "asset_id": "asset-demo-vllm-prod",
+    "maintenance_window": {
+     "weekday": "Sun",
+     "start": "02:00",
+     "end": "05:00",
+     "timezone": "Asia/Shanghai"
+    },
+    "business_importance": "high",
+    "prohibited_actions": [],
+    "owner": "team-inference@example.invalid",
+    "acceptable_downtime_minutes": 30,
+    "explicit": true,
+    "warnings": []
+   },
+   "findings": [
+    {
+     "event_id": "PYSEC-2026-4000",
+     "event_title": "PYSEC-2026-4000",
+     "asset_id": "asset-demo-vllm-prod",
+     "link_status": "affected",
+     "link_reasons": [
+      "资产版本 0.29.0 命中受影响区间"
+     ],
+     "priority": {
+      "level": "low",
+      "score": 25,
+      "score_is_provisional": false,
+      "components": {
+       "severity": 0,
+       "exploitation": 0,
+       "business_importance": 15,
+       "exposure": 5,
+       "link_confidence": 5
+      },
+      "weights": {
+       "severity": {
+        "critical": 40,
+        "high": 30,
+        "medium": 15,
+        "low": 5,
+        "unknown": 0
+       },
+       "exploitation": {
+        "known_exploited": 25,
+        "poc_recorded": 15,
+        "none_recorded": 0
+       },
+       "business_importance": {
+        "critical": 20,
+        "high": 15,
+        "medium": 8,
+        "low": 3,
+        "unknown": 0
+       },
+       "exposure": {
+        "public": 10,
+        "internal": 5,
+        "unknown": 0
+       },
+       "link_confidence": {
+        "affected": 5,
+        "needs_confirmation": 0
+       }
+      },
+      "inputs": {
+       "severity": "unknown",
+       "exploitation": "none_recorded",
+       "business_importance": "high",
+       "exposure": "internal",
+       "link_status": "affected"
+      },
+      "gaps": [
+       "缺少严重性/CVSS：severity 分量记 0 分，不推断",
+       "未收录 POC/在野利用：exploitation 分量记 0 分（不等于不存在）"
+      ],
+      "exploitation_evidence_ids": [],
+      "note": "分值=分量之和（0–100）；状态非 affected 时不给出精确分值，仅输出『待核实』与参考分量，避免用推断风险冒充确定风险"
+     },
+     "recommended_actions": [
+      {
+       "action": "verify_version",
+       "rationale": "确认线上实例与受影响版本一致（版本来自资产登记）",
+       "evidence_ids": [
+        "osv:acca1ed12f"
+       ],
+       "label": "核对资产实际版本与配置",
+       "disruptive": false,
+       "estimated_downtime_minutes": 0,
+       "basis": "只读核查，不改变运行状态",
+       "scheduling": {
+        "status": "not_required",
+        "detail": "非破坏性动作，无需维护窗口"
+       },
+       "requires_approval": false
+      },
+      {
+       "action": "apply_patch",
+       "target_version": "0.30.0",
+       "rationale": "事件给出修复版本 0.30.0，且资产命中受影响区间",
+       "evidence_ids": [
+        "osv:acca1ed12f"
+       ],
+       "label": "升级/打补丁到修复版本",
+       "disruptive": true,
+       "estimated_downtime_minutes": 15,
+       "basis": "动作目录配置的停机估算（需按实际发布流程调整）",
+       "scheduling": {
+        "status": "inside_declared_window_only",
+        "allowed_from": "Sun 02:00",
+        "allowed_until": "Sun 05:00",
+        "timezone": "Asia/Shanghai",
+        "basis": "资产策略声明的维护窗口（系统不判断当前时刻）"
+       },
+       "requires_approval": true,
+       "approval_reason": "涉及生产影响，需负责人批准后执行"
+      }
+     ],
+     "blocked_actions": [],
+     "scheduling": {
+      "maintenance_window": {
+       "weekday": "Sun",
+       "start": "02:00",
+       "end": "05:00",
+       "timezone": "Asia/Shanghai"
+      },
+      "acceptable_downtime_minutes": 30,
+      "window_source": "policy"
+     },
+     "conflicts": [],
+     "owner": "team-inference@example.invalid",
+     "owner_known": true,
+     "policy_explicit": true,
+     "policy_warnings": [],
+     "evidence_ids": [
+      "osv:acca1ed12f",
+      "osv:bd7777defa"
+     ],
+     "enrichment_gaps": [],
+     "poc_status": null,
+     "confidence": "confirmed",
+     "needs_human_review": false,
+     "limitations": [
+      "系统只输出建议，不执行任何扫描/隔离/升级/关机动作",
+      "风险分值基于事件严重性、利用证据、业务重要性与暴露面；缺少的输入记 0 分并列入 gaps",
+      "POC『未收录』不等于不存在；在野利用以已接入来源（CISA KEV）为准"
+     ],
+     "rank": 1
+    }
+   ],
+   "summary": {
+    "findings": 1,
+    "affected": 1,
+    "needs_confirmation": 0,
+    "needs_human_review": 0,
+    "blocked_actions": 0
+   }
+  },
+  {
+   "asset": {
+    "id": "asset-demo-vllm-lab",
+    "name": "推理服务实验环境（合成）",
+    "component": "vllm",
+    "ecosystem": "PyPI",
+    "version": "0.29.0",
+    "exposure": "internal",
+    "business_criticality": "low",
+    "authorized": true,
+    "synthetic": true,
+    "source": "file"
+   },
+   "policy": {
+    "asset_id": "asset-demo-vllm-lab",
+    "maintenance_window": {
+     "weekday": "Wed",
+     "start": "09:00",
+     "end": "18:00",
+     "timezone": "Asia/Shanghai"
+    },
+    "business_importance": "low",
+    "prohibited_actions": [],
+    "owner": "team-inference@example.invalid",
+    "acceptable_downtime_minutes": 240,
+    "explicit": true,
+    "warnings": []
+   },
+   "findings": [
+    {
+     "event_id": "PYSEC-2026-4000",
+     "event_title": "PYSEC-2026-4000",
+     "asset_id": "asset-demo-vllm-lab",
+     "link_status": "affected",
+     "link_reasons": [
+      "资产版本 0.29.0 命中受影响区间"
+     ],
+     "priority": {
+      "level": "low",
+      "score": 13,
+      "score_is_provisional": false,
+      "components": {
+       "severity": 0,
+       "exploitation": 0,
+       "business_importance": 3,
+       "exposure": 5,
+       "link_confidence": 5
+      },
+      "weights": {
+       "severity": {
+        "critical": 40,
+        "high": 30,
+        "medium": 15,
+        "low": 5,
+        "unknown": 0
+       },
+       "exploitation": {
+        "known_exploited": 25,
+        "poc_recorded": 15,
+        "none_recorded": 0
+       },
+       "business_importance": {
+        "critical": 20,
+        "high": 15,
+        "medium": 8,
+        "low": 3,
+        "unknown": 0
+       },
+       "exposure": {
+        "public": 10,
+        "internal": 5,
+        "unknown": 0
+       },
+       "link_confidence": {
+        "affected": 5,
+        "needs_confirmation": 0
+       }
+      },
+      "inputs": {
+       "severity": "unknown",
+       "exploitation": "none_recorded",
+       "business_importance": "low",
+       "exposure": "internal",
+       "link_status": "affected"
+      },
+      "gaps": [
+       "缺少严重性/CVSS：severity 分量记 0 分，不推断",
+       "未收录 POC/在野利用：exploitation 分量记 0 分（不等于不存在）"
+      ],
+      "exploitation_evidence_ids": [],
+      "note": "分值=分量之和（0–100）；状态非 affected 时不给出精确分值，仅输出『待核实』与参考分量，避免用推断风险冒充确定风险"
+     },
+     "recommended_actions": [
+      {
+       "action": "verify_version",
+       "rationale": "确认线上实例与受影响版本一致（版本来自资产登记）",
+       "evidence_ids": [
+        "osv:acca1ed12f"
+       ],
+       "label": "核对资产实际版本与配置",
+       "disruptive": false,
+       "estimated_downtime_minutes": 0,
+       "basis": "只读核查，不改变运行状态",
+       "scheduling": {
+        "status": "not_required",
+        "detail": "非破坏性动作，无需维护窗口"
+       },
+       "requires_approval": false
+      },
+      {
+       "action": "apply_patch",
+       "target_version": "0.30.0",
+       "rationale": "事件给出修复版本 0.30.0，且资产命中受影响区间",
+       "evidence_ids": [
+        "osv:acca1ed12f"
+       ],
+       "label": "升级/打补丁到修复版本",
+       "disruptive": true,
+       "estimated_downtime_minutes": 15,
+       "basis": "动作目录配置的停机估算（需按实际发布流程调整）",
+       "scheduling": {
+        "status": "inside_declared_window_only",
+        "allowed_from": "Wed 09:00",
+        "allowed_until": "Wed 18:00",
+        "timezone": "Asia/Shanghai",
+        "basis": "资产策略声明的维护窗口（系统不判断当前时刻）"
+       },
+       "requires_approval": true,
+       "approval_reason": "涉及生产影响，需负责人批准后执行"
+      }
+     ],
+     "blocked_actions": [],
+     "scheduling": {
+      "maintenance_window": {
+       "weekday": "Wed",
+       "start": "09:00",
+       "end": "18:00",
+       "timezone": "Asia/Shanghai"
+      },
+      "acceptable_downtime_minutes": 240,
+      "window_source": "policy"
+     },
+     "conflicts": [],
+     "owner": "team-inference@example.invalid",
+     "owner_known": true,
+     "policy_explicit": true,
+     "policy_warnings": [],
+     "evidence_ids": [
+      "osv:acca1ed12f",
+      "osv:bd7777defa"
+     ],
+     "enrichment_gaps": [],
+     "poc_status": null,
+     "confidence": "confirmed",
+     "needs_human_review": false,
+     "limitations": [
+      "系统只输出建议，不执行任何扫描/隔离/升级/关机动作",
+      "风险分值基于事件严重性、利用证据、业务重要性与暴露面；缺少的输入记 0 分并列入 gaps",
+      "POC『未收录』不等于不存在；在野利用以已接入来源（CISA KEV）为准"
+     ],
+     "rank": 1
+    }
+   ],
+   "summary": {
+    "findings": 1,
+    "affected": 1,
+    "needs_confirmation": 0,
+    "needs_human_review": 0,
+    "blocked_actions": 0
+   }
+  },
+  {
+   "asset": {
+    "id": "asset-demo-vllm-edge",
+    "name": "推理服务对外边缘节点（合成）",
+    "component": "vllm",
+    "ecosystem": "PyPI",
+    "version": "0.29.0",
+    "exposure": "public",
+    "business_criticality": "critical",
+    "authorized": true,
+    "synthetic": true,
+    "source": "file"
+   },
+   "policy": {
+    "asset_id": "asset-demo-vllm-edge",
+    "maintenance_window": {
+     "weekday": "Mon",
+     "start": "01:00",
+     "end": "02:00",
+     "timezone": "Asia/Shanghai"
+    },
+    "business_importance": "critical",
+    "prohibited_actions": [],
+    "owner": "team-edge@example.invalid",
+    "acceptable_downtime_minutes": 5,
+    "explicit": true,
+    "warnings": []
+   },
+   "findings": [
+    {
+     "event_id": "PYSEC-2026-4000",
+     "event_title": "PYSEC-2026-4000",
+     "asset_id": "asset-demo-vllm-edge",
+     "link_status": "affected",
+     "link_reasons": [
+      "资产版本 0.29.0 命中受影响区间"
+     ],
+     "priority": {
+      "level": "medium",
+      "score": 35,
+      "score_is_provisional": false,
+      "components": {
+       "severity": 0,
+       "exploitation": 0,
+       "business_importance": 20,
+       "exposure": 10,
+       "link_confidence": 5
+      },
+      "weights": {
+       "severity": {
+        "critical": 40,
+        "high": 30,
+        "medium": 15,
+        "low": 5,
+        "unknown": 0
+       },
+       "exploitation": {
+        "known_exploited": 25,
+        "poc_recorded": 15,
+        "none_recorded": 0
+       },
+       "business_importance": {
+        "critical": 20,
+        "high": 15,
+        "medium": 8,
+        "low": 3,
+        "unknown": 0
+       },
+       "exposure": {
+        "public": 10,
+        "internal": 5,
+        "unknown": 0
+       },
+       "link_confidence": {
+        "affected": 5,
+        "needs_confirmation": 0
+       }
+      },
+      "inputs": {
+       "severity": "unknown",
+       "exploitation": "none_recorded",
+       "business_importance": "critical",
+       "exposure": "public",
+       "link_status": "affected"
+      },
+      "gaps": [
+       "缺少严重性/CVSS：severity 分量记 0 分，不推断",
+       "未收录 POC/在野利用：exploitation 分量记 0 分（不等于不存在）"
+      ],
+      "exploitation_evidence_ids": [],
+      "note": "分值=分量之和（0–100）；状态非 affected 时不给出精确分值，仅输出『待核实』与参考分量，避免用推断风险冒充确定风险"
+     },
+     "recommended_actions": [
+      {
+       "action": "verify_version",
+       "rationale": "确认线上实例与受影响版本一致（版本来自资产登记）",
+       "evidence_ids": [
+        "osv:acca1ed12f"
+       ],
+       "label": "核对资产实际版本与配置",
+       "disruptive": false,
+       "estimated_downtime_minutes": 0,
+       "basis": "只读核查，不改变运行状态",
+       "scheduling": {
+        "status": "not_required",
+        "detail": "非破坏性动作，无需维护窗口"
+       },
+       "requires_approval": false
+      },
+      {
+       "action": "apply_patch",
+       "target_version": "0.30.0",
+       "rationale": "事件给出修复版本 0.30.0，且资产命中受影响区间",
+       "evidence_ids": [
+        "osv:acca1ed12f"
+       ],
+       "label": "升级/打补丁到修复版本",
+       "disruptive": true,
+       "estimated_downtime_minutes": 15,
+       "basis": "动作目录配置的停机估算（需按实际发布流程调整）",
+       "constraint_warning": "预计停机 15 分钟 > 可接受停机 5 分钟，不得作为无条件推荐",
+       "scheduling": {
+        "status": "inside_declared_window_only",
+        "allowed_from": "Mon 01:00",
+        "allowed_until": "Mon 02:00",
+        "timezone": "Asia/Shanghai",
+        "basis": "资产策略声明的维护窗口（系统不判断当前时刻）"
+       },
+       "requires_approval": true,
+       "approval_reason": "涉及生产影响，需负责人批准后执行"
+      }
+     ],
+     "blocked_actions": [],
+     "scheduling": {
+      "maintenance_window": {
+       "weekday": "Mon",
+       "start": "01:00",
+       "end": "02:00",
+       "timezone": "Asia/Shanghai"
+      },
+      "acceptable_downtime_minutes": 5,
+      "window_source": "policy"
+     },
+     "conflicts": [
+      "预计停机 15 分钟 > 可接受停机 5 分钟，不得作为无条件推荐"
+     ],
+     "owner": "team-edge@example.invalid",
+     "owner_known": true,
+     "policy_explicit": true,
+     "policy_warnings": [],
+     "evidence_ids": [
+      "osv:acca1ed12f",
+      "osv:bd7777defa"
+     ],
+     "enrichment_gaps": [],
+     "poc_status": null,
+     "confidence": "confirmed",
+     "needs_human_review": true,
+     "limitations": [
+      "系统只输出建议，不执行任何扫描/隔离/升级/关机动作",
+      "风险分值基于事件严重性、利用证据、业务重要性与暴露面；缺少的输入记 0 分并列入 gaps",
+      "POC『未收录』不等于不存在；在野利用以已接入来源（CISA KEV）为准"
+     ],
+     "rank": 1
+    }
+   ],
+   "summary": {
+    "findings": 1,
+    "affected": 1,
+    "needs_confirmation": 0,
+    "needs_human_review": 1,
+    "blocked_actions": 0
+   }
+  },
+  {
+   "asset": {
+    "id": "asset-demo-openwebui",
+    "name": "Open WebUI 内部面板（合成）",
+    "component": "open-webui",
+    "ecosystem": "PyPI",
+    "version": "0.10.0",
+    "exposure": "internal",
+    "business_criticality": "medium",
+    "authorized": true,
+    "synthetic": true,
+    "source": "file"
+   },
+   "policy": {
+    "asset_id": "asset-demo-openwebui",
+    "maintenance_window": null,
+    "business_importance": "medium",
+    "prohibited_actions": [
+     "apply_patch",
+     "restart_service"
+    ],
+    "owner": null,
+    "acceptable_downtime_minutes": 0,
+    "explicit": true,
+    "warnings": [
+     "owner 缺失：建议会标注为『负责人未知，需人工指派』"
+    ]
+   },
+   "findings": [],
+   "summary": {
+    "findings": 0,
+    "affected": 0,
+    "needs_confirmation": 0,
+    "needs_human_review": 0,
+    "blocked_actions": 0
+   }
+  }
+ ],
+ "totals": {
+  "assets": 6,
+  "assets_with_explicit_policy": 6,
+  "findings": 4,
+  "needs_human_review": 1
+ }
+}

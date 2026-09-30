@@ -48,7 +48,14 @@ _GENERIC_SECURITY_TERMS = {
 def terms(value: str) -> list[str]:
     """Tokenize mixed Chinese/English security text without external models."""
     lowered = _text(value).casefold()
-    tokens = re.findall(r"[a-z0-9][a-z0-9_.:/+-]*", lowered)
+    # '.', ':', '/', '+', '-', '_' 允许出现在词**内部**（0.28.0、cve-2026-41106、
+    # vllm-project/vllm），但不允许挂在词尾。正文标题里的 "JevOut:" 会被切成
+    # "jevout:"，与查询中的 "jevout" 永远对不上——该专名因此检索不到。
+    tokens = [
+        stripped
+        for stripped in (raw.strip("_.:/+-") for raw in re.findall(r"[a-z0-9][a-z0-9_.:/+-]*", lowered))
+        if stripped
+    ]
     for phrase, additions in _EXPANSIONS.items():
         if phrase in lowered:
             tokens.extend(additions)
@@ -236,7 +243,16 @@ def chunks_from_records(records: Iterable[dict]) -> list[Chunk]:
     """
     chunks: list[Chunk] = []
     for item in records or []:
-        body = _text(item.get("text") or item.get("quote"))
+        # `char_start`/`char_end` address the text exactly as it was stored, so
+        # the audit check below must use that text verbatim.  `_text()` is only
+        # used to decide whether the record is populated at all: using the
+        # stripped string for the length check rejected every record whose text
+        # ends with a newline, silently discarding roughly half of the corpus.
+        # `or` (not `is None`) keeps the pre-existing fallback: an empty `text`
+        # still falls back to `quote`.
+        raw_text = item.get("text") or item.get("quote")
+        text = "" if raw_text is None else str(raw_text)
+        body = _text(raw_text)
         document_id = _text(item.get("document_id"))
         chunk_id = _text(item.get("chunk_id"))
         snapshot_hash = _text(item.get("snapshot_hash"))
@@ -244,14 +260,14 @@ def chunks_from_records(records: Iterable[dict]) -> list[Chunk]:
             continue
         try:
             start = int(item.get("char_start") or 0)
-            end = int(item.get("char_end") if item.get("char_end") is not None else start + len(body))
+            end = int(item.get("char_end") if item.get("char_end") is not None else start + len(text))
         except (TypeError, ValueError):
             continue
-        if start < 0 or end != start + len(body):
+        if start < 0 or end != start + len(text):
             # A persisted quote whose range does not match cannot be audited.
             continue
         chunks.append(Chunk(
-            document_id=document_id, chunk_id=chunk_id, text=body,
+            document_id=document_id, chunk_id=chunk_id, text=text,
             char_start=start, char_end=end, snapshot_hash=snapshot_hash,
             snapshot_origin=_text(item.get("snapshot_origin")) or "persisted_chunk_record",
             source_id=_text(item.get("source_id")), title=_text(item.get("title")),
@@ -318,7 +334,21 @@ def retrieve_chunks(
         # as "漏洞"/"vulnerability".  A single generic overlap must not turn
         # an otherwise unknown subject into a confident retrieval result.
         if not exact_identifier and len(unique_query) >= 4 and len(matched) < 2:
-            continue
+            # A long natural-language question with only one overlapping term
+            # is weak evidence -- unless that term is *discriminative*.  A rare
+            # term (low document frequency) carries the subject of the query,
+            # whereas a ubiquitous word such as "ai" does not.  Chinese question
+            # wording contributes many n-grams that never occur in an English
+            # corpus; counting those as unmet requirements rejected every
+            # "English proper noun + Chinese question" query.
+            only_match = matched[0] if len(matched) == 1 else None
+            # 阈值按实际语料标定（3639 分块）：
+            #   distillguard 0.6% / auroc 4.2% / multi-agent 8.1% / kernel-level 9.0%
+            # 都是可以单独承载查询的技术词；而 ai 35.8% / model 20.0% /
+            # security 13.9% 属于"遍布语料"的通用词，单独命中不足以支撑结论。
+            # 10% 这条线能分开这两组（N/20 会把 multi-agent、kernel-level 一起拒掉）。
+            if only_match is None or df.get(only_match, 0) > max(1, len(chunks) // 10):
+                continue
         score = 8.0 if exact_identifier else 0.0
         for term in query_terms:
             frequency = tokens.count(term)
