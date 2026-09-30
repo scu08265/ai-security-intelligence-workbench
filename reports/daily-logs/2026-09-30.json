@@ -1,6 +1,6 @@
 {
   "date": "2026-09-30",
-  "generated_at": "2026-09-30T07:58:05Z",
+  "generated_at": "2026-09-30T08:58:06Z",
   "version": "0.2.2",
   "scheduled_runs": [
     {
@@ -1327,6 +1327,152 @@
           ]
         }
       ]
+    },
+    {
+      "id": "run-95c66b263a28",
+      "status": "completed",
+      "started_at": "2026-09-30T08:44:47Z",
+      "finished_at": "2026-09-30T08:54:17Z",
+      "summary": "采集 12 个来源：新增 0，更新 1，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-09-30T16:00:00+08:00",
+        "actual_at": "2026-09-30T08:44:47Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 203,
+          "kept": 1,
+          "duration_ms": 214031,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 01:50 → 2026-09-30 08:44，共 203 条，分 2 页扫描 203 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 1,
+          "duration_ms": 10390,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1899,
+          "kept": 0,
+          "duration_ms": 4500,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1899 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1729,
+          "kept": 0,
+          "duration_ms": 1735,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.29（发布 2026-09-29T13:51:33.3852Z），全量 1729 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2600,
+          "kept": 10,
+          "duration_ms": 11735,
+          "error": null,
+          "notes": [
+            "更新索引共 189 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 234,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 257015,
+          "error": "ConnectTimeout: _ssl.c:993: The handshake operation timed out",
+          "notes": []
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1046,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 969,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7173 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 953,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 18875,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 47844,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
     }
   ],
   "alerts": [
@@ -1484,8 +1630,8 @@
     }
   ],
   "summary": {
-    "run_count": 9,
-    "successful_run_count": 8,
+    "run_count": 10,
+    "successful_run_count": 9,
     "partial_run_count": 1,
     "failed_run_count": 0
   }
