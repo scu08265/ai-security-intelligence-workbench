@@ -1,0 +1,946 @@
+{
+ "schema_version": "b-qa-human-score-1.0",
+ "computable": true,
+ "cases_total": 50,
+ "human_judged_cases": 50,
+ "pending_human_cases": 0,
+ "answer": {
+  "numerator": 7,
+  "denominator": 33,
+  "rate": 0.2121,
+  "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+  "strict_denominator": 9,
+  "strict_rate": 0.7778,
+  "partial_counted_not_correct": 24,
+  "by_label": {
+   "correct": 7,
+   "incorrect": 2,
+   "partial": 24
+  },
+  "undecided": 17
+ },
+ "citation": {
+  "numerator": 1,
+  "denominator": 31,
+  "rate": 0.0323,
+  "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+  "by_label": {
+   "supported": 1,
+   "partially_supported": 29,
+   "unsupported": 1,
+   "not_applicable": 17,
+   "unknown": 2
+  },
+  "not_applicable": 17,
+  "undecided": 2
+ },
+ "refusal": {
+  "judged_cases": 17,
+  "should_refuse": {
+   "n": 12,
+   "correctly_refused": 6,
+   "refused_recall": 0.5,
+   "answered_by_system": 6
+  },
+  "should_answer": {
+   "n": 5,
+   "answered_correctly": 0,
+   "wrongly_refused": 5
+  },
+  "refused_precision": 0.5455,
+  "refusal_accuracy": 0.3529,
+  "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+  "not_applicable": 33,
+  "undecided": 0
+ },
+ "by_category": {
+  "中英文混合查询": {
+   "cases": 6,
+   "answer": {
+    "numerator": 1,
+    "denominator": 6,
+    "rate": 0.1667,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 1,
+    "strict_rate": 1.0,
+    "partial_counted_not_correct": 5,
+    "by_label": {
+     "correct": 1,
+     "partial": 5
+    },
+    "undecided": 0
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 6,
+    "rate": 0.0,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "partially_supported": 6
+    },
+    "not_applicable": 0,
+    "undecided": 0
+   },
+   "refusal": {
+    "judged_cases": 0,
+    "should_refuse": {
+     "n": 0,
+     "correctly_refused": 0,
+     "refused_recall": null,
+     "answered_by_system": 0
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": null,
+    "refusal_accuracy": null,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 6,
+    "undecided": 0
+   }
+  },
+  "基础事实问答": {
+   "cases": 10,
+   "answer": {
+    "numerator": 4,
+    "denominator": 10,
+    "rate": 0.4,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 4,
+    "strict_rate": 1.0,
+    "partial_counted_not_correct": 6,
+    "by_label": {
+     "correct": 4,
+     "partial": 6
+    },
+    "undecided": 0
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 8,
+    "rate": 0.0,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "partially_supported": 8,
+     "not_applicable": 1,
+     "unknown": 1
+    },
+    "not_applicable": 1,
+    "undecided": 1
+   },
+   "refusal": {
+    "judged_cases": 0,
+    "should_refuse": {
+     "n": 0,
+     "correctly_refused": 0,
+     "refused_recall": null,
+     "answered_by_system": 0
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": null,
+    "refusal_accuracy": null,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 10,
+    "undecided": 0
+   }
+  },
+  "多轮追问": {
+   "cases": 6,
+   "answer": {
+    "numerator": 0,
+    "denominator": 1,
+    "rate": 0.0,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 1,
+    "strict_rate": 0.0,
+    "partial_counted_not_correct": 0,
+    "by_label": {
+     "incorrect": 1
+    },
+    "undecided": 5
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "not_applicable": 6
+    },
+    "not_applicable": 6,
+    "undecided": 0
+   },
+   "refusal": {
+    "judged_cases": 5,
+    "should_refuse": {
+     "n": 0,
+     "correctly_refused": 0,
+     "refused_recall": null,
+     "answered_by_system": 0
+    },
+    "should_answer": {
+     "n": 5,
+     "answered_correctly": 0,
+     "wrongly_refused": 5
+    },
+    "refused_precision": 0.0,
+    "refusal_accuracy": 0.0,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 1,
+    "undecided": 0
+   }
+  },
+  "拒答及证据不足": {
+   "cases": 5,
+   "answer": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 0,
+    "strict_rate": null,
+    "partial_counted_not_correct": 0,
+    "by_label": {},
+    "undecided": 5
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "not_applicable": 5
+    },
+    "not_applicable": 5,
+    "undecided": 0
+   },
+   "refusal": {
+    "judged_cases": 5,
+    "should_refuse": {
+     "n": 5,
+     "correctly_refused": 2,
+     "refused_recall": 0.4,
+     "answered_by_system": 3
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": 1.0,
+    "refusal_accuracy": 0.4,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 0,
+    "undecided": 0
+   }
+  },
+  "无证据问题与范围外问题": {
+   "cases": 5,
+   "answer": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 0,
+    "strict_rate": null,
+    "partial_counted_not_correct": 0,
+    "by_label": {},
+    "undecided": 5
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "not_applicable": 5
+    },
+    "not_applicable": 5,
+    "undecided": 0
+   },
+   "refusal": {
+    "judged_cases": 5,
+    "should_refuse": {
+     "n": 5,
+     "correctly_refused": 4,
+     "refused_recall": 0.8,
+     "answered_by_system": 1
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": 1.0,
+    "refusal_accuracy": 0.8,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 0,
+    "undecided": 0
+   }
+  },
+  "术语及语义查询": {
+   "cases": 8,
+   "answer": {
+    "numerator": 1,
+    "denominator": 8,
+    "rate": 0.125,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 1,
+    "strict_rate": 1.0,
+    "partial_counted_not_correct": 7,
+    "by_label": {
+     "correct": 1,
+     "partial": 7
+    },
+    "undecided": 0
+   },
+   "citation": {
+    "numerator": 1,
+    "denominator": 8,
+    "rate": 0.125,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "supported": 1,
+     "partially_supported": 7
+    },
+    "not_applicable": 0,
+    "undecided": 0
+   },
+   "refusal": {
+    "judged_cases": 0,
+    "should_refuse": {
+     "n": 0,
+     "correctly_refused": 0,
+     "refused_recall": null,
+     "answered_by_system": 0
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": null,
+    "refusal_accuracy": null,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 8,
+    "undecided": 0
+   }
+  },
+  "真实多跳问答": {
+   "cases": 2,
+   "answer": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 0,
+    "strict_rate": null,
+    "partial_counted_not_correct": 0,
+    "by_label": {},
+    "undecided": 2
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 1,
+    "rate": 0.0,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "partially_supported": 1,
+     "unknown": 1
+    },
+    "not_applicable": 0,
+    "undecided": 1
+   },
+   "refusal": {
+    "judged_cases": 2,
+    "should_refuse": {
+     "n": 2,
+     "correctly_refused": 0,
+     "refused_recall": 0.0,
+     "answered_by_system": 2
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": null,
+    "refusal_accuracy": 0.0,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 0,
+    "undecided": 0
+   }
+  },
+  "跨文档问答": {
+   "cases": 8,
+   "answer": {
+    "numerator": 1,
+    "denominator": 8,
+    "rate": 0.125,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 2,
+    "strict_rate": 0.5,
+    "partial_counted_not_correct": 6,
+    "by_label": {
+     "correct": 1,
+     "incorrect": 1,
+     "partial": 6
+    },
+    "undecided": 0
+   },
+   "citation": {
+    "numerator": 0,
+    "denominator": 8,
+    "rate": 0.0,
+    "rule": "supported / (supported + partially_supported + unsupported)；not_applicable（本题不需要引用）与 unknown 不进分母",
+    "by_label": {
+     "partially_supported": 7,
+     "unsupported": 1
+    },
+    "not_applicable": 0,
+    "undecided": 0
+   },
+   "refusal": {
+    "judged_cases": 0,
+    "should_refuse": {
+     "n": 0,
+     "correctly_refused": 0,
+     "refused_recall": null,
+     "answered_by_system": 0
+    },
+    "should_answer": {
+     "n": 0,
+     "answered_correctly": 0,
+     "wrongly_refused": 0
+    },
+    "refused_precision": null,
+    "refusal_accuracy": null,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母；not_applicable 与空白单列；拒答本身不等于正确",
+    "not_applicable": 8,
+    "undecided": 0
+   }
+  }
+ },
+ "latency_ms": {
+  "samples": 50,
+  "p50": 427.1,
+  "p95": 584.6,
+  "scope": "机器实测端到端耗时：与本轮 50 题工作表同一批运行记录，非历史数据；分位数用最近秩口径、不做插值；超时阈值 5000 ms"
+ },
+ "errors": {
+  "timeouts": 0,
+  "failures": 0
+ },
+ "note": null,
+ "machine_metrics": {
+  "source": "artifacts\\b_eval\\formal_qa_results.json",
+  "batch": "50 题固定问答集，本轮实测运行记录",
+  "document_hit_rate": {
+   "ok": 31,
+   "n": 36,
+   "rate": 0.8611,
+   "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
+  },
+  "term_hit_rate": {
+   "ok": 25,
+   "n": 38,
+   "rate": 0.6579,
+   "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
+  },
+  "refusal_consistency": {
+   "ok": 39,
+   "n": 50,
+   "rate": 0.78
+  },
+  "citations": {
+   "total": 187,
+   "retrievable": 187,
+   "rate": 1.0
+  },
+  "answer_semantic_accuracy": {
+   "value": null,
+   "reason": "无人工核验标准答案，按规则不计入正式准确率"
+  },
+  "confusion": {
+   "should_refuse_true": {
+    "n": 12,
+    "refused_ok": 6,
+    "answered_wrongly": 6,
+    "refusal_recall": 0.5
+   },
+   "should_refuse_false": {
+    "n": 38,
+    "answered_ok": 33,
+    "refused_wrongly": 5,
+    "answer_rate": 0.8684
+   }
+  },
+  "latency_ms": {
+   "samples": 50,
+   "p50": 427.1,
+   "p95": 584.6,
+   "min": 314.5,
+   "max": 679.9,
+   "mean": 445.3
+  },
+  "warning": "机器指标不等于准确率：引用命中/词命中/拒答一致率都是机械判定，不得与人工准确率混用或相加"
+ },
+ "target_comparison": {
+  "targets": [
+   "75%",
+   "90%",
+   "95%"
+  ],
+  "rule": "逐指标对照，**不得**把不同指标合成单一总分；人工指标在无金标准时输出『不可对照』",
+  "metrics": [
+   {
+    "metric": "人工·答案准确率",
+    "value": 0.2121,
+    "numerator": 7,
+    "denominator": 33,
+    "scope": "分母=已人工判定 correct/incorrect/partial 的题",
+    "comparison": {
+     "75%": "差 53.79 pt",
+     "90%": "差 68.79 pt",
+     "95%": "差 73.79 pt"
+    }
+   },
+   {
+    "metric": "人工·引用准确率",
+    "value": 0.0323,
+    "numerator": 1,
+    "denominator": 31,
+    "scope": "分母=已人工判定 supported/partially/unsupported 的题",
+    "comparison": {
+     "75%": "差 71.77 pt",
+     "90%": "差 86.77 pt",
+     "95%": "差 91.77 pt"
+    }
+   },
+   {
+    "metric": "人工·拒答召回率",
+    "value": 0.5,
+    "numerator": 6,
+    "denominator": 12,
+    "scope": "分母=人工已判定的应拒答题",
+    "comparison": {
+     "75%": "差 25.00 pt",
+     "90%": "差 40.00 pt",
+     "95%": "差 45.00 pt"
+    }
+   },
+   {
+    "metric": "机器·引用命中率",
+    "value": 0.8611,
+    "numerator": 31,
+    "denominator": 36,
+    "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案",
+    "comparison": {
+     "75%": "超出 11.11 pt",
+     "90%": "差 3.89 pt",
+     "95%": "差 8.89 pt"
+    }
+   },
+   {
+    "metric": "机器·预期词命中率",
+    "value": 0.6579,
+    "numerator": 25,
+    "denominator": 38,
+    "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率",
+    "comparison": {
+     "75%": "差 9.21 pt",
+     "90%": "差 24.21 pt",
+     "95%": "差 29.21 pt"
+    }
+   },
+   {
+    "metric": "机器·拒答一致率",
+    "value": 0.78,
+    "numerator": 39,
+    "denominator": 50,
+    "scope": "机器实测：与 should_refuse 是否一致，不是人工核验",
+    "comparison": {
+     "75%": "超出 3.00 pt",
+     "90%": "差 12.00 pt",
+     "95%": "差 17.00 pt"
+    }
+   },
+   {
+    "metric": "机器·引用可追溯率",
+    "value": 1.0,
+    "numerator": 187,
+    "denominator": 187,
+    "scope": "机器实测：引用 ID 是否能在库中取回",
+    "comparison": {
+     "75%": "超出 25.00 pt",
+     "90%": "超出 10.00 pt",
+     "95%": "超出 5.00 pt"
+    }
+   }
+  ]
+ },
+ "failure_samples": [
+  {
+   "question_id": "BQA-009",
+   "category": "基础事实问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "引用支持性=pending_human_review"
+   ],
+   "contested": false,
+   "reason": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
+  },
+  {
+   "question_id": "BQA-013",
+   "category": "术语及语义查询",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "引用支持性=pending_human_review"
+   ],
+   "contested": false,
+   "reason": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
+  },
+  {
+   "question_id": "BQA-018",
+   "category": "术语及语义查询",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "引用支持性=pending_human_review"
+   ],
+   "contested": false,
+   "reason": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
+  },
+  {
+   "question_id": "BQA-022",
+   "category": "中英文混合查询",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "引用支持性=pending_human_review"
+   ],
+   "contested": false,
+   "reason": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
+  },
+  {
+   "question_id": "BQA-024",
+   "category": "中英文混合查询",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "引用支持性=pending_human_review"
+   ],
+   "contested": false,
+   "reason": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
+  },
+  {
+   "question_id": "BQA-025",
+   "category": "多轮追问",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=incorrect",
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+  },
+  {
+   "question_id": "BQA-026",
+   "category": "多轮追问",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=incorrect",
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+  },
+  {
+   "question_id": "BQA-028",
+   "category": "多轮追问",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=incorrect",
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+  },
+  {
+   "question_id": "BQA-029",
+   "category": "多轮追问",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=incorrect",
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+  },
+  {
+   "question_id": "BQA-030",
+   "category": "多轮追问",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=incorrect",
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+  },
+  {
+   "question_id": "BQA-031",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-032",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-033",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review",
+    "引用支持性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-034",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-035",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review",
+    "引用支持性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-036",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review",
+    "引用支持性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-037",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review",
+    "引用支持性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-038",
+   "category": "跨文档问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "答案正确性=pending_human_review",
+    "引用支持性=pending_human_review"
+   ],
+   "contested": true,
+   "reason": "缺少『多文档引用是否算综合』的判定标准；系统输出无跨来源推理表述"
+  },
+  {
+   "question_id": "BQA-039",
+   "category": "真实多跳问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "引用支持性=pending_human_review",
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "需人工按拒答规则确认该题是否确属证据不足"
+  },
+  {
+   "question_id": "BQA-040",
+   "category": "真实多跳问答",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "需人工按拒答规则确认该题是否确属证据不足"
+  },
+  {
+   "question_id": "BQA-044",
+   "category": "无证据问题与范围外问题",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "需人工按拒答规则确认该题是否确属证据不足"
+  },
+  {
+   "question_id": "BQA-046",
+   "category": "拒答及证据不足",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "拒答正确性=incorrect"
+   ],
+   "contested": true,
+   "reason": "缺少『单通用词查询是否应拒答』的评测口径裁定"
+  },
+  {
+   "question_id": "BQA-047",
+   "category": "拒答及证据不足",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "拒答正确性=incorrect"
+   ],
+   "contested": false,
+   "reason": "需人工按拒答规则确认该题是否确属证据不足"
+  },
+  {
+   "question_id": "BQA-050",
+   "category": "拒答及证据不足",
+   "tier": "B_machine_assisted_suggestion",
+   "issues": [
+    "拒答正确性=incorrect"
+   ],
+   "contested": true,
+   "reason": "缺少『单通用词查询是否应拒答』的评测口径裁定"
+  }
+ ],
+ "auto_review": {
+  "source": "artifacts\\b_eval\\qa_auto_review.json",
+  "counts": {
+   "total": 50,
+   "by_judgment": {
+    "supported": 33,
+    "insufficient_evidence": 7,
+    "not_applicable": 6,
+    "contradicted": 4
+   },
+   "by_category": {
+    "中英文混合查询": {
+     "supported": 6
+    },
+    "基础事实问答": {
+     "supported": 10
+    },
+    "多轮追问": {
+     "insufficient_evidence": 5,
+     "supported": 1
+    },
+    "拒答及证据不足": {
+     "contradicted": 3,
+     "not_applicable": 2
+    },
+    "无证据问题与范围外问题": {
+     "not_applicable": 4,
+     "contradicted": 1
+    },
+    "术语及语义查询": {
+     "supported": 8
+    },
+    "真实多跳问答": {
+     "insufficient_evidence": 2
+    },
+    "跨文档问答": {
+     "supported": 8
+    }
+   }
+  },
+  "metrics": {
+   "answer_support_rate_auto": {
+    "numerator": 33,
+    "denominator": 38,
+    "rate": 0.8684,
+    "scope": "仅对'应作答'的题；是自动评审判定，不是人工准确率"
+   },
+   "citation_support_rate_auto": {
+    "numerator": 24,
+    "denominator": 24,
+    "rate": 1.0,
+    "scope": "答案正文是否逐字由被引用原文构成；不代表引用内容语义上支持答案。分母只含'答案是文档引用格式'的题。",
+    "with_citations": 35,
+    "not_applicable": 11,
+    "not_applicable_reason": "有文档引用，但答案来自结构化事件路径，答案正文不是引用拼接，无法用该规则核验"
+   },
+   "confusion": {
+    "should_refuse_true": {
+     "n": 12,
+     "refused_ok": 6,
+     "answered_wrongly": 6
+    },
+    "should_refuse_false": {
+     "n": 38,
+     "answered_ok": 33,
+     "refused_wrongly": 5
+    }
+   },
+   "refusal_recall": {
+    "numerator": 6,
+    "denominator": 12,
+    "rate": 0.5
+   },
+   "answer_rate": {
+    "numerator": 33,
+    "denominator": 38,
+    "rate": 0.8684
+   },
+   "coverage": {
+    "auto_reviewed": 50,
+    "total": 50,
+    "coverage_rate": 1.0,
+    "undetermined": 7,
+    "undetermined_rate": 0.14,
+    "low_confidence": 22,
+    "manual_review_required": 26
+   },
+   "consistency_violations": 0,
+   "contradicted": 4,
+   "latency_ms_from_previous_run": {
+    "samples": 50,
+    "p50": 427.1,
+    "p95": 584.6,
+    "min": 314.5,
+    "max": 679.9,
+    "mean": 445.3
+   },
+   "latency_source": "artifacts/b_eval/formal_qa_results.json（上一轮同一批 50 题的实测值，本轮未重新计时）",
+   "failures": {
+    "errors": 0,
+    "timeouts": 0
+   }
+  },
+  "warning": "自动评审判定，**不是**人工指标；不得当作准确率使用"
+ }
+}

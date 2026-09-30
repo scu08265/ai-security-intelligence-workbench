@@ -1,0 +1,3567 @@
+{
+ "schema_version": "b-multihop-candidates-1.0",
+ "description": "B 任务跨文档/多跳候选题库（由真实证据生成）",
+ "verification_policy": "所有条目均为候选，verification_status=pending_human_review；两条边中至少一条来自字段匹配而非人工确认的关系。",
+ "limitations": [
+  "系统当前只有 known_exploited 一种显式关系谓词，没有实体/关系抽取，因此没有真正的多跳路径搜索能力。",
+  "two_hop 链的第二跳是'组件名出现在文档文本中'，属于**字符串共现**，不等于论文对事件本身做出了论断。",
+  "cross_document 链只是同一术语在多篇文档中出现，不是跨文档推理。"
+ ],
+ "counts": {
+  "two_hop": 10,
+  "cross_document": 21
+ },
+ "cases": [
+  {
+   "question_id": "BMH-001",
+   "chain_type": "two_hop",
+   "question": "PYSEC-2026-4000 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 PYSEC-2026-4000 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "PYSEC-2026-4000",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "PYSEC-2026-4000",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "PYSEC-2026-4000",
+      "field": "component",
+      "source_id": "osv:bd7777defa"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "PYSEC-2026-4000",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:bd7777defa",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-002",
+   "chain_type": "two_hop",
+   "question": "PYSEC-2026-3998 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 PYSEC-2026-3998 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "PYSEC-2026-3998",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "PYSEC-2026-3998",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "PYSEC-2026-3998",
+      "field": "component",
+      "source_id": "osv:85c3eca0b9"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "PYSEC-2026-3998",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:85c3eca0b9",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-003",
+   "chain_type": "two_hop",
+   "question": "PYSEC-2026-3999 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 PYSEC-2026-3999 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "PYSEC-2026-3999",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "PYSEC-2026-3999",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "PYSEC-2026-3999",
+      "field": "component",
+      "source_id": "osv:f23e476959"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "PYSEC-2026-3999",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:f23e476959",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-004",
+   "chain_type": "two_hop",
+   "question": "PYSEC-2026-3997 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 PYSEC-2026-3997 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "PYSEC-2026-3997",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "PYSEC-2026-3997",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "PYSEC-2026-3997",
+      "field": "component",
+      "source_id": "osv:c922ec329b"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "PYSEC-2026-3997",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:c922ec329b",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-005",
+   "chain_type": "two_hop",
+   "question": "PYSEC-2026-3996 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 PYSEC-2026-3996 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "PYSEC-2026-3996",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "PYSEC-2026-3996",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "PYSEC-2026-3996",
+      "field": "component",
+      "source_id": "osv:166eacfdad"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "PYSEC-2026-3996",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:166eacfdad",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-006",
+   "chain_type": "two_hop",
+   "question": "GHSA-8pw2-6jv3-mj5j 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 GHSA-8pw2-6jv3-mj5j 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "GHSA-8pw2-6jv3-mj5j",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "GHSA-8pw2-6jv3-mj5j",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "GHSA-8pw2-6jv3-mj5j",
+      "field": "component",
+      "source_id": "osv:85324e9b56"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "GHSA-8pw2-6jv3-mj5j",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:85324e9b56",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-007",
+   "chain_type": "two_hop",
+   "question": "GHSA-hcwq-8wjf-3gcr 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 GHSA-hcwq-8wjf-3gcr 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "GHSA-hcwq-8wjf-3gcr",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "GHSA-hcwq-8wjf-3gcr",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "GHSA-hcwq-8wjf-3gcr",
+      "field": "component",
+      "source_id": "osv:0c41779f63"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "GHSA-hcwq-8wjf-3gcr",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:0c41779f63",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-008",
+   "chain_type": "two_hop",
+   "question": "PYSEC-2026-3985 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 PYSEC-2026-3985 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "PYSEC-2026-3985",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "PYSEC-2026-3985",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "PYSEC-2026-3985",
+      "field": "component",
+      "source_id": "osv:fe201bd8b7"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "PYSEC-2026-3985",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:fe201bd8b7",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-009",
+   "chain_type": "two_hop",
+   "question": "GHSA-mcmc-2m55-j8jj 关联的组件 vllm，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 GHSA-mcmc-2m55-j8jj 的组件为 vllm",
+    "下列文档正文中出现了该组件名：paper:2609.29333、paper:2609.28915"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "GHSA-mcmc-2m55-j8jj",
+    "vllm"
+   ],
+   "edges": [
+    {
+     "from": "GHSA-mcmc-2m55-j8jj",
+     "relation": "component_is",
+     "to": "vllm",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "GHSA-mcmc-2m55-j8jj",
+      "field": "component",
+      "source_id": "osv:ea2fc7d308"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2c8eca1ff4afa364b972a80",
+      "document_key": "paper:2609.29333",
+      "char_start": 7185,
+      "char_end": 8100,
+      "quote": " to 480B, dense and mixture-of-experts, served locally with vLLM [17] on A100 nodes. The 171\n"
+     }
+    },
+    {
+     "from": "vllm",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d486aa432777eaa8e427c2f5",
+      "document_key": "paper:2609.28915",
+      "char_start": 155475,
+      "char_end": 156463,
+      "quote": "oss-View cell use Transformers in FP16; other OOD cells use vLLM in BF16.\nInference-time cap-bind rates are0.9%(Kernel-View),2.6%(App-View), and3.9%(Cross-View)\npooled across the 7 OWASP OOD folds. We"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "GHSA-mcmc-2m55-j8jj",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "osv:ea2fc7d308",
+    "chunk-a2c8eca1ff4afa364b972a80",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-010",
+   "chain_type": "two_hop",
+   "question": "CVE-2025-62593 关联的组件 ray，在我们采集的文档里被讨论到了哪些？",
+   "answer_points": [
+    "事件 CVE-2025-62593 的组件为 ray",
+    "下列文档正文中出现了该组件名：paper:2609.28996、paper:2609.29333、paper:2609.30028"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30028"
+   ],
+   "entities": [
+    "CVE-2025-62593",
+    "ray"
+   ],
+   "edges": [
+    {
+     "from": "CVE-2025-62593",
+     "relation": "component_is",
+     "to": "ray",
+     "evidence": {
+      "type": "event_field",
+      "event_id": "CVE-2025-62593",
+      "field": "component",
+      "source_id": "kev:55c81e7e4d"
+     }
+    },
+    {
+     "from": "ray",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-418f63bbe509f927274d204d",
+      "document_key": "paper:2609.28996",
+      "char_start": 53657,
+      "char_end": 54591,
+      "quote": ". Zhang, Y. Pu, H. Chai,\nC. Zhang, S. Agarwal, K. Slama, A. Rayet al., “Training language L. Ying, H. Duan, and M. Yang, “Exposing the hidden layer: Software\n"
+     }
+    },
+    {
+     "from": "ray",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d809e09fe4a64a6783a6c60f",
+      "document_key": "paper:2609.29333",
+      "char_start": 40510,
+      "char_end": 41476,
+      "quote": "hn, Andrew Luxton-Reilly, Stephen MacNeil, Andrew Petersen, Raymond Pettit,\nBrent N. Reeves, and Jaromir Savelka. The robots are here: Navigating the generative AI revolution in computing\neducation. I"
+     }
+    },
+    {
+     "from": "ray",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5ae7a299b8a8f6619d6305f2",
+      "document_key": "paper:2609.30028",
+      "char_start": 39691,
+      "char_end": 40664,
+      "quote": "Andis Draguns, Annie Gray, Keren Katz, Vasilios Mavroudis, Jaron Mink, Sumeet Ramesh\nMotwani, Jonathan Petit, Leif-Sebastian Rembeck, Chandler Smith, John Sotirop"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "CVE-2025-62593",
+    "ray",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30028"
+   ],
+   "required_evidence": [
+    "kev:55c81e7e4d",
+    "chunk-418f63bbe509f927274d204d",
+    "chunk-d809e09fe4a64a6783a6c60f",
+    "chunk-5ae7a299b8a8f6619d6305f2"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "两条边的证据均可追溯：事件字段 + 真实分块坐标。第二跳是字符串共现，不代表论文对事件本身作出论断；未经人工确认。"
+  },
+  {
+   "question_id": "BMH-011",
+   "chain_type": "cross_document",
+   "question": "AUROC 在哪些文档中被讨论？",
+   "answer_points": [
+    "术语 AUROC 至少出现在 2 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29429",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "AUROC"
+   ],
+   "edges": [
+    {
+     "from": "AUROC",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4449b351a8d1f9ba2969f75e",
+      "document_key": "paper:2609.29429",
+      "char_start": 1719,
+      "char_end": 2298,
+      "quote": "parately from what it sees: the question’s\nwording and answer type on one side, the fields of the input on the other. A\nsingle generic question reaches a median AUROC of 0.886 zero"
+     }
+    },
+    {
+     "from": "AUROC",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-515c21cd9eedd670f76992f1",
+      "document_key": "paper:2609.28915",
+      "char_start": 9893,
+      "char_end": 10837,
+      "quote": "ection. Full attacker-capability, detection-surface,\ndefender-capability, and scope-boundary detail is in Appendix E.1.\n2.2 SESSION AS UNIT OF ANALYSIS\nThroughout this paper, asess"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "AUROC",
+    "paper:2609.29429",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "chunk-4449b351a8d1f9ba2969f75e",
+    "chunk-515c21cd9eedd670f76992f1"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-012",
+   "chain_type": "cross_document",
+   "question": "kernel-level 出现在哪些文档中？",
+   "answer_points": [
+    "术语 kernel-level 至少出现在 2 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29808",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "kernel-level"
+   ],
+   "edges": [
+    {
+     "from": "kernel-level",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-250b52fd4333894e5257ec94",
+      "document_key": "paper:2609.29808",
+      "char_start": 0,
+      "char_end": 974,
+      "quote": "Hard Stop: Kernel-Level Preemption and Containment\nfor Rogue Agentic Execution\nA Preprint\nJosé Luis Pino 0009-0005-4854-3914\nIndependent Researcher\nWestlake Village, CA, USA\njoselu"
+     }
+    },
+    {
+     "from": "kernel-level",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-834172ea6722a03c4a60627e",
+      "document_key": "paper:2609.28915",
+      "char_start": 0,
+      "char_end": 996,
+      "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University of Georgia 2Amazon "
+     }
+    }
+   ],
+   "reasoning_path": [
+    "kernel-level",
+    "paper:2609.29808",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "chunk-250b52fd4333894e5257ec94",
+    "chunk-834172ea6722a03c4a60627e"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-013",
+   "chain_type": "cross_document",
+   "question": "multi-agent 出现在哪些文档中？",
+   "answer_points": [
+    "术语 multi-agent 至少出现在 6 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.30266",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "multi-agent"
+   ],
+   "edges": [
+    {
+     "from": "multi-agent",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-1affae01e6771d62ade675be",
+      "document_key": "paper:2609.29333",
+      "char_start": 50687,
+      "char_end": 51051,
+      "quote": "652.3744220.\n[36] Chi-Min Chan, Weize Chen, Yusheng Su, Jianxuan Yu, Wei Xue, Shanghang Zhang, Jie Fu, and Zhiyuan Liu.\nChatEval: Towards better LLM-based evaluators through multi-"
+     }
+    },
+    {
+     "from": "multi-agent",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-f64b7ac95f7fe93186b70931",
+      "document_key": "paper:2609.29757",
+      "char_start": 50353,
+      "char_end": 51350,
+      "quote": "20 K. Elzer et al..\ncuting unauthorized functionalities, ranging from network probing utilities (e.g.\nget_time or ping), sensitive file read, write, execute and web search operatio"
+     }
+    },
+    {
+     "from": "multi-agent",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-1d8ee2a1d0a8c84ffa9f73b6",
+      "document_key": "paper:2609.30028",
+      "char_start": 0,
+      "char_end": 973,
+      "quote": "HOW DOES ADVERSARIAL INFLUENCE SCALE IN\nMULTI-AGENTSYSTEMS?\nAddison J. Wu∗ Jasin Cekinmez∗ Michel Liao∗ Karthik Narasimhan Thomas L. Griffiths\nPrinceton University\nABSTRACT\nMulti-a"
+     }
+    },
+    {
+     "from": "multi-agent",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+      "document_key": "paper:2609.28900",
+      "char_start": 0,
+      "char_end": 969,
+      "quote": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting}@cmu.edu\nAbstract\nM"
+     }
+    },
+    {
+     "from": "multi-agent",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30266",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-688ac6c60ec79707794d5d31",
+      "document_key": "paper:2609.30266",
+      "char_start": 12907,
+      "char_end": 13862,
+      "quote": "Figure 2. Trace tampering capability across ten model-harness pairs. Direct user requests test whether agents can\ndelete, add to, or manipulate their traces when prompted to. Overa"
+     }
+    },
+    {
+     "from": "multi-agent",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-b82e758adb2fee959d577cfd",
+      "document_key": "paper:2609.28915",
+      "char_start": 51299,
+      "char_end": 52233,
+      "quote": "/, 2026.\naccessed 2026-06-17.\nTrail of Bits. Jumping the Line: How MCP Servers Can Attack You Before You Ever Use Them.\nhttps://blog.trailofbits.com/2025/04/21/jumping-the-line-how"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "multi-agent",
+    "paper:2609.29333",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.30266",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "chunk-1affae01e6771d62ade675be",
+    "chunk-f64b7ac95f7fe93186b70931",
+    "chunk-1d8ee2a1d0a8c84ffa9f73b6",
+    "chunk-86ce9e6b5b0e6ce787a30993",
+    "chunk-688ac6c60ec79707794d5d31",
+    "chunk-b82e758adb2fee959d577cfd"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-014",
+   "chain_type": "cross_document",
+   "question": "reinforcement learning 出现在哪些论文中？",
+   "answer_points": [
+    "术语 reinforcement learning 至少出现在 5 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.29808",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "reinforcement learning"
+   ],
+   "edges": [
+    {
+     "from": "reinforcement learning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30192",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-99f6facf8375a778cae6aea8",
+      "document_key": "paper:2609.30192",
+      "char_start": 30124,
+      "char_end": 31071,
+      "quote": "w/oΨ P 39.12 17.68 38.85 21.18\nthe strongest end-to-end verified performance- SAGE w/ Euclidean 38.01 16.92 38.02 20.89\nconfirming that both signals are needed when SAGE w/ Shuffle"
+     }
+    },
+    {
+     "from": "reinforcement learning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29230",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-72ead54d06cf2c62969163b6",
+      "document_key": "paper:2609.29230",
+      "char_start": 0,
+      "char_end": 942,
+      "quote": "EAGER: Enhancing Generative Event Extraction via Reinforcement\nLearning with Verifiable Rewards\nOmar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2\n1German Rese"
+     }
+    },
+    {
+     "from": "reinforcement learning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-95728533c01bb6067e4da24a",
+      "document_key": "paper:2609.29429",
+      "char_start": 0,
+      "char_end": 970,
+      "quote": "Under review as a conference paper at ICLR 2027\nJUST ASKJEV: REINFORCEMENT LEARNING FOR\nCALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR\nOFAI ALIGNMENTFAILURES\nRuoqi Guo Yi Liu∗\nGriffith "
+     }
+    },
+    {
+     "from": "reinforcement learning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-73c80d6011c5e8352cf2a46a",
+      "document_key": "paper:2609.29808",
+      "char_start": 5771,
+      "char_end": 6749,
+      "quote": "oyota Production System (TPS) Andon\ncord concept within autonomous artificial intelligence spans five key milestones:\n1. Offline Training-Phase Intervention: Ziegler et al. (2019, "
+     }
+    },
+    {
+     "from": "reinforcement learning",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6468726d30991cc42fd9e372",
+      "document_key": "official:eu_ai_act",
+      "char_start": 144965,
+      "char_end": 145941,
+      "quote": "(97) The notion of general -purpose AI models should be clearly defined and set apart from the\nnotion of AI systems to enable legal certainty. The definition should be based on the"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "reinforcement learning",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.29808",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-99f6facf8375a778cae6aea8",
+    "chunk-72ead54d06cf2c62969163b6",
+    "chunk-95728533c01bb6067e4da24a",
+    "chunk-73c80d6011c5e8352cf2a46a",
+    "chunk-6468726d30991cc42fd9e372"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-015",
+   "chain_type": "cross_document",
+   "question": "prompt injection 出现在哪些文档中？",
+   "answer_points": [
+    "术语 prompt injection 至少出现在 11 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:security_blog"
+   ],
+   "entities": [
+    "prompt injection"
+   ],
+   "edges": [
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-28928bf8dbacd585d13e3401",
+      "document_key": "paper:2609.30217",
+      "char_start": 837,
+      "char_end": 1754,
+      "quote": "red and are prompted\nto continue working when they pause. Across our evaluations, best-of-3 evasion attempt rates reach\nup to 98% and success rates up to 88%, with substantial vari"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-bf1af25382844c97993f30d7",
+      "document_key": "paper:2609.29757",
+      "char_start": 878,
+      "char_end": 1874,
+      "quote": "tempts against both the infrastructure and LLM lay-\ners. These included model management abuse, path traversal and SSRF\nprobes, RCE and cryptocurrency mining payloads, resource exh"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-e80da5768f539bedaf1f7cbe",
+      "document_key": "paper:2609.30028",
+      "char_start": 31546,
+      "char_end": 31960,
+      "quote": "model-persuasiveness.\nKai Greshake, Sahar Abdelnabi, Shailesh Mishra, Christoph Endres, Thorsten Holz, and Mario Fritz.\nNot What You’ve Signed Up For: Compromising Real-World LLM-I"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ecb5248c0e8b4cf87ddbdcbe",
+      "document_key": "paper:2609.28900",
+      "char_start": 121917,
+      "char_end": 122883,
+      "quote": "s per message\ncan already disable the channel. Robustness to such edits, e.g., through codes for insertion and deletion\nerrors [CG24,MG24], is a natural extension of the design. Pe"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4e41be5dbb5c565966504b1e",
+      "document_key": "paper:2609.29429",
+      "char_start": 3998,
+      "char_end": 4991,
+      "quote": "or thresholded. Reading\ntoken probabilities gives a score, as in Llama Guard’sP(unsafe)or G-Eval’s probability-weighted\nratings (Liu et al., 2023). However, each call still scores "
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30243",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-accc606e3283bc7d2420427f",
+      "document_key": "paper:2609.30243",
+      "char_start": 33281,
+      "char_end": 34261,
+      "quote": "chi Ishibashi, Danushka Bollegala, Katsuhito Sudoh, and Satoshi Nakamura. Evaluating the robustness of discrete\nprompts. In Proceedings of the 17th Conference of the European Chapt"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30266",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-84d8f9a4287660080336c5cf",
+      "document_key": "paper:2609.30266",
+      "char_start": 5378,
+      "char_end": 6294,
+      "quote": "s. Surprisingly, auto-\nmode monitors also often failed to flag the behavior in 5 out of 10 model-harness pairs [10, 23]. In many\ncases, Claude Code simply downgraded the model from"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-bc56bca0a8484aff645a61f0",
+      "document_key": "paper:2609.29808",
+      "char_start": 6629,
+      "char_end": 7613,
+      "quote": "ms: Brian Williams\nand colleagues (Ingham, Ragno, & Williams, 2001 [15]; Williams, Ingham, Chung, & Elliott, 2003 [14])\nestablished in the NASA Deep Space 1 Remote Agent that auton"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-8a7555ab8647e716569ccfbd",
+      "document_key": "paper:2609.28915",
+      "char_start": 16270,
+      "char_end": 17229,
+      "quote": "Preprint\nTable 1:The 12 attack mechanics in ACE and their prior-benchmark coverage.Fold: held-out\nfold letter (A–G) in the OWASP-aligned OOD design.OWASP Coverage: anchoring catego"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5a81635235b59c567b8abd34",
+      "document_key": "source:owasp_genai",
+      "char_start": 0,
+      "char_end": 305,
+      "quote": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways. These inputs can affect the model even if they are imperceptible to"
+     }
+    },
+    {
+     "from": "prompt injection",
+     "relation": "mentioned_in",
+     "to": "source:security_blog",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-01cbb4b0c2f3c400cf80cffa",
+      "document_key": "source:security_blog",
+      "char_start": 72061,
+      "char_end": 72961,
+      "quote": "paragraph\">To help researchers calibrate, here are patterns we see regularly that fall under shared responsibility:</p>\n<figure class=\"wp-block-table\"><table class=\"has-fixed-layou"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "prompt injection",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:security_blog"
+   ],
+   "required_evidence": [
+    "chunk-28928bf8dbacd585d13e3401",
+    "chunk-bf1af25382844c97993f30d7",
+    "chunk-e80da5768f539bedaf1f7cbe",
+    "chunk-ecb5248c0e8b4cf87ddbdcbe",
+    "chunk-4e41be5dbb5c565966504b1e",
+    "chunk-accc606e3283bc7d2420427f",
+    "chunk-84d8f9a4287660080336c5cf",
+    "chunk-bc56bca0a8484aff645a61f0",
+    "chunk-8a7555ab8647e716569ccfbd",
+    "chunk-5a81635235b59c567b8abd34",
+    "chunk-01cbb4b0c2f3c400cf80cffa"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-016",
+   "chain_type": "cross_document",
+   "question": "supply chain 出现在哪些文档中？",
+   "answer_points": [
+    "术语 supply chain 至少出现在 8 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.29757",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:security_blog",
+    "source:owasp_genai",
+    "source:nist_news",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "supply chain"
+   ],
+   "edges": [
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-708cbce7a3558541368161c5",
+      "document_key": "paper:2609.28996",
+      "char_start": 0,
+      "char_end": 912,
+      "quote": "DistillGuard: Malicious NPM Package Detection\nand API Attack Chain Analysis via Static Graph\nand LLM Distillation\nSiyuan Pang†‡, Yepeng Yao†‡∗, Zhengwei Jiang†‡∗, Zijing Fan†, Baox"
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-85d02dede907544683932817",
+      "document_key": "paper:2609.29757",
+      "char_start": 38036,
+      "char_end": 39030,
+      "quote": "Lsarecallbackdomainsassociatedwiththeinter-\nactsh2 project and indicate Out-of-Band Application Security Testing (OAST)\nvia Server-Side Request Forgery (SSRF) for active target enu"
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-dfc5286ff63790bb8b575710",
+      "document_key": "paper:2609.29808",
+      "char_start": 11506,
+      "char_end": 12477,
+      "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nDominant Vectors &\nAttack Phase Total Actions Percentage Tooling\n1. Dropper 6,972 39.61% Ephemeral payload"
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6629a94d43fe3c1f39cc3f0b",
+      "document_key": "paper:2609.28915",
+      "char_start": 90569,
+      "char_end": 91555,
+      "quote": "Preprint\nTable 7:OWASP coverage of ACE.✓= represented (at least one mechanic in Table 1 instantiates\nan attack under the category);∼= partial coverage (OS-observable slice only, se"
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "source:security_blog",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a868522c16c96f1fd507da94",
+      "document_key": "source:security_blog",
+      "char_start": 1756,
+      "char_end": 2736,
+      "quote": "repository has grown to approximately 388,000 stars, 81,000 forks, and more than 80,000 commits by August 26, 2026.</p>\n<p class=\"wp-block-paragraph\">In this video interview, filme"
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-18928314781e666fa6bccf97",
+      "document_key": "source:owasp_genai",
+      "char_start": 8954,
+      "char_end": 9090,
+      "quote": "LLM supply chains are susceptible to various vulnerabilities, which can affect the integrity of training data, models, and deployment..."
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "source:nist_news",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-dde8589d7b562931b1464475",
+      "document_key": "source:nist_news",
+      "char_start": 5049,
+      "char_end": 5143,
+      "quote": "New Fabric Test Material Could Help Strengthen Domestic Supply Chain for Textiles and Clothing"
+     }
+    },
+    {
+     "from": "supply chain",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-f797953ead8fe828ffa08e26",
+      "document_key": "official:eu_ai_act",
+      "char_start": 256473,
+      "char_end": 257134,
+      "quote": "el to, respectively, perform and carry out on its behalf the\nobligations and procedures established by this Regulation;\n(6) ‘importer’ means a natural or legal person loc ated or e"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "supply chain",
+    "paper:2609.28996",
+    "paper:2609.29757",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:security_blog",
+    "source:owasp_genai",
+    "source:nist_news",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-708cbce7a3558541368161c5",
+    "chunk-85d02dede907544683932817",
+    "chunk-dfc5286ff63790bb8b575710",
+    "chunk-6629a94d43fe3c1f39cc3f0b",
+    "chunk-a868522c16c96f1fd507da94",
+    "chunk-18928314781e666fa6bccf97",
+    "chunk-dde8589d7b562931b1464475",
+    "chunk-f797953ead8fe828ffa08e26"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-017",
+   "chain_type": "cross_document",
+   "question": "risk management 出现在哪些文档中？",
+   "answer_points": [
+    "术语 risk management 至少出现在 2 篇文档中"
+   ],
+   "documents": [
+    "source:nist_ai_rmf",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "risk management"
+   ],
+   "edges": [
+    {
+     "from": "risk management",
+     "relation": "mentioned_in",
+     "to": "source:nist_ai_rmf",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5452c850b3f479d0dde1304f",
+      "document_key": "source:nist_ai_rmf",
+      "char_start": 336,
+      "char_end": 613,
+      "quote": "On April 7, 2026, NIST released a concept note for an AI RMF Profile on Trustworthy AI in Critical Infrastructure. The profile will guide critical infrastructure operators towards "
+     }
+    },
+    {
+     "from": "risk management",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-fe21f48a8f6aed9023e762ca",
+      "document_key": "official:eu_ai_act",
+      "char_start": 106503,
+      "char_end": 107079,
+      "quote": "(66) Requirements should apply to high -risk AI systems as regards risk management, the\nquality and relevance of data sets used, technical documentation and record -keeping,\ntransp"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "risk management",
+    "source:nist_ai_rmf",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-5452c850b3f479d0dde1304f",
+    "chunk-fe21f48a8f6aed9023e762ca"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-018",
+   "chain_type": "cross_document",
+   "question": "Qwen3 出现在哪些文档中？",
+   "answer_points": [
+    "术语 Qwen3 至少出现在 10 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.30192",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.30266",
+    "paper:2609.28915",
+    "paper:2606.15617"
+   ],
+   "entities": [
+    "Qwen3"
+   ],
+   "edges": [
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a0edad6207b341f6fde5029e",
+      "document_key": "paper:2609.28996",
+      "char_start": 1643,
+      "char_end": 2632,
+      "quote": "us code, and generate a large\nDistillGuard first acquires multi-granular features through three\nstatic analysis modules. Then, it leverages online LLM to distill number of false po"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-8d84a47b13951d84638387aa",
+      "document_key": "paper:2609.29333",
+      "char_start": 4655,
+      "char_end": 5592,
+      "quote": "estion\ngrader marks, takes five open models (4B–30B; Qwen, Llama, Gemma) from significantly worse than one human grader\nto parity or better under a paired third-grader test onbothe"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-dd3e88b8a60f49545609a841",
+      "document_key": "paper:2609.29757",
+      "char_start": 17448,
+      "char_end": 18445,
+      "quote": " model management component this is\nreflected by a static, default list of models that are made to look available (e.g.\nllama3.1:70b,qwen3.6:35b, andmistral:7b) and any model manag"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29228",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-05867dd6607cce70a3d8c8be",
+      "document_key": "paper:2609.29228",
+      "char_start": 36139,
+      "char_end": 37126,
+      "quote": "Running Title for Header\nBT behavioral modeling, and a large number of basic actions such as roaming, tracking, capturing, and maneuvering.\nThe pursuer capture task is implemented "
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30192",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-03317ba315f16be669e3c769",
+      "document_key": "paper:2609.30192",
+      "char_start": 22865,
+      "char_end": 23258,
+      "quote": "soning as\na stress test for exploration and compounding biases. Section 5.4 is the ablation study of the two\ncomponents. We report implementation details and additional results in "
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-575e88bd188500b81c446536",
+      "document_key": "paper:2609.29429",
+      "char_start": 12778,
+      "char_end": 13668,
+      "quote": "Under review as a conference paper at ICLR 2027\nTable 1:The ten failure types of RLCDALIGNBENCH. Items come from five target models: Qwen3.5-\n2B (Yang et al., 2025), Phi-4-mini (Mi"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30243",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4274f8a2df3f94cc66ef8f14",
+      "document_key": "paper:2609.30243",
+      "char_start": 17511,
+      "char_end": 18445,
+      "quote": "velopment items support\nmethod development and proposer training; all primary results use the held-out items. Expanding\nSATA into option-membership decisions produces 1,531 initial"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30266",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-962f7d55c013c905925e2767",
+      "document_key": "paper:2609.30266",
+      "char_start": 21344,
+      "char_end": 22051,
+      "quote": "ions despite\nloading the skill. Codex, on the other hand, considered deletion as routine cleanup required by the skill.\nFor the compaction attack, successful injection was reported"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-79157cb47a91b838e0298d56",
+      "document_key": "paper:2609.28915",
+      "char_start": 25054,
+      "char_end": 26022,
+      "quote": " rows are scored in\na single forward pass, with no gradient training on ACE. Train-from-scratch tabular DL alternatives\n(MLP, FT-Transformer (Gorishniy et al., 2021), Appendix I.1)"
+     }
+    },
+    {
+     "from": "Qwen3",
+     "relation": "mentioned_in",
+     "to": "paper:2606.15617",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4be51f4b81e36bbffa7fb8de",
+      "document_key": "paper:2606.15617",
+      "char_start": 15048,
+      "char_end": 15995,
+      "quote": "NeRD 7\nFig.4: NeRD generated MCoTs.\nTable 2: Average concept count. Pos Table 3: Intervention results on Derm7pt.\n/ Neg: present / absent per case N: intervened samples; Concepts: "
+     }
+    }
+   ],
+   "reasoning_path": [
+    "Qwen3",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.30192",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.30266",
+    "paper:2609.28915",
+    "paper:2606.15617"
+   ],
+   "required_evidence": [
+    "chunk-a0edad6207b341f6fde5029e",
+    "chunk-8d84a47b13951d84638387aa",
+    "chunk-dd3e88b8a60f49545609a841",
+    "chunk-05867dd6607cce70a3d8c8be",
+    "chunk-03317ba315f16be669e3c769",
+    "chunk-575e88bd188500b81c446536",
+    "chunk-4274f8a2df3f94cc66ef8f14",
+    "chunk-962f7d55c013c905925e2767",
+    "chunk-79157cb47a91b838e0298d56",
+    "chunk-4be51f4b81e36bbffa7fb8de"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-019",
+   "chain_type": "cross_document",
+   "question": "adversarial 出现在哪些文档中？",
+   "answer_points": [
+    "术语 adversarial 至少出现在 10 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "adversarial"
+   ],
+   "edges": [
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-28928bf8dbacd585d13e3401",
+      "document_key": "paper:2609.30217",
+      "char_start": 837,
+      "char_end": 1754,
+      "quote": "red and are prompted\nto continue working when they pause. Across our evaluations, best-of-3 evasion attempt rates reach\nup to 98% and success rates up to 88%, with substantial vari"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ed781a5d98546d3c0f735bea",
+      "document_key": "paper:2609.29757",
+      "char_start": 6932,
+      "char_end": 7931,
+      "quote": "weights\nto and from remote registries. Conversely, /api/create, /api/copy, and\n/api/deletemanipulate local model files.\n–Inference & Embeddings:/api/generateand/api/chathandle re-\n"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-1d8ee2a1d0a8c84ffa9f73b6",
+      "document_key": "paper:2609.30028",
+      "char_start": 0,
+      "char_end": 973,
+      "quote": "HOW DOES ADVERSARIAL INFLUENCE SCALE IN\nMULTI-AGENTSYSTEMS?\nAddison J. Wu∗ Jasin Cekinmez∗ Michel Liao∗ Karthik Narasimhan Thomas L. Griffiths\nPrinceton University\nABSTRACT\nMulti-a"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-fb88aba0609858e9fb9660de",
+      "document_key": "paper:2609.28900",
+      "char_start": 16183,
+      "char_end": 17174,
+      "quote": "ecutive powers\nof a primitive element of F2m; this forces dmin≥2τ+1 , and an efficient algebraic decoder corrects any τ\nerrors from the syndromes of the received word [LC04]. The g"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-01d70fccef7b4750b58b46cf",
+      "document_key": "paper:2609.29429",
+      "char_start": 4871,
+      "char_end": 5753,
+      "quote": "r’s belief,\ndeception against the model’s own belief, and prompt injection against an instruction hidden in\ntool output. A detector that sees only the response may therefore lack t"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30243",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-d95d2436093bc2505dbee084",
+      "document_key": "paper:2609.30243",
+      "char_start": 8090,
+      "char_end": 9047,
+      "quote": "remain unchanged.\n2. Related Work\nLanguage-modelpredictionscandependstronglyonhowotherwisecomparableinputsarepresented.\nDiscrete prompt templates, demonstration order, option order"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-87baf21eafa3149ea762ec32",
+      "document_key": "paper:2609.29808",
+      "char_start": 7493,
+      "char_end": 8446,
+      "quote": "n software dispatchers, leaving it vulnerable to runtime\nsubversion, prompt injection, and in-memory monkey-patching.\n5. In-Situ Physical Preemption (This Work): While prior treatm"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a9c0d6fdc880f65f7f54582f",
+      "document_key": "paper:2609.28915",
+      "char_start": 14963,
+      "char_end": 15880,
+      "quote": "er is grantedSYS PTRACE\nso the in-containerstracecan attach to its own process tree, and in principle a malicious agent\ncould issue its ownptracecalls to detach or interfere with t"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-02c4948ce00893c0062f38df",
+      "document_key": "source:owasp_genai",
+      "char_start": 7632,
+      "char_end": 7726,
+      "quote": "Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (nist.gov)"
+     }
+    },
+    {
+     "from": "adversarial",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-c519ad96e13a44861eed5a8e",
+      "document_key": "official:eu_ai_act",
+      "char_start": 123006,
+      "char_end": 123777,
+      "quote": " in the EU declaration of\nconformi ty or parts thereof issued under that regulation. To that end, the assessment of the\ncybersecurity risks, associated to a product with digital el"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "adversarial",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-28928bf8dbacd585d13e3401",
+    "chunk-ed781a5d98546d3c0f735bea",
+    "chunk-1d8ee2a1d0a8c84ffa9f73b6",
+    "chunk-fb88aba0609858e9fb9660de",
+    "chunk-01d70fccef7b4750b58b46cf",
+    "chunk-d95d2436093bc2505dbee084",
+    "chunk-87baf21eafa3149ea762ec32",
+    "chunk-a9c0d6fdc880f65f7f54582f",
+    "chunk-02c4948ce00893c0062f38df",
+    "chunk-c519ad96e13a44861eed5a8e"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-020",
+   "chain_type": "cross_document",
+   "question": "benchmark 出现在哪些文档中？",
+   "answer_points": [
+    "术语 benchmark 至少出现在 13 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2501.13787",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "benchmark"
+   ],
+   "edges": [
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ca5b173e0f7108d317ea94ee",
+      "document_key": "paper:2609.28996",
+      "char_start": 24657,
+      "char_end": 25640,
+      "quote": "TABLE II discriminative patterns between benign and malicious NPM\nSTATISTICS OF THE CONSTRUCTED DATASET packages.\nDataset #Malicious #Benign B. RQ1: Training Results.\nGuo et al.[15"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-8d84a47b13951d84638387aa",
+      "document_key": "paper:2609.29333",
+      "char_start": 4655,
+      "char_end": 5592,
+      "quote": "estion\ngrader marks, takes five open models (4B–30B; Qwen, Llama, Gemma) from significantly worse than one human grader\nto parity or better under a paired third-grader test onbothe"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-97003a4b609ad0ef86f8914a",
+      "document_key": "paper:2609.30217",
+      "char_start": 0,
+      "char_end": 957,
+      "quote": "Instrumental Monitor Evasion Emerges Under Ordinary Task Pressure\nDavid Schmotz1,2,3∗ Derck Prinzhorn4* Luca Beurer-Kellner5 Anselm Paulus4\nAmeya Prabhu2,3,6† Maksym Andriushchenko"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-72101c456a83adb24e70f9d7",
+      "document_key": "paper:2609.30028",
+      "char_start": 28137,
+      "char_end": 29117,
+      "quote": "Peva Blanchard, El Mahdi El Mhamdi, Rachid Guerraoui, and Julien Stainer. Ma-\nchine Learning with Adversaries: Byzantine Tolerant Gradient Descent. InAd-\nvances in Neural Informati"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-792938c8ad2b5042bc4bf343",
+      "document_key": "paper:2609.28900",
+      "char_start": 134812,
+      "char_end": 135358,
+      "quote": "577–7597, 2024.\n[YM26] Ruiyi Yan and Yugo Murawaki. Efficient provably secure linguistic steganography via range\ncoding. InProceedings of the 64th Annual Meeting of the Association"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30192",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-3cdcc8050c44d2f0074f4c48",
+      "document_key": "paper:2609.30192",
+      "char_start": 865,
+      "char_end": 1863,
+      "quote": "ibility, and as a design principle for\nstructural priors in less formal reasoning tasks. Motivated by this analysis, we\npropose SAGE (StructuralAdmissibility-GuidedExploration), a "
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29230",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-19fe255de97c8cc4f6585ef2",
+      "document_key": "paper:2609.29230",
+      "char_start": 822,
+      "char_end": 1815,
+      "quote": "evi- on end-to-end event extraction across 7 datasets and\nate advantage collapse under sparse binary re- domains.\nwards. Our reward design explicitly targets depicted in Figure1, e"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-95728533c01bb6067e4da24a",
+      "document_key": "paper:2609.29429",
+      "char_start": 0,
+      "char_end": 970,
+      "quote": "Under review as a conference paper at ICLR 2027\nJUST ASKJEV: REINFORCEMENT LEARNING FOR\nCALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR\nOFAI ALIGNMENTFAILURES\nRuoqi Guo Yi Liu∗\nGriffith "
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30243",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-0b077adb1250d787cd9a8344",
+      "document_key": "paper:2609.30243",
+      "char_start": 31623,
+      "char_end": 32621,
+      "quote": "nguish context that changes what should be decided from context that merely\nchanges which option they favor.\nReferences\nBarneyjm. [proposal] option-order robustness check (not part"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-f72a671c77fa4f22c67c356c",
+      "document_key": "paper:2609.29808",
+      "char_start": 3091,
+      "char_end": 4084,
+      "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\ntunnel vision, and cognitive dissonance. Defective components left unhalted compound downstream into\ncatas"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-834172ea6722a03c4a60627e",
+      "document_key": "paper:2609.28915",
+      "char_start": 0,
+      "char_end": 996,
+      "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University of Georgia 2Amazon "
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "paper:2501.13787",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-bbbc5b877b789518752ead48",
+      "document_key": "paper:2501.13787",
+      "char_start": 33549,
+      "char_end": 34491,
+      "quote": "\nonly the topn layers during inference. (2) robust AdapterDrop segmentation. By appending a lightweight side network to\nthat randomly draws n from [0, 11] for training. Across a fi"
+     }
+    },
+    {
+     "from": "benchmark",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-f579e6bb0784fe132c67c6d4",
+      "document_key": "official:eu_ai_act",
+      "char_start": 119253,
+      "char_end": 120251,
+      "quote": "y of measurements and to help\nthe transparency and fairness of commercial transactions. In that context, in cooperation\nwith relevant stakeholders and organisation, such as metrolo"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "benchmark",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2501.13787",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-ca5b173e0f7108d317ea94ee",
+    "chunk-8d84a47b13951d84638387aa",
+    "chunk-97003a4b609ad0ef86f8914a",
+    "chunk-72101c456a83adb24e70f9d7",
+    "chunk-792938c8ad2b5042bc4bf343",
+    "chunk-3cdcc8050c44d2f0074f4c48",
+    "chunk-19fe255de97c8cc4f6585ef2",
+    "chunk-95728533c01bb6067e4da24a",
+    "chunk-0b077adb1250d787cd9a8344",
+    "chunk-f72a671c77fa4f22c67c356c",
+    "chunk-834172ea6722a03c4a60627e",
+    "chunk-bbbc5b877b789518752ead48",
+    "chunk-f579e6bb0784fe132c67c6d4"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-021",
+   "chain_type": "cross_document",
+   "question": "jailbreak 出现在哪些文档中？",
+   "answer_points": [
+    "术语 jailbreak 至少出现在 7 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "source:owasp_genai"
+   ],
+   "entities": [
+    "jailbreak"
+   ],
+   "edges": [
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-14827612f5eb0ddf14aae271",
+      "document_key": "paper:2609.30217",
+      "char_start": 59710,
+      "char_end": 60692,
+      "quote": "Chen Bo Calvin Zhang,\nJohn Hughes, Xiang Deng, Henry Sleight, Tyler Tracy, Buck Shlegeris, and Joe Benton. Shade-arena:\nEvaluating sabotage and monitoring in llm agents, 2025. URL "
+     }
+    },
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-cc257ff4db32b2e687dbbaa9",
+      "document_key": "paper:2609.29757",
+      "char_start": 9661,
+      "char_end": 10602,
+      "quote": "th and\ncontrol over compromised AI systems.\n–Exfiltration: Stealing AI artifacts or other information about the system.\n–Impact: Manipulating, interrupting, eroding confidence in, "
+     }
+    },
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-401f929ddc2b1077b52667d0",
+      "document_key": "paper:2609.30028",
+      "char_start": 31962,
+      "char_end": 32897,
+      "quote": "Xiangming Gu, Xiaosen Zheng, Tianyu Pang, Chao Du, Qian Liu, Ye Wang, Jing Jiang, and Min\nLin. Agent Smith: A Single Image Can Jailbreak One Million Multimodal LLM Agents Expo-\nnen"
+     }
+    },
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-7e9ad2070673c4008fce6fd6",
+      "document_key": "paper:2609.29429",
+      "char_start": 850,
+      "char_end": 1839,
+      "quote": "babilities, such as Llama Guard, still\nscore one fixed label per call. Jev, a model trained with reinforcement learning\nfor calibrated decisions (RLCD), answers many typed question"
+     }
+    },
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30243",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-1ffc5fffcebd7981342ef157",
+      "document_key": "paper:2609.30243",
+      "char_start": 35390,
+      "char_end": 36386,
+      "quote": "JevOut: Natural Context Can Flip Decision Models\nPouya Pezeshkpour and Estevam Hruschka. Large language models sensitivity to the order of options in multiple-choice\nquestions. In "
+     }
+    },
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-cc031de0f114b4a975b5ba0f",
+      "document_key": "paper:2609.29808",
+      "char_start": 10419,
+      "char_end": 11413,
+      "quote": "curve Customer-reported Symbolic event Real-time OS\nEntity divergence & harm, safety traces & robotic syscalls (/proc/,\nreward score sign evaluation state transitions. kubectl), IM"
+     }
+    },
+    {
+     "from": "jailbreak",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-90c768cd5de7c577f26397d2",
+      "document_key": "source:owasp_genai",
+      "char_start": 816,
+      "char_end": 1447,
+      "quote": "While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through sp"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "jailbreak",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "source:owasp_genai"
+   ],
+   "required_evidence": [
+    "chunk-14827612f5eb0ddf14aae271",
+    "chunk-cc257ff4db32b2e687dbbaa9",
+    "chunk-401f929ddc2b1077b52667d0",
+    "chunk-7e9ad2070673c4008fce6fd6",
+    "chunk-1ffc5fffcebd7981342ef157",
+    "chunk-cc031de0f114b4a975b5ba0f",
+    "chunk-90c768cd5de7c577f26397d2"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-022",
+   "chain_type": "cross_document",
+   "question": "model poisoning 出现在哪些文档中？",
+   "answer_points": [
+    "术语 model poisoning 至少出现在 2 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28915",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "model poisoning"
+   ],
+   "edges": [
+    {
+     "from": "model poisoning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6629a94d43fe3c1f39cc3f0b",
+      "document_key": "paper:2609.28915",
+      "char_start": 90569,
+      "char_end": 91555,
+      "quote": "Preprint\nTable 7:OWASP coverage of ACE.✓= represented (at least one mechanic in Table 1 instantiates\nan attack under the category);∼= partial coverage (OS-observable slice only, se"
+     }
+    },
+    {
+     "from": "model poisoning",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-f5afb4ab9fc93d06a02fbd58",
+      "document_key": "official:eu_ai_act",
+      "char_start": 314906,
+      "char_end": 315230,
+      "quote": "and control for attacks trying\nto manipulate the training data set (data poisoning), or pre -trained components used in\ntraining (model poisoning), inputs designed to cause the AI "
+     }
+    }
+   ],
+   "reasoning_path": [
+    "model poisoning",
+    "paper:2609.28915",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-6629a94d43fe3c1f39cc3f0b",
+    "chunk-f5afb4ab9fc93d06a02fbd58"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-023",
+   "chain_type": "cross_document",
+   "question": "agent security 出现在哪些文档中？",
+   "answer_points": [
+    "术语 agent security 至少出现在 2 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.30028",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "agent security"
+   ],
+   "edges": [
+    {
+     "from": "agent security",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5ae7a299b8a8f6619d6305f2",
+      "document_key": "paper:2609.30028",
+      "char_start": 39691,
+      "char_end": 40664,
+      "quote": "Andis Draguns, Annie Gray, Keren Katz, Vasilios Mavroudis, Jaron Mink, Sumeet Ramesh\nMotwani, Jonathan Petit, Leif-Sebastian Rembeck, Chandler Smith, John Sotiropoulos, Steven\nYoun"
+     }
+    },
+    {
+     "from": "agent security",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-834172ea6722a03c4a60627e",
+      "document_key": "paper:2609.28915",
+      "char_start": 0,
+      "char_end": 996,
+      "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University of Georgia 2Amazon "
+     }
+    }
+   ],
+   "reasoning_path": [
+    "agent security",
+    "paper:2609.30028",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "chunk-5ae7a299b8a8f6619d6305f2",
+    "chunk-834172ea6722a03c4a60627e"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-024",
+   "chain_type": "cross_document",
+   "question": "chain-of-thought 出现在哪些文档中？",
+   "answer_points": [
+    "术语 chain-of-thought 至少出现在 7 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29228",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.30243",
+    "paper:2606.15617"
+   ],
+   "entities": [
+    "chain-of-thought"
+   ],
+   "edges": [
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-8d84a47b13951d84638387aa",
+      "document_key": "paper:2609.29333",
+      "char_start": 4655,
+      "char_end": 5592,
+      "quote": "estion\ngrader marks, takes five open models (4B–30B; Qwen, Llama, Gemma) from significantly worse than one human grader\nto parity or better under a paired third-grader test onbothe"
+     }
+    },
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-2c114f21b70af8b52c16a15c",
+      "document_key": "paper:2609.30217",
+      "char_start": 48494,
+      "char_end": 49476,
+      "quote": "t any malicious prompts or evasion-specific\ntraining.\nOther work examines vulnerabilities in monitoring. Terekhov et al. (2026b) show that known prompt-\ninjection attacks can be us"
+     }
+    },
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29228",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-71c93d99466b2655f586aa52",
+      "document_key": "paper:2609.29228",
+      "char_start": 11496,
+      "char_end": 12427,
+      "quote": "uage\ninstructions. Lin et al. [26] have proposed systematic markdown prompt templates with task-oriented prompt patches\nand step-by-step instructions for LLMs to focus on key desig"
+     }
+    },
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30192",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-f15af9718faba25f7ac771fa",
+      "document_key": "paper:2609.30192",
+      "char_start": 38340,
+      "char_end": 39309,
+      "quote": "Y., Kucharski,\nP., Wang, Z., and Gukov, S. What makes math problems hard for reinforcement learning: a case\nstudy, 2025. URLhttps://arxiv.org/abs/2408.15332.\nSullivan, M. and Kolle"
+     }
+    },
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29230",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-cb816f573c1102060b33d435",
+      "document_key": "paper:2609.29230",
+      "char_start": 2541,
+      "char_end": 3513,
+      "quote": "supervision. This\nguage models, a growing body of work (Li et al., is further motivated by broader findings in the lit-\n2023a;Lu et al.,2021;Hsu et al.,2022;Ma et al., erature: com"
+     }
+    },
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30243",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-c75e38333dc6f5f433422c0f",
+      "document_key": "paper:2609.30243",
+      "char_start": 37121,
+      "char_end": 38109,
+      "quote": "study of position bias in LLM-as-a-judge. In Proceedings of the 14th International Joint Conference on Natural Language\nProcessing and the 4th Conference of the Asia-Pacific Chapte"
+     }
+    },
+    {
+     "from": "chain-of-thought",
+     "relation": "mentioned_in",
+     "to": "paper:2606.15617",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-624f4f26de25323dca017dba",
+      "document_key": "paper:2606.15617",
+      "char_start": 0,
+      "char_end": 936,
+      "quote": "NeRD: Neuro-Symbolic Rule Distillation for\nEfficient Ontology-Grounded Chain-of-Thought in\nMedical Image Diagnosis\nHongxi Yang1,2 , Yiwen Jiang2,3⋆ , Siyuan Yan1,2 , Jamie Chow4, E"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "chain-of-thought",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29228",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.30243",
+    "paper:2606.15617"
+   ],
+   "required_evidence": [
+    "chunk-8d84a47b13951d84638387aa",
+    "chunk-2c114f21b70af8b52c16a15c",
+    "chunk-71c93d99466b2655f586aa52",
+    "chunk-f15af9718faba25f7ac771fa",
+    "chunk-cb816f573c1102060b33d435",
+    "chunk-c75e38333dc6f5f433422c0f",
+    "chunk-624f4f26de25323dca017dba"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-025",
+   "chain_type": "cross_document",
+   "question": "backdoor 出现在哪些文档中？",
+   "answer_points": [
+    "术语 backdoor 至少出现在 4 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29757",
+    "paper:2609.28915",
+    "paper:2501.13787",
+    "source:owasp_genai"
+   ],
+   "entities": [
+    "backdoor"
+   ],
+   "edges": [
+    {
+     "from": "backdoor",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-85d02dede907544683932817",
+      "document_key": "paper:2609.29757",
+      "char_start": 38036,
+      "char_end": 39030,
+      "quote": "Lsarecallbackdomainsassociatedwiththeinter-\nactsh2 project and indicate Out-of-Band Application Security Testing (OAST)\nvia Server-Side Request Forgery (SSRF) for active target enu"
+     }
+    },
+    {
+     "from": "backdoor",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-2cbcca6214fb7cc377c198ef",
+      "document_key": "paper:2609.28915",
+      "char_start": 47787,
+      "char_end": 48734,
+      "quote": "rxiv.org/abs/\n1810.01594.\nVijitha Mittapalli, Shreyaa Jayant Dani, Satya Srujana Pilli, Snigdha Ansu, Mohammadreza Tey-\nmoorianfard, Franck Dernoncourt, Hongjie Chen, Yu Wang, Ryan"
+     }
+    },
+    {
+     "from": "backdoor",
+     "relation": "mentioned_in",
+     "to": "paper:2501.13787",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-598bf77ac617e8ddcc0da441",
+      "document_key": "paper:2501.13787",
+      "char_start": 122146,
+      "char_end": 123144,
+      "quote": " Li, R. Yuxi, X. Xiao, Y. Wang,\nsion, 2023. R. Wang, S. Wen, X. Pan et al., “Freeseg: Unified,\n[208]M. U. Khattak, S. T. Wasim, M. Naseer, S. Khan, M.- universal and open-vocabular"
+     }
+    },
+    {
+     "from": "backdoor",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-38d00262953f66b73c198ade",
+      "document_key": "source:owasp_genai",
+      "char_start": 9092,
+      "char_end": 9251,
+      "quote": "Data poisoning occurs when pre-training, fine-tuning, or embedding data is manipulated to introduce vulnerabilities, backdoors, or biases. This manipulation..."
+     }
+    }
+   ],
+   "reasoning_path": [
+    "backdoor",
+    "paper:2609.29757",
+    "paper:2609.28915",
+    "paper:2501.13787",
+    "source:owasp_genai"
+   ],
+   "required_evidence": [
+    "chunk-85d02dede907544683932817",
+    "chunk-2cbcca6214fb7cc377c198ef",
+    "chunk-598bf77ac617e8ddcc0da441",
+    "chunk-38d00262953f66b73c198ade"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-026",
+   "chain_type": "cross_document",
+   "question": "privacy 出现在哪些文档中？",
+   "answer_points": [
+    "术语 privacy 至少出现在 10 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.28900",
+    "paper:2609.30192",
+    "paper:2609.29429",
+    "paper:2609.30266",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:nist_news",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "privacy"
+   ],
+   "edges": [
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-bf1af25382844c97993f30d7",
+      "document_key": "paper:2609.29757",
+      "char_start": 878,
+      "char_end": 1874,
+      "quote": "tempts against both the infrastructure and LLM lay-\ners. These included model management abuse, path traversal and SSRF\nprobes, RCE and cryptocurrency mining payloads, resource exh"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29228",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-2683af27319002dd1bdd7dee",
+      "document_key": "paper:2609.29228",
+      "char_start": 76152,
+      "char_end": 77101,
+      "quote": "Running Title for Header\n[19] Friha O, Ferrag M A, Kantarci B, et al. Llm-based edge intelligence: A comprehensive survey on architectures,\napplications, security and trustworthine"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-9e5d692f8cf7a5f362cff21e",
+      "document_key": "paper:2609.28900",
+      "char_start": 123208,
+      "char_end": 124162,
+      "quote": "[BHG+25] Bowen Baker, Joost Huizinga, Leo Gao, Zehao Dou, Melody Y Guan, Aleksander Madry,\nWojciech Zaremba, Jakub Pachocki, and David Farhi. Monitoring reasoning models for\nmisbeh"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30192",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5d8f5e6c798329ef5c5bebdc",
+      "document_key": "paper:2609.30192",
+      "char_start": 75363,
+      "char_end": 76353,
+      "quote": "erform poorly when image resolution\nis low or images are taken in low lighting. Or a speech-to-text system might not be\nused reliably to provide closed captions for online lectures"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-7e9ad2070673c4008fce6fd6",
+      "document_key": "paper:2609.29429",
+      "char_start": 850,
+      "char_end": 1839,
+      "quote": "babilities, such as Llama Guard, still\nscore one fixed label per call. Jev, a model trained with reinforcement learning\nfor calibrated decisions (RLCD), answers many typed question"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30266",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-84d8f9a4287660080336c5cf",
+      "document_key": "paper:2609.30266",
+      "char_start": 5378,
+      "char_end": 6294,
+      "quote": "s. Surprisingly, auto-\nmode monitors also often failed to flag the behavior in 5 out of 10 model-harness pairs [10, 23]. In many\ncases, Claude Code simply downgraded the model from"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ffc266e4bbbc4c487c6c2957",
+      "document_key": "paper:2609.28915",
+      "char_start": 39082,
+      "char_end": 40071,
+      "quote": "Preprint\nSoftware Engineering Conference and Symposium on the Foundations of Software Engineering\n(ESEC/FSE), 2026.https://arxiv.org/abs/2510.21236.\nZijun Cheng, Qiujian Lv, Jinyua"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-72ea7f99ef638482fa4598cd",
+      "document_key": "source:owasp_genai",
+      "char_start": 8017,
+      "char_end": 8108,
+      "quote": "From ChatGPT to ThreatGPT: Impact of Generative AI in Cybersecurity and Privacy (arxiv.org)"
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "source:nist_news",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-87f4f6b146f4c2b4beb9dfcc",
+      "document_key": "source:nist_news",
+      "char_start": 15427,
+      "char_end": 15496,
+      "quote": "Cybersecurity and privacy risks can threaten patient confidentiality."
+     }
+    },
+    {
+     "from": "privacy",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ed922e1fbded240641cfe4f3",
+      "document_key": "official:eu_ai_act",
+      "char_start": 14500,
+      "char_end": 15211,
+      "quote": "uncil of 27 April 2016 on\nthe protection of natural persons with regard to the processing of personal data by competent\nauthorities for the purposes of the prevention, investigatio"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "privacy",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.28900",
+    "paper:2609.30192",
+    "paper:2609.29429",
+    "paper:2609.30266",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:nist_news",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-bf1af25382844c97993f30d7",
+    "chunk-2683af27319002dd1bdd7dee",
+    "chunk-9e5d692f8cf7a5f362cff21e",
+    "chunk-5d8f5e6c798329ef5c5bebdc",
+    "chunk-7e9ad2070673c4008fce6fd6",
+    "chunk-84d8f9a4287660080336c5cf",
+    "chunk-ffc266e4bbbc4c487c6c2957",
+    "chunk-72ea7f99ef638482fa4598cd",
+    "chunk-87f4f6b146f4c2b4beb9dfcc",
+    "chunk-ed922e1fbded240641cfe4f3"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-027",
+   "chain_type": "cross_document",
+   "question": "fine-tuning 出现在哪些文档中？",
+   "answer_points": [
+    "术语 fine-tuning 至少出现在 10 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2606.15617",
+    "paper:2501.13787",
+    "source:owasp_genai"
+   ],
+   "entities": [
+    "fine-tuning"
+   ],
+   "edges": [
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-e01d60cdd348874c2f46eda0",
+      "document_key": "paper:2609.28996",
+      "char_start": 3358,
+      "char_end": 4312,
+      "quote": "NPM.\nOpen source software (OSS) has become the infrastructure Furthermore, existing LLM methods directly input raw code\nfor modern web and backend software development. As the for "
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-de15ca01624deb9d69b4ff39",
+      "document_key": "paper:2609.29333",
+      "char_start": 868,
+      "char_end": 1852,
+      "quote": "s models;\nthe best reaches mean absolute error 1.64/35 , below the 2.61/35 two human graders achieve against\neach other. The catch is the prompt: a short “strict grader” preamble d"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-512ebdb660ff36acd40f5071",
+      "document_key": "paper:2609.30217",
+      "char_start": 4905,
+      "char_end": 5905,
+      "quote": "et al., 2025). In this work, we formalize ordinary task-completion pressure and its interaction with runtime\nguardrails. Specifically, we show that language model agents have a pro"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30192",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-26da301ee57dae7e66840129",
+      "document_key": "paper:2609.30192",
+      "char_start": 23260,
+      "char_end": 24240,
+      "quote": "7B (Shao et al., 2024), DeepSeek-Prover-V2-7B (Ren et al., 2025), Kimina-Prover (7B, Distill-\n8B) (Wang et al., 2025) and Llama-3.3-70B-Instruct (Patterson et al., 2022).\nBenchmark"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29230",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-19fe255de97c8cc4f6585ef2",
+      "document_key": "paper:2609.29230",
+      "char_start": 822,
+      "char_end": 1815,
+      "quote": "evi- on end-to-end event extraction across 7 datasets and\nate advantage collapse under sparse binary re- domains.\nwards. Our reward design explicitly targets depicted in Figure1, e"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-764ceb3306c9aa15b5905dd8",
+      "document_key": "paper:2609.29808",
+      "char_start": 59284,
+      "char_end": 60251,
+      "quote": "preprint arXiv:2310.00328. https://doi.org/10.48550/arXiv.2310.00328\n12. Ziegler, D. M., Stiennon, N., Wu, J., Brown, T. B., Radford, A., Amodei, D., Christiano, P., &\nIrving, G.(2"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6a3c661cac85c30c68a3917d",
+      "document_key": "paper:2609.28915",
+      "char_start": 35267,
+      "char_end": 36247,
+      "quote": "Preprint\nREPRODUCIBILITY STATEMENT\nThe corpus construction protocol, threat-model taxonomy, and positive-class labeling policy are\ndocumented in §3.1 and Appendix E, and the fold d"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2606.15617",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-49e097460f0bbc42fdad285b",
+      "document_key": "paper:2606.15617",
+      "char_start": 15875,
+      "char_end": 16859,
+      "quote": "(3) Generative reasoning models. Zero-shot\nprompting with Qwen3-VL-8B-Instruct [1] using the predefined concept set and\ntask description to elicit concept-based rationales without "
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "paper:2501.13787",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-8e22077c669275cfa3e1fd10",
+      "document_key": "paper:2501.13787",
+      "char_start": 0,
+      "char_end": 970,
+      "quote": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 1\nParameter-Efficient Fine-Tuning for\nFoundation Models\nDan Zhang∗, Tao Feng∗, Lilong Xue∗, Yuandong Wang, Yuxiao Dong,"
+     }
+    },
+    {
+     "from": "fine-tuning",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-7061149ba14708176205f246",
+      "document_key": "source:owasp_genai",
+      "char_start": 307,
+      "char_end": 814,
+      "quote": "Prompt Injection vulnerabilities exist in how models process prompts, and how input may force the model to incorrectly pass prompt data to other parts of the model, potentially cau"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "fine-tuning",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2606.15617",
+    "paper:2501.13787",
+    "source:owasp_genai"
+   ],
+   "required_evidence": [
+    "chunk-e01d60cdd348874c2f46eda0",
+    "chunk-de15ca01624deb9d69b4ff39",
+    "chunk-512ebdb660ff36acd40f5071",
+    "chunk-26da301ee57dae7e66840129",
+    "chunk-19fe255de97c8cc4f6585ef2",
+    "chunk-764ceb3306c9aa15b5905dd8",
+    "chunk-6a3c661cac85c30c68a3917d",
+    "chunk-49e097460f0bbc42fdad285b",
+    "chunk-8e22077c669275cfa3e1fd10",
+    "chunk-7061149ba14708176205f246"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-028",
+   "chain_type": "cross_document",
+   "question": "vulnerability 出现在哪些文档中？",
+   "answer_points": [
+    "术语 vulnerability 至少出现在 10 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:security_blog",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "vulnerability"
+   ],
+   "edges": [
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-de15ca01624deb9d69b4ff39",
+      "document_key": "paper:2609.29333",
+      "char_start": 868,
+      "char_end": 1852,
+      "quote": "s models;\nthe best reaches mean absolute error 1.64/35 , below the 2.61/35 two human graders achieve against\neach other. The catch is the prompt: a short “strict grader” preamble d"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-c9d055d67466301994da063b",
+      "document_key": "paper:2609.30217",
+      "char_start": 71105,
+      "char_end": 71579,
+      "quote": " runs (%)\nFigure 11: Recorded cyber refusals and downgrades. Labels show affected runs over attempted runs. Claude Opus\n5 had six terminal refusals and ten cyber-triggered downgrad"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ec7233a50b6ded0aa59e99c2",
+      "document_key": "paper:2609.29757",
+      "char_start": 37182,
+      "char_end": 38156,
+      "quote": "by read-only activity conducted to gather\ninfrastructure and model metadata. However, these interactions cannot be com-\npletely disregarded as non-malicious scanner activity. Threa"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30028",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-3e26336d8c17b15067d4e17d",
+      "document_key": "paper:2609.30028",
+      "char_start": 1711,
+      "char_end": 2665,
+      "quote": "023; Li et al., 2024; Wang et al., 2025). These results make larger groups an appealing\nway to scale accurate inference. But they also create a growing dependence on the agents wit"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30266",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5d0b41d50273664bec30cd2c",
+      "document_key": "paper:2609.30266",
+      "char_start": 50340,
+      "char_end": 51257,
+      "quote": "[18] Alexander Panfilov, David Schmotz, Ilia Shumailov, Luca Beurer-Kellner, Joachim Schaeffer, Ameya Prabhu,\nJonas Geiping, and Maksym Andriushchenko. Stealing reasoning traces fr"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-245bbc8dfda9a36583ba4511",
+      "document_key": "paper:2609.29808",
+      "char_start": 1716,
+      "char_end": 2675,
+      "quote": "ms WCET bound) POSIX preemption\nbuses—demonstrating how compiled, deterministic epistemic boundaries prevent autonomous\nrogue excursions before the first off-target socket packet t"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a7fda3d62674c6d15a012d7a",
+      "document_key": "paper:2609.28915",
+      "char_start": 3470,
+      "char_end": 3782,
+      "quote": "c applications (OWASP Gen\nAI Security Project, 2026). Past compromises of comparable delivery channels (npm Inc., 2018;\nGitHub Advisory Database, 2021; NIST National Vulnerability "
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "source:owasp_genai",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-5a81635235b59c567b8abd34",
+      "document_key": "source:owasp_genai",
+      "char_start": 0,
+      "char_end": 305,
+      "quote": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways. These inputs can affect the model even if they are imperceptible to"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "source:security_blog",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a68b0d3f3ce51b0327581d0a",
+      "document_key": "source:security_blog",
+      "char_start": 24345,
+      "char_end": 25214,
+      "quote": "ay allows maintainers time to respond and recover the account before their account can be used to start an attack.</li>\n<li><a href=\"https://github.blog/changelog/2026-06-18-safer-"
+     }
+    },
+    {
+     "from": "vulnerability",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6ecf123d819d08737c71097e",
+      "document_key": "official:eu_ai_act",
+      "char_start": 159409,
+      "char_end": 160343,
+      "quote": "international approaches\nhave so far identified the need to pay attention to risks from potential intentional misuse or\nunintended issues of control relating to alignment with huma"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "vulnerability",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:security_blog",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-de15ca01624deb9d69b4ff39",
+    "chunk-c9d055d67466301994da063b",
+    "chunk-ec7233a50b6ded0aa59e99c2",
+    "chunk-3e26336d8c17b15067d4e17d",
+    "chunk-5d0b41d50273664bec30cd2c",
+    "chunk-245bbc8dfda9a36583ba4511",
+    "chunk-a7fda3d62674c6d15a012d7a",
+    "chunk-5a81635235b59c567b8abd34",
+    "chunk-a68b0d3f3ce51b0327581d0a",
+    "chunk-6ecf123d819d08737c71097e"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-029",
+   "chain_type": "cross_document",
+   "question": "detector 出现在哪些文档中？",
+   "answer_points": [
+    "术语 detector 至少出现在 5 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.29808",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "detector"
+   ],
+   "edges": [
+    {
+     "from": "detector",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4733d4b59677975fe00ad845",
+      "document_key": "paper:2609.28996",
+      "char_start": 26369,
+      "char_end": 27322,
+      "quote": "them more representative of real-world application packages, organizing training samples using a standardized\nscenarios. For the experiments, we consistently selected the human-AI "
+     }
+    },
+    {
+     "from": "detector",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4eec7c5f39f31ba0ca1393cc",
+      "document_key": "paper:2609.28900",
+      "char_start": 117015,
+      "char_end": 117973,
+      "quote": "have constant\nmin-entropy, give constructions from sparse learning parity with noise and from a signaling compiler with\nnoiseless feedback, and prove that public pseudorandom codes"
+     }
+    },
+    {
+     "from": "detector",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-95728533c01bb6067e4da24a",
+      "document_key": "paper:2609.29429",
+      "char_start": 0,
+      "char_end": 970,
+      "quote": "Under review as a conference paper at ICLR 2027\nJUST ASKJEV: REINFORCEMENT LEARNING FOR\nCALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR\nOFAI ALIGNMENTFAILURES\nRuoqi Guo Yi Liu∗\nGriffith "
+     }
+    },
+    {
+     "from": "detector",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-3ac7b14612dbc6e61975d675",
+      "document_key": "paper:2609.29808",
+      "char_start": 12773,
+      "char_end": 13710,
+      "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nThis bypassed network name filtering entirely without generating file modification syscall events.\n3. Impr"
+     }
+    },
+    {
+     "from": "detector",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ef7fbecfc13c9c41d2e5986c",
+      "document_key": "paper:2609.28915",
+      "char_start": 876,
+      "char_end": 1863,
+      "quote": "yer signal for agent security. To quantify\nthe value of the enhanced telemetry, we introduce Agent Cross-Layer Evidence\n(ACE), a paired-session corpus of4,047sessions and 17 threat"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "detector",
+    "paper:2609.28996",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.29808",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "chunk-4733d4b59677975fe00ad845",
+    "chunk-4eec7c5f39f31ba0ca1393cc",
+    "chunk-95728533c01bb6067e4da24a",
+    "chunk-3ac7b14612dbc6e61975d675",
+    "chunk-ef7fbecfc13c9c41d2e5986c"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-030",
+   "chain_type": "cross_document",
+   "question": "alignment 出现在哪些文档中？",
+   "answer_points": [
+    "术语 alignment 至少出现在 15 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.28900",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2606.15617",
+    "paper:2501.13787",
+    "source:nist_ai_rmf",
+    "source:security_blog",
+    "official:eu_ai_act"
+   ],
+   "entities": [
+    "alignment"
+   ],
+   "edges": [
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29333",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-b7fc8ba1d764afafdfba6708",
+      "document_key": "paper:2609.29333",
+      "char_start": 42221,
+      "char_end": 43208,
+      "quote": "editors,\nAdvances in Neural Information Processing Systems, volume 36, pages 46595–46623. Curran Associates, Inc.,\n2023. doi: 10.52202/075280-2020. URLhttps://proceedings.neurips.c"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30217",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a2d0871056597c7cb04480c2",
+      "document_key": "paper:2609.30217",
+      "char_start": 2487,
+      "char_end": 3237,
+      "quote": "t. We evaluate 50 tasks with up to three runs per task, excluding infrastructure failures\nunder GPT-OSS-120B monitoring. We report single-run rates and the fraction of tasks with t"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-e1d51918fdf9d785036dfa57",
+      "document_key": "paper:2609.29757",
+      "char_start": 45509,
+      "char_end": 46495,
+      "quote": "atest\", \"insecure\": true, \"stream\": false}\nListing 1.2: Multi-vector Ollama exploitation campaign from a single source.\nLLM-SpecificAttacks.BeyondtraditionalandLLMAPI-specificattac"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29228",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-3cef1e1a582d60d2d9fa8858",
+      "document_key": "paper:2609.29228",
+      "char_start": 4218,
+      "char_end": 5132,
+      "quote": "m\nmaintenance, especially in consumer electronics where behavioral logic frequently evolves through software iteration,\nfirmware updates, platform migration, and behavioral logic r"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28900",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-621b4844620ae6c84ec2725d",
+      "document_key": "paper:2609.28900",
+      "char_start": 74403,
+      "char_end": 75371,
+      "quote": "Algorithm 3Lifted exact-cover carrier at one position\nRequire: modulus q; public session identifier sid; public replica ratio β and pool size L=βq ; public\nserializer g:Z q→Y with "
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29230",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-8098e67cdd34235589fd045e",
+      "document_key": "paper:2609.29230",
+      "char_start": 7143,
+      "char_end": 8130,
+      "quote": "ons\ntargeting event identification and argument ex-\n2 Related Work traction, achieving gains in structural fidelity and\nLarge language models have increasingly been generalization "
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-95728533c01bb6067e4da24a",
+      "document_key": "paper:2609.29429",
+      "char_start": 0,
+      "char_end": 970,
+      "quote": "Under review as a conference paper at ICLR 2027\nJUST ASKJEV: REINFORCEMENT LEARNING FOR\nCALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR\nOFAI ALIGNMENTFAILURES\nRuoqi Guo Yi Liu∗\nGriffith "
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.30266",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-08e44cfc6e8118b1849cc01e",
+      "document_key": "paper:2609.30266",
+      "char_start": 3642,
+      "char_end": 4621,
+      "quote": "agents made\nrecorded commands differ from those actually executed, with the stated aim of deceiving an automated\nscorer. While investigators did not find successful retroactive tra"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29808",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-cc688fd6b5ec4225e3d6523e",
+      "document_key": "paper:2609.29808",
+      "char_start": 17768,
+      "char_end": 18675,
+      "quote": "(nvidia/GLM-5.2-NVFP4) on their own private GPUs to decode the XOR+gzip schemes and\nrecover the 17,600-action timeline.\nThis empirical event confirms an architectural invariant obs"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ceb2fbabc01ec184bd482f09",
+      "document_key": "paper:2609.28915",
+      "char_start": 62374,
+      "char_end": 63336,
+      "quote": "Preprint\nexecution and score maliciousness or misalignment per-step or per-trajectory. TRACE(Mittapalli\net al., 2026) uses a triage-inspect-judge loop over long-horizon trajectorie"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2606.15617",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6debcd72668cfca723c698a7",
+      "document_key": "paper:2606.15617",
+      "char_start": 3248,
+      "char_end": 4195,
+      "quote": " WISE [7] is the first to automate MCoT\ngeneration from the bottleneck layer of CBMs. It leverages an ensemble of deci-\nsion trees to selectively activate class-discriminative conc"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "paper:2501.13787",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-a657367403bc2ac867fb9b68",
+      "document_key": "paper:2501.13787",
+      "char_start": 35075,
+      "char_end": 36057,
+      "quote": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 8\nFig. 4: Illustration of representative prompt PEFT across various FMs.\nw, T2I-Adapter can generate image x: C.PromptP"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "source:nist_ai_rmf",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-0b7be61625b19e597a6072ba",
+      "document_key": "source:nist_ai_rmf",
+      "char_start": 1796,
+      "char_end": 2083,
+      "quote": "On March 30, 2023, NIST launched the Trustworthy and Responsible AI Resource Center, which will facilitate implementation of, and international alignment with, the AI RMF. Examples"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "source:security_blog",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-ad0956cca8a41f0ea8f94cab",
+      "document_key": "source:security_blog",
+      "char_start": 96393,
+      "char_end": 97286,
+      "quote": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><p class=\"wp-block-paragraph\">We&rsquo;ve been hard at work o"
+     }
+    },
+    {
+     "from": "alignment",
+     "relation": "mentioned_in",
+     "to": "official:eu_ai_act",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-6ecf123d819d08737c71097e",
+      "document_key": "official:eu_ai_act",
+      "char_start": 159409,
+      "char_end": 160343,
+      "quote": "international approaches\nhave so far identified the need to pay attention to risks from potential intentional misuse or\nunintended issues of control relating to alignment with huma"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "alignment",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.28900",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2606.15617",
+    "paper:2501.13787",
+    "source:nist_ai_rmf",
+    "source:security_blog",
+    "official:eu_ai_act"
+   ],
+   "required_evidence": [
+    "chunk-b7fc8ba1d764afafdfba6708",
+    "chunk-a2d0871056597c7cb04480c2",
+    "chunk-e1d51918fdf9d785036dfa57",
+    "chunk-3cef1e1a582d60d2d9fa8858",
+    "chunk-621b4844620ae6c84ec2725d",
+    "chunk-8098e67cdd34235589fd045e",
+    "chunk-95728533c01bb6067e4da24a",
+    "chunk-08e44cfc6e8118b1849cc01e",
+    "chunk-cc688fd6b5ec4225e3d6523e",
+    "chunk-ceb2fbabc01ec184bd482f09",
+    "chunk-6debcd72668cfca723c698a7",
+    "chunk-a657367403bc2ac867fb9b68",
+    "chunk-0b7be61625b19e597a6072ba",
+    "chunk-ad0956cca8a41f0ea8f94cab",
+    "chunk-6ecf123d819d08737c71097e"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  },
+  {
+   "question_id": "BMH-031",
+   "chain_type": "cross_document",
+   "question": "hallucination 出现在哪些文档中？",
+   "answer_points": [
+    "术语 hallucination 至少出现在 6 篇文档中"
+   ],
+   "documents": [
+    "paper:2609.28996",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.28915"
+   ],
+   "entities": [
+    "hallucination"
+   ],
+   "edges": [
+    {
+     "from": "hallucination",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28996",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-3e02e30d18b6d9d534a09cad",
+      "document_key": "paper:2609.28996",
+      "char_start": 48189,
+      "char_end": 49147,
+      "quote": "n\nfeature completeness and vulnerable to obfuscated malicious knowledge with lightweight LoRA fine-tuning, DistillGuard\ncode. Recently, LLMs have become prevalent for code secu- ac"
+     }
+    },
+    {
+     "from": "hallucination",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29757",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-4ce37a5361059518c6b3e369",
+      "document_key": "paper:2609.29757",
+      "char_start": 32244,
+      "char_end": 33228,
+      "quote": "nt random tokens. Trivial tasks such as\nbasic mathematical queries, string reversal, word repetition, and simple dialog\nstarters (‘Hi’ Category) constituted the overwhelming majori"
+     }
+    },
+    {
+     "from": "hallucination",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29228",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-df65aaf19868e0b93aece1e8",
+      "document_key": "paper:2609.29228",
+      "char_start": 60798,
+      "char_end": 61713,
+      "quote": "d\naverage retries per failed case in the three experimental scenarios. For both BT-to-FSM and FSM-to-BT conversion, the\naverage number of retries ranges from 1.56 to 2.28, showing "
+     }
+    },
+    {
+     "from": "hallucination",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29230",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-0d509c6bf91e5c3659b3a6a8",
+      "document_key": "paper:2609.29230",
+      "char_start": 20774,
+      "char_end": 21714,
+      "quote": "ormal- Encourages completeness while balancing over-generation\nized to prevent inflation from over-prediction penalties\nSpan Precision R span Token-level Jaccard similarity with an"
+     }
+    },
+    {
+     "from": "hallucination",
+     "relation": "mentioned_in",
+     "to": "paper:2609.29429",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-7e9ad2070673c4008fce6fd6",
+      "document_key": "paper:2609.29429",
+      "char_start": 850,
+      "char_end": 1839,
+      "quote": "babilities, such as Llama Guard, still\nscore one fixed label per call. Jev, a model trained with reinforcement learning\nfor calibrated decisions (RLCD), answers many typed question"
+     }
+    },
+    {
+     "from": "hallucination",
+     "relation": "mentioned_in",
+     "to": "paper:2609.28915",
+     "evidence": {
+      "type": "chunk",
+      "chunk_id": "chunk-c206a019df7ed2a386bf0d1d",
+      "document_key": "paper:2609.28915",
+      "char_start": 91435,
+      "char_end": 92384,
+      "quote": "l index directly\nLLM09 Misinformation × Attacks the human interpreter\nLLM10 Unbounded Consumption ✓ Resource exhaustion\nOWASP Agentic AI Threats and Mitigations v1.0\nT1 Memory Pois"
+     }
+    }
+   ],
+   "reasoning_path": [
+    "hallucination",
+    "paper:2609.28996",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.28915"
+   ],
+   "required_evidence": [
+    "chunk-3e02e30d18b6d9d534a09cad",
+    "chunk-4ce37a5361059518c6b3e369",
+    "chunk-df65aaf19868e0b93aece1e8",
+    "chunk-0d509c6bf91e5c3659b3a6a8",
+    "chunk-7e9ad2070673c4008fce6fd6",
+    "chunk-c206a019df7ed2a386bf0d1d"
+   ],
+   "evidence_complete": true,
+   "verification_status": "pending_human_review",
+   "notes": "这是跨文档**检索**证据，不构成多跳推理；每篇文档各有一个真实分块坐标。"
+  }
+ ]
+}
