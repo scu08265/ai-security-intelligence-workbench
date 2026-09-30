@@ -1,0 +1,78 @@
+{
+  "synthetic": true,
+  "_comment": "B 任务四资产示例（合成数据，非真实资产清单）。位置：config/assets.example.json；用法：--assets 指向本文件。字段与 app 的 AssetRequest 对齐（id/name/component/ecosystem/version/exposure/business_criticality/authorized），策略字段单独放在 config/asset_policies.example.json。",
+  "assets": [
+    {
+      "id": "asset-demo-smolagents-prod",
+      "name": "Agent 工具链生产服务（合成）",
+      "component": "smolagents",
+      "ecosystem": "smolagents",
+      "version": "1.20.0",
+      "exposure": "public",
+      "business_criticality": "critical",
+      "authorized": true,
+      "is_demo": true,
+      "conditions": {}
+    },
+    {
+      "id": "asset-demo-copilot-prod",
+      "name": "Copilot 生产网关（合成）",
+      "component": "Microsoft 365 Copilot",
+      "ecosystem": "Microsoft",
+      "version": "unknown",
+      "exposure": "public",
+      "business_criticality": "high",
+      "authorized": true,
+      "is_demo": true,
+      "conditions": {}
+    },
+    {
+      "id": "asset-demo-vllm-prod",
+      "name": "推理服务生产集群（合成）",
+      "component": "vllm",
+      "ecosystem": "PyPI",
+      "version": "0.29.0",
+      "exposure": "internal",
+      "business_criticality": "high",
+      "authorized": true,
+      "is_demo": true,
+      "conditions": {}
+    },
+    {
+      "id": "asset-demo-vllm-lab",
+      "name": "推理服务实验环境（合成）",
+      "component": "vllm",
+      "ecosystem": "PyPI",
+      "version": "0.29.0",
+      "exposure": "internal",
+      "business_criticality": "low",
+      "authorized": true,
+      "is_demo": true,
+      "conditions": {}
+    },
+    {
+      "id": "asset-demo-vllm-edge",
+      "name": "推理服务对外边缘节点（合成）",
+      "component": "vllm",
+      "ecosystem": "PyPI",
+      "version": "0.29.0",
+      "exposure": "public",
+      "business_criticality": "critical",
+      "authorized": true,
+      "is_demo": true,
+      "conditions": {}
+    },
+    {
+      "id": "asset-demo-openwebui",
+      "name": "Open WebUI 内部面板（合成）",
+      "component": "open-webui",
+      "ecosystem": "PyPI",
+      "version": "0.10.0",
+      "exposure": "internal",
+      "business_criticality": "medium",
+      "authorized": true,
+      "is_demo": true,
+      "conditions": {}
+    }
+  ]
+}

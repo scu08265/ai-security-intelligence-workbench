@@ -351,6 +351,22 @@ def answer_question(
             document_id = citation.get("document_id")
             if document_id and document_id not in document_ids:
                 document_ids.append(document_id)
+        # 结构化事件路径与文档路径是两次独立检索。当事件路径拒答、而文档路径
+        # 确实检出了原文证据时，若仍把"未找到可匹配事件"当作最终答案，就会
+        # 出现"拒答文案 + 真实引用"并存的自相矛盾响应。此时以文档证据为准：
+        # 保留真实引用，并把答案换成有依据的文档答案，同时记录改判原因。
+        has_event_evidence = bool(payload.get("related_event_ids")) or bool(payload.get("citations"))
+        if (not has_event_evidence and not rag_result.get("refused")
+                and rag_result.get("citations")):
+            payload["answer"] = rag_result.get("answer") or payload.get("answer")
+            payload["trace"] = list(payload.get("trace") or []) + [{
+                "step": len(payload.get("trace") or []) + 1, "role": "retriever",
+                "action": "answer_from_document_evidence", "evidence_ids": [],
+                "result": f"事件路径未定位到匹配记录，改用 {len(rag_result['citations'])} 条文档证据作答",
+            }]
+            payload["limitations"] = list(payload.get("limitations") or []) + [
+                "结论来自版本化文档分块；本次未定位到对应的结构化事件记录，引用以文档为准"
+            ]
         payload["rag"] = rag_result
         payload["document_citations"] = rag_result["citations"]
         payload["context_snapshot"] = context["context_snapshot"]

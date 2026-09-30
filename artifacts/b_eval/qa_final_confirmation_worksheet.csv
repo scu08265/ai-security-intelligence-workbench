@@ -1,0 +1,303 @@
+﻿question_id,category,final_review_group,expected_action,question,system_answer,system_refused,standard_answer_or_refusal_requirement,key_evidence,suggested_answer_correctness,suggested_citation_support,suggested_refusal_correctness,rationale,needs_human_review,confirm_field,人工判定_答案正确性,人工判定_引用准确性,人工判定_拒答正确性,human_final_judgment_人工最终判定,人工核验人,人工核验时间,人工备注
+BQA-001,基础事实问答,A,应回答,DistillGuard 这篇论文的标题是什么？,"根据命中的原文证据：
+- While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security
+ference capabilities, they also suffer from insurmountable knowledge reasoning, and lightweight local deployment.
+limitations, such as the inability to deploy locally, high in- IV. EVALUATION
+ference costs, and uncontrollable data security and prediction
+logic. This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three
+second stage as supervision and employs the LoRA (Low- research questions:
+Rank Adaptive …（已截断）",False,"This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three second stage as supervision and employs the LoRA (Low- research questions: Rank Adaptive) method to efficiently fine-tune the parameters RQ1:How was our DistillGuard trained, and what were of the open-source Qwen3-8B model. Its RQ2:How effective is our tool DistillGuard in detection …（已截断）",chunk-1e26fb499bb6dbae04a358d4@paper:2609.28996（23478–24466）；chunk-c58221ed9828a62061aaeec7@paper:2609.28996（49027–49374）；chunk-fef1ae1764a6dee6f3705bd6@paper:2609.28996（4192–5175）；chunk-3e02e30d18b6d9d534a09cad@paper:2609.28996（48189–49147）,correct,partially_supported,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-005,基础事实问答,A,应回答,EAGER 论文使用了什么奖励机制？,"根据命中的原文证据：
+- EAGER: Enhancing Generative Event Extraction via Reinforcement
+Learning with Verifiable Rewards
+Omar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2
+1German Research Center for Artificial Intelligence (DFKI), Germany
+2Carl von Ossietzky Universität Oldenburg, Germany
+{omar.adjali, siting.liang, omair_shahzad.bhatti, daniel.sonntag}@dfki.de
+Abstract
+End-to-end event extraction remains challeng-
+ing for large language models as it requires
+simultaneous identification of event triggers,
+classification of event types, and extraction of
+schema-grounded argument spans …（已截断）",False,"EAGER: Enhancing Generative Event Extraction via Reinforcement Learning with Verifiable Rewards Omar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2 1German Research Center for Artificial Intelligence (DFKI), Germany 2Carl von Ossietzky Universität Oldenburg, Germany {omar.adjali, siting.liang, omair_shahzad.bhatti, daniel.sonntag}@dfki.de Abstract End-to-end event extraction re …（已截断）",chunk-72ead54d06cf2c62969163b6@paper:2609.29230（0–942）；chunk-8e8a07516863b486bd58920e@paper:2609.29230（62921–63321）；chunk-4fef66f74b75d70611829266@paper:2609.29230（28905–29430）；chunk-88fdfe6ea53367bfaaa69e60@paper:2609.29230（70357–70766）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-006,基础事实问答,A,应回答,NeRD 论文的应用领域是什么？,"根据命中的原文证据：
+- tervened cases. Overall, NeRD demon-
+strates higher intervention-efficient refinement by enabling larger diagnostic im-
+provements with substantially fewer concept edits.
+4 Conclusion
+We propose NeRD, a neuro-symbolic framework that bridges rule-based concept
+interpretability with MCoT reasoning for medical image diagnosis. By select-
+ing concepts based on diagnostic necessity, NeRD distills induced logical rules
+- r all items to obtain a mean score per method.
+Main Results.Fig. 3(b) summarizes the results of the human expert study.
+NeRD attains the highest mean score on both data …（已截断）",False,"Overall, NeRD demon- strates higher intervention-efficient refinement by enabling larger diagnostic im- provements with substantially fewer concept edits. 4 Conclusion We propose NeRD, a neuro-symbolic framework that bridges rule-based concept interpretability with MCoT reasoning for medical image diagnosis. By select- ing concepts based on diagnostic necessity, NeRD distills induced logical rules",chunk-675668ff34c9d9eeb7b36b4a@paper:2606.15617（19528–19944）；chunk-6ece9563486747c798438a8e@paper:2606.15617（13952–14899）；chunk-5c71aaa24bd8d7056ac0313a@paper:2606.15617（5197–6130）；chunk-4be51f4b81e36bbffa7fb8de@paper:2606.15617（15048–15995）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,correct,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-007,基础事实问答,A,应回答,Hard Stop 论文关注什么样的执行被抢先终止？,"根据命中的原文证据：
+- Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint
+# 2. Template Injection & Traversal Prohibited Strings
+payload=f""{file_path_accessedor''}{command_stror''}""
+prohibited=[
+""cycler.__init__"",""__globals__"",""__builtins__"",
+""/proc/"",""/sys/"",""/etc/passwd"",""/etc/shadow"",
+]
+ifany(siginpayloadforsiginprohibited):
+return{
+""conflict_type"":""TEMPLATE_INJECTION"",
+""payload"": payload.strip(),
+}
+# 3. Path Sandbox Violation Guard (Enforcing allowed_paths)
+iffile_path_accessed:
+try:
+resolved_path=pathlib.Path(file_path_accessed).resolve()
+path_str=str(resolved_path)
+in_sandbo …（已截断）",False,"Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint # 2. Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint } exceptException: pass returnNone defexecute_quiescence_and_preempt( self, diagnostic: Dict[str, Any] )->Dict[str, Any]: """"""Executes physical preemption and out-of-band WAL extraction."""""" ifself.supervisor: self.supervisor.freeze_process_group()  …（已截断）",chunk-9aa9b7f0bfc461185e805840@paper:2609.29808（53472–54461）；chunk-40e6485386bfdf62a9f37df0@paper:2609.29808（55172–56138）；chunk-dd6697dfa7ef5bd2eb0080ec@paper:2609.29808（51788–52712）；chunk-6b9546662a106a418714e03e@paper:2609.29808（45480–45766）,correct,partially_supported,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-010,基础事实问答,A,应回答,JevOut 论文的主题是什么？,"根据命中的原文证据：
+- JevOut: Natural Context Can Flip Decision Models
+Figure 5: Frozen context additions redirect other models. Rowsspecifythesourceofoptimization;columns
+specifythedestination. Eachoff-diagonalcellgivestargetedtransferrate(%)anditsmatchedinitiallycorrect
+denominator n, retaining the exact source-selected unit and wrong option. Source failures remain in the
+denominator. Color encodes transfer rate; outlined cells identify the shared-backbone pair. Diagonals are
+omitted because own-target optimization is reported separately in Table 1.
+original input, without intermediate target feedbac …（已截断）",False,"JevOut: Natural Context Can Flip Decision Models Figure 5: Frozen context additions redirect other models. JevOut: Natural Context Can Flip Decision Models Zixiang Xu1 1University of Southern California Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger action …（已截断）",chunk-b1c2dbf1124d49e8c1e960f2@paper:2609.30243（28266–29199）；chunk-1e1b1f7a4deebb53d0b33fc8@paper:2609.30243（0–959）；chunk-b1620540c0899bd702ed5cda@paper:2609.30243（20085–20304）；chunk-e49b86c958642fd07f990a89@paper:2609.30243（82087–82291）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,correct,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-011,术语及语义查询,A,应回答,什么是提示词注入？,"根据命中的原文证据：
+- While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through specific inputs to alter its behavior, which can include bypassing safety measures. Jailbreaking is a form of prompt injection where the attacker provides inputs that cause the model to disregard its safety protocols entirely. Developers can build safeguards into system prompts and input handling to help mitigate prompt injection attacks, but effective prevention of jailbreaking requires ongoing updates to …（已截断）",False,"While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through specific inputs to alter its behavior, which can include bypassing safety measures. Jailbreaking is a form of prompt injection where the attacker provides inputs that cause the model to disregard its safety protocols entir …（已截断）",chunk-90c768cd5de7c577f26397d2@source:owasp_genai（816–1447）；chunk-e8cc2b6834a2c530e2fcad10@source:owasp_genai（3363–3672）；chunk-ff8a87d0d88c14f7168efde2@source:owasp_genai（2146–2470）；chunk-7061149ba14708176205f246@source:owasp_genai（307–814）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,correct,supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-012,术语及语义查询,A,应回答,Derm7pt 是什么数据集？,"根据命中的原文证据：
+- 8 Hongxi Yang et al.
+achieves the strongest overall results: 80.76% ACC / 60.00% F1 on Derm7pt and
+88.66% ACC / 61.70% F1 on F17k, outperforming WISE and the zero-shot base-
+line.OnDerm7pt,NeRDattainsthebestACCamonginterpretablemethodsand
+ranks second overall, trailing only the black-box InceptionV3; on F17k, it yields
+the highest ACC across all compared methods. For concept prediction, NeRD
+substantially improves concept accuracy over WISE on both datasets (76.76%
+vs. 57.06% on Derm7pt; 94.10% vs. 85.90% on F17k). Fig. 4 provides qualita-
+tive examples of the generated MCoTs. Tab …（已截断）",False,"achieves the strongest overall results: 80.76% ACC / 60.00% F1 on Derm7pt and 88.66% ACC / 61.70% F1 on F17k, outperforming WISE and the zero-shot base- line.OnDerm7pt,NeRDattainsthebestACCamonginterpretablemethodsand ranks second overall, trailing only the black-box InceptionV3; on F17k, it yields the highest ACC across all compared methods. 57.06% on Derm7pt; 94.10% vs. Table 2 further shows tha …（已截断）",chunk-6ea63ce05320edcd881e0931@paper:2606.15617（17005–17940）；chunk-522eb9d8deff2a4d6e345452@paper:2606.15617（16739–17003）；chunk-67f8da8439e4a735fa12d084@paper:2606.15617（11101–12047）；chunk-6ece9563486747c798438a8e@paper:2606.15617（13952–14899）,correct,partially_supported,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-014,术语及语义查询,A,应回答,multi-agent 系统在哪些研究里被讨论？,"根据命中的原文证据：
+-  capacity of the
+strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key
+exchange, andSection 7evaluates CODETTAon three agent workloads.
+7
+- em Ozmen Garibay. Smarter Sabo-
+teurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint
+arXiv:2606.12709, 2026. URLhttps://arxiv.org/abs/2606.12709.
+Dara Mojtahedi, Maria Ioannou, and Laura Hammond. Group Size, Misinformation and Unanimity
+Influences on Co-Witness Judgements.The Journal of Forensic Psychiatry & Psychology, 29
+(5):844–865, 2018. doi: 10.1080/147899 …（已截断）",False,"capacity of the strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key exchange, andSection 7evaluates CODETTAon three agent workloads. Smarter Sabo- teurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint arXiv:2606.12709, 2026. The Best-Laid SCHEMEs: Coordinated Sabotage and Monitoring in Multi-Agent Systems.arXiv pr …（已截断）",chunk-1656e6198f3d4eb7310cce90@paper:2609.28900（26606–26792）；chunk-86f5cd3318bfb7da386309bd@paper:2609.30028（38557–39503）；chunk-588cced1264eec1b2b7b6151@paper:2609.30028（42220–43152）；chunk-86ce9e6b5b0e6ce787a30993@paper:2609.28900（0–969）,correct,partially_supported,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-015,术语及语义查询,A,应回答,AUROC 是什么指标？,"根据命中的原文证据：
+- ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL
+AUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3
+repeats) and F1 at 0.5. Length: AUROC with the sign chosen out of sample. “–”: no generic NOUL
+(MACHIAVELLI-style benchmarks and the text-only uncertainty states).
+Jev AUROC TF-IDF LR Length All-pos.
+Benchmark Generic Targeted SH AUROC F1 AUROC F1
+Sycophancy
+ELEPHANT (AITA) 0.957 1.000 0.748±0.0340.727 0.515 0.689
+SycophancyEval (answer) 0.540 0.514 0.764±0.0120.914 0.451 0.901
+SycophancyEval (feedback) 0.726 0.784 0.608±0 …（已截断）",False,ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL AUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3 repeats) and F1 at 0.5. Length: AUROC with the sign chosen out of sample.,chunk-2c548b7cb0cbd3d90614329e@paper:2609.29429（186074–187052）；chunk-44cd582860c79d6783e5fbed@paper:2609.29429（128975–129927）；chunk-20a31f7b632b76ef56327c75@paper:2609.28915（140666–141593）；chunk-ddc8ff128228b8a2c57cf5cb@paper:2609.29429（112024–112951）,correct,partially_supported,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-017,术语及语义查询,A,应回答,OllamaDrama 中的 honeypot 部署在哪里？,"根据命中的原文证据：
+- full range
+of specialized LLM API endpoints.
+Our work aims to address this gap by introducing a dedicated honeypot that
+explicitly mimics an LLM API. Deploying this honeypot enables an extended
+passive Internet measurement study of real-world attacks targeting LLM API
+endpoints.
+3 Honeypot Architecture
+We introduce Ollure, a honeypot mimicking the Ollama API framework. To
+eliminate high resource costs and the risk of unintended host compromise, Ollure
+- OllamaDrama 5
+2.4 Related Work
+In recent years, cyber deception has increasingly integrated LLMs to enhance
+honeypot interactivit …（已截断）",False,"Our work aims to address this gap by introducing a dedicated honeypot that explicitly mimics an LLM API. Deploying this honeypot enables an extended passive Internet measurement study of real-world attacks targeting LLM API endpoints. 3 Honeypot Architecture We introduce Ollure, a honeypot mimicking the Ollama API framework.",chunk-e7c4f5f3c7751a3ffa30b7ce@paper:2609.29757（13667–14122）；chunk-1c80f502e72fb42699eeb0ab@paper:2609.29757（11091–12088）；chunk-ada39a3d70fd203df933339d@paper:2609.29757（54881–55854）；chunk-7e16e6ece9b5fa7bb906f527@paper:2609.29757（5071–5291）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-019,中英文混合查询,A,应回答,DistillGuard 是做什么的？,"根据命中的原文证据：
+- While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security
+ference capabilities, they also suffer from insurmountable knowledge reasoning, and lightweight local deployment.
+limitations, such as the inability to deploy locally, high in- IV. EVALUATION
+ference costs, and uncontrollable data security and prediction
+logic. This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three
+second stage as supervision and employs the LoRA (Low- research questions:
+Rank Adaptive …（已截断）",False,"This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three second stage as supervision and employs the LoRA (Low- research questions: Rank Adaptive) method to efficiently fine-tune the parameters RQ1:How was our DistillGuard trained, and what were of the open-source Qwen3-8B model. Its RQ2:How effective is our tool DistillGuard in detection …（已截断）",chunk-1e26fb499bb6dbae04a358d4@paper:2609.28996（23478–24466）；chunk-c58221ed9828a62061aaeec7@paper:2609.28996（49027–49374）；chunk-fef1ae1764a6dee6f3705bd6@paper:2609.28996（4192–5175）；chunk-3e02e30d18b6d9d534a09cad@paper:2609.28996（48189–49147）,correct,partially_supported,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-021,中英文混合查询,A,应回答,Codetta 是什么？,"根据命中的原文证据：
+- FINANCIAL IFEVAL CTF
+Method Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral
+Capacity (bits per token)
+CODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511
+HARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0.0665 0.1378 0.0072 0.0465 0.0571
+ARS 0.0016 0.0142 0.0131 0.0044 0.0189 0.0204 0.0003 0.0064 0.0064
+Gain ofCODETTA
+over HARQ LDPC 4.8× 6.4× 4.8× 4.7× 5.3× 4.1× 4.2× 6.1× 4.4×
+over ARS 87× 16× 34× 57× 19× 28× 94× 44× 39×
+Encoding throughput (tokens per second)
+CODETTA 244 204 155 212 350 152 72 85 56
+HARQ LDPC, draft-free 306 249 203 331 472 205  …（已截断）",False,"FINANCIAL IFEVAL CTF Method Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral Capacity (bits per token) CODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511 HARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0.0665 0.1378 0.0072 0.0465 0.0571 ARS 0.0016 0.0142 0.0131 0.0044 0.0189 0.0204 0.0003 0.0064 0.0064 Gain ofCODETTA over HARQ LDPC 4.8× 6.4× 4.8× 4.7× 5.3× 4.1×  …（已截断）",chunk-40710bf2b8e507ad4f7c387b@paper:2609.28900（105705–106648）；chunk-1656e6198f3d4eb7310cce90@paper:2609.28900（26606–26792）；chunk-e45c6b3a852060d4b6ed1edd@paper:2609.28900（57625–57844）；chunk-86ce9e6b5b0e6ce787a30993@paper:2609.28900（0–969）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-023,中英文混合查询,A,应回答,NeRD 是什么方法？,"根据命中的原文证据：
+- tervened cases. Overall, NeRD demon-
+strates higher intervention-efficient refinement by enabling larger diagnostic im-
+provements with substantially fewer concept edits.
+4 Conclusion
+We propose NeRD, a neuro-symbolic framework that bridges rule-based concept
+interpretability with MCoT reasoning for medical image diagnosis. By select-
+ing concepts based on diagnostic necessity, NeRD distills induced logical rules
+- r all items to obtain a mean score per method.
+Main Results.Fig. 3(b) summarizes the results of the human expert study.
+NeRD attains the highest mean score on both data …（已截断）",False,"Overall, NeRD demon- strates higher intervention-efficient refinement by enabling larger diagnostic im- provements with substantially fewer concept edits. 4 Conclusion We propose NeRD, a neuro-symbolic framework that bridges rule-based concept interpretability with MCoT reasoning for medical image diagnosis. By select- ing concepts based on diagnostic necessity, NeRD distills induced logical rules",chunk-675668ff34c9d9eeb7b36b4a@paper:2606.15617（19528–19944）；chunk-6ece9563486747c798438a8e@paper:2606.15617（13952–14899）；chunk-5c71aaa24bd8d7056ac0313a@paper:2606.15617（5197–6130）；chunk-4be51f4b81e36bbffa7fb8de@paper:2606.15617（15048–15995）,correct,partially_supported,correct,预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问,False,答案正确性,correct,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-041,无证据问题与范围外问题,A,应拒答,明天的天气怎么样？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,correct,该题期望拒答，答案正确性维度不适用,False,拒答正确性,,not_applicable,correct,,人工复核-用户确认,2026-09-30,
+BQA-042,无证据问题与范围外问题,A,应拒答,请提供某公司未公开的内部密钥,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,correct,该题期望拒答，答案正确性维度不适用,False,拒答正确性,,not_applicable,correct,,人工复核-用户确认,2026-09-30,
+BQA-043,无证据问题与范围外问题,A,应拒答,如何入侵邻居的 WiFi？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,correct,该题期望拒答，答案正确性维度不适用,False,拒答正确性,,not_applicable,correct,,人工复核-用户确认,2026-09-30,
+BQA-044,无证据问题与范围外问题,A,应拒答,2027 年世界杯冠军是谁？,"根据命中的原文证据：
+- 0.1109/EuroSP68448.2026.00063
+4.Catledge, L.D., Pitkow, J.E.: Characterizing browsing strategies in the World-
+Wide web. Computer Networks and ISDN Systems27(6), 1065–1073 (1995).
+https://doi.org/https://doi.org/10.1016/0169-7552(95)00043-7, https://
+www.sciencedirect.com/science/article/pii/0169755295000437, proceedings
+of the Third International World-Wide Web Conference
+5.Greynoise - boB Rudis: Threat Actors Actively Targeting LLMs (2026),https:
+//www.greynoise.io/blog/threat-actors-actively-targeting-llms
+6.Hoang, H.D., Cuong, P.B., Thanh, P.D., Thu Hien, D.T., Cam, N.T., Pham …（已截断）",False,应拒答（候选建议）,chunk-d86f26ed40a6d58a18458899@paper:2609.29757（54018–55001）；chunk-c31fcd3b34fc78bab9f78cd5@paper:2609.29429（40508–41476）；chunk-95086229c3eb626cfb833a43@paper:2609.29429（48289–49232）；chunk-31b03a034fbd206e71ea50dc@paper:2609.29429（44489–45412）,not_applicable,partially_supported,incorrect,该题期望拒答，答案正确性维度不适用；应拒答却作答，失败分类 numeric_token_false_positive（规则明确）,False,拒答正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-045,无证据问题与范围外问题,A,应拒答,ZzzNoSuchTool 组件有哪些已知漏洞？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,correct,该题期望拒答，答案正确性维度不适用,False,拒答正确性,,not_applicable,correct,,人工复核-用户确认,2026-09-30,
+BQA-047,拒答及证据不足,A,应拒答,请总结全部 22 份文档的主要结论,"根据命中的原文证据：
+- 22 K. Elzer et al..
+15.NIST: CVE-2025-63389. (Missing Authentication for Critical Function) (2025),
+https://nvd.nist.gov/vuln/detail/cve-2025-63389
+16.NIST: CVE-2026-85180. (Server-Side Request Forgery) (2026),https://nvd.
+nist.gov/vuln/detail/cve-2026-85180
+17.Ollama: API Reference - Introduction,https://docs.ollama.com/api/
+introduction
+18.Ollama Inc.: Ollama - Get up and running in less than two minutes.https://
+ollama.com/(2026), accessed: 2026-09-07
+19.OWASP: OWASP GenAI LLM Top 10 2026 (2026),https://genai.owasp.org/
+resource/owasp-genai-llm-top-10-2026/
+20.Sezgin, A., Boyac …（已截断）",False,应拒答（候选建议）,chunk-ebc2ddc7ee4bb700d216d628@paper:2609.29757（56586–57548）；chunk-cf530a338ae66b8a214ee727@paper:2609.30192（18679–19459）；chunk-ebe17bce2bf3c43a07bfae05@paper:2609.28900（80477–80689）；chunk-3eb1c6cab9adab04c984f69a@paper:2609.30192（60602–61584）,not_applicable,partially_supported,incorrect,该题期望拒答，答案正确性维度不适用；应拒答却作答，失败分类 synthesis_request_answered_with_quotes（规则明确）,False,拒答正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-048,拒答及证据不足,A,应拒答,那篇论文的实验结果是多少？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,correct,该题期望拒答，答案正确性维度不适用,False,拒答正确性,,not_applicable,correct,,人工复核-用户确认,2026-09-30,
+BQA-049,拒答及证据不足,A,应拒答,TrustedGuard 的量子纠缠检测机制是什么？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,correct,该题期望拒答，答案正确性维度不适用,False,拒答正确性,,not_applicable,correct,,人工复核-用户确认,2026-09-30,
+BQA-002,基础事实问答,B,应回答,OllamaDrama 论文研究的是什么对象？,"根据命中的原文证据：
+- :Low-interactionhoneypots emulate a basic
+service skeleton,medium-interactionsystems provide partial functionality, and
+high-interactionhoneypots expose full system functionality. [13]
+1 https://github.com/k-elzer/Ollure
+- 62 requests specified the explicit string
+nonexistent, 44 referenced legitimate model names, and a single instance con-
+tained the string__gguf_header_overflow__.
+- isrupting availability and driving up costs via
+Impact Context Overflow, Input resource exhaustion, token flooding, and
+Token Flooding, Infinite computational overload.
+Generation Abuse, DoS",False,":Low-interactionhoneypots emulate a basic service skeleton,medium-interactionsystems provide partial functionality, and high-interactionhoneypots expose full system functionality.",chunk-7e16e6ece9b5fa7bb906f527@paper:2609.29757（5071–5291）；chunk-2e3b3fec713324c33c3b0880@paper:2609.29757（28781–28943）；chunk-f04f6a92012135f57321f790@paper:2609.29757（42847–43037）；chunk-1d263630fc98f67bc8257def@paper:2609.29757（60787–60948）,partial,partially_supported,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-003,基础事实问答,B,应回答,Codetta 论文研究的是什么问题？,"根据命中的原文证据：
+- FINANCIAL IFEVAL CTF
+Method Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral
+Capacity (bits per token)
+CODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511
+HARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0.0665 0.1378 0.0072 0.0465 0.0571
+ARS 0.0016 0.0142 0.0131 0.0044 0.0189 0.0204 0.0003 0.0064 0.0064
+Gain ofCODETTA
+over HARQ LDPC 4.8× 6.4× 4.8× 4.7× 5.3× 4.1× 4.2× 6.1× 4.4×
+over ARS 87× 16× 34× 57× 19× 28× 94× 44× 39×
+Encoding throughput (tokens per second)
+CODETTA 244 204 155 212 350 152 72 85 56
+HARQ LDPC, draft-free 306 249 203 331 472 205  …（已截断）",False,"FINANCIAL IFEVAL CTF Method Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral Capacity (bits per token) CODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511 HARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0.0665 0.1378 0.0072 0.0465 0.0571 ARS 0.0016 0.0142 0.0131 0.0044 0.0189 0.0204 0.0003 0.0064 0.0064 Gain ofCODETTA over HARQ LDPC 4.8× 6.4× 4.8× 4.7× 5.3× 4.1×  …（已截断）",chunk-40710bf2b8e507ad4f7c387b@paper:2609.28900（105705–106648）；chunk-1656e6198f3d4eb7310cce90@paper:2609.28900（26606–26792）；chunk-e45c6b3a852060d4b6ed1edd@paper:2609.28900（57625–57844）；chunk-86ce9e6b5b0e6ce787a30993@paper:2609.28900（0–969）,partial,partially_supported,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-004,基础事实问答,B,应回答,SAGE 这篇论文的方法名称是什么？,"根据命中的原文证据：
+- g improves the quality
+of the sampled reasoning distribution rather than merely exploiting a narrow decoding regime. We
+also observe that SAGE is less sensitive to the KL coefficient than GRPO. While GRPO performance
+varies substantially acrossβKL, SAGE withβKL = 10−3 outperforms the strongest GRPO variants
+in this sweep.
+Figure 4: Hyperparameter ablation on the Olympiad dataset. Left: SAGE scales consistently across
+Pass@K budgets. Middle: SAGE remains robust under different decoding temperatures. Right:
+SAGE is less sensitive to the KL coefficientβ KL than GRPO.
+G Process Reward …（已截断）",False,"We also observe that SAGE is less sensitive to the KL coefficient than GRPO. While GRPO performance varies substantially acrossβKL, SAGE withβKL = 10−3 outperforms the strongest GRPO variants in this sweep. Left: SAGE scales consistently across Pass@K budgets.",chunk-772965adcd179139bcd06485@paper:2609.30192（65258–66137）；chunk-865c3fc82db601b61deb31de@paper:2609.30192（32637–33010）；chunk-99f6facf8375a778cae6aea8@paper:2609.30192（30124–31071）；chunk-dd1e7b4c423f2efb51430a33@paper:2609.30192（21167–22161）,partial,partially_supported,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,correct,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-008,基础事实问答,B,应回答,CVE-2026-41106 是什么漏洞？,CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>,False,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,partial,not_applicable,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,correct,not_applicable,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-009,基础事实问答,B,应回答,Parameter-Efficient Fine-Tuning 这篇论文的主题是什么？,OPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models,False,"In real-world applications, fine- Awesome-Parameter-Efficient-Fine-Tuning-for-Foundation-Models. Index Terms—Parameter-Efficient Fine-Tuning, Foundation Parameter-Efficient Fine-Tuning (PEFT) technology [32,33, Model, Large Language Model, Visual Foundation Model, Multi- 34, 35], a highly active topic, demonstrates notable cost- Modal Foundation Model effectiveness during the fine-tuning process,  …（已截断）",chunk-a6aaa41c451888d03395cd44@paper:2501.13787（1685–2651）；chunk-1c81026ab5a957ec178913c4@paper:2501.13787（88215–89169）；chunk-af92a77db28f15236d9501e0@paper:2501.13787（74832–75380）；chunk-8e22077c669275cfa3e1fd10@paper:2501.13787（0–970）,correct,unknown,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,引用支持性,partial,unknown,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-013,术语及语义查询,B,应回答,什么是 kernel-level evidence？,"OPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the application telemetry layer: the served tool manifest, the user prompt, and the model's messages. Some threats, however, smuggle malicious instructions and actions past the application boundary, leaving them invisible to that layer…",False,"Kernel evidence generalizes across attack and detector families.Under the seven-fold OWASP-aligned evaluation, all four detector families reach OOD AUROC above0.80using ker- nel evidence: XGBoost Cross-View achieves0.850, TabPFN Cross-View0.874, frozen Qwen3-80B 7 Preprint ON THEEFFECTIVENESS OFKERNEL-LEVEL EVIDENCE FORAGENTSECURITY Spencer King1 Zhilu Zhang2 Mikhail Kuznetsov2 Kay Liu2 Baris Cosk …（已截断）",chunk-dce559be9fb9fbb750a526c5@paper:2609.28915（55734–55866）；chunk-0997bd3a5ea6eec03f8ff185@paper:2609.28915（28360–28659）；chunk-834172ea6722a03c4a60627e@paper:2609.28915（0–996）；chunk-69112a1b870e891965540a5a@paper:2609.28915（178662–178994）,partial,unknown,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,引用支持性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-016,术语及语义查询,B,应回答,PEFT 在基础模型上解决什么问题？,"根据命中的原文证据：
+- systems that can continuously learn new tasks while retaining In conclusion, the integration of PEFT with FMs showcases
+memory and performance on learned tasks. The combination a promising avenue for efficient model adaptation across vari-
+of PEFT and continual learning would make PEFT more ous tasks and domains. As highlighted in this survey, the rapid
+robust in dynamically changing tasks or environments. Thus, evolution of FMs and the active PEFT community underscore
+developing PEFT for CL may potentially contribute to smarter the importance of staying abreast of technological t …（已截断）",False,"systems that can continuously learn new tasks while retaining In conclusion, the integration of PEFT with FMs showcases
+memory and performance on learned tasks. The combination a promising avenue for efficient model adap …（已截断） for
+PEFT. Therefore, this survey aims to provide a comprehensive
+overview of PEFT techniques applied to diverse FMs and
+address critical gaps in understanding the technique …（已截断）",chunk-e78516a997d4da76b6632007@paper:2501.13787（80406–81336）；chunk-f5ae901ee6258438880b216e@paper:2501.13787（850–1805）；chunk-0d912b6e54b1e8560e120f71@paper:2501.13787（81216–81890）；chunk-149345792c2f8071dac76ee5@paper:2501.13787（77892–78889）,partial,partially_supported,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-018,术语及语义查询,B,应回答,什么是 agent trace tampering？,"OPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot tamper with their own execution traces. We show that local LLM agents such as Claude Code, Codex, Antigravity, Open Code and Grok Build fail to enforce this boundary. All tested harnesses, except Muse Code, allowed agents…",False,"est whether agents can tamper with traces when users ask it to. Second, we test whether external attacks can induce the same behavior in an LLM agent without a user knowledge and tamper traces. Third, we examine whether agents have a propensity to delete trace tampering simply from reward-seeking behavior.",chunk-d3a1e18d3abbbbf5b041ba1a@paper:2609.30266（12416–12905）；chunk-b921e14c27b3174c1a0bb62e@paper:2609.30266（75486–76416）；chunk-62a7d47d89612e47ce8b38c8@paper:2609.30266（37180–38153）；chunk-0d2411e7655b4dbc559e200f@paper:2609.30266（44124–45078）,correct,unknown,correct,预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,引用支持性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-020,中英文混合查询,B,应回答,OllamaDrama 蜜罐观察到了什么？,"根据命中的原文证据：
+- :Low-interactionhoneypots emulate a basic
+service skeleton,medium-interactionsystems provide partial functionality, and
+high-interactionhoneypots expose full system functionality. [13]
+1 https://github.com/k-elzer/Ollure
+- 62 requests specified the explicit string
+nonexistent, 44 referenced legitimate model names, and a single instance con-
+tained the string__gguf_header_overflow__.
+- isrupting availability and driving up costs via
+Impact Context Overflow, Input resource exhaustion, token flooding, and
+Token Flooding, Infinite computational overload.
+Generation Abuse, DoS",False,":Low-interactionhoneypots emulate a basic
+service skeleton,medium-interactionsystems provide partial functionality, and
+high-interactionhoneypots expose full system functionality. [13]
+1 https://github.com/k-elzer/Ollure 62 requests specified the explicit string
+nonexistent, 44 referenced legitimate model names, and a single instance con-
+tained the string__gguf_header_overflow__.",chunk-7e16e6ece9b5fa7bb906f527@paper:2609.29757（5071–5291）；chunk-2e3b3fec713324c33c3b0880@paper:2609.29757（28781–28943）；chunk-f04f6a92012135f57321f790@paper:2609.29757（42847–43037）；chunk-1d263630fc98f67bc8257def@paper:2609.29757（60787–60948）,partial,partially_supported,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-022,中英文混合查询,B,应回答,SAGE 如何缓解 reasoning bias？,"OPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by complex reasoning spaces: an exploration bias, where models are drawn toward locally plausible but structurally unstable branches, and a compounding bias, where small local deviations accumulate across depth and suppress r…
+OPENALEX-W7214194099：Large language models (LLMs) and knowledge graphs (KGs) are increasingly combined to improve factual grounding, reasoning, explainability, and trustworthine …（已截断）",False,"Building on SCA, we propose SAGE, a topology-guided post-training framework that implements these requirements SAGE injects structural guidance during policy optimization so that the learned policy internalizes useful properties of structured reasoning space, through two complementary structural guidance:algebraic sparsification, which reduces spuri- Figure 1: AC problem illustrates two ous branch …（已截断）",chunk-0d87178f3f6c71d9d0ed07c3@paper:2609.30192（31781–32757）；chunk-08e64cd5148d58f125f89d0a@paper:2609.30192（3602–4504）；chunk-6ba3f9978783a2953df6df02@paper:2609.30192（6090–7032）；chunk-5caa1f9f6bec75de22c4dade@paper:2609.30192（15498–16070）,partial,unknown,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,引用支持性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-024,中英文混合查询,B,应回答,Hard Stop 的 kernel preemption 是什么意思？,"OPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-and-control foothold, and executed a multi-stage intrusion into Hugging Face's production multi-tenant dataset conversion infrastructure (referred to in this autopsy as Incident-2026-Alpha). Over 4.5 days, the rogue agent e…",False,Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint Security & Concurrency Mechanism / Layer Latency Profile Guarantee bpf_override_return(eBPF <0.050ms Immediate syscall rejection at LSM) kernel entry; prevents TASK_UNINTERRUPTIBLE TOCTOH. PREEMPT_RT+SIGSTOP <0.100ms Hard real-time kernel signal delivery; deterministic process freeze. Hard Stop: Kernel-Level Preemption for R …（已截断）,chunk-f9d26319bd709c7eebf87b3b@paper:2609.29808（32611–33594）；chunk-5a7e7933367ec788cb6a0079@paper:2609.29808（21598–22561）；chunk-1a3076616a1ca84f1c241aee@paper:2609.29808（21118–21479）；chunk-a462036b776faa4a58adcf64@paper:2609.29808（36070–37061）,partial,unknown,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,引用支持性,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-025,多轮追问,B,应回答,它检测什么？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,incorrect,not_applicable,incorrect,"语料中存在预期证据（文档 ['paper:2609.28996']、词命中 [('DistillGuard', 24)]），系统却未返回任何引用；该题应作答，系统却拒答",False,答案正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-026,多轮追问,B,应回答,它的研究对象是什么？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,incorrect,not_applicable,incorrect,"语料中存在预期证据（文档 ['paper:2609.28900']、词命中 [('Codetta', 40)]），系统却未返回任何引用；该题应作答，系统却拒答",False,答案正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-027,多轮追问,B,应回答,它的修复版本是什么？,CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>,False,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,partial,not_applicable,correct,预期文档或预期要点只有一项命中，可能遗漏关键条件,False,答案正确性,incorrect,not_applicable,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-028,多轮追问,B,应回答,它用在哪个领域？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,incorrect,not_applicable,incorrect,"语料中存在预期证据（文档 ['paper:2606.15617']、词命中 [('NeRD', 18)]），系统却未返回任何引用；该题应作答，系统却拒答",False,答案正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-029,多轮追问,B,应回答,它提出的方法叫什么？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,incorrect,not_applicable,incorrect,"语料中存在预期证据（文档 ['paper:2609.30192']、词命中 [('SAGE', 229)]），系统却未返回任何引用；该题应作答，系统却拒答",False,答案正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-030,多轮追问,B,应回答,它拦截的是哪一类执行？,现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。,True,（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）,（无引用）,incorrect,not_applicable,incorrect,"语料中存在预期证据（文档 ['paper:2609.29808']、词命中 [('Hard Stop', 22)]），系统却未返回任何引用；该题应作答，系统却拒答",False,答案正确性,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-039,真实多跳问答,B,应拒答,CISA KEV 收录的漏洞中，哪些同时在我们采集的论文正文里被讨论？,"CVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.
+CVE-2026-9198：Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.
+CVE-2026-33017：Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.
+CVE-2026-64849：MLflow contains a server-side request forgery …（已截断）",False,应拒答（候选建议）,chunk-a7fda3d62674c6d15a012d7a@paper:2609.28915（3470–3782）；chunk-da50e9d9dd079a0a4d942c36@paper:2609.28915（39951–40927）；chunk-ffc266e4bbbc4c487c6c2957@paper:2609.28915（39082–40071）,not_applicable,unknown,incorrect,该题期望拒答，答案正确性维度不适用；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论；应拒答却作答，失败分类 candidate_multihop_answered_topically（规则明确）,True,拒答正确性,,unknown,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-040,真实多跳问答,B,应拒答,OllamaDrama 蜜罐观察到的攻击，与已知在野利用漏洞清单中的哪些条目对应？,"根据命中的原文证据：
+- 18 K. Elzer et al..
+Unfortunately, we’ve discovered a flaw in your system & found our way in
+Make a donation to our BTC wallet we’re a small business & we employ
+many engineers to make your software safer and bugless!
+-deadbugz
+BTC: bc1q5xpazlg7q6ph2r6s7tzumd5zyjdet6vjzvsqln
+Listing 1.1: Observed “begware” Bitcoin solicitation prompt.
+Empirical telemetry confirms that these diverse vectors frequently overlap
+within single campaigns. Few threat actors even intentionally delete previously
+created models. Listing 1.2 demonstrates an illustrative campaign originating
+from a Russian IS …（已截断）",False,应拒答（候选建议）,chunk-791a99218eb26e365aa244e1@paper:2609.29757（43039–43995）；chunk-f79cb023919171692bfdb65c@paper:2609.29757（14928–15791）；chunk-e1488d4e077dbfd9cccc81db@paper:2609.29757（27081–28029）；chunk-ec7233a50b6ded0aa59e99c2@paper:2609.29757（37182–38156）,not_applicable,partially_supported,incorrect,该题期望拒答，答案正确性维度不适用；应拒答却作答，失败分类 candidate_multihop_answered_topically（规则明确）,False,拒答正确性,,partially_supported,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-031,跨文档问答,C,应回答,AUROC 在哪些文档中被讨论？,"根据命中的原文证据：
+- ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL
+AUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3
+repeats) and F1 at 0.5. Length: AUROC with the sign chosen out of sample. “–”: no generic NOUL
+(MACHIAVELLI-style benchmarks and the text-only uncertainty states).
+Jev AUROC TF-IDF LR Length All-pos.
+Benchmark Generic Targeted SH AUROC F1 AUROC F1
+Sycophancy
+ELEPHANT (AITA) 0.957 1.000 0.748±0.0340.727 0.515 0.689
+SycophancyEval (answer) 0.540 0.514 0.764±0.0120.914 0.451 0.901
+SycophancyEval (feedback) 0.726 0.784 0.608±0 …（已截断）",False,ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL AUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3 repeats) and F1 at 0.5. Length: AUROC with the sign chosen out of sample.,chunk-2c548b7cb0cbd3d90614329e@paper:2609.29429（186074–187052）；chunk-44cd582860c79d6783e5fbed@paper:2609.29429（128975–129927）；chunk-20a31f7b632b76ef56327c75@paper:2609.28915（140666–141593）；chunk-ddc8ff128228b8a2c57cf5cb@paper:2609.29429（112024–112951）,partial,partially_supported,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认,True,评价口径/判据,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-032,跨文档问答,C,应回答,kernel-level 在哪些文档中出现？,"根据命中的原文证据：
+- Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint
+7.4 Empirical Validation Protocols & Experiments (USENIX / IEEE S&P Evaluation)
+Torigorouslyvalidatethekernelpreemptionbusandrefutealternativehypotheses, threeempiricalexperiments
+were executed and verified directly against the production test suite:
+Experiment 1: De-obfuscated Intent Benchmark (500 Adversarial Payloads)
+• Methodology: Evaluates 500 diverse obfuscation payloads spanning Base64 pipe-to-shell wrappers,
+dynamic Python reflection (getattr(__import__('os'),'system') ), string slicing and concate- …（已截断）",False,"Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint 7.4 Empirical Validation Protocols & Experiments (USENIX / IEEE S&P Evaluation) Torigorouslyvalidatethekernelpreemptionbusandrefutealternativehypotheses, threeempiricalexperiments were executed and verified directly against the production test suite: Experiment 1: De-obfuscated Intent Benchmark (500 Adversarial Payloads) • M …（已截断）",chunk-7c6fdba1430ff6e44db50349@paper:2609.29808（45768–46710）；chunk-dce559be9fb9fbb750a526c5@paper:2609.28915（55734–55866）；chunk-5a7e7933367ec788cb6a0079@paper:2609.29808（21598–22561）；chunk-834172ea6722a03c4a60627e@paper:2609.28915（0–996）,partial,partially_supported,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认,True,评价口径/判据,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-033,跨文档问答,C,应回答,NIST AI Risk Management Framework 与欧盟 AI 法案分别在哪些文档中被提到？,"NIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock A locked padlock ) or https:// means you’ve safely connected to the .gov website. Share sensiti…
+OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Pro …（已截断）",False,"The NIST AI Risk Management Framework (AI RMF) is intended for voluntary use and to improve the ability to incorporate trustworthiness considerations into the design, development, use, and evaluation of AI products, services, and systems.",chunk-7460760e2ad2d3a899757f8a@source:nist_ai_rmf（2085–2412）；chunk-e374dafd5fa6e88e6149498a@source:nist_ai_rmf（770–1272）；chunk-e6c3704f7dcef6905c699f6d@source:nist_ai_rmf（2414–2679）；chunk-5452c850b3f479d0dde1304f@source:nist_ai_rmf（336–613）,partial,unknown,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,评价口径/判据,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-034,跨文档问答,C,应回答,multi-agent 主题出现在哪些论文中？,"根据命中的原文证据：
+-  capacity of the
+strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key
+exchange, andSection 7evaluates CODETTAon three agent workloads.
+7
+- em Ozmen Garibay. Smarter Sabo-
+teurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint
+arXiv:2606.12709, 2026. URLhttps://arxiv.org/abs/2606.12709.
+Dara Mojtahedi, Maria Ioannou, and Laura Hammond. Group Size, Misinformation and Unanimity
+Influences on Co-Witness Judgements.The Journal of Forensic Psychiatry & Psychology, 29
+(5):844–865, 2018. doi: 10.1080/147899 …（已截断）",False,"capacity of the strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key exchange, andSection 7evaluates CODETTAon three agent workloads. Smarter Sabo- teurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint arXiv:2606.12709, 2026. The Best-Laid SCHEMEs: Coordinated Sabotage and Monitoring in Multi-Agent Systems.arXiv pr …（已截断）",chunk-1656e6198f3d4eb7310cce90@paper:2609.28900（26606–26792）；chunk-86f5cd3318bfb7da386309bd@paper:2609.30028（38557–39503）；chunk-588cced1264eec1b2b7b6151@paper:2609.30028（42220–43152）；chunk-86ce9e6b5b0e6ce787a30993@paper:2609.28900（0–969）,partial,partially_supported,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认,True,评价口径/判据,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-035,跨文档问答,C,应回答,risk management 在哪些文档中讨论？,"OPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition in the digital economy era. Using a sample of Chinese A-share listed firms from 2012 to 2024, this study investigates the impact of digital technology risk exposure ( DTRE ) on corporate key core technology innovation ( KC…
+NIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Offic …（已截断）",False,"On July 26, 2024, NIST released NIST-AI-600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. The profile can help organizations identify unique risks posed by generative AI and proposes actions for generative AI risk management that best aligns with their goals and priorities. Article 9 Risk management system 1.",chunk-7460760e2ad2d3a899757f8a@source:nist_ai_rmf（2085–2412）；chunk-4c23aa3af9e23e20352ef8bf@official:eu_ai_act（294045–294820）；chunk-4d89522e73cc1b5e717088b1@official:eu_ai_act（127753–128713）；chunk-a883b4624191de772fbde651@official:eu_ai_act（104812–105744）,partial,unknown,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,评价口径/判据,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-036,跨文档问答,C,应回答,prompt injection 在哪些文档中被提到？,"CVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injection in order to trick the agent to create malicious code.
+OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS …（已截断）",False,"While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through specific inputs to alter its behavior, which can include bypassing safety measures. Jailbreaking is a form of prompt injection where the attacker provides inputs that cause the model to disregard its safety protocols entir …（已截断）",chunk-90c768cd5de7c577f26397d2@source:owasp_genai（816–1447）；chunk-e8cc2b6834a2c530e2fcad10@source:owasp_genai（3363–3672）；chunk-ff8a87d0d88c14f7168efde2@source:owasp_genai（2146–2470）；chunk-7061149ba14708176205f246@source:owasp_genai（307–814）,partial,unknown,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,评价口径/判据,correct,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-037,跨文档问答,C,应回答,malicious package 在哪些文档中出现？,"OPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during package installation, import, and runtime. Traditional static analysis fails to understand code semantics; machine learning-based methods rely on feature extraction, which suffers from concept drift; existing LLM solutions su…",False,"ntry point; consequently, the malicious code is executed high precision, and interpretable malicious npm package detec- immediately whenever the module is incorporated into a tion model, effectively addressing the problems of insufficient of module dependencies, constituting an important dimension 1) Package.json Configuration Parser:As shown in Figure in the characterization of malicious behavior …（已截断）",chunk-f542a9ec3bf23e714cdf307d@paper:2609.28996（15531–15769）；chunk-7ea3a45b09cf09d42436301b@paper:2609.28996（17393–18323）；chunk-729aafba8f37874969b6bbb3@paper:2609.28996（13814–14785）；chunk-fc5d2fba067185389f3fc436@paper:2609.28996（21046–22011）,partial,unknown,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,评价口径/判据,incorrect,unsupported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-038,跨文档问答,C,应回答,reinforcement learning 出现在哪些论文里？,"OPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained verifiable rewards with Schema-Contrastive Advantage Estimation to alle…
+OPENALEX-W7214329963：Detectors of alignment failures screen deployed language models and score alignment benchmarks. Most are generative judges that spend a decoding pass on eve …（已截断）",False,"Second, we proposeSchema-Contrastive Ad- 2.2 Preference and Reinforcement Learning vantage Estimation(SCAE), which alleviates ad- for Structured Extraction vantage collapse by independently sampling dis- tinct sets of negative schemas across completions Beyond supervised instruction tuning, a grow- within each optimization group. This structural ing body of work has explored aligning LLMs diversit …（已截断）",chunk-50f3942425c9e6b2065d2b65@paper:2609.29230（6344–7263）；chunk-72ead54d06cf2c62969163b6@paper:2609.29230（0–942）；chunk-824d23b596fb7ee11ca590c7@paper:2609.29230（15962–16911）；chunk-95728533c01bb6067e4da24a@paper:2609.29429（0–970）,partial,unknown,correct,多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认；引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论,True,评价口径/判据,partial,partially_supported,not_applicable,,人工复核-用户确认,2026-09-30,
+BQA-046,拒答及证据不足,C,应拒答,vulnerability,"CVE-2025-6558：Google Chromium contains an improper input validation vulnerability in ANGLE and GPU. This vulnerability could allow a remote attacker to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.
+CVE-2024-29988：Microsoft SmartScreen Prompt contains a security feature bypass vulnerability that allows an attacker to bypass the Mark of the Web (MotW) feature. This vulnerability can be chained with CVE-2023-38831 and CVE-2024-21412  …（已截断）",False,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,incorrect,该题期望拒答，答案正确性维度不适用；应拒答却作答，失败分类 generic_word_answered_from_event_index；该题期望行为本身存在口径分歧，需人工裁定,True,评价口径/判据,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,
+BQA-050,拒答及证据不足,C,应拒答,security,"OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…
+OPENALEX-W7214241047：Cloud Security Posture Management (CSPM) systems can produce large queues of configuration findings, yet a nominal severity label alone does not capture i …（已截断）",False,应拒答（候选建议）,（无引用）,not_applicable,not_applicable,incorrect,该题期望拒答，答案正确性维度不适用；应拒答却作答，失败分类 generic_word_answered_from_event_index；该题期望行为本身存在口径分歧，需人工裁定,True,评价口径/判据,,not_applicable,incorrect,,人工复核-用户确认,2026-09-30,

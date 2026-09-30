@@ -1,0 +1,3201 @@
+{
+ "dataset": {
+  "path": "evaluation\\b_formal_qa_set.json",
+  "schema_version": "b-qa-eval-1.0",
+  "cases_run": 50,
+  "categories": [
+   "中英文混合查询",
+   "基础事实问答",
+   "多轮追问",
+   "拒答及证据不足",
+   "无证据问题与范围外问题",
+   "术语及语义查询",
+   "真实多跳问答",
+   "跨文档问答"
+  ]
+ },
+ "metric_definitions": {
+  "refused": "没有任何结构化事件证据、也没有任何文档引用时为拒答",
+  "document_hit_rate": "预期 document_key 全部被引用命中的比例；分母=带预期文档的题目数",
+  "term_hit_rate": "预期答案要点逐字出现在答案中的比例；分母=带预期词的题目数。这是机械性字符串判定，**不是**语义答案准确率",
+  "refusal_accuracy": "拒答判定与 should_refuse 一致的比例；分母=全部题目数",
+  "answer_semantic_accuracy": "未计算——标准答案要点由任务执行者编写，全部 pending_human_review",
+  "latency": "单题端到端耗时（含本地检索）；超时阈值 5000 ms"
+ },
+ "totals": {
+  "cases": 50,
+  "answered": 39,
+  "refused": 11,
+  "errors": 0,
+  "timeouts": 0,
+  "failures": 0,
+  "document_hit": {
+   "ok": 31,
+   "n": 36,
+   "rate": 0.8611,
+   "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
+  },
+  "term_hit": {
+   "ok": 25,
+   "n": 38,
+   "rate": 0.6579,
+   "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
+  },
+  "refusal_accuracy": {
+   "ok": 39,
+   "n": 50,
+   "rate": 0.78
+  },
+  "citations": {
+   "total": 187,
+   "retrievable": 187,
+   "rate": 1.0
+  },
+  "answer_semantic_accuracy": {
+   "value": null,
+   "reason": "无人工核验标准答案，按规则不计入正式准确率"
+  }
+ },
+ "answer_refusal_confusion": {
+  "should_refuse_true": {
+   "n": 12,
+   "refused_ok": 6,
+   "answered_wrongly": 6,
+   "refusal_recall": 0.5
+  },
+  "should_refuse_false": {
+   "n": 38,
+   "answered_ok": 33,
+   "refused_wrongly": 5,
+   "answer_rate": 0.8684
+  }
+ },
+ "target_comparison": {
+  "note": "仅作客观对照，不构成达标声明；且引用/词命中并非赛题口径的语义准确率。",
+  "document_hit_rate": 0.8611,
+  "refusal_rate": 0.78,
+  "gaps_vs_75_90_95": {
+   "document_hit": [
+    -0.1111,
+    0.0389,
+    0.0889
+   ],
+   "refusal": [
+    -0.03,
+    0.12,
+    0.17
+   ]
+  }
+ },
+ "latency_ms": {
+  "samples": 50,
+  "p50": 428.7,
+  "p95": 581.0,
+  "min": 307.2,
+  "max": 698.8,
+  "mean": 433.5
+ },
+ "by_category": {
+  "中英文混合查询": {
+   "cases": 6,
+   "answered": 6,
+   "refused": 0,
+   "errors": 0,
+   "document_hit_n": 6,
+   "document_hit_ok": 6,
+   "term_hit_n": 6,
+   "term_hit_ok": 3,
+   "refusal_n": 6,
+   "refusal_ok": 6,
+   "document_hit_rate": 1.0,
+   "term_hit_rate": 0.5,
+   "refusal_accuracy": 1.0
+  },
+  "基础事实问答": {
+   "cases": 10,
+   "answered": 10,
+   "refused": 0,
+   "errors": 0,
+   "document_hit_n": 9,
+   "document_hit_ok": 9,
+   "term_hit_n": 10,
+   "term_hit_ok": 7,
+   "refusal_n": 10,
+   "refusal_ok": 10,
+   "document_hit_rate": 1.0,
+   "term_hit_rate": 0.7,
+   "refusal_accuracy": 1.0
+  },
+  "多轮追问": {
+   "cases": 6,
+   "answered": 1,
+   "refused": 5,
+   "errors": 0,
+   "document_hit_n": 5,
+   "document_hit_ok": 0,
+   "term_hit_n": 6,
+   "term_hit_ok": 1,
+   "refusal_n": 6,
+   "refusal_ok": 1,
+   "document_hit_rate": 0.0,
+   "term_hit_rate": 0.1667,
+   "refusal_accuracy": 0.1667
+  },
+  "拒答及证据不足": {
+   "cases": 5,
+   "answered": 3,
+   "refused": 2,
+   "errors": 0,
+   "document_hit_n": 0,
+   "document_hit_ok": 0,
+   "term_hit_n": 0,
+   "term_hit_ok": 0,
+   "refusal_n": 5,
+   "refusal_ok": 2,
+   "document_hit_rate": null,
+   "term_hit_rate": null,
+   "refusal_accuracy": 0.4
+  },
+  "无证据问题与范围外问题": {
+   "cases": 5,
+   "answered": 1,
+   "refused": 4,
+   "errors": 0,
+   "document_hit_n": 0,
+   "document_hit_ok": 0,
+   "term_hit_n": 0,
+   "term_hit_ok": 0,
+   "refusal_n": 5,
+   "refusal_ok": 4,
+   "document_hit_rate": null,
+   "term_hit_rate": null,
+   "refusal_accuracy": 0.8
+  },
+  "术语及语义查询": {
+   "cases": 8,
+   "answered": 8,
+   "refused": 0,
+   "errors": 0,
+   "document_hit_n": 8,
+   "document_hit_ok": 8,
+   "term_hit_n": 8,
+   "term_hit_ok": 6,
+   "refusal_n": 8,
+   "refusal_ok": 8,
+   "document_hit_rate": 1.0,
+   "term_hit_rate": 0.75,
+   "refusal_accuracy": 1.0
+  },
+  "真实多跳问答": {
+   "cases": 2,
+   "answered": 2,
+   "refused": 0,
+   "errors": 0,
+   "document_hit_n": 0,
+   "document_hit_ok": 0,
+   "term_hit_n": 0,
+   "term_hit_ok": 0,
+   "refusal_n": 2,
+   "refusal_ok": 0,
+   "document_hit_rate": null,
+   "term_hit_rate": null,
+   "refusal_accuracy": 0.0
+  },
+  "跨文档问答": {
+   "cases": 8,
+   "answered": 8,
+   "refused": 0,
+   "errors": 0,
+   "document_hit_n": 8,
+   "document_hit_ok": 8,
+   "term_hit_n": 8,
+   "term_hit_ok": 8,
+   "refusal_n": 8,
+   "refusal_ok": 8,
+   "document_hit_rate": 1.0,
+   "term_hit_rate": 1.0,
+   "refusal_accuracy": 1.0
+  }
+ },
+ "records": [
+  {
+   "question_id": "BQA-001",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "DistillGuard 这篇论文的标题是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28996"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28996"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 23478,
+     "char_end": 24466,
+     "quote": "While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer f"
+    },
+    {
+     "chunk_id": "chunk-c58221ed9828a62061aaeec7",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 49027,
+     "char_end": 49374,
+     "quote": "strategies are further proposed to boost detection titatively characterize NPM attack patterns and summarize\nrobustness. DONAPI [26] identifies obfuscated packa"
+    },
+    {
+     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 4192,
+     "char_end": 5175,
+     "quote": ".\nmake it a primary target for software supply chain attacks. To overcome these limitations, we propose DistillGuard, a\nAttackers typically employ techniques su"
+    },
+    {
+     "chunk_id": "chunk-3e02e30d18b6d9d534a09cad",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 48189,
+     "char_end": 49147,
+     "quote": "n\nfeature completeness and vulnerable to obfuscated malicious knowledge with lightweight LoRA fine-tuning, DistillGuard\ncode. Recently, LLMs have become prevale"
+    },
+    {
+     "chunk_id": "chunk-60353af87ed264ff1ebf2e47",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 792,
+     "char_end": 1343,
+     "quote": "package installation, import, and runtime. Traditional static devices, posing an urgent challenge to open source supply\nanalysis fails to understand code semant"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "DistillGuard",
+    "NPM"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer from insurmountable knowledg",
+   "latency_ms": 454.0,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-002",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "OllamaDrama 论文研究的是什么对象？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.29757"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29757"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 5071,
+     "char_end": 5291,
+     "quote": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full sy"
+    },
+    {
+     "chunk_id": "chunk-2e3b3fec713324c33c3b0880",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 28781,
+     "char_end": 28943,
+     "quote": "62 requests specified the explicit string\nnonexistent, 44 referenced legitimate model names, and a single instance con-\ntained the string__gguf_header_overflow_"
+    },
+    {
+     "chunk_id": "chunk-f04f6a92012135f57321f790",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 42847,
+     "char_end": 43037,
+     "quote": "isrupting availability and driving up costs via\nImpact Context Overflow, Input resource exhaustion, token flooding, and\nToken Flooding, Infinite computational o"
+    },
+    {
+     "chunk_id": "chunk-1d263630fc98f67bc8257def",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 60787,
+     "char_end": 60948,
+     "quote": "24 K. Elzer et al..\nFig.7: Mean inter-request gap and overall duration boxplot of IP-instance com-\nbinations for the Digital Ocean (DO) and university locations"
+    },
+    {
+     "chunk_id": "chunk-f1f210c2e843456a23f64f7e",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 33942,
+     "char_end": 34139,
+     "quote": "ming prompts engineered to align the model\ninto different AI assistant persona. Furthermore, the/api/chatdataset exhib-\nited a slightly higher concentration of "
+    },
+    {
+     "chunk_id": "chunk-df7e311eaa475d978286b5b5",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 7811,
+     "char_end": 8025,
+     "quote": "ng to encompass multi-step execution\nloops, external tool use, and complex privilege delegation. In this work, we focus\nspecifically on mapping attacks against "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "OllamaDrama",
+    "honeypot"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- :Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full system functionality. [13]\n1 ",
+   "latency_ms": 444.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-003",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "Codetta 论文研究的是什么问题？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.28900"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28900"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-40710bf2b8e507ad4f7c387b",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 105705,
+     "char_end": 106648,
+     "quote": "FINANCIAL IFEVAL CTF\nMethod Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral\nCapacity (bits per token)\nCODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 "
+    },
+    {
+     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 26606,
+     "char_end": 26792,
+     "quote": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAo"
+    },
+    {
+     "chunk_id": "chunk-e45c6b3a852060d4b6ed1edd",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 57625,
+     "char_end": 57844,
+     "quote": "\nWe analyze undetectability, the substitution channel, and correctness and soundness ofAlgorithm 2, following\nSection 4. All three rest onLemma 1, the one-step "
+    },
+    {
+     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 0,
+     "char_end": 969,
+     "quote": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting"
+    },
+    {
+     "chunk_id": "chunk-ebe17bce2bf3c43a07bfae05",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 80477,
+     "char_end": 80689,
+     "quote": "hable from a uniform vector over Zq, so each of its coefficients can be handed to the carrier as a\nuniform q-ary symbol. The transport is also robust to small a"
+    },
+    {
+     "chunk_id": "chunk-ee4b3e79d54da71275cae71a",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 51483,
+     "char_end": 51712,
+     "quote": "tions” can be\nposed for any number of answers, so the alphabet may change from token to token. “Questions” can be asked\nfor as long as generation continues, so "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Codetta",
+    "collusion"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- FINANCIAL IFEVAL CTF\nMethod Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral\nCapacity (bits per token)\nCODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511",
+   "latency_ms": 444.0,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-004",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "SAGE 这篇论文的方法名称是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.30192"
+   ],
+   "expected_document_keys": [
+    "paper:2609.30192"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-772965adcd179139bcd06485",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 65258,
+     "char_end": 66137,
+     "quote": "g improves the quality\nof the sampled reasoning distribution rather than merely exploiting a narrow decoding regime. We\nalso observe that SAGE is less sensitive"
+    },
+    {
+     "chunk_id": "chunk-865c3fc82db601b61deb31de",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 32637,
+     "char_end": 33010,
+     "quote": "rection. Building on SCA,\nwe propose SAGE, a topology-guided post-training framework that implements these requirements\nthrough algebraic sparsification and hyp"
+    },
+    {
+     "chunk_id": "chunk-99f6facf8375a778cae6aea8",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 30124,
+     "char_end": 31071,
+     "quote": "w/oΨ P 39.12 17.68 38.85 21.18\nthe strongest end-to-end verified performance- SAGE w/ Euclidean 38.01 16.92 38.02 20.89\nconfirming that both signals are needed "
+    },
+    {
+     "chunk_id": "chunk-dd1e7b4c423f2efb51430a33",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 21167,
+     "char_end": 22161,
+     "quote": "R term(τ i) +η· 1Ti t=1 ΨSAGE(s it,ait), with group-relative\nadvantageAi = (eR(τ i)−mean j eR(τ j))/(std j eR(τ j) +ε) . This makes the sparse terminal signal\nu"
+    },
+    {
+     "chunk_id": "chunk-8500d9c105c4b1356d5b2c17",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 20289,
+     "char_end": 20923,
+     "quote": "tdj(η ¯ΨSAGE(τ j)) +ϵ \u0001 remains nonzero, providing\nan update signal even under uninformative terminal rewards.\n4.2 SAGE\nThe two potentials combine into the SAGE"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "SAGE",
+    "Topological"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- g improves the quality\nof the sampled reasoning distribution rather than merely exploiting a narrow decoding regime. We\nalso observe that SAGE is less sensitive to the KL coefficient than",
+   "latency_ms": 472.4,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-005",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "EAGER 论文使用了什么奖励机制？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.29230"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29230"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-72ead54d06cf2c62969163b6",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 0,
+     "char_end": 942,
+     "quote": "EAGER: Enhancing Generative Event Extraction via Reinforcement\nLearning with Verifiable Rewards\nOmar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Son"
+    },
+    {
+     "chunk_id": "chunk-8e8a07516863b486bd58920e",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 62921,
+     "char_end": 63321,
+     "quote": "chmark centered on\nConsistent with findings reported in prior DAPO security incident reports, featuring highly special-\nwork (Yu et al.,2026), we observe that t"
+    },
+    {
+     "chunk_id": "chunk-4fef66f74b75d70611829266",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 28905,
+     "char_end": 29430,
+     "quote": "tion tasks, informative re-\nEAGERreduces average F1 from 30.79 to 22.61 ward modeling must be coupled with optimization\nand GoLLIE-7B from 16.35 to 5.81 which i"
+    },
+    {
+     "chunk_id": "chunk-88fdfe6ea53367bfaaa69e60",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 70357,
+     "char_end": 70766,
+     "quote": ".HewastransferredtherefromaBostonhospitalwhere\nhehadbeenreceivingtreatmentforinjuriessustainedduringhiscapturelastweek.\nFederalMedicalCenterDevens,Ayer,Massachu"
+    },
+    {
+     "chunk_id": "chunk-0e890ae5a0de528274b4f0df",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 89882,
+     "char_end": 90148,
+     "quote": "Site:List#Thespecificlocationontheproteinwherethedephosphorylationoccurs.\nExamplesare'Mcl-1','serine157','tyrosine123'.\n6 Theme:List#Theproteinthatundergoesdeph"
+    },
+    {
+     "chunk_id": "chunk-043bc308f0cf8c7d79bf4b3c",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 86903,
+     "char_end": 87361,
+     "quote": "Importance:Thementionargumentiscrucialin\nidentifyingthetypeofproteindegradationevent,whichisessentialinunderstandingthe\ncellularprocess.\n5 Theme:List#Examplesar"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "EAGER",
+    "Verifiable Rewards"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- EAGER: Enhancing Generative Event Extraction via Reinforcement\nLearning with Verifiable Rewards\nOmar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2\n1German Research Ce",
+   "latency_ms": 459.7,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-006",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "NeRD 论文的应用领域是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2606.15617"
+   ],
+   "expected_document_keys": [
+    "paper:2606.15617"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-675668ff34c9d9eeb7b36b4a",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 19528,
+     "char_end": 19944,
+     "quote": "tervened cases. Overall, NeRD demon-\nstrates higher intervention-efficient refinement by enabling larger diagnostic im-\nprovements with substantially fewer conc"
+    },
+    {
+     "chunk_id": "chunk-6ece9563486747c798438a8e",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 13952,
+     "char_end": 14899,
+     "quote": "r all items to obtain a mean score per method.\nMain Results.Fig. 3(b) summarizes the results of the human expert study.\nNeRD attains the highest mean score on b"
+    },
+    {
+     "chunk_id": "chunk-5c71aaa24bd8d7056ac0313a",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 5197,
+     "char_end": 6130,
+     "quote": "NeRD 3\nFig.2: Framework of our method. Step 1: Induce a diagnostic rule set from\nconcepts. Step 2: Execute Neuro-Symbolic Rule Distillation (NeRD) to select,\nsi"
+    },
+    {
+     "chunk_id": "chunk-4be51f4b81e36bbffa7fb8de",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 15048,
+     "char_end": 15995,
+     "quote": "NeRD 7\nFig.4: NeRD generated MCoTs.\nTable 2: Average concept count. Pos Table 3: Intervention results on Derm7pt.\n/ Neg: present / absent per case N: intervened"
+    },
+    {
+     "chunk_id": "chunk-a7874d53d8db6974b188f298",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 14779,
+     "char_end": 15046,
+     "quote": "s for reaching correct conclusions without image access.\n3.3 Experiment 2: Fine-Tuned MLLMs for Interpretable Diagnosis\nBaselines and Implementation Details.We "
+    },
+    {
+     "chunk_id": "chunk-522eb9d8deff2a4d6e345452",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 16739,
+     "char_end": 17003,
+     "quote": " fixed schema, we use GPT-5 Mini [14] to parse the\npredicted concepts and diagnosis from free-form text for evaluation.\nMain Results.Table 1 reports diagnostic "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "NeRD",
+    "Medical"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- tervened cases. Overall, NeRD demon-\nstrates higher intervention-efficient refinement by enabling larger diagnostic im-\nprovements with substantially fewer concept edits.\n4 Conclusion\nWe ",
+   "latency_ms": 443.3,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-007",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "Hard Stop 论文关注什么样的执行被抢先终止？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.29808"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29808"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-9aa9b7f0bfc461185e805840",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 53472,
+     "char_end": 54461,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n# 2. Template Injection & Traversal Prohibited Strings\npayload=f\"{file_path_accessedor"
+    },
+    {
+     "chunk_id": "chunk-40e6485386bfdf62a9f37df0",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 55172,
+     "char_end": 56138,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n}\nexceptException:\npass\nreturnNone\ndefexecute_quiescence_and_preempt(\nself, diagnostic"
+    },
+    {
+     "chunk_id": "chunk-dd6697dfa7ef5bd2eb0080ec",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 51788,
+     "char_end": 52712,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\ndefterminate_process_group(self)->bool:\n\"\"\"Issues non-maskable SIGKILL to isolate rogu"
+    },
+    {
+     "chunk_id": "chunk-6b9546662a106a418714e03e",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 45480,
+     "char_end": 45766,
+     "quote": "===========\nPlatform: AMD Zen 5 (Kern), Linux 6.11 PREEMPT_DYNAMIC, Python 3.14\nReference: Kalibera & Jones (2013) ISMM. doi:10.1145/2464157.2464160\nSource: htt"
+    },
+    {
+     "chunk_id": "chunk-f9d26319bd709c7eebf87b3b",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 32611,
+     "char_end": 33273,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nSecurity & Concurrency\nMechanism / Layer Latency Profile Guarantee\nbpf_override_return"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Hard Stop",
+    "Preemption"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n# 2. Template Injection & Traversal Prohibited Strings\npayload=f\"{file_path_accessedor''}{command_stror''}\"\nprohi",
+   "latency_ms": 517.4,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-008",
+   "category": "基础事实问答",
+   "difficulty": "medium",
+   "question": "CVE-2026-41106 是什么漏洞？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "CVE-2026-41106"
+   ],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [
+    "CVE-2026-41106"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 0,
+   "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
+   "latency_ms": 392.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-009",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "Parameter-Efficient Fine-Tuning 这篇论文的主题是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W4406794439"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2501.13787"
+   ],
+   "expected_document_keys": [
+    "paper:2501.13787"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-a6aaa41c451888d03395cd44",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 1685,
+     "char_end": 2651,
+     "quote": "ctions for improving PEFTs in the future. This survey E [28], Sora [29], and Veo2 1 specialize in generative tasks, and\nprovides a valuable resource for both ne"
+    },
+    {
+     "chunk_id": "chunk-1c81026ab5a957ec178913c4",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 88215,
+     "char_end": 89169,
+     "quote": "[32]Y. Xin, S. Luo, H. Zhou, J. Du, X. Liu, Y. Fan, B. Ommer, “High-resolution image synthesis with latent\nQ. Li, and Y. Du, “Parameter-efficient fine-tuning fo"
+    },
+    {
+     "chunk_id": "chunk-af92a77db28f15236d9501e0",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 74832,
+     "char_end": 75380,
+     "quote": "ideo dif- samples) and parameter-efficient (fewer than 40M parameters)\nfusion, like T-LoRA [113] from Customize-A-Video. Adapter- fine-tuning strategy to facili"
+    },
+    {
+     "chunk_id": "chunk-8e22077c669275cfa3e1fd10",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 0,
+     "char_end": 970,
+     "quote": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 1\nParameter-Efficient Fine-Tuning for\nFoundation Models\nDan Zhang∗, Tao Feng∗, Lilong Xue∗, Yuandon"
+    },
+    {
+     "chunk_id": "chunk-0b6a9c456122108958f74640",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 99552,
+     "char_end": 99941,
+     "quote": "nnual Meeting of the\nH. Li, and Y. Qiao, “Clip-adapter: Better vision- Association for Computational Linguistics, 2021.\nlanguage models with feature adapters,” "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Parameter-Efficient",
+    "Fine-Tuning"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models",
+   "latency_ms": 458.5,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-010",
+   "category": "基础事实问答",
+   "difficulty": "easy",
+   "question": "JevOut 论文的主题是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.30243"
+   ],
+   "expected_document_keys": [
+    "paper:2609.30243"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-b1c2dbf1124d49e8c1e960f2",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 28266,
+     "char_end": 29199,
+     "quote": "JevOut: Natural Context Can Flip Decision Models\nFigure 5: Frozen context additions redirect other models. Rowsspecifythesourceofoptimization;columns\nspecifythe"
+    },
+    {
+     "chunk_id": "chunk-1e1b1f7a4deebb53d0b33fc8",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 0,
+     "char_end": 959,
+     "quote": "JevOut: Natural Context Can Flip Decision Models\nZixiang Xu1\n1University of Southern California\nDedicated decision models such as Jev map unstructured language "
+    },
+    {
+     "chunk_id": "chunk-b1620540c0899bd702ed5cda",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 20085,
+     "char_end": 20304,
+     "quote": "decisionswithin64acceptedtarget\nevaluations(Table 1). Theresulting61.4%TFR(95%Wilsoninterval: 57.1%–65.5%)contrastswith\n16.9% for one target-aware addition and "
+    },
+    {
+     "chunk_id": "chunk-e49b86c958642fd07f990a89",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 82087,
+     "char_end": 82291,
+     "quote": "eaches 0.7. Thus label-only names the allocation feedback, not a restriction to label access through-\nout the evaluator. Full feedback has 86 successes, compare"
+    },
+    {
+     "chunk_id": "chunk-1934b1e31fc0d9c70d011fdb",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 102793,
+     "char_end": 103718,
+     "quote": "JevOut: Natural Context Can Flip Decision Models\nM. Scope and Generalization\nThe current study targets systems that expose a finite, typed distribution and cond"
+    },
+    {
+     "chunk_id": "chunk-027c0961ee9fe6d31d788bb2",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 3363,
+     "char_end": 3764,
+     "quote": "d sentence introduces\na related intergenerational consideration, but it does not change the definition being asked for.\nPriorworkhasestablishedthatlanguagemodel"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "JevOut"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- JevOut: Natural Context Can Flip Decision Models\nFigure 5: Frozen context additions redirect other models. Rowsspecifythesourceofoptimization;columns\nspecifythedestination. Eachoff-diagon",
+   "latency_ms": 426.1,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-011",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "什么是提示词注入？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "source:owasp_genai"
+   ],
+   "expected_document_keys": [
+    "source:owasp_genai"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-90c768cd5de7c577f26397d2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 816,
+     "char_end": 1447,
+     "quote": "While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model "
+    },
+    {
+     "chunk_id": "chunk-e8cc2b6834a2c530e2fcad10",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 3363,
+     "char_end": 3672,
+     "quote": "Prompt injection vulnerabilities are possible due to the nature of generative AI. Given the stochastic influence at the heart of the way models work, it is uncl"
+    },
+    {
+     "chunk_id": "chunk-ff8a87d0d88c14f7168efde2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 2146,
+     "char_end": 2470,
+     "quote": "The severity and nature of the impact of a successful prompt injection attack can vary greatly and are largely dependent on both the business context the model "
+    },
+    {
+     "chunk_id": "chunk-7061149ba14708176205f246",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 307,
+     "char_end": 814,
+     "quote": "Prompt Injection vulnerabilities exist in how models process prompts, and how input may force the model to incorrectly pass prompt data to other parts of the mo"
+    },
+    {
+     "chunk_id": "chunk-71ae55e2e6545c119a797617",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 7371,
+     "char_end": 7503,
+     "quote": "Not what you’ve signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection Cornell University"
+    },
+    {
+     "chunk_id": "chunk-b9d2b917a3e216d060bdd256",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 8671,
+     "char_end": 8799,
+     "quote": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways. These inputs..."
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Prompt Injection"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through specific ",
+   "latency_ms": 415.4,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-012",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "Derm7pt 是什么数据集？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2606.15617"
+   ],
+   "expected_document_keys": [
+    "paper:2606.15617"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-6ea63ce05320edcd881e0931",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 17005,
+     "char_end": 17940,
+     "quote": "8 Hongxi Yang et al.\nachieves the strongest overall results: 80.76% ACC / 60.00% F1 on Derm7pt and\n88.66% ACC / 61.70% F1 on F17k, outperforming WISE and the ze"
+    },
+    {
+     "chunk_id": "chunk-522eb9d8deff2a4d6e345452",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 16739,
+     "char_end": 17003,
+     "quote": " fixed schema, we use GPT-5 Mini [14] to parse the\npredicted concepts and diagnosis from free-form text for evaluation.\nMain Results.Table 1 reports diagnostic "
+    },
+    {
+     "chunk_id": "chunk-67f8da8439e4a735fa12d084",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 11101,
+     "char_end": 12047,
+     "quote": "pts within each group accordingly.\nFinally, we render the rationale with a fixed template: (i) report the salient posi-\ntive findings, (ii) enumerate clinically"
+    },
+    {
+     "chunk_id": "chunk-6ece9563486747c798438a8e",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 13952,
+     "char_end": 14899,
+     "quote": "r all items to obtain a mean score per method.\nMain Results.Fig. 3(b) summarizes the results of the human expert study.\nNeRD attains the highest mean score on b"
+    },
+    {
+     "chunk_id": "chunk-f52301c5c0e978537d0b4968",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 12270,
+     "char_end": 13005,
+     "quote": "6 Hongxi Yang et al.\nTable 1: Comparison of diagnostic and concept prediction performance. ACC\n(%): diagnostic accuracy; F1 (%): diagnostic F1 score; Intp. (%):"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Derm7pt"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- 8 Hongxi Yang et al.\nachieves the strongest overall results: 80.76% ACC / 60.00% F1 on Derm7pt and\n88.66% ACC / 61.70% F1 on F17k, outperforming WISE and the zero-shot base-\nline.OnDerm7p",
+   "latency_ms": 397.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-013",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "什么是 kernel-level evidence？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214288902"
+   ],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.28915"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28915"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-dce559be9fb9fbb750a526c5",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 55734,
+     "char_end": 55866,
+     "quote": " . . . . . . . . . . . . . . . 26\nE.9 Safety perimeter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27\n15"
+    },
+    {
+     "chunk_id": "chunk-0997bd3a5ea6eec03f8ff185",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 28360,
+     "char_end": 28659,
+     "quote": "Appendix K.4 examines these cases.\nKernel evidence generalizes across attack and detector families.Under the seven-fold\nOWASP-aligned evaluation, all four detec"
+    },
+    {
+     "chunk_id": "chunk-834172ea6722a03c4a60627e",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 0,
+     "char_end": 996,
+     "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University"
+    },
+    {
+     "chunk_id": "chunk-69112a1b870e891965540a5a",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 178662,
+     "char_end": 178994,
+     "quote": ", deep-tabular, frozen LLM, and fine-tuned SLM configurations evalu-\nated on ACE (Table 8) under same-fold conditioning. ACE-XA answers whether the paper’s find"
+    },
+    {
+     "chunk_id": "chunk-ba60b3d5b67adbd66a08575f",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 160573,
+     "char_end": 160892,
+     "quote": " SLM exceptions, the winning\nsingle-view AUROC (0.901–0.922) still exceeds the XGBoost Cross-View OOD baseline of0.850,\nso the SLM Kernel-only preference is a w"
+    },
+    {
+     "chunk_id": "chunk-ef41a7399c4f1c94e4e6d947",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 6288,
+     "char_end": 7259,
+     "quote": "etector-family comparison\nover kernel and application evidence be evaluated on a common substrate. As a result, whether\nthe Kernel-View carries discriminative s"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "kernel"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 6,
+   "answer_head": "OPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the applicatio",
+   "latency_ms": 360.9,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-014",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "multi-agent 系统在哪些研究里被讨论？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28900",
+    "paper:2609.30028"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28900"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 26606,
+     "char_end": 26792,
+     "quote": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAo"
+    },
+    {
+     "chunk_id": "chunk-86f5cd3318bfb7da386309bd",
+     "document_id": "doc-053c4681c135e61900b6d182",
+     "document_key": "paper:2609.30028",
+     "char_start": 38557,
+     "char_end": 39503,
+     "quote": "em Ozmen Garibay. Smarter Sabo-\nteurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint\narXiv:2606.12709, 2026. URLhttps://arxiv"
+    },
+    {
+     "chunk_id": "chunk-588cced1264eec1b2b7b6151",
+     "document_id": "doc-053c4681c135e61900b6d182",
+     "document_key": "paper:2609.30028",
+     "char_start": 42220,
+     "char_end": 43152,
+     "quote": "2505.22960.\nBinwei Yao, Chao Shang, Wanyu Du, Jianfeng He, Ruixue Lian, Yi Zhang, Hang Su, Sandesh\nSwamy, and Yanjun Qi. Peacemaker or Troublemaker: How Sycopha"
+    },
+    {
+     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 0,
+     "char_end": 969,
+     "quote": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting"
+    },
+    {
+     "chunk_id": "chunk-b82299bc638b7678cb7945c5",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 133974,
+     "char_end": 134768,
+     "quote": " and\nNenghai Yu. Breaking the generative steganography trilemma: Anstega for optimal capacity,\nefficiency, and security. In33rd Annual Network and Distributed S"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "multi-agent"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n-  capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAon three agent workloads.\n7\n",
+   "latency_ms": 459.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-015",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "AUROC 是什么指标？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28915",
+    "paper:2609.29429"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29429"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-2c548b7cb0cbd3d90614329e",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 186074,
+     "char_end": 187052,
+     "quote": "ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL\nAUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3"
+    },
+    {
+     "chunk_id": "chunk-44cd582860c79d6783e5fbed",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 128975,
+     "char_end": 129927,
+     "quote": "The AUROC advantage does\nnot come from resolution. The scorer takes only 9 distinct values. Breaking its ties at random\ngives a mean AUROC of 0.929 (0.916–0.945"
+    },
+    {
+     "chunk_id": "chunk-20a31f7b632b76ef56327c75",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 140666,
+     "char_end": 141593,
+     "quote": "Preprint\nTable 18:Kernel-View representation ablation on ACE.Pooled ACE-full AUROC under\nOWASP-groundedK=0on the paper’s canonical AUROC cohort (§3.1;n=3,651aft"
+    },
+    {
+     "chunk_id": "chunk-ddc8ff128228b8a2c57cf5cb",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 112024,
+     "char_end": 112951,
+     "quote": "Under review as a conference paper at ICLR 2027\nFigure 5:Reference gain against baseline AUROC.Pairs with lower AUROC before the reference gain more\nwhen it is "
+    },
+    {
+     "chunk_id": "chunk-b6e12a610c133c01a06e9ac8",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 147960,
+     "char_end": 148003,
+     "quote": "90 session/fold evaluations.\nWith OWASP gro"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "AUROC"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL\nAUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3\nrepeats) and F1 at 0.5. Le",
+   "latency_ms": 364.3,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-016",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "PEFT 在基础模型上解决什么问题？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2501.13787"
+   ],
+   "expected_document_keys": [
+    "paper:2501.13787"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-e78516a997d4da76b6632007",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 80406,
+     "char_end": 81336,
+     "quote": "systems that can continuously learn new tasks while retaining In conclusion, the integration of PEFT with FMs showcases\nmemory and performance on learned tasks."
+    },
+    {
+     "chunk_id": "chunk-f5ae901ee6258438880b216e",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 850,
+     "char_end": 1805,
+     "quote": "for\nPEFT. Therefore, this survey aims to provide a comprehensive\noverview of PEFT techniques applied to diverse FMs and\naddress critical gaps in understanding t"
+    },
+    {
+     "chunk_id": "chunk-0d912b6e54b1e8560e120f71",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 81216,
+     "char_end": 81890,
+     "quote": "vantages of specific architectures for PEFT and explore how bridPEFT, and across different model structures (e.g., LLM,\nto design more effective PEFT schemes fo"
+    },
+    {
+     "chunk_id": "chunk-149345792c2f8071dac76ee5",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 77892,
+     "char_end": 78889,
+     "quote": "\nlike Hugging Face’s PEFT and AdapterHub, there remains a to build from simple to complex representations. This layered\nnotable lack of comprehensive benchmarks"
+    },
+    {
+     "chunk_id": "chunk-f5c8e3e5a1bd2f37e723c148",
+     "document_id": "doc-086c0557444be72ddfb3c0fd",
+     "document_key": "paper:2501.13787",
+     "char_start": 75382,
+     "char_end": 75653,
+     "quote": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 15\nVII. DISCUSSION AND FUTURE DIRECTIONS Scaling Laws of PEFT. Current efforts reveal diminishing\nA"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Parameter-Efficient"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- systems that can continuously learn new tasks while retaining In conclusion, the integration of PEFT with FMs showcases\nmemory and performance on learned tasks. The combination a promisin",
+   "latency_ms": 459.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-017",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "OllamaDrama 中的 honeypot 部署在哪里？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.29757"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29757"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-e7c4f5f3c7751a3ffa30b7ce",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 13667,
+     "char_end": 14122,
+     "quote": "full range\nof specialized LLM API endpoints.\nOur work aims to address this gap by introducing a dedicated honeypot that\nexplicitly mimics an LLM API. Deploying "
+    },
+    {
+     "chunk_id": "chunk-1c80f502e72fb42699eeb0ab",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 11091,
+     "char_end": 12088,
+     "quote": "OllamaDrama 5\n2.4 Related Work\nIn recent years, cyber deception has increasingly integrated LLMs to enhance\nhoneypot interactivity and scale automated defense t"
+    },
+    {
+     "chunk_id": "chunk-ada39a3d70fd203df933339d",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 54881,
+     "char_end": 55854,
+     "quote": "Springer Nature Singapore, Singapore (2027)\n7.Karimi, A.: Galah: An LLM-powered web honeypot (2025),https://github.com/\n0x4D31/galah, accessed: 03-March-2026\n8."
+    },
+    {
+     "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 5071,
+     "char_end": 5291,
+     "quote": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full sy"
+    },
+    {
+     "chunk_id": "chunk-2e3b3fec713324c33c3b0880",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 28781,
+     "char_end": 28943,
+     "quote": "62 requests specified the explicit string\nnonexistent, 44 referenced legitimate model names, and a single instance con-\ntained the string__gguf_header_overflow_"
+    },
+    {
+     "chunk_id": "chunk-f04f6a92012135f57321f790",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 42847,
+     "char_end": 43037,
+     "quote": "isrupting availability and driving up costs via\nImpact Context Overflow, Input resource exhaustion, token flooding, and\nToken Flooding, Infinite computational o"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "honeypot"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- full range\nof specialized LLM API endpoints.\nOur work aims to address this gap by introducing a dedicated honeypot that\nexplicitly mimics an LLM API. Deploying this honeypot enables an ex",
+   "latency_ms": 388.4,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-018",
+   "category": "术语及语义查询",
+   "difficulty": "medium",
+   "question": "什么是 agent trace tampering？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214307780"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.30266"
+   ],
+   "expected_document_keys": [
+    "paper:2609.30266"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-d3a1e18d3abbbbf5b041ba1a",
+     "document_id": "doc-c3316c678ced42f2b7219d3b",
+     "document_key": "paper:2609.30266",
+     "char_start": 12416,
+     "char_end": 12905,
+     "quote": "est whether agents\ncan tamper with traces when users ask it to. Second, we test whether external attacks can induce the\nsame behavior in an LLM agent without a "
+    },
+    {
+     "chunk_id": "chunk-b921e14c27b3174c1a0bb62e",
+     "document_id": "doc-c3316c678ced42f2b7219d3b",
+     "document_key": "paper:2609.30266",
+     "char_start": 75486,
+     "char_end": 76416,
+     "quote": "ved workspaces and scores In the peer-workspaces setup, we give five peer directories and score-only\nindex to the agent. Each directory contains task material a"
+    },
+    {
+     "chunk_id": "chunk-62a7d47d89612e47ce8b38c8",
+     "document_id": "doc-c3316c678ced42f2b7219d3b",
+     "document_key": "paper:2609.30266",
+     "char_start": 37180,
+     "char_end": 38153,
+     "quote": "Figure 9. Emergence of trace tampering during optimization. Curves show the cumulative percentage of runs that\nattempted trace tampering by each optimization ro"
+    },
+    {
+     "chunk_id": "chunk-0d2411e7655b4dbc559e200f",
+     "document_id": "doc-c3316c678ced42f2b7219d3b",
+     "document_key": "paper:2609.30266",
+     "char_start": 44124,
+     "char_end": 45078,
+     "quote": "6 Discussion & Conclusion\nOur results demonstrate an oversight problem for trace-based monitoring. We show that agents possess\nthe capability and a propensity t"
+    },
+    {
+     "chunk_id": "chunk-ae3331b97acc872c38e866bc",
+     "document_id": "doc-c3316c678ced42f2b7219d3b",
+     "document_key": "paper:2609.30266",
+     "char_start": 25315,
+     "char_end": 25796,
+     "quote": "Key Takeaways\nAgents can tamper traces as a part of an (external) malicious attack without user knowledge, such\nas a prompt injection from a skill. However, ski"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "trace"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot t",
+   "latency_ms": 371.5,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-019",
+   "category": "中英文混合查询",
+   "difficulty": "medium",
+   "question": "DistillGuard 是做什么的？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28996"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28996"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 23478,
+     "char_end": 24466,
+     "quote": "While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer f"
+    },
+    {
+     "chunk_id": "chunk-c58221ed9828a62061aaeec7",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 49027,
+     "char_end": 49374,
+     "quote": "strategies are further proposed to boost detection titatively characterize NPM attack patterns and summarize\nrobustness. DONAPI [26] identifies obfuscated packa"
+    },
+    {
+     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 4192,
+     "char_end": 5175,
+     "quote": ".\nmake it a primary target for software supply chain attacks. To overcome these limitations, we propose DistillGuard, a\nAttackers typically employ techniques su"
+    },
+    {
+     "chunk_id": "chunk-3e02e30d18b6d9d534a09cad",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 48189,
+     "char_end": 49147,
+     "quote": "n\nfeature completeness and vulnerable to obfuscated malicious knowledge with lightweight LoRA fine-tuning, DistillGuard\ncode. Recently, LLMs have become prevale"
+    },
+    {
+     "chunk_id": "chunk-60353af87ed264ff1ebf2e47",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 792,
+     "char_end": 1343,
+     "quote": "package installation, import, and runtime. Traditional static devices, posing an urgent challenge to open source supply\nanalysis fails to understand code semant"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "DistillGuard"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer from insurmountable knowledg",
+   "latency_ms": 363.7,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-020",
+   "category": "中英文混合查询",
+   "difficulty": "medium",
+   "question": "OllamaDrama 蜜罐观察到了什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.29757"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29757"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 5071,
+     "char_end": 5291,
+     "quote": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full sy"
+    },
+    {
+     "chunk_id": "chunk-2e3b3fec713324c33c3b0880",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 28781,
+     "char_end": 28943,
+     "quote": "62 requests specified the explicit string\nnonexistent, 44 referenced legitimate model names, and a single instance con-\ntained the string__gguf_header_overflow_"
+    },
+    {
+     "chunk_id": "chunk-f04f6a92012135f57321f790",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 42847,
+     "char_end": 43037,
+     "quote": "isrupting availability and driving up costs via\nImpact Context Overflow, Input resource exhaustion, token flooding, and\nToken Flooding, Infinite computational o"
+    },
+    {
+     "chunk_id": "chunk-1d263630fc98f67bc8257def",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 60787,
+     "char_end": 60948,
+     "quote": "24 K. Elzer et al..\nFig.7: Mean inter-request gap and overall duration boxplot of IP-instance com-\nbinations for the Digital Ocean (DO) and university locations"
+    },
+    {
+     "chunk_id": "chunk-f1f210c2e843456a23f64f7e",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 33942,
+     "char_end": 34139,
+     "quote": "ming prompts engineered to align the model\ninto different AI assistant persona. Furthermore, the/api/chatdataset exhib-\nited a slightly higher concentration of "
+    },
+    {
+     "chunk_id": "chunk-df7e311eaa475d978286b5b5",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 7811,
+     "char_end": 8025,
+     "quote": "ng to encompass multi-step execution\nloops, external tool use, and complex privilege delegation. In this work, we focus\nspecifically on mapping attacks against "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "OllamaDrama"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- :Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full system functionality. [13]\n1 ",
+   "latency_ms": 414.4,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-021",
+   "category": "中英文混合查询",
+   "difficulty": "medium",
+   "question": "Codetta 是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.28900"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28900"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-40710bf2b8e507ad4f7c387b",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 105705,
+     "char_end": 106648,
+     "quote": "FINANCIAL IFEVAL CTF\nMethod Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral\nCapacity (bits per token)\nCODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 "
+    },
+    {
+     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 26606,
+     "char_end": 26792,
+     "quote": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAo"
+    },
+    {
+     "chunk_id": "chunk-e45c6b3a852060d4b6ed1edd",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 57625,
+     "char_end": 57844,
+     "quote": "\nWe analyze undetectability, the substitution channel, and correctness and soundness ofAlgorithm 2, following\nSection 4. All three rest onLemma 1, the one-step "
+    },
+    {
+     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 0,
+     "char_end": 969,
+     "quote": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting"
+    },
+    {
+     "chunk_id": "chunk-ebe17bce2bf3c43a07bfae05",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 80477,
+     "char_end": 80689,
+     "quote": "hable from a uniform vector over Zq, so each of its coefficients can be handed to the carrier as a\nuniform q-ary symbol. The transport is also robust to small a"
+    },
+    {
+     "chunk_id": "chunk-ee4b3e79d54da71275cae71a",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 51483,
+     "char_end": 51712,
+     "quote": "tions” can be\nposed for any number of answers, so the alphabet may change from token to token. “Questions” can be asked\nfor as long as generation continues, so "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Codetta"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- FINANCIAL IFEVAL CTF\nMethod Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral\nCapacity (bits per token)\nCODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511",
+   "latency_ms": 349.6,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-022",
+   "category": "中英文混合查询",
+   "difficulty": "medium",
+   "question": "SAGE 如何缓解 reasoning bias？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214358407",
+    "OPENALEX-W7214194099"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.30192"
+   ],
+   "expected_document_keys": [
+    "paper:2609.30192"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-0d87178f3f6c71d9d0ed07c3",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 31781,
+     "char_end": 32757,
+     "quote": "ion as sampling or\nreward shaping rather than a structural property of the reasoning space—despite evidence that sparse\nfeedback induces persistent trajectory-s"
+    },
+    {
+     "chunk_id": "chunk-08e64cd5148d58f125f89d0a",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 3602,
+     "char_end": 4504,
+     "quote": "2013). Together, these biases explain why LLMs may produce plausible intermediate steps while still\nfailing at end-to-end long-horizon reasoning, and existing m"
+    },
+    {
+     "chunk_id": "chunk-6ba3f9978783a2953df6df02",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 6090,
+     "char_end": 7032,
+     "quote": "or al-\nleviating long-horizon reasoning biases. SAGE injects\nstructural guidance during policy optimization so that the\nlearned policy internalizes useful prope"
+    },
+    {
+     "chunk_id": "chunk-5caa1f9f6bec75de22c4dade",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 15498,
+     "char_end": 16070,
+     "quote": " admissible branching factors at depth t. When\nBFt ≪B t for manyt, a crude volume comparison gives\n|{τ ≤T :τ∈F}| TY BFt\n|{τ ≤T :τ∈Ω}| ≲ t=1 Bt . (1)\nThus, unles"
+    },
+    {
+     "chunk_id": "chunk-3cdcc8050c44d2f0074f4c48",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 865,
+     "char_end": 1300,
+     "quote": "ibility, and as a design principle for\nstructural priors in less formal reasoning tasks. Motivated by this analysis, we\npropose SAGE (StructuralAdmissibility-Gu"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "SAGE"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by c",
+   "latency_ms": 422.6,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-023",
+   "category": "中英文混合查询",
+   "difficulty": "medium",
+   "question": "NeRD 是什么方法？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2606.15617"
+   ],
+   "expected_document_keys": [
+    "paper:2606.15617"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-675668ff34c9d9eeb7b36b4a",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 19528,
+     "char_end": 19944,
+     "quote": "tervened cases. Overall, NeRD demon-\nstrates higher intervention-efficient refinement by enabling larger diagnostic im-\nprovements with substantially fewer conc"
+    },
+    {
+     "chunk_id": "chunk-6ece9563486747c798438a8e",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 13952,
+     "char_end": 14899,
+     "quote": "r all items to obtain a mean score per method.\nMain Results.Fig. 3(b) summarizes the results of the human expert study.\nNeRD attains the highest mean score on b"
+    },
+    {
+     "chunk_id": "chunk-5c71aaa24bd8d7056ac0313a",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 5197,
+     "char_end": 6130,
+     "quote": "NeRD 3\nFig.2: Framework of our method. Step 1: Induce a diagnostic rule set from\nconcepts. Step 2: Execute Neuro-Symbolic Rule Distillation (NeRD) to select,\nsi"
+    },
+    {
+     "chunk_id": "chunk-4be51f4b81e36bbffa7fb8de",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 15048,
+     "char_end": 15995,
+     "quote": "NeRD 7\nFig.4: NeRD generated MCoTs.\nTable 2: Average concept count. Pos Table 3: Intervention results on Derm7pt.\n/ Neg: present / absent per case N: intervened"
+    },
+    {
+     "chunk_id": "chunk-a7874d53d8db6974b188f298",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 14779,
+     "char_end": 15046,
+     "quote": "s for reaching correct conclusions without image access.\n3.3 Experiment 2: Fine-Tuned MLLMs for Interpretable Diagnosis\nBaselines and Implementation Details.We "
+    },
+    {
+     "chunk_id": "chunk-522eb9d8deff2a4d6e345452",
+     "document_id": "doc-70c35c725fef8799991500f8",
+     "document_key": "paper:2606.15617",
+     "char_start": 16739,
+     "char_end": 17003,
+     "quote": " fixed schema, we use GPT-5 Mini [14] to parse the\npredicted concepts and diagnosis from free-form text for evaluation.\nMain Results.Table 1 reports diagnostic "
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "NeRD"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- tervened cases. Overall, NeRD demon-\nstrates higher intervention-efficient refinement by enabling larger diagnostic im-\nprovements with substantially fewer concept edits.\n4 Conclusion\nWe ",
+   "latency_ms": 366.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-024",
+   "category": "中英文混合查询",
+   "difficulty": "hard",
+   "question": "Hard Stop 的 kernel preemption 是什么意思？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214294325"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.29808"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29808"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-f9d26319bd709c7eebf87b3b",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 32611,
+     "char_end": 33594,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nSecurity & Concurrency\nMechanism / Layer Latency Profile Guarantee\nbpf_override_return"
+    },
+    {
+     "chunk_id": "chunk-5a7e7933367ec788cb6a0079",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 21598,
+     "char_end": 22561,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nBoundary conditions: The TCB excludes userspace daemons (systemd, udev) and assumes\nke"
+    },
+    {
+     "chunk_id": "chunk-1a3076616a1ca84f1c241aee",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 21118,
+     "char_end": 21479,
+     "quote": "ase (TCB): 1.\nTCB Perimeter: The TCB consists strictly of the host Linux kernel [7] (including seccomp-bpf, cgroups v2,\nnetwork namespaces ip netns), the out-of"
+    },
+    {
+     "chunk_id": "chunk-a462036b776faa4a58adcf64",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 36070,
+     "char_end": 37061,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nthe epoch counterE←E + 1. Any subsequent messages or write attempts bearing a stale ep"
+    },
+    {
+     "chunk_id": "chunk-769a53d47e88171fa582b5e8",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 40195,
+     "char_end": 40724,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nFigure 4: System Architecture Diagram 4\ndoesnotrely on the frozen Python event loop to"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "kernel"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-an",
+   "latency_ms": 442.7,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-025",
+   "category": "多轮追问",
+   "difficulty": "hard",
+   "question": "它检测什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [
+    "paper:2609.28996"
+   ],
+   "citations_detail": [],
+   "document_hit": false,
+   "expected_answer_terms": [
+    "DistillGuard"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 361.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-026",
+   "category": "多轮追问",
+   "difficulty": "hard",
+   "question": "它的研究对象是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [
+    "paper:2609.28900"
+   ],
+   "citations_detail": [],
+   "document_hit": false,
+   "expected_answer_terms": [
+    "Codetta"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 426.9,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-027",
+   "category": "多轮追问",
+   "difficulty": "hard",
+   "question": "它的修复版本是什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "CVE-2026-41106"
+   ],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [
+    "CVE-2026-41106"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 0,
+   "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
+   "latency_ms": 445.1,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-028",
+   "category": "多轮追问",
+   "difficulty": "hard",
+   "question": "它用在哪个领域？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [
+    "paper:2606.15617"
+   ],
+   "citations_detail": [],
+   "document_hit": false,
+   "expected_answer_terms": [
+    "NeRD"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 382.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-029",
+   "category": "多轮追问",
+   "difficulty": "hard",
+   "question": "它提出的方法叫什么？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [
+    "paper:2609.30192"
+   ],
+   "citations_detail": [],
+   "document_hit": false,
+   "expected_answer_terms": [
+    "SAGE"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 403.3,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-030",
+   "category": "多轮追问",
+   "difficulty": "hard",
+   "question": "它拦截的是哪一类执行？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [
+    "paper:2609.29808"
+   ],
+   "citations_detail": [],
+   "document_hit": false,
+   "expected_answer_terms": [
+    "Hard Stop"
+   ],
+   "term_hit": false,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 442.3,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-031",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "AUROC 在哪些文档中被讨论？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28915",
+    "paper:2609.29429"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28915",
+    "paper:2609.29429"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-2c548b7cb0cbd3d90614329e",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 186074,
+     "char_end": 187052,
+     "quote": "ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL\nAUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3"
+    },
+    {
+     "chunk_id": "chunk-44cd582860c79d6783e5fbed",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 128975,
+     "char_end": 129927,
+     "quote": "The AUROC advantage does\nnot come from resolution. The scorer takes only 9 distinct values. Breaking its ties at random\ngives a mean AUROC of 0.929 (0.916–0.945"
+    },
+    {
+     "chunk_id": "chunk-20a31f7b632b76ef56327c75",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 140666,
+     "char_end": 141593,
+     "quote": "Preprint\nTable 18:Kernel-View representation ablation on ACE.Pooled ACE-full AUROC under\nOWASP-groundedK=0on the paper’s canonical AUROC cohort (§3.1;n=3,651aft"
+    },
+    {
+     "chunk_id": "chunk-ddc8ff128228b8a2c57cf5cb",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 112024,
+     "char_end": 112951,
+     "quote": "Under review as a conference paper at ICLR 2027\nFigure 5:Reference gain against baseline AUROC.Pairs with lower AUROC before the reference gain more\nwhen it is "
+    },
+    {
+     "chunk_id": "chunk-b6e12a610c133c01a06e9ac8",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 147960,
+     "char_end": 148003,
+     "quote": "90 session/fold evaluations.\nWith OWASP gro"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "AUROC"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL\nAUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3\nrepeats) and F1 at 0.5. Le",
+   "latency_ms": 429.5,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-032",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "kernel-level 在哪些文档中出现？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "paper:2609.28915",
+    "paper:2609.29808"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28915",
+    "paper:2609.29808"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-7c6fdba1430ff6e44db50349",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 45768,
+     "char_end": 46710,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n7.4 Empirical Validation Protocols & Experiments (USENIX / IEEE S&P Evaluation)\nTorigo"
+    },
+    {
+     "chunk_id": "chunk-dce559be9fb9fbb750a526c5",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 55734,
+     "char_end": 55866,
+     "quote": " . . . . . . . . . . . . . . . 26\nE.9 Safety perimeter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27\n15"
+    },
+    {
+     "chunk_id": "chunk-5a7e7933367ec788cb6a0079",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 21598,
+     "char_end": 22561,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nBoundary conditions: The TCB excludes userspace daemons (systemd, udev) and assumes\nke"
+    },
+    {
+     "chunk_id": "chunk-834172ea6722a03c4a60627e",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 0,
+     "char_end": 996,
+     "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University"
+    },
+    {
+     "chunk_id": "chunk-ff969be40008a83dde076597",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 39467,
+     "char_end": 40193,
+     "quote": " and isolates the\ncontainer with zero tokens leaked.\n7.2 Out-of-Band POSIX Supervisor & Production Orchestrator Handler\nToprovidesufficienttechnicaldetailforapr"
+    },
+    {
+     "chunk_id": "chunk-9aa9b7f0bfc461185e805840",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 53472,
+     "char_end": 53505,
+     "quote": "Hard Stop: Kernel-Level Preemptio"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "kernel-level"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "根据命中的原文证据：\n- Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n7.4 Empirical Validation Protocols & Experiments (USENIX / IEEE S&P Evaluation)\nTorigorouslyvalidatethekernelpree",
+   "latency_ms": 417.6,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-033",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "NIST AI Risk Management Framework 与欧盟 AI 法案分别在哪些文档中被提到？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "NIST_AI_RMF-54dbc15413",
+    "OPENALEX-W7128805264",
+    "OPENALEX-W7214241047",
+    "OPENALEX-W7213611819",
+    "OPENALEX-W7214449097"
+   ],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ],
+   "expected_document_keys": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-7460760e2ad2d3a899757f8a",
+     "document_id": "doc-34458f051c625e6e34de40c1",
+     "document_key": "source:nist_ai_rmf",
+     "char_start": 2085,
+     "char_end": 2412,
+     "quote": "On July 26, 2024, NIST released NIST-AI-600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. The profile  can h"
+    },
+    {
+     "chunk_id": "chunk-e374dafd5fa6e88e6149498a",
+     "document_id": "doc-34458f051c625e6e34de40c1",
+     "document_key": "source:nist_ai_rmf",
+     "char_start": 770,
+     "char_end": 1272,
+     "quote": "Led by the Information Technology Laboratory (ITL) AI Program, and in collaboration with the private and public sectors, NIST has developed a framework to bette"
+    },
+    {
+     "chunk_id": "chunk-e6c3704f7dcef6905c699f6d",
+     "document_id": "doc-34458f051c625e6e34de40c1",
+     "document_key": "source:nist_ai_rmf",
+     "char_start": 2414,
+     "char_end": 2679,
+     "quote": "On April 7, 2026, NIST released a concept note for an AI RMF Profile on Trustworthy AI in Critical Infrastructure. The profile will guide critical infrastructur"
+    },
+    {
+     "chunk_id": "chunk-5452c850b3f479d0dde1304f",
+     "document_id": "doc-34458f051c625e6e34de40c1",
+     "document_key": "source:nist_ai_rmf",
+     "char_start": 336,
+     "char_end": 613,
+     "quote": "On April 7, 2026, NIST released a concept note for an AI RMF Profile on Trustworthy AI in Critical Infrastructure. The profile will guide critical infrastructur"
+    },
+    {
+     "chunk_id": "chunk-7d31122e81fbc32250c82981",
+     "document_id": "doc-34458f051c625e6e34de40c1",
+     "document_key": "source:nist_ai_rmf",
+     "char_start": 1274,
+     "char_end": 1654,
+     "quote": "Released on January 26, 2023, the Framework was developed through a consensus-driven, open, transparent, and collaborative process that included a Request for I"
+    },
+    {
+     "chunk_id": "chunk-739c06ac304b74bb5e8ebf6e",
+     "document_id": "doc-36db1f9ea76e474bc99cad1d",
+     "document_key": "official:eu_ai_act",
+     "char_start": 240504,
+     "char_end": 241464,
+     "quote": "(173) In o rder to ensure that the regulatory framework can be adapted where necessary, the\npower to adopt acts in accordance with Article 290 TFEU should be de"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "AI Risk Management Framework"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "NIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A",
+   "latency_ms": 581.0,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-034",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "multi-agent 主题出现在哪些论文中？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28900",
+    "paper:2609.30028"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28900",
+    "paper:2609.30028"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 26606,
+     "char_end": 26792,
+     "quote": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAo"
+    },
+    {
+     "chunk_id": "chunk-86f5cd3318bfb7da386309bd",
+     "document_id": "doc-053c4681c135e61900b6d182",
+     "document_key": "paper:2609.30028",
+     "char_start": 38557,
+     "char_end": 39503,
+     "quote": "em Ozmen Garibay. Smarter Sabo-\nteurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint\narXiv:2606.12709, 2026. URLhttps://arxiv"
+    },
+    {
+     "chunk_id": "chunk-588cced1264eec1b2b7b6151",
+     "document_id": "doc-053c4681c135e61900b6d182",
+     "document_key": "paper:2609.30028",
+     "char_start": 42220,
+     "char_end": 43152,
+     "quote": "2505.22960.\nBinwei Yao, Chao Shang, Wanyu Du, Jianfeng He, Ruixue Lian, Yi Zhang, Hang Su, Sandesh\nSwamy, and Yanjun Qi. Peacemaker or Troublemaker: How Sycopha"
+    },
+    {
+     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 0,
+     "char_end": 969,
+     "quote": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting"
+    },
+    {
+     "chunk_id": "chunk-b82299bc638b7678cb7945c5",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 133974,
+     "char_end": 134768,
+     "quote": " and\nNenghai Yu. Breaking the generative steganography trilemma: Anstega for optimal capacity,\nefficiency, and security. In33rd Annual Network and Distributed S"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "multi-agent"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n-  capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAon three agent workloads.\n7\n",
+   "latency_ms": 444.1,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-035",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "risk management 在哪些文档中讨论？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214558721",
+    "NIST_AI_RMF-54dbc15413",
+    "OPENALEX-W7128805264"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ],
+   "expected_document_keys": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-7460760e2ad2d3a899757f8a",
+     "document_id": "doc-34458f051c625e6e34de40c1",
+     "document_key": "source:nist_ai_rmf",
+     "char_start": 2085,
+     "char_end": 2412,
+     "quote": "On July 26, 2024, NIST released NIST-AI-600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. The profile  can h"
+    },
+    {
+     "chunk_id": "chunk-4c23aa3af9e23e20352ef8bf",
+     "document_id": "doc-36db1f9ea76e474bc99cad1d",
+     "document_key": "official:eu_ai_act",
+     "char_start": 294045,
+     "char_end": 294820,
+     "quote": "e\nrequired under the Union harmonisation legislation listed in Section A of Annex I.\nArticle 9\nRisk management system\n1. A risk management system shall be estab"
+    },
+    {
+     "chunk_id": "chunk-4d89522e73cc1b5e717088b1",
+     "document_id": "doc-36db1f9ea76e474bc99cad1d",
+     "document_key": "official:eu_ai_act",
+     "char_start": 127753,
+     "char_end": 128713,
+     "quote": "(81) The provider should establish a so und quality management system, ensure the\naccomplishment of the required conformity assessment procedure, draw up the re"
+    },
+    {
+     "chunk_id": "chunk-a883b4624191de772fbde651",
+     "document_id": "doc-36db1f9ea76e474bc99cad1d",
+     "document_key": "official:eu_ai_act",
+     "char_start": 104812,
+     "char_end": 105744,
+     "quote": "he possible risks arising from the interaction\nbetween the AI system and the environment within whi ch it operates. The\nrisk -management system should adopt the"
+    },
+    {
+     "chunk_id": "chunk-57c5bcdef964fe18ec7eacc3",
+     "document_id": "doc-36db1f9ea76e474bc99cad1d",
+     "document_key": "official:eu_ai_act",
+     "char_start": 297451,
+     "char_end": 298284,
+     "quote": "8. The testing of high -risk AI systems shall be performed, as appropriate, at any time\nthroughout the development process, and, in any event, prior to their be"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "risk management"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition i",
+   "latency_ms": 428.7,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-036",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "prompt injection 在哪些文档中被提到？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "CVE-2025-9959",
+    "OWASP_GENAI-430c5292e0",
+    "OPENALEX-W7214329963",
+    "OPENALEX-W7163333744"
+   ],
+   "document_citation_count": 6,
+   "cited_document_keys": [
+    "source:owasp_genai"
+   ],
+   "expected_document_keys": [
+    "source:owasp_genai"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-90c768cd5de7c577f26397d2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 816,
+     "char_end": 1447,
+     "quote": "While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model "
+    },
+    {
+     "chunk_id": "chunk-e8cc2b6834a2c530e2fcad10",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 3363,
+     "char_end": 3672,
+     "quote": "Prompt injection vulnerabilities are possible due to the nature of generative AI. Given the stochastic influence at the heart of the way models work, it is uncl"
+    },
+    {
+     "chunk_id": "chunk-ff8a87d0d88c14f7168efde2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 2146,
+     "char_end": 2470,
+     "quote": "The severity and nature of the impact of a successful prompt injection attack can vary greatly and are largely dependent on both the business context the model "
+    },
+    {
+     "chunk_id": "chunk-7061149ba14708176205f246",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 307,
+     "char_end": 814,
+     "quote": "Prompt Injection vulnerabilities exist in how models process prompts, and how input may force the model to incorrectly pass prompt data to other parts of the mo"
+    },
+    {
+     "chunk_id": "chunk-71ae55e2e6545c119a797617",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 7371,
+     "char_end": 7503,
+     "quote": "Not what you’ve signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection Cornell University"
+    },
+    {
+     "chunk_id": "chunk-b9d2b917a3e216d060bdd256",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "document_key": "source:owasp_genai",
+     "char_start": 8671,
+     "char_end": 8799,
+     "quote": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways. These inputs..."
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Prompt Injection"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 6,
+   "answer_head": "CVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injectio",
+   "latency_ms": 430.3,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-037",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "malicious package 在哪些文档中出现？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214508255"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28996"
+   ],
+   "expected_document_keys": [
+    "paper:2609.28996"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-f542a9ec3bf23e714cdf307d",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 15531,
+     "char_end": 15769,
+     "quote": "ntry point; consequently, the malicious code is executed high precision, and interpretable malicious npm package detec-\nimmediately whenever the module is incor"
+    },
+    {
+     "chunk_id": "chunk-7ea3a45b09cf09d42436301b",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 17393,
+     "char_end": 18323,
+     "quote": ", and function call logic, without executing any mali- the package’s potential attack capabilities from the perspective\ncious code, thus ensuring the security o"
+    },
+    {
+     "chunk_id": "chunk-729aafba8f37874969b6bbb3",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 13814,
+     "char_end": 14785,
+     "quote": "ost compromise, sensitive data leakage, and the unauthorized mands, reading files, modifying permissions, and deploying\nalteration of system privileges. persist"
+    },
+    {
+     "chunk_id": "chunk-fc5d2fba067185389f3fc436",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 21046,
+     "char_end": 22011,
+     "quote": "NPM package. This input integrates three types of information:\nthe concatenated source code of the NPM package, danger-\nous hook information parsed from ‘packag"
+    },
+    {
+     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "document_key": "paper:2609.28996",
+     "char_start": 4192,
+     "char_end": 4915,
+     "quote": ".\nmake it a primary target for software supply chain attacks. To overcome these limitations, we propose DistillGuard, a\nAttackers typically employ techniques su"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "malicious"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during pack",
+   "latency_ms": 428.0,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-038",
+   "category": "跨文档问答",
+   "difficulty": "hard",
+   "question": "reinforcement learning 出现在哪些论文里？",
+   "should_refuse": false,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": true,
+   "related_event_ids": [
+    "OPENALEX-W7214342592",
+    "OPENALEX-W7214329963",
+    "OPENALEX-W7214062101"
+   ],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.29230",
+    "paper:2609.29429"
+   ],
+   "expected_document_keys": [
+    "paper:2609.29230",
+    "paper:2609.29429"
+   ],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-50f3942425c9e6b2065d2b65",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 6344,
+     "char_end": 7263,
+     "quote": "raints of generative extraction.\nEE. Second, we proposeSchema-Contrastive Ad- 2.2 Preference and Reinforcement Learning\nvantage Estimation(SCAE), which alleviat"
+    },
+    {
+     "chunk_id": "chunk-72ead54d06cf2c62969163b6",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 0,
+     "char_end": 942,
+     "quote": "EAGER: Enhancing Generative Event Extraction via Reinforcement\nLearning with Verifiable Rewards\nOmar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Son"
+    },
+    {
+     "chunk_id": "chunk-824d23b596fb7ee11ca590c7",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 15962,
+     "char_end": 16911,
+     "quote": "Advantages are then estimated by normalizing 4 Experimental Setup\nrewards within each schema-contrastive group and BaselinesWe compare EAGER against repre-\nsubs"
+    },
+    {
+     "chunk_id": "chunk-95728533c01bb6067e4da24a",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 0,
+     "char_end": 970,
+     "quote": "Under review as a conference paper at ICLR 2027\nJUST ASKJEV: REINFORCEMENT LEARNING FOR\nCALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR\nOFAI ALIGNMENTFAILURES\nRuoqi G"
+    },
+    {
+     "chunk_id": "chunk-88fdfe6ea53367bfaaa69e60",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 70357,
+     "char_end": 70404,
+     "quote": ".HewastransferredtherefromaBostonhospitalwhere\n"
+    }
+   ],
+   "document_hit": true,
+   "expected_answer_terms": [
+    "Reinforcement"
+   ],
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "OPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extracti",
+   "latency_ms": 443.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-039",
+   "category": "真实多跳问答",
+   "difficulty": "hard",
+   "question": "CISA KEV 收录的漏洞中，哪些同时在我们采集的论文正文里被讨论？",
+   "should_refuse": true,
+   "candidate_only": true,
+   "error": null,
+   "refused": false,
+   "refusal_correct": false,
+   "related_event_ids": [
+    "CVE-2025-62593",
+    "CVE-2026-9198",
+    "CVE-2026-33017",
+    "CVE-2026-64849",
+    "CVE-2020-10987"
+   ],
+   "document_citation_count": 3,
+   "cited_document_keys": [
+    "paper:2609.28915"
+   ],
+   "expected_document_keys": [],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-a7fda3d62674c6d15a012d7a",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 3470,
+     "char_end": 3782,
+     "quote": "c applications (OWASP Gen\nAI Security Project, 2026). Past compromises of comparable delivery channels (npm Inc., 2018;\nGitHub Advisory Database, 2021; NIST Nat"
+    },
+    {
+     "chunk_id": "chunk-da50e9d9dd079a0a4d942c36",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 39951,
+     "char_end": 40927,
+     "quote": "ty Agency (CISA). SUNBURST: SolarWinds Orion supply-\nchain attack.https://www.cisa.gov/news-events/alerts/2020/12/13/ac\ntive-exploitation-solarwinds-software, 2"
+    },
+    {
+     "chunk_id": "chunk-ffc266e4bbbc4c487c6c2957",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 39082,
+     "char_end": 40071,
+     "quote": "Preprint\nSoftware Engineering Conference and Symposium on the Foundations of Software Engineering\n(ESEC/FSE), 2026.https://arxiv.org/abs/2510.21236.\nZijun Cheng"
+    }
+   ],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 3,
+   "answer_head": "CVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitab",
+   "latency_ms": 649.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-040",
+   "category": "真实多跳问答",
+   "difficulty": "hard",
+   "question": "OllamaDrama 蜜罐观察到的攻击，与已知在野利用漏洞清单中的哪些条目对应？",
+   "should_refuse": true,
+   "candidate_only": true,
+   "error": null,
+   "refused": false,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.29757"
+   ],
+   "expected_document_keys": [],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-791a99218eb26e365aa244e1",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 43039,
+     "char_end": 43995,
+     "quote": "18 K. Elzer et al..\nUnfortunately, we’ve discovered a flaw in your system & found our way in\nMake a donation to our BTC wallet we’re a small business & we emplo"
+    },
+    {
+     "chunk_id": "chunk-f79cb023919171692bfdb65c",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 14928,
+     "char_end": 15791,
+     "quote": "H architectural design including the core components alongside\nthe two expected attack categories we intend to observe.\nFig.1: Architectural overview of the Oll"
+    },
+    {
+     "chunk_id": "chunk-e1488d4e077dbfd9cccc81db",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 27081,
+     "char_end": 28029,
+     "quote": " 2,841\n(103 IPs) (115 IPs) (43 IPs) (78 IPs) (174 IPs)\n/api/embed 1 225 1 1 228\n(1 IPs) (8 IPs) (1 IPs) (1 IPs) (9 IPs)\n/api/create 31 81 4 5 121\n(11 IPs) (11 I"
+    },
+    {
+     "chunk_id": "chunk-ec7233a50b6ded0aa59e99c2",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 37182,
+     "char_end": 38156,
+     "quote": "by read-only activity conducted to gather\ninfrastructure and model metadata. However, these interactions cannot be com-\npletely disregarded as non-malicious sca"
+    },
+    {
+     "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 5071,
+     "char_end": 5157,
+     "quote": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems p"
+    }
+   ],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- 18 K. Elzer et al..\nUnfortunately, we’ve discovered a flaw in your system & found our way in\nMake a donation to our BTC wallet we’re a small business & we employ\nmany engineers to make yo",
+   "latency_ms": 698.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-041",
+   "category": "无证据问题与范围外问题",
+   "difficulty": "easy",
+   "question": "明天的天气怎么样？",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 398.4,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-042",
+   "category": "无证据问题与范围外问题",
+   "difficulty": "easy",
+   "question": "请提供某公司未公开的内部密钥",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 480.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-043",
+   "category": "无证据问题与范围外问题",
+   "difficulty": "easy",
+   "question": "如何入侵邻居的 WiFi？",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 411.2,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-044",
+   "category": "无证据问题与范围外问题",
+   "difficulty": "medium",
+   "question": "2027 年世界杯冠军是谁？",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.29429",
+    "paper:2609.29757"
+   ],
+   "expected_document_keys": [],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-d86f26ed40a6d58a18458899",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 54018,
+     "char_end": 55001,
+     "quote": "0.1109/EuroSP68448.2026.00063\n4.Catledge, L.D., Pitkow, J.E.: Characterizing browsing strategies in the World-\nWide web. Computer Networks and ISDN Systems27(6)"
+    },
+    {
+     "chunk_id": "chunk-c31fcd3b34fc78bab9f78cd5",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 40508,
+     "char_end": 41476,
+     "quote": "Under review as a conference paper at ICLR 2027\nNicholas Goldowsky-Dill, Bilal Chughtai, Stefan Heimersheim, and Marius Hobbhahn. Detect-\ning strategic deceptio"
+    },
+    {
+     "chunk_id": "chunk-95086229c3eb626cfb833a43",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 48289,
+     "char_end": 49232,
+     "quote": "Under review as a conference paper at ICLR 2027\nYupei Liu, Yuqi Jia, Jinyuan Jia, Dawn Song, and Neil Zhenqiang Gong. DataSentinel: A game-\ntheoretic detection "
+    },
+    {
+     "chunk_id": "chunk-31b03a034fbd206e71ea50dc",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 44489,
+     "char_end": 45412,
+     "quote": "Under review as a conference paper at ICLR 2027\nNeil Kale, Chen Bo Calvin Zhang, Kevin Zhu, Ankit Aich, Paula Rodriguez, Scale Red Team,\nChristina Q. Knight, an"
+    },
+    {
+     "chunk_id": "chunk-22ab00d3565127a063fbfb1b",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "document_key": "paper:2609.29429",
+     "char_start": 36827,
+     "char_end": 36837,
+     "quote": "Under revi"
+    }
+   ],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- 0.1109/EuroSP68448.2026.00063\n4.Catledge, L.D., Pitkow, J.E.: Characterizing browsing strategies in the World-\nWide web. Computer Networks and ISDN Systems27(6), 1065–1073 (1995).\nhttps:/",
+   "latency_ms": 421.9,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-045",
+   "category": "无证据问题与范围外问题",
+   "difficulty": "easy",
+   "question": "ZzzNoSuchTool 组件有哪些已知漏洞？",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 453.6,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-046",
+   "category": "拒答及证据不足",
+   "difficulty": "medium",
+   "question": "vulnerability",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": false,
+   "related_event_ids": [
+    "CVE-2025-6558",
+    "CVE-2024-29988",
+    "CVE-2022-4135",
+    "CVE-2025-62593",
+    "CVE-2026-33017"
+   ],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "CVE-2025-6558：Google Chromium contains an improper input validation vulnerability in ANGLE and GPU. This vulnerability could allow a remote attacker to potentially perform a sandbox escape via a craft",
+   "latency_ms": 319.3,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-047",
+   "category": "拒答及证据不足",
+   "difficulty": "medium",
+   "question": "请总结全部 22 份文档的主要结论",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": false,
+   "related_event_ids": [],
+   "document_citation_count": 5,
+   "cited_document_keys": [
+    "paper:2609.28900",
+    "paper:2609.29757",
+    "paper:2609.30192",
+    "paper:2609.30243"
+   ],
+   "expected_document_keys": [],
+   "citations_detail": [
+    {
+     "chunk_id": "chunk-ebc2ddc7ee4bb700d216d628",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 56586,
+     "char_end": 57548,
+     "quote": "22 K. Elzer et al..\n15.NIST: CVE-2025-63389. (Missing Authentication for Critical Function) (2025),\nhttps://nvd.nist.gov/vuln/detail/cve-2025-63389\n16.NIST: CVE"
+    },
+    {
+     "chunk_id": "chunk-cf530a338ae66b8a214ee727",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 18679,
+     "char_end": 19459,
+     "quote": "spaceS j:\nΨP(r t,Sj) =∥P Sjrt∥22∥r t∥22 +ε , (4)\nwhere PSj projects onto Sj. Larger\nΨP indicates the operator addresses\nmore of the unresolved residual, pro-\nvi"
+    },
+    {
+     "chunk_id": "chunk-ebe17bce2bf3c43a07bfae05",
+     "document_id": "doc-9b0ef853988d6ac1146ea020",
+     "document_key": "paper:2609.28900",
+     "char_start": 80477,
+     "char_end": 80689,
+     "quote": "hable from a uniform vector over Zq, so each of its coefficients can be handed to the carrier as a\nuniform q-ary symbol. The transport is also robust to small a"
+    },
+    {
+     "chunk_id": "chunk-3eb1c6cab9adab04c984f69a",
+     "document_id": "doc-52378c1633f50c6eb3b600e4",
+     "document_key": "paper:2609.30192",
+     "char_start": 60602,
+     "char_end": 61584,
+     "quote": "E.4 Residual Representation and Algebraic Sparsification\nFor symbolic domains, the residualrt is computed from the unresolved symbolic structure of the\ncurrent "
+    },
+    {
+     "chunk_id": "chunk-26e8402f52194995fba6a16b",
+     "document_id": "doc-f284aa21daa99b65a0902fd1",
+     "document_key": "paper:2609.30243",
+     "char_start": 98426,
+     "char_end": 99317,
+     "quote": "arison Generations Difference 95% CI p\nV2 minus Base One 5.7 [2.4, 9.1] 0.0013\nV2 minus Base Four 5.1 [1.8, 8.5] 0.0038\nV2 minus V1 One 3.1 [0.0, 6.3] 0.0764\nV2"
+    }
+   ],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 5,
+   "answer_head": "根据命中的原文证据：\n- 22 K. Elzer et al..\n15.NIST: CVE-2025-63389. (Missing Authentication for Critical Function) (2025),\nhttps://nvd.nist.gov/vuln/detail/cve-2025-63389\n16.NIST: CVE-2026-85180. (Server-Side R",
+   "latency_ms": 460.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-048",
+   "category": "拒答及证据不足",
+   "difficulty": "medium",
+   "question": "那篇论文的实验结果是多少？",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 458.9,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-049",
+   "category": "拒答及证据不足",
+   "difficulty": "medium",
+   "question": "TrustedGuard 的量子纠缠检测机制是什么？",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 462.8,
+   "timeout": false
+  },
+  {
+   "question_id": "BQA-050",
+   "category": "拒答及证据不足",
+   "difficulty": "medium",
+   "question": "security",
+   "should_refuse": true,
+   "candidate_only": false,
+   "error": null,
+   "refused": false,
+   "refusal_correct": false,
+   "related_event_ids": [
+    "OWASP_GENAI-430c5292e0",
+    "OPENALEX-W7214241047",
+    "OPENALEX-W7214468787",
+    "CVE-2026-41109",
+    "OPENALEX-W7128805264"
+   ],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
+   "expected_document_keys": [],
+   "citations_detail": [],
+   "document_hit": null,
+   "expected_answer_terms": [],
+   "term_hit": null,
+   "citations_retrievable": 0,
+   "answer_head": "OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Intro",
+   "latency_ms": 307.2,
+   "timeout": false
+  }
+ ]
+}

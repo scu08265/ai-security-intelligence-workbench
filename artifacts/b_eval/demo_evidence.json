@@ -1,0 +1,215 @@
+{
+ "schema_version": "b-demo-evidence-1.0",
+ "generated_at": "2026-09-30T02:32:25Z",
+ "environment": {
+  "python": "3.13.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "data_dir_used": "C:\\Users\\赵雅娴\\AppData\\Local\\Temp\\b_demo_2jg1sl5t",
+  "source_data_dir": "D:\\ICT\\intel-data-b (只读，未写入)",
+  "model_mode": "local_evidence_extraction",
+  "retrieval_index": "keyword-v1 (app/rag_corpus.KeywordIndex / app/rag.retrieve_chunks)",
+  "screenshot": "not_captured（本环境无法截图，仅保留可复现的输入输出与运行 ID）"
+ },
+ "results": [
+  {
+   "scenario_id": "DEMO-01",
+   "name": "基础事实问答",
+   "status": "ok",
+   "error": null,
+   "run_id": "run-124ed9b12439",
+   "asked_at": "2026-09-30T02:32:23Z",
+   "question": "DistillGuard 这篇论文的标题是什么？",
+   "history_turns": 0,
+   "answer": "根据命中的原文证据：\n- While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer from insurmountable knowledge reasoning, and lightweight local deployment.\nlimitations, such as the inability to deploy locally, high in- IV. EVALUATION\nference costs, and uncontrollable data security and prediction\nlogic. This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three\nsecond stage as supervision and employs the LoRA (Low- research questions:\nRank Adaptive",
+   "refused": false,
+   "event_ids": [],
+   "citation_count": 5,
+   "citation_ids_retrievable": 5,
+   "citations": [
+    {
+     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 23478,
+     "char_end": 24466
+    },
+    {
+     "chunk_id": "chunk-c58221ed9828a62061aaeec7",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 49027,
+     "char_end": 49374
+    },
+    {
+     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 4192,
+     "char_end": 5175
+    },
+    {
+     "chunk_id": "chunk-3e02e30d18b6d9d534a09cad",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 48189,
+     "char_end": 49147
+    },
+    {
+     "chunk_id": "chunk-60353af87ed264ff1ebf2e47",
+     "document_id": "doc-6848cfa4c508d3d98cbcc747",
+     "char_start": 792,
+     "char_end": 1343
+    }
+   ],
+   "duration_ms": 457.9,
+   "mode": "local_evidence_extraction"
+  },
+  {
+   "scenario_id": "DEMO-02",
+   "name": "多轮追问",
+   "status": "ok",
+   "error": null,
+   "run_id": "run-9f802e61ccbe",
+   "asked_at": "2026-09-30T02:32:23Z",
+   "question": "它检测什么？",
+   "history_turns": 2,
+   "answer": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "refused": true,
+   "event_ids": [],
+   "citation_count": 0,
+   "citation_ids_retrievable": 0,
+   "citations": [],
+   "duration_ms": 362.1,
+   "mode": "local_evidence_extraction"
+  },
+  {
+   "scenario_id": "DEMO-03",
+   "name": "跨文档问答",
+   "status": "ok",
+   "error": null,
+   "run_id": "run-44937f5490a7",
+   "asked_at": "2026-09-30T02:32:24Z",
+   "question": "AUROC 在哪些文档中被讨论？",
+   "history_turns": 0,
+   "answer": "根据命中的原文证据：\n- ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL\nAUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3\nrepeats) and F1 at 0.5. Length: AUROC with the sign chosen out of sample. “–”: no generic NOUL\n(MACHIAVELLI-style benchmarks and the text-only uncertainty states).\nJev AUROC TF-IDF LR Length All-pos.\nBenchmark Generic Targeted SH AUROC F1 AUROC F1\nSycophancy\nELEPHANT (AITA) 0.957 1.000 0.748±0.0340.727 0.515 0.689\nSycophancyEval (answer) 0.540 0.514 0.764±0.0120.914 0.451 0.901\nSycophancyEval (feedback) 0.726 0.784 0.608±0",
+   "refused": false,
+   "event_ids": [],
+   "citation_count": 5,
+   "citation_ids_retrievable": 5,
+   "citations": [
+    {
+     "chunk_id": "chunk-2c548b7cb0cbd3d90614329e",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "char_start": 186074,
+     "char_end": 187052
+    },
+    {
+     "chunk_id": "chunk-44cd582860c79d6783e5fbed",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "char_start": 128975,
+     "char_end": 129927
+    },
+    {
+     "chunk_id": "chunk-20a31f7b632b76ef56327c75",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "char_start": 140666,
+     "char_end": 141593
+    },
+    {
+     "chunk_id": "chunk-ddc8ff128228b8a2c57cf5cb",
+     "document_id": "doc-38443598019e64691b4f66e4",
+     "char_start": 112024,
+     "char_end": 112951
+    },
+    {
+     "chunk_id": "chunk-b6e12a610c133c01a06e9ac8",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "char_start": 147960,
+     "char_end": 148003
+    }
+   ],
+   "duration_ms": 418.9,
+   "mode": "local_evidence_extraction"
+  },
+  {
+   "scenario_id": "DEMO-04",
+   "name": "证据不足拒答",
+   "status": "ok",
+   "error": null,
+   "run_id": "run-d388cbcb0c92",
+   "asked_at": "2026-09-30T02:32:24Z",
+   "question": "明天的天气怎么样？",
+   "history_turns": 0,
+   "answer": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "refused": true,
+   "event_ids": [],
+   "citation_count": 0,
+   "citation_ids_retrievable": 0,
+   "citations": [],
+   "duration_ms": 397.3,
+   "mode": "local_evidence_extraction"
+  },
+  {
+   "scenario_id": "DEMO-05",
+   "name": "引用定位与导出",
+   "status": "ok",
+   "error": null,
+   "run_id": "run-89a8e774a919",
+   "asked_at": "2026-09-30T02:32:25Z",
+   "question": "什么是提示词注入？",
+   "history_turns": 0,
+   "answer": "根据命中的原文证据：\n- While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through specific inputs to alter its behavior, which can include bypassing safety measures. Jailbreaking is a form of prompt injection where the attacker provides inputs that cause the model to disregard its safety protocols entirely. Developers can build safeguards into system prompts and input handling to help mitigate prompt injection attacks, but effective prevention of jailbreaking requires ongoing updates to",
+   "refused": false,
+   "event_ids": [],
+   "citation_count": 6,
+   "citation_ids_retrievable": 6,
+   "citations": [
+    {
+     "chunk_id": "chunk-90c768cd5de7c577f26397d2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 816,
+     "char_end": 1447
+    },
+    {
+     "chunk_id": "chunk-e8cc2b6834a2c530e2fcad10",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 3363,
+     "char_end": 3672
+    },
+    {
+     "chunk_id": "chunk-ff8a87d0d88c14f7168efde2",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 2146,
+     "char_end": 2470
+    },
+    {
+     "chunk_id": "chunk-7061149ba14708176205f246",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 307,
+     "char_end": 814
+    },
+    {
+     "chunk_id": "chunk-71ae55e2e6545c119a797617",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 7371,
+     "char_end": 7503
+    },
+    {
+     "chunk_id": "chunk-b9d2b917a3e216d060bdd256",
+     "document_id": "doc-86fb37ed00532831b8e67acb",
+     "char_start": 8671,
+     "char_end": 8799
+    }
+   ],
+   "duration_ms": 426.9,
+   "mode": "local_evidence_extraction"
+  }
+ ],
+ "export_check": {
+  "events": 93,
+  "assets": 0,
+  "assessments": 0,
+  "note": "导出接口在副本上执行，用于验证引用可随快照导出。"
+ },
+ "limitations": [
+  "跨文档综合能力尚未实现：DEMO-03 只验证检索层能返回多篇文档，不代表推理成功。",
+  "多轮追问在 RAG 路径不继承会话上下文，DEMO-02 如实记录其真实表现。",
+  "本环境无法截图，未生成任何页面截图；所有证据均为可复现的文本与 ID。"
+ ]
+}
