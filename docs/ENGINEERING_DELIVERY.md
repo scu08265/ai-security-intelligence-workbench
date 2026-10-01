@@ -24,6 +24,14 @@ powershell -ExecutionPolicy Bypass -File .\scripts\deploy.ps1 -Version 0.2.2
 6. `docker compose config`；
 7. Docker 镜像构建。
 
+推送后记录指定 commit 的 CI 结果：
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\record_ci_validation.py `
+  --branch release/v0.2.2 `
+  --head-sha <commit-sha>
+```
+
 ## 3. 健康检查、结构化日志和失败告警
 
 - 健康检查：`GET /api/health`，包含数据库、事件数、失败来源和主动跳过来源。
