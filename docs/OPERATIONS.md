@@ -29,9 +29,12 @@ python -m uvicorn app.api:app --host 127.0.0.1 --port 8000
 ### Windows 任务计划：每小时
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1
+powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1 -DurationHours 24
 Start-ScheduledTask -TaskName "AI-Security-Intelligence-Hourly-Collection"
 ```
+
+该任务持续 24 小时，空闲时继续运行，并在系统从睡眠恢复后补跑。安装脚本同时关闭交流和电池供电时的自动睡眠/
+休眠；显示器仍可按原计划关闭，不需要保持屏幕常亮。
 
 卸载：
 

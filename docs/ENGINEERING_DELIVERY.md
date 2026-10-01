@@ -62,7 +62,16 @@ powershell -ExecutionPolicy Bypass -File .\scripts\rollback_release.ps1 -Version
 
 详细说明见 [OPERATIONS.md](OPERATIONS.md)。
 
-## 5. 验收命令
+## 5. 24 小时息屏采集
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1 -DurationHours 24
+```
+
+任务在用户保持登录的状态下每小时运行一次，持续 24 小时；关闭显示器不会暂停任务。安装脚本会关闭自动睡眠和休眠，
+并设置空闲时继续运行及唤醒后补跑。
+
+## 6. 验收命令
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q

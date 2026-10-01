@@ -147,14 +147,15 @@ def _markdown_report(report: dict[str, Any]) -> str:
         "",
         "## 3. 来源健康",
         "",
-        "| 来源 | 状态 | 成功率 | 成功/失败/跳过 | P50 ms | P95 ms | 最近成功 |",
+        "| 来源 | 状态 | 成功率 | 成功/失败/陈旧/跳过 | P50 ms | P95 ms | 最近成功 |",
         "| --- | --- | ---: | --- | ---: | ---: | --- |",
     ])
     for item in report["sources"]["items"]:
         rate = "未知" if item["success_rate"] is None else f"{item['success_rate'] * 100:.1f}%"
         lines.append(
             f"| {item['id']} | {item['health_class']} | {rate} | "
-            f"{item['successful_attempts']}/{item['failed_attempts']}/{item['skipped_attempts']} | "
+            f"{item['successful_attempts']}/{item['failed_attempts']}/"
+            f"{item['stale_attempts']}/{item['skipped_attempts']} | "
             f"{item['duration_ms_p50'] if item['duration_ms_p50'] is not None else '未知'} | "
             f"{item['duration_ms_p95'] if item['duration_ms_p95'] is not None else '未知'} | "
             f"{item['last_success'] or '未知'} |"
