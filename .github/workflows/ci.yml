@@ -76,3 +76,43 @@ jobs:
       - name: Stop Compose stack
         if: always()
         run: docker compose down -v
+
+  rollback:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch release tags
+        run: git fetch --force --tags
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Create sentinel database
+        run: |
+          python - <<'PY'
+          from app import storage
+
+          storage.init_db()
+          storage.upsert_event({
+              "id": "CI-ROLLBACK-SENTINEL",
+              "kind": "vulnerability",
+              "status": "confirmed",
+              "title": "Rollback validation sentinel",
+          })
+          PY
+      - name: Run real rollback validation
+        run: python tools/run_rollback_validation.py --host-port 18001
+      - name: Publish rollback summary
+        if: always()
+        run: |
+          if [ -f reports/rollback-validation.json ]; then
+            cat reports/rollback-validation.json >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rollback-validation
+          path: reports/rollback-validation.json
