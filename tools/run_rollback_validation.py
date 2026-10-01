@@ -6,6 +6,7 @@ import argparse
 import json
 import os
 import shutil
+import sqlite3
 import subprocess
 import sys
 import tarfile
@@ -174,14 +175,16 @@ def _wait_health(base_url: str, expected_version: str, timeout_seconds: int) -> 
     )
 
 
-def _backup(docker: str) -> str:
-    del docker
-    if shutil.which("powershell"):
-        return _run([
-            "powershell", "-NoProfile", "-ExecutionPolicy", "Bypass",
-            "-File", str(ROOT / "scripts" / "backup_database.ps1"),
-        ])
-    raise RuntimeError("PowerShell was not found.")
+def _backup() -> str:
+    database = ROOT / "data" / "intel.sqlite"
+    if not database.is_file():
+        raise RuntimeError(f"Database not found: {database}")
+    backup_dir = ROOT / "artifacts" / "backups"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    target = backup_dir / f"intel-{datetime.now().strftime('%Y%m%d-%H%M%S')}.sqlite"
+    with sqlite3.connect(database) as source, sqlite3.connect(target) as destination:
+        source.backup(destination)
+    return str(target)
 
 
 def main() -> int:
@@ -221,7 +224,7 @@ def main() -> int:
             "v0.2.1 image build copies VERSION so /api/health reports the "
             "historical release version correctly."
         )
-        report["backup_output"] = _backup(docker)
+        report["backup_output"] = _backup()
 
         COMPOSE_OVERRIDE.parent.mkdir(parents=True, exist_ok=True)
         COMPOSE_OVERRIDE.write_text(
@@ -273,7 +276,7 @@ def main() -> int:
             json.dumps(report, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
-    print(json.dumps(report, ensure_ascii=False, indent=2))
+    print(json.dumps(report, ensure_ascii=True, indent=2))
     return return_code
 
 
