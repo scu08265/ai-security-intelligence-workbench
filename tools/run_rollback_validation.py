@@ -80,7 +80,7 @@ def _build_old_image(docker: str, version: str) -> None:
     archive.parent.mkdir(parents=True, exist_ok=True)
     try:
         _run([
-            "git", "archive", "--format=tar",
+            "git", "-c", "safe.directory=*", "archive", "--format=tar",
             f"--output={archive}", f"v{version}",
         ])
         with tarfile.open(archive, "r") as bundle:
