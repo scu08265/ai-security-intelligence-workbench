@@ -132,11 +132,18 @@ def push(
     if not token:
         raise RuntimeError("GITHUB_TOKEN is not set.")
     github = GitHub(token)
-    ref = github.request("GET", f"/repos/{repo}/git/ref/heads/{branch}")
-    remote_commit_sha = str(ref["object"]["sha"])
+    branch_exists = True
+    try:
+        ref = github.request("GET", f"/repos/{repo}/git/ref/heads/{branch}")
+        remote_commit_sha = str(ref["object"]["sha"])
+    except RuntimeError as exc:
+        if "GitHub API 404:" not in str(exc):
+            raise
+        branch_exists = False
+        remote_commit_sha = ""
 
     if full_tree:
-        parent = remote_commit_sha
+        parent = remote_commit_sha or base_commit or _git("rev-parse", "HEAD^").strip()
         remote_commit = github.request("GET", f"/repos/{repo}/git/commits/{parent}")
         base_tree = str(remote_commit["tree"]["sha"])
     else:
@@ -172,10 +179,16 @@ def push(
             "committer": json.loads(author),
         },
     )
-    github.request(
-        "PATCH", f"/repos/{repo}/git/refs/heads/{branch}",
-        json={"sha": commit["sha"], "force": True},
-    )
+    if branch_exists:
+        github.request(
+            "PATCH", f"/repos/{repo}/git/refs/heads/{branch}",
+            json={"sha": commit["sha"], "force": True},
+        )
+    else:
+        github.request(
+            "POST", f"/repos/{repo}/git/refs",
+            json={"ref": f"refs/heads/{branch}", "sha": commit["sha"]},
+        )
 
     def update_tag(tag_name: str, commit_sha: str, tagger: dict[str, Any]) -> str:
         tag_object = github.request(
@@ -215,6 +228,7 @@ def push(
         "tag": tag,
         "updated_tags": updated_tags,
         "remote_previous_commit": remote_commit_sha,
+        "branch_created": not branch_exists,
         "full_tree": full_tree,
     }
 
