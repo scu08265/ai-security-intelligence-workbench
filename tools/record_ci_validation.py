@@ -83,16 +83,23 @@ def main() -> int:
         with _client(os.getenv("GITHUB_TOKEN", "").strip() or None) as client:
             deadline = time.monotonic() + args.wait_seconds
             selected: dict[str, Any] | None = None
+            last_read_error: Exception | None = None
             while time.monotonic() < deadline:
-                payload = _response_json(client.get(
-                    f"/repos/{args.repo}/actions/runs",
-                    params={
-                        "branch": args.branch,
-                        "head_sha": args.head_sha,
-                        "event": "push",
-                        "per_page": 20,
-                    },
-                ))
+                try:
+                    payload = _response_json(client.get(
+                        f"/repos/{args.repo}/actions/runs",
+                        params={
+                            "branch": args.branch,
+                            "head_sha": args.head_sha,
+                            "event": "push",
+                            "per_page": 20,
+                        },
+                    ))
+                    last_read_error = None
+                except (httpx.HTTPError, RuntimeError) as exc:
+                    last_read_error = exc
+                    time.sleep(args.poll_seconds)
+                    continue
                 candidates = [
                     item for item in payload.get("workflow_runs") or []
                     if str(item.get("path") or "").endswith(args.workflow)
@@ -106,9 +113,19 @@ def main() -> int:
                         break
                 time.sleep(args.poll_seconds)
             if selected is None:
+                if last_read_error is not None:
+                    raise RuntimeError(f"Could not read Actions status: {last_read_error}")
                 raise RuntimeError(
                     f"No {args.workflow} run found for {args.head_sha} on {args.branch}."
                 )
+            while True:
+                try:
+                    jobs = _jobs(client, args.repo, int(selected["id"]))
+                    break
+                except (httpx.HTTPError, RuntimeError):
+                    if time.monotonic() >= deadline:
+                        raise
+                    time.sleep(args.poll_seconds)
             run.update({
                 "run_id": selected.get("id"),
                 "run_url": selected.get("html_url"),
@@ -116,7 +133,7 @@ def main() -> int:
                 "conclusion": selected.get("conclusion"),
                 "created_at": selected.get("created_at"),
                 "updated_at": selected.get("updated_at"),
-                "jobs": _jobs(client, args.repo, int(selected["id"])),
+                "jobs": jobs,
             })
     except Exception as exc:
         run["status"] = "failed_to_read"

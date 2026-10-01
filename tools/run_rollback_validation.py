@@ -77,19 +77,11 @@ def _build_old_image(docker: str, version: str) -> None:
             bundle.extractall(source_dir)
         dockerfile = source_dir / "Dockerfile"
         dockerfile_text = dockerfile.read_text(encoding="utf-8")
-        if not dockerfile_text.startswith("# syntax="):
-            dockerfile_text = "# syntax=docker/dockerfile:1.7\n\n" + dockerfile_text
         dockerfile_text = dockerfile_text.replace(
             "    PIP_NO_CACHE_DIR=1 \\\n",
-            "    PIP_NO_CACHE_DIR=0 \\\n"
+            "    PIP_NO_CACHE_DIR=1 \\\n"
             "    PIP_DEFAULT_TIMEOUT=120 \\\n"
             "    PIP_RETRIES=10 \\\n",
-            1,
-        )
-        dockerfile_text = dockerfile_text.replace(
-            "RUN python -m pip install --disable-pip-version-check -r requirements.txt",
-            "RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \\\n"
-            "    python -m pip install --disable-pip-version-check -r requirements.txt",
             1,
         )
         if "COPY VERSION ./" not in dockerfile_text:
