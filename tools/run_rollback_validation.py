@@ -65,9 +65,12 @@ def _image_id(docker: str, version: str) -> str:
 
 
 def _build_old_image(docker: str, version: str) -> None:
-    archive = ROOT / "work" / f"rollback-{version}.tar"
-    source_dir = Path(tempfile.mkdtemp(prefix=f"rollback-{version}-", dir=ROOT / "work"))
-    archive.parent.mkdir(parents=True, exist_ok=True)
+    work_dir = ROOT / "work"
+    # work/ is gitignored, so it must be created before mkdtemp on clean
+    # checkouts such as GitHub-hosted runners.
+    work_dir.mkdir(parents=True, exist_ok=True)
+    archive = work_dir / f"rollback-{version}.tar"
+    source_dir = Path(tempfile.mkdtemp(prefix=f"rollback-{version}-", dir=work_dir))
     try:
         _run([
             "git", "-c", "safe.directory=*", "archive", "--format=tar",
@@ -168,15 +171,37 @@ def _wait_health(base_url: str, expected_version: str, timeout_seconds: int) -> 
     )
 
 
-def _backup() -> str:
+def _backup(docker: str) -> str:
     database = ROOT / "data" / "intel.sqlite"
     if not database.is_file():
         raise RuntimeError(f"Database not found: {database}")
     backup_dir = ROOT / "artifacts" / "backups"
     backup_dir.mkdir(parents=True, exist_ok=True)
-    target = backup_dir / f"intel-{datetime.now().strftime('%Y%m%d-%H%M%S')}.sqlite"
-    with sqlite3.connect(database) as source, sqlite3.connect(target) as destination:
-        source.backup(destination)
+    name = f"intel-{datetime.now().strftime('%Y%m%d-%H%M%S')}.sqlite"
+    target = backup_dir / name
+    if sys.platform.startswith("win"):
+        # On Docker Desktop for Windows the data directory is a DrvFs bind
+        # mount. A Windows-side SQLite connection to the live WAL database
+        # leaves shared-memory state that makes the next in-container
+        # "PRAGMA journal_mode=WAL" fail with disk I/O error. Run the online
+        # backup from a Linux container so all SQLite access stays on the
+        # same side of the host/VM boundary.
+        snippet = (
+            "import sqlite3; "
+            "src=sqlite3.connect('file:/backup-data/intel.sqlite?mode=ro', uri=True); "
+            f"dst=sqlite3.connect('/backup-out/{name}'); "
+            "src.backup(dst); dst.close(); src.close()"
+        )
+        _run([
+            docker, "run", "--rm",
+            "-v", f"{ROOT / 'data'}:/backup-data",
+            "-v", f"{backup_dir}:/backup-out",
+            f"{IMAGE_REPOSITORY}:0.2.2",
+            "python", "-c", snippet,
+        ])
+    else:
+        with sqlite3.connect(database) as source, sqlite3.connect(target) as destination:
+            source.backup(destination)
     return str(target)
 
 
@@ -217,7 +242,7 @@ def main() -> int:
             "v0.2.1 image build copies VERSION so /api/health reports the "
             "historical release version correctly."
         )
-        report["backup_output"] = _backup()
+        report["backup_output"] = _backup(docker)
 
         COMPOSE_OVERRIDE.parent.mkdir(parents=True, exist_ok=True)
         COMPOSE_OVERRIDE.write_text(
