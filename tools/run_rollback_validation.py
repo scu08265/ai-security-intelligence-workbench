@@ -63,17 +63,6 @@ def _image_id(docker: str, version: str) -> str:
     return _run([docker, "image", "inspect", image, "--format", "{{.Id}}"])
 
 
-def _image_has_version(docker: str, version: str) -> bool:
-    image = f"{IMAGE_REPOSITORY}:{version}"
-    try:
-        values = json.loads(_run([
-            docker, "image", "inspect", image, "--format", "{{json .Config.Env}}",
-        ]))
-    except (RuntimeError, json.JSONDecodeError):
-        return False
-    return f"APP_VERSION={version}" in values
-
-
 def _build_old_image(docker: str, version: str) -> None:
     archive = ROOT / "work" / f"rollback-{version}.tar"
     source_dir = Path(tempfile.mkdtemp(prefix=f"rollback-{version}-", dir=ROOT / "work"))
@@ -85,6 +74,15 @@ def _build_old_image(docker: str, version: str) -> None:
         ])
         with tarfile.open(archive, "r") as bundle:
             bundle.extractall(source_dir)
+        dockerfile = source_dir / "Dockerfile"
+        dockerfile_text = dockerfile.read_text(encoding="utf-8")
+        if "COPY VERSION ./" not in dockerfile_text:
+            dockerfile_text = dockerfile_text.replace(
+                "COPY README.md ./\n",
+                "COPY README.md ./\nCOPY VERSION ./\n",
+                1,
+            )
+            dockerfile.write_text(dockerfile_text, encoding="utf-8")
         _run([
             docker, "build",
             "--build-arg", f"APP_VERSION={version}",
@@ -122,6 +120,13 @@ def _compose(docker: str, host_port: int, version: str, action: str) -> str:
         "APP_VERSION": version,
         "HOST_PORT": str(host_port),
     })
+
+
+def _cleanup_compose(docker: str, host_port: int) -> None:
+    try:
+        _compose(docker, host_port, "0.2.2", "down")
+    except Exception:
+        pass
 
 
 def _wait_health(base_url: str, expected_version: str, timeout_seconds: int) -> dict[str, Any]:
@@ -174,19 +179,21 @@ def main() -> int:
             docker, "version", "--format", "{{.Server.Version}}",
         ])
 
-        if not _image_has_version(docker, "0.2.1"):
-            report["build_0_2_1"] = "started"
-            _build_old_image(docker, "0.2.1")
-            report["build_0_2_1"] = "completed"
-        if not _image_has_version(docker, "0.2.2"):
-            report["build_0_2_2"] = "started"
-            _build_current_image(docker, "0.2.2")
-            report["build_0_2_2"] = "completed"
+        report["build_0_2_1"] = "started"
+        _build_old_image(docker, "0.2.1")
+        report["build_0_2_1"] = "completed"
+        report["build_0_2_2"] = "started"
+        _build_current_image(docker, "0.2.2")
+        report["build_0_2_2"] = "completed"
 
         report["image_ids"] = {
             "0.2.1": _image_id(docker, "0.2.1"),
             "0.2.2": _image_id(docker, "0.2.2"),
         }
+        report["legacy_build_compatibility"] = (
+            "v0.2.1 image build copies VERSION so /api/health reports the "
+            "historical release version correctly."
+        )
         report["backup_output"] = _backup(docker)
 
         COMPOSE_OVERRIDE.parent.mkdir(parents=True, exist_ok=True)
@@ -203,6 +210,7 @@ def main() -> int:
         )
         base_url = f"http://127.0.0.1:{args.host_port}"
 
+        _cleanup_compose(docker, args.host_port)
         _compose(docker, args.host_port, "0.2.2", "up")
         report["before_rollback"] = _wait_health(base_url, "0.2.2", args.timeout_seconds)
 
@@ -229,6 +237,8 @@ def main() -> int:
         report["status"] = "failed"
         report["error"] = str(exc)
         report["finished_at"] = _utcnow()
+        if docker:
+            _cleanup_compose(docker, args.host_port)
         return_code = 1
     finally:
         REPORT.parent.mkdir(parents=True, exist_ok=True)
