@@ -87,6 +87,16 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -Int
 
 ## 6. 验收命令
 
+正常用户 PowerShell 中的一键收尾：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\finalize_v0.2.2.ps1 `
+  -InstallScheduledTask
+```
+
+该脚本会推送 `release/v0.2.2` 和标签、记录对应 SHA 的 Actions 结果、执行真实 Docker
+回滚验证，并可选安装 24 小时 Windows 计划任务。
+
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m pip check
