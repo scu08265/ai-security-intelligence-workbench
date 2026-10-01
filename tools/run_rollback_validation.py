@@ -160,9 +160,10 @@ def _cleanup_compose(docker: str, host_port: int) -> None:
 def _wait_health(base_url: str, expected_version: str, timeout_seconds: int) -> dict[str, Any]:
     deadline = time.monotonic() + timeout_seconds
     last_error = "health endpoint did not respond"
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     while time.monotonic() < deadline:
         try:
-            with urllib.request.urlopen(f"{base_url}/api/health", timeout=5) as response:
+            with opener.open(f"{base_url}/api/health", timeout=5) as response:
                 payload = json.loads(response.read().decode("utf-8"))
             if payload.get("status") == "ok" and payload.get("version") == expected_version:
                 return payload
