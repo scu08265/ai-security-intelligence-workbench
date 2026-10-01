@@ -76,6 +76,21 @@ def _build_old_image(docker: str, version: str) -> None:
             bundle.extractall(source_dir)
         dockerfile = source_dir / "Dockerfile"
         dockerfile_text = dockerfile.read_text(encoding="utf-8")
+        if not dockerfile_text.startswith("# syntax="):
+            dockerfile_text = "# syntax=docker/dockerfile:1.7\n\n" + dockerfile_text
+        dockerfile_text = dockerfile_text.replace(
+            "    PIP_NO_CACHE_DIR=1 \\\n",
+            "    PIP_NO_CACHE_DIR=0 \\\n"
+            "    PIP_DEFAULT_TIMEOUT=120 \\\n"
+            "    PIP_RETRIES=10 \\\n",
+            1,
+        )
+        dockerfile_text = dockerfile_text.replace(
+            "RUN python -m pip install --disable-pip-version-check -r requirements.txt",
+            "RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \\\n"
+            "    python -m pip install --disable-pip-version-check -r requirements.txt",
+            1,
+        )
         if "COPY VERSION ./" not in dockerfile_text:
             dockerfile_text = dockerfile_text.replace(
                 "COPY README.md ./\n",
@@ -83,7 +98,7 @@ def _build_old_image(docker: str, version: str) -> None:
                 1,
             )
             dockerfile.write_text(dockerfile_text, encoding="utf-8")
-        _run([
+        _run_build([
             docker, "build",
             "--build-arg", f"APP_VERSION={version}",
             "-t", f"{IMAGE_REPOSITORY}:{version}",
@@ -95,12 +110,24 @@ def _build_old_image(docker: str, version: str) -> None:
 
 
 def _build_current_image(docker: str, version: str) -> None:
-    _run([
+    _run_build([
         docker, "build",
         "--build-arg", f"APP_VERSION={version}",
         "-t", f"{IMAGE_REPOSITORY}:{version}",
         ".",
     ])
+
+
+def _run_build(command: list[str], *, cwd: Path = ROOT) -> str:
+    last_error: RuntimeError | None = None
+    for attempt in range(1, 4):
+        try:
+            return _run(command, cwd=cwd)
+        except RuntimeError as exc:
+            last_error = exc
+            if attempt < 3:
+                time.sleep(10)
+    raise last_error or RuntimeError("Docker build failed.")
 
 
 def _compose(docker: str, host_port: int, version: str, action: str) -> str:

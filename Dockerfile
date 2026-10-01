@@ -1,16 +1,21 @@
+# syntax=docker/dockerfile:1.7
+
 FROM python:3.12-slim
 
 ARG APP_VERSION=0.2.2
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
+    PIP_NO_CACHE_DIR=0 \
+    PIP_DEFAULT_TIMEOUT=120 \
+    PIP_RETRIES=10 \
     INTEL_JSON_LOGS=1 \
     APP_VERSION=${APP_VERSION}
 
 WORKDIR /app
 
 COPY requirements.txt ./
-RUN python -m pip install --disable-pip-version-check -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+    python -m pip install --disable-pip-version-check -r requirements.txt
 
 COPY app ./app
 COPY docs ./docs
