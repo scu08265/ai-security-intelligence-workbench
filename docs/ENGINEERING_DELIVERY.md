@@ -60,6 +60,12 @@ powershell -ExecutionPolicy Bypass -File .\scripts\rollback_release.ps1 -Version
 
 回滚脚本会先备份数据库，再切换到已存在的旧 Docker 镜像，并执行健康检查。
 
+可重复的真实回滚验证：
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\run_rollback_validation.py --host-port 18001
+```
+
 详细说明见 [OPERATIONS.md](OPERATIONS.md)。
 
 ## 5. 24 小时息屏采集

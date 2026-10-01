@@ -115,6 +115,15 @@ powershell -ExecutionPolicy Bypass -File .\scripts\restore_database.ps1 -BackupP
 
 数据库文件回滚前会自动保存为 `intel.sqlite.before-restore-*`，避免再次覆盖时丢失现场。
 
+### 真实验证 0.2.2 -> 0.2.1 -> 0.2.2
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\run_rollback_validation.py --host-port 18001
+```
+
+该命令从 `v0.2.1` 标签构建旧镜像，验证 `0.2.2` 健康后切到 `0.2.1`，检查版本和事件数，再恢复
+`0.2.2`。结果写入 `reports/rollback-validation.json`。
+
 ## 7. 版本回退
 
 - 当前发布版本记录在 `VERSION`，本文档对应 `0.2.2`。
