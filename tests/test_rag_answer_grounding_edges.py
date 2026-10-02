@@ -14,7 +14,7 @@ import pytest
 from app import intelligence
 
 REFUSAL_FRAGMENT = "未找到可匹配的事件"
-DOCUMENT_TEMPLATE = "根据命中的原文证据："
+DOCUMENT_TEMPLATE = "检索到的原文直接证据："
 
 SUFFICIENT_TEXT = (
     "TrustedGuard enforces a signed allow list for every model asset before loading. " * 2
@@ -33,10 +33,14 @@ def _chunk(text: str, *, chunk_id: str, document_id: str, title: str = "Syntheti
     }
 
 
-def _answer_budget(citations: list[dict]) -> int:
-    """答案文本允许的最大长度：模板 + 每条引用原文 + 列表符号与换行。"""
-    quoted = citations[:3]
-    return len(DOCUMENT_TEMPLATE) + 1 + sum(len(c["quote"]) + 2 for c in quoted) + len(quoted)
+def _assert_claims_are_supported(result: dict) -> None:
+    """Every answer claim must be an exact substring of one returned citation."""
+    citations = result["document_citations"]
+    assert result["claims"], "文档答案必须产生逐句绑定的 claims"
+    quotes = [item["quote"] for item in citations]
+    for claim in result["claims"]:
+        assert claim["evidence_ids"], "claim 必须绑定 chunk_id"
+        assert any(claim["text"] in quote for quote in quotes), claim["text"]
 
 
 # --------------------------------------------------------------------------
@@ -49,20 +53,18 @@ def test_sufficient_document_evidence_produces_a_grounded_answer():
                                                    document_id="d-1")]
     )
     assert result["document_citations"], "有充分证据时必须给出引用"
-    assert result["answer"].startswith(DOCUMENT_TEMPLATE)
+    assert result["answer"].startswith(("检索到的原文直接证据：", "根据检索到的原文证据："))
     assert REFUSAL_FRAGMENT not in result["answer"]
 
 
 def test_document_answer_contains_only_cited_verbatim_quotes():
-    """答案不得出现模板与引用原文之外的任何自造文字。"""
+    """答案中的事实句必须逐字来自引用，并绑定对应证据。"""
     result = intelligence.answer_question(
         "TrustedGuard", [], [], rag_chunks=[_chunk(SUFFICIENT_TEXT, chunk_id="c-1",
                                                    document_id="d-1")]
     )
-    citations = result["document_citations"]
-    for citation in citations:
-        assert citation["quote"] in result["answer"], "引用原文必须逐字出现在答案中"
-    assert len(result["answer"]) <= _answer_budget(citations), "答案长度超出引用原文总量"
+    _assert_claims_are_supported(result)
+    assert all(claim["text"] in result["answer"] for claim in result["claims"])
 
 
 # --------------------------------------------------------------------------
@@ -91,6 +93,16 @@ def test_generic_term_still_hits_in_the_retriever_itself():
     assert retrieve_chunks("vulnerability", chunks, limit=12) == []
 
 
+def test_prompt_only_text_does_not_satisfy_prompt_injection_phrase():
+    result = intelligence.answer_question(
+        "什么是提示词注入？", [], [],
+        rag_chunks=[_chunk(("prompt recall appears in this unrelated policy text. " * 6),
+                           chunk_id="c-prompt-only", document_id="d-prompt-only")],
+    )
+    assert result["document_citations"] == []
+    assert result["rag"]["refused"] is True
+
+
 # --------------------------------------------------------------------------
 # 3) 事件路径拒答且文档路径没有结果
 # --------------------------------------------------------------------------
@@ -113,10 +125,7 @@ def test_event_refusal_with_document_hits_never_invents_uncited_content():
     )
     assert result["related_event_ids"] == []
     assert result["document_citations"]
-    citations = result["document_citations"]
-    for citation in citations:
-        assert citation["quote"] in result["answer"]
-    assert len(result["answer"]) <= _answer_budget(citations)
+    _assert_claims_are_supported(result)
 
 
 # --------------------------------------------------------------------------
@@ -176,7 +185,7 @@ def test_multi_document_citations_are_not_synthesised_into_a_conclusion(connecti
     document_ids = {c["document_id"] for c in result["document_citations"]}
     assert len(document_ids) >= 2, "前置条件：应命中两篇不同文档"
     assert connective not in result["answer"], f"答案出现了推断性措辞：{connective}"
-    assert len(result["answer"]) <= _answer_budget(result["document_citations"])
+    _assert_claims_are_supported(result)
 
 
 # --------------------------------------------------------------------------
@@ -198,8 +207,7 @@ def test_citation_is_returned_even_when_the_question_subject_is_not_covered():
     # 但答案只包含引用原文，不包含问题里未被证据覆盖的主张
     assert "quantum" not in result["answer"].casefold()
     assert "entanglement" not in result["answer"].casefold()
-    for citation in result["document_citations"]:
-        assert citation["quote"] in result["answer"]
+    _assert_claims_are_supported(result)
 
 
 def test_citation_identity_is_verbatim_and_unchanged():

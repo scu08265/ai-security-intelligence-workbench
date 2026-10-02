@@ -167,3 +167,28 @@ def test_cyclonedx_endpoints_do_not_leak_secrets(monkeypatch):
         response = client.post(path, json=payload)
         assert response.status_code == 200
         assert "sk-cdx-canary" not in response.text
+
+
+def test_real_asset_import_preserves_policy_and_demo_flag():
+    client = TestClient(app)
+    policies = {
+        "vllm": {
+            "business_importance": "critical",
+            "maintenance_window": {
+                "weekday": "Sun", "start": "02:00", "end": "05:00",
+                "timezone": "Asia/Shanghai",
+            },
+            "prohibited_actions": ["restart_service"],
+            "owner": "inference-team@example.invalid",
+            "acceptable_downtime_minutes": 30,
+        }
+    }
+    imported = client.post("/api/assets/cyclonedx/import", json={
+        "bom": _bom(), "authorized": True, "is_demo": False,
+        "policies": policies,
+    }).json()
+    assert imported["is_demo"] is False
+    assert imported["policy_asset_count"] == 1
+    asset = next(item for item in storage.list_assets() if item["component"] == "vllm")
+    assert asset["is_demo"] is False
+    assert asset["policy"] == policies["vllm"]

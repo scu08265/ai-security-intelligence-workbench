@@ -977,6 +977,7 @@
     state.simulation.preview = preview;
     state.simulation.assets = Array.isArray(preview.assets) ? preview.assets : [];
     state.simulation.source = source;
+    state.simulation.isDemo = Boolean(source.synthetic);
     state.simulation.confirmed = false;
     state.simulation.imported = [];
     state.simulation.assessments = [];
@@ -997,7 +998,7 @@
     reader.onload = async () => {
       try {
         const doc = JSON.parse(String(reader.result || ''));
-        await prepareSimulationBom(doc, { type: 'CycloneDX JSON', name: file.name, observedAt: new Date().toISOString(), synthetic: true });
+        await prepareSimulationBom(doc, { type: 'CycloneDX JSON', name: file.name, observedAt: new Date().toISOString(), synthetic: false });
       } catch (err) {
         state.simulation.error = err.message;
         renderSimulation();
@@ -1048,13 +1049,15 @@
     }
 
     const previewRows = sim.assets.map((item) => [
-      h('div', {}, textOr(item.name), item.is_demo ? h('span', { class: 'badge badge--demo' }, '合成') : null),
+      h('div', {}, textOr(item.name), sim.isDemo ? h('span', { class: 'badge badge--demo' }, '合成') : null),
       textOr(item.component), textOr(item.ecosystem, '未识别'), textOr(item.version, '未提供'),
       textOr((item.sbom || {}).purl, '未提供'), textOr((item.sbom || {}).bom_ref, '未提供')
     ]);
     const source = sim.source || {};
     const confirm = h('input', { type: 'checkbox', checked: sim.confirmed,
       onchange: (event) => { state.simulation.confirmed = event.target.checked; renderSimulation(); } });
+    const demoMark = h('input', { type: 'checkbox', checked: sim.isDemo,
+      onchange: (event) => { state.simulation.isDemo = event.target.checked; renderSimulation(); } });
     const assumptions = simulationAssumptions();
     const assumptionBox = h('section', { class: 'simulation-step' },
       h('div', { class: 'simulation-step-head' }, h('span', {}, '2'), h('div', {}, h('h4', {}, '核对来源与仿真假设'), h('p', {}, '确认前不会写入资产库，也不会开始研判。'))),
@@ -1064,6 +1067,7 @@
         h('div', {}, h('span', {}, '导入时间'), h('strong', {}, textOr(fmtTime(source.observedAt)))),
         h('div', {}, h('span', {}, '数据性质'), h('strong', {}, source.synthetic ? '合成仿真数据' : '用户提供清单'))),
       h('ul', { class: 'assumption-list' }, ...assumptions.map((item) => h('li', {}, item))),
+      h('label', { class: 'simulation-confirm' }, demoMark, h('span', {}, '将该清单标记为合成演示资产（真实资产请取消勾选）')),
       h('label', { class: 'simulation-confirm' }, confirm, h('span', {}, '我已核对以上来源和假设，同意将清单纳入本次评估范围。')));
 
     const plan = sim.plan || {};
@@ -1091,7 +1095,9 @@
     renderSimulation();
     try {
       if (!state.simulation.bom) throw new Error('请先导入并预览 CycloneDX 清单。');
-      const imported = await api.post('/api/assets/cyclonedx/import', { bom: state.simulation.bom, authorized: true });
+      const imported = await api.post('/api/assets/cyclonedx/import', {
+        bom: state.simulation.bom, authorized: true, is_demo: Boolean(state.simulation.isDemo)
+      });
       const result = await api.post('/api/assets/cyclonedx/' + encodeURIComponent(imported.batch_id) + '/assess');
       state.simulation.imported = state.simulation.assets;
       state.simulation.result = result;
@@ -1464,6 +1470,13 @@
       : h('strong', { class: 'score-value' }, String(value) + (suffix || ''));
   }
 
+  function percentValue(value) {
+    if (value === null || value === undefined) return null;
+    const number = Number(value);
+    if (!Number.isFinite(number)) return null;
+    return `${(number * 100).toFixed(2).replace(/\.?0+$/, '')}%`;
+  }
+
   function scoreCapability(title, stateLabel, facts, note) {
     return h('article', { class: 'score-capability' },
       h('div', { class: 'score-capability-head' }, h('h3', {}, title), badge(stateLabel === '已验证' ? 'ok' : 'plain', stateLabel)),
@@ -1495,12 +1508,20 @@
     const monitoring = all.monitoring || {};
     const evaluation = all.evaluation || {};
     const orchestration = all.orchestration || {};
+    const bEval = official.b_evaluation || {};
+    const bQa = bEval.qa_quality || {};
+    const bPerformance = bEval.qa_performance || {};
+    const bRelation = bEval.relation || {};
+    const bMultihop = bEval.multihop || {};
     const coverage = (dashboard.monitoring || {}).coverage || {};
     const metrics = evaluation.metrics || {};
     const completeDays = firstValue(monitoring, ['complete_days', 'summary.complete_days']);
+    const scheduledDays = firstValue(official, ['monitoring_7d.scheduled_run_days.value']);
     const within24h = firstValue(monitoring, ['within_24h_ratio', 'latency.within_24h_ratio', 'summary.within_24h_ratio']);
     const toolCount = Array.isArray(orchestration.tools) ? orchestration.tools.length : null;
     const phaseCount = Array.isArray(orchestration.phases) ? orchestration.phases.filter((x) => x.id !== 'summary' && x.id !== 'answer').length : null;
+    const p95Values = (bPerformance.batches || []).map((item) => Number(item.p95_ms)).filter(Number.isFinite);
+    const p95Max = p95Values.length ? Math.max(...p95Values) : null;
     const officialReady = Object.keys(official).length > 0;
 
     setBox(view.status,
@@ -1510,11 +1531,12 @@
           ? '当前优先消费 /api/competition/scorecard。'
           : '统一计分接口尚未提供，当前由现有监测、评测和编排接口汇总；接口上线后会自动优先使用。')));
     setBox(view.grid,
-      scoreCapability('持续监测', completeDays !== null ? '已验证' : '待积累', [
-        ['完整运行天数', completeDays, ' 天'],
+      scoreCapability('持续监测', scheduledDays !== null && scheduledDays >= 7 ? '已验证' : '待积累', [
+        ['定时运行天数', scheduledDays, ' 天'],
+        ['有采集日期', completeDays, ' 天'],
         ['来源分类', firstValue(official, ['monitoring.source_categories']) || coverage.categories, ' 类'],
         ['有效端点', coverage.endpoints_with_data, '']
-      ], '证据来自最近 7 天监测记录与来源覆盖统计。'),
+      ], '赛题连续运行只认 trigger=scheduled 的采集；有采集日期与定时运行天数分开显示。'),
       scoreCapability('知识富化', dashboard.latest_enrichment || (dashboard.counts || {}).events ? '已验证' : '待运行', [
         ['知识事件', firstValue(official, ['enrichment.documents']) || (dashboard.counts || {}).events, ' 条'],
         ['工具数量', toolCount, ' 个'],
@@ -1534,7 +1556,25 @@
         ['任务阶段', phaseCount, ' 个'],
         ['固定工具', toolCount, ' 个'],
         ['工具预算', firstValue(orchestration, ['scheduling.tool_budget']), ' 次']
-      ], '计划、检索、审核、停止条件和工具调用均可在任务运行记录中核查。'));
+      ], '计划、检索、审核、停止条件和工具调用均可在任务运行记录中核查。'),
+      scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
+        ['人工核验题数', bQa.human_judged_cases, ' 个'],
+        ['答案准确率', percentValue(bQa.answer_accuracy), ''],
+        ['引用支持率', percentValue(bQa.citation_support), ''],
+        ['拒答召回率', percentValue(bQa.refusal_recall), '']
+      ], '这是改造前的冻结人工基线；partial、unknown 不按正确回填，代码修改后需重新人工核验。'),
+      scoreCapability('关系与多跳评测', bRelation.available ? '已验证' : '待读取', [
+        ['可判定关系', bRelation.evaluable_samples, ' 条'],
+        ['关系 Precision', percentValue(bRelation.precision), ''],
+        ['关系 Recall', percentValue(bRelation.recall), ''],
+        ['跨文档路径', bMultihop.cross_document_total
+          ? `${bMultihop.cross_document_found}/${bMultihop.cross_document_total}` : null, '']
+      ], 'Recall/F1 只有存在漏检金标准全集时才计算；跨文档连通不等于完成综合推理。'),
+      scoreCapability('问答性能评测', bPerformance.available ? '已验证' : '待读取', [
+        ['独立批次', Array.isArray(bPerformance.batches) ? bPerformance.batches.length : null, ' 批'],
+        ['P95 最大值', p95Max, ' ms'],
+        ['超时 / 异常', bPerformance.available ? `${bPerformance.timeouts || 0}/${bPerformance.errors || 0}` : null, '']
+      ], '赛题性能目标为单题 5 秒内；延迟和失败数来自两批各 50 题的真实运行。'));
   }
 
   async function loadDashboard() {

@@ -432,7 +432,22 @@ def nvd_to_event(raw: dict) -> dict | None:
         unique_affected.append(item)
     affected = unique_affected[:25]
 
-    references = [_text(r.get("url")) for r in cve.get("references") or [] if r.get("url")]
+    reference_entries = [item for item in cve.get("references") or [] if isinstance(item, dict) and item.get("url")]
+    references = [_text(item.get("url")) for item in reference_entries]
+    poc: list[dict] = []
+    for item in reference_entries:
+        url = _text(item.get("url"))
+        tags = [_text(tag) for tag in item.get("tags") or [] if _text(tag)]
+        if not any("exploit" in tag.casefold() for tag in tags):
+            continue
+        poc.append({
+            "url": url,
+            "status": "public_exploit_reference",
+            "reason": "NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。",
+            "source_id": _source_id("nvd", f"{event_id}:poc:{url}"),
+            "tags": tags,
+            "verified": False,
+        })
     published = cve.get("published")
     modified = cve.get("lastModified")
     vuln_status = _text(cve.get("vulnStatus"))
@@ -467,6 +482,7 @@ def nvd_to_event(raw: dict) -> dict | None:
         cwes=cwes,
         sources=[source_entry],
         references=references,
+        poc=poc,
         tags=[t for t in [_text(cve.get("sourceIdentifier"))] if t.startswith("CVE-")],
         content_hash=storage.content_hash(_text(description)),
     )

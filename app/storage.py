@@ -442,6 +442,32 @@ def get_event(event_id: str) -> dict | None:
     return json.loads(row["doc"]) if row else None
 
 
+def merge_event_poc(event_id: str, records: list[dict]) -> bool:
+    """Add POC reference records to an existing event without replacing it."""
+    event = get_event(event_id)
+    if not event:
+        return False
+    existing = list(event.get("poc") or [])
+    keys = {
+        (str(item.get("source_id") or ""), str(item.get("url") or ""))
+        for item in existing if isinstance(item, dict)
+    }
+    changed = False
+    for item in records or []:
+        if not isinstance(item, dict):
+            continue
+        key = (str(item.get("source_id") or ""), str(item.get("url") or ""))
+        if key in keys:
+            continue
+        existing.append(item)
+        keys.add(key)
+        changed = True
+    if changed:
+        event["poc"] = existing
+        upsert_event(event)
+    return changed
+
+
 def find_event_by_identifier(identifier: str) -> dict | None:
     """Resolve a CVE/GHSA id through both primary ids and aliases."""
     ident = (identifier or "").strip()

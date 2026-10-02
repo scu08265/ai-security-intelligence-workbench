@@ -10,7 +10,7 @@ from collections import Counter
 from statistics import mean
 from typing import Any
 
-from . import agents, evaluation, sources, storage
+from . import agents, b_evaluation, evaluation, sources, storage
 
 
 def _rate(numerator: int, denominator: int) -> float | None:
@@ -59,6 +59,14 @@ def _source_metrics() -> dict:
 
 def _monitoring_metrics() -> dict:
     evidence = agents.monitoring_evidence(days=7)
+    allowed_dates = {day["date"] for day in evidence["days"]}
+    scheduled_runs = [
+        run for run in storage.list_runs(limit=500)
+        if run.get("kind") == "collect"
+        and (run.get("detail") or {}).get("trigger") == "scheduled"
+        and str(run.get("started_at") or "")[:10] in allowed_dates
+    ]
+    scheduled_days = sorted({str(run.get("started_at") or "")[:10] for run in scheduled_runs})
     measured = sum(day["events_with_publisher_time"] for day in evidence["days"])
     within_6h = sum(day["within_6h"] for day in evidence["days"])
     within_12h = sum(day["within_12h"] for day in evidence["days"])
@@ -68,6 +76,14 @@ def _monitoring_metrics() -> dict:
     return {
         "window_days": 7,
         "actual_run_days": _metric(evidence["complete_days"], source="runs(kind=collect)"),
+        "scheduled_run_days": _metric(
+            len(scheduled_days), source="runs(kind=collect,detail.trigger=scheduled)",
+            note="只有外部计划任务触发的采集才计入赛题连续运行天数。"),
+        "scheduled_run_evidence": [{
+            "id": run.get("id"), "started_at": run.get("started_at"),
+            "status": run.get("status"),
+            "task_id": (run.get("detail") or {}).get("scheduler", {}).get("task_id"),
+        } for run in scheduled_runs[:20]],
         "observed_events": _metric(observed, source="event.monitoring_observations"),
         "publication_latency_samples": _metric(measured, source="event.monitoring_observations"),
         "unknown_latency_samples": _metric(unknown, source="event.monitoring_observations"),
@@ -81,7 +97,7 @@ def _monitoring_metrics() -> dict:
         "within_24h_rate": _metric(_rate(within, measured), source="event.monitoring_observations",
                                    sample_size=measured),
         "days": evidence["days"],
-        "note": evidence["note"],
+        "note": evidence["note"] + " actual_run_days 统计任一采集运行；scheduled_run_days 才对应赛题连续运行口径。",
     }
 
 
@@ -228,5 +244,6 @@ def scorecard() -> dict:
         "monitoring_7d": _monitoring_metrics(),
         "enrichment": _enrichment_metrics(events),
         "question_answer_evaluation": _evaluation_metrics(),
+        "b_evaluation": b_evaluation.summary(),
         "agent_execution": _agent_metrics(events),
     }

@@ -130,6 +130,20 @@ def test_kev_marks_the_exploitation_fact_in_the_excerpt():
     assert event["sources"][0]["publisher"] == "CISA"
 
 
+def test_nvd_exploit_reference_is_stored_as_unverified_poc_reference():
+    payload = json.loads(json.dumps(NVD_ITEM_SYNTHETIC))
+    payload["cve"]["references"] = [{
+        "url": "https://example.invalid/exploit",
+        "tags": ["Exploit", "Third Party Advisory"],
+    }]
+    event = normalize.nvd_to_event(payload)
+    assert len(event["poc"]) == 1
+    assert event["poc"][0]["url"] == "https://example.invalid/exploit"
+    assert event["poc"][0]["status"] == "public_exploit_reference"
+    assert event["poc"][0]["verified"] is False
+    assert "不代表已由本系统验证" in event["poc"][0]["reason"]
+
+
 def test_withdrawn_records_are_flagged_not_dropped():
     payload = json.loads(json.dumps(OSV_SYNTHETIC))
     event = normalize.osv_to_event(payload)

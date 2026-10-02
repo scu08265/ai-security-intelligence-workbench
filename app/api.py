@@ -19,7 +19,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import (agent_context, agents, competition_scorecard, config, cyclonedx_assets,
+from . import (agent_context, agents, b_evaluation, competition_scorecard, config, cyclonedx_assets,
                evaluation, intelligence, knowledge_views, observability, rag_corpus,
                reliability, self_healing, sources, storage, streaming,
                multi_agent_runtime)
@@ -54,8 +54,9 @@ class AssetRequest(BaseModel):
     ecosystem: str = Field(default="", max_length=120)
     version: str | None = Field(default=None, max_length=120)
     exposure: str = Field(default="unknown", pattern="^(public|internal|unknown)$")
-    business_criticality: str = Field(default="medium", pattern="^(high|medium|low)$")
+    business_criticality: str = Field(default="medium", pattern="^(critical|high|medium|low|unknown)$")
     conditions: dict[str, Any] = Field(default_factory=dict)
+    policy: dict[str, Any] | None = None
     is_demo: bool = False
     authorized: bool = True
 
@@ -97,6 +98,8 @@ class CycloneDXRequest(BaseModel):
 
 class CycloneDXImportRequest(CycloneDXRequest):
     authorized: bool
+    is_demo: bool = True
+    policies: dict[str, dict[str, Any]] = Field(default_factory=dict)
 
 
 class RAGSnapshotRequest(BaseModel):
@@ -256,6 +259,11 @@ async def local_origin_guard(request: Request, call_next):
     )
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
+    if request.url.path in {"/", "/index.html", "/app.js", "/styles.css"}:
+        # Local UI updates must not leave PyCharm/browser sessions on stale code.
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
     return response
 
 
@@ -598,7 +606,10 @@ def dry_run_cyclonedx(payload: CycloneDXRequest) -> dict:
 @app.post("/api/assets/cyclonedx/import")
 def import_cyclonedx(payload: CycloneDXImportRequest) -> dict:
     try:
-        return cyclonedx_assets.import_bom(payload.bom, authorized=payload.authorized)
+        return cyclonedx_assets.import_bom(
+            payload.bom, authorized=payload.authorized,
+            is_demo=payload.is_demo, policies=payload.policies,
+        )
     except cyclonedx_assets.CycloneDXError as exc:
         raise _bad(str(exc)) from exc
 
@@ -698,6 +709,12 @@ def list_runs(limit: int = Query(default=30, ge=1, le=200)) -> dict:
 @app.get("/api/evaluation")
 def get_evaluation() -> dict:
     return evaluation.latest_evaluation()
+
+
+@app.get("/api/evaluation/b")
+def get_b_evaluation() -> dict:
+    """Return the frozen human/machine B evidence used by the scorecard."""
+    return b_evaluation.summary()
 
 
 @app.post("/api/evaluation/run")

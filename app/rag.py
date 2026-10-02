@@ -37,11 +37,24 @@ _EXPANSIONS = {
     "缓解": ("mitigation", "remediation"),
     "漏洞": ("vulnerability", "cve"),
     "供应链": ("supply", "chain"),
+    "检测": ("detect", "detects", "detection", "identify", "monitor"),
+    "标题": ("title", "paper", "study"),
+    "论文": ("paper", "study", "arxiv"),
+    "模型": ("model", "models"),
+    "攻击": ("attack", "attacks"),
+    "风险": ("risk", "risks"),
+    "资产": ("asset", "assets"),
 }
 
 _GENERIC_SECURITY_TERMS = {
     "vulnerability", "cve", "fix", "fixed", "patched", "remediation",
     "mitigation", "security", "risk",
+}
+
+_EXPANSION_REQUIREMENTS = {
+    "提示词注入": (("prompt",), ("injection",)),
+    "远程代码执行": (("remote",), ("code", "execution", "rce")),
+    "拒绝服务": (("denial",), ("service", "dos")),
 }
 
 
@@ -315,9 +328,16 @@ def retrieve_chunks(
         item.casefold() for item in re.findall(r"(?:cve-\d{4}-\d{4,}|ghsa-[a-z0-9-]+|arxiv-\d{4}\.\d+)", query, re.I)
     }
     scored: list[SearchHit] = []
+    lowered_query = _text(query).casefold()
     for chunk, tokens in zip(chunks, doc_terms):
         token_set = set(tokens)
         matched = tuple(sorted(unique_query & token_set))
+        if any(
+            phrase in lowered_query
+            and not all(any(term in token_set for term in alternatives) for alternatives in groups)
+            for phrase, groups in _EXPANSION_REQUIREMENTS.items()
+        ):
+            continue
         metadata_text = " ".join((chunk.document_id, chunk.source_id, chunk.title, _text(chunk.metadata.get("event_id")))).casefold()
         exact_identifier = any(identifier in metadata_text or identifier in chunk.text.casefold() for identifier in identifiers)
         # Real webpage parsers also encounter menu labels and bibliography
@@ -438,11 +458,105 @@ def assemble_context(
 Generator = Callable[[str, str, Sequence[dict[str, Any]]], str]
 
 
+_ANSWER_SENTENCE_RE = re.compile(r"(?<=[.!?。！？])(?:\s+|(?=[\u4e00-\u9fff]))|\n+")
+
+
+def _answer_sentences(text: str, *, max_chars: int = 420) -> list[str]:
+    """Split quoted evidence into short, directly citable answer units."""
+    result: list[str] = []
+    for raw in _ANSWER_SENTENCE_RE.split(_text(text)):
+        sentence = re.sub(r"\s+", " ", raw).strip(" \t-•")
+        if not sentence:
+            continue
+        if len(sentence) > max_chars:
+            sentence = sentence[:max_chars].rstrip()
+        if len(sentence) >= 16:
+            result.append(sentence)
+    return result or ([_text(text)[:max_chars].rstrip()] if _text(text) else [])
+
+
+def _answer_sentence_candidates(
+    question: str, citations: Sequence[dict[str, Any]],
+) -> list[tuple[float, dict[str, Any], str]]:
+    query_terms = set(terms(question))
+    candidates: list[tuple[float, dict[str, Any], str]] = []
+    for citation in citations:
+        for index, sentence in enumerate(_answer_sentences(str(citation.get("quote") or ""))):
+            sentence_terms = set(terms(sentence))
+            overlap = query_terms & sentence_terms
+            specific = overlap - _GENERIC_SECURITY_TERMS
+            score = float(len(overlap) * 2 + len(specific) * 2)
+            if index == 0:
+                score += 0.25
+            if query_terms and not overlap:
+                score -= 1.0
+            candidates.append((score, citation, sentence))
+    return candidates
+
+
+def _extractive_answer(
+    question: str, citations: Sequence[dict[str, Any]],
+) -> tuple[str, list[dict[str, Any]]]:
+    """Build a concise answer from exact evidence sentences.
+
+    The function deliberately does not paraphrase.  It selects the sentences
+    that overlap the user's terms most strongly and keeps the source/chunk id
+    beside each sentence, so every claim remains directly auditable.
+    """
+    candidates = _answer_sentence_candidates(question, citations)
+    if not candidates:
+        return "", []
+    candidates.sort(key=lambda item: (-item[0], item[1].get("rank") or 999))
+    asks_multiple = bool(re.search(
+        r"哪些|有哪些|列出|分别|对比|比较|list\b|which\s+(?:ones|documents)|compare",
+        question, re.I,
+    ))
+    selected: list[tuple[float, dict[str, Any], str]] = []
+    seen_sentences: set[str] = set()
+    used_documents: set[str] = set()
+    for candidate in candidates:
+        score, citation, sentence = candidate
+        normalized = sentence.casefold()
+        if normalized in seen_sentences:
+            continue
+        document_id = _text(citation.get("document_id"))
+        if not asks_multiple and document_id and document_id in used_documents:
+            continue
+        selected.append(candidate)
+        seen_sentences.add(normalized)
+        if document_id:
+            used_documents.add(document_id)
+        if len(selected) >= (4 if asks_multiple else 3):
+            break
+    if not selected:
+        return "", []
+    if re.search(r"哪些|有哪些|列出|list\b|which\s+(?:ones|documents)", question, re.I):
+        lead = "检索到的相关原文证据如下："
+    elif re.search(r"是什么|什么是|检测什么|做什么|what\s+(?:is|does)", question, re.I):
+        lead = "检索到的原文直接证据："
+    else:
+        lead = "根据检索到的原文证据："
+    lines = [lead]
+    claims: list[dict[str, Any]] = []
+    for _, citation, sentence in selected:
+        label = _text(citation.get("title") or citation.get("source_id") or citation.get("document_id"))
+        chunk_id = _text(citation.get("chunk_id"))
+        suffix = f" [{label} · {chunk_id}]" if label or chunk_id else ""
+        lines.append(f"- “{sentence}”{suffix}")
+        claims.append({
+            "text": sentence,
+            "evidence_ids": [chunk_id] if chunk_id else [],
+        })
+    return "\n".join(lines), claims
+
+
 def answer_with_rag(
     question: str,
     events: Sequence[dict] = (),
     *,
     chunks: Sequence[Chunk] | Sequence[dict] | None = None,
+    focus_document_ids: Sequence[str] | None = None,
+    required_terms: Sequence[str] | None = None,
     max_context_chars: int = 4000,
     max_chunks: int = 6,
     reranker: Reranker | None = None,
@@ -460,7 +574,27 @@ def answer_with_rag(
         documents = events_to_documents(events)
         search_chunks = chunk_documents(documents)
         input_mode = "event_compatibility_projection"
-    hits = retrieve_chunks(question, search_chunks, limit=max_chunks * 2, reranker=reranker)
+    focus_ids = {str(item) for item in (focus_document_ids or []) if str(item)}
+    focused_chunks = [item for item in search_chunks if item.document_id in focus_ids] if focus_ids else []
+    focused_retrieval = bool(focused_chunks)
+    hits = retrieve_chunks(
+        question,
+        focused_chunks if focused_chunks else search_chunks,
+        limit=max_chunks * 2,
+        reranker=reranker,
+    )
+    focus_fallback = bool(focus_ids and not hits)
+    if focus_fallback:
+        hits = retrieve_chunks(question, search_chunks, limit=max_chunks * 2, reranker=reranker)
+    required = {str(term).casefold() for term in (required_terms or []) if str(term)}
+    if required:
+        hits = [
+            hit for hit in hits
+            if any(
+                term in set(terms(" ".join((hit.chunk.title, hit.chunk.text))))
+                for term in required
+            )
+        ]
     context = assemble_context(hits, max_chars=max_context_chars, max_chunks=max_chunks)
     citations = context["citations"]
     if not citations:
@@ -472,25 +606,38 @@ def answer_with_rag(
             "context_chunks": [],
             "context": {key: value for key, value in context.items() if key != "text"},
             "retrieval": {"documents": len(documents), "chunks": len(search_chunks), "hits": 0,
-                          "ranker": "bm25_keyword", "input_mode": input_mode},
+                          "ranker": "bm25_keyword", "input_mode": input_mode,
+                          "focused_document_ids": sorted(focus_ids),
+                          "focused_retrieval": focused_retrieval,
+                          "focus_fallback": focus_fallback,
+                          "required_terms": sorted(required)},
         }
     if generator is not None:
         answer = _text(generator(question, context["text"], citations))
         if not answer:
             answer = "生成器未返回答案；请直接核对所附原文证据。"
+        claims: list[dict[str, Any]] = []
     else:
-        quotes = [item["quote"] for item in citations[:3]]
-        answer = "根据命中的原文证据：\n" + "\n".join(f"- {quote}" for quote in quotes)
+        answer, claims = _extractive_answer(question, citations)
+        if not answer:
+            answer = "根据命中的原文证据：\n" + "\n".join(
+                f"- {item['quote']}" for item in citations[:3]
+            )
     return {
         "answer": answer,
         "refused": False,
         "refusal_reason": None,
         "citations": citations,
+        "claims": claims,
         "context_chunks": citations,
         "context": {key: value for key, value in context.items() if key != "text"},
         "retrieval": {
             "documents": len(documents), "chunks": len(search_chunks), "hits": len(hits),
             "ranker": "bm25_keyword", "reranked": reranker is not None,
             "input_mode": input_mode,
+            "focused_document_ids": sorted(focus_ids),
+            "focused_retrieval": focused_retrieval,
+            "focus_fallback": focus_fallback,
+            "required_terms": sorted(required),
         },
     }

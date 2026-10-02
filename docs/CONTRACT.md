@@ -15,7 +15,7 @@
 - ai_relevance: {included:bool,reason:string}；tags:string[]；enrichment:dict可选。
 - relationships: [{subject,predicate,object,conditions:dict,evidence_ids:string[]}]可选；攻击链仅从有来源关系展示。
 
-资产asset：id,name,component,ecosystem,version:string|null,exposure:public|internal|unknown,business_criticality:high|medium|low,conditions:dict,is_demo:bool,authorized:bool,updated_at。
+资产asset：id,name,component,ecosystem,version:string|null,exposure:public|internal|unknown,business_criticality:critical|high|medium|low|unknown,conditions:dict,policy:dict|null,is_demo:bool,authorized:bool,updated_at。policy只保存调用方明确提供的维护窗口、禁止动作、负责人和可接受停机时间。
 assets由用户主动导入；初始提供明确标注is_demo的合成资产，不声称是真实公网资产。
 
 ## intelligence.py接口
@@ -39,6 +39,7 @@ assets由用户主动导入；初始提供明确标注is_demo的合成资产，�
 - POST /api/chat JSON {question:string,history:[{role,content}]?} -> answer_question返回结果加duration_ms。
 - GET /api/runs?limit=30 -> {items:[{id,kind,status,started_at,finished_at,summary,detail}]}
 - GET /api/evaluation -> {status:not_run|completed,scope,metrics:dict,results:[],limitations:[],...}；只有真实执行后有分数。
+- GET /api/evaluation/b -> B 任务冻结产物投影；人工问答、性能、关系 Precision 和多跳路径均为只读字段，Recall 不可计算时保持 null。
 - POST /api/evaluation/run -> 同上，执行本地回归/金标准样例评估，明确小样本不代表正式盲测；无代码执行接口。
 - GET /api/export -> JSON snapshot，用下载链接即可。
 

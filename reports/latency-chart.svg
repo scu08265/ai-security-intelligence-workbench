@@ -1,29 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480">
 <rect width="100%" height="100%" fill="#0d1117"/>
 <text x="48" y="44" fill="#f0f6fc" font-size="25" font-family="Arial, sans-serif">发布到首次发现时延分布</text>
-<text x="48" y="68" fill="#8b949e" font-size="14" font-family="Arial, sans-serif">可计算 6 条，未知 13 条；目标：6/12/24 小时</text>
+<text x="48" y="68" fill="#8b949e" font-size="14" font-family="Arial, sans-serif">可计算 224 条，未知 14 条；目标：6/12/24 小时</text>
 <text x="48" y="109" fill="#c9d1d9" font-size="16" font-family="Arial, sans-serif">&lt;=6h</text>
 <rect x="170" y="84" width="680" height="34" rx="4" fill="#21262d"/>
-<rect x="170" y="84" width="5" height="34" rx="4" fill="#31c48d"/>
-<text x="866" y="107" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">1 条 · 16.7%</text>
+<rect x="170" y="84" width="6" height="34" rx="4" fill="#31c48d"/>
+<text x="866" y="107" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">2 条 · 0.9%</text>
 <text x="48" y="178" fill="#c9d1d9" font-size="16" font-family="Arial, sans-serif">&gt;6h-12h</text>
 <rect x="170" y="153" width="680" height="34" rx="4" fill="#21262d"/>
-<rect x="170" y="153" width="5" height="34" rx="4" fill="#58a6ff"/>
-<text x="866" y="176" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">1 条 · 16.7%</text>
+<rect x="170" y="153" width="11" height="34" rx="4" fill="#58a6ff"/>
+<text x="866" y="176" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">4 条 · 1.8%</text>
 <text x="48" y="247" fill="#c9d1d9" font-size="16" font-family="Arial, sans-serif">&gt;12h-24h</text>
 <rect x="170" y="222" width="680" height="34" rx="4" fill="#21262d"/>
-<rect x="170" y="222" width="0" height="34" rx="4" fill="#f6c344"/>
-<text x="866" y="245" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">0 条 · 0.0%</text>
+<rect x="170" y="222" width="77" height="34" rx="4" fill="#f6c344"/>
+<text x="866" y="245" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">27 条 · 12.1%</text>
 <text x="48" y="316" fill="#c9d1d9" font-size="16" font-family="Arial, sans-serif">&gt;24h</text>
 <rect x="170" y="291" width="680" height="34" rx="4" fill="#21262d"/>
-<rect x="170" y="291" width="22" height="34" rx="4" fill="#f97066"/>
-<text x="866" y="314" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">4 条 · 66.7%</text>
+<rect x="170" y="291" width="546" height="34" rx="4" fill="#f97066"/>
+<text x="866" y="314" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">191 条 · 85.3%</text>
 <text x="48" y="385" fill="#c9d1d9" font-size="16" font-family="Arial, sans-serif">未知</text>
 <rect x="170" y="360" width="680" height="34" rx="4" fill="#21262d"/>
-<rect x="170" y="360" width="71" height="34" rx="4" fill="#8b949e"/>
-<text x="866" y="383" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">13 条</text>
+<rect x="170" y="360" width="40" height="34" rx="4" fill="#8b949e"/>
+<text x="866" y="383" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">14 条</text>
 <text x="48" y="454" fill="#c9d1d9" font-size="16" font-family="Arial, sans-serif">历史回填排除</text>
 <rect x="170" y="429" width="680" height="34" rx="4" fill="#21262d"/>
-<rect x="170" y="429" width="576" height="34" rx="4" fill="#6e7681"/>
-<text x="866" y="452" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">105 条</text>
+<rect x="170" y="429" width="0" height="34" rx="4" fill="#6e7681"/>
+<text x="866" y="452" fill="#f0f6fc" font-size="15" font-family="Arial, sans-serif">0 条</text>
 </svg>

@@ -17,6 +17,7 @@ def test_empty_scorecard_uses_null_for_unmeasured_metrics():
     body = TestClient(app).get("/api/competition/scorecard").json()
     assert body["sources"]["actual_producing_sources"]["value"] == 0
     assert body["monitoring_7d"]["actual_run_days"]["value"] == 0
+    assert body["monitoring_7d"]["scheduled_run_days"]["value"] == 0
     assert body["monitoring_7d"]["within_24h_rate"]["value"] is None
     qa = body["question_answer_evaluation"]
     assert qa["status"] == "not_run"
@@ -129,3 +130,18 @@ def test_scorecard_does_not_leak_secrets(monkeypatch):
     response = TestClient(app).get("/api/competition/scorecard")
     assert response.status_code == 200
     assert "sk-scorecard-canary" not in response.text
+
+
+def test_b_evaluation_artifacts_are_exposed_without_rounding_unknowns():
+    body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
+    assert body["available"] is True
+    assert body["qa_quality"]["human_judged_cases"] == 50
+    assert body["qa_quality"]["answer_accuracy"] == 0.2121
+    assert body["qa_quality"]["citation_support"] == 0.0323
+    assert body["qa_quality"]["refusal_recall"] == 0.5
+    assert body["relation"]["precision"] == 1.0
+    assert body["relation"]["recall"] is None
+    assert body["multihop"]["cross_document_found"] == 0
+    assert body["multihop"]["cross_document_total"] == 21
+    assert body["qa_performance"]["timeouts"] == 0
+    assert body["qa_performance"]["errors"] == 0

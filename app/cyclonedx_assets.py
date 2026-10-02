@@ -117,7 +117,8 @@ def parse(bom: dict) -> dict:
             "ecosystem": _ecosystem(purl),
             "version": component["version"],
             "authorized": None,
-            "is_demo": True,
+            "is_demo": None,
+            "policy": None,
             "sbom": {
                 **component,
                 "batch_id": batch_id,
@@ -159,13 +160,30 @@ def preview(bom: dict) -> dict:
             "assessment_relationship_count": 0}
 
 
-def import_bom(bom: dict, *, authorized: bool) -> dict:
+def import_bom(
+    bom: dict, *, authorized: bool, is_demo: bool = True,
+    policies: dict[str, dict[str, Any]] | None = None,
+) -> dict:
     parsed = parse(bom)
     existing = {item.get("id") for item in storage.list_assets()}
+    policies = policies or {}
     created = updated = 0
+    policy_count = 0
     for candidate in parsed["assets"]:
         asset = dict(candidate)
         asset["authorized"] = authorized
+        asset["is_demo"] = bool(is_demo)
+        bom_ref = _text((asset.get("sbom") or {}).get("bom_ref"))
+        policy = (
+            policies.get(asset["id"])
+            or policies.get(_text(asset.get("component")))
+            or policies.get(bom_ref)
+        )
+        if policy is not None and not isinstance(policy, dict):
+            raise CycloneDXError(f"资产 {asset['id']} 的 policy 必须是对象")
+        asset["policy"] = dict(policy) if isinstance(policy, dict) else None
+        if asset["policy"] is not None:
+            policy_count += 1
         asset["authorization_assertion"] = {
             "value": authorized,
             "source": "cyclonedx import request",
@@ -179,7 +197,9 @@ def import_bom(bom: dict, *, authorized: bool) -> dict:
     return {
         **{key: value for key, value in parsed.items() if key != "assets"},
         "dry_run": False, "created": created, "updated": updated,
-        "authorized": authorized, "assessment_relationship_count": 0,
+        "authorized": authorized, "is_demo": bool(is_demo),
+        "policy_asset_count": policy_count,
+        "assessment_relationship_count": 0,
         "idempotent": updated == parsed["deduplicated_asset_count"],
     }
 

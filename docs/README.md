@@ -14,3 +14,4 @@
 | [Docker、Compose 与 CI](DOCKER_CI_GUIDE.md) | 容器运行、CI、健康检查和运维截图说明。 |
 | [A 项任务实施说明](A_TASK_IMPLEMENTATION.md) | 每日采集、7 天进度、产出文件与检查命令。 |
 | [工程化交付说明](ENGINEERING_DELIVERY.md) | Docker、CI、健康检查、日志、告警、部署与回滚映射。 |
+| [POC 与真实资产数据源决定](DATA_SOURCE_DECISIONS.md) | POC 标签来源、真实 CycloneDX 导入和策略字段口径。 |

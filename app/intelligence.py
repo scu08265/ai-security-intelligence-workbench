@@ -317,6 +317,30 @@ def _model_select(question: str, events: list[dict], config: dict) -> tuple[list
         return [], f"远端模型不可用，已降级：{type(exc).__name__}"
 
 
+def _contextual_rag_plan(
+    question: str, history: list[dict], context: dict,
+) -> tuple[str, list[str]]:
+    """Expand elliptical follow-ups without inheriting assistant assertions."""
+    if context.get("topic_switched"):
+        return question, []
+    from .rag import terms
+
+    pronoun = bool(re.search(
+        r"它|该|这个|此|上述|前者|后者|\bit\b|\bthis\b|\bthat\b",
+        question, re.I,
+    ))
+    if not pronoun and len([item for item in terms(question) if item]) >= 3:
+        return question, []
+    for message in reversed(history or []):
+        if str(message.get("role") or "") != "user":
+            continue
+        previous = _text(message.get("content"))
+        if previous and previous != question:
+            anchors = re.findall(r"\b[A-Z][A-Za-z0-9_.:-]{2,}\b", previous)
+            return f"{previous} {question}", list(dict.fromkeys(anchors))
+    return question, []
+
+
 def answer_question(
     question, events, assets, history=None, model_config=None, rag_chunks=None,
     context_snapshot=None,
@@ -333,6 +357,8 @@ def answer_question(
         _text(question), events or [], assets or [], history=history,
         context_snapshot=context_snapshot,
     )
+    focus_document_ids = list(context["context_snapshot"].get("selected_document_ids") or [])
+    rag_question, required_terms = _contextual_rag_plan(_text(question), history, context)
     if context["needs_clarification"]:
         rag_result = {
             "answer": context["clarification"]["question"], "refused": True,
@@ -340,7 +366,13 @@ def answer_question(
             "context": {}, "retrieval": {"hits": 0, "input_mode": "not_run_ambiguous_context"},
         }
     else:
-        rag_result = answer_with_rag(_text(question), events or [], chunks=rag_chunks)
+        rag_result = answer_with_rag(
+            rag_question, events or [], chunks=rag_chunks,
+            focus_document_ids=focus_document_ids,
+            required_terms=required_terms,
+        )
+        rag_result.setdefault("retrieval", {})["query"] = rag_question
+        rag_result["retrieval"]["original_question"] = _text(question)
 
     def with_rag(payload: dict) -> dict:
         # Make the exact documents used this turn explicit context for the
@@ -367,6 +399,14 @@ def answer_question(
             payload["limitations"] = list(payload.get("limitations") or []) + [
                 "结论来自版本化文档分块；本次未定位到对应的结构化事件记录，引用以文档为准"
             ]
+        existing_claims = list(payload.get("claims") or [])
+        known_claims = {(item.get("text"), tuple(item.get("evidence_ids") or [])) for item in existing_claims}
+        for claim in rag_result.get("claims") or []:
+            key = (claim.get("text"), tuple(claim.get("evidence_ids") or []))
+            if key not in known_claims:
+                existing_claims.append(claim)
+                known_claims.add(key)
+        payload["claims"] = existing_claims
         payload["rag"] = rag_result
         payload["document_citations"] = rag_result["citations"]
         payload["context_snapshot"] = context["context_snapshot"]

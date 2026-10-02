@@ -44,6 +44,19 @@ def test_aliases_are_searchable():
     assert storage.find_event_by_identifier("CVE-2099-99999") is None
 
 
+def test_poc_backfill_merges_without_replacing_the_event():
+    storage.upsert_event(_event(title="original", poc=[]))
+    poc = [{
+        "url": "https://example.invalid/exploit", "status": "public_exploit_reference",
+        "source_id": "nvd:poc-1", "verified": False,
+    }]
+    assert storage.merge_event_poc("CVE-2099-00001", poc) is True
+    assert storage.merge_event_poc("CVE-2099-00001", poc) is False
+    stored = storage.get_event("CVE-2099-00001")
+    assert stored["title"] == "original"
+    assert stored["poc"] == poc
+
+
 def test_search_matches_document_text_and_alias():
     storage.upsert_event(_event())
     assert storage.list_events(query="storage fixture")[1] == 1

@@ -12,8 +12,8 @@
 <text x="794" y="127" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">100.0%</text>
 <text x="48" y="162" fill="#c9d1d9" font-size="13" font-family="Arial, sans-serif">osv</text>
 <rect x="260" y="142" width="520" height="18" rx="4" fill="#21262d"/>
-<rect x="260" y="142" width="520" height="18" rx="4" fill="#31c48d"/>
-<text x="794" y="157" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">100.0%</text>
+<rect x="260" y="142" width="433" height="18" rx="4" fill="#f6c344"/>
+<text x="794" y="157" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">83.3%</text>
 <text x="48" y="192" fill="#c9d1d9" font-size="13" font-family="Arial, sans-serif">ghsa</text>
 <rect x="260" y="172" width="520" height="18" rx="4" fill="#21262d"/>
 <rect x="260" y="172" width="0" height="18" rx="4" fill="#f97066"/>
@@ -24,8 +24,8 @@
 <text x="794" y="217" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">100.0%</text>
 <text x="48" y="252" fill="#c9d1d9" font-size="13" font-family="Arial, sans-serif">msrc</text>
 <rect x="260" y="232" width="520" height="18" rx="4" fill="#21262d"/>
-<rect x="260" y="232" width="520" height="18" rx="4" fill="#31c48d"/>
-<text x="794" y="247" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">100.0%</text>
+<rect x="260" y="232" width="446" height="18" rx="4" fill="#f6c344"/>
+<text x="794" y="247" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">85.7%</text>
 <text x="48" y="282" fill="#c9d1d9" font-size="13" font-family="Arial, sans-serif">security_blog</text>
 <rect x="260" y="262" width="520" height="18" rx="4" fill="#21262d"/>
 <rect x="260" y="262" width="520" height="18" rx="4" fill="#31c48d"/>
@@ -36,8 +36,8 @@
 <text x="794" y="307" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">未运行</text>
 <text x="48" y="342" fill="#c9d1d9" font-size="13" font-family="Arial, sans-serif">openalex</text>
 <rect x="260" y="322" width="520" height="18" rx="4" fill="#21262d"/>
-<rect x="260" y="322" width="520" height="18" rx="4" fill="#31c48d"/>
-<text x="794" y="337" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">100.0%</text>
+<rect x="260" y="322" width="371" height="18" rx="4" fill="#f6c344"/>
+<text x="794" y="337" fill="#f0f6fc" font-size="13" font-family="Arial, sans-serif">71.4%</text>
 <text x="48" y="372" fill="#c9d1d9" font-size="13" font-family="Arial, sans-serif">owasp_genai</text>
 <rect x="260" y="352" width="520" height="18" rx="4" fill="#21262d"/>
 <rect x="260" y="352" width="520" height="18" rx="4" fill="#31c48d"/>

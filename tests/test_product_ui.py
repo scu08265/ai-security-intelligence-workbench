@@ -8,6 +8,10 @@ covered by `tools/browser_check.py`.
 import re
 from pathlib import Path
 
+from fastapi.testclient import TestClient
+
+from app.api import app
+
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = (ROOT / "app/static/index.html").read_text(encoding="utf-8")
@@ -131,6 +135,16 @@ def test_scorecard_consumes_current_evidence_and_reserves_unified_api():
     assert "'/api/monitoring/evidence?days=7'" in SCRIPT
     for label in ("持续监测", "知识富化", "证据问答", "时效与性能", "Agent 编排证据"):
         assert label in SCRIPT
+
+
+def test_static_assets_are_cache_busted_and_no_store():
+    assert '/app.js?v=' in HTML
+    assert '/styles.css?v=' in HTML
+    client = TestClient(app)
+    for path in ("/", "/index.html", "/app.js", "/styles.css"):
+        response = client.get(path)
+        assert response.status_code == 200
+        assert "no-store" in response.headers.get("cache-control", "")
     assert "'/api/ai-participation'" in SCRIPT
 
 
