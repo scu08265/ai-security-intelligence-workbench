@@ -1,5 +1,6 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
+  "evidence_version": "0.2.2",
   "log_path": "data/logs/workbench.jsonl",
   "alert_path": "data/logs/alerts.jsonl",
   "recent_logs": [

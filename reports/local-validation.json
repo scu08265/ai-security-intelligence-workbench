@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-09-30T08:32:45.256886+00:00",
-  "version": "0.2.2",
+  "version": "0.2.3",
+  "evidence_version": "0.2.2",
   "checks": [
     {
       "name": "pytest",

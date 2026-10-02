@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.3
+
+- Added a real scheduled-run evidence path that distinguishes all collection
+  executions from Windows Task Scheduler/cron executions.
+- Unified scorecard, Markdown, and JSON timeliness denominators around the
+  first monitored observation and excluded pre-monitoring backfill.
+- Recorded authenticated CI and rollback evidence against repository commits.
+- Hardened the latest Docker image acceptance and version checks.
+
 ## 0.2.2
 
 - Completed NVD pagination so normal result sets drain all pages without partial status.

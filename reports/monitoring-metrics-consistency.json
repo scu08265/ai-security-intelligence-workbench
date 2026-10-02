@@ -1,0 +1,30 @@
+{
+  "version": "0.2.3",
+  "generated_at": "2026-10-02T10:26:31Z",
+  "json": {
+    "actual_run_days": 5,
+    "scheduled_run_days": 5,
+    "monitoring_started_at": "2026-09-27T10:43:32Z",
+    "baseline_excluded_samples": 172,
+    "post_monitoring_samples": 210,
+    "effective_denominator": 25
+  },
+  "page": {
+    "actual_run_days": 5,
+    "scheduled_run_days": 5,
+    "monitoring_started_at": "2026-09-27T10:43:32Z",
+    "baseline_excluded_samples": 172,
+    "post_monitoring_samples": 210,
+    "effective_denominator": 25
+  },
+  "markdown": {
+    "actual_run_days": 5,
+    "scheduled_run_days": 5
+  },
+  "checks": {
+    "page_matches_json": true,
+    "markdown_actual_matches_json": true,
+    "markdown_scheduled_matches_json": true
+  },
+  "consistent": true
+}

@@ -1,6 +1,6 @@
 {
-  "version": "0.2.2",
-  "generated_at": "2026-09-30T08:58:06Z",
+  "version": "0.2.3",
+  "generated_at": "2026-10-02T10:26:31Z",
   "checks": {
     "version_consistent": true,
     "version_mismatches": [],

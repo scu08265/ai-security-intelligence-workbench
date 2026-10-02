@@ -1,11 +1,31 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "workflow": "CI",
   "workflow_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/workflows/ci.yml",
-  "branch": "release/v0.2.2",
-  "head_sha": null,
-  "status": "pending_push",
-  "conclusion": null,
-  "generated_at": "2026-10-01T00:00:00Z",
-  "required_command": ".venv\\Scripts\\python.exe tools\\record_ci_validation.py --branch release/v0.2.2 --head-sha <pushed-commit-sha>"
+  "run_id": 36992851906,
+  "run_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906",
+  "head_sha": "8db19cf1f808eec6c91e8461ea308d54525cac1a",
+  "status": "completed",
+  "conclusion": "success",
+  "updated_at": "2026-10-02T09:58:33Z",
+  "jobs": [
+    {
+      "name": "test",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906/job/110792824865"
+    },
+    {
+      "name": "container",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906/job/110792824763"
+    },
+    {
+      "name": "rollback",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906/job/110792824572"
+    }
+  ]
 }

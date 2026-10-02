@@ -1,5 +1,6 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
+  "evidence_version": "0.2.2",
   "generated_at": "2026-09-30T05:45:30Z",
   "implementation_effective_at": "2026-09-30T04:50:00Z",
   "direct_full_scan": {

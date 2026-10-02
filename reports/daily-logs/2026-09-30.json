@@ -1,7 +1,7 @@
 {
   "date": "2026-09-30",
-  "generated_at": "2026-09-30T08:58:06Z",
-  "version": "0.2.2",
+  "generated_at": "2026-10-02T10:21:24Z",
+  "version": "0.2.3",
   "scheduled_runs": [
     {
       "id": "run-e79f865108da",
@@ -1473,6 +1473,876 @@
           ]
         }
       ]
+    },
+    {
+      "id": "run-3eddfe596475",
+      "status": "partial",
+      "started_at": "2026-09-30T09:46:14Z",
+      "finished_at": "2026-09-30T09:47:44Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 3，历史数据可用 9",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-09-30T17:00:00+08:00",
+        "actual_at": "2026-09-30T09:46:14Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7344,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7468,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7125,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 8890,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "msrc",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7671,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "security_blog",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7094,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "openalex",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7156,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7655,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7155,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7311,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7906,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        },
+        {
+          "source_id": "nist_news",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 7234,
+          "error": "ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "run-39447881b081",
+      "status": "completed",
+      "started_at": "2026-09-30T09:58:43Z",
+      "finished_at": "2026-09-30T10:06:22Z",
+      "summary": "采集 12 个来源：新增 1，更新 1，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-09-30T17:00:00+08:00",
+        "actual_at": "2026-09-30T09:58:43Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 216,
+          "kept": 2,
+          "duration_ms": 60061,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 02:44 → 2026-09-30 09:58，共 216 条，分 2 页扫描 216 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 1,
+          "duration_ms": 11000,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 91297,
+          "error": "ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1729,
+          "kept": 0,
+          "duration_ms": 4063,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.29（发布 2026-09-29T13:51:33.3852Z），全量 1729 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2600,
+          "kept": 10,
+          "duration_ms": 15641,
+          "error": null,
+          "notes": [
+            "更新索引共 189 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 344,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 180281,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1014,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 750,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7173 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 952,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 30125,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 62609,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-1a4904c8f1e3",
+      "status": "completed",
+      "started_at": "2026-09-30T11:49:16Z",
+      "finished_at": "2026-09-30T11:52:31Z",
+      "summary": "采集 12 个来源：新增 6，更新 1，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-09-30T18:00:00+08:00",
+        "actual_at": "2026-09-30T11:49:16Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 238,
+          "kept": 2,
+          "duration_ms": 105764,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 03:58 → 2026-09-30 11:49，共 238 条，分 2 页扫描 238 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 1,
+          "duration_ms": 12827,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1905,
+          "kept": 6,
+          "duration_ms": 5421,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1905 条 OSV 记录",
+            "已取详细记录 6 条（并发 6 路）"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1729,
+          "kept": 0,
+          "duration_ms": 655,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.29（发布 2026-09-29T13:51:33.3852Z），全量 1729 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2600,
+          "kept": 10,
+          "duration_ms": 11719,
+          "error": null,
+          "notes": [
+            "更新索引共 189 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 250,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 18532,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2094,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 735,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7173 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 360,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 35295,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 687,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-3d77c6a1dc73",
+      "status": "completed",
+      "started_at": "2026-09-30T11:53:32Z",
+      "finished_at": "2026-09-30T11:55:32Z",
+      "summary": "采集 12 个来源：新增 0，更新 1，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-09-30T19:00:00+08:00",
+        "actual_at": "2026-09-30T11:53:32Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 120,
+          "kept": 1,
+          "duration_ms": 1640,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 05:49 → 2026-09-30 11:53，共 120 条，分 1 页扫描 120 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 1,
+          "duration_ms": 10781,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1905,
+          "kept": 0,
+          "duration_ms": 6655,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1905 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1729,
+          "kept": 0,
+          "duration_ms": 389,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.29（发布 2026-09-29T13:51:33.3852Z），全量 1729 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2600,
+          "kept": 10,
+          "duration_ms": 7389,
+          "error": null,
+          "notes": [
+            "更新索引共 189 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 203,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 73420,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 280,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 687,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7173 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 484,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 16421,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 655,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    }
+  ],
+  "actual_runs": [
+    {
+      "id": "run-e79f865108da",
+      "status": "partial",
+      "started_at": "2026-09-30T04:36:51Z",
+      "finished_at": "2026-09-30T04:38:46Z",
+      "trigger": "scheduled",
+      "task_id": "daily-recommended-sources"
+    },
+    {
+      "id": "run-ecd3a975985e",
+      "status": "completed",
+      "started_at": "2026-09-30T04:55:00Z",
+      "finished_at": "2026-09-30T04:55:00Z",
+      "trigger": "fault_injection",
+      "task_id": "fault-injection"
+    },
+    {
+      "id": "run-7a7e14ef4660",
+      "status": "completed",
+      "started_at": "2026-09-30T04:55:00Z",
+      "finished_at": "2026-09-30T04:55:00Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-5f683fe50e8b",
+      "status": "completed",
+      "started_at": "2026-09-30T04:55:00Z",
+      "finished_at": "2026-09-30T04:55:00Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-019e6717ffab",
+      "status": "completed",
+      "started_at": "2026-09-30T04:55:36Z",
+      "finished_at": "2026-09-30T04:55:36Z",
+      "trigger": "fault_injection",
+      "task_id": "fault-injection"
+    },
+    {
+      "id": "run-76b277c84d90",
+      "status": "completed",
+      "started_at": "2026-09-30T04:55:36Z",
+      "finished_at": "2026-09-30T04:55:36Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-e35abdf29aa8",
+      "status": "completed",
+      "started_at": "2026-09-30T04:55:36Z",
+      "finished_at": "2026-09-30T04:55:36Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-9629821a26ca",
+      "status": "completed",
+      "started_at": "2026-09-30T04:56:05Z",
+      "finished_at": "2026-09-30T05:00:17Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-2e3e0d4d6206",
+      "status": "completed",
+      "started_at": "2026-09-30T05:02:17Z",
+      "finished_at": "2026-09-30T05:11:51Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources-2"
+    },
+    {
+      "id": "run-b9a4936d74e5",
+      "status": "completed",
+      "started_at": "2026-09-30T05:13:51Z",
+      "finished_at": "2026-09-30T05:17:06Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources-3"
+    },
+    {
+      "id": "run-5adab7fcabde",
+      "status": "completed",
+      "started_at": "2026-09-30T05:19:06Z",
+      "finished_at": "2026-09-30T05:20:27Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources-4"
+    },
+    {
+      "id": "run-9f4c9bf28bba",
+      "status": "completed",
+      "started_at": "2026-09-30T05:22:27Z",
+      "finished_at": "2026-09-30T05:23:40Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources-5"
+    },
+    {
+      "id": "run-2eda584fec85",
+      "status": "completed",
+      "started_at": "2026-09-30T05:25:40Z",
+      "finished_at": "2026-09-30T05:26:49Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources-6"
+    },
+    {
+      "id": "run-64d0069c90b6",
+      "status": "completed",
+      "started_at": "2026-09-30T05:47:59Z",
+      "finished_at": "2026-09-30T05:47:59Z",
+      "trigger": "fault_injection",
+      "task_id": "fault-injection"
+    },
+    {
+      "id": "run-90f7e7313b79",
+      "status": "completed",
+      "started_at": "2026-09-30T05:47:59Z",
+      "finished_at": "2026-09-30T05:47:59Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-efeaa765d05e",
+      "status": "completed",
+      "started_at": "2026-09-30T05:47:59Z",
+      "finished_at": "2026-09-30T05:47:59Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-530bce35f7f8",
+      "status": "completed",
+      "started_at": "2026-09-30T05:50:09Z",
+      "finished_at": "2026-09-30T05:50:09Z",
+      "trigger": "fault_injection",
+      "task_id": "fault-injection"
+    },
+    {
+      "id": "run-3e11b32bd541",
+      "status": "completed",
+      "started_at": "2026-09-30T05:50:09Z",
+      "finished_at": "2026-09-30T05:50:09Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-588b1665b8ae",
+      "status": "completed",
+      "started_at": "2026-09-30T05:50:09Z",
+      "finished_at": "2026-09-30T05:50:09Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-8f95fc38ba7e",
+      "status": "completed",
+      "started_at": "2026-09-30T06:41:15Z",
+      "finished_at": "2026-09-30T06:43:39Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-334182a85e56",
+      "status": "completed",
+      "started_at": "2026-09-30T07:50:26Z",
+      "finished_at": "2026-09-30T07:57:16Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-95c66b263a28",
+      "status": "completed",
+      "started_at": "2026-09-30T08:44:47Z",
+      "finished_at": "2026-09-30T08:54:17Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-3eddfe596475",
+      "status": "partial",
+      "started_at": "2026-09-30T09:46:14Z",
+      "finished_at": "2026-09-30T09:47:44Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-bc4a4ec1467a",
+      "status": "completed",
+      "started_at": "2026-09-30T09:47:44Z",
+      "finished_at": "2026-09-30T09:47:51Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-163362f321b1",
+      "status": "completed",
+      "started_at": "2026-09-30T09:47:51Z",
+      "finished_at": "2026-09-30T09:47:59Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-1d375f9fc73a",
+      "status": "completed",
+      "started_at": "2026-09-30T09:47:59Z",
+      "finished_at": "2026-09-30T09:48:06Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-74f5c6cf0e1e",
+      "status": "completed",
+      "started_at": "2026-09-30T09:48:06Z",
+      "finished_at": "2026-09-30T09:48:13Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-c6e29a046edb",
+      "status": "completed",
+      "started_at": "2026-09-30T09:48:13Z",
+      "finished_at": "2026-09-30T09:48:22Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-ea9d9f087eb4",
+      "status": "failed",
+      "started_at": "2026-09-30T09:48:22Z",
+      "finished_at": "2026-09-30T09:48:30Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-c0a2af4f9cd7",
+      "status": "completed",
+      "started_at": "2026-09-30T09:48:30Z",
+      "finished_at": "2026-09-30T09:48:37Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-436738f875bb",
+      "status": "completed",
+      "started_at": "2026-09-30T09:48:37Z",
+      "finished_at": "2026-09-30T09:48:44Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-448095f8ced3",
+      "status": "completed",
+      "started_at": "2026-09-30T09:48:44Z",
+      "finished_at": "2026-09-30T09:48:51Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-612a1ca19ce0",
+      "status": "failed",
+      "started_at": "2026-09-30T09:48:51Z",
+      "finished_at": "2026-09-30T09:48:58Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-76e82bc7d467",
+      "status": "completed",
+      "started_at": "2026-09-30T09:48:58Z",
+      "finished_at": "2026-09-30T09:49:05Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-d1b5c9cf148e",
+      "status": "failed",
+      "started_at": "2026-09-30T09:49:05Z",
+      "finished_at": "2026-09-30T09:49:13Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-39447881b081",
+      "status": "completed",
+      "started_at": "2026-09-30T09:58:43Z",
+      "finished_at": "2026-09-30T10:06:22Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-1a4904c8f1e3",
+      "status": "completed",
+      "started_at": "2026-09-30T11:49:16Z",
+      "finished_at": "2026-09-30T11:52:31Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-3d77c6a1dc73",
+      "status": "completed",
+      "started_at": "2026-09-30T11:53:32Z",
+      "finished_at": "2026-09-30T11:55:32Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
     }
   ],
   "alerts": [
@@ -1627,12 +2497,241 @@
       "message": "nvd 自动恢复成功",
       "severity": "info",
       "timestamp": "2026-09-30T05:50:09Z"
+    },
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-09-30T17:00:00+08:00",
+        "run_id": "run-3eddfe596475",
+        "status": "partial",
+        "task_id": "hourly-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:47:44Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-bc4a4ec1467a",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nvd 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:47:51Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-163362f321b1",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "mitre_cve",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "mitre_cve 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:47:59Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-1d375f9fc73a",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "osv",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "osv 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:06Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-74f5c6cf0e1e",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "cisa_kev",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "cisa_kev 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:13Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-c6e29a046edb",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "msrc",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "msrc 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:22Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-ea9d9f087eb4",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "security_blog",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "security_blog 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:30Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-c0a2af4f9cd7",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "openalex",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "openalex 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:37Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-436738f875bb",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "owasp_genai",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "owasp_genai 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:44Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-448095f8ced3",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nist_ai_rmf",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nist_ai_rmf 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:51Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-612a1ca19ce0",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "mitre_atlas",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "mitre_atlas 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:48:58Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-76e82bc7d467",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "eu_ai_act",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "eu_ai_act 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:49:05Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-d1b5c9cf148e",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "nist_news",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "nist_news 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-09-30T09:49:13Z"
     }
   ],
   "summary": {
-    "run_count": 10,
-    "successful_run_count": 9,
-    "partial_run_count": 1,
-    "failed_run_count": 0
+    "actual_run_count": 38,
+    "scheduled_run_count": 14,
+    "scheduled_successful_run_count": 12,
+    "scheduled_partial_run_count": 2,
+    "scheduled_failed_run_count": 0
   }
 }

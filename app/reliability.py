@@ -113,6 +113,11 @@ def latency_records(
             "latency_seconds": None,
             "latency_hours": None,
             "valid": False,
+            "is_post_monitoring": (
+                monitoring_started_at is None
+                or discovered is None
+                or discovered >= monitoring_started_at
+            ),
             "unknown_reason": None,
         }
         stored_latency = (observation or {}).get("publication_to_discovery_seconds")
@@ -159,9 +164,12 @@ def timeliness_stats(
         if not item["valid"]
         and item["unknown_reason"] != "baseline_backfill_before_monitoring_start"
     ]
+    post_monitoring = [item for item in records if item["is_post_monitoring"]]
     result: dict[str, Any] = {
         "sample_size": len(records),
+        "post_monitoring_samples": len(post_monitoring),
         "computable_samples": len(valid),
+        "effective_denominator": len(valid),
         "unknown_samples": len(unknown),
         "baseline_excluded_samples": len(baseline),
         "monitoring_started_at": _iso(monitoring_started_at) if monitoring_started_at else None,
@@ -193,6 +201,10 @@ def _run_results(run: dict) -> list[dict[str, Any]]:
 
 def _is_scheduled_run(run: dict) -> bool:
     return (run.get("detail") or {}).get("trigger") == "scheduled"
+
+
+def _is_collect_run(run: dict) -> bool:
+    return run.get("kind") in {"collect", "scheduled_collect"}
 
 
 def source_health(runs: Iterable[dict]) -> dict[str, Any]:
@@ -281,7 +293,7 @@ def source_health(runs: Iterable[dict]) -> dict[str, Any]:
 def _date_range(days: int, runs: Iterable[dict]) -> list[str]:
     run_dates = [
         str(run.get("started_at"))[:10] for run in runs
-        if _is_scheduled_run(run) and run.get("started_at")
+        if run.get("started_at")
     ]
     end = datetime.now(timezone.utc).date()
     if run_dates:
@@ -292,48 +304,86 @@ def _date_range(days: int, runs: Iterable[dict]) -> list[str]:
 
 def continuous_run_evidence(days: int = 7, runs: Iterable[dict] | None = None) -> dict[str, Any]:
     source_runs = list(runs or storage.list_runs(limit=2000))
-    scheduled = [run for run in source_runs if _is_scheduled_run(run)]
-    by_day: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    actual = [
+        run for run in source_runs
+        if _is_collect_run(run) and run.get("started_at")
+    ]
+    scheduled = [run for run in actual if _is_scheduled_run(run)]
+    actual_by_day: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    scheduled_by_day: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for run in actual:
+        actual_by_day[str(run["started_at"])[:10]].append(run)
     for run in scheduled:
-        if run.get("started_at"):
-            by_day[str(run["started_at"])[:10]].append(run)
-    date_strings = _date_range(days, scheduled)
+        scheduled_by_day[str(run["started_at"])[:10]].append(run)
+    date_strings = _date_range(days, actual)
     ledger = []
     for date_string in date_strings:
-        day_runs = sorted(
-            by_day.get(date_string, []),
+        day_actual = sorted(
+            actual_by_day.get(date_string, []),
+            key=lambda run: str(run.get("started_at") or ""),
+        )
+        day_scheduled = sorted(
+            scheduled_by_day.get(date_string, []),
             key=lambda run: str(run.get("started_at") or ""),
         )
         ledger.append({
             "date": date_string,
-            "executed": bool(day_runs),
-            "run_count": len(day_runs),
+            "actual_executed": bool(day_actual),
+            "actual_run_count": len(day_actual),
+            "actual_successful_run_count": sum(
+                run.get("status") == "completed" for run in day_actual
+            ),
+            "actual_partial_run_count": sum(
+                run.get("status") == "partial" for run in day_actual
+            ),
+            "actual_failed_run_count": sum(
+                run.get("status") == "failed" for run in day_actual
+            ),
+            "actual_run_ids": [run.get("id") for run in day_actual],
+            "scheduled_executed": bool(day_scheduled),
+            "scheduled_run_count": len(day_scheduled),
+            "scheduled_successful_run_count": sum(
+                run.get("status") == "completed" for run in day_scheduled
+            ),
+            "scheduled_partial_run_count": sum(
+                run.get("status") == "partial" for run in day_scheduled
+            ),
+            "scheduled_failed_run_count": sum(
+                run.get("status") == "failed" for run in day_scheduled
+            ),
+            "scheduled_run_ids": [run.get("id") for run in day_scheduled],
+            # Backward-compatible fields mean scheduled execution.
+            "executed": bool(day_scheduled),
+            "run_count": len(day_scheduled),
             "successful_run_count": sum(
-                run.get("status") == "completed" for run in day_runs
+                run.get("status") == "completed" for run in day_scheduled
             ),
             "partial_run_count": sum(
-                run.get("status") == "partial" for run in day_runs
+                run.get("status") == "partial" for run in day_scheduled
             ),
             "failed_run_count": sum(
-                run.get("status") == "failed" for run in day_runs
+                run.get("status") == "failed" for run in day_scheduled
             ),
-            "run_ids": [run.get("id") for run in day_runs],
+            "run_ids": [run.get("id") for run in day_scheduled],
         })
     consecutive = 0
     for item in reversed(ledger):
-        if not item["executed"]:
+        if not item["scheduled_executed"]:
             break
         consecutive += 1
     return {
         "target_days": days,
-        "observed_days": sum(item["executed"] for item in ledger),
+        "actual_run_days": sum(item["actual_executed"] for item in ledger),
+        "scheduled_run_days": sum(item["scheduled_executed"] for item in ledger),
+        "observed_days": sum(item["scheduled_executed"] for item in ledger),
         "consecutive_executed_days": consecutive,
         "target_met": consecutive >= days,
         "ledger": ledger,
+        "actual_run_count": len(actual),
         "scheduled_run_count": len(scheduled),
         "note": (
-            "只有带 trigger=scheduled 的运行才计入每日定时任务证据；"
-            "人工触发和应用内普通采集不计入连续运行天数。"
+            "actual_run_days 统计任一采集运行；scheduled_run_days 只统计 "
+            "trigger=scheduled 的外部计划任务运行。"
         ),
     }
 
@@ -344,16 +394,16 @@ def build_reliability_report(
 ) -> dict[str, Any]:
     event_items = events if events is not None else storage.all_events(limit=5000)
     run_items = runs if runs is not None else storage.list_runs(limit=2000)
-    scheduled_runs = [
+    collect_runs = [
         run for run in run_items
-        if (run.get("detail") or {}).get("trigger") == "scheduled"
+        if _is_collect_run(run) and run.get("started_at")
     ]
     monitoring_started_at = None
-    if scheduled_runs:
+    if collect_runs:
         monitoring_started_at = min(
             (
                 _parse(run.get("started_at"))
-                for run in scheduled_runs
+                for run in collect_runs
                 if _parse(run.get("started_at")) is not None
             ),
             default=None,
@@ -388,6 +438,8 @@ def build_reliability_report(
             "first_observation": "每个事件只取最早一次 discovered_at，重复更新不重复计入时延。",
             "invalid_publisher_time": "缺失、0001 等异常年份、发布时间晚于发现时间均记为未知。",
             "scheduled_run": "运行详情中 trigger=scheduled，即由外部计划任务触发。",
+            "actual_run": "任一 kind=collect 的采集运行，包括人工和计划任务。",
+            "monitoring_started_at": "数据库中最早一次持久化采集运行的开始时间。",
         },
         "timeliness": timeliness,
         "sources": source_report,

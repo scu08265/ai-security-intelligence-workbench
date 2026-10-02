@@ -1,7 +1,7 @@
 {
   "date": "2026-09-28",
-  "generated_at": "2026-09-30T08:58:06Z",
-  "version": "0.2.2",
+  "generated_at": "2026-10-02T10:21:24Z",
+  "version": "0.2.3",
   "scheduled_runs": [
     {
       "id": "run-c67653dd9ca6",
@@ -149,11 +149,22 @@
       ]
     }
   ],
+  "actual_runs": [
+    {
+      "id": "run-c67653dd9ca6",
+      "status": "completed",
+      "started_at": "2026-09-28T05:01:32Z",
+      "finished_at": "2026-09-28T05:06:04Z",
+      "trigger": "scheduled",
+      "task_id": "daily-recommended-sources"
+    }
+  ],
   "alerts": [],
   "summary": {
-    "run_count": 1,
-    "successful_run_count": 1,
-    "partial_run_count": 0,
-    "failed_run_count": 0
+    "actual_run_count": 1,
+    "scheduled_run_count": 1,
+    "scheduled_successful_run_count": 1,
+    "scheduled_partial_run_count": 0,
+    "scheduled_failed_run_count": 0
   }
 }

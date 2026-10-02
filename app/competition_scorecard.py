@@ -10,7 +10,7 @@ from collections import Counter
 from statistics import mean
 from typing import Any
 
-from . import agents, b_evaluation, evaluation, sources, storage
+from . import agents, b_evaluation, evaluation, reliability, sources, storage
 
 
 def _rate(numerator: int, denominator: int) -> float | None:
@@ -59,33 +59,51 @@ def _source_metrics() -> dict:
 
 def _monitoring_metrics() -> dict:
     evidence = agents.monitoring_evidence(days=7)
-    allowed_dates = {day["date"] for day in evidence["days"]}
-    scheduled_runs = [
-        run for run in storage.list_runs(limit=500)
-        if run.get("kind") == "collect"
-        and (run.get("detail") or {}).get("trigger") == "scheduled"
-        and str(run.get("started_at") or "")[:10] in allowed_dates
-    ]
-    scheduled_days = sorted({str(run.get("started_at") or "")[:10] for run in scheduled_runs})
-    measured = sum(day["events_with_publisher_time"] for day in evidence["days"])
-    within_6h = sum(day["within_6h"] for day in evidence["days"])
-    within_12h = sum(day["within_12h"] for day in evidence["days"])
-    within = sum(day["within_24h"] for day in evidence["days"])
-    observed = sum(day["events_observed"] for day in evidence["days"])
-    unknown = sum(day["unknown_latency"] for day in evidence["days"])
+    report = reliability.build_reliability_report(days=7)
+    timeliness = report["timeliness"]
+    continuous = report["continuous_runs"]
+    measured = timeliness["effective_denominator"]
+    within_6h = timeliness["within_6h"]["count"]
+    within_12h = timeliness["within_12h"]["count"]
+    within = timeliness["within_24h"]["count"]
+    observed = timeliness["post_monitoring_samples"]
+    unknown = timeliness["unknown_samples"]
     return {
         "window_days": 7,
-        "actual_run_days": _metric(evidence["complete_days"], source="runs(kind=collect)"),
+        "monitoring_started_at": _metric(
+            timeliness["monitoring_started_at"],
+            source="earliest persisted collect run started_at",
+        ),
+        "actual_run_days": _metric(
+            continuous["actual_run_days"],
+            source="runs(kind=collect)",
+        ),
         "scheduled_run_days": _metric(
-            len(scheduled_days), source="runs(kind=collect,detail.trigger=scheduled)",
+            continuous["scheduled_run_days"],
+            source="runs(kind=collect,detail.trigger=scheduled)",
             note="只有外部计划任务触发的采集才计入赛题连续运行天数。"),
         "scheduled_run_evidence": [{
             "id": run.get("id"), "started_at": run.get("started_at"),
             "status": run.get("status"),
             "task_id": (run.get("detail") or {}).get("scheduler", {}).get("task_id"),
-        } for run in scheduled_runs[:20]],
+        } for run in storage.list_runs(limit=500)
+          if run.get("kind") == "collect"
+          and (run.get("detail") or {}).get("trigger") == "scheduled"][:20],
         "observed_events": _metric(observed, source="event.monitoring_observations"),
         "publication_latency_samples": _metric(measured, source="event.monitoring_observations"),
+        "effective_denominator": _metric(
+            timeliness["effective_denominator"],
+            source="event.monitoring_observations",
+        ),
+        "post_monitoring_samples": _metric(
+            timeliness["post_monitoring_samples"],
+            source="event.monitoring_observations",
+        ),
+        "baseline_excluded_samples": _metric(
+            timeliness["baseline_excluded_samples"],
+            source="event.monitoring_observations",
+            note="系统首次监测前发布的历史回填，不进入正式时延分母。",
+        ),
         "unknown_latency_samples": _metric(unknown, source="event.monitoring_observations"),
         "within_6h_samples": _metric(within_6h, source="event.monitoring_observations"),
         "within_6h_rate": _metric(_rate(within_6h, measured), source="event.monitoring_observations",
@@ -97,7 +115,11 @@ def _monitoring_metrics() -> dict:
         "within_24h_rate": _metric(_rate(within, measured), source="event.monitoring_observations",
                                    sample_size=measured),
         "days": evidence["days"],
-        "note": evidence["note"] + " actual_run_days 统计任一采集运行；scheduled_run_days 才对应赛题连续运行口径。",
+        "note": (
+            evidence["note"]
+            + " actual_run_days 统计任一采集运行；scheduled_run_days 只统计计划任务。"
+            + " 时延指标与可靠性 Markdown/JSON 使用同一口径。"
+        ),
     }
 
 
