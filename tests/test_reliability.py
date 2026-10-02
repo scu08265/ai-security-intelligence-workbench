@@ -96,6 +96,37 @@ def test_source_health_distinguishes_failure_with_historical_data():
     assert item["duration_ms_p50"] == 1250.0
 
 
+def test_source_health_treats_stale_as_failure_with_historical_data():
+    storage.update_source_state(
+        "openalex", status="stale", events_count=41,
+        last_success="2099-01-01T00:00:00Z",
+        last_error="ConnectTimeout: SSL handshake timed out",
+    )
+    runs = [{
+        "id": "run-stale", "kind": "collect", "status": "partial",
+        "started_at": "2099-01-02T00:00:00Z",
+        "finished_at": "2099-01-02T00:00:01Z",
+        "detail": {
+            "trigger": "scheduled",
+            "results": [{
+                "source_id": "openalex", "status": "stale",
+                "duration_ms": 241608,
+                "error": "ConnectTimeout: SSL handshake timed out",
+            }],
+        },
+    }]
+    item = next(
+        item for item in reliability.source_health(runs)["items"]
+        if item["id"] == "openalex"
+    )
+    assert item["current_status"] == "stale"
+    assert item["health_class"] == "real_failure_historical_data_available"
+    assert item["success_rate"] == 0.0
+    assert item["failed_attempts"] == 0
+    assert item["stale_attempts"] == 1
+    assert item["failure_reason"] == "ConnectTimeout: SSL handshake timed out"
+
+
 def test_continuous_run_evidence_requires_scheduled_trigger():
     today = datetime.now(timezone.utc)
     runs = []

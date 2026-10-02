@@ -216,16 +216,17 @@ def source_health(runs: Iterable[dict]) -> dict[str, Any]:
         attempts = history.get(spec.id, [])
         succeeded = [item for item in attempts if item.get("status") in {"ok", "partial"}]
         failed = [item for item in attempts if item.get("status") == "failed"]
+        stale = [item for item in attempts if item.get("status") == "stale"]
         skipped = [item for item in attempts if item.get("status") == "skipped"]
         durations = [
             float(item.get("duration_ms")) for item in attempts
             if item.get("duration_ms") is not None
         ]
-        classified = len(succeeded) + len(failed)
+        classified = len(succeeded) + len(failed) + len(stale)
         current_status = str(state.get("status") or "idle")
-        if current_status == "failed" and int(state.get("events_count") or 0) > 0:
+        if current_status in {"failed", "stale"} and int(state.get("events_count") or 0) > 0:
             health_class = "real_failure_historical_data_available"
-        elif current_status == "failed":
+        elif current_status in {"failed", "stale"}:
             health_class = "real_failure_no_historical_data"
         elif current_status == "skipped":
             health_class = "intentional_skip"
@@ -247,6 +248,7 @@ def source_health(runs: Iterable[dict]) -> dict[str, Any]:
             "attempts": len(attempts),
             "successful_attempts": len(succeeded),
             "failed_attempts": len(failed),
+            "stale_attempts": len(stale),
             "skipped_attempts": len(skipped),
             "partial_attempts": sum(item.get("status") == "partial" for item in attempts),
             "success_rate": round(len(succeeded) / classified, 4) if classified else None,
@@ -411,6 +413,7 @@ def source_health_rows(report: dict[str, Any] | None = None) -> list[dict[str, A
             "attempts": item["attempts"],
             "successful_attempts": item["successful_attempts"],
             "failed_attempts": item["failed_attempts"],
+            "stale_attempts": item["stale_attempts"],
             "skipped_attempts": item["skipped_attempts"],
             "success_rate": item["success_rate"],
             "duration_ms_p50": item["duration_ms_p50"],

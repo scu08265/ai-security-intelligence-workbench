@@ -5,6 +5,8 @@
 - Completed NVD pagination so normal result sets drain all pages without partial status.
 - Added optional NVD API key, page delay, and cursor advancement only after complete scans.
 - Added hourly scheduler loop and updated Windows Task Scheduler/cron examples.
+- Fixed source-health classification so `stale` sources are reported as failures
+  with historical data and are included in the success-rate denominator.
 - Merged upstream multi-agent runtime and bounded source self-healing.
 - Fixed self-healing success detection to use post-retry source state.
 

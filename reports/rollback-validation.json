@@ -1,8 +1,9 @@
 {
   "version": "0.2.2",
-  "generated_at": "2026-09-30T05:46:16.5632622Z",
-  "dry_run_status": "passed",
-  "output": "Rollback dry run:\n1. Backup current database.\n2. Verify image ai-security-intelligence-workbench:0.2.1 exists.\n3. docker compose down.\n4. Start APP_VERSION=0.2.1.\n5. Check http://127.0.0.1:8000/api/health.",
+  "generated_at": "2026-10-01T00:00:00Z",
+  "status": "pending_runtime",
+  "dry_run": false,
+  "rollback_target": "0.2.1",
   "docker_runtime_verified": false,
-  "blocker": "Docker CLI/daemon is not installed on this host."
+  "required_command": ".venv\\Scripts\\python.exe tools\\run_rollback_validation.py --host-port 18001"
 }

@@ -29,9 +29,12 @@ python -m uvicorn app.api:app --host 127.0.0.1 --port 8000
 ### Windows 任务计划：每小时
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1
+powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1 -DurationHours 24
 Start-ScheduledTask -TaskName "AI-Security-Intelligence-Hourly-Collection"
 ```
+
+该任务持续 24 小时，空闲时继续运行，并在系统从睡眠恢复后补跑。安装脚本同时关闭交流和电池供电时的自动睡眠/
+休眠；显示器仍可按原计划关闭，不需要保持屏幕常亮。
 
 卸载：
 
@@ -111,6 +114,15 @@ powershell -ExecutionPolicy Bypass -File .\scripts\restore_database.ps1 -BackupP
 4. 启动服务并核对 `/api/health`、`/api/duplicate-candidates` 和最近的运行记录。
 
 数据库文件回滚前会自动保存为 `intel.sqlite.before-restore-*`，避免再次覆盖时丢失现场。
+
+### 真实验证 0.2.2 -> 0.2.1 -> 0.2.2
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\run_rollback_validation.py --host-port 18001
+```
+
+该命令从 `v0.2.1` 标签构建旧镜像，验证 `0.2.2` 健康后切到 `0.2.1`，检查版本和事件数，再恢复
+`0.2.2`。结果写入 `reports/rollback-validation.json`。
 
 ## 7. 版本回退
 

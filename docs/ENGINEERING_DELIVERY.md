@@ -24,6 +24,14 @@ powershell -ExecutionPolicy Bypass -File .\scripts\deploy.ps1 -Version 0.2.2
 6. `docker compose config`；
 7. Docker 镜像构建。
 
+推送后记录指定 commit 的 CI 结果：
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\record_ci_validation.py `
+  --branch release/v0.2.2 `
+  --head-sha <commit-sha>
+```
+
 ## 3. 健康检查、结构化日志和失败告警
 
 - 健康检查：`GET /api/health`，包含数据库、事件数、失败来源和主动跳过来源。
@@ -60,9 +68,34 @@ powershell -ExecutionPolicy Bypass -File .\scripts\rollback_release.ps1 -Version
 
 回滚脚本会先备份数据库，再切换到已存在的旧 Docker 镜像，并执行健康检查。
 
+可重复的真实回滚验证：
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\run_rollback_validation.py --host-port 18001
+```
+
 详细说明见 [OPERATIONS.md](OPERATIONS.md)。
 
-## 5. 验收命令
+## 5. 24 小时息屏采集
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install_windows_task.ps1 -IntervalHours 1 -DurationHours 24
+```
+
+任务在用户保持登录的状态下每小时运行一次，持续 24 小时；关闭显示器不会暂停任务。安装脚本会关闭自动睡眠和休眠，
+并设置空闲时继续运行及唤醒后补跑。
+
+## 6. 验收命令
+
+正常用户 PowerShell 中的一键收尾：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\finalize_v0.2.2.ps1 `
+  -InstallScheduledTask
+```
+
+该脚本会推送 `release/v0.2.2` 和标签、记录对应 SHA 的 Actions 结果、执行真实 Docker
+回滚验证，并可选安装 24 小时 Windows 计划任务。
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
