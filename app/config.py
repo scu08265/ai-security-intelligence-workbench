@@ -20,7 +20,7 @@ except OSError:
 APP_VERSION = (
     os.getenv("APP_VERSION", "").strip()
     or _FILE_VERSION
-    or "0.2.2"
+    or "0.2.3"
 )
 DATA_DIR = Path(os.getenv("INTEL_DATA_DIR") or (BASE_DIR / "data"))
 SNAPSHOT_DIR = DATA_DIR / "snapshots"

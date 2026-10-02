@@ -68,6 +68,8 @@ def test_first_run_backfill_is_not_counted_as_monitoring_latency():
     started = datetime(2099, 1, 2, tzinfo=timezone.utc)
     result = reliability.timeliness_stats([event], monitoring_started_at=started)
     assert result["computable_samples"] == 0
+    assert result["effective_denominator"] == 0
+    assert result["post_monitoring_samples"] == 1
     assert result["baseline_excluded_samples"] == 1
 
 
@@ -146,6 +148,11 @@ def test_continuous_run_evidence_requires_scheduled_trigger():
         "detail": {"trigger": "manual", "results": []},
     }
     result = reliability.continuous_run_evidence(7, [manual, *runs])
+    assert result["actual_run_days"] == 2
+    assert result["scheduled_run_days"] == 2
     assert result["consecutive_executed_days"] == 2
     assert result["target_met"] is False
     assert result["scheduled_run_count"] == 2
+    today_ledger = result["ledger"][-1]
+    assert today_ledger["actual_run_count"] == 2
+    assert today_ledger["scheduled_run_count"] == 1

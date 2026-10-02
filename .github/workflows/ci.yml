@@ -36,19 +36,26 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - name: Read application version
+        id: app_version
+        run: echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
       - name: Validate Compose configuration
         run: docker compose config
       - name: Build container
+        env:
+          APP_VERSION: ${{ steps.app_version.outputs.version }}
         run: |
           docker build \
-            --build-arg APP_VERSION=ci \
-            -t ai-security-intelligence-workbench:ci .
+            --build-arg APP_VERSION="${APP_VERSION}" \
+            -t "ai-security-intelligence-workbench:${APP_VERSION}" .
       - name: Start Compose stack
         env:
-          APP_VERSION: ci
+          APP_VERSION: ${{ steps.app_version.outputs.version }}
         run: docker compose up -d
       - name: Verify container health
         id: health
+        env:
+          EXPECTED_VERSION: ${{ steps.app_version.outputs.version }}
         run: |
           for attempt in $(seq 1 30); do
             status=$(docker inspect --format='{{.State.Health.Status}}' ai-security-intelligence-workbench 2>/dev/null || true)
@@ -59,6 +66,29 @@ jobs:
           done
           docker inspect --format='{{.State.Health.Status}}' ai-security-intelligence-workbench | grep -qx healthy
           curl -fsS http://127.0.0.1:8000/api/health | tee container-health.json
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          payload = json.load(open("container-health.json", encoding="utf-8"))
+          expected = os.environ["EXPECTED_VERSION"]
+          assert payload["status"] == "ok", payload
+          assert payload["version"] == expected, (payload, expected)
+          output = Path("container-evidence")
+          output.mkdir(parents=True, exist_ok=True)
+          (output / "docker-validation.json").write_text(
+              json.dumps({
+                  "version": expected,
+                  "docker_runtime_verified": True,
+                  "image": f"ai-security-intelligence-workbench:{expected}",
+                  "container_name": "ai-security-intelligence-workbench",
+                  "health_response": payload,
+                  "verified": True,
+              }, ensure_ascii=False, indent=2),
+              encoding="utf-8",
+          )
+          PY
           docker compose ps
       - name: Capture container evidence
         if: always()
