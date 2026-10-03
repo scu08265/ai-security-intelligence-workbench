@@ -214,7 +214,8 @@ def collect_rss(spec: SourceSpec, since: str | None) -> CollectOutcome:
 
     items = root.findall(".//item") or root.findall(f".//{ATOM}entry")
     outcome.fetched = len(items)
-    cutoff = _parse_iso(since) or (_now() - timedelta(days=30))
+    lookback = getattr(spec, "lookback_days", 30) or 30
+    cutoff = _parse_iso(since) or (_now() - timedelta(days=lookback))
     kept = 0
     skipped_old = 0
     for item in items:
@@ -302,9 +303,12 @@ def collect_page(spec: SourceSpec, since: str | None) -> CollectOutcome:
     )
     if (event.get("ai_relevance") or {}).get("included"):
         outcome.events.append(event)
+        outcome.notes.append(f"页面内容较上次发生变化（{len(text)} 字符），已生成知识条目")
     else:
         outcome.filtered += 1
-    outcome.notes.append(f"页面内容较上次发生变化（{len(text)} 字符），已生成知识条目")
+        outcome.notes.append(
+            f"页面内容较上次发生变化（{len(text)} 字符），但未命中 AI 安全相关术语，未入库"
+        )
     return outcome
 
 

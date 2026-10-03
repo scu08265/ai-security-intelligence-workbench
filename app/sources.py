@@ -31,6 +31,10 @@ class SourceSpec:
     description: str
     auto_default: bool = True
     requires_token_env: str | None = None
+    # How far back the *first* collection looks when there is no cursor yet.
+    # Low-frequency sources publish monthly, so a 30-day window silently skips
+    # their newest post and the cursor then makes it unreachable forever.
+    lookback_days: int = 30
 
 
 SOURCES: tuple[SourceSpec, ...] = (
@@ -133,6 +137,7 @@ SOURCES: tuple[SourceSpec, ...] = (
         trust="vendor_blog",
         license_note="RSS feed; excerpts quoted, not republished.",
         description="安全博客 RSS，提供公告之外的背景与分析文章。",
+        lookback_days=120,
     ),
     SourceSpec(
         id="arxiv",
@@ -218,6 +223,82 @@ SOURCES: tuple[SourceSpec, ...] = (
         trust="government",
         license_note="European Commission reuse policy applies.",
         description="欧盟理事会托管的 AI Act 官方 PDF，保存快照并建立可检索全文。",
+    ),
+    SourceSpec(
+        id="qax_ti_blog",
+        name="Qianxin Threat Intelligence Center Blog",
+        category="security_blog",
+        category_label="安全博客与社区",
+        url="https://ti.qianxin.com/blog/",
+        collector="page",
+        mode="page",
+        realtime=False,
+        independent_origin=True,
+        trust="vendor_blog",
+        license_note="奇安信版权所有；仅摘录与链接，不全文转载。",
+        description="奇安信威胁情报中心官方博客，APTX 分析与攻击链研判；按页面内容哈希增量监测。",
+        lookback_days=90,
+    ),
+    SourceSpec(
+        id="butian_community",
+        name="Qianxin Butian Attack-Defense Community",
+        category="security_blog",
+        category_label="安全博客与社区",
+        url="https://forum.butian.net/Rss",
+        collector="rss",
+        mode="rss",
+        realtime=False,
+        independent_origin=True,
+        trust="community_media",
+        license_note="奇安信攻防社区 RSS；摘录引用，不全文转载。",
+        description="奇安信攻防社区（漏洞盒子）官方 RSS，覆盖社区投稿的漏洞分析与复现文章。"
+                    "FreeBuf 因阿里云 WAF 对非浏览器客户端返回 JS 挑战页，无法可靠自动采集，故以本源替代。",
+        lookback_days=30,
+    ),
+    SourceSpec(
+        id="anquanke",
+        name="AnQuanKe (安全客)",
+        category="security_blog",
+        category_label="安全博客与社区",
+        url="https://api.anquanke.com/data/v1/rss",
+        collector="rss",
+        mode="rss",
+        realtime=False,
+        independent_origin=True,
+        trust="community_media",
+        license_note="安全客 RSS；摘录引用，不全文转载。",
+        description="奇安信 360 支持的中文安全资讯平台 RSS（数据接口地址），覆盖 AI 与大模型安全议题。",
+        lookback_days=30,
+    ),
+    SourceSpec(
+        id="securelist",
+        name="Securelist (Kaspersky Research)",
+        category="security_blog",
+        category_label="安全博客与社区",
+        url="https://securelist.com/feed/",
+        collector="rss",
+        mode="rss",
+        realtime=False,
+        independent_origin=True,
+        trust="vendor_blog",
+        license_note="Securelist RSS；摘录引用，不全文转载。",
+        description="卡巴斯基官方研究博客 RSS，APT 与攻击链分析的主要一手来源之一。",
+        lookback_days=90,
+    ),
+    SourceSpec(
+        id="talos_blog",
+        name="Cisco Talos Intelligence Blog",
+        category="security_blog",
+        category_label="安全博客与社区",
+        url="https://blog.talosintelligence.com/rss/",
+        collector="rss",
+        mode="rss",
+        realtime=False,
+        independent_origin=True,
+        trust="vendor_blog",
+        license_note="Cisco Talos RSS；摘录引用，不全文转载。",
+        description="思科 Talos 官方威胁研究博客 RSS，含漏洞披露与利用分析。",
+        lookback_days=90,
     ),
     SourceSpec(
         id="nist_news",

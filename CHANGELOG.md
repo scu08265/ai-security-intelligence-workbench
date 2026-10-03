@@ -1,5 +1,27 @@
 # Changelog
 
+## Unreleased
+
+- Added five blog/community sources: Qianxin TI blog, Qianxin Butian community,
+  AnQuanKe, Securelist and Cisco Talos.  FreeBuf was evaluated and dropped: its
+  Aliyun WAF returns a JavaScript challenge to non-browser clients, so it can
+  never be collected honestly.
+- Fixed AI-relevance classification for Chinese and punctuated headlines, which
+  was the reason community feeds produced zero events:
+  * CJK terms are matched as substrings; the ASCII token regex never produced
+    them, so a Chinese headline could not qualify at all.
+  * Unicode dashes (U+2010-U+2015) are normalised, so "AI‑powered" no longer
+    hides the "ai" signal inside a single hyphenated token.
+  * An AI component named in a headline (LiteLLM, Ollama) qualifies even when
+    no `package` argument is supplied, as blog titles never carry one.
+  * Security-intent words now include `security` and Chinese equivalents, so
+    "AI security" is recognised without a CVE identifier.
+- Added per-source `lookback_days` for the first collection.  Low-frequency
+  blogs publish monthly, so the previous 30-day window skipped their newest
+  post and the cursor then made it permanently unreachable.
+- Corrected `collect_page` reporting: it no longer logs "已生成知识条目" when the
+  event was actually filtered out.
+
 ## 0.2.3
 
 - Added a real scheduled-run evidence path that distinguishes all collection
