@@ -2,10 +2,12 @@
 
 ## Unreleased
 
-- Added five blog/community sources: Qianxin TI blog, Qianxin Butian community,
-  AnQuanKe, Securelist and Cisco Talos.  FreeBuf was evaluated and dropped: its
-  Aliyun WAF returns a JavaScript challenge to non-browser clients, so it can
-  never be collected honestly.
+- Added the teacher-recommended blog/community sources: Qianxin TI blog,
+  FreeBuf, Securelist and Cisco Talos, plus Qianxin Butian community and
+  AnQuanKe as additional sources.  FreeBuf uses a source-specific system-curl
+  transport because its Aliyun WAF rejects the httpx TLS fingerprint with a
+  JavaScript challenge even though the same official RSS endpoint is publicly
+  accessible.
 - Fixed AI-relevance classification for Chinese and punctuated headlines, which
   was the reason community feeds produced zero events:
   * CJK terms are matched as substrings; the ASCII token regex never produced

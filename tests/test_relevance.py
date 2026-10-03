@@ -131,3 +131,12 @@ def test_plain_security_headlines_are_not_admitted_by_the_widened_rules():
     ):
         assert relevance.classify(headline).included is False
 
+
+def test_teacher_recommended_community_sources_are_registered():
+    from app import sources
+
+    required = {"qax_ti_blog", "freebuf", "securelist", "talos_blog"}
+    assert required <= set(sources.recommended_sources())
+    assert sources.get("freebuf").url == "https://www.freebuf.com/feed"
+    assert sources.get("freebuf").collector == "rss"
+

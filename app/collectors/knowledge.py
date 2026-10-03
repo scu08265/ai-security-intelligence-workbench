@@ -17,7 +17,7 @@ from typing import Any
 
 from .. import normalize, rag_corpus, storage
 from ..sources import SourceSpec
-from . import CollectOutcome, FetchError, http_request, record_snapshot
+from . import CollectOutcome, FetchError, curl_text, http_request, record_snapshot
 
 ATOM = "{http://www.w3.org/2005/Atom}"
 ARXIV_MAX_RESULTS = 40
@@ -201,10 +201,15 @@ def collect_openalex(spec: SourceSpec, since: str | None) -> CollectOutcome:
 
 def collect_rss(spec: SourceSpec, since: str | None) -> CollectOutcome:
     outcome = CollectOutcome(source_id=spec.id, status="ok", cursor=_now().isoformat(timespec="milliseconds"))
-    response = http_request("GET", spec.url, timeout=45)
-    if response.status_code >= 400:
-        raise FetchError(f"HTTP {response.status_code}")
-    raw = response.text
+    if spec.id == "freebuf":
+        # Aliyun WAF fingerprints httpx/OpenSSL and returns a JavaScript shell.
+        # The system curl client is accepted by the same upstream endpoint.
+        raw = curl_text(spec.url, timeout=45)
+    else:
+        response = http_request("GET", spec.url, timeout=45)
+        if response.status_code >= 400:
+            raise FetchError(f"HTTP {response.status_code}")
+        raw = response.text
     outcome.snapshot_hash = record_snapshot(spec.id, raw, suffix="xml")
 
     try:
@@ -292,8 +297,9 @@ def collect_page(spec: SourceSpec, since: str | None) -> CollectOutcome:
         outcome.error = "页面正文为空，未生成事件"
         return outcome
 
-    previous = storage.source_state(spec.id).get("last_hash")
-    if previous and previous == outcome.snapshot_hash:
+    state = storage.source_state(spec.id)
+    previous = state.get("last_hash")
+    if previous and previous == outcome.snapshot_hash and int(state.get("events_count") or 0) > 0:
         outcome.notes.append("内容哈希与上次一致，未产生新事件")
         return outcome
 

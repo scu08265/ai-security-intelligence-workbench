@@ -9,6 +9,8 @@ data.
 from __future__ import annotations
 
 import time
+import shutil
+import subprocess
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
@@ -94,6 +96,31 @@ def _retry_delay(response: httpx.Response, attempt: int) -> float:
     if retry_after.isdigit():
         return min(float(retry_after), 60.0)
     return BACKOFF_SECONDS[min(attempt, len(BACKOFF_SECONDS) - 1)]
+
+
+def curl_text(
+    url: str, *, timeout: float = 45.0,
+    accept: str = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.1",
+) -> str:
+    """Fetch text through the system curl for WAFs that reject httpx fingerprints.
+
+    This is deliberately source-specific and still returns the upstream body
+    verbatim.  A missing curl or non-2xx response is a real failure, never an
+    empty success.
+    """
+    executable = shutil.which("curl") or shutil.which("curl.exe")
+    if not executable:
+        raise FetchError("系统未安装 curl，无法通过兼容传输读取该来源")
+    completed = subprocess.run(
+        [executable, "-sS", "-L", "--fail-with-body",
+         "--max-time", str(max(1, int(timeout))),
+         "-A", USER_AGENT, "-H", f"Accept: {accept}", url],
+        capture_output=True, check=False,
+    )
+    if completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout)[:240].decode("utf-8", errors="replace")
+        raise FetchError(f"curl 读取失败（exit={completed.returncode}）：{detail.strip()}")
+    return completed.stdout.decode("utf-8", errors="replace")
 
 
 def get_json(url: str, **kwargs: Any) -> tuple[Any, str]:
