@@ -39,6 +39,7 @@ assets由用户主动导入；初始提供明确标注is_demo的合成资产，�
 - GET /api/dispositions -> {items:disposition[],total,status_labels}；处置状态 open|in_progress|fixed|verified|accepted。
 - GET /api/dispositions/metrics -> {high_priority_total,high_priority_closed,high_priority_verified,high_priority_in_progress,closure_rate,verified_rate,mean_time_to_close_hours,status_breakdown,findings_total}。
 - GET /api/dispositions/{event_id}/{asset_id} -> disposition（缺省返回 status=open，不写库）。
+- GET /api/dispositions/{event_id}/{asset_id}/advice -> 复用 tools/asset_disposal_advisor.py 的策略感知处置建议（只读，不是执行记录）；返回 recommended_actions、blocked_actions、scheduling、conflicts、needs_human_review、evidence_ids，未配置策略时破坏性动作进入 blocked_actions。
 - PUT /api/dispositions/{event_id}/{asset_id} JSON {status,assignee?,note?,evidence_ids?,version_before?,version_after?,operator?,run_verification?} -> {disposition,assessment_status,assessment_priority,verification,requested_status,applied_status}；status=verified 时系统重新研判该资产，只有资产已不命中受影响区间才置为 verified，否则降级为 fixed 并记录失败复测。原始 assessment.status 不被覆盖。
 - POST /api/chat JSON {question:string,history:[{role,content}]?} -> answer_question返回结果加duration_ms。
 - GET /api/runs?limit=30 -> {items:[{id,kind,status,started_at,finished_at,summary,detail}]}

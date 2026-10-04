@@ -358,13 +358,13 @@ BMH-021: term:jailbreak →(mentioned_in) paper:2609.03999 →(cites) source:owa
 
 ## 5. 赛题指标页面与权威 JSON 一致性（P1，已完成）
 
-命令与结果（只读，27 个字段）：
+命令与结果（只读，43 个字段；B 交付时为 27，一致性工具已扩展至活动批次）：
 
 ```
 .\.venv\Scripts\python.exe tools\check_b_scorecard_consistency.py ^
     --out artifacts\b_eval\scorecard_consistency_20261002.json
-对照字段数: 27 | 不一致: 0
-页面是否显示新批次: False
+对照字段数: 43 | 不一致: 0
+页面是否显示新批次: True（页面已接入活动批次，旧冻结基线保留）
 ```
 
 - 页面口径（`app/b_evaluation.py` → `/api/competition/scorecard` → 前端卡片）
@@ -416,8 +416,8 @@ node --check app\static\app.js
 
 1. **50 题人工重核验**（P0，必须由人完成）：机器建议**不得**当作人工标签。
 2. **POC 维度**：需要队长提供已回填的库或对应 NVD 快照，否则保持 0 并标注前置缺失。
-3. **跨文档 0/21**：需要新来源才能产生真实关系边。
-4. **页面展示新批次**：属于 `app/` 共享代码，需队长决定是否改。
+3. **跨文档多跳**：选项 A 补入真实来源后已从 0/21 提升到 10/21（PR #5 已合并）；剩余 11 题缺引用来源，保留 `no_path`。
+4. **页面展示新批次**：已完成，页面优先显示 20261002 活动批次，旧基线字段保留。
 
 ## 9. 复现命令汇总
 

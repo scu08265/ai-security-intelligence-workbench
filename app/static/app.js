@@ -2837,7 +2837,26 @@
         submit.disabled = false;
       }
     });
-    const verification = disposition.verification;
+    const adviceBox = h('div', { class: 'disposition-advice' });
+    setBox(adviceBox, loadingBlock('正在读取策略感知处置建议…'));
+    api.get(`/api/dispositions/` + encodeURIComponent(item.event_id) + `/` + encodeURIComponent(item.asset_id) + `/advice`)
+      .then((advice) => {
+        if (!advice || !advice.available) {
+          setBox(adviceBox, h('p', { class: 'plain-note' }, textOr(advice && advice.reason, '暂无处置建议')));
+          return;
+        }
+        const actions = (advice.recommended_actions || []).map((entry) => h('li', {}, textOr(entry.label, entry.action) + (entry.requires_approval ? '（需人工批准）' : '')));
+        const blocked = (advice.blocked_actions || []).map((entry) => h('li', {}, textOr(entry.label, entry.action) + '：' + textOr(entry.blocked_reason, '被策略阻止')));
+        setBox(adviceBox, h('div', {},
+          h('h4', { class: 'disposition-advice-title' }, 'B 任务策略感知建议（只读，不是执行记录）'),
+          actions.length ? h('ul', { class: 'cell-list' }, actions) : h('p', { class: 'plain-note' }, '当前无可执行建议动作'),
+          blocked.length ? h('div', {}, h('span', { class: 'dim' }, '被策略阻止 / 需人工决策'), h('ul', { class: 'cell-list' }, blocked)) : null,
+          (advice.conflicts || []).length ? h('p', { class: 'plain-note' }, '冲突：' + advice.conflicts.join('；')) : null,
+          (advice.enrichment_gaps || []).length ? h('p', { class: 'plain-note' }, '证据缺口：' + advice.enrichment_gaps.join('；')) : null,
+          h('p', { class: 'plain-note' }, textOr(advice.disclaimer, '建议只读，系统不执行任何生产动作。'))));
+      })
+      .catch((err) => setBox(adviceBox, h('p', { class: 'plain-note' }, '读取建议失败：' + err.message)));
+        const verification = disposition.verification;
     setBox(view.disposition, card('处置闭环 · ' + textOr(item.event_title, item.event_id),
       kvList([
         ['资产', textOr(item.asset_name, item.asset_id)],
@@ -2855,6 +2874,7 @@
         h('label', {}, '处置后版本', versionAfter),
         h('label', {}, '处置说明', note),
         h('div', { class: 'btn-row' }, submit)),
+      adviceBox,
       verification
         ? alertBox(verification.passed ? 'ok' : 'warn', '系统复测结果',
             h('p', {}, textOr(verification.verdict)),

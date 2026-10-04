@@ -530,6 +530,11 @@ def disposition_metrics() -> dict:
     return disposition.metrics()
 
 
+@app.get("/api/dispositions/{event_id}/{asset_id}/advice")
+def disposition_advice(event_id: str, asset_id: str) -> dict:
+    return disposition.advice(event_id, asset_id)
+
+
 @app.get("/api/dispositions/{event_id}/{asset_id}")
 def get_disposition(event_id: str, asset_id: str) -> dict:
     return disposition.get_disposition(event_id, asset_id)

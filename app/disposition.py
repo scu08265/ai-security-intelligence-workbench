@@ -18,6 +18,9 @@ Design rules:
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import importlib.util
+import sys
+from pathlib import Path
 from typing import Any
 
 from . import config, intelligence, storage
@@ -246,4 +249,73 @@ def metrics() -> dict[str, Any]:
             "接受风险（accepted）只表示处置决策，不代表风险已消除。",
             "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。",
         ],
+    }
+
+# --------------------------------------------------------------------------
+# B-task disposal advisor bridge (single source of truth for recommendations)
+# --------------------------------------------------------------------------
+
+_ADVISOR = None
+
+
+def _load_advisor():
+    """Load tools/asset_disposal_advisor.py once, without duplicating its logic."""
+    global _ADVISOR
+    if _ADVISOR is not None:
+        return _ADVISOR
+    path = Path(config.BASE_DIR) / "tools" / "asset_disposal_advisor.py"
+    if not path.is_file():
+        _ADVISOR = False
+        return _ADVISOR
+    spec = importlib.util.spec_from_file_location("asset_disposal_advisor", path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    _ADVISOR = module
+    return _ADVISOR
+
+
+def advice(event_id: str, asset_id: str) -> dict[str, Any]:
+    """Return the B-task policy-aware action plan for one finding.
+
+    Recommendations are not decisions: this only reads the advisor output. The
+    disposition record stays the system of record for what was actually done.
+    """
+    advisor = _load_advisor()
+    if not advisor:
+        return {"available": False, "reason": "处置建议模块不可用"}
+    asset = _asset(asset_id)
+    event = storage.get_event(event_id)
+    if asset is None or event is None:
+        return {"available": False, "reason": "事件或资产不存在"}
+    try:
+        policy = advisor.default_policy(str(asset_id))
+        result = advisor.advise(asset, policy, {str(event_id): event})
+    except Exception as exc:
+        return {"available": False, "reason": "建议生成失败：" + str(exc)}
+    disclaimer = result.get("disclaimer") or "本建议只读，不是执行记录；系统不执行扫描/隔离/升级/关机等任何生产动作。"
+    finding = next((f for f in result.get("findings", []) if f.get("event_id") == event_id), None)
+    if finding is None:
+        return {
+            "available": False,
+            "reason": "该事件与资产组件不匹配，处置建议不适用",
+            "disclaimer": disclaimer,
+        }
+    return {
+        "available": True,
+        "policy_explicit": finding.get("policy_explicit"),
+        "owner": finding.get("owner"),
+        "link_status": finding.get("link_status"),
+        "confidence": finding.get("confidence"),
+        "score": (finding.get("priority") or {}).get("score"),
+        "level": (finding.get("priority") or {}).get("level"),
+        "recommended_actions": finding.get("recommended_actions") or [],
+        "blocked_actions": finding.get("blocked_actions") or [],
+        "scheduling": finding.get("scheduling") or {},
+        "conflicts": finding.get("conflicts") or [],
+        "needs_human_review": finding.get("needs_human_review"),
+        "enrichment_gaps": finding.get("enrichment_gaps") or [],
+        "evidence_ids": finding.get("evidence_ids") or [],
+        "limitations": finding.get("limitations") or [],
+        "disclaimer": disclaimer,
     }

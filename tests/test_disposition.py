@@ -91,6 +91,26 @@ def test_api_put_and_metrics_reflect_closure():
     assert scorecard["disposition"]["high_priority_closed"] == 1
 
 
+def test_advice_bridge_returns_recommendation_for_a_real_finding():
+    event_id, asset_id = _seed_case(version="1.0.0")
+    advice = disposition.advice(event_id, asset_id)
+    assert advice["available"] is True
+    assert advice["link_status"] == "affected"
+    assert any(a.get("action") for a in advice["recommended_actions"])
+    # 未配置策略时，破坏性动作必须进入 blocked_actions，不能默认推荐执行
+    assert any(a.get("action") == "apply_patch" for a in advice["blocked_actions"])
+
+
+def test_advice_endpoint_exposes_bridge_output():
+    event_id, asset_id = _seed_case(version="1.0.0")
+    client = TestClient(app)
+    response = client.get(f"/api/dispositions/{event_id}/{asset_id}/advice")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["available"] is True
+    assert body["disclaimer"]
+
+
 def test_unknown_status_is_rejected():
     event_id, asset_id = _seed_case()
     client = TestClient(app)
