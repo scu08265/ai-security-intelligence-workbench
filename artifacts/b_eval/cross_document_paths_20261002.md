@@ -11,8 +11,8 @@
 | 2609.22961 | When Agentic Trust Crosses Organizational Boundaries: Structural Exter | official:eu_ai_act, source:owasp_genai | 2 | 8 |
 | 2609.35266 | Continuous Assurance of Agentic Security Auditors for Software Deliver | official:eu_ai_act, source:nist_ai_rmf | 2 | 6 |
 | 2609.24016 | Context-Aware Pre-Deployment Evaluation of AI Systems: A Regulatory Fr | official:eu_ai_act, source:nist_ai_rmf | 2 | 5 |
-| 2608.10530 | On Understanding, Identifying, and Mitigating Vulnerabilities in Agent | source:owasp_genai | 1 | 16 |
-| 2608.28327 | Layered LLM Defenses as an Ensemble: Access Tiers, Inference Cost, and | source:owasp_genai | 1 | 13 |
+| 2608.10530 | On Understanding, Identifying, and Mitigating Vulnerabilities in Agent | source:owasp_genai | 0 | 16 |
+| 2608.28327 | Layered LLM Defenses as an Ensemble: Access Tiers, Inference Cost, and | source:owasp_genai | 1 | 12 |
 | 2609.23894 | Connecting the Dots in Agentic AI Security: A Cross-Dimensional Threat | source:owasp_genai | 1 | 12 |
 | 2609.22882 | The Law of Stop: Interruptibility, Injunctions, and the Governance of  | official:eu_ai_act | 1 | 8 |
 
@@ -47,8 +47,8 @@
 - 边：`doc:paper:2609.22961` --cites--> `doc:official:eu_ai_act`
 - evidence `chunk-f1e362206516aa8101a6eb75` [120:135] quote='risk management' 回读=OK （term:risk management → doc:paper:2609.22961）
     - 上下文：…systems,” 2025, arXiv preprint arXiv:2505.06817. [Online]. risk management framework (AI RMF 1.0),” National Institute of Available: h…
-- evidence `chunk-493df5df913a27ffc52bd9e7` [565:592] quote='Artificial Intelligence act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
-    - 上下文：…ts to a named subject, delegated task, Huafu Li and Jia Xia are with China Mobile Jiutian Artificial Intelligence action, relying party, trust boundary, and adverse condition. Technology (Beijing) Co., Ltd.…
+- evidence `chunk-39d8219c14a0a3defdb05eae` [867:876] quote='EU AI Act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
+    - 上下文：…ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where…
 - 与候选声明链路一致：False
 
 ### BMH-019｜adversarial 出现在哪些文档中？
@@ -58,8 +58,8 @@
 - 边：`doc:paper:2609.22961` --cites--> `doc:official:eu_ai_act`
 - evidence `chunk-77cc1f6556b9882dbecece05` [180:191] quote='adversarial' 回读=OK （term:adversarial → doc:paper:2609.22961）
     - 上下文：…A technical interface, process dent consumers, hard gates, adversarial evidence tests, metrics, boundary, or API call does not alo…
-- evidence `chunk-493df5df913a27ffc52bd9e7` [565:592] quote='Artificial Intelligence act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
-    - 上下文：…ts to a named subject, delegated task, Huafu Li and Jia Xia are with China Mobile Jiutian Artificial Intelligence action, relying party, trust boundary, and adverse condition. Technology (Beijing) Co., Ltd.…
+- evidence `chunk-39d8219c14a0a3defdb05eae` [867:876] quote='EU AI Act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
+    - 上下文：…ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where…
 - 与候选声明链路一致：False
 
 ### BMH-020｜benchmark 出现在哪些文档中？
@@ -69,8 +69,8 @@
 - 边：`doc:paper:2609.22961` --cites--> `doc:official:eu_ai_act`
 - evidence `chunk-3e5a6824a4db54c5d0fa163e` [188:197] quote='benchmark' 回读=OK （term:benchmark → doc:paper:2609.22961）
     - 上下文：…ral object is a trust-evidence envelope for a bounded type, benchmark result, theorem, exhaustive literature review, delegated ac…
-- evidence `chunk-493df5df913a27ffc52bd9e7` [565:592] quote='Artificial Intelligence act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
-    - 上下文：…ts to a named subject, delegated task, Huafu Li and Jia Xia are with China Mobile Jiutian Artificial Intelligence action, relying party, trust boundary, and adverse condition. Technology (Beijing) Co., Ltd.…
+- evidence `chunk-39d8219c14a0a3defdb05eae` [867:876] quote='EU AI Act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
+    - 上下文：…ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where…
 - 与候选声明链路一致：False
 
 ### BMH-021｜jailbreak 出现在哪些文档中？
@@ -102,8 +102,8 @@
 - 边：`doc:paper:2609.22961` --cites--> `doc:official:eu_ai_act`
 - evidence `chunk-7643464cb9694b009872c6fb` [379:386] quote='privacy' 回读=OK （term:privacy → doc:paper:2609.22961）
     - 上下文：…machine-readable evidence profile is needed to reliability, privacy, accountability, oversight, and organiza- to bind a delegat…
-- evidence `chunk-493df5df913a27ffc52bd9e7` [565:592] quote='Artificial Intelligence act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
-    - 上下文：…ts to a named subject, delegated task, Huafu Li and Jia Xia are with China Mobile Jiutian Artificial Intelligence action, relying party, trust boundary, and adverse condition. Technology (Beijing) Co., Ltd.…
+- evidence `chunk-39d8219c14a0a3defdb05eae` [867:876] quote='EU AI Act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
+    - 上下文：…ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where…
 - 与候选声明链路一致：False
 
 ### BMH-027｜fine-tuning 出现在哪些文档中？
@@ -124,8 +124,8 @@
 - 边：`doc:paper:2609.22961` --cites--> `doc:official:eu_ai_act`
 - evidence `chunk-3bf1b75edbb069a5704f46c9` [923:932] quote='alignment' 回读=OK （term:alignment → doc:paper:2609.22961）
     - 上下文：…or-reliance. Verifier-policy mismatch supplies the same en- alignment therefore provides design traceability, not a claim…
-- evidence `chunk-493df5df913a27ffc52bd9e7` [565:592] quote='Artificial Intelligence act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
-    - 上下文：…ts to a named subject, delegated task, Huafu Li and Jia Xia are with China Mobile Jiutian Artificial Intelligence action, relying party, trust boundary, and adverse condition. Technology (Beijing) Co., Ltd.…
+- evidence `chunk-39d8219c14a0a3defdb05eae` [867:876] quote='EU AI Act' 回读=OK （paper:2609.22961 → official:eu_ai_act）
+    - 上下文：…ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where…
 - 与候选声明链路一致：False
 
 ## 三、未连通（11 条，保留 no_path）

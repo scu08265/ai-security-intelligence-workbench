@@ -2,13 +2,13 @@
  "schema_version": "b-multihop-path-validation-1.0",
  "graph": {
   "nodes": 187,
-  "edges": 218,
+  "edges": 216,
   "edge_kinds": [
    "cites",
    "component_is",
    "mentioned_in"
   ],
-  "verified_document_edges_loaded": 97,
+  "verified_document_edges_loaded": 95,
   "note": "只含可追溯到真实证据的边；文档到文档的边只有人工核验且带 chunk 证据的才会加载。"
  },
  "counts": {
@@ -909,7 +909,7 @@
    ],
    "evidence_ids": [
     "chunk-f1e362206516aa8101a6eb75",
-    "chunk-493df5df913a27ffc52bd9e7"
+    "chunk-39d8219c14a0a3defdb05eae"
    ],
    "matches_declared_path": false,
    "failure_reason": null,
@@ -1066,7 +1066,7 @@
    ],
    "evidence_ids": [
     "chunk-77cc1f6556b9882dbecece05",
-    "chunk-493df5df913a27ffc52bd9e7"
+    "chunk-39d8219c14a0a3defdb05eae"
    ],
    "matches_declared_path": false,
    "failure_reason": null,
@@ -1122,7 +1122,7 @@
    ],
    "evidence_ids": [
     "chunk-3e5a6824a4db54c5d0fa163e",
-    "chunk-493df5df913a27ffc52bd9e7"
+    "chunk-39d8219c14a0a3defdb05eae"
    ],
    "matches_declared_path": false,
    "failure_reason": null,
@@ -1438,7 +1438,7 @@
    ],
    "evidence_ids": [
     "chunk-7643464cb9694b009872c6fb",
-    "chunk-493df5df913a27ffc52bd9e7"
+    "chunk-39d8219c14a0a3defdb05eae"
    ],
    "matches_declared_path": false,
    "failure_reason": null,
@@ -1608,7 +1608,7 @@
      "term:vulnerability"
     ],
     "term_reachable": true,
-    "term_first_hop_documents": 4
+    "term_first_hop_documents": 3
    }
   },
   {
@@ -1721,7 +1721,7 @@
    ],
    "evidence_ids": [
     "chunk-3bf1b75edbb069a5704f46c9",
-    "chunk-493df5df913a27ffc52bd9e7"
+    "chunk-39d8219c14a0a3defdb05eae"
    ],
    "matches_declared_path": false,
    "failure_reason": null,

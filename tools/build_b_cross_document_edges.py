@@ -79,6 +79,16 @@ START_TERMS = (
     "fine-tuning", "vulnerability", "detector", "alignment", "hallucination",
 )
 
+# 目标文档的"锚点"：命中标题/编号之外，还必须在同一 chunk 里出现官方标识，
+# 否则可能只是引用了"别人讨论该文档的论文"（例如参考文献里另一篇论文的标题）。
+GOAL_ANCHORS: dict[str, tuple[str, ...]] = {
+    "source:owasp_genai": ("OWASP Foundation", "owasp.org", "OWASP GenAI",
+                           "OWASP Gen AI", "GenAI Security Project"),
+}
+# 说明：`official:eu_ai_act` 与 `source:nist_ai_rmf` 的匹配串本身就是文档标题/官方编号
+# （"Artificial Intelligence Act"、"Regulation (EU) 2024/1689"、"NIST AI RMF"），
+# 无需额外锚点；OWASP 文档在语料里的标题只是来源名，才需要官方标识做锚点。
+
 SEARCH_QUERIES = (
     'all:"prompt injection"',
     'all:"AI governance"',
@@ -171,14 +181,47 @@ def _find_matches(text: str) -> tuple[dict[str, str], dict[str, str]]:
     goals: dict[str, str] = {}
     for goal, patterns in GOAL_PATTERNS.items():
         for pattern in patterns:
-            if len(pattern) >= 12 and pattern.casefold() in lowered:
+            if len(pattern) >= 12 and _find(text, pattern, strict_end=True)[0] is not None:
                 goals[goal] = pattern
                 break
     terms = {}
     for term in START_TERMS:
-        if term.casefold() in lowered:
+        if _find(text, term)[0] is not None:
             terms[term] = term
     return goals, terms
+
+
+def _find(text: str, pattern: str, *, strict_end: bool = False) -> tuple[int | None, str]:
+    """在文本里定位命中，返回 (起始偏移, 实际命中串)。
+
+    * 标题/官方编号（strict_end=True）：两端都必须是词边界，避免把
+      "Artificial Intelligence **action**" 当成 "Artificial Intelligence Act"；
+      但允许紧跟复数后缀（如 "... large language model**s**"）——否则会误杀
+      正确的引用写法；
+    * 术语：左侧要求词边界，允许后缀（如 benchmarking 含 benchmark）。
+    """
+    if not text or not pattern:
+        return None, ""
+    regex = re.compile(r"(?<![A-Za-z0-9])" + re.escape(pattern), re.IGNORECASE)
+    for match in regex.finditer(text):
+        if strict_end and not _right_boundary_ok(text, match.end()):
+            continue
+        return match.start(), match.group(0)
+    return None, ""
+
+
+def _right_boundary_ok(text: str, end: int) -> bool:
+    """右边界：允许词尾、标点，以及复数后缀 s / es（避免误杀合法引用写法）。"""
+    nxt = text[end] if end < len(text) else ""
+    nxt2 = text[end + 1] if end + 1 < len(text) else ""
+    nxt3 = text[end + 2] if end + 2 < len(text) else ""
+    if not nxt or not nxt.isalnum():
+        return True
+    if nxt in "sS" and (not nxt2 or not nxt2.isalnum()):
+        return True
+    if nxt in "eE" and nxt2 in "sS" and (not nxt3 or not nxt3.isalnum()):
+        return True
+    return False
 
 
 def stage_screen(workdir: Path) -> dict:
@@ -240,6 +283,7 @@ def stage_edges(workdir: Path, db_dir: Path, edges_out: Path, docs_out: Path) ->
     known_docs = {row[0] for row in connection.execute("select document_key from rag_documents")}
     edges: list[dict] = []
     documents: list[dict] = []
+    rejected: list[dict] = []
 
     for item in ingested:
         if item["status"] != "fulltext":
@@ -250,17 +294,30 @@ def stage_edges(workdir: Path, db_dir: Path, edges_out: Path, docs_out: Path) ->
                WHERE d.document_key = ? AND d.current_version_id = c.version_id""",
             (document_key,)).fetchall()
         doc_edges = []
+        doc_text = "\n".join((text or "") for _, text in rows)
         for goal in item["goal_hits"]:
             patterns = sorted(GOAL_PATTERNS.get(goal, ()), key=len, reverse=True)
             best: dict | None = None
+            anchors = GOAL_ANCHORS.get(goal, ())
+            anchor_list = ", ".join(anchors)
+            anchored = (not anchors) or any(a.casefold() in doc_text.casefold()
+                                            for a in anchors)
             for chunk_id, text in rows:
                 for pattern in patterns:
-                    position = (text or "").casefold().find(pattern.casefold())
-                    if position < 0:
+                    position, matched = _find(text, pattern, strict_end=True)
+                    if position is None:
                         continue
-                    quote = text[position:position + len(pattern)]
-                    if quote.casefold() != pattern.casefold():
+                    if not anchored:
+                        rejected.append({
+                            "subject": document_key, "object": goal,
+                            "reason": "整篇文档缺少目标文档锚点"
+                                      f"（需出现 {anchor_list}）",
+                            "evidence": {"chunk_id": chunk_id, "char_start": position,
+                                         "char_end": position + len(matched),
+                                         "quote": matched},
+                        })
                         continue
+                    quote = matched
                     # 取最具体（最长）的匹配作为证据，避免用弱串凑边
                     if best is None or len(quote) > len(best["evidence"]["quote"]):
                         best = {
@@ -277,10 +334,10 @@ def stage_edges(workdir: Path, db_dir: Path, edges_out: Path, docs_out: Path) ->
                 doc_edges.append(best)
         for term in item["term_hits"]:
             for chunk_id, text in rows:
-                position = (text or "").casefold().find(term.casefold())
-                if position < 0:
+                position, matched = _find(text, term)
+                if position is None:
                     continue
-                quote = text[position:position + len(term)]
+                quote = matched
                 doc_edges.append({
                     "subject": f"term:{term}", "predicate": "mentioned_in",
                     "object": f"doc:{document_key}",
@@ -312,11 +369,13 @@ def stage_edges(workdir: Path, db_dir: Path, edges_out: Path, docs_out: Path) ->
         "never_string_cooccurrence": "通用词共现（如 Agents/Adversarial）一律不作边；"
                                      "术语边只在候选题声明的起始术语上建立",
         "edges": edges,
+        "rejected_edges": rejected,
         "documents": documents,
         "counts": {
             "new_documents": len(documents),
             "document_edges": sum(1 for e in edges if e["predicate"] == "cites"),
             "term_edges": sum(1 for e in edges if e["predicate"] == "mentioned_in"),
+            "rejected_edges": len(rejected),
         },
         "previous_edge_file": str(previous.relative_to(ROOT)) if previous.is_file() else None,
     }

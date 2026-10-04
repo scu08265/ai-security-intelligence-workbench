@@ -299,10 +299,11 @@ evasion emerges under ordinary task pressure. Preprint, 2026.`；偏移已回读
 
 | 项 | 结果 |
 |---|---|
-| 新增文档 | **8 篇**（见 `artifacts/b_eval/new_documents_20261002.json`，含 PDF sha256 与快照哈希） |
-| 文档间边（`cites`） | **12 条**，如 `paper:2609.24016 --cites--> official:eu_ai_act`，引用串为 `Regulation (EU) 2024/1689` |
-| 术语第一跳（`mentioned_in`） | **85 条**（覆盖 21 个起始术语中的 20 个） |
-| 独立回读校验 | **97/97 通过**（另写脚本从库里重读 chunk 逐条核对） |
+| 新增文档 | **8 篇**（见 `artifacts/b_eval/new_documents_20261002.json`，含 PDF sha256 与快照哈希）；其中 **7 篇**产生文档间引用边，1 篇（`2608.10530`）只贡献术语第一跳——它的"OWASP"命中落在他人论文标题里，已按锚点规则拒绝 |
+| 文档间边（`cites`） | **11 条**，如 `paper:2609.24016 --cites--> official:eu_ai_act`，引用串为 `Regulation (EU) 2024/1689` |
+| 术语第一跳（`mentioned_in`） | **84 条**（覆盖 21 个起始术语中的 19 个） |
+| 独立回读校验 | **95/95 通过**（另写脚本从库里重读 chunk 逐条核对） |
+| 被拒边（不计入） | **2 条**，写在 `rejected_edges` 并附拒绝原因 |
 | 跨文档路径 | **10/21 连通**（原 0/21），two_hop 仍 10/10 |
 | 术语可达性（独立诊断） | **29/31 可达**，2 个不可达（`kernel-level`、`Qwen3`） |
 | 未连通 | **11 题保留 `no_path`** + 失败原因，未隐藏 |
@@ -333,6 +334,17 @@ BMH-021: term:jailbreak →(mentioned_in) paper:2609.03999 →(cites) source:owa
 （8 篇新来源清单 + 10 条连通路径的节点/边/evidence/可回读 quote/上下文 + 11 条未连通原因）。
 该文件由 `tools/build_b_cross_document_edges.py --stage packet` 生成；
 证据按"边"精确对应（同一 chunk 承载多条边时不会串位）。
+
+精度加固（本轮自查后修正的三处）：
+
+1. **词边界校验**：原先 `Artificial Intelligence act` 会把 `…Artificial Intelligence
+   action…` 当成 "Artificial Intelligence Act"；现改为两端词边界（允许复数后缀），
+   该条证据已换成真正的 `EU AI Act` 命中。
+2. **锚点校验**：OWASP 文档在语料里的标题只是来源名，因此要求整篇文档出现
+   `OWASP Foundation / owasp.org / OWASP GenAI` 等官方标识；据此**剔除 1 条假边**
+   （`paper:2608.10530 → source:owasp_genai` 的命中其实落在另一篇论文的标题里），
+   剔除记录保留在 `rejected_edges`。
+3. **取证按边对应**：复核材料里同一 chunk 有多条边时不再串位。
 
 **本轮未能补上的部分（如实记录）**：为了打通剩余 8 题（目标为
 `paper:2609.28915`、`paper:2606.15617`），需要"引用这两篇论文的来源"，本轮尝试：

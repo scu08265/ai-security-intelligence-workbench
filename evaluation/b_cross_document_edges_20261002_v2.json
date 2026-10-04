@@ -274,13 +274,13 @@
    "subject": "paper:2609.22961",
    "predicate": "cites",
    "object": "official:eu_ai_act",
-   "match_basis": "正文/参考文献中出现 'Artificial Intelligence Act'",
+   "match_basis": "正文/参考文献中出现 'EU AI Act'",
    "evidence": {
-    "chunk_id": "chunk-493df5df913a27ffc52bd9e7",
-    "char_start": 565,
-    "char_end": 592,
-    "quote": "Artificial Intelligence act",
-    "context": "ts to a named subject, delegated task, Huafu Li and Jia Xia are with China Mobile Jiutian Artificial Intelligence action, relying party, trust boundary, and adverse condition. Technology (Beijing) Co., Ltd."
+    "chunk_id": "chunk-39d8219c14a0a3defdb05eae",
+    "char_start": 867,
+    "char_end": 876,
+    "quote": "EU AI Act",
+    "context": "ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where"
    },
    "verified": true
   },
@@ -621,20 +621,6 @@
    "verified": true
   },
   {
-   "subject": "paper:2608.10530",
-   "predicate": "cites",
-   "object": "source:owasp_genai",
-   "match_basis": "正文/参考文献中出现 'OWASP Top 10 for Large Language Model'",
-   "evidence": {
-    "chunk_id": "chunk-400cf4ec6ada465d477f822d",
-    "char_start": 473,
-    "char_end": 510,
-    "quote": "OWASP top 10 for large language model",
-    "context": "503.00865. doi:10.48550/arxiv.2503.00865. [41] Mohammad Fasha et al. 2024. Mitigating the OWASP top 10 for large language models applications using intelligent agents. InProceedings of the IEEE International Conferenc"
-   },
-   "verified": true
-  },
-  {
    "subject": "term:adversarial",
    "predicate": "mentioned_in",
    "object": "doc:paper:2608.10530",
@@ -906,11 +892,11 @@
    "object": "doc:paper:2608.28327",
    "match_basis": "文档正文出现术语 'alignment'",
    "evidence": {
-    "chunk_id": "chunk-b37b70ed661a60b25306ca2e",
-    "char_start": 399,
-    "char_end": 408,
+    "chunk_id": "chunk-a06ce299487bdb254b71732b",
+    "char_start": 199,
+    "char_end": 208,
     "quote": "alignment",
-    "context": "at. Onecandidatemechanismwouldexplainmuchofthisatonce.Safetyalignmentascurrentlypracticedisshallow: itadaptsthemodel’soutputdistr"
+    "context": "e in hand, requiring neither large compute nor the original alignment data, while the capability to restore it is not. This is th"
    },
    "verified": true
   },
@@ -948,11 +934,11 @@
    "object": "doc:paper:2608.28327",
    "match_basis": "文档正文出现术语 'detector'",
    "evidence": {
-    "chunk_id": "chunk-87b853e2a12538ea41340718",
-    "char_start": 575,
-    "char_end": 583,
+    "chunk_id": "chunk-f201c4fe2f1809eb4bd06d1a",
+    "char_start": 724,
+    "char_end": 732,
     "quote": "detector",
-    "context": "esanLLMonabilingualcorpusof14,387query–responsepairstoactasadetectoraligned withconfigurablesafetystandards,producinganexplanati"
+    "context": "cted instructions more accurately but by moving to a row no detector occupies, making compliance with them inconsequential. Conv"
    },
    "verified": true
   },
@@ -990,11 +976,11 @@
    "object": "doc:paper:2608.28327",
    "match_basis": "文档正文出现术语 'privacy'",
    "evidence": {
-    "chunk_id": "chunk-e00efae49bf53d428363de0d",
-    "char_start": 652,
-    "char_end": 659,
+    "chunk_id": "chunk-9645e514ac634298e1a11e67",
+    "char_start": 426,
+    "char_end": 433,
     "quote": "privacy",
-    "context": "m. Das et al. [9] and Abdali et al. [10] catalog securityandprivacyrisks,andCuietal.[34]addsarisktaxonomyandassessmentframework"
+    "context": "r extraction targets the weights directly (A3), posing both privacy and intellectual-property risks [57,58]. A. Alotaibi et al."
    },
    "verified": true
   },
@@ -1037,20 +1023,6 @@
     "char_end": 763,
     "quote": "supply chain",
     "context": ": Identifying vulnerabilities in the machine learning model supply chain, arXiv preprint arXiv:1708.06733 (2017). [61]J. Steinhardt,"
-   },
-   "verified": true
-  },
-  {
-   "subject": "term:vulnerability",
-   "predicate": "mentioned_in",
-   "object": "doc:paper:2608.28327",
-   "match_basis": "文档正文出现术语 'vulnerability'",
-   "evidence": {
-    "chunk_id": "chunk-7b7436c4572223eb9f3af329",
-    "char_start": 654,
-    "char_end": 667,
-    "quote": "vulnerability",
-    "context": "akes,suchaspromptinjection,modelextraction,ordatapoisoning;avulnerabilityis the weaknessthat makes the action succeed,such as the ina"
    },
    "verified": true
   },
@@ -1102,11 +1074,11 @@
    "object": "doc:paper:2609.23894",
    "match_basis": "文档正文出现术语 'alignment'",
    "evidence": {
-    "chunk_id": "chunk-d2c444c745e5cb079b7910f9",
-    "char_start": 150,
-    "char_end": 159,
+    "chunk_id": "chunk-55db088634b830d8ee3da9c3",
+    "char_start": 968,
+    "char_end": 977,
     "quote": "alignment",
-    "context": "CP) security, been evaluated. multi-agent attacks, agent misalignment, and agent supply- Each dimension permits multiple labels,"
+    "context": "ipeline (P), Horizontal/Collaborative (C), or behavior, and alignment faking [45, 46, 47]."
    },
    "verified": true
   },
@@ -1270,11 +1242,11 @@
    "object": "doc:paper:2609.22882",
    "match_basis": "文档正文出现术语 'alignment'",
    "evidence": {
-    "chunk_id": "chunk-e7b0a60de5dec34142270247",
-    "char_start": 305,
-    "char_end": 314,
-    "quote": "alignment",
-    "context": "2025, rev. Jan. 26, 2026); Aengus Lynch et al., Agentic Misalignment: How LLMs Could Be Insider Threats (arXiv:2510.05179, Oct."
+    "chunk_id": "chunk-e1ef2bd6c0ae27c4de3d048c",
+    "char_start": 514,
+    "char_end": 523,
+    "quote": "Alignment",
+    "context": "nated pacing as soon as possible.” Anthropic, Improving Our Alignment and Security Efforts (Aug. 31, 2026). 188 OpenAI, Respondin"
    },
    "verified": true
   },
@@ -1363,6 +1335,30 @@
    "verified": true
   }
  ],
+ "rejected_edges": [
+  {
+   "subject": "paper:2608.10530",
+   "object": "source:owasp_genai",
+   "reason": "整篇文档缺少目标文档锚点（需出现 OWASP Foundation, owasp.org, OWASP GenAI, OWASP Gen AI, GenAI Security Project）",
+   "evidence": {
+    "chunk_id": "chunk-400cf4ec6ada465d477f822d",
+    "char_start": 473,
+    "char_end": 510,
+    "quote": "OWASP top 10 for large language model"
+   }
+  },
+  {
+   "subject": "paper:2608.10530",
+   "object": "source:owasp_genai",
+   "reason": "整篇文档缺少目标文档锚点（需出现 OWASP Foundation, owasp.org, OWASP GenAI, OWASP Gen AI, GenAI Security Project）",
+   "evidence": {
+    "chunk_id": "chunk-400cf4ec6ada465d477f822d",
+    "char_start": 473,
+    "char_end": 485,
+    "quote": "OWASP top 10"
+   }
+  }
+ ],
  "documents": [
   {
    "arxiv_id": "2609.03999",
@@ -1427,7 +1423,7 @@
    "status": "fulltext",
    "pdf_sha256": "7c9fab3975c003230ef76e09cc319d640930462a254a1b913d5a4b0d29a6959b",
    "snapshot_hash": "7c9fab3975c003230ef76e09cc319d640930462a254a1b913d5a4b0d29a6959b",
-   "goal_edges": 1,
+   "goal_edges": 0,
    "term_edges": 16,
    "goals": [
     "source:owasp_genai"
@@ -1441,7 +1437,7 @@
    "pdf_sha256": "01ca21d5ae8d13a6b511fd1ab5f19e2ee54de4ba2d1a87b527c207c1e43242bf",
    "snapshot_hash": "01ca21d5ae8d13a6b511fd1ab5f19e2ee54de4ba2d1a87b527c207c1e43242bf",
    "goal_edges": 1,
-   "term_edges": 13,
+   "term_edges": 12,
    "goals": [
     "source:owasp_genai"
    ]
@@ -1475,8 +1471,9 @@
  ],
  "counts": {
   "new_documents": 8,
-  "document_edges": 12,
-  "term_edges": 85
+  "document_edges": 11,
+  "term_edges": 84,
+  "rejected_edges": 2
  },
  "previous_edge_file": "evaluation\\b_cross_document_edges_20261002.json"
 }

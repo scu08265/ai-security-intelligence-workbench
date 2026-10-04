@@ -258,9 +258,12 @@ def test_cross_document_edges_carry_verifiable_chunk_evidence():
 
 def test_new_documents_are_ingested_and_have_goal_edges():
     documents = _load(NEW_DOCUMENTS)["papers"]
-    assert len(documents) >= 5
+    assert 5 <= len(documents) <= 8          # 队长要求 5–8 篇
     assert all(doc["status"] == "fulltext" for doc in documents)
-    assert all(doc["goal_edges"] >= 1 for doc in documents)
+    # 至少 5 篇必须产生文档间引用边（其余可以只贡献术语第一跳）
+    with_citation = [doc for doc in documents if doc["goal_edges"] >= 1]
+    assert len(with_citation) >= 5
+    assert all(doc["goal_edges"] >= 0 and doc["term_edges"] >= 0 for doc in documents)
     assert all(doc["pdf_sha256"] and doc["snapshot_hash"] for doc in documents)
 
 
