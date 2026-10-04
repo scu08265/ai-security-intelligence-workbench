@@ -219,9 +219,48 @@ machine_suggestion_changes_after_rule_fix`。
 3. 补充探测：按标题特征词跨文档匹配，命中的是 `Agents`、`Adversarial`、
    `Effectiveness` 这类通用词，属于字符串共现，**按规则不得写成推理关系**。
 
-结论：`multihop_path_validation.json` 的跨文档 0/21 **保持不变**，本轮不制造
-伪关系边。要提升这条指标，需要新增"论文互相引用"或"安全博客讨论具体论文/CVE"
-这类真实来源。
+### 4.1 第一批真实关系边（已补 1 条，可核验）
+
+对 22 篇文档做全文互查后，语料内**只存在 1 条**真实的文档间引用：
+
+```json
+{"subject": "paper:2609.30266", "predicate": "cites", "object": "paper:2609.30217",
+ "evidence": {"chunk_id": "chunk-5d0b41d50273664bec30cd2c",
+              "char_start": 558, "char_end": 600,
+              "quote": "Instrumental monitor evasion emerges under"},
+ "verified": true}
+```
+
+来源是 `paper:2609.30266` 参考文献里的 `[20] David Schmotz, ... Instrumental monitor
+evasion emerges under ordinary task pressure. Preprint, 2026.`；偏移已回读校验
+（`text[558:600]` 等于 quote）。登记在
+`evaluation/b_cross_document_edges_20261002.json`，
+路径检索器新增 `--edges` 只加载 `verified=true` 且带 `chunk_id` 的边。
+
+### 4.2 为什么跨文档计数仍是 0/21（精确诊断）
+
+带这条边重跑（`artifacts/b_eval/multihop_path_validation_20261002.json`）：
+
+```
+图规模: 节点 160 / 边 122 / 边类型 ['cites', 'component_is', 'mentioned_in']
+候选题: 31 | 找到路径: 10 | 不连通: 21
+按类型: {"two_hop": {"total": 10, "path_found": 10},
+         "cross_document": {"total": 21, "no_path": 21}}
+缺失边类型: term_node_with_evidence ×21、document_to_document ×126
+21 道跨文档题的失败原因：**全部是"起始术语不在图中"**
+（例：BMH-011 起始 'AUROC' 不是图节点，目标是 doc:paper:2609.28915）
+```
+
+两个独立缺口：
+
+1. **术语节点缺失**：图里没有 `term:*` 节点，21 道题的起点（AUROC、prompt injection…）
+   全部解析失败——这是**图构建缺口**，不是数据缺失（术语确实在语料里有带偏移的证据）；
+2. **文档间边缺失**：即使补上术语节点，声明的 文档A→文档B 链路仍缺 126 条文档间边；
+   本轮只找到 1 条真实引用边，且它连接的两篇文档都不是这 21 题的目标文档。
+
+因此**不把 0/21 改写成 ≥1**：那需要补新来源（互相引用的论文、讨论具体论文或 CVE
+的安全博客），或由任务负责人同意把该指标口径改成"术语可达性"（1 跳检索，不是推理）。
+两条路都需要队长决定，本轮不擅自换口径、不造边。
 
 ## 5. 赛题指标页面与权威 JSON 一致性（P1，已完成）
 

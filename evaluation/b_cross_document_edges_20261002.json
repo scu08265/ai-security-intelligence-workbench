@@ -1,0 +1,22 @@
+{
+ "schema_version": "b-cross-document-edges-1.0",
+ "scope": "B 任务跨文档/多跳：只登记能从语料原文核验的文档间关系边",
+ "method": "在语料内检索其他文档的完整标题/多词短语；命中即记录 chunk_id 与字符偏移，并回读校验 [start:end] 等于命中文本",
+ "verified_by": "机器定位 + 人工可复核（chunk 原文可见、可回读）",
+ "never_string_cooccurrence": "拒绝把通用词共现（如 Agents/Adversarial）当作推理关系；本文件只收文献引用型命中",
+ "coverage_note": "对 22 篇文档全文互查后，语料内**只有 1 条**真实文档间引用（2609.30266 的参考文献 [20] 引用了 2609.30217）。其余论文互不引用，论文正文与库内 CVE 事件也零交集，因此 21 道跨文档题的目标文档均不在该边上，路径计数仍为 0/21。",
+ "edges": [
+  {
+   "subject": "paper:2609.30266",
+   "predicate": "cites",
+   "object": "paper:2609.30217",
+   "evidence": {
+    "chunk_id": "chunk-5d0b41d50273664bec30cd2c",
+    "char_start": 558,
+    "char_end": 600,
+    "quote": "Instrumental monitor evasion emerges under"
+   },
+   "verified": true
+  }
+ ]
+}
