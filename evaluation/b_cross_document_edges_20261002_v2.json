@@ -1,0 +1,1479 @@
+{
+ "schema_version": "b-cross-document-edges-2.0",
+ "scope": "B 任务跨文档/多跳：新增来源后登记的真实文档间边与术语第一跳",
+ "method": "arXiv 检索 → 项目自带 PDF 解析 → 只在标题/官方编号级别匹配 → 记录 chunk_id 与字符偏移并回读校验 text[char_start:char_end] == quote",
+ "never_string_cooccurrence": "通用词共现（如 Agents/Adversarial）一律不作边；术语边只在候选题声明的起始术语上建立",
+ "edges": [
+  {
+   "subject": "paper:2609.03999",
+   "predicate": "cites",
+   "object": "source:nist_ai_rmf",
+   "match_basis": "正文/参考文献中出现 'AI Risk Management Framework'",
+   "evidence": {
+    "chunk_id": "chunk-0a41e2a90c067dfd138e3821",
+    "char_start": 244,
+    "char_end": 272,
+    "quote": "AI Risk Management Framework",
+    "context": "roduced by AI and LLM systems, such as the National Institute of Standards and Technology AI Risk Management Framework (NIST AI RMF) [5] and ISO standards discussed below [47]. 6.1 AI Security and Risk Govern"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.03999",
+   "predicate": "cites",
+   "object": "source:owasp_genai",
+   "match_basis": "正文/参考文献中出现 'OWASP LLM Top 10'",
+   "evidence": {
+    "chunk_id": "chunk-164cfa4a1cb42c48b5bfcf90",
+    "char_start": 722,
+    "char_end": 738,
+    "quote": "OWASP LLM Top 10",
+    "context": "nt a structured taxonomy that maps web attacks to their emerging manifestations under the OWASP LLM Top 10 risks, clarifying how LLM-specific designs create new web attack surfaces. • Second, we a"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-ac676b8d821ad2eec4d29eef",
+    "char_start": 461,
+    "char_end": 472,
+    "quote": "adversarial",
+    "context": "b environments. Three unresolved challenges are identified: adversarial natural-language instructions, autonomous agent security, a"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:agent security",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'agent security'",
+   "evidence": {
+    "chunk_id": "chunk-ac676b8d821ad2eec4d29eef",
+    "char_start": 515,
+    "char_end": 529,
+    "quote": "agent security",
+    "context": "fied: adversarial natural-language instructions, autonomous agent security, and post-deployment security through continuous monitoring"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-d36e195779443a9135ee40ea",
+    "char_start": 141,
+    "char_end": 150,
+    "quote": "alignment",
+    "context": "ather than an isolated model component. To avoid subjective alignment, we define a structured methodology for mapping OWASP LLM r"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:backdoor",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'backdoor'",
+   "evidence": {
+    "chunk_id": "chunk-acaa6958654b8ae1d90912f1",
+    "char_start": 832,
+    "char_end": 840,
+    "quote": "backdoor",
+    "context": "y and intro- TRA_04: Persistent Data Manipulation ing duces backdoors (CWE-345, CWE-347) LLM_05 Improper Output Han- Unsafe or h"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-ecabbb45b45c8dc60539ca9f",
+    "char_start": 416,
+    "char_end": 425,
+    "quote": "benchmark",
+    "context": "limits on reasoning depth and tool access, and standardized benchmarks for LLM resource-exhaustion attacks remain important resea"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:chain-of-thought",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'chain-of-thought'",
+   "evidence": {
+    "chunk_id": "chunk-dd7982764527b62d0cdd702b",
+    "char_start": 398,
+    "char_end": 414,
+    "quote": "chain-of-thought",
+    "context": "ojie Jin. 2026. Badthink: Triggered overthinking attacks on chain-of-thought reasoning in large language models. InProceedings of the AA"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:fine-tuning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'fine-tuning'",
+   "evidence": {
+    "chunk_id": "chunk-38059997a940da8a90b0b2e0",
+    "char_start": 963,
+    "char_end": 974,
+    "quote": "fine-tuning",
+    "context": "omponents, including pre-trained models, training datasets, fine-tuning pipelines, embedding"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:hallucination",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'hallucination'",
+   "evidence": {
+    "chunk_id": "chunk-0a71d8959dc271a4a489fadf",
+    "char_start": 593,
+    "char_end": 606,
+    "quote": "hallucination",
+    "context": "ct information can have serious consequences. LLM-generated hallucinations are often perceived as credible and are difficult for user"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:jailbreak",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'jailbreak'",
+   "evidence": {
+    "chunk_id": "chunk-64fda3d9789903475a50de40",
+    "char_start": 802,
+    "char_end": 811,
+    "quote": "jailbreak",
+    "context": "se adaptations, novel threats such as membership inference, jailbreaking, and model inversion further expose sensitive data in wa"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:model poisoning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'model poisoning'",
+   "evidence": {
+    "chunk_id": "chunk-7e1b488fb85963b7e83a3bf3",
+    "char_start": 530,
+    "char_end": 545,
+    "quote": "Model Poisoning",
+    "context": "y across the LLM development pipeline. 5.4 LLM_04: Data and Model Poisoning This refers to the persistent corruption of training/embedd"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:multi-agent",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'multi-agent'",
+   "evidence": {
+    "chunk_id": "chunk-6754729f6ee1bf492c42b43f",
+    "char_start": 463,
+    "char_end": 474,
+    "quote": "Multi-agent",
+    "context": ", Jinzhi Liao, Hongyu Kuang, and Lin Yang. 2024. Audit-llm: Multi-agent collaboration for log-based insider threat detection.arXiv"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-ac676b8d821ad2eec4d29eef",
+    "char_start": 955,
+    "char_end": 962,
+    "quote": "privacy",
+    "context": "r secure AI-enabled web systems. CCS Concepts:•Security and privacy→Web application security."
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:prompt injection",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'prompt injection'",
+   "evidence": {
+    "chunk_id": "chunk-dd559ecb4405f9458e53a6f5",
+    "char_start": 739,
+    "char_end": 755,
+    "quote": "prompt injection",
+    "context": "pagate across web applications, introducing attacks such as prompt injection. Securing modern web systems therefore requires understandi"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:reinforcement learning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'reinforcement learning'",
+   "evidence": {
+    "chunk_id": "chunk-8e123ba7cd4d0a8f5978c3da",
+    "char_start": 469,
+    "char_end": 491,
+    "quote": "Reinforcement Learning",
+    "context": "hat modern alignment pipelines, particularly those based on Reinforcement Learning with Human Feedback (RLHF) [23], are vulnerable to training"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:risk management",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'risk management'",
+   "evidence": {
+    "chunk_id": "chunk-164cfa4a1cb42c48b5bfcf90",
+    "char_start": 294,
+    "char_end": 309,
+    "quote": "risk management",
+    "context": "art of RQ2, we further analyze how established security and risk management frameworks should be extended to systematically address the"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:supply chain",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'supply chain'",
+   "evidence": {
+    "chunk_id": "chunk-acaa6958654b8ae1d90912f1",
+    "char_start": 586,
+    "char_end": 598,
+    "quote": "Supply Chain",
+    "context": "closure proprietary data Data Exfiltration (CWE-200) LLM_03 Supply Chain Vulnera- Compromised plugins, APIs, or de- TRA_03: Software"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:vulnerability",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.03999",
+   "match_basis": "文档正文出现术语 'vulnerability'",
+   "evidence": {
+    "chunk_id": "chunk-21edb1ae9ef322ae90f6adf2",
+    "char_start": 219,
+    "char_end": 232,
+    "quote": "Vulnerability",
+    "context": "Language Models; Web Ecosystem Security; Prompt Injection; Vulnerability Amplification; OWASP Top 10 ACM Reference Format: Nivedita"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.22961",
+   "predicate": "cites",
+   "object": "official:eu_ai_act",
+   "match_basis": "正文/参考文献中出现 'EU AI Act'",
+   "evidence": {
+    "chunk_id": "chunk-39d8219c14a0a3defdb05eae",
+    "char_start": 867,
+    "char_end": 876,
+    "quote": "EU AI Act",
+    "context": "ose roles have genuinely independent governance. evidence [7]–[10]. Where applicable, the EU AI Act simi- Purpose-bound access, tenant isolation, short retention where"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.22961",
+   "predicate": "cites",
+   "object": "source:owasp_genai",
+   "match_basis": "正文/参考文献中出现 'OWASP Top 10'",
+   "evidence": {
+    "chunk_id": "chunk-93a952274833dfb6407fed5b",
+    "char_start": 470,
+    "char_end": 482,
+    "quote": "OWASP top 10",
+    "context": "8–102. [Online]. Available: https://doi.org/10.1109/ [36] OWASP Gen AI Security Project, “OWASP top 10 for LLM DISCEX.2000.824965 applications 2025,” 2024, official resource page; published 20"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-77cc1f6556b9882dbecece05",
+    "char_start": 180,
+    "char_end": 191,
+    "quote": "adversarial",
+    "context": "A technical interface, process dent consumers, hard gates, adversarial evidence tests, metrics, boundary, or API call does not alo"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:agent security",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'agent security'",
+   "evidence": {
+    "chunk_id": "chunk-3a16b2a27069d9a4a1aaf2fa",
+    "char_start": 768,
+    "char_end": 782,
+    "quote": "agent security",
+    "context": "mory compromise, and multi-agent trustworthy-AI governance, agent security, distributed trust man- agement, identity, provenance, assu"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-3bf1b75edbb069a5704f46c9",
+    "char_start": 923,
+    "char_end": 932,
+    "quote": "alignment",
+    "context": "or-reliance. Verifier-policy mismatch supplies the same en- alignment therefore provides design traceability, not a claim"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-3e5a6824a4db54c5d0fa163e",
+    "char_start": 188,
+    "char_end": 197,
+    "quote": "benchmark",
+    "context": "ral object is a trust-evidence envelope for a bounded type, benchmark result, theorem, exhaustive literature review, delegated ac"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:multi-agent",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'multi-agent'",
+   "evidence": {
+    "chunk_id": "chunk-3a16b2a27069d9a4a1aaf2fa",
+    "char_start": 729,
+    "char_end": 740,
+    "quote": "multi-agent",
+    "context": "ynthesis of descriptions, persistent memory compromise, and multi-agent trustworthy-AI governance, agent security, distributed trus"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-7643464cb9694b009872c6fb",
+    "char_start": 379,
+    "char_end": 386,
+    "quote": "privacy",
+    "context": "machine-readable evidence profile is needed to reliability, privacy, accountability, oversight, and organiza- to bind a delegat"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:prompt injection",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'prompt injection'",
+   "evidence": {
+    "chunk_id": "chunk-3a16b2a27069d9a4a1aaf2fa",
+    "char_start": 569,
+    "char_end": 585,
+    "quote": "prompt injection",
+    "context": "g-domain controls and records. This paper develops Indirect prompt injection, poisoned retrieval, malicious tool Trustworthiness as a Se"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:risk management",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22961",
+   "match_basis": "文档正文出现术语 'risk management'",
+   "evidence": {
+    "chunk_id": "chunk-f1e362206516aa8101a6eb75",
+    "char_start": 120,
+    "char_end": 135,
+    "quote": "risk management",
+    "context": "systems,” 2025, arXiv preprint arXiv:2505.06817. [Online]. risk management framework (AI RMF 1.0),” National Institute of Available: h"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.35266",
+   "predicate": "cites",
+   "object": "official:eu_ai_act",
+   "match_basis": "正文/参考文献中出现 'Artificial Intelligence Act'",
+   "evidence": {
+    "chunk_id": "chunk-eefe9db7ff0c91ea020d6021",
+    "char_start": 333,
+    "char_end": 360,
+    "quote": "Artificial Intelligence Act",
+    "context": "pAI - A Procedure for Conducting Conformity Assessment of AI Systems in Line with the EU Artificial Intelligence Act. SSRN Electronic Journal (2022). https://doi.org/10.2139/ssrn.4064091 7. Gamma, E., Helm,"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.35266",
+   "predicate": "cites",
+   "object": "source:nist_ai_rmf",
+   "match_basis": "正文/参考文献中出现 'AI Risk Management Framework'",
+   "evidence": {
+    "chunk_id": "chunk-5874f41a84024c8881fea916",
+    "char_start": 361,
+    "char_end": 389,
+    "quote": "AI Risk Management Framework",
+    "context": "rXiv.2504.13839, http://arxiv. org/abs/2504.13839, arXiv:2504.13839 [cs] 26. Tabassi, E.: AI Risk Management Framework (2023). https://doi.org/10.6028/NIST.AI.100-1, https://nvlpubs.nist.gov/nistpubs/ ai/NIST"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.35266",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-9ec9e61a5eb0f102b2c507d5",
+    "char_start": 432,
+    "char_end": 443,
+    "quote": "adversarial",
+    "context": "rrectness of evidence admission, resistance to malformed or adversarial evidence, and the operational effects of false holds, excep"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.35266",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-7761b1ca27d710a10083d30d",
+    "char_start": 497,
+    "char_end": 506,
+    "quote": "alignment",
+    "context": "coverage, temporal coherence, verifiability, and governance alignment at this evidence boundary [19]. NIST AI RMF supplies the Te"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.35266",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-8a5c69e3d7d94f1157a85804",
+    "char_start": 365,
+    "char_end": 374,
+    "quote": "benchmark",
+    "context": "pository auditor on a fixed Python Null Pointer Dereference benchmark. A re- tained evidence repository comprising80RepoAudit exe"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:detector",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.35266",
+   "match_basis": "文档正文出现术语 'detector'",
+   "evidence": {
+    "chunk_id": "chunk-4a895aab4be954c4ba66ea67",
+    "char_start": 537,
+    "char_end": 545,
+    "quote": "detector",
+    "context": "surance-layer integration gap The gap is not another defect detector. It is a software layer that turns hetero- geneous control-"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.35266",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-a13bb263a6ce3758ab8e1068",
+    "char_start": 423,
+    "char_end": 430,
+    "quote": "Privacy",
+    "context": "iven Bug Detection. In: 2026 IEEE Symposium on Security and Privacy (SP). pp. 3396–3413 (May 2026). https://doi.org/10.1109/SP6"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:risk management",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.35266",
+   "match_basis": "文档正文出现术语 'risk management'",
+   "evidence": {
+    "chunk_id": "chunk-5874f41a84024c8881fea916",
+    "char_start": 364,
+    "char_end": 379,
+    "quote": "Risk Management",
+    "context": "g/abs/2504.13839, arXiv:2504.13839 [cs] 26. Tabassi, E.: AI Risk Management Framework (2023). https://doi.org/10.6028/NIST.AI.100-1, ht"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.24016",
+   "predicate": "cites",
+   "object": "official:eu_ai_act",
+   "match_basis": "正文/参考文献中出现 'Regulation (EU) 2024/1689'",
+   "evidence": {
+    "chunk_id": "chunk-0236c6a007e7acf6fc7909c4",
+    "char_start": 149,
+    "char_end": 174,
+    "quote": "Regulation (EU) 2024/1689",
+    "context": "of AI in financial services has advanced most substantially in the European Union, where Regulation (EU) 2024/1689, the EU AI Act, es- tablishes the first comprehensive binding legal framework for AI syst"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.24016",
+   "predicate": "cites",
+   "object": "source:nist_ai_rmf",
+   "match_basis": "正文/参考文献中出现 'NIST AI Risk Management Framework'",
+   "evidence": {
+    "chunk_id": "chunk-a278a00d1d450dc6e95f724a",
+    "char_start": 309,
+    "char_end": 342,
+    "quote": "NIST AI Risk Management Framework",
+    "context": "ing operationalisation to providers and member states [13]. At the operational level, the NIST AI Risk Management Framework (AI RMF 1.0) is among the most widely referenced voluntary instruments for managing AI ri"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.24016",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-b0f4c60943dfdcdca4ee47ee",
+    "char_start": 449,
+    "char_end": 460,
+    "quote": "adversarial",
+    "context": "r, E.: Toxigen: A large-scale machine-generated dataset for adversarial and implicit hate speech detection. In: Proceedings of the"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.24016",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-0f9e6b870b44744b2d3459f5",
+    "char_start": 619,
+    "char_end": 628,
+    "quote": "alignment",
+    "context": "research increasingly concentrates on pre-deployment model alignment and testing, es- tablishing pre-deployment evaluation as ce"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.24016",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-c9e755595bec19e6b5b5881a",
+    "char_start": 815,
+    "char_end": 824,
+    "quote": "benchmark",
+    "context": "ent evaluation is operationally unspecified. Generic safety benchmarks cannot surface the failure modes most relevant to this dom"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:fine-tuning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.24016",
+   "match_basis": "文档正文出现术语 'fine-tuning'",
+   "evidence": {
+    "chunk_id": "chunk-37aaede1a2fd73c714e62815",
+    "char_start": 715,
+    "char_end": 726,
+    "quote": "fine-tuning",
+    "context": "interventions are tested as a low-cost alternative to model fine-tuning for safety improvement [17,28]. Six commer- cial models wer"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:risk management",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.24016",
+   "match_basis": "文档正文出现术语 'risk management'",
+   "evidence": {
+    "chunk_id": "chunk-e2a124bae594a5ed57956fee",
+    "char_start": 184,
+    "char_end": 199,
+    "quote": "Risk Management",
+    "context": "National Institute of Standards and Technol- ogy (NIST) AI Risk Management Framework treats performance measurement against defined me"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-b90b0f8249e98eb59949eae6",
+    "char_start": 235,
+    "char_end": 246,
+    "quote": "adversarial",
+    "context": "tion-layer vulnerabilities (prompt injection, jailbreaking, adversarial perturbations) dominate, accounting for 66% of papers, whil"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:agent security",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'agent security'",
+   "evidence": {
+    "chunk_id": "chunk-cb037c9b284f0146310cdeaf",
+    "char_start": 310,
+    "char_end": 324,
+    "quote": "agent security",
+    "context": "veys cover LLM safety, adversarial machine learning, and AI agent security, they mostly focus on model-level attacks and do not provid"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-3a255bbafd69227ee4fe8c52",
+    "char_start": 730,
+    "char_end": 739,
+    "quote": "alignment",
+    "context": "tect semantic manipu- (Brain) tency detection training-time alignment lation reliably Tool Misuse (Action) Execution monitoring,"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:backdoor",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'backdoor'",
+   "evidence": {
+    "chunk_id": "chunk-dddd3e1d03ac05a560ff641a",
+    "char_start": 818,
+    "char_end": 826,
+    "quote": "backdoor",
+    "context": "y include manipulation of reasoning, behaviour insertion of backdoor behaviours into model weights, and goal-hijacking attacks t"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-565e25f4ded46c9785894d9b",
+    "char_start": 175,
+    "char_end": 184,
+    "quote": "benchmark",
+    "context": "del, nature of contribution (attack, defense, framework, or benchmark), experimental setup, and key findings including limitation"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:chain-of-thought",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'chain-of-thought'",
+   "evidence": {
+    "chunk_id": "chunk-2ab6eedef44d12714480531c",
+    "char_start": 187,
+    "char_end": 203,
+    "quote": "chain-of-thought",
+    "context": "soning modules, planning and task decomposition mechanisms, chain-of-thought reasoning frameworks, and goal and state management compone"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:detector",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'detector'",
+   "evidence": {
+    "chunk_id": "chunk-5246b60cb5942aa8e94c2631",
+    "char_start": 828,
+    "char_end": 836,
+    "quote": "detector",
+    "context": "s [124]. The classifiers can vary from fine-tuned LLM-based detectors to lightweight embedding-based classifiers that check for"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:fine-tuning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'fine-tuning'",
+   "evidence": {
+    "chunk_id": "chunk-890497498a996141a55a62ca",
+    "char_start": 451,
+    "char_end": 462,
+    "quote": "fine-tuning",
+    "context": "s for backdoor remediation focus on detecting backdoors via fine-tuning or cleansing. Adversarial fine-tuning helps improve robustn"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:hallucination",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'hallucination'",
+   "evidence": {
+    "chunk_id": "chunk-c2801fd8bf7c0a04cfc27f18",
+    "char_start": 274,
+    "char_end": 287,
+    "quote": "hallucination",
+    "context": "Xu, Giovanni Zappella, and Bryan Wang. 2024. Cost-effective hallucination detection for llms.arXiv (Cornell University), (July 2024)."
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:jailbreak",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'jailbreak'",
+   "evidence": {
+    "chunk_id": "chunk-b90b0f8249e98eb59949eae6",
+    "char_start": 221,
+    "char_end": 230,
+    "quote": "jailbreak",
+    "context": "3.9:1. Perception-layer vulnerabilities (prompt injection, jailbreaking, adversarial perturbations) dominate, accounting for 66%"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:multi-agent",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'multi-agent'",
+   "evidence": {
+    "chunk_id": "chunk-f29866eca47ec22f8b94ee5d",
+    "char_start": 244,
+    "char_end": 255,
+    "quote": "Multi-Agent",
+    "context": "els, LLM Agents, Vulnerability, Security, Prompt Injection, Multi-Agent Systems, Tool-Augmented LLMs 1 Introduction 1.1 The Advance"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-b90b0f8249e98eb59949eae6",
+    "char_start": 851,
+    "char_end": 858,
+    "quote": "privacy",
+    "context": "ties to propagate across layers. CCS Concepts:•Security and privacy → Human and societal aspects of security and privacy;•Compu"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:prompt injection",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'prompt injection'",
+   "evidence": {
+    "chunk_id": "chunk-b90b0f8249e98eb59949eae6",
+    "char_start": 203,
+    "char_end": 219,
+    "quote": "prompt injection",
+    "context": "es defense work by 3.9:1. Perception-layer vulnerabilities (prompt injection, jailbreaking, adversarial perturbations) dominate, account"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:reinforcement learning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'reinforcement learning'",
+   "evidence": {
+    "chunk_id": "chunk-67252445781d060122762d6d",
+    "char_start": 506,
+    "char_end": 528,
+    "quote": "reinforcement learning",
+    "context": "d Group 3 excludes out-of-scope domains (e.g., traditional, reinforcement learning, or game agents). Queries were adapted to the syntax of dat"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:supply chain",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'supply chain'",
+   "evidence": {
+    "chunk_id": "chunk-a5b726bffdeeb373278142ef",
+    "char_start": 482,
+    "char_end": 494,
+    "quote": "supply chain",
+    "context": "rey-box settings such as collaborative developmentsettings, supply chain environments, or compromised insiders with only limited aut"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:vulnerability",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.10530",
+   "match_basis": "文档正文出现术语 'vulnerability'",
+   "evidence": {
+    "chunk_id": "chunk-b90b0f8249e98eb59949eae6",
+    "char_start": 558,
+    "char_end": 571,
+    "quote": "vulnerability",
+    "context": "agents 12%. We contribute a four-layer taxonomy mapping 13 vulnerability types across perception, brain, action, and interaction lay"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2608.28327",
+   "predicate": "cites",
+   "object": "source:owasp_genai",
+   "match_basis": "正文/参考文献中出现 'OWASP Top 10 for Large Language Model'",
+   "evidence": {
+    "chunk_id": "chunk-665f371b45442956c3a043ac",
+    "char_start": 872,
+    "char_end": 909,
+    "quote": "OWASP top 10 for large language model",
+    "context": "l-intelligence systems,https://atlas.mitre.org, ???? Accessed 2026. [52]OWASP Foundation, OWASP top 10 for large language model applications,https://owasp.org/"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:AUROC",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'AUROC'",
+   "evidence": {
+    "chunk_id": "chunk-4600c056cb91b96604edd2c1",
+    "char_start": 794,
+    "char_end": 799,
+    "quote": "AUROC",
+    "context": "on examples deduplicated at Jaccard0.6, reaching validation AUROC1.0; that near-ceiling figure is itself discussed in Section"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-897350d1d7e383844c510325",
+    "char_start": 538,
+    "char_end": 549,
+    "quote": "Adversarial",
+    "context": "ightsorreadingactivations,theytierthedefenderasAATMtiersthe Adversarial robustness adversary. From these we derive how a stack beha"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-a06ce299487bdb254b71732b",
+    "char_start": 199,
+    "char_end": 208,
+    "quote": "alignment",
+    "context": "e in hand, requiring neither large compute nor the original alignment data, while the capability to restore it is not. This is th"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:backdoor",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'backdoor'",
+   "evidence": {
+    "chunk_id": "chunk-c39cb2c4e26f9b6753fd6e97",
+    "char_start": 213,
+    "char_end": 221,
+    "quote": "backdoor",
+    "context": "Influence over the training or fine-tuning Data poisoning, backdoor and Trojan insertion corpus AATM refines the classical whit"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-e1a65dd7320e9d6dec8b36b6",
+    "char_start": 764,
+    "char_end": 773,
+    "quote": "benchmark",
+    "context": "valuation concern (Section8.1), and the field’s metrics and benchmarks are assessed against what A. Alotaibi et al.:Preprint subm"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:detector",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'detector'",
+   "evidence": {
+    "chunk_id": "chunk-f201c4fe2f1809eb4bd06d1a",
+    "char_start": 724,
+    "char_end": 732,
+    "quote": "detector",
+    "context": "cted instructions more accurately but by moving to a row no detector occupies, making compliance with them inconsequential. Conv"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:fine-tuning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'fine-tuning'",
+   "evidence": {
+    "chunk_id": "chunk-c2464eb925d3d339c6f6298c",
+    "char_start": 361,
+    "char_end": 372,
+    "quote": "fine-tuning",
+    "context": "proposes defenses, input and output filtering [1,2], robust fine-tuning [3,4], adversarial training [5,6], runtime monitoring [7],"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:jailbreak",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'jailbreak'",
+   "evidence": {
+    "chunk_id": "chunk-7b7436c4572223eb9f3af329",
+    "char_start": 183,
+    "char_end": 192,
+    "quote": "jailbreak",
+    "context": "loyedmodeltouncovervulnerabilities,throughadversarialinputs,jailbreakattempts,ormisusescenariosthattest its safety boundary [23,2"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-9645e514ac634298e1a11e67",
+    "char_start": 426,
+    "char_end": 433,
+    "quote": "privacy",
+    "context": "r extraction targets the weights directly (A3), posing both privacy and intellectual-property risks [57,58]. A. Alotaibi et al."
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:prompt injection",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'prompt injection'",
+   "evidence": {
+    "chunk_id": "chunk-2463613d984c30b5c01cc228",
+    "char_start": 504,
+    "char_end": 520,
+    "quote": "prompt injection",
+    "context": "access The surrounding system only: dependencies, Indirect prompt injection [28], retrieval retrieved content, the deployment pipeline"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:reinforcement learning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'reinforcement learning'",
+   "evidence": {
+    "chunk_id": "chunk-57036f50478c80cd629c65e3",
+    "char_start": 284,
+    "char_end": 306,
+    "quote": "Reinforcement Learning",
+    "context": "Retrieval-Augmented Generation FPR False Positive Rate RLHF Reinforcement Learning from Human Feedback FRR False Refusal Rate TEE Trusted Exec"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:supply chain",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2608.28327",
+   "match_basis": "文档正文出现术语 'supply chain'",
+   "evidence": {
+    "chunk_id": "chunk-3fabd21871efd4cebf0a703b",
+    "char_start": 751,
+    "char_end": 763,
+    "quote": "supply chain",
+    "context": ": Identifying vulnerabilities in the machine learning model supply chain, arXiv preprint arXiv:1708.06733 (2017). [61]J. Steinhardt,"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.23894",
+   "predicate": "cites",
+   "object": "source:owasp_genai",
+   "match_basis": "正文/参考文献中出现 'OWASP Top 10'",
+   "evidence": {
+    "chunk_id": "chunk-8348a413a7703e35a6ab8e41",
+    "char_start": 161,
+    "char_end": 173,
+    "quote": "OWASP Top 10",
+    "context": ". [3]Q. Wu, G. Bansal, J. Zhang, Y. Wu, B. Li, E. Zhu, [16]OWASP GenAI Security Project, “OWASP Top 10 for L. Jiang, X. Zhang, S. Zhang, J. Liuet al., “Autogen: Agentic Applications,” 2025, ag"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:adversarial",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'adversarial'",
+   "evidence": {
+    "chunk_id": "chunk-3bed24359fba57b8249de698",
+    "char_start": 915,
+    "char_end": 926,
+    "quote": "adversarial",
+    "context": "ffers from the coverage demonstrated by empirical research. adversarial input can alter reasoning, the resulting decision"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:agent security",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'agent security'",
+   "evidence": {
+    "chunk_id": "chunk-c9eeb67aea241366a0fa4ac8",
+    "char_start": 771,
+    "char_end": 785,
+    "quote": "agent security",
+    "context": "ants can strategically exploit decisions are managed. Multi-agent security therefore requires the coordination mechanism itself. consi"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-55db088634b830d8ee3da9c3",
+    "char_start": 968,
+    "char_end": 977,
+    "quote": "alignment",
+    "context": "ipeline (P), Horizontal/Collaborative (C), or behavior, and alignment faking [45, 46, 47]."
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:backdoor",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'backdoor'",
+   "evidence": {
+    "chunk_id": "chunk-666e7b205aa84d5bb48d8693",
+    "char_start": 360,
+    "char_end": 368,
+    "quote": "backdoor",
+    "context": "uated jailbreaks, training-data poisoning, privacy leakage, backdoors, in combination. Selected evaluations are mapped separatel"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-ee94e21fa3e032ad4ce99430",
+    "char_start": 805,
+    "char_end": 814,
+    "quote": "benchmark",
+    "context": "r agents can itself carry adversarial instructions security benchmarks to characterize empirical coverage and or poisoned state."
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:chain-of-thought",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'chain-of-thought'",
+   "evidence": {
+    "chunk_id": "chunk-905b0878fd16543dc5f2f322",
+    "char_start": 360,
+    "char_end": 376,
+    "quote": "chain-of-thought",
+    "context": "W. Xu, X. Wang, Y. Sunet al., “Personal llm agents: ing the chain-of-thought safety reasoning mechanism Insights and survey about the ca"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:jailbreak",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'jailbreak'",
+   "evidence": {
+    "chunk_id": "chunk-7bfc400c8c94b2fff5dc7a72",
+    "char_start": 859,
+    "char_end": 868,
+    "quote": "jailbreak",
+    "context": "asis for the mechanism or consequence. For example, generic jailbreak, survey, we adopt a structured literature-review methodolog"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:multi-agent",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'multi-agent'",
+   "evidence": {
+    "chunk_id": "chunk-fcf229fe8fc39c6a8ed83a3f",
+    "char_start": 496,
+    "char_end": 507,
+    "quote": "multi-agent",
+    "context": "supply chains, inter-agent trust, human oversight, complex multi-agent, systemic, and long-horizon threats receive less coverage."
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-666e7b205aa84d5bb48d8693",
+    "char_start": 343,
+    "char_end": 350,
+    "quote": "privacy",
+    "context": "ondition was evaluated jailbreaks, training-data poisoning, privacy leakage, backdoors, in combination. Selected evaluations ar"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:prompt injection",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'prompt injection'",
+   "evidence": {
+    "chunk_id": "chunk-fcf229fe8fc39c6a8ed83a3f",
+    "char_start": 763,
+    "char_end": 779,
+    "quote": "prompt injection",
+    "context": "ss all empirical research. Heterogeneous involving indirect prompt injection, memory poisoning, mali- metrics, limited adaptive defense"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:supply chain",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'supply chain'",
+   "evidence": {
+    "chunk_id": "chunk-fcf229fe8fc39c6a8ed83a3f",
+    "char_start": 437,
+    "char_end": 449,
+    "quote": "supply chain",
+    "context": "ingle-agent settings. Persistent, Human–Agent, and software supply chains, inter-agent trust, human oversight, complex multi-agent,"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:vulnerability",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.23894",
+   "match_basis": "文档正文出现术语 'vulnerability'",
+   "evidence": {
+    "chunk_id": "chunk-a1d2738549b3eef4b23047ec",
+    "char_start": 746,
+    "char_end": 759,
+    "quote": "vulnerability",
+    "context": "cross-dimensional threat LLM-based agent; (2) it analyzed a vulnerability arising from framework and characterizes the broader attack"
+   },
+   "verified": true
+  },
+  {
+   "subject": "paper:2609.22882",
+   "predicate": "cites",
+   "object": "official:eu_ai_act",
+   "match_basis": "正文/参考文献中出现 'Artificial Intelligence Act'",
+   "evidence": {
+    "chunk_id": "chunk-f9d6b23e1fa81a89b80710c3",
+    "char_start": 731,
+    "char_end": 758,
+    "quote": "Artificial Intelligence Act",
+    "context": "LYSIS (Malgieri et al. eds., forthcoming 2026); Lena Enqvist, ‘Human Oversight’ in the EU Artificial Intelligence Act: What, When and by Whom?, 15 LAW, INNOVATION & TECH. 508 (2023); Ben Green, The Flaws of"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:agent security",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'agent security'",
+   "evidence": {
+    "chunk_id": "chunk-23f47911c31e600653384d42",
+    "char_start": 328,
+    "char_end": 342,
+    "quote": "agent security",
+    "context": "ng file because it misremembered the path. As one survey of agent security puts it, the risk \"shifts from epistemic to behavioral.\"69"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:alignment",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'alignment'",
+   "evidence": {
+    "chunk_id": "chunk-e1ef2bd6c0ae27c4de3d048c",
+    "char_start": 514,
+    "char_end": 523,
+    "quote": "Alignment",
+    "context": "nated pacing as soon as possible.” Anthropic, Improving Our Alignment and Security Efforts (Aug. 31, 2026). 188 OpenAI, Respondin"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:benchmark",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'benchmark'",
+   "evidence": {
+    "chunk_id": "chunk-c3b89bda0691c863d69a7fa0",
+    "char_start": 493,
+    "char_end": 502,
+    "quote": "benchmark",
+    "context": "the emergency alert that would have saved his life.51 In a benchmark of one thousand survival-pressure scenarios, models chose u"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:hallucination",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'hallucination'",
+   "evidence": {
+    "chunk_id": "chunk-d478e74245fd42a48c9e97c0",
+    "char_start": 327,
+    "char_end": 340,
+    "quote": "Hallucination",
+    "context": "tional domain into operational and physical environments.12 Hallucinations, instruction misfires, and proxy-driven optimization no lo"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:privacy",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'privacy'",
+   "evidence": {
+    "chunk_id": "chunk-2ffcb7b74c21454d705f5174",
+    "char_start": 649,
+    "char_end": 656,
+    "quote": "privacy",
+    "context": "ation of judgment. The operator must weigh the individual's privacy interests against the public's interest in access to inform"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:reinforcement learning",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'reinforcement learning'",
+   "evidence": {
+    "chunk_id": "chunk-e1ef2bd6c0ae27c4de3d048c",
+    "char_start": 287,
+    "char_end": 309,
+    "quote": "reinforcement learning",
+    "context": "reward hacking was found and an April freeze of production reinforcement learning environments, neither disclosed at the time; the same docum"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:risk management",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'risk management'",
+   "evidence": {
+    "chunk_id": "chunk-f9d6b23e1fa81a89b80710c3",
+    "char_start": 120,
+    "char_end": 135,
+    "quote": "Risk Management",
+    "context": "; Nat’l Inst. of Standards & Tech., Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1, MANAGE 2.4 (Jan. 202"
+   },
+   "verified": true
+  },
+  {
+   "subject": "term:supply chain",
+   "predicate": "mentioned_in",
+   "object": "doc:paper:2609.22882",
+   "match_basis": "文档正文出现术语 'supply chain'",
+   "evidence": {
+    "chunk_id": "chunk-d478e74245fd42a48c9e97c0",
+    "char_start": 607,
+    "char_end": 619,
+    "quote": "supply chain",
+    "context": "hysical accident; at larger scale it can disrupt markets or supply chains; and, in the extreme case of a capable and misaligned syst"
+   },
+   "verified": true
+  }
+ ],
+ "rejected_edges": [
+  {
+   "subject": "paper:2608.10530",
+   "object": "source:owasp_genai",
+   "reason": "整篇文档缺少目标文档锚点（需出现 OWASP Foundation, owasp.org, OWASP GenAI, OWASP Gen AI, GenAI Security Project）",
+   "evidence": {
+    "chunk_id": "chunk-400cf4ec6ada465d477f822d",
+    "char_start": 473,
+    "char_end": 510,
+    "quote": "OWASP top 10 for large language model"
+   }
+  },
+  {
+   "subject": "paper:2608.10530",
+   "object": "source:owasp_genai",
+   "reason": "整篇文档缺少目标文档锚点（需出现 OWASP Foundation, owasp.org, OWASP GenAI, OWASP Gen AI, GenAI Security Project）",
+   "evidence": {
+    "chunk_id": "chunk-400cf4ec6ada465d477f822d",
+    "char_start": 473,
+    "char_end": 485,
+    "quote": "OWASP top 10"
+   }
+  }
+ ],
+ "documents": [
+  {
+   "arxiv_id": "2609.03999",
+   "title": "Shifting from Injection to Interaction: Rethinking Web Security in the Age of LLMs and Beyond",
+   "document_key": "paper:2609.03999",
+   "status": "fulltext",
+   "pdf_sha256": "9a0f488f39ef42cd9b5d079e9b289eebea990412cd80fda0511b8fa5b62948f9",
+   "snapshot_hash": "9a0f488f39ef42cd9b5d079e9b289eebea990412cd80fda0511b8fa5b62948f9",
+   "goal_edges": 2,
+   "term_edges": 17,
+   "goals": [
+    "source:nist_ai_rmf",
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.22961",
+   "title": "When Agentic Trust Crosses Organizational Boundaries: Structural Externalization and a Reference Model for Trust Evidence",
+   "document_key": "paper:2609.22961",
+   "status": "fulltext",
+   "pdf_sha256": "62ed596c4bf266c74787777e6dbd3c2162c6db977cac58b7d10aa1a473a1c297",
+   "snapshot_hash": "62ed596c4bf266c74787777e6dbd3c2162c6db977cac58b7d10aa1a473a1c297",
+   "goal_edges": 2,
+   "term_edges": 8,
+   "goals": [
+    "official:eu_ai_act",
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.35266",
+   "title": "Continuous Assurance of Agentic Security Auditors for Software Delivery Decision Gates",
+   "document_key": "paper:2609.35266",
+   "status": "fulltext",
+   "pdf_sha256": "1b3ff15bf8f12178ca54af79f7b27e239a20e07f499db867ed173a14ed4b3fac",
+   "snapshot_hash": "1b3ff15bf8f12178ca54af79f7b27e239a20e07f499db867ed173a14ed4b3fac",
+   "goal_edges": 2,
+   "term_edges": 6,
+   "goals": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ]
+  },
+  {
+   "arxiv_id": "2609.24016",
+   "title": "Context-Aware Pre-Deployment Evaluation of AI Systems: A Regulatory Framework for Nigerian Fintech",
+   "document_key": "paper:2609.24016",
+   "status": "fulltext",
+   "pdf_sha256": "19420217e150640c6a3eebb4795d6278fb14ec60c066503e70e1c0e2d2cb2653",
+   "snapshot_hash": "19420217e150640c6a3eebb4795d6278fb14ec60c066503e70e1c0e2d2cb2653",
+   "goal_edges": 2,
+   "term_edges": 5,
+   "goals": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ]
+  },
+  {
+   "arxiv_id": "2608.10530",
+   "title": "On Understanding, Identifying, and Mitigating Vulnerabilities in Agentic Large Language Models",
+   "document_key": "paper:2608.10530",
+   "status": "fulltext",
+   "pdf_sha256": "7c9fab3975c003230ef76e09cc319d640930462a254a1b913d5a4b0d29a6959b",
+   "snapshot_hash": "7c9fab3975c003230ef76e09cc319d640930462a254a1b913d5a4b0d29a6959b",
+   "goal_edges": 0,
+   "term_edges": 16,
+   "goals": [
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2608.28327",
+   "title": "Layered LLM Defenses as an Ensemble: Access Tiers, Inference Cost, and the Measured Failure Correlation Between Defense Layers",
+   "document_key": "paper:2608.28327",
+   "status": "fulltext",
+   "pdf_sha256": "01ca21d5ae8d13a6b511fd1ab5f19e2ee54de4ba2d1a87b527c207c1e43242bf",
+   "snapshot_hash": "01ca21d5ae8d13a6b511fd1ab5f19e2ee54de4ba2d1a87b527c207c1e43242bf",
+   "goal_edges": 1,
+   "term_edges": 12,
+   "goals": [
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.23894",
+   "title": "Connecting the Dots in Agentic AI Security: A Cross-Dimensional Threat Taxonomy, Evaluation Maturity, and Open Challenges",
+   "document_key": "paper:2609.23894",
+   "status": "fulltext",
+   "pdf_sha256": "494960e70fe43dee9ea7f3f62e80e0c97641d1eac319a11c995439fdeab2942e",
+   "snapshot_hash": "494960e70fe43dee9ea7f3f62e80e0c97641d1eac319a11c995439fdeab2942e",
+   "goal_edges": 1,
+   "term_edges": 12,
+   "goals": [
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.22882",
+   "title": "The Law of Stop: Interruptibility, Injunctions, and the Governance of Agentic AI",
+   "document_key": "paper:2609.22882",
+   "status": "fulltext",
+   "pdf_sha256": "9d8f866588a44a70a39b3b4183492462643611f94078f7d0af0269ef0d8788bf",
+   "snapshot_hash": "9d8f866588a44a70a39b3b4183492462643611f94078f7d0af0269ef0d8788bf",
+   "goal_edges": 1,
+   "term_edges": 8,
+   "goals": [
+    "official:eu_ai_act"
+   ]
+  }
+ ],
+ "counts": {
+  "new_documents": 8,
+  "document_edges": 11,
+  "term_edges": 84,
+  "rejected_edges": 2
+ },
+ "previous_edge_file": "evaluation\\b_cross_document_edges_20261002.json"
+}

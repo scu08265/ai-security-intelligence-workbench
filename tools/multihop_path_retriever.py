@@ -134,6 +134,31 @@ def _resolve(node: str) -> list[str]:
     return candidates
 
 
+def _as_node(value: str) -> str:
+    """边文件里的端点：已带前缀的按原样使用，否则视为文档节点。"""
+    text = str(value or "")
+    if text.startswith(("doc:", "term:", "event:", "component:")):
+        return text
+    return f"doc:{text}"
+
+
+def term_diagnostics(case: dict, graph: Graph) -> dict:
+    """术语可达性：单独诊断，不参与 path_found 判定。"""
+    declared = case.get("reasoning_path") or []
+    if not declared:
+        return {"term": None, "term_nodes": [], "term_reachable": False,
+                "term_first_hop_documents": 0}
+    term = declared[0]
+    nodes = [node for node in _resolve(term) if node in graph.nodes]
+    first_hop = {edge["to"] for edge in graph.edges if edge["from"] in nodes}
+    return {
+        "term": term,
+        "term_nodes": nodes,
+        "term_reachable": bool(nodes and first_hop),
+        "term_first_hop_documents": len(first_hop),
+    }
+
+
 def validate(case: dict, graph: Graph) -> dict:
     declared = case["reasoning_path"]
     start_options = _resolve(declared[0])
@@ -248,13 +273,17 @@ def main() -> int:
             if not evidence.get("chunk_id"):
                 continue          # 没有真实 chunk 证据的边不进入图
             subject, obj = edge.get("subject"), edge.get("object")
-            graph.add_node(f"doc:{subject}", "document", subject)
-            graph.add_node(f"doc:{obj}", "document", obj)
-            graph.add_edge(f"doc:{subject}", f"doc:{obj}",
+            subject_node, object_node = _as_node(subject), _as_node(obj)
+            graph.add_node(subject_node, "term" if subject_node.startswith("term:") else "document",
+                           subject)
+            graph.add_node(object_node, "document", obj)
+            graph.add_edge(subject_node, object_node,
                            edge.get("predicate") or "document_to_document", evidence)
             loaded_edges.append(edge)
     payload = json.loads(args.candidates.read_text(encoding="utf-8"))
     results = [validate(case, graph) for case in payload["cases"]]
+    for case, result in zip(payload["cases"], results):
+        result["term_diagnostics"] = term_diagnostics(case, graph)
 
     by_type: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     missing_kinds: dict[str, int] = {}
@@ -280,6 +309,10 @@ def main() -> int:
             "no_path": sum(1 for r in results if not r["path_found"]),
             "by_chain_type": {k: dict(v) for k, v in by_type.items()},
             "missing_edge_kinds": missing_kinds,
+            "term_reachable": sum(1 for r in results
+                                  if r["term_diagnostics"]["term_reachable"]),
+            "term_not_reachable": sum(1 for r in results
+                                      if not r["term_diagnostics"]["term_reachable"]),
         },
         "missing_edge_summary": {
             "cases_with_missing_edges": sum(1 for r in results if r.get("missing_edges")),
