@@ -154,6 +154,19 @@ def test_scorecard_does_not_leak_secrets(monkeypatch):
     assert "sk-scorecard-canary" not in response.text
 
 
+def test_active_multihop_uses_v2_batch_and_exposes_missing_edges():
+    body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
+    active = body["active_multihop"]
+    assert active["available"] is True
+    assert active["cross_document_found"] == 10
+    assert active["cross_document_total"] == 21
+    assert active["two_hop_found"] == 10
+    assert active["term_reachable"] == 29
+    assert active["missing_edge_kinds"]["document_to_document"] == 52
+    # 旧冻结基线保留，不覆盖
+    assert body["multihop"]["cross_document_found"] == 0
+
+
 def test_b_evaluation_artifacts_are_exposed_without_rounding_unknowns():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     assert body["available"] is True

@@ -137,6 +137,16 @@ def test_scorecard_consumes_current_evidence_and_reserves_unified_api():
         assert label in SCRIPT
 
 
+def test_scorecard_reads_active_multihop_fields():
+    for token in (
+        "active_multihop",
+        "term_reachable",
+        "missing_edge_kinds",
+        "缺文档间边",
+    ):
+        assert token in SCRIPT
+
+
 def test_scorecard_reads_canonical_monitoring_and_active_batch_fields():
     for token in (
         "monitoring_7d.within_24h_rate.value",

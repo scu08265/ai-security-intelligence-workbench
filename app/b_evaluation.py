@@ -141,7 +141,8 @@ def _relation(payload: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
-def _multihop(payload: dict[str, Any] | None) -> dict[str, Any]:
+def _multihop(payload: dict[str, Any] | None, *, source: str | None = None,
+              missing_edges: dict[str, Any] | None = None) -> dict[str, Any]:
     if not payload:
         return {"available": False}
     counts = payload.get("counts") or {}
@@ -157,9 +158,11 @@ def _multihop(payload: dict[str, Any] | None) -> dict[str, Any]:
         "two_hop_total": two_hop.get("total"),
         "cross_document_found": cross.get("path_found", 0),
         "cross_document_total": cross.get("total"),
-        "missing_edge_kinds": payload.get("missing_edge_kinds") or {},
+        "term_reachable": counts.get("term_reachable"),
+        "term_not_reachable": counts.get("term_not_reachable"),
+        "missing_edge_kinds": (missing_edges or (payload.get("missing_edge_summary") or {}).get("missing_edge_kinds") or payload.get("missing_edge_kinds") or {}),
         "limitations": payload.get("limitations") or [],
-        "source": "artifacts/b_eval/multihop_path_validation.json",
+        "source": source or "artifacts/b_eval/multihop_path_validation.json",
     }
 
 
@@ -178,6 +181,20 @@ def _demo(payload: dict[str, Any] | None) -> dict[str, Any]:
 
 
 _BATCH_FILE_RE = re.compile(r"^(qa_human_score|qa_performance)_(\d{8})\.json$")
+_MULTIHOP_FILE_RE = re.compile(r"^multihop_path_validation_(\d{8})(_v2)?\.json$")
+
+
+def _active_multihop() -> str | None:
+    """Newest versioned multihop validation file, preferring the v2 revision."""
+    found: list[tuple[str, int]] = []
+    for path in ARTIFACT_DIR.glob("multihop_path_validation_*.json"):
+        match = _MULTIHOP_FILE_RE.match(path.name)
+        if match:
+            found.append((match.group(1), 1 if match.group(2) else 0))
+    if not found:
+        return None
+    batch_id, _version = max(found, key=lambda item: (item[0], item[1]))
+    return f"multihop_path_validation_{batch_id}_v2.json"
 
 
 def _active_batch() -> dict[str, Any] | None:
@@ -221,13 +238,18 @@ def summary() -> dict[str, Any]:
         source=("artifacts/b_eval/" + active_batch["qa_performance_file"]) if active_batch else None,
     )
     relation = _relation(_read_json("relation_score_all.json"))
+    active_multihop_file = _active_multihop()
+    active_multihop = _multihop(
+        _read_json(active_multihop_file) if active_multihop_file else None,
+        source=("artifacts/b_eval/" + active_multihop_file) if active_multihop_file else None,
+    )
     multihop = _multihop(_read_json("multihop_path_validation.json"))
     demo = _demo(_read_json("b_demo_screenshots.json"))
     available = all(item.get("available") for item in (
         qa_quality, qa_performance, relation, multihop,
     ))
     active_available = bool(active_batch) and all(item.get("available") for item in (
-        active_qa_quality, active_qa_performance, relation, multihop,
+        active_qa_quality, active_qa_performance, relation, active_multihop,
     ))
     return {
         "available": available,
@@ -240,6 +262,7 @@ def summary() -> dict[str, Any]:
         "active_qa_performance": active_qa_performance,
         "relation": relation,
         "multihop": multihop,
+        "active_multihop": active_multihop,
         "demo": demo,
         "evaluation_basis": ("旧冻结基线保留；qa_quality / qa_performance 指向改造前基线，active_qa_quality / active_qa_performance 指向最新完整批次。" if active_batch else "冻结基线；新实现必须重新运行机器评测并由人工重新核验后才能更新这些数字。"),
         "limitations": [
