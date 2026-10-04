@@ -219,3 +219,67 @@ def test_poc_classification_counts_match_the_rows():
         _Counter(row["url_type"] for row in rows))
     assert classification["machine_suggestion_counts"] == dict(
         _Counter(row["建议_是否可利用证据"] for row in rows))
+
+
+# --------------------------------------------------------------------------
+# 跨文档真实关系边（选项 A：新增来源后）
+# --------------------------------------------------------------------------
+
+CROSS_DOC_EDGES = ROOT / "evaluation" / "b_cross_document_edges_20261002_v2.json"
+MULTIHOP_V2 = ARTIFACTS / "multihop_path_validation_20261002_v2.json"
+NEW_DOCUMENTS = ARTIFACTS / "new_documents_20261002.json"
+COPY_DB = Path(r"D:\ICT\intel-data-b-poc-20261002\intel.sqlite")
+
+
+def test_cross_document_edges_carry_verifiable_chunk_evidence():
+    payload = _load(CROSS_DOC_EDGES)
+    edges = payload["edges"]
+    assert payload["counts"]["new_documents"] >= 5          # 队长要求 5–8 篇
+    assert payload["counts"]["new_documents"] <= 8
+    assert payload["counts"]["document_edges"] >= 5         # ≥5 条文档间边
+    assert any(e["predicate"] == "mentioned_in" for e in edges)   # 术语第一跳
+    if not COPY_DB.is_file():
+        pytest.skip(f"库副本不存在：{COPY_DB}")
+    import sqlite3
+    with sqlite3.connect(f"file:{COPY_DB}?mode=ro", uri=True) as conn:
+        texts = {row[0]: row[1] for row in conn.execute("select id, text from rag_chunks")}
+    for edge in edges:
+        evidence = edge["evidence"]
+        assert edge["verified"] is True
+        assert evidence["quote"]
+        assert evidence["char_end"] - evidence["char_start"] == len(evidence["quote"])
+        text = texts.get(evidence["chunk_id"])
+        assert text is not None, evidence["chunk_id"]
+        # 独立回读：偏移处必须真的等于 quote
+        assert text[evidence["char_start"]:evidence["char_end"]] == evidence["quote"]
+
+
+def test_new_documents_are_ingested_and_have_goal_edges():
+    documents = _load(NEW_DOCUMENTS)["papers"]
+    assert len(documents) >= 5
+    assert all(doc["status"] == "fulltext" for doc in documents)
+    assert all(doc["goal_edges"] >= 1 for doc in documents)
+    assert all(doc["pdf_sha256"] and doc["snapshot_hash"] for doc in documents)
+
+
+def test_multihop_v2_reports_paths_term_reachability_and_keeps_no_path():
+    payload = _load(MULTIHOP_V2)
+    counts = payload["counts"]
+    by_type = counts["by_chain_type"]["cross_document"]
+    assert by_type["path_found"] >= 1            # 验收：≥1/21
+    assert counts["no_path"] >= 1                # 未连通必须保留，不得隐藏
+    assert counts["term_reachable"] >= 5         # 术语第一跳独立诊断字段
+    found = [c for c in payload["cases"]
+             if c["chain_type"] == "cross_document" and c["path_found"]]
+    for case in found:
+        assert len(case["path_nodes"]) == len(case["path_edges"]) + 1
+        assert case["evidence_ids"]
+        assert all(edge_id for edge_id in case["evidence_ids"])
+        # 路径必须跨文档：起点是术语、终点是目标文档
+        assert case["path_nodes"][0].startswith("term:")
+        assert case["declared_path"][-1].split(":")[0] in case["path_nodes"][-1]
+    unresolved = [c for c in payload["cases"]
+                  if c["chain_type"] == "cross_document" and not c["path_found"]]
+    for case in unresolved:
+        assert case["failure_reason"] or case.get("missing_edges")
+        assert "term_diagnostics" in case

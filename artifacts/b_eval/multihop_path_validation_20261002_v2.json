@@ -1,0 +1,1813 @@
+{
+ "schema_version": "b-multihop-path-validation-1.0",
+ "graph": {
+  "nodes": 187,
+  "edges": 218,
+  "edge_kinds": [
+   "cites",
+   "component_is",
+   "mentioned_in"
+  ],
+  "verified_document_edges_loaded": 97,
+  "note": "只含可追溯到真实证据的边；文档到文档的边只有人工核验且带 chunk 证据的才会加载。"
+ },
+ "counts": {
+  "candidates": 31,
+  "path_found": 20,
+  "no_path": 11,
+  "by_chain_type": {
+   "two_hop": {
+    "total": 10,
+    "path_found": 10
+   },
+   "cross_document": {
+    "total": 21,
+    "no_path": 11,
+    "path_found": 10
+   }
+  },
+  "missing_edge_kinds": {
+   "unspecified": 9,
+   "document_to_document": 52,
+   "term_node_with_evidence": 2
+  },
+  "term_reachable": 29,
+  "term_not_reachable": 2
+ },
+ "missing_edge_summary": {
+  "cases_with_missing_edges": 11,
+  "missing_edge_kinds": {
+   "unspecified": 9,
+   "document_to_document": 52,
+   "term_node_with_evidence": 2
+  },
+  "note": "缺失清单只说明'缺哪类边、需要什么证据'，不包含任何补造的关系。"
+ },
+ "limitations": [
+  "本工具是受限 BFS，不是语义推理；找不到路径时不会创造新边。",
+  "跨文档题声明的 文档A→文档B 在图中不存在，因此必然不连通——这是数据缺口，不是工具缺陷。"
+ ],
+ "cases": [
+  {
+   "question_id": "BMH-001",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "PYSEC-2026-4000",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:PYSEC-2026-4000",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:PYSEC-2026-4000",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:PYSEC-2026-4000",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "PYSEC-2026-4000",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "PYSEC-2026-4000",
+    "term_nodes": [
+     "event:PYSEC-2026-4000"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-002",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "PYSEC-2026-3998",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:PYSEC-2026-3998",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:PYSEC-2026-3998",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:PYSEC-2026-3998",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "PYSEC-2026-3998",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "PYSEC-2026-3998",
+    "term_nodes": [
+     "event:PYSEC-2026-3998"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-003",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "PYSEC-2026-3999",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:PYSEC-2026-3999",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:PYSEC-2026-3999",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:PYSEC-2026-3999",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "PYSEC-2026-3999",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "PYSEC-2026-3999",
+    "term_nodes": [
+     "event:PYSEC-2026-3999"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-004",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "PYSEC-2026-3997",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:PYSEC-2026-3997",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:PYSEC-2026-3997",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:PYSEC-2026-3997",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "PYSEC-2026-3997",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "PYSEC-2026-3997",
+    "term_nodes": [
+     "event:PYSEC-2026-3997"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-005",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "PYSEC-2026-3996",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:PYSEC-2026-3996",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:PYSEC-2026-3996",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:PYSEC-2026-3996",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "PYSEC-2026-3996",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "PYSEC-2026-3996",
+    "term_nodes": [
+     "event:PYSEC-2026-3996"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-006",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "GHSA-8pw2-6jv3-mj5j",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:GHSA-8pw2-6jv3-mj5j",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:GHSA-8pw2-6jv3-mj5j",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:GHSA-8pw2-6jv3-mj5j",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "GHSA-8pw2-6jv3-mj5j",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "GHSA-8pw2-6jv3-mj5j",
+    "term_nodes": [
+     "event:GHSA-8pw2-6jv3-mj5j"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-007",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "GHSA-hcwq-8wjf-3gcr",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:GHSA-hcwq-8wjf-3gcr",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:GHSA-hcwq-8wjf-3gcr",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:GHSA-hcwq-8wjf-3gcr",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "GHSA-hcwq-8wjf-3gcr",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "GHSA-hcwq-8wjf-3gcr",
+    "term_nodes": [
+     "event:GHSA-hcwq-8wjf-3gcr"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-008",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "PYSEC-2026-3985",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:PYSEC-2026-3985",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:PYSEC-2026-3985",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:PYSEC-2026-3985",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "PYSEC-2026-3985",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "PYSEC-2026-3985",
+    "term_nodes": [
+     "event:PYSEC-2026-3985"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-009",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "GHSA-mcmc-2m55-j8jj",
+    "vllm",
+    "paper:2609.29333",
+    "paper:2609.28915"
+   ],
+   "start_node": "event:GHSA-mcmc-2m55-j8jj",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:GHSA-mcmc-2m55-j8jj",
+    "component:vllm",
+    "doc:paper:2609.28915"
+   ],
+   "path_edges": [
+    {
+     "from": "event:GHSA-mcmc-2m55-j8jj",
+     "to": "component:vllm",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:vllm",
+     "to": "doc:paper:2609.28915",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "GHSA-mcmc-2m55-j8jj",
+    "chunk-d486aa432777eaa8e427c2f5"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "GHSA-mcmc-2m55-j8jj",
+    "term_nodes": [
+     "event:GHSA-mcmc-2m55-j8jj"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-010",
+   "chain_type": "two_hop",
+   "declared_path": [
+    "CVE-2025-62593",
+    "ray",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30028"
+   ],
+   "start_node": "event:CVE-2025-62593",
+   "goal_node": "doc:paper:2609.30028",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "event:CVE-2025-62593",
+    "component:ray",
+    "doc:paper:2609.30028"
+   ],
+   "path_edges": [
+    {
+     "from": "event:CVE-2025-62593",
+     "to": "component:ray",
+     "relation": "component_is"
+    },
+    {
+     "from": "component:ray",
+     "to": "doc:paper:2609.30028",
+     "relation": "mentioned_in"
+    }
+   ],
+   "evidence_ids": [
+    "CVE-2025-62593",
+    "chunk-5ae7a299b8a8f6619d6305f2"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "CVE-2025-62593",
+    "term_nodes": [
+     "event:CVE-2025-62593"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-011",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "AUROC",
+    "paper:2609.29429",
+    "paper:2609.28915"
+   ],
+   "start_node": "term:AUROC",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:AUROC 到 doc:paper:2609.28915 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "AUROC",
+     "to": "paper:2609.29429",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29429",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "AUROC",
+    "term_nodes": [
+     "term:AUROC"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-012",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "kernel-level",
+    "paper:2609.29808",
+    "paper:2609.28915"
+   ],
+   "start_node": null,
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中找不到端点（起始='kernel-level'，目标='doc:paper:2609.28915'）",
+   "missing_edges": [
+    {
+     "from": "kernel-level",
+     "to": "paper:2609.29808",
+     "required_relation": "term_node_with_evidence",
+     "why": "节点 'kernel-level' 不在图中：它既不是已登记来源、事件或组件，也没有作为带证据的实体被登记",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.29808",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "kernel-level",
+    "term_nodes": [],
+    "term_reachable": false,
+    "term_first_hop_documents": 0
+   }
+  },
+  {
+   "question_id": "BMH-013",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "multi-agent",
+    "paper:2609.29333",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.30266",
+    "paper:2609.28915"
+   ],
+   "start_node": "term:multi-agent",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:multi-agent 到 doc:paper:2609.28915 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "multi-agent",
+     "to": "paper:2609.29333",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29333",
+     "to": "paper:2609.29757",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29757",
+     "to": "paper:2609.30028",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30028",
+     "to": "paper:2609.28900",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28900",
+     "to": "paper:2609.30266",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30266",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "multi-agent",
+    "term_nodes": [
+     "term:multi-agent"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 4
+   }
+  },
+  {
+   "question_id": "BMH-014",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "reinforcement learning",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.29808",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:reinforcement learning",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:reinforcement learning",
+    "doc:paper:2609.22882",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:reinforcement learning",
+     "to": "doc:paper:2609.22882",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22882",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-e1ef2bd6c0ae27c4de3d048c",
+    "chunk-f9d6b23e1fa81a89b80710c3"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "reinforcement learning",
+    "term_nodes": [
+     "term:reinforcement learning"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 4
+   }
+  },
+  {
+   "question_id": "BMH-015",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "prompt injection",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:security_blog"
+   ],
+   "start_node": "term:prompt injection",
+   "goal_node": "doc:source:security_blog",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:prompt injection 到 doc:source:security_blog 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "prompt injection",
+     "to": "paper:2609.30217",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30217",
+     "to": "paper:2609.29757",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29757",
+     "to": "paper:2609.30028",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30028",
+     "to": "paper:2609.28900",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28900",
+     "to": "paper:2609.29429",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29429",
+     "to": "paper:2609.30243",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30243",
+     "to": "paper:2609.30266",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30266",
+     "to": "paper:2609.29808",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29808",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28915",
+     "to": "source:owasp_genai",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "source:owasp_genai",
+     "to": "source:security_blog",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "prompt injection",
+    "term_nodes": [
+     "term:prompt injection"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 5
+   }
+  },
+  {
+   "question_id": "BMH-016",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "supply chain",
+    "paper:2609.28996",
+    "paper:2609.29757",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:security_blog",
+    "source:owasp_genai",
+    "source:nist_news",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:supply chain",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:supply chain",
+    "doc:paper:2609.22882",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:supply chain",
+     "to": "doc:paper:2609.22882",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22882",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-d478e74245fd42a48c9e97c0",
+    "chunk-f9d6b23e1fa81a89b80710c3"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "supply chain",
+    "term_nodes": [
+     "term:supply chain"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 5
+   }
+  },
+  {
+   "question_id": "BMH-017",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "risk management",
+    "source:nist_ai_rmf",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:risk management",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:risk management",
+    "doc:paper:2609.22961",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:risk management",
+     "to": "doc:paper:2609.22961",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22961",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-f1e362206516aa8101a6eb75",
+    "chunk-493df5df913a27ffc52bd9e7"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "risk management",
+    "term_nodes": [
+     "term:risk management"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 5
+   }
+  },
+  {
+   "question_id": "BMH-018",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "Qwen3",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.30192",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.30266",
+    "paper:2609.28915",
+    "paper:2606.15617"
+   ],
+   "start_node": null,
+   "goal_node": "doc:paper:2606.15617",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中找不到端点（起始='Qwen3'，目标='doc:paper:2606.15617'）",
+   "missing_edges": [
+    {
+     "from": "Qwen3",
+     "to": "paper:2609.28996",
+     "required_relation": "term_node_with_evidence",
+     "why": "节点 'Qwen3' 不在图中：它既不是已登记来源、事件或组件，也没有作为带证据的实体被登记",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.28996",
+     "to": "paper:2609.29333",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.29333",
+     "to": "paper:2609.29757",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.29757",
+     "to": "paper:2609.29228",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.29228",
+     "to": "paper:2609.30192",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.30192",
+     "to": "paper:2609.29429",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.29429",
+     "to": "paper:2609.30243",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.30243",
+     "to": "paper:2609.30266",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.30266",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    },
+    {
+     "from": "paper:2609.28915",
+     "to": "paper:2606.15617",
+     "required_relation": "document_to_document",
+     "why": "两个端点都在图中，但当前图没有边连接它们",
+     "evidence_needed": "一条可追溯到真实证据的关系边"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "Qwen3",
+    "term_nodes": [],
+    "term_reachable": false,
+    "term_first_hop_documents": 0
+   }
+  },
+  {
+   "question_id": "BMH-019",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "adversarial",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:adversarial",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:adversarial",
+    "doc:paper:2609.22961",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:adversarial",
+     "to": "doc:paper:2609.22961",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22961",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-77cc1f6556b9882dbecece05",
+    "chunk-493df5df913a27ffc52bd9e7"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "adversarial",
+    "term_nodes": [
+     "term:adversarial"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 7
+   }
+  },
+  {
+   "question_id": "BMH-020",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "benchmark",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.30028",
+    "paper:2609.28900",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2501.13787",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:benchmark",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:benchmark",
+    "doc:paper:2609.22961",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:benchmark",
+     "to": "doc:paper:2609.22961",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22961",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-3e5a6824a4db54c5d0fa163e",
+    "chunk-493df5df913a27ffc52bd9e7"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "benchmark",
+    "term_nodes": [
+     "term:benchmark"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 8
+   }
+  },
+  {
+   "question_id": "BMH-021",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "jailbreak",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.29429",
+    "paper:2609.30243",
+    "paper:2609.29808",
+    "source:owasp_genai"
+   ],
+   "start_node": "term:jailbreak",
+   "goal_node": "doc:source:owasp_genai",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:jailbreak",
+    "doc:paper:2609.03999",
+    "doc:source:owasp_genai"
+   ],
+   "path_edges": [
+    {
+     "from": "term:jailbreak",
+     "to": "doc:paper:2609.03999",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.03999",
+     "to": "doc:source:owasp_genai",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-64fda3d9789903475a50de40",
+    "chunk-164cfa4a1cb42c48b5bfcf90"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "jailbreak",
+    "term_nodes": [
+     "term:jailbreak"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 4
+   }
+  },
+  {
+   "question_id": "BMH-022",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "model poisoning",
+    "paper:2609.28915",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:model poisoning",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:model poisoning 到 doc:official:eu_ai_act 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "model poisoning",
+     "to": "paper:2609.28915",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28915",
+     "to": "official:eu_ai_act",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "model poisoning",
+    "term_nodes": [
+     "term:model poisoning"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 1
+   }
+  },
+  {
+   "question_id": "BMH-023",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "agent security",
+    "paper:2609.30028",
+    "paper:2609.28915"
+   ],
+   "start_node": "term:agent security",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:agent security 到 doc:paper:2609.28915 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "agent security",
+     "to": "paper:2609.30028",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30028",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "agent security",
+    "term_nodes": [
+     "term:agent security"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 5
+   }
+  },
+  {
+   "question_id": "BMH-024",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "chain-of-thought",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29228",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.30243",
+    "paper:2606.15617"
+   ],
+   "start_node": "term:chain-of-thought",
+   "goal_node": "doc:paper:2606.15617",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:chain-of-thought 到 doc:paper:2606.15617 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "chain-of-thought",
+     "to": "paper:2609.29333",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29333",
+     "to": "paper:2609.30217",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30217",
+     "to": "paper:2609.29228",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29228",
+     "to": "paper:2609.30192",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30192",
+     "to": "paper:2609.29230",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29230",
+     "to": "paper:2609.30243",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30243",
+     "to": "paper:2606.15617",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "chain-of-thought",
+    "term_nodes": [
+     "term:chain-of-thought"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 3
+   }
+  },
+  {
+   "question_id": "BMH-025",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "backdoor",
+    "paper:2609.29757",
+    "paper:2609.28915",
+    "paper:2501.13787",
+    "source:owasp_genai"
+   ],
+   "start_node": "term:backdoor",
+   "goal_node": "doc:source:owasp_genai",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:backdoor",
+    "doc:paper:2609.03999",
+    "doc:source:owasp_genai"
+   ],
+   "path_edges": [
+    {
+     "from": "term:backdoor",
+     "to": "doc:paper:2609.03999",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.03999",
+     "to": "doc:source:owasp_genai",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-acaa6958654b8ae1d90912f1",
+    "chunk-164cfa4a1cb42c48b5bfcf90"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "backdoor",
+    "term_nodes": [
+     "term:backdoor"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 4
+   }
+  },
+  {
+   "question_id": "BMH-026",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "privacy",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.28900",
+    "paper:2609.30192",
+    "paper:2609.29429",
+    "paper:2609.30266",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:nist_news",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:privacy",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:privacy",
+    "doc:paper:2609.22961",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:privacy",
+     "to": "doc:paper:2609.22961",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22961",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-7643464cb9694b009872c6fb",
+    "chunk-493df5df913a27ffc52bd9e7"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "privacy",
+    "term_nodes": [
+     "term:privacy"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 7
+   }
+  },
+  {
+   "question_id": "BMH-027",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "fine-tuning",
+    "paper:2609.28996",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.30192",
+    "paper:2609.29230",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2606.15617",
+    "paper:2501.13787",
+    "source:owasp_genai"
+   ],
+   "start_node": "term:fine-tuning",
+   "goal_node": "doc:source:owasp_genai",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:fine-tuning",
+    "doc:paper:2609.03999",
+    "doc:source:owasp_genai"
+   ],
+   "path_edges": [
+    {
+     "from": "term:fine-tuning",
+     "to": "doc:paper:2609.03999",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.03999",
+     "to": "doc:source:owasp_genai",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-38059997a940da8a90b0b2e0",
+    "chunk-164cfa4a1cb42c48b5bfcf90"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "fine-tuning",
+    "term_nodes": [
+     "term:fine-tuning"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 4
+   }
+  },
+  {
+   "question_id": "BMH-028",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "vulnerability",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.30028",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "source:owasp_genai",
+    "source:security_blog",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:vulnerability",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:vulnerability 到 doc:official:eu_ai_act 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "vulnerability",
+     "to": "paper:2609.29333",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29333",
+     "to": "paper:2609.30217",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30217",
+     "to": "paper:2609.29757",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29757",
+     "to": "paper:2609.30028",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30028",
+     "to": "paper:2609.30266",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.30266",
+     "to": "paper:2609.29808",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29808",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28915",
+     "to": "source:owasp_genai",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "source:owasp_genai",
+     "to": "source:security_blog",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "source:security_blog",
+     "to": "official:eu_ai_act",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "vulnerability",
+    "term_nodes": [
+     "term:vulnerability"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 4
+   }
+  },
+  {
+   "question_id": "BMH-029",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "detector",
+    "paper:2609.28996",
+    "paper:2609.28900",
+    "paper:2609.29429",
+    "paper:2609.29808",
+    "paper:2609.28915"
+   ],
+   "start_node": "term:detector",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:detector 到 doc:paper:2609.28915 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "detector",
+     "to": "paper:2609.28996",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28996",
+     "to": "paper:2609.28900",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28900",
+     "to": "paper:2609.29429",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29429",
+     "to": "paper:2609.29808",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29808",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "detector",
+    "term_nodes": [
+     "term:detector"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 3
+   }
+  },
+  {
+   "question_id": "BMH-030",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "alignment",
+    "paper:2609.29333",
+    "paper:2609.30217",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.28900",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.30266",
+    "paper:2609.29808",
+    "paper:2609.28915",
+    "paper:2606.15617",
+    "paper:2501.13787",
+    "source:nist_ai_rmf",
+    "source:security_blog",
+    "official:eu_ai_act"
+   ],
+   "start_node": "term:alignment",
+   "goal_node": "doc:official:eu_ai_act",
+   "path_found": true,
+   "hops": 2,
+   "path_nodes": [
+    "term:alignment",
+    "doc:paper:2609.22961",
+    "doc:official:eu_ai_act"
+   ],
+   "path_edges": [
+    {
+     "from": "term:alignment",
+     "to": "doc:paper:2609.22961",
+     "relation": "mentioned_in"
+    },
+    {
+     "from": "doc:paper:2609.22961",
+     "to": "doc:official:eu_ai_act",
+     "relation": "cites"
+    }
+   ],
+   "evidence_ids": [
+    "chunk-3bf1b75edbb069a5704f46c9",
+    "chunk-493df5df913a27ffc52bd9e7"
+   ],
+   "matches_declared_path": false,
+   "failure_reason": null,
+   "missing_edges": [],
+   "term_diagnostics": {
+    "term": "alignment",
+    "term_nodes": [
+     "term:alignment"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 8
+   }
+  },
+  {
+   "question_id": "BMH-031",
+   "chain_type": "cross_document",
+   "declared_path": [
+    "hallucination",
+    "paper:2609.28996",
+    "paper:2609.29757",
+    "paper:2609.29228",
+    "paper:2609.29230",
+    "paper:2609.29429",
+    "paper:2609.28915"
+   ],
+   "start_node": "term:hallucination",
+   "goal_node": "doc:paper:2609.28915",
+   "path_found": false,
+   "hops": null,
+   "path_nodes": [],
+   "path_edges": [],
+   "evidence_ids": [],
+   "matches_declared_path": false,
+   "failure_reason": "图中 term:hallucination 到 doc:paper:2609.28915 不连通：当前图只有事件→组件、组件/术语→文档 两类边，没有文档到文档的边",
+   "missing_edges": [
+    {
+     "from": "hallucination",
+     "to": "paper:2609.28996",
+     "required_relation": "unspecified",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.28996",
+     "to": "paper:2609.29757",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29757",
+     "to": "paper:2609.29228",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29228",
+     "to": "paper:2609.29230",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29230",
+     "to": "paper:2609.29429",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    },
+    {
+     "from": "paper:2609.29429",
+     "to": "paper:2609.28915",
+     "required_relation": "document_to_document",
+     "why": "当前图没有这类边：只有 事件→组件 与 组件/术语→文档",
+     "evidence_needed": "一条可追溯到真实证据的关系边（例如两篇文档引用同一实体，或同一 CVE 同时出现在两篇文档中）"
+    }
+   ],
+   "term_diagnostics": {
+    "term": "hallucination",
+    "term_nodes": [
+     "term:hallucination"
+    ],
+    "term_reachable": true,
+    "term_first_hop_documents": 3
+   }
+  }
+ ]
+}

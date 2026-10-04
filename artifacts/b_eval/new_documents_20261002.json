@@ -1,0 +1,112 @@
+{
+ "papers": [
+  {
+   "arxiv_id": "2609.03999",
+   "title": "Shifting from Injection to Interaction: Rethinking Web Security in the Age of LLMs and Beyond",
+   "document_key": "paper:2609.03999",
+   "status": "fulltext",
+   "pdf_sha256": "9a0f488f39ef42cd9b5d079e9b289eebea990412cd80fda0511b8fa5b62948f9",
+   "snapshot_hash": "9a0f488f39ef42cd9b5d079e9b289eebea990412cd80fda0511b8fa5b62948f9",
+   "goal_edges": 2,
+   "term_edges": 17,
+   "goals": [
+    "source:nist_ai_rmf",
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.22961",
+   "title": "When Agentic Trust Crosses Organizational Boundaries: Structural Externalization and a Reference Model for Trust Evidence",
+   "document_key": "paper:2609.22961",
+   "status": "fulltext",
+   "pdf_sha256": "62ed596c4bf266c74787777e6dbd3c2162c6db977cac58b7d10aa1a473a1c297",
+   "snapshot_hash": "62ed596c4bf266c74787777e6dbd3c2162c6db977cac58b7d10aa1a473a1c297",
+   "goal_edges": 2,
+   "term_edges": 8,
+   "goals": [
+    "official:eu_ai_act",
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.35266",
+   "title": "Continuous Assurance of Agentic Security Auditors for Software Delivery Decision Gates",
+   "document_key": "paper:2609.35266",
+   "status": "fulltext",
+   "pdf_sha256": "1b3ff15bf8f12178ca54af79f7b27e239a20e07f499db867ed173a14ed4b3fac",
+   "snapshot_hash": "1b3ff15bf8f12178ca54af79f7b27e239a20e07f499db867ed173a14ed4b3fac",
+   "goal_edges": 2,
+   "term_edges": 6,
+   "goals": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ]
+  },
+  {
+   "arxiv_id": "2609.24016",
+   "title": "Context-Aware Pre-Deployment Evaluation of AI Systems: A Regulatory Framework for Nigerian Fintech",
+   "document_key": "paper:2609.24016",
+   "status": "fulltext",
+   "pdf_sha256": "19420217e150640c6a3eebb4795d6278fb14ec60c066503e70e1c0e2d2cb2653",
+   "snapshot_hash": "19420217e150640c6a3eebb4795d6278fb14ec60c066503e70e1c0e2d2cb2653",
+   "goal_edges": 2,
+   "term_edges": 5,
+   "goals": [
+    "official:eu_ai_act",
+    "source:nist_ai_rmf"
+   ]
+  },
+  {
+   "arxiv_id": "2608.10530",
+   "title": "On Understanding, Identifying, and Mitigating Vulnerabilities in Agentic Large Language Models",
+   "document_key": "paper:2608.10530",
+   "status": "fulltext",
+   "pdf_sha256": "7c9fab3975c003230ef76e09cc319d640930462a254a1b913d5a4b0d29a6959b",
+   "snapshot_hash": "7c9fab3975c003230ef76e09cc319d640930462a254a1b913d5a4b0d29a6959b",
+   "goal_edges": 1,
+   "term_edges": 16,
+   "goals": [
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2608.28327",
+   "title": "Layered LLM Defenses as an Ensemble: Access Tiers, Inference Cost, and the Measured Failure Correlation Between Defense Layers",
+   "document_key": "paper:2608.28327",
+   "status": "fulltext",
+   "pdf_sha256": "01ca21d5ae8d13a6b511fd1ab5f19e2ee54de4ba2d1a87b527c207c1e43242bf",
+   "snapshot_hash": "01ca21d5ae8d13a6b511fd1ab5f19e2ee54de4ba2d1a87b527c207c1e43242bf",
+   "goal_edges": 1,
+   "term_edges": 13,
+   "goals": [
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.23894",
+   "title": "Connecting the Dots in Agentic AI Security: A Cross-Dimensional Threat Taxonomy, Evaluation Maturity, and Open Challenges",
+   "document_key": "paper:2609.23894",
+   "status": "fulltext",
+   "pdf_sha256": "494960e70fe43dee9ea7f3f62e80e0c97641d1eac319a11c995439fdeab2942e",
+   "snapshot_hash": "494960e70fe43dee9ea7f3f62e80e0c97641d1eac319a11c995439fdeab2942e",
+   "goal_edges": 1,
+   "term_edges": 12,
+   "goals": [
+    "source:owasp_genai"
+   ]
+  },
+  {
+   "arxiv_id": "2609.22882",
+   "title": "The Law of Stop: Interruptibility, Injunctions, and the Governance of Agentic AI",
+   "document_key": "paper:2609.22882",
+   "status": "fulltext",
+   "pdf_sha256": "9d8f866588a44a70a39b3b4183492462643611f94078f7d0af0269ef0d8788bf",
+   "snapshot_hash": "9d8f866588a44a70a39b3b4183492462643611f94078f7d0af0269ef0d8788bf",
+   "goal_edges": 1,
+   "term_edges": 8,
+   "goals": [
+    "official:eu_ai_act"
+   ]
+  }
+ ]
+}

@@ -258,7 +258,7 @@ evasion emerges under ordinary task pressure. Preprint, 2026.`；偏移已回读
 `evaluation/b_cross_document_edges_20261002.json`，
 路径检索器新增 `--edges` 只加载 `verified=true` 且带 `chunk_id` 的边。
 
-### 4.2 为什么跨文档计数仍是 0/21（精确诊断）
+### 4.2 为什么原来跨文档计数是 0/21（精确诊断）
 
 带这条边重跑（`artifacts/b_eval/multihop_path_validation_20261002.json`）：
 
@@ -282,6 +282,52 @@ evasion emerges under ordinary task pressure. Preprint, 2026.`；偏移已回读
 因此**不把 0/21 改写成 ≥1**：那需要补新来源（互相引用的论文、讨论具体论文或 CVE
 的安全博客），或由任务负责人同意把该指标口径改成"术语可达性"（1 跳检索，不是推理）。
 两条路都需要队长决定，本轮不擅自换口径、不造边。
+
+### 4.3 按队长决定（选项 A：补来源）后的结果：跨文档 10/21
+
+流程（`tools/build_b_cross_document_edges.py`，`--stage fetch/screen/ingest/edges`）：
+
+1. arXiv 检索 5 组主题 → 49 篇候选 → 下载 PDF（限速 3s/请求）；
+2. 用项目自带 PDF 解析器抽文本筛选 → **13 篇命中目标文档**；
+3. 取命中目标文档且术语覆盖最好的 **8 篇**入库到**库副本**
+   （`paper_fulltext.ingest_arxiv_paper`，`document_key=paper:<arxiv id>`）；
+4. 在入库后的 chunk 里定位引用串与术语，**只认标题/官方编号级匹配**，
+   记录 `chunk_id + char_start + char_end + quote`，并做
+   `text[char_start:char_end] == quote` 回读校验。
+
+产出：
+
+| 项 | 结果 |
+|---|---|
+| 新增文档 | **8 篇**（见 `artifacts/b_eval/new_documents_20261002.json`，含 PDF sha256 与快照哈希） |
+| 文档间边（`cites`） | **12 条**，如 `paper:2609.24016 --cites--> official:eu_ai_act`，引用串为 `Regulation (EU) 2024/1689` |
+| 术语第一跳（`mentioned_in`） | **85 条**（覆盖 21 个起始术语中的 20 个） |
+| 独立回读校验 | **97/97 通过**（另写脚本从库里重读 chunk 逐条核对） |
+| 跨文档路径 | **10/21 连通**（原 0/21），two_hop 仍 10/10 |
+| 术语可达性（独立诊断） | **29/31 可达**，2 个不可达（`kernel-level`、`Qwen3`） |
+| 未连通 | **11 题保留 `no_path`** + 失败原因，未隐藏 |
+
+连通样例（节点 / 边 / 证据 ID 全部可列）：
+
+```
+BMH-014: term:reinforcement learning →(mentioned_in) paper:2609.22882 →(cites) official:eu_ai_act
+         evidence: chunk-e1ef2bd6c0ae27c4de3d048c, chunk-270a4e17aeac622b6b337ae5
+BMH-021: term:jailbreak →(mentioned_in) paper:2609.03999 →(cites) source:owasp_genai
+         evidence: chunk-64fda3d9789903475a50de40, chunk-21edb1ae9ef322ae90f6adf2
+```
+
+仍未连通的 11 题及原因（均在输出里保留）：
+
+| 题号 | 目标文档 | 原因 |
+|---|---|---|
+| BMH-011/012/013/023/029/031 | `paper:2609.28915` | 新增论文里没有引用该论文的（需找"引用它的"来源） |
+| BMH-018/024 | `paper:2606.15617` | 同上 |
+| BMH-015 | `source:security_blog` | 博客文档不被学术论文引用 |
+| BMH-022/028 | `official:eu_ai_act` | 该术语的第一跳落在只引用 OWASP 的论文上，未形成到 EU AI Act 的路径 |
+
+口径说明：连通路径的**终点**与候选题声明的目标一致，但中间节点可能与声明链路不同，
+`matches_declared_path` 如实输出，不假装完全一致；**术语可达性单列为诊断字段**，
+不参与 `path_found` 判定；语料由 22 篇增至 30 篇，**50 题 QA 基线不动**。
 
 ## 5. 赛题指标页面与权威 JSON 一致性（P1，已完成）
 
