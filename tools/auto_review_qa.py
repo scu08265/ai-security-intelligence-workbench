@@ -171,10 +171,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="问答自动评审")
     parser.add_argument("--out", type=Path,
                         default=ROOT / "artifacts" / "b_eval" / "qa_auto_review.json")
+    parser.add_argument("--results", type=Path, default=RESULTS,
+                        help="问答运行结果文件（默认正式集基线；重评测批次请显式指定，"
+                             "以免与旧批次混淆）")
     args = parser.parse_args()
 
     dataset = json.loads(DATASET.read_text(encoding="utf-8"))
-    results = json.loads(RESULTS.read_text(encoding="utf-8"))
+    results = json.loads(args.results.read_text(encoding="utf-8"))
     by_id = {r["question_id"]: r for r in results["records"]}
 
     reviewed = [review_case(case, by_id.get(case["question_id"], {}))

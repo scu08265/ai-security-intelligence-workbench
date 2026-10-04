@@ -641,7 +641,8 @@ def build_row(entry: dict, record: dict, priority: str) -> dict:
 
 FINAL_CONFIRMATION_COLUMNS = [
     "question_id", "category", "final_review_group", "expected_action",
-    "question", "system_answer", "system_refused",
+    "question", "should_refuse", "system_answer", "system_refused",
+    "latency_ms",
     "standard_answer_or_refusal_requirement", "key_evidence",
     "suggested_answer_correctness", "suggested_citation_support",
     "suggested_refusal_correctness", "rationale", "needs_human_review",
@@ -664,6 +665,10 @@ def confirmation_row(entry: dict, item: dict, case: dict, record: dict) -> dict:
         "final_review_group": _final_group(item)[0],
         "expected_action": item["expected_action"],
         "question": case["question"],
+        # 评分工具按 should_refuse 判定"应拒答题"分母；缺这一列会让拒答指标
+        # 全部落到 should_answer 分支（recall 变 None、precision 变 0）。
+        "should_refuse": str(bool(case.get("should_refuse"))),
+        "latency_ms": "" if record.get("latency_ms") is None else str(record["latency_ms"]),
         "system_answer": _clip(record.get("answer_full") or "", 600),
         "system_refused": str(bool(record.get("refused"))),
         "standard_answer_or_refusal_requirement": _clip(
@@ -694,16 +699,29 @@ def confirmation_row(entry: dict, item: dict, case: dict, record: dict) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description="生成机器候选标准答案与统一裁定表")
     parser.add_argument("--outdir", type=Path, default=ARTIFACTS)
+    parser.add_argument("--results", type=Path, default=RESULTS,
+                        help="问答运行结果文件（默认正式集基线；重评测批次请显式指定）")
+    parser.add_argument("--auto-review", type=Path, default=AUTO_REVIEW,
+                        help="自动评审文件（需与 --results 同批次）")
+    parser.add_argument("--refusal-classification", type=Path,
+                        default=REFUSAL_CLASSIFICATION,
+                        help="拒答失败分类文件（需与 --results 同批次）")
+    parser.add_argument("--gold-worksheet", type=Path, default=GOLD_WORKSHEET,
+                        help="提供语料探测摘要的工作表（只读取 corpus_probe_summary 列）")
+    parser.add_argument("--suffix", default="",
+                        help="输出文件名后缀，例如 _20261002：同目录并存多批次结果，"
+                             "不覆盖旧批次文件")
     args = parser.parse_args()
+    suffix = args.suffix
 
     dataset = json.loads(QA_DATASET.read_text(encoding="utf-8"))["cases"]
     records = {r["question_id"]: r for r in json.loads(
-        RESULTS.read_text(encoding="utf-8"))["records"]}
+        args.results.read_text(encoding="utf-8"))["records"]}
     reviews = {r["question_id"]: r for r in json.loads(
-        AUTO_REVIEW.read_text(encoding="utf-8"))["cases"]}
+        args.auto_review.read_text(encoding="utf-8"))["cases"]}
     refusal_cases = {}
-    if REFUSAL_CLASSIFICATION.is_file():
-        payload = json.loads(REFUSAL_CLASSIFICATION.read_text(encoding="utf-8"))
+    if args.refusal_classification.is_file():
+        payload = json.loads(args.refusal_classification.read_text(encoding="utf-8"))
         for item in payload.get("cases") or []:
             refusal_cases[item["question_id"]] = item
 
@@ -729,11 +747,11 @@ def main() -> int:
         },
         "cases": entries,
     }
-    (args.outdir / "qa_candidate_answers.json").write_text(
+    (args.outdir / f"qa_candidate_answers{suffix}.json").write_text(
         json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
 
     # ---- 机器辅助裁定（B 类）+ 分项统计 ---------------------------------
-    probe_index = load_probe_index()
+    probe_index = load_probe_index(args.gold_worksheet)
     adjudications = [build_adjudication(
         case, records.get(case["question_id"], {}), reviews.get(case["question_id"], {}),
         refusal_cases.get(case["question_id"]) or
@@ -752,12 +770,12 @@ def main() -> int:
         "summary": summary,
         "cases": adjudications,
     }
-    (args.outdir / "qa_machine_adjudication.json").write_text(
+    (args.outdir / f"qa_machine_adjudication{suffix}.json").write_text(
         json.dumps(adjudication_payload, ensure_ascii=False, indent=1), encoding="utf-8")
 
     adj_rows = sorted((adjudication_row(item) for item in adjudications),
                       key=lambda r: (not r["contested"] == "True", r["question_id"]))
-    adj_sheet = args.outdir / "qa_machine_adjudication.csv"
+    adj_sheet = args.outdir / f"qa_machine_adjudication{suffix}.csv"
     with adj_sheet.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=MACHINE_ADJUDICATION_COLUMNS)
         writer.writeheader()
@@ -765,7 +783,7 @@ def main() -> int:
 
     pending_rows = [row for row in adj_rows
                     if row["contested"] == "True" or row["needs_human_review"] == "True"]
-    pending_sheet = args.outdir / "qa_pending_human_cases.csv"
+    pending_sheet = args.outdir / f"qa_pending_human_cases{suffix}.csv"
     with pending_sheet.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=MACHINE_ADJUDICATION_COLUMNS)
         writer.writeheader()
@@ -778,7 +796,7 @@ def main() -> int:
     order = {"A": 0, "B": 1, "C": 2}
     confirmation_rows.sort(key=lambda r: (order[r["final_review_group"]],
                                           r["question_id"]))
-    confirm_sheet = args.outdir / "qa_final_confirmation_worksheet.csv"
+    confirm_sheet = args.outdir / f"qa_final_confirmation_worksheet{suffix}.csv"
     if _has_human_values(confirm_sheet):
         print("⚠️ 已存在人工填写内容，跳过写入以保护人工核验结果:", confirm_sheet)
     else:
@@ -790,7 +808,8 @@ def main() -> int:
     groups = Counter(_final_group(item)[0] for item in adjudications)
     print("  分组:", {f"{k} 组": groups[k] for k in ("A", "B", "C")})
 
-    print("机器辅助裁定:", len(adjudications), "条 →", args.outdir / "qa_machine_adjudication.json")
+    print("机器辅助裁定:", len(adjudications), "条 →",
+          args.outdir / f"qa_machine_adjudication{suffix}.json")
     print("  A 类(自动):", summary["tier_A_machine_auto_detection"],
           "| B 类(建议):", summary["tier_B_machine_assisted_suggestion"],
           "| C 类(人工):", summary["tier_C_human_confirmed_gold"])
@@ -812,13 +831,14 @@ def main() -> int:
             for entry in entries]
     order = {"P0-争议": 0, "P1-拒答": 1, "P2-多轮": 2, "P3-常规": 3}
     rows.sort(key=lambda r: (order[r["priority"]], r["question_id"]))
-    table = args.outdir / "qa_adjudication_table.csv"
+    table = args.outdir / f"qa_adjudication_table{suffix}.csv"
     with table.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=ADJUDICATION_COLUMNS)
         writer.writeheader()
         writer.writerows(rows)
 
-    print("候选标准答案:", len(entries), "条 →", args.outdir / "qa_candidate_answers.json")
+    print("候选标准答案:", len(entries), "条 →",
+          args.outdir / f"qa_candidate_answers{suffix}.json")
     print("其中争议/判据未定义:", payload["counts"]["contested"],
           "| 有引用:", payload["counts"]["with_citations"],
           "| 建议拒答:", payload["counts"]["refusal_recommended"])

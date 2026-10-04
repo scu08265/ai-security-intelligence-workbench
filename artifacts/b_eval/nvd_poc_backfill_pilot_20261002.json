@@ -1,0 +1,8 @@
+{
+  "snapshot_dir": "D:\\ICT\\intel-data-b-poc-pilot\\snapshots\\nvd",
+  "snapshot_files": 5,
+  "events_with_poc": 147,
+  "events_updated": 3,
+  "events_unchanged_or_missing": 144,
+  "snapshot_errors": 0
+}

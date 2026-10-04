@@ -1,0 +1,479 @@
+{
+ "schema_version": "b-nvd-poc-snapshot-manifest-1.0",
+ "retrieved_from": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=<CVE-ID>",
+ "retrieved_at": "2026-10-04",
+ "scope": "只拉取 B 独立库 events 中出现的 CVE（37 个），为 POC 维度提供权威来源；未执行任何利用代码",
+ "source_decision_ref": "docs/DATA_SOURCE_DECISIONS.md（权威来源=NVD references[].tags 含 Exploit）",
+ "target_database_copy": "D:\\ICT\\intel-data-b-poc-20261002",
+ "original_database_sha256": "4095a5b1ff836f70baf5552304aac95f7eab5ee95fb3a58c45768e3478254285",
+ "copy_database_sha256": "ea97afbe5c29c8cac91a88039b2a2b67b2e0d580055fc3d614bd7bc09846faf9",
+ "snapshot_files": 37,
+ "events_with_poc": 16,
+ "poc_records": 32,
+ "files": [
+  {
+   "cve": "CVE-2014-4114",
+   "file": "CVE-2014-4114.json",
+   "sha256": "d12d98ba48049e13175ca45db1bc34a4dae303e69db22e123f211d57a971017b",
+   "references": 21,
+   "exploit_tagged": 8,
+   "published": "2014-10-15T10:55:07.817",
+   "last_modified": "2026-06-17T00:09:27.550"
+  },
+  {
+   "cve": "CVE-2014-6332",
+   "file": "CVE-2014-6332.json",
+   "sha256": "55161a8073ca9712d517b58aad1d4841e9fb8f4ae580ff7e68ecee6adc52e1fc",
+   "references": 33,
+   "exploit_tagged": 22,
+   "published": "2014-11-11T22:55:05.200",
+   "last_modified": "2026-06-17T00:12:55.477"
+  },
+  {
+   "cve": "CVE-2020-10987",
+   "file": "CVE-2020-10987.json",
+   "sha256": "08ae8e6048697eda686fd46fe34499a25c9b10f73d1601413997985e69327f35",
+   "references": 5,
+   "exploit_tagged": 2,
+   "published": "2020-07-13T19:15:12.207",
+   "last_modified": "2026-06-17T02:48:48.630"
+  },
+  {
+   "cve": "CVE-2021-27876",
+   "file": "CVE-2021-27876.json",
+   "sha256": "3f33e3564016ad424dc0523890f4f5f2fb34a2834c54fa5115012d251f390628",
+   "references": 5,
+   "exploit_tagged": 2,
+   "published": "2021-03-01T22:15:14.350",
+   "last_modified": "2026-06-17T03:45:32.780"
+  },
+  {
+   "cve": "CVE-2021-27877",
+   "file": "CVE-2021-27877.json",
+   "sha256": "008b9e59ab4ab084d9490a552f7cfad14cb24e5141a3ba41b53edbde76503026",
+   "references": 5,
+   "exploit_tagged": 2,
+   "published": "2021-03-01T22:15:14.460",
+   "last_modified": "2026-06-17T03:45:32.920"
+  },
+  {
+   "cve": "CVE-2021-27878",
+   "file": "CVE-2021-27878.json",
+   "sha256": "620b14d68c16b27c9cd81e49dbdce276170006b746f17ea220cc1790317156a0",
+   "references": 5,
+   "exploit_tagged": 2,
+   "published": "2021-03-01T22:15:14.537",
+   "last_modified": "2026-06-17T03:45:33.063"
+  },
+  {
+   "cve": "CVE-2021-28663",
+   "file": "CVE-2021-28663.json",
+   "sha256": "8608d7843e2920faff9ae27eba831c5b9a8a971252eada14ee6c11d2043c4a89",
+   "references": 7,
+   "exploit_tagged": 2,
+   "published": "2021-05-10T15:15:07.557",
+   "last_modified": "2026-06-17T03:46:43.793"
+  },
+  {
+   "cve": "CVE-2021-28664",
+   "file": "CVE-2021-28664.json",
+   "sha256": "b045387fd3eb904491108589d55dfc0265b5ecc5b0e58019bd50c6f636d595ab",
+   "references": 7,
+   "exploit_tagged": 0,
+   "published": "2021-05-10T15:15:07.590",
+   "last_modified": "2026-06-17T03:46:43.977"
+  },
+  {
+   "cve": "CVE-2021-29256",
+   "file": "CVE-2021-29256.json",
+   "sha256": "24fd2901c59ae73e4ff1381d8744cff439fe3122e497c7399ddeb867b57825dc",
+   "references": 3,
+   "exploit_tagged": 0,
+   "published": "2021-05-24T18:15:08.033",
+   "last_modified": "2026-06-17T03:47:27.647"
+  },
+  {
+   "cve": "CVE-2022-22706",
+   "file": "CVE-2022-22706.json",
+   "sha256": "3e29732ba1540cd86a96a28578096a8d60ab4a86c14677785b50d1b25abd5f07",
+   "references": 5,
+   "exploit_tagged": 0,
+   "published": "2022-03-03T15:15:08.610",
+   "last_modified": "2026-06-17T04:28:50.043"
+  },
+  {
+   "cve": "CVE-2022-38181",
+   "file": "CVE-2022-38181.json",
+   "sha256": "bf796b52bee5ff9d33d69c7b422cc64aac253942c206897df0214801d3be6f68",
+   "references": 11,
+   "exploit_tagged": 4,
+   "published": "2022-10-25T19:15:11.487",
+   "last_modified": "2026-06-17T04:56:14.803"
+  },
+  {
+   "cve": "CVE-2022-4135",
+   "file": "CVE-2022-4135.json",
+   "sha256": "0476b2eb655932d331e8bf03b6a9d98903b5ce8bae6976f544d87f031d4249c7",
+   "references": 7,
+   "exploit_tagged": 2,
+   "published": "2022-11-25T01:15:09.957",
+   "last_modified": "2026-06-17T05:20:03.057"
+  },
+  {
+   "cve": "CVE-2023-26083",
+   "file": "CVE-2023-26083.json",
+   "sha256": "5c0572357f97938882dea2186791636a86c627db27377b50deca589f896ad004",
+   "references": 7,
+   "exploit_tagged": 0,
+   "published": "2023-04-06T16:15:07.843",
+   "last_modified": "2026-06-17T05:42:38.457"
+  },
+  {
+   "cve": "CVE-2023-4211",
+   "file": "CVE-2023-4211.json",
+   "sha256": "b7d7294ca2b0981fdc281dee39b54c5052c1d80eaa8bae4bc2b5d007bfc99aad",
+   "references": 3,
+   "exploit_tagged": 0,
+   "published": "2023-10-01T18:15:09.927",
+   "last_modified": "2026-06-17T06:37:19.410"
+  },
+  {
+   "cve": "CVE-2024-29988",
+   "file": "CVE-2024-29988.json",
+   "sha256": "ce4902593f406a0ece4737793d5907f2e2d7a8686edf2ce9db8f4ef56bf2270a",
+   "references": 3,
+   "exploit_tagged": 0,
+   "published": "2024-04-09T17:16:01.830",
+   "last_modified": "2026-06-17T07:23:30.187"
+  },
+  {
+   "cve": "CVE-2024-4610",
+   "file": "CVE-2024-4610.json",
+   "sha256": "51de16f4dc4f8a074b68da83b3f719a4798ce207e7c3576756f1b5b64cc9f440",
+   "references": 3,
+   "exploit_tagged": 0,
+   "published": "2024-06-07T12:15:09.077",
+   "last_modified": "2026-06-17T08:02:15.760"
+  },
+  {
+   "cve": "CVE-2025-3248",
+   "file": "CVE-2025-3248.json",
+   "sha256": "c3561235ee5b4306a5a3971256c9eab62b1cef0561040fd5ae395d35e0c84e30",
+   "references": 5,
+   "exploit_tagged": 1,
+   "published": "2025-04-07T15:15:44.897",
+   "last_modified": "2026-07-14T23:17:27.010"
+  },
+  {
+   "cve": "CVE-2025-34291",
+   "file": "CVE-2025-34291.json",
+   "sha256": "b504144bf6a2b2fbe33765f61c46347aee4c2c2a618bb61f9d4b4bacb850822d",
+   "references": 5,
+   "exploit_tagged": 1,
+   "published": "2025-12-05T23:15:47.433",
+   "last_modified": "2026-07-14T23:17:22.617"
+  },
+  {
+   "cve": "CVE-2025-62593",
+   "file": "CVE-2025-62593.json",
+   "sha256": "b147ea824916f51b4a10e06d57501f7532110043ad9cb4c21e4d8b7bfbd39a91",
+   "references": 4,
+   "exploit_tagged": 1,
+   "published": "2025-11-26T23:15:47.927",
+   "last_modified": "2026-10-01T19:17:15.957"
+  },
+  {
+   "cve": "CVE-2025-6558",
+   "file": "CVE-2025-6558.json",
+   "sha256": "92262d88f449924c7bcf4a13dc8f81c3154ee05fdd64542dc45235a4e3174b25",
+   "references": 11,
+   "exploit_tagged": 0,
+   "published": "2025-07-15T18:15:24.533",
+   "last_modified": "2026-10-01T12:00:53.397"
+  },
+  {
+   "cve": "CVE-2025-68613",
+   "file": "CVE-2025-68613.json",
+   "sha256": "4e7b71a26ceaa2b0c02fc4cc5790311cb097f6307a1bcb17d05191911104fb0c",
+   "references": 6,
+   "exploit_tagged": 1,
+   "published": "2025-12-19T23:15:52.083",
+   "last_modified": "2026-06-17T09:59:20.790"
+  },
+  {
+   "cve": "CVE-2025-9959",
+   "file": "CVE-2025-9959.json",
+   "sha256": "1152f33aca00913c7c968d8e71e2f309d0c299222f15b5f423257edb38bb60d2",
+   "references": 2,
+   "exploit_tagged": 0,
+   "published": "2025-09-03T17:15:35.737",
+   "last_modified": "2026-09-26T00:10:00.127"
+  },
+  {
+   "cve": "CVE-2026-0770",
+   "file": "CVE-2026-0770.json",
+   "sha256": "ea3f7e7554ad53c3acaf2056d4764b5766c5637c7a2493b768973734897901f4",
+   "references": 2,
+   "exploit_tagged": 0,
+   "published": "2026-01-23T04:16:04.063",
+   "last_modified": "2026-07-22T05:17:08.693"
+  },
+  {
+   "cve": "CVE-2026-33017",
+   "file": "CVE-2026-33017.json",
+   "sha256": "c93295ceded4149253e2794a7014c67fbccb871d943eb10b6a951a5a8919d3a0",
+   "references": 7,
+   "exploit_tagged": 2,
+   "published": "2026-03-20T05:16:15.550",
+   "last_modified": "2026-06-17T10:36:47.177"
+  },
+  {
+   "cve": "CVE-2026-41106",
+   "file": "CVE-2026-41106.json",
+   "sha256": "4667aff153c23a393a19a1c77fe9cdeedb7a79545a4c98e7812a2f4a5f08de65",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-02T23:16:50.867",
+   "last_modified": "2026-07-07T14:24:12.110"
+  },
+  {
+   "cve": "CVE-2026-41109",
+   "file": "CVE-2026-41109.json",
+   "sha256": "2ba5c7c690a3ceb5d4ad3a1aa9e204754571bc3384a42cf1a6aae77718106095",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-05-12T18:17:22.210",
+   "last_modified": "2026-08-10T18:17:46.930"
+  },
+  {
+   "cve": "CVE-2026-45499",
+   "file": "CVE-2026-45499.json",
+   "sha256": "0bd31c5fe4b54b45cfd3c4463e4025d2a0a85e38e4d109f97aa78c56412cef08",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-02T23:16:51.003",
+   "last_modified": "2026-07-07T14:04:54.607"
+  },
+  {
+   "cve": "CVE-2026-47282",
+   "file": "CVE-2026-47282.json",
+   "sha256": "b0d79ad9440ca972a9ce0a7aabdab0f6a29271deed3e9b12c4611fdd1259d9c6",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-14T17:16:49.383",
+   "last_modified": "2026-07-16T17:21:30.720"
+  },
+  {
+   "cve": "CVE-2026-48561",
+   "file": "CVE-2026-48561.json",
+   "sha256": "eb7f0ad52d3b6582413fd601dcd932d760288a163e65c3caa676ff900b4c9492",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-14T17:16:49.753",
+   "last_modified": "2026-07-26T18:17:38.233"
+  },
+  {
+   "cve": "CVE-2026-50510",
+   "file": "CVE-2026-50510.json",
+   "sha256": "0cc1d8461b268808f4adafbc7558dba38e51db5156b53c741c4019c7537869f2",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-14T18:17:58.233",
+   "last_modified": "2026-07-22T16:24:29.957"
+  },
+  {
+   "cve": "CVE-2026-50517",
+   "file": "CVE-2026-50517.json",
+   "sha256": "e4f56a091ad9abbf9d7937db9eb5665039c267caa3db3777817f19ffbd5aaf1f",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-24T01:17:02.257",
+   "last_modified": "2026-07-29T14:19:20.030"
+  },
+  {
+   "cve": "CVE-2026-55145",
+   "file": "CVE-2026-55145.json",
+   "sha256": "c568ed0a0424575c05156be31306d3829cf80ee8c9aa80a9be85ba8489adb3c8",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-14T18:18:21.520",
+   "last_modified": "2026-07-22T16:26:41.270"
+  },
+  {
+   "cve": "CVE-2026-55255",
+   "file": "CVE-2026-55255.json",
+   "sha256": "dbd280201b59da10d8360c626c69f42a9f8e2d41c21f852b1de78a5a39052587",
+   "references": 6,
+   "exploit_tagged": 2,
+   "published": "2026-06-23T17:17:08.050",
+   "last_modified": "2026-07-08T13:39:12.593"
+  },
+  {
+   "cve": "CVE-2026-56167",
+   "file": "CVE-2026-56167.json",
+   "sha256": "dc85d96b2dc0719175521839a2419d46cb59b7127068681c310b65d1e918dfdf",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-24T01:17:34.877",
+   "last_modified": "2026-07-29T14:36:54.927"
+  },
+  {
+   "cve": "CVE-2026-58617",
+   "file": "CVE-2026-58617.json",
+   "sha256": "489b3b3bc692223315954e072a355cd3103ea4b09b85a50afc58605d1aff7f51",
+   "references": 1,
+   "exploit_tagged": 0,
+   "published": "2026-07-14T18:18:44.260",
+   "last_modified": "2026-07-16T20:09:34.043"
+  },
+  {
+   "cve": "CVE-2026-64849",
+   "file": "CVE-2026-64849.json",
+   "sha256": "a7088c5f05b0d65d474ff9beec16e8076408332b2a3f986ef2846d8a16f6f161",
+   "references": 6,
+   "exploit_tagged": 2,
+   "published": "2026-08-17T22:17:23.580",
+   "last_modified": "2026-10-02T19:16:42.033"
+  },
+  {
+   "cve": "CVE-2026-9198",
+   "file": "CVE-2026-9198.json",
+   "sha256": "ad80ab72ab54503020ea17566af686af3faf5f55ca171125ddc32a8fed51010a",
+   "references": 2,
+   "exploit_tagged": 0,
+   "published": "2026-07-17T18:17:17.340",
+   "last_modified": "2026-08-17T20:16:48.010"
+  }
+ ],
+ "events": [
+  {
+   "event_id": "CVE-2026-64849",
+   "poc_count": 2,
+   "urls": [
+    "https://github.com/mlflow/mlflow/issues/24179",
+    "https://github.com/mlflow/mlflow/security/advisories/GHSA-7gwp-5pfp-969j"
+   ]
+  },
+  {
+   "event_id": "CVE-2025-62593",
+   "poc_count": 1,
+   "urls": [
+    "https://github.com/ray-project/ray/security/advisories/GHSA-q279-jhrf-cc6v"
+   ]
+  },
+  {
+   "event_id": "CVE-2026-55255",
+   "poc_count": 1,
+   "urls": [
+    "https://github.com/langflow-ai/langflow/security/advisories/GHSA-qrpv-q767-xqq2"
+   ]
+  },
+  {
+   "event_id": "CVE-2025-34291",
+   "poc_count": 1,
+   "urls": [
+    "https://www.obsidiansecurity.com/blog/cve-2025-34291-critical-account-takeover-and-rce-vulnerability-in-the-langflow-ai-agent-workflow-platform"
+   ]
+  },
+  {
+   "event_id": "CVE-2026-33017",
+   "poc_count": 2,
+   "urls": [
+    "https://github.com/langflow-ai/langflow/security/advisories/GHSA-vwmf-pq79-vjvx",
+    "https://medium.com/@aviral23/cve-2026-33017-how-i-found-an-unauthenticated-rce-in-langflow-by-reading-the-code-they-already-dc96cdce5896"
+   ]
+  },
+  {
+   "event_id": "CVE-2025-68613",
+   "poc_count": 1,
+   "urls": [
+    "https://www.akamai.com/blog/security-research/2026/feb/zerobot-malware-targets-n8n-automation-platform"
+   ]
+  },
+  {
+   "event_id": "CVE-2025-3248",
+   "poc_count": 1,
+   "urls": [
+    "https://www.horizon3.ai/attack-research/disclosures/unsafe-at-any-speed-abusing-python-exec-for-unauth-rce-in-langflow-ai/"
+   ]
+  },
+  {
+   "event_id": "CVE-2021-27876",
+   "poc_count": 1,
+   "urls": [
+    "http://packetstormsecurity.com/files/168506/Veritas-Backup-Exec-Agent-Remote-Code-Execution.html"
+   ]
+  },
+  {
+   "event_id": "CVE-2021-27877",
+   "poc_count": 1,
+   "urls": [
+    "http://packetstormsecurity.com/files/168506/Veritas-Backup-Exec-Agent-Remote-Code-Execution.html"
+   ]
+  },
+  {
+   "event_id": "CVE-2021-27878",
+   "poc_count": 1,
+   "urls": [
+    "http://packetstormsecurity.com/files/168506/Veritas-Backup-Exec-Agent-Remote-Code-Execution.html"
+   ]
+  },
+  {
+   "event_id": "CVE-2022-38181",
+   "poc_count": 2,
+   "urls": [
+    "https://github.blog/2023-01-23-pwning-the-all-google-phone-with-a-non-google-bug/",
+    "https://securitylab.github.com/advisories/GHSL-2022-054_Arm_Mali/"
+   ]
+  },
+  {
+   "event_id": "CVE-2022-4135",
+   "poc_count": 1,
+   "urls": [
+    "https://crbug.com/1392715"
+   ]
+  },
+  {
+   "event_id": "CVE-2014-6332",
+   "poc_count": 11,
+   "urls": [
+    "http://packetstormsecurity.com/files/134053/Avant-Browser-Lite-Ultimate-Remote-Code-Execution.html",
+    "http://packetstormsecurity.com/files/134061/The-World-Browser-3.0-Final-Remote-Code-Execution.html",
+    "http://packetstormsecurity.com/files/134062/HTML-Compiler-Remote-Code-Execution.html",
+    "http://packetstormsecurity.com/files/134064/Microsoft-Compiled-HTML-Help-Remote-Code-Execution.html",
+    "http://packetstormsecurity.com/files/134079/Winamp-Bento-Browser-Remote-Code-Execution.html",
+    "http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows",
+    "https://forsec.nl/wp-content/uploads/2014/11/ms14_064_ie_olerce.rb_.txt",
+    "https://www.exploit-db.com/exploits/37668/",
+    "https://www.exploit-db.com/exploits/37800/",
+    "https://www.exploit-db.com/exploits/38500/",
+    "https://www.exploit-db.com/exploits/38512/"
+   ]
+  },
+  {
+   "event_id": "CVE-2014-4114",
+   "poc_count": 4,
+   "urls": [
+    "http://blog.trendmicro.com/trendlabs-security-intelligence/an-analysis-of-windows-zero-day-vulnerability-cve-2014-4114-aka-sandworm/",
+    "http://www.exploit-db.com/exploits/35019",
+    "http://www.exploit-db.com/exploits/35020",
+    "http://www.exploit-db.com/exploits/35055"
+   ]
+  },
+  {
+   "event_id": "CVE-2021-28663",
+   "poc_count": 1,
+   "urls": [
+    "https://github.com/lntrx/CVE-2021-28663"
+   ]
+  },
+  {
+   "event_id": "CVE-2020-10987",
+   "poc_count": 1,
+   "urls": [
+    "https://blog.securityevaluators.com/tenda-ac1900-vulnerabilities-discovered-and-exploited-e8e26aa0bc68"
+   ]
+  }
+ ],
+ "note": "副本与原库的唯一差异是 event.poc[] 新增；原库未被修改。"
+}

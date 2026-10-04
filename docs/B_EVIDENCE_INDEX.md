@@ -8,8 +8,10 @@
    本文件只回答"去哪里看、按什么口径看、还缺什么"。
 2. **机器指标与人工指标分列存放**，不合并、不互相替代（详见第 3 节口径说明）。
 
-**运行环境**：仓库 `D:\ICT\ai-security-intelligence-workbench-git`，分支 `feat/b-evaluation`，
-数据目录 `D:\ICT\intel-data-b`（全程只读）；产物根目录 `artifacts/b_eval/`、`docs/`、`tools/`。
+**运行环境**：仓库 `D:\ICT\ai-security-intelligence-workbench-git`，数据目录
+`D:\ICT\intel-data-b`（全程只读）；产物根目录 `artifacts/b_eval/`、`docs/`、`tools/`。
+冻结基线（2026-09-30 产出）在 `feat/b-evaluation` 及其合并记录中；重评测批次
+（2026-10-02 产出，文件后缀 `_20261002`）在分支 `feat/b-reevaluation-20261002`（自 `8db19cf` 开）。
 
 ---
 
@@ -114,6 +116,41 @@
 # 相关测试
 .\.venv\Scripts\python.exe -m pytest tests -q -p no:cacheprovider -rsx
 ```
+
+## 9. 重评测批次（2026-10-02，RAG 链路修改后）
+
+**背景**：`8db19cf` 修改了 `app/rag.py`（检索短语约束 + 抽取式答案）并新增
+`app/b_evaluation.py`，旧人工基线描述的是改造前的回答，因此另建一批文件重跑；
+旧文件全部保留，不覆盖。
+
+| 环节 | 权威产物（新批次） | 关键字段 / 口径 |
+| --- | --- | --- |
+| 机器评测 | `artifacts/b_eval/formal_qa_results_20261002.json` | `records[]`、`totals.{document_hit,term_hit,refusal_accuracy,citations}`、`latency_ms.{p50,p95}`、`totals.{timeouts,errors}` |
+| 性能统计（分批） | `artifacts/b_eval/qa_performance_20261002.json` | `batches[]`（A_prev / B_prev / C_20261002 三批独立分位数）、`comparison.per_question[]`（仅同题号集合时逐题差值） |
+| 自动评审 | `artifacts/b_eval/qa_auto_review_20261002.json` | 规则判定，与人工指标分列；不得当准确率 |
+| 拒答分类 | `artifacts/b_eval/refusal_failure_classification_20261002.json` | `counts.{correctly_refused,wrongly_answered}`（本批次已修正计数口径）、`cases[].failure_category` |
+| 机器辅助裁定（B 类） | `artifacts/b_eval/qa_machine_adjudication_20261002.{json,csv}` | `cases[].{answer_correctness,citation_support,refusal_correctness}.{suggestion,status,confidence}`；`summary.tier_C_human_confirmed_gold` |
+| 候选标准答案 | `artifacts/b_eval/qa_candidate_answers_20261002.json` | 机器候选，**不是**金标准 |
+| 人工确认工作表 | `artifacts/b_eval/qa_final_confirmation_worksheet_20261002.csv` | 人工三列 + `人工核验人/时间/备注`，当前全空 |
+| 人工指标 | `artifacts/b_eval/qa_human_score_20261002.json` | 人工确认 50/50（署名 `人工复核-用户确认`，2026-10-04）；本文件是重评测批次的人工指标，**不替代**旧的 `qa_human_score.json` |
+| 关系候选（新库） | `evaluation/b_relation_candidates_20261002.json` | 未含 POC 数据源时的基线；`poc`、`asset_assessment` 无候选 |
+| 关系候选（含 POC） | `evaluation/b_relation_candidates_20261002_poc.json` | 153 条；`poc` 32 条（16 个事件）；`asset_assessment` 仍无候选 |
+| POC 前置探测 | `artifacts/b_eval/nvd_poc_backfill_20261002.json` | 既有快照与本库不同源的真实输出：`events_updated` 为 0 |
+| POC 定向回填 | `artifacts/b_eval/nvd_poc_backfill_cve_scope_20261002.json` | 按库内 37 个 CVE 拉取 NVD 后在**库副本**上回填：`events_updated` 16 |
+| POC 快照清单 | `artifacts/b_eval/nvd_poc_snapshot_manifest_20261002.json` | 每个 CVE 的文件 SHA256、公开引用数、Exploit 标签数；含原库/副本 SHA256 |
+| 页面一致性核对 | `artifacts/b_eval/scorecard_consistency_20261002.json` | `checks[]`（页面口径 vs 冻结 JSON 逐字段）、`mismatches[]`、`conclusion.page_shows_new_batch` |
+| 阶段报告 | `docs/B_REEVAL_20261002_REPORT.md` | 本轮方法、真实数值、缺口、复现命令 |
+| 回归测试 | `tests/test_b_reeval_20261002.py` | 新批次 50 题、旧文件保留、批次不混算、C 类人工=0、空值不进分母、拒答计数自洽、页面一致性 |
+
+**本批次缺口（如实记录）**：
+
+* 人工金标准：新回答的人工核验尚未完成，因此人工答案/引用/拒答指标**暂不可计算**。
+* `poc` 维度：本机库 `events[].poc[]` 全空，且本机 NVD 快照与库不同源（回填实测 0 条），
+  需队长提供已回填的库/快照后才能评测。
+* 跨文档路径：语料内论文无互引、论文正文 CVE 与库内 CVE 无交集，0/21 无法在不造假的
+  前提下提升，需新增来源。
+* 共享问答主链路回归：`tests/test_rag_mixed_language_query.py` 的中频词用例在
+  `8db19cf`/`7dcb064` 上失败（改造前通过），已上报，本轮未改 `app/`。
 
 ## 8. 维护约定
 

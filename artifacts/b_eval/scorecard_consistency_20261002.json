@@ -1,0 +1,214 @@
+{
+ "schema_version": "b-scorecard-consistency-1.0",
+ "page_source": "app/b_evaluation.py::summary()（页面卡片消费的同一个投影）",
+ "frozen_sources": [
+  "artifacts/b_eval/qa_human_score.json （2026-09-30 冻结人工基线）",
+  "artifacts/b_eval/qa_performance_stats.json",
+  "artifacts/b_eval/relation_score_all.json",
+  "artifacts/b_eval/multihop_path_validation.json",
+  "artifacts/b_eval/b_demo_screenshots.json"
+ ],
+ "checks": [
+  {
+   "field": "qa_quality.human_judged_cases",
+   "page_value": 50,
+   "source_file": "qa_human_score.json",
+   "source_value": 50,
+   "match": true
+  },
+  {
+   "field": "qa_quality.answer_accuracy",
+   "page_value": 0.2121,
+   "source_file": "qa_human_score.json",
+   "source_value": 0.2121,
+   "match": true
+  },
+  {
+   "field": "qa_quality.answer_numerator",
+   "page_value": 7,
+   "source_file": "qa_human_score.json",
+   "source_value": 7,
+   "match": true
+  },
+  {
+   "field": "qa_quality.answer_denominator",
+   "page_value": 33,
+   "source_file": "qa_human_score.json",
+   "source_value": 33,
+   "match": true
+  },
+  {
+   "field": "qa_quality.citation_support",
+   "page_value": 0.0323,
+   "source_file": "qa_human_score.json",
+   "source_value": 0.0323,
+   "match": true
+  },
+  {
+   "field": "qa_quality.citation_numerator",
+   "page_value": 1,
+   "source_file": "qa_human_score.json",
+   "source_value": 1,
+   "match": true
+  },
+  {
+   "field": "qa_quality.citation_denominator",
+   "page_value": 31,
+   "source_file": "qa_human_score.json",
+   "source_value": 31,
+   "match": true
+  },
+  {
+   "field": "qa_quality.refusal_recall",
+   "page_value": 0.5,
+   "source_file": "qa_human_score.json",
+   "source_value": 0.5,
+   "match": true
+  },
+  {
+   "field": "qa_quality.refusal_precision",
+   "page_value": 0.5455,
+   "source_file": "qa_human_score.json",
+   "source_value": 0.5455,
+   "match": true
+  },
+  {
+   "field": "qa_quality.refusal_accuracy",
+   "page_value": 0.3529,
+   "source_file": "qa_human_score.json",
+   "source_value": 0.3529,
+   "match": true
+  },
+  {
+   "field": "qa_performance.batch_count",
+   "page_value": 2,
+   "source_file": "qa_performance_stats.json",
+   "source_value": 2,
+   "match": true
+  },
+  {
+   "field": "qa_performance.batches[0].p50_ms",
+   "page_value": 427.1,
+   "source_file": "qa_performance_stats.json",
+   "source_value": 427.1,
+   "match": true
+  },
+  {
+   "field": "qa_performance.batches[0].p95_ms",
+   "page_value": 584.6,
+   "source_file": "qa_performance_stats.json",
+   "source_value": 584.6,
+   "match": true
+  },
+  {
+   "field": "qa_performance.batches[1].p50_ms",
+   "page_value": 427.4,
+   "source_file": "qa_performance_stats.json",
+   "source_value": 427.4,
+   "match": true
+  },
+  {
+   "field": "qa_performance.batches[1].p95_ms",
+   "page_value": 566.5,
+   "source_file": "qa_performance_stats.json",
+   "source_value": 566.5,
+   "match": true
+  },
+  {
+   "field": "relation.precision",
+   "page_value": 1.0,
+   "source_file": "relation_score_all.json",
+   "source_value": 1.0,
+   "match": true
+  },
+  {
+   "field": "relation.recall",
+   "page_value": null,
+   "source_file": "relation_score_all.json",
+   "source_value": null,
+   "match": true
+  },
+  {
+   "field": "relation.f1",
+   "page_value": null,
+   "source_file": "relation_score_all.json",
+   "source_value": null,
+   "match": true
+  },
+  {
+   "field": "relation.tp",
+   "page_value": 47,
+   "source_file": "relation_score_all.json",
+   "source_value": 47,
+   "match": true
+  },
+  {
+   "field": "relation.fp",
+   "page_value": 0,
+   "source_file": "relation_score_all.json",
+   "source_value": 0,
+   "match": true
+  },
+  {
+   "field": "relation.fn",
+   "page_value": 0,
+   "source_file": "relation_score_all.json",
+   "source_value": 0,
+   "match": true
+  },
+  {
+   "field": "relation.evaluable_samples",
+   "page_value": 47,
+   "source_file": "relation_score_all.json",
+   "source_value": 47,
+   "match": true
+  },
+  {
+   "field": "multihop.two_hop_found",
+   "page_value": 10,
+   "source_file": "multihop_path_validation.json",
+   "source_value": 10,
+   "match": true
+  },
+  {
+   "field": "multihop.two_hop_total",
+   "page_value": 10,
+   "source_file": "multihop_path_validation.json",
+   "source_value": 10,
+   "match": true
+  },
+  {
+   "field": "multihop.cross_document_found",
+   "page_value": 0,
+   "source_file": "multihop_path_validation.json",
+   "source_value": 0,
+   "match": true
+  },
+  {
+   "field": "multihop.cross_document_total",
+   "page_value": 21,
+   "source_file": "multihop_path_validation.json",
+   "source_value": 21,
+   "match": true
+  },
+  {
+   "field": "demo.screenshots",
+   "page_value": 6,
+   "source_file": "b_demo_screenshots.json",
+   "source_value": 6,
+   "match": true
+  }
+ ],
+ "mismatches": [],
+ "conclusion": {
+  "page_matches_frozen_json": true,
+  "page_shows_new_batch": false,
+  "note": "页面只读冻结文件；20261002 新批次不会自动出现在页面上。页面横幅已注明人工问答区块是改造前的冻结基线。"
+ },
+ "new_batch_files_present": {
+  "formal_qa_results_20261002.json": true,
+  "qa_performance_20261002.json": true,
+  "qa_human_score_20261002.json": false
+ },
+ "caveat": "本文件是只读核对结果，不是指标；不覆盖、不重算任何冻结基线。"
+}
