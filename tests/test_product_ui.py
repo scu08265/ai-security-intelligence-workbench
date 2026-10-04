@@ -137,6 +137,19 @@ def test_scorecard_consumes_current_evidence_and_reserves_unified_api():
         assert label in SCRIPT
 
 
+def test_scorecard_reads_canonical_monitoring_and_active_batch_fields():
+    for token in (
+        "monitoring_7d.within_24h_rate.value",
+        "monitoring_7d.cumulative_actual_run_days.value",
+        "monitoring_7d.cumulative_scheduled_run_days.value",
+        "active_qa_quality",
+        "active_qa_performance",
+        "累计有采集日期",
+        "当前批次",
+    ):
+        assert token in SCRIPT
+
+
 def test_static_assets_are_cache_busted_and_no_store():
     assert '/app.js?v=' in HTML
     assert '/styles.css?v=' in HTML

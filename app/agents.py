@@ -886,7 +886,7 @@ def refresh_source_event_counts() -> dict[str, int]:
     return counts
 
 
-def monitoring_evidence(days: int = 7) -> dict:
+def monitoring_evidence(days: int = 7, runs: list[dict] | None = None) -> dict:
     """Build an honest daily evidence ledger from persisted runs and observations.
 
     Missing days remain present with zero runs.  This makes the structure useful
@@ -908,8 +908,9 @@ def monitoring_evidence(days: int = 7) -> dict:
         }
         for day in dates
     }
-    for run in storage.list_runs(limit=200):
-        if run.get("kind") != "collect" or not run.get("started_at"):
+    run_items = runs if runs is not None else storage.list_runs(limit=2000)
+    for run in run_items:
+        if run.get("kind") not in {"collect", "scheduled_collect"} or not run.get("started_at"):
             continue
         day = str(run["started_at"])[:10]
         if day not in buckets:

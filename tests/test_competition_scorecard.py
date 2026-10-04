@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timedelta, timezone
+
 from fastapi.testclient import TestClient
 
 from app import agents, evaluation, storage
@@ -67,6 +69,24 @@ def test_seven_day_monitoring_uses_persisted_observations_and_runs():
     assert result["within_24h_rate"]["value"] == 1.0
     assert result["within_24h_rate"]["sample_size"] == 1
 
+
+
+def test_cumulative_collection_days_survive_rolling_window_expiry():
+    today = datetime.now(timezone.utc)
+    for offset in (0, 1, 2, 8, 9, 10, 11, 12):
+        stamp = (today - timedelta(days=offset)).isoformat()
+        storage.save_run({
+            "id": f"run-cumulative-{offset}", "kind": "collect", "status": "completed",
+            "started_at": stamp, "finished_at": stamp, "summary": "cumulative",
+            "detail": {"trigger": "scheduled" if offset < 3 else "manual", "results": []},
+        })
+    result = TestClient(app).get("/api/competition/scorecard").json()["monitoring_7d"]
+    assert result["cumulative_actual_run_days"]["value"] == 8
+    assert result["cumulative_scheduled_run_days"]["value"] == 3
+    assert result["cumulative_first_collection_date"]["value"] == (today - timedelta(days=12)).isoformat()[:10]
+    assert result["cumulative_last_collection_date"]["value"] == today.isoformat()[:10]
+    # The rolling seven-day window sees three days; the cumulative count keeps all eight.
+    assert sum(1 for day in result["days"] if day["collection_runs"] > 0) == 3
 
 def test_enrichment_coverage_uses_exact_stored_fields():
     storage.upsert_event({
@@ -137,6 +157,12 @@ def test_scorecard_does_not_leak_secrets(monkeypatch):
 def test_b_evaluation_artifacts_are_exposed_without_rounding_unknowns():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     assert body["available"] is True
+    assert body["active_batch"]["batch_id"] == "20261002"
+    assert body["active_qa_quality"]["human_judged_cases"] == 50
+    assert body["active_qa_quality"]["answer_accuracy"] == 0.1316
+    assert body["active_qa_quality"]["citation_support"] == 0.0833
+    assert body["active_qa_quality"]["refusal_recall"] == 0.3333
+    # Legacy fields stay on the old 2026-09-30 baseline for backward compatibility.
     assert body["qa_quality"]["human_judged_cases"] == 50
     assert body["qa_quality"]["answer_accuracy"] == 0.2121
     assert body["qa_quality"]["citation_support"] == 0.0323

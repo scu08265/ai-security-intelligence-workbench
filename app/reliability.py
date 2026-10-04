@@ -302,6 +302,34 @@ def _date_range(days: int, runs: Iterable[dict]) -> list[str]:
     return [(end - timedelta(days=offset)).isoformat() for offset in reversed(range(days))]
 
 
+def cumulative_run_evidence(runs: Iterable[dict] | None = None) -> dict[str, Any]:
+    """Count every distinct calendar date with a persisted collection run.
+
+    This is deliberately independent of the rolling ``days`` window used by
+    :func:`continuous_run_evidence`. A date only disappears from the rolling
+    window, never from this cumulative ledger.
+    """
+    collect_runs = [
+        run for run in (runs if runs is not None else storage.list_runs(limit=2000))
+        if _is_collect_run(run) and run.get("started_at")
+    ]
+    actual_dates = sorted({str(run["started_at"])[:10] for run in collect_runs})
+    scheduled_dates = sorted({
+        str(run["started_at"])[:10] for run in collect_runs if _is_scheduled_run(run)
+    })
+    return {
+        "actual_run_days": len(actual_dates),
+        "scheduled_run_days": len(scheduled_dates),
+        "actual_run_count": len(collect_runs),
+        "scheduled_run_count": sum(1 for run in collect_runs if _is_scheduled_run(run)),
+        "actual_dates": actual_dates,
+        "scheduled_dates": scheduled_dates,
+        "first_collection_date": actual_dates[0] if actual_dates else None,
+        "last_collection_date": actual_dates[-1] if actual_dates else None,
+        "note": "累计统计持久化采集记录中的不同自然日，不受滚动窗口影响。",
+    }
+
+
 def continuous_run_evidence(days: int = 7, runs: Iterable[dict] | None = None) -> dict[str, Any]:
     source_runs = list(runs or storage.list_runs(limit=2000))
     actual = [

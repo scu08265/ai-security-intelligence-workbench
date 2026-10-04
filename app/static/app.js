@@ -1509,15 +1509,19 @@
     const evaluation = all.evaluation || {};
     const orchestration = all.orchestration || {};
     const bEval = official.b_evaluation || {};
-    const bQa = bEval.qa_quality || {};
-    const bPerformance = bEval.qa_performance || {};
+    const bQa = bEval.active_qa_quality || bEval.qa_quality || {};
+    const bPerformance = bEval.active_qa_performance || bEval.qa_performance || {};
     const bRelation = bEval.relation || {};
     const bMultihop = bEval.multihop || {};
     const coverage = (dashboard.monitoring || {}).coverage || {};
     const metrics = evaluation.metrics || {};
-    const completeDays = firstValue(monitoring, ['complete_days', 'summary.complete_days']);
+    const cumulativeCollectionDays = firstValue(official, ['monitoring_7d.cumulative_actual_run_days.value']);
     const scheduledDays = firstValue(official, ['monitoring_7d.scheduled_run_days.value']);
-    const within24h = firstValue(monitoring, ['within_24h_ratio', 'latency.within_24h_ratio', 'summary.within_24h_ratio']);
+    const scheduledTotalDays = firstValue(official, ['monitoring_7d.cumulative_scheduled_run_days.value']);
+    const rollingCollectionDays = firstValue(monitoring, ['complete_days', 'summary.complete_days']);
+    const within24h = firstValue(official, ['monitoring_7d.within_24h_rate.value']);
+    const effectiveDenominator = firstValue(official, ['monitoring_7d.effective_denominator.value']);
+    const postMonitoringSamples = firstValue(official, ['monitoring_7d.post_monitoring_samples.value']);
     const toolCount = Array.isArray(orchestration.tools) ? orchestration.tools.length : null;
     const phaseCount = Array.isArray(orchestration.phases) ? orchestration.phases.filter((x) => x.id !== 'summary' && x.id !== 'answer').length : null;
     const p95Values = (bPerformance.batches || []).map((item) => Number(item.p95_ms)).filter(Number.isFinite);
@@ -1532,11 +1536,11 @@
           : '统一计分接口尚未提供，当前由现有监测、评测和编排接口汇总；接口上线后会自动优先使用。')));
     setBox(view.grid,
       scoreCapability('持续监测', scheduledDays !== null && scheduledDays >= 7 ? '已验证' : '待积累', [
-        ['定时运行天数', scheduledDays, ' 天'],
-        ['有采集日期', completeDays, ' 天'],
-        ['来源分类', firstValue(official, ['monitoring.source_categories']) || coverage.categories, ' 类'],
-        ['有效端点', coverage.endpoints_with_data, '']
-      ], '赛题连续运行只认 trigger=scheduled 的采集；有采集日期与定时运行天数分开显示。'),
+        ['累计有采集日期', cumulativeCollectionDays, ' 天'],
+        ['赛题定时运行天数', scheduledDays, ' 天'],
+        ['累计定时运行日期', scheduledTotalDays, ' 天'],
+        ['当前窗口有采集日期', rollingCollectionDays, ' 天']
+      ], '累计有采集日期只增不减，统计所有历史采集自然日；赛题连续运行只认 trigger=scheduled。'),
       scoreCapability('知识富化', dashboard.latest_enrichment || (dashboard.counts || {}).events ? '已验证' : '待运行', [
         ['知识事件', firstValue(official, ['enrichment.documents']) || (dashboard.counts || {}).events, ' 条'],
         ['工具数量', toolCount, ' 个'],
@@ -1548,21 +1552,23 @@
         ['准确率', metrics.accuracy, '']
       ], '答案只从本地证据拼装，并携带引用；资料不足时拒答。'),
       scoreCapability('时效与性能', within24h !== null ? '已验证' : '待积累', [
-        ['24 小时内发现', within24h, typeof within24h === 'number' && within24h <= 1 ? '' : '%'],
-        ['最近采集状态', firstValue(dashboard, ['latest_collection.status']), ''],
-        ['完整运行天数', completeDays, ' 天']
-      ], '发布时间到发现时间的延迟来自真实采集证据，不做前端估算。'),
+        ['24 小时内发现', percentValue(within24h), ''],
+        ['有效样本', effectiveDenominator, ' 条'],
+        ['监测后样本', postMonitoringSamples, ' 条'],
+        ['最近采集状态', firstValue(dashboard, ['latest_collection.status']), '']
+      ], '发布时间到发现时间的延迟来自真实采集证据；仅统计系统首次监测后的有效样本，不做前端估算。'),
       scoreCapability('Agent 编排证据', phaseCount ? '已验证' : '待读取', [
         ['任务阶段', phaseCount, ' 个'],
         ['固定工具', toolCount, ' 个'],
         ['工具预算', firstValue(orchestration, ['scheduling.tool_budget']), ' 次']
       ], '计划、检索、审核、停止条件和工具调用均可在任务运行记录中核查。'),
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
+        ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],
         ['答案准确率', percentValue(bQa.answer_accuracy), ''],
         ['引用支持率', percentValue(bQa.citation_support), ''],
         ['拒答召回率', percentValue(bQa.refusal_recall), '']
-      ], '这是改造前的冻结人工基线；partial、unknown 不按正确回填，代码修改后需重新人工核验。'),
+      ], (bQa.batch_id ? `当前展示 ${bQa.batch_id} 重评测批次；旧基线保留；partial/unknown 不按正确回填。` : '这是改造前的冻结人工基线；partial、unknown 不按正确回填，代码修改后需重新人工核验。')),
       scoreCapability('关系与多跳评测', bRelation.available ? '已验证' : '待读取', [
         ['可判定关系', bRelation.evaluable_samples, ' 条'],
         ['关系 Precision', percentValue(bRelation.precision), ''],
@@ -1574,7 +1580,7 @@
         ['独立批次', Array.isArray(bPerformance.batches) ? bPerformance.batches.length : null, ' 批'],
         ['P95 最大值', p95Max, ' ms'],
         ['超时 / 异常', bPerformance.available ? `${bPerformance.timeouts || 0}/${bPerformance.errors || 0}` : null, '']
-      ], '赛题性能目标为单题 5 秒内；延迟和失败数来自两批各 50 题的真实运行。'));
+      ], (bPerformance.batch_id ? `当前活动批次 ${bPerformance.batch_id}；各批次分位数独立计算，不跨批次合并。` : '赛题性能目标为单题 5 秒内；延迟和失败数来自两批各 50 题的真实运行。')));
   }
 
   async function loadDashboard() {

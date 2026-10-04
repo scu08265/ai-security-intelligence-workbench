@@ -7,7 +7,7 @@
 * 机器辅助裁定仍声明 C 类（人工确认）= 0，不得冒充人工金标准；
 * 新工作表人工列留空时不给指标（不得把空值当 0% 或 100%）；
 * 拒答分类的计数自洽（正确拒答 + 错误作答 = 应拒答题数）；
-* 赛题指标页面与权威冻结 JSON 逐字段一致，且页面不显示新批次。
+* 赛题指标页面与权威冻结 JSON 逐字段一致，并优先展示 20261002 活动批次。
 """
 
 from __future__ import annotations
@@ -186,11 +186,12 @@ def test_refusal_classification_counts_are_self_consistent():
         counts["should_refuse_cases"]
 
 
-def test_scorecard_page_matches_frozen_json_and_hides_the_new_batch():
+def test_scorecard_page_matches_frozen_json_and_prefers_active_batch():
     payload = consistency.build()
     assert payload["mismatches"] == []
     assert payload["conclusion"]["page_matches_frozen_json"] is True
-    assert payload["conclusion"]["page_shows_new_batch"] is False
+    assert payload["conclusion"]["page_shows_new_batch"] is True
+    assert payload["active_batch"]["batch_id"] == "20261002"
 
 
 def test_poc_review_worksheet_covers_every_candidate_with_signed_human_labels():
