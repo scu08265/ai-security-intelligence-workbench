@@ -220,6 +220,12 @@ def main() -> int:
     parser.add_argument("--out", type=Path,
                         default=ROOT / "artifacts" / "b_eval" / "multihop_path_validation.json")
     parser.add_argument("--source-data-dir", type=Path, default=SOURCE_DATA_DIR)
+    parser.add_argument("--candidates", type=Path, default=CANDIDATES,
+                        help="多跳/跨文档候选集（默认冻结基线；重评测批次显式指定）")
+    parser.add_argument("--edges", type=Path, default=None,
+                        help="已人工核验的文档间关系边 JSON（subject/predicate/object/"
+                             "evidence{chunk_id,char_start,char_end}/verified）。"
+                             "只加载 verified=true 的边；不加载即维持原行为")
     args = parser.parse_args()
     if not (args.source_data_dir / "intel.sqlite").is_file():
         print("找不到数据库:", args.source_data_dir / "intel.sqlite")
@@ -229,7 +235,25 @@ def main() -> int:
     config.DB_PATH = args.source_data_dir / "intel.sqlite"
 
     graph = build_graph()
-    payload = json.loads(CANDIDATES.read_text(encoding="utf-8"))
+    loaded_edges: list[dict] = []
+    if args.edges:
+        if not args.edges.is_file():
+            print("找不到关系边文件:", args.edges)
+            return 2
+        edge_payload = json.loads(args.edges.read_text(encoding="utf-8"))
+        for edge in edge_payload.get("edges") or []:
+            if not edge.get("verified"):
+                continue          # 未核验的边不进入图
+            evidence = edge.get("evidence") or {}
+            if not evidence.get("chunk_id"):
+                continue          # 没有真实 chunk 证据的边不进入图
+            subject, obj = edge.get("subject"), edge.get("object")
+            graph.add_node(f"doc:{subject}", "document", subject)
+            graph.add_node(f"doc:{obj}", "document", obj)
+            graph.add_edge(f"doc:{subject}", f"doc:{obj}",
+                           edge.get("predicate") or "document_to_document", evidence)
+            loaded_edges.append(edge)
+    payload = json.loads(args.candidates.read_text(encoding="utf-8"))
     results = [validate(case, graph) for case in payload["cases"]]
 
     by_type: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
@@ -247,7 +271,8 @@ def main() -> int:
             "nodes": len(graph.nodes),
             "edges": len(graph.edges),
             "edge_kinds": sorted({e["relation"] for e in graph.edges}),
-            "note": "只含可追溯到真实证据的边；没有文档到文档的边。",
+            "verified_document_edges_loaded": len(loaded_edges),
+            "note": "只含可追溯到真实证据的边；文档到文档的边只有人工核验且带 chunk 证据的才会加载。",
         },
         "counts": {
             "candidates": len(results),

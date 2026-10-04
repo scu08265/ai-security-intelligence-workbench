@@ -102,13 +102,17 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="拒答失败分类")
     parser.add_argument("--out", type=Path,
                         default=ROOT / "artifacts" / "b_eval" / "refusal_failure_classification.json")
+    parser.add_argument("--results", type=Path, default=RESULTS,
+                        help="问答运行结果文件（默认正式集基线；重评测批次请显式指定）")
+    parser.add_argument("--auto-review", type=Path, default=AUTO_REVIEW,
+                        help="自动评审文件（需与 --results 同批次）")
     args = parser.parse_args()
 
     dataset = json.loads(DATASET.read_text(encoding="utf-8"))
     results = {r["question_id"]: r
-               for r in json.loads(RESULTS.read_text(encoding="utf-8"))["records"]}
+               for r in json.loads(args.results.read_text(encoding="utf-8"))["records"]}
     review = {r["question_id"]: r
-              for r in json.loads(AUTO_REVIEW.read_text(encoding="utf-8"))["cases"]}
+              for r in json.loads(args.auto_review.read_text(encoding="utf-8"))["cases"]}
 
     cases = [c for c in dataset["cases"] if c["should_refuse"]]
     classified = [classify(c, results.get(c["question_id"], {}), review.get(c["question_id"], {}))
@@ -123,7 +127,11 @@ def main() -> int:
         "scope": "只覆盖 should_refuse=True 的题目；只读复现，未修改问答主流程",
         "counts": {
             "should_refuse_cases": len(cases),
-            "correctly_refused": sum(1 for c in classified if not c["actually_refused"]),
+            # 修正：原先 "correctly_refused" 实际统计的是**未拒答**的题数，
+            # 与 "wrongly_answered" 重复计数，导致应拒答题的
+            # 正确拒答/错误作答两个数字都失真（历史基线文件保留原样）。
+            "correctly_refused": sum(1 for c in classified
+                                     if c["actually_refused"] is True),
             "wrongly_answered": sum(1 for c in classified if c["actually_refused"] is False),
             "by_category": by_category,
             "needs_human_review": sum(1 for c in classified if c["needs_human_review"]),

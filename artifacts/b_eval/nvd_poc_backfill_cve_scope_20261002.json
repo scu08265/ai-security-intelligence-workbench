@@ -1,0 +1,8 @@
+{
+  "snapshot_dir": "D:\\ICT\\intel-data-b-poc-20261002\\snapshots\\nvd",
+  "snapshot_files": 39,
+  "events_with_poc": 160,
+  "events_updated": 16,
+  "events_unchanged_or_missing": 144,
+  "snapshot_errors": 0
+}

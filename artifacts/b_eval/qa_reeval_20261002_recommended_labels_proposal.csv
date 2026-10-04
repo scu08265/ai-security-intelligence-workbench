@@ -1,0 +1,51 @@
+question_id,建议来源,建议_答案正确性,建议_引用准确性,建议_拒答正确性,依据简述
+BQA-001,证据复判,partial,partially_supported,not_applicable,引用标签带出标题但正文引用是截断碎片，未完整回答
+BQA-002,证据复判,incorrect,unsupported,not_applicable,引用 PEFT 论文与 IRB 清单，未提及 OllamaDrama
+BQA-003,证据复判,incorrect,unsupported,not_applicable,预期文档未命中，引用来源与 Codetta 无关
+BQA-004,证据复判,partial,partially_supported,not_applicable,正文引用是 IRB 清单，仅引用标签含 SAGE 标题
+BQA-005,证据复判,incorrect,unsupported,not_applicable,未提及 EAGER 与奖励机制，引用为 PEFT/IRB 片段
+BQA-006,证据复判,partial,partially_supported,not_applicable,引文提到 NeRD 与临床合理性，未直接给出应用领域
+BQA-007,证据复判,correct,supported,not_applicable,引文直接给出 Kernel-Level Preemption for Rogue Agentic Execution
+BQA-008,沿用旧标签,correct,not_applicable,not_applicable,答案与引用与改造前逐字一致
+BQA-009,证据复判,partial,unknown,not_applicable,答案文本未变，仅引用集合变化，引用支撑性暂不能判定
+BQA-010,证据复判,partial,partially_supported,not_applicable,引用片段只覆盖 JevOut 主题的一部分
+BQA-011,证据复判,correct,supported,not_applicable,引文直接给出提示词注入定义句
+BQA-012,证据复判,partial,partially_supported,not_applicable,引文给的是 Derm7pt 上的指标而非数据集定义
+BQA-013,沿用旧标签,partial,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-014,证据复判,partial,partially_supported,not_applicable,枚举多个来源但未完成跨来源整合
+BQA-015,证据复判,partial,partially_supported,not_applicable,引文为碎片，未给出 AUROC 定义
+BQA-016,证据复判,partial,partially_supported,not_applicable,引文片段相关但未说明解决的问题全貌
+BQA-017,证据复判,partial,partially_supported,not_applicable,引文只给论文标题，未回答蜜罐部署位置
+BQA-018,沿用旧标签,partial,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-019,证据复判,partial,partially_supported,not_applicable,引文为功能碎片，未说明 DistillGuard 做了什么
+BQA-020,证据复判,partial,partially_supported,not_applicable,引文是蜜罐共性说明，未回答观察到什么
+BQA-021,证据复判,partial,partially_supported,not_applicable,引文仅复述标题关键词
+BQA-022,沿用旧标签,partial,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-023,证据复判,partial,partially_supported,not_applicable,引文 Overall NeRD demon 被截断，未说明方法
+BQA-024,沿用旧标签,partial,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-025,证据复判,partial,partially_supported,not_applicable,旧行为误拒新行为作答，引文碎片未说明检测对象
+BQA-026,证据复判,partial,partially_supported,not_applicable,旧行为误拒新行为作答，引文仅复述标题
+BQA-027,沿用旧标签,incorrect,not_applicable,not_applicable,答案与引用与改造前逐字一致
+BQA-028,证据复判,partial,partially_supported,not_applicable,旧行为误拒新行为作答，引文被截断
+BQA-029,证据复判,incorrect,unsupported,not_applicable,引用 NeurIPS IRB 清单，与方法名称无关
+BQA-030,证据复判,correct,supported,not_applicable,引文标题直接给出拦截对象 rogue agentic execution
+BQA-031,证据复判,partial,partially_supported,not_applicable,枚举文档但只给碎片，未完成跨文档整合
+BQA-032,证据复判,partial,partially_supported,not_applicable,同源文档重复引用，未给出跨文档事实
+BQA-033,沿用旧标签,partial,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-034,证据复判,incorrect,unsupported,not_applicable,预期文档未命中，引用为无关片段
+BQA-035,沿用旧标签,partial,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-036,沿用旧标签,correct,partially_supported,not_applicable,答案与引用与改造前逐字一致
+BQA-037,沿用旧标签,incorrect,unsupported,not_applicable,答案与引用与改造前逐字一致
+BQA-038,证据复判,partial,partially_supported,not_applicable,引用正文与问题弱相关，仅词命中
+BQA-039,证据复判,,unknown,incorrect,应拒答但作答，未验证论文正文是否讨论该 CVE
+BQA-040,证据复判,,partially_supported,incorrect,应拒答但作答，未建立与 KEV 清单的映射
+BQA-041,沿用旧标签,,not_applicable,correct,答案与引用与改造前逐字一致（应拒答且已拒答）
+BQA-042,沿用旧标签,,not_applicable,correct,答案与引用与改造前逐字一致（应拒答且已拒答）
+BQA-043,沿用旧标签,,not_applicable,correct,答案与引用与改造前逐字一致（应拒答且已拒答）
+BQA-044,证据复判,,not_applicable,incorrect,应拒答但作答，引用为无关片段
+BQA-045,沿用旧标签,,not_applicable,correct,答案与引用与改造前逐字一致（应拒答且已拒答）
+BQA-046,沿用旧标签,,not_applicable,incorrect,答案与引用与改造前逐字一致（仍为直接作答）
+BQA-047,证据复判,,not_applicable,incorrect,应拒答但作答，引用为无关片段
+BQA-048,证据复判,,unknown,incorrect,旧行为拒答正确，新行为作答且引用无关
+BQA-049,证据复判,,unknown,incorrect,旧行为拒答正确，新行为作答且引用无关
+BQA-050,沿用旧标签,,not_applicable,incorrect,答案与引用与改造前逐字一致（仍为直接作答）

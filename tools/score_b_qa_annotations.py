@@ -205,7 +205,8 @@ def _machine_metrics(path: Path = FORMAL_RESULTS) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     totals = payload.get("totals") or {}
     return {
-        "source": str(path.relative_to(ROOT)),
+        "source": str(path) if not path.is_absolute() or not path.is_relative_to(ROOT)
+                  else str(path.relative_to(ROOT)),
         "batch": "50 题固定问答集，本轮实测运行记录",
         "document_hit_rate": totals.get("document_hit"),
         "term_hit_rate": totals.get("term_hit"),
@@ -336,12 +337,13 @@ def _load_adjudication(path: Path = MACHINE_ADJUDICATION) -> list[dict]:
     return json.loads(path.read_text(encoding="utf-8")).get("cases") or []
 
 
-def _load_auto_review() -> dict:
-    if not AUTO_REVIEW.is_file():
+def _load_auto_review(path: Path = AUTO_REVIEW) -> dict:
+    if not path.is_file():
         return {}
-    payload = json.loads(AUTO_REVIEW.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
     return {
-        "source": str(AUTO_REVIEW.relative_to(ROOT)),
+        "source": str(path) if not path.is_relative_to(ROOT)
+                  else str(path.relative_to(ROOT)),
         "counts": payload.get("counts"),
         "metrics": payload.get("metrics"),
         "warning": "自动评审判定，**不是**人工指标；不得当作准确率使用",
@@ -378,12 +380,20 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="B 任务问答人工指标计算")
     parser.add_argument("--worksheet", type=Path, default=WORKSHEET)
     parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument("--auto-review", type=Path, default=AUTO_REVIEW,
+                        help="自动评审文件（需与人工标签所属批次一致）")
+    parser.add_argument("--results", type=Path, default=FORMAL_RESULTS,
+                        help="问答运行结果文件（提供性能口径；需与工作表同批次）")
+    parser.add_argument("--machine-adjudication", type=Path,
+                        default=MACHINE_ADJUDICATION,
+                        help="机器辅助裁定文件（B 类，仅供参考，不计入人工指标）")
     args = parser.parse_args()
     if not args.worksheet.is_file():
         print("找不到工作表:", args.worksheet)
         return 2
-    result = score(load_rows(args.worksheet), _load_auto_review(), _machine_metrics(),
-                   _load_adjudication())
+    result = score(load_rows(args.worksheet), _load_auto_review(args.auto_review),
+                   _machine_metrics(args.results),
+                   _load_adjudication(args.machine_adjudication))
     _print(result)
     if args.out:
         args.out.parent.mkdir(parents=True, exist_ok=True)

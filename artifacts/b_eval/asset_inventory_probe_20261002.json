@@ -1,0 +1,95 @@
+{
+ "schema_version": "b-asset-inventory-probe-1.0",
+ "purpose": "验证资产关联通道是否可用，并给出该维度为何仍为 0 的真实证据（不使用合成资产凑指标）",
+ "inventory_source": "本仓库 .venv 实际安装的运行时依赖（pip list），真实且可复现",
+ "import_path": "app.cyclonedx_assets.import_bom(authorized=True, is_demo=False) 等价于 POST /api/assets/cyclonedx/import",
+ "target_database_copy": "D:\\ICT\\intel-data-b-poc-20261002",
+ "imported_assets": [
+  {
+   "asset_id": "asset-cdx-89a31a54f460ffd9d422",
+   "component": "fastapi",
+   "version": "0.142.1",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  },
+  {
+   "asset_id": "asset-cdx-b2580d18c40c285e2524",
+   "component": "uvicorn",
+   "version": "0.54.0",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  },
+  {
+   "asset_id": "asset-cdx-5e9ebe30b47ed288a6ca",
+   "component": "httpx",
+   "version": "0.28.1",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  },
+  {
+   "asset_id": "asset-cdx-50c0f3aa2aecfce62336",
+   "component": "packaging",
+   "version": "26.3",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  },
+  {
+   "asset_id": "asset-cdx-44405bff0e8deecdb382",
+   "component": "pypdf",
+   "version": "6.19.0",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  },
+  {
+   "asset_id": "asset-cdx-abd270178490cc0d265f",
+   "component": "starlette",
+   "version": "1.7.0",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  },
+  {
+   "asset_id": "asset-cdx-cc03beaefcd13cd1dd90",
+   "component": "pydantic",
+   "version": "2.13.5",
+   "is_demo": false,
+   "authorized": true,
+   "batch_id": "cdx-82e4efb429ffc86bf3f7"
+  }
+ ],
+ "asset_count": 7,
+ "assessment_relationship_count": 0,
+ "corpus_vulnerability_components": {
+  "vllm": 9,
+  "langflow": 6,
+  "mali graphics processing unit (gpu)": 6,
+  "open-webui": 3,
+  "backup exec agent": 3,
+  "mali gpu kernel driver": 2,
+  "windows": 2,
+  "microsoft 365 copilot": 2,
+  "visual studio code": 2,
+  "smolagents": 1,
+  "mlflow": 1,
+  "ray": 1,
+  "n8n": 1,
+  "chromium": 1,
+  "smartscreen prompt": 1,
+  "chromium gpu": 1,
+  "ac1900 router ac15 model": 1,
+  "azure open ai": 1,
+  "microsoft edge copilot for android": 1,
+  "github copilot plugin for jetbrains ides": 1,
+  "microsoft copilot": 1,
+  "azure ai search": 1,
+  "microsoft 365 copilot for ios": 1
+ },
+ "conclusion": "通道可用（7 个真实资产成功导入并被评估），但库内漏洞涉及的组件与工作台自身依赖零交集，因此资产关联维度没有可评测候选；需要授权方提供业务侧资产清单（谁在跑 vllm/langflow/ray/mlflow/n8n/open-webui 等）",
+ "original_database_sha256": "4095a5b1ff836f70baf5552304aac95f7eab5ee95fb3a58c45768e3478254285",
+ "copy_database_sha256": "dfeb1fae01473abe04655691c03334e7ab5346b856ceae4ad504e09691f99394"
+}
