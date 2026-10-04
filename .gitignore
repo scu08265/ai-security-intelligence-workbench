@@ -18,3 +18,4 @@ work/
 .ui-server-job
 data/evidence/
 artifacts/tools/
+.server-logs/
