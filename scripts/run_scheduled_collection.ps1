@@ -7,12 +7,16 @@ param(
 
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
-$Python = Join-Path $Root ".venv\Scripts\python.exe"
+$PythonCandidates = @(
+    (Join-Path $Root ".venv\Scripts\python.exe"),
+    (Join-Path (Split-Path -Parent $Root) ".venv\Scripts\python.exe")
+)
+$Python = $PythonCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 $LogDir = Join-Path $Root "artifacts\logs"
 $LogPath = Join-Path $LogDir "scheduled-collection.log"
 
 if (-not (Test-Path -LiteralPath $Python)) {
-    throw "Python environment not found: $Python. Run the installation steps in docs/DOCKER_CI_GUIDE.md."
+    throw "Python environment not found. Checked: $($PythonCandidates -join ', '). Run the installation steps in docs/DOCKER_CI_GUIDE.md."
 }
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
