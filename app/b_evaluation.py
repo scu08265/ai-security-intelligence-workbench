@@ -10,6 +10,7 @@ zero.
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from . import config
@@ -31,7 +32,7 @@ def _number(value: Any) -> float | int | None:
     return value if isinstance(value, (int, float)) else None
 
 
-def _qa_quality(payload: dict[str, Any] | None) -> dict[str, Any]:
+def _qa_quality(payload: dict[str, Any] | None, batch: dict[str, Any] | None = None, *, source: str | None = None) -> dict[str, Any]:
     if not payload:
         return {"available": False}
     answer = payload.get("answer") or {}
@@ -41,6 +42,7 @@ def _qa_quality(payload: dict[str, Any] | None) -> dict[str, Any]:
     return {
         "available": True,
         "computable": bool(payload.get("computable")),
+        "batch_id": (batch or {}).get("batch_id"),
         "cases_total": _number(payload.get("cases_total")),
         "human_judged_cases": _number(payload.get("human_judged_cases")),
         "pending_human_cases": _number(payload.get("pending_human_cases")),
@@ -55,13 +57,19 @@ def _qa_quality(payload: dict[str, Any] | None) -> dict[str, Any]:
         "refusal_denominator": _number(should_refuse.get("n")),
         "refusal_precision": _number(refusal.get("refused_precision")),
         "refusal_accuracy": _number(refusal.get("refusal_accuracy")),
+        "strict_answer_rate": _number(answer.get("strict_rate")),
+        "strict_answer_denominator": _number(answer.get("strict_denominator")),
+        "answer_partial_count": _number(answer.get("partial_counted_not_correct")),
+        "answer_undecided": _number(answer.get("undecided")),
+        "citation_not_applicable": _number(citation.get("not_applicable")),
+        "citation_undecided": _number(citation.get("undecided")),
         "target_comparison": payload.get("target_comparison") or {},
-        "basis": "B 任务 2026-09-30 冻结人工基线；本次问答链路修改后尚未重新人工标注。",
-        "source": "artifacts/b_eval/qa_human_score.json",
+        "basis": ("B 任务 2026-10-02 重评测批次；人工复核完成，当前作为活动批次展示。" if batch else "B 任务 2026-09-30 冻结人工基线；本次问答链路修改后尚未重新人工标注。"),
+        "source": source or "artifacts/b_eval/qa_human_score.json",
     }
 
 
-def _qa_performance(payload: dict[str, Any] | None) -> dict[str, Any]:
+def _qa_performance(payload: dict[str, Any] | None, batch: dict[str, Any] | None = None, *, source: str | None = None) -> dict[str, Any]:
     if not payload:
         return {"available": False, "batches": []}
     batches: list[dict[str, Any]] = []
@@ -89,11 +97,13 @@ def _qa_performance(payload: dict[str, Any] | None) -> dict[str, Any]:
         })
     return {
         "available": bool(batches),
+        "batch_id": (batch or {}).get("batch_id"),
         "batches": batches,
         "timeouts": total_timeouts,
         "errors": total_errors,
         "comparison": payload.get("comparison") or {},
-        "source": "artifacts/b_eval/qa_performance_stats.json",
+        "notes": payload.get("notes") or {},
+        "source": source or "artifacts/b_eval/qa_performance_stats.json",
     }
 
 
@@ -167,26 +177,71 @@ def _demo(payload: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
+_BATCH_FILE_RE = re.compile(r"^(qa_human_score|qa_performance)_(\d{8})\.json$")
+
+
+def _active_batch() -> dict[str, Any] | None:
+    """Return the newest complete B batch, without touching frozen files."""
+    batches: dict[str, set[str]] = {}
+    for path in ARTIFACT_DIR.glob("qa_*_*.json"):
+        match = _BATCH_FILE_RE.match(path.name)
+        if not match:
+            continue
+        prefix, batch_id = match.groups()
+        batches.setdefault(batch_id, set()).add(prefix)
+    complete = [
+        batch_id for batch_id, kinds in batches.items()
+        if {"qa_human_score", "qa_performance"} <= kinds
+    ]
+    if not complete:
+        return None
+    batch_id = sorted(complete)[-1]
+    return {
+        "batch_id": batch_id,
+        "qa_human_score_file": f"qa_human_score_{batch_id}.json",
+        "qa_performance_file": f"qa_performance_{batch_id}.json",
+        "label": f"{batch_id[:4]}-{batch_id[4:6]}-{batch_id[6:]}",
+    }
+
+
 def summary() -> dict[str, Any]:
     """Return the current frozen B evidence projection."""
 
     qa_quality = _qa_quality(_read_json("qa_human_score.json"))
     qa_performance = _qa_performance(_read_json("qa_performance_stats.json"))
+    active_batch = _active_batch()
+    active_qa_quality = _qa_quality(
+        _read_json(active_batch["qa_human_score_file"]) if active_batch else None,
+        active_batch,
+        source=("artifacts/b_eval/" + active_batch["qa_human_score_file"]) if active_batch else None,
+    )
+    active_qa_performance = _qa_performance(
+        _read_json(active_batch["qa_performance_file"]) if active_batch else None,
+        active_batch,
+        source=("artifacts/b_eval/" + active_batch["qa_performance_file"]) if active_batch else None,
+    )
     relation = _relation(_read_json("relation_score_all.json"))
     multihop = _multihop(_read_json("multihop_path_validation.json"))
     demo = _demo(_read_json("b_demo_screenshots.json"))
     available = all(item.get("available") for item in (
         qa_quality, qa_performance, relation, multihop,
     ))
+    active_available = bool(active_batch) and all(item.get("available") for item in (
+        active_qa_quality, active_qa_performance, relation, multihop,
+    ))
     return {
         "available": available,
+        "active_available": active_available,
+        "active_batch": active_batch,
         "artifact_dir": "artifacts/b_eval",
         "qa_quality": qa_quality,
         "qa_performance": qa_performance,
+        "active_qa_quality": active_qa_quality,
+        "active_qa_performance": active_qa_performance,
         "relation": relation,
         "multihop": multihop,
         "demo": demo,
-        "evaluation_basis": "冻结基线；新实现必须重新运行机器评测并由人工重新核验后才能更新这些数字。",
+        "evaluation_basis": ("旧冻结基线保留；qa_quality / qa_performance 指向改造前基线，active_qa_quality / active_qa_performance 指向最新完整批次。" if active_batch else "冻结基线；新实现必须重新运行机器评测并由人工重新核验后才能更新这些数字。"),
         "limitations": [
             "人工指标按人工标签口径计算，partial 或 unknown 不回填为正确。",
             "关系 Recall/F1 只有在存在“应抽取但未抽取”的金标准全集时才会计算。",

@@ -54,6 +54,9 @@ def build() -> dict:
     from app import b_evaluation
 
     page = b_evaluation.summary()
+    active_batch = page.get("active_batch") or {}
+    active_human = _load(active_batch["qa_human_score_file"]) if active_batch else {}
+    active_performance = _load(active_batch["qa_performance_file"]) if active_batch else {}
     qa_human = _load("qa_human_score.json")
     performance = _load("qa_performance_stats.json")
     relation = _load("relation_score_all.json")
@@ -116,6 +119,45 @@ def build() -> dict:
     _check(checks, "demo.screenshots", demo_page.get("screenshots"),
            "b_demo_screenshots.json", len(shots))
 
+    active_quality = page.get("active_qa_quality") or {}
+    active_answer = active_human.get("answer") or {}
+    active_citation = active_human.get("citation") or {}
+    active_refusal = active_human.get("refusal") or {}
+    active_should_refuse = active_refusal.get("should_refuse") or {}
+    for field, page_value, source_value in (
+        ("active_qa_quality.human_judged_cases", active_quality.get("human_judged_cases"),
+         active_human.get("human_judged_cases")),
+        ("active_qa_quality.answer_accuracy", active_quality.get("answer_accuracy"),
+         active_answer.get("rate")),
+        ("active_qa_quality.answer_numerator", active_quality.get("answer_numerator"),
+         active_answer.get("numerator")),
+        ("active_qa_quality.answer_denominator", active_quality.get("answer_denominator"),
+         active_answer.get("denominator")),
+        ("active_qa_quality.citation_support", active_quality.get("citation_support"),
+         active_citation.get("rate")),
+        ("active_qa_quality.citation_numerator", active_quality.get("citation_numerator"),
+         active_citation.get("numerator")),
+        ("active_qa_quality.citation_denominator", active_quality.get("citation_denominator"),
+         active_citation.get("denominator")),
+        ("active_qa_quality.refusal_recall", active_quality.get("refusal_recall"),
+         active_should_refuse.get("refused_recall")),
+        ("active_qa_quality.refusal_precision", active_quality.get("refusal_precision"),
+         active_refusal.get("refused_precision")),
+        ("active_qa_quality.refusal_accuracy", active_quality.get("refusal_accuracy"),
+         active_refusal.get("refusal_accuracy")),
+    ):
+        _check(checks, field, page_value, active_batch.get("qa_human_score_file"), source_value)
+
+    active_batches_page = page.get("active_qa_performance", {}).get("batches") or []
+    active_batches_src = active_performance.get("batches") or []
+    for index, source in enumerate(active_batches_src):
+        row = active_batches_page[index] if index < len(active_batches_page) else {}
+        latency = source.get("latency_ms") or {}
+        for key, source_value in (("p50_ms", latency.get("p50")),
+                                  ("p95_ms", latency.get("p95"))):
+            _check(checks, f"active_qa_performance.batches[{index}].{key}",
+                   row.get(key), active_batch.get("qa_performance_file"), source_value)
+
     new_batch = {
         "formal_qa_results_20261002.json": (ARTIFACTS / "formal_qa_results_20261002.json").is_file(),
         "qa_performance_20261002.json": (ARTIFACTS / "qa_performance_20261002.json").is_file(),
@@ -125,6 +167,7 @@ def build() -> dict:
     return {
         "schema_version": "b-scorecard-consistency-1.0",
         "page_source": "app/b_evaluation.py::summary()（页面卡片消费的同一个投影）",
+        "active_batch": page.get("active_batch"),
         "frozen_sources": [
             "artifacts/b_eval/qa_human_score.json （2026-09-30 冻结人工基线）",
             "artifacts/b_eval/qa_performance_stats.json",
@@ -136,9 +179,8 @@ def build() -> dict:
         "mismatches": mismatches,
         "conclusion": {
             "page_matches_frozen_json": not mismatches,
-            "page_shows_new_batch": False,
-            "note": "页面只读冻结文件；20261002 新批次不会自动出现在页面上。"
-                    "页面横幅已注明人工问答区块是改造前的冻结基线。",
+            "page_shows_new_batch": bool(page.get("active_available")),
+            "note": "旧基线字段仍与冻结 JSON 一致；active_qa_quality/active_qa_performance 指向最新完整批次，页面卡片优先显示活动批次。",
         },
         "new_batch_files_present": new_batch,
         "caveat": "本文件是只读核对结果，不是指标；不覆盖、不重算任何冻结基线。",

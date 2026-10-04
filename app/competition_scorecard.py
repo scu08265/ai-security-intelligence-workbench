@@ -57,9 +57,11 @@ def _source_metrics() -> dict:
     }
 
 
-def _monitoring_metrics() -> dict:
-    evidence = agents.monitoring_evidence(days=7)
-    report = reliability.build_reliability_report(days=7)
+def _monitoring_metrics(runs: list[dict] | None = None) -> dict:
+    runs = list(runs) if runs is not None else storage.list_runs(limit=2000)
+    evidence = agents.monitoring_evidence(days=7, runs=runs)
+    report = reliability.build_reliability_report(days=7, runs=runs)
+    cumulative = reliability.cumulative_run_evidence(runs)
     timeliness = report["timeliness"]
     continuous = report["continuous_runs"]
     measured = timeliness["effective_denominator"]
@@ -114,11 +116,32 @@ def _monitoring_metrics() -> dict:
         "within_24h_samples": _metric(within, source="event.monitoring_observations"),
         "within_24h_rate": _metric(_rate(within, measured), source="event.monitoring_observations",
                                    sample_size=measured),
+        "cumulative_actual_run_days": _metric(
+            cumulative["actual_run_days"],
+            source="runs(kind=collect) distinct started_at dates",
+            note="累计有采集日期；不受滚动窗口影响。"),
+        "cumulative_scheduled_run_days": _metric(
+            cumulative["scheduled_run_days"],
+            source="runs(kind=collect,detail.trigger=scheduled) distinct started_at dates",
+            note="累计定时运行日期；只有 trigger=scheduled 的计划任务计入。"),
+        "cumulative_first_collection_date": _metric(
+            cumulative["first_collection_date"],
+            source="runs(kind=collect) distinct started_at dates"),
+        "cumulative_last_collection_date": _metric(
+            cumulative["last_collection_date"],
+            source="runs(kind=collect) distinct started_at dates"),
+        "cumulative_actual_run_count": _metric(
+            cumulative["actual_run_count"], source="runs(kind=collect)"),
+        "cumulative_scheduled_run_count": _metric(
+            cumulative["scheduled_run_count"],
+            source="runs(kind=collect,detail.trigger=scheduled)"),
         "days": evidence["days"],
         "note": (
             evidence["note"]
             + " actual_run_days 统计任一采集运行；scheduled_run_days 只统计计划任务。"
             + " 时延指标与可靠性 Markdown/JSON 使用同一口径。"
+
+            + " cumulative_actual_run_days / cumulative_scheduled_run_days 为累计不同自然日。"
         ),
     }
 
