@@ -10,7 +10,7 @@ from collections import Counter
 from statistics import mean
 from typing import Any
 
-from . import agents, b_evaluation, evaluation, reliability, sources, storage
+from . import agents, b_evaluation, disposition, evaluation, reliability, sources, storage
 
 
 def _rate(numerator: int, denominator: int) -> float | None:
@@ -290,5 +290,6 @@ def scorecard() -> dict:
         "enrichment": _enrichment_metrics(events),
         "question_answer_evaluation": _evaluation_metrics(),
         "b_evaluation": b_evaluation.summary(),
+        "disposition": disposition.metrics(),
         "agent_execution": _agent_metrics(events),
     }

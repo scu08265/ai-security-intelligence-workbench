@@ -20,6 +20,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
 from . import (agent_context, agents, b_evaluation, competition_scorecard, config, cyclonedx_assets,
+                 disposition,
                evaluation, intelligence, knowledge_views, observability, rag_corpus,
                reliability, self_healing, sources, storage, streaming,
                multi_agent_runtime)
@@ -154,6 +155,19 @@ class AgentTurnRequest(StrictRequest):
     resolved_references: list[ResolvedReferenceRequest] = Field(default_factory=list, max_length=100)
     chunk_ids: list[str] = Field(default_factory=list, max_length=200)
     source_version_ids: list[str] = Field(default_factory=list, max_length=100)
+
+
+class DispositionUpdateRequest(StrictRequest):
+    event_id: str = Field(min_length=1, max_length=200)
+    asset_id: str = Field(min_length=1, max_length=200)
+    status: str = Field(pattern="^(open|in_progress|fixed|verified|accepted)$")
+    assignee: str | None = Field(default=None, max_length=200)
+    note: str | None = Field(default=None, max_length=4000)
+    evidence_ids: list[str] = Field(default_factory=list, max_length=100)
+    version_before: str | None = Field(default=None, max_length=200)
+    version_after: str | None = Field(default=None, max_length=200)
+    operator: str | None = Field(default=None, max_length=200)
+    run_verification: bool = True
 
 
 class AgentTaskRequest(StrictRequest):
@@ -504,6 +518,40 @@ def run_enrichment(limit: int = Query(default=10, ge=1, le=50)) -> dict:
 @app.post("/api/assessments/run")
 def run_assessments() -> dict:
     return agents.run_assessment()
+
+
+@app.get("/api/dispositions")
+def list_dispositions(limit: int = Query(default=1000, ge=1, le=2000)) -> dict:
+    return disposition.list_dispositions(limit=limit)
+
+
+@app.get("/api/dispositions/metrics")
+def disposition_metrics() -> dict:
+    return disposition.metrics()
+
+
+@app.get("/api/dispositions/{event_id}/{asset_id}")
+def get_disposition(event_id: str, asset_id: str) -> dict:
+    return disposition.get_disposition(event_id, asset_id)
+
+
+@app.put("/api/dispositions/{event_id}/{asset_id}")
+def update_disposition(event_id: str, asset_id: str, payload: DispositionUpdateRequest) -> dict:
+    try:
+        return disposition.update_disposition(
+            event_id,
+            asset_id,
+            status=payload.status,
+            assignee=payload.assignee,
+            note=payload.note,
+            evidence_ids=payload.evidence_ids,
+            version_before=payload.version_before,
+            version_after=payload.version_after,
+            operator=payload.operator,
+            run_verification=payload.run_verification,
+        )
+    except disposition.DispositionError as exc:
+        raise _bad(str(exc)) from exc
 
 
 # --------------------------------------------------------------------------

@@ -86,6 +86,23 @@ CREATE TABLE IF NOT EXISTS assessments (
 CREATE INDEX IF NOT EXISTS idx_assess_event ON assessments(event_id);
 CREATE INDEX IF NOT EXISTS idx_assess_asset ON assessments(asset_id);
 
+CREATE TABLE IF NOT EXISTS assessment_dispositions (
+    event_id      TEXT NOT NULL,
+    asset_id      TEXT NOT NULL,
+    status        TEXT NOT NULL,
+    assignee      TEXT,
+    note          TEXT,
+    evidence_ids  TEXT NOT NULL DEFAULT '[]',
+    version_before TEXT,
+    version_after  TEXT,
+    opened_at     TEXT NOT NULL,
+    updated_at    TEXT NOT NULL,
+    closed_at     TEXT,
+    verification  TEXT,
+    doc           TEXT NOT NULL,
+    PRIMARY KEY (event_id, asset_id)
+);
+
 CREATE TABLE IF NOT EXISTS runs (
     id          TEXT PRIMARY KEY,
     kind        TEXT NOT NULL,
@@ -684,6 +701,9 @@ def list_assessments(limit: int = 500) -> list[dict]:
         event = get_event(row["event_id"]) if row["event_id"] else None
         record["asset_name"] = row["asset_name"] or row["asset_id"]
         record["event_title"] = (event or {}).get("title") or row["event_id"]
+        disposition = get_assessment_disposition(record.get("event_id", ""), record.get("asset_id", ""))
+        record["disposition"] = disposition
+        record["disposition_status"] = (disposition or {}).get("status") or "open"
         items.append(record)
     return items
 
@@ -704,6 +724,70 @@ def count_assessments() -> int:
 def clear_assessments() -> None:
     with connect() as conn:
         conn.execute("DELETE FROM assessments")
+
+
+# --------------------------------------------------------------------------
+# assessment dispositions (remediation closure loop)
+# --------------------------------------------------------------------------
+
+def save_assessment_disposition(disposition: dict) -> None:
+    existing = get_assessment_disposition(disposition.get("event_id", ""), disposition.get("asset_id", ""))
+    opened_at = (existing or {}).get("opened_at") or disposition.get("opened_at") or utcnow()
+    payload = dict(disposition)
+    payload["opened_at"] = opened_at
+    payload.setdefault("updated_at", utcnow())
+    with connect() as conn:
+        conn.execute(
+            """INSERT INTO assessment_dispositions
+                   (event_id, asset_id, status, assignee, note, evidence_ids,
+                    version_before, version_after, opened_at, updated_at, closed_at,
+                    verification, doc)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+               ON CONFLICT(event_id, asset_id) DO UPDATE SET
+                   status=excluded.status, assignee=excluded.assignee, note=excluded.note,
+                   evidence_ids=excluded.evidence_ids, version_before=excluded.version_before,
+                   version_after=excluded.version_after, updated_at=excluded.updated_at,
+                   closed_at=excluded.closed_at, verification=excluded.verification,
+                   doc=excluded.doc""",
+            (
+                payload.get("event_id", ""),
+                payload.get("asset_id", ""),
+                payload.get("status", "open"),
+                payload.get("assignee"),
+                payload.get("note"),
+                json.dumps(payload.get("evidence_ids") or [], ensure_ascii=False),
+                payload.get("version_before"),
+                payload.get("version_after"),
+                payload["opened_at"],
+                payload.get("updated_at") or utcnow(),
+                payload.get("closed_at"),
+                json.dumps(payload.get("verification"), ensure_ascii=False) if payload.get("verification") is not None else None,
+                json.dumps(payload, ensure_ascii=False),
+            ),
+        )
+
+
+def get_assessment_disposition(event_id: str, asset_id: str) -> dict | None:
+    with connect() as conn:
+        row = conn.execute(
+            "SELECT doc FROM assessment_dispositions WHERE event_id = ? AND asset_id = ?",
+            (event_id, asset_id),
+        ).fetchone()
+    return json.loads(row["doc"]) if row else None
+
+
+def list_assessment_dispositions(limit: int = 1000) -> list[dict]:
+    with connect() as conn:
+        rows = conn.execute(
+            "SELECT doc FROM assessment_dispositions ORDER BY updated_at DESC LIMIT ?",
+            (max(1, min(limit, 5000)),),
+        ).fetchall()
+    return [json.loads(row["doc"]) for row in rows]
+
+
+def count_assessment_dispositions() -> int:
+    with connect() as conn:
+        return int(conn.execute("SELECT COUNT(*) AS n FROM assessment_dispositions").fetchone()["n"])
 
 
 # --------------------------------------------------------------------------

@@ -35,7 +35,11 @@ assets由用户主动导入；初始提供明确标注is_demo的合成资产，�
 - GET /api/assets -> {items:asset[]}
 - POST /api/assets JSON单个资产(无需id) -> asset；POST /api/assets/import JSON {items:asset[]} -> {imported,items}。
 - DELETE /api/assets/{id} -> {deleted:bool}
-- GET /api/assessments -> {items:assessment[]}，assessment附asset_name,event_title。
+- GET /api/assessments -> {items:assessment[]}，assessment附asset_name,event_title,disposition,disposition_status。
+- GET /api/dispositions -> {items:disposition[],total,status_labels}；处置状态 open|in_progress|fixed|verified|accepted。
+- GET /api/dispositions/metrics -> {high_priority_total,high_priority_closed,high_priority_verified,high_priority_in_progress,closure_rate,verified_rate,mean_time_to_close_hours,status_breakdown,findings_total}。
+- GET /api/dispositions/{event_id}/{asset_id} -> disposition（缺省返回 status=open，不写库）。
+- PUT /api/dispositions/{event_id}/{asset_id} JSON {status,assignee?,note?,evidence_ids?,version_before?,version_after?,operator?,run_verification?} -> {disposition,assessment_status,assessment_priority,verification,requested_status,applied_status}；status=verified 时系统重新研判该资产，只有资产已不命中受影响区间才置为 verified，否则降级为 fixed 并记录失败复测。原始 assessment.status 不被覆盖。
 - POST /api/chat JSON {question:string,history:[{role,content}]?} -> answer_question返回结果加duration_ms。
 - GET /api/runs?limit=30 -> {items:[{id,kind,status,started_at,finished_at,summary,detail}]}
 - GET /api/evaluation -> {status:not_run|completed,scope,metrics:dict,results:[],limitations:[],...}；只有真实执行后有分数。

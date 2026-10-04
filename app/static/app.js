@@ -26,6 +26,8 @@
     assessStatus: { affected: '受影响', not_affected: '当前规则下不受影响', needs_confirmation: '待补信息', not_applicable: '未评估' },
     assessStatusClass: { affected: 'affected', not_affected: 'not-affected', needs_confirmation: 'needs-confirmation', not_applicable: 'not-applicable' },
     priority: { critical: '紧急', high: '高', medium: '中', low: '低', unknown: '未知' },
+    dispositionStatus: { open: '待处置', in_progress: '处置中', fixed: '已修复待复测', verified: '已复测关闭', accepted: '已接受风险' },
+    dispositionClass: { open: 'affected', in_progress: 'needs-confirmation', fixed: 'needs-confirmation', verified: 'not-affected', accepted: 'not-applicable' },
     runStatus: { ok: '成功', partial: '部分成功', failed: '失败', skipped: '已跳过', idle: '未运行', completed: '已完成', running: '执行中', aborted: '已中断', stale: '历史数据可用' },
     severity: { critical: '严重', high: '高', medium: '中', low: '低', none: '无评级', unknown: '未知' },
     exposure: { public: '公网', internal: '内网', unknown: '未知' },
@@ -306,6 +308,7 @@
   const api = {
     get: (path) => request('GET', path),
     post: (path, body) => request('POST', path, body),
+    put: (path, body) => request('PUT', path, body),
     del: (path) => request('DELETE', path)
   };
 
@@ -437,6 +440,7 @@
   function assessStatusBadge(value) { return statusBadge(L.assessStatus, L.assessStatusClass, value); }
   function runStatusBadge(value) { return statusBadge(L.runStatus, null, value); }
   function priorityBadge(value) { return statusBadge(L.priority, null, value); }
+  function dispositionStatusBadge(value) { return statusBadge(L.dispositionStatus, L.dispositionClass, value); }
 
   function emptyState(main, hint) {
     return h('div', { class: 'empty' },
@@ -1515,6 +1519,7 @@
     const bMultihop = bEval.multihop || {};
     const coverage = (dashboard.monitoring || {}).coverage || {};
     const metrics = evaluation.metrics || {};
+    const disposal = official.disposition || {};
     const cumulativeCollectionDays = firstValue(official, ['monitoring_7d.cumulative_actual_run_days.value']);
     const scheduledDays = firstValue(official, ['monitoring_7d.scheduled_run_days.value']);
     const scheduledTotalDays = firstValue(official, ['monitoring_7d.cumulative_scheduled_run_days.value']);
@@ -1562,6 +1567,12 @@
         ['固定工具', toolCount, ' 个'],
         ['工具预算', firstValue(orchestration, ['scheduling.tool_budget']), ' 次']
       ], '计划、检索、审核、停止条件和工具调用均可在任务运行记录中核查。'),
+      scoreCapability('处置闭环', disposal.closure_rate !== null ? '已验证' : '待积累', [
+        ['高优先级总数', disposal.high_priority_total, ' 条'],
+        ['已复测关闭', disposal.high_priority_closed, ' 条'],
+        ['闭环率', percentValue(disposal.closure_rate), ''],
+        ['平均关闭时长', disposal.mean_time_to_close_hours, ' 小时']
+      ], textOr(disposal.evidence_policy, '原始研判结论不会被处置记录覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。')),
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
         ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],
@@ -2685,8 +2696,10 @@
     const runResult = h('div');
     const statsBox = h('div');
     const tableBox = h('div');
+    const dispositionBox = h('div');
 
-    state.dom.assessments = { table: tableBox, stats: statsBox, runResult: runResult };
+    state.assessments.selected = null;
+    state.dom.assessments = { table: tableBox, stats: statsBox, runResult: runResult, disposition: dispositionBox };
 
     body.append(
       card('研判控制',
@@ -2694,7 +2707,8 @@
         h('p', { class: 'dim' }, '对全部事件与全部资产执行影响判断；未标记授权的资产会被记录为“不适用”而非静默跳过。'),
         runResult),
       statsBox,
-      tableBox);
+      tableBox,
+      dispositionBox);
 
     renderAssessments();
   }
@@ -2755,6 +2769,9 @@
       h('div', {}, h('div', {}, textOr(item.asset_name, '（未知资产）')), mono(textOr(item.asset_id), 'dim')),
       assessStatusBadge(item.status),
       priorityBadge(item.priority),
+      h('div', { class: 'disposition-cell' },
+        dispositionStatusBadge(item.disposition_status || 'open'),
+        h('button', { type: 'button', class: 'link-button', onclick: () => openDisposition(item) }, item.disposition_status === 'open' ? '登记处置' : '查看 / 更新')),
       Array.isArray(item.reasons) && item.reasons.length
         ? h('ul', { class: 'cell-list' }, item.reasons.map((reason) => h('li', {}, humanizeReason(reason))))
         : mono(DASH, 'dim'),
@@ -2766,9 +2783,84 @@
     setBox(view.table,
       h('h3', { class: 'block-title' }, '研判结论', h('span', { class: 'count' }, `显示 ${filtered.length} / ${items.length} 条`)),
       dataTable([
-        { text: '事件' }, { text: '资产' }, { text: '状态' }, { text: '优先级' },
+        { text: '事件' }, { text: '资产' }, { text: '研判状态' }, { text: '优先级' }, { text: '处置状态' },
         { text: '判定理由' }, { text: '证据 ID' }
       ], rows));
+  }
+
+  function openDisposition(item) {
+    state.assessments.selected = item;
+    renderDispositionPanel();
+    state.dom.assessments.disposition.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderDispositionPanel() {
+    const view = state.dom.assessments;
+    if (!view || !view.disposition) return;
+    const item = state.assessments.selected || (state.assessments.items || []).find((x) => x.status === 'affected');
+    if (!item) {
+      setBox(view.disposition);
+      return;
+    }
+    const disposition = item.disposition || {};
+    const statusSelect = h('select', { class: 'select', 'aria-label': '处置状态' },
+      ['open', 'in_progress', 'fixed', 'verified', 'accepted'].map((value) =>
+        h('option', { value }, L.dispositionStatus[value] || value)));
+    statusSelect.value = disposition.status || 'open';
+    const assignee = h('input', { class: 'input', value: textOr(disposition.assignee, ''), placeholder: '处置人 / 负责人' });
+    const versionBefore = h('input', { class: 'input', value: textOr(disposition.version_before, ''), placeholder: '处置前版本' });
+    const versionAfter = h('input', { class: 'input', value: textOr(disposition.version_after, ''), placeholder: '处置后版本' });
+    const note = h('textarea', { class: 'input', rows: '2', placeholder: '处置说明（动作、依据、工单号）' }, textOr(disposition.note, ''));
+    const feedback = h('div');
+    const submit = h('button', { type: 'button', class: 'btn btn--primary' }, icon('check'), '提交处置记录');
+    submit.addEventListener('click', async () => {
+      submit.disabled = true;
+      setBox(feedback, loadingBlock('正在提交处置记录…'));
+      try {
+        const result = await api.put(`/api/dispositions/${encodeURIComponent(item.event_id)}/${encodeURIComponent(item.asset_id)}`, {
+          event_id: item.event_id,
+          asset_id: item.asset_id,
+          status: statusSelect.value,
+          assignee: assignee.value.trim() || null,
+          note: note.value.trim() || null,
+          version_before: versionBefore.value.trim() || null,
+          version_after: versionAfter.value.trim() || null
+        });
+        setBox(feedback, alertBox(
+          result.verification && result.verification.passed === false ? 'error' : 'ok',
+          result.verification ? result.verification.verdict : '处置记录已保存',
+          h('p', {}, `记录状态：${L.dispositionStatus[result.applied_status] || result.applied_status}`)));
+        await Promise.all([loadAssessments(), loadScorecard()]);
+      } catch (err) {
+        setBox(feedback, errorBlock(err.message));
+      } finally {
+        submit.disabled = false;
+      }
+    });
+    const verification = disposition.verification;
+    setBox(view.disposition, card('处置闭环 · ' + textOr(item.event_title, item.event_id),
+      kvList([
+        ['资产', textOr(item.asset_name, item.asset_id)],
+        ['研判结论', assessStatusBadge(item.status)],
+        ['系统优先级', priorityBadge(item.priority)],
+        ['当前处置状态', dispositionStatusBadge(disposition.status || 'open')],
+        ['处置人', textOr(disposition.assignee, '未指派')],
+        ['更新时间', textOr(disposition.updated_at, DASH)],
+        ['关闭时间', textOr(disposition.closed_at, DASH)]
+      ]),
+      h('div', { class: 'disposition-form' },
+        h('label', {}, '处置状态', statusSelect),
+        h('label', {}, '处置人', assignee),
+        h('label', {}, '处置前版本', versionBefore),
+        h('label', {}, '处置后版本', versionAfter),
+        h('label', {}, '处置说明', note),
+        h('div', { class: 'btn-row' }, submit)),
+      verification
+        ? alertBox(verification.passed ? 'ok' : 'warn', '系统复测结果',
+            h('p', {}, textOr(verification.verdict)),
+            h('p', { class: 'dim' }, `复测前：${textOr(verification.assessment_status_before)}；复测后：${textOr(verification.assessment_status_after)}`))
+        : h('p', { class: 'plain-note' }, '标记“已复测关闭”时，系统会重新研判该资产；只有资产版本不再命中受影响区间，才会关闭并记录复测结果。原始受影响结论不会被覆盖。'),
+      feedback));
   }
 
   async function runAssessments(button) {

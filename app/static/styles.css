@@ -1669,3 +1669,8 @@ button.knowledge-node.category:hover { border-color: var(--accent); background: 
 @media (max-width: 1120px) {
   .onboarding { grid-template-columns: 1fr; }
 }
+
+.disposition-cell { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; }
+.disposition-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 9px; margin: 10px 0; }
+.disposition-form label { display: flex; flex-direction: column; gap: 4px; color: var(--dim); font-size: 11px; }
+.disposition-form textarea { min-height: 52px; resize: vertical; }
