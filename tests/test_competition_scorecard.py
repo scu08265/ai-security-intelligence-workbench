@@ -58,6 +58,8 @@ def test_seven_day_monitoring_uses_persisted_observations_and_runs():
     })
     result = TestClient(app).get("/api/competition/scorecard").json()["monitoring_7d"]
     assert result["actual_run_days"]["value"] == 1
+    assert result["scheduled_run_days"]["value"] == 0
+    assert result["monitoring_started_at"]["value"] == now
     # Latency counts the first discovery per event, not every later update.
     assert result["observed_events"]["value"] == 1
     assert result["publication_latency_samples"]["value"] == 1

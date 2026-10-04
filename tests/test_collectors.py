@@ -227,11 +227,22 @@ def test_openalex_collector_is_the_tokenless_paper_fallback():
 def test_page_collector_does_not_re_emit_unchanged_content():
     first = collectors.collect("owasp_genai")
     assert first.events, "first fetch should produce an event"
-    storage.update_source_state("owasp_genai", last_hash=first.snapshot_hash)
+    storage.update_source_state("owasp_genai", last_hash=first.snapshot_hash, events_count=1)
 
     second = collectors.collect("owasp_genai")
     assert second.events == []
     assert any("未产生新事件" in note for note in second.notes)
+
+
+def test_page_collector_reclassifies_unchanged_page_when_no_event_was_saved():
+    first = collectors.collect("owasp_genai")
+    assert first.events
+    storage.update_source_state(
+        "owasp_genai", last_hash=first.snapshot_hash, events_count=0,
+    )
+
+    second = collectors.collect("owasp_genai")
+    assert second.events, "历史事件数为 0 时，同一页面必须在分类器修复后重新解析"
 
 
 def test_page_collector_strips_scripts_from_extracted_text():
@@ -294,6 +305,30 @@ def test_unregistered_source_is_rejected():
     outcome = collectors.collect("not-a-real-source")
     assert outcome.status == "skipped"
     assert outcome.events == []
+
+
+def test_curl_text_returns_verbatim_body(monkeypatch):
+    seen = {}
+
+    def fake_run(command, **kwargs):
+        seen["command"] = command
+        return __import__("subprocess").CompletedProcess(command, 0, b"<rss>ok</rss>", b"")
+
+    monkeypatch.setattr(collectors.shutil, "which", lambda name: "curl" if name in {"curl", "curl.exe"} else None)
+    monkeypatch.setattr(collectors.subprocess, "run", fake_run)
+    assert collectors.curl_text("https://example.invalid/feed") == "<rss>ok</rss>"
+    assert seen["command"][0] == "curl"
+    assert "--fail-with-body" in seen["command"]
+
+
+def test_curl_text_reports_missing_executable(monkeypatch):
+    monkeypatch.setattr(collectors.shutil, "which", lambda name: None)
+    try:
+        collectors.curl_text("https://example.invalid/feed")
+    except collectors.FetchError as exc:
+        assert "curl" in str(exc)
+    else:
+        raise AssertionError("missing curl must be a real failure")
 
 
 def test_rate_limit_produces_an_honest_failure_not_an_empty_success():

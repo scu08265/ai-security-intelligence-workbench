@@ -1,4 +1,4 @@
-"""Run and record a real Docker rollback from 0.2.2 to 0.2.1 and back."""
+"""Run and record a real Docker rollback from the current version and back."""
 
 from __future__ import annotations
 
@@ -145,9 +145,9 @@ def _compose(docker: str, host_port: int, version: str, action: str) -> str:
     })
 
 
-def _cleanup_compose(docker: str, host_port: int) -> None:
+def _cleanup_compose(docker: str, host_port: int, current_version: str) -> None:
     try:
-        _compose(docker, host_port, "0.2.2", "down")
+        _compose(docker, host_port, current_version, "down")
     except Exception:
         pass
 
@@ -171,7 +171,7 @@ def _wait_health(base_url: str, expected_version: str, timeout_seconds: int) -> 
     )
 
 
-def _backup(docker: str) -> str:
+def _backup(docker: str, current_version: str) -> str:
     database = ROOT / "data" / "intel.sqlite"
     if not database.is_file():
         raise RuntimeError(f"Database not found: {database}")
@@ -196,7 +196,7 @@ def _backup(docker: str) -> str:
             docker, "run", "--rm",
             "-v", f"{ROOT / 'data'}:/backup-data",
             "-v", f"{backup_dir}:/backup-out",
-            f"{IMAGE_REPOSITORY}:0.2.2",
+            f"{IMAGE_REPOSITORY}:{current_version}",
             "python", "-c", snippet,
         ])
     else:
@@ -209,13 +209,22 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--host-port", type=int, default=18001)
     parser.add_argument("--timeout-seconds", type=int, default=120)
+    parser.add_argument(
+        "--current-version",
+        default=(ROOT / "VERSION").read_text(encoding="utf-8").strip(),
+    )
+    parser.add_argument("--previous-version", default="0.2.2")
     args = parser.parse_args()
+    if not args.current_version or args.current_version == args.previous_version:
+        parser.error("current and previous versions must be non-empty and different")
 
     report: dict[str, Any] = {
-        "version": "0.2.2",
+        "version": args.current_version,
+        "current_version": args.current_version,
+        "previous_version": args.previous_version,
         "generated_at": _utcnow(),
         "status": "running",
-        "rollback_target": "0.2.1",
+        "rollback_target": args.previous_version,
         "docker_runtime_verified": False,
     }
     docker = ""
@@ -227,22 +236,22 @@ def main() -> int:
             docker, "version", "--format", "{{.Server.Version}}",
         ])
 
-        report["build_0_2_1"] = "started"
-        _build_old_image(docker, "0.2.1")
-        report["build_0_2_1"] = "completed"
-        report["build_0_2_2"] = "started"
-        _build_current_image(docker, "0.2.2")
-        report["build_0_2_2"] = "completed"
+        report["build_previous"] = "started"
+        _build_old_image(docker, args.previous_version)
+        report["build_previous"] = "completed"
+        report["build_current"] = "started"
+        _build_current_image(docker, args.current_version)
+        report["build_current"] = "completed"
 
         report["image_ids"] = {
-            "0.2.1": _image_id(docker, "0.2.1"),
-            "0.2.2": _image_id(docker, "0.2.2"),
+            args.previous_version: _image_id(docker, args.previous_version),
+            args.current_version: _image_id(docker, args.current_version),
         }
         report["legacy_build_compatibility"] = (
-            "v0.2.1 image build copies VERSION so /api/health reports the "
-            "historical release version correctly."
+            f"v{args.previous_version} image build copies VERSION so /api/health "
+            "reports the historical release version correctly."
         )
-        report["backup_output"] = _backup(docker)
+        report["backup_output"] = _backup(docker, args.current_version)
 
         COMPOSE_OVERRIDE.parent.mkdir(parents=True, exist_ok=True)
         COMPOSE_OVERRIDE.write_text(
@@ -258,17 +267,23 @@ def main() -> int:
         )
         base_url = f"http://127.0.0.1:{args.host_port}"
 
-        _cleanup_compose(docker, args.host_port)
-        _compose(docker, args.host_port, "0.2.2", "up")
-        report["before_rollback"] = _wait_health(base_url, "0.2.2", args.timeout_seconds)
+        _cleanup_compose(docker, args.host_port, args.current_version)
+        _compose(docker, args.host_port, args.current_version, "up")
+        report["before_rollback"] = _wait_health(
+            base_url, args.current_version, args.timeout_seconds,
+        )
 
-        _compose(docker, args.host_port, "0.2.2", "down")
-        _compose(docker, args.host_port, "0.2.1", "up")
-        report["after_rollback"] = _wait_health(base_url, "0.2.1", args.timeout_seconds)
+        _compose(docker, args.host_port, args.current_version, "down")
+        _compose(docker, args.host_port, args.previous_version, "up")
+        report["after_rollback"] = _wait_health(
+            base_url, args.previous_version, args.timeout_seconds,
+        )
 
-        _compose(docker, args.host_port, "0.2.1", "down")
-        _compose(docker, args.host_port, "0.2.2", "up")
-        report["after_restore"] = _wait_health(base_url, "0.2.2", args.timeout_seconds)
+        _compose(docker, args.host_port, args.previous_version, "down")
+        _compose(docker, args.host_port, args.current_version, "up")
+        report["after_restore"] = _wait_health(
+            base_url, args.current_version, args.timeout_seconds,
+        )
         events_before = report["before_rollback"]["checks"]["events"]
         events_after = report["after_restore"]["checks"]["events"]
         report["events_preserved"] = events_before == events_after
@@ -277,7 +292,7 @@ def main() -> int:
                 f"Event count changed across rollback: {events_before} -> {events_after}"
             )
 
-        _compose(docker, args.host_port, "0.2.2", "down")
+        _compose(docker, args.host_port, args.current_version, "down")
         report["status"] = "passed"
         report["finished_at"] = _utcnow()
         return_code = 0
@@ -286,7 +301,7 @@ def main() -> int:
         report["error"] = str(exc)
         report["finished_at"] = _utcnow()
         if docker:
-            _cleanup_compose(docker, args.host_port)
+            _cleanup_compose(docker, args.host_port, args.current_version)
         return_code = 1
     finally:
         REPORT.parent.mkdir(parents=True, exist_ok=True)

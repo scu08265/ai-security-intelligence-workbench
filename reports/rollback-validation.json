@@ -1,9 +1,60 @@
 {
-  "version": "0.2.2",
-  "generated_at": "2026-10-01T00:00:00Z",
-  "status": "pending_runtime",
-  "dry_run": false,
+  "version": "0.2.3",
+  "evidence_version": "0.2.2",
+  "current_version": "0.2.2",
+  "previous_version": "0.2.1",
+  "generated_at": "2026-10-01T13:08:07Z",
+  "status": "passed",
   "rollback_target": "0.2.1",
-  "docker_runtime_verified": false,
-  "required_command": ".venv\\Scripts\\python.exe tools\\run_rollback_validation.py --host-port 18001"
+  "docker_runtime_verified": true,
+  "docker_server_version": "29.8.1",
+  "build_0_2_1": "completed",
+  "build_0_2_2": "completed",
+  "image_ids": {
+    "0.2.1": "sha256:52a834555e1f5ae4a9f320bb31cf7dfe02c3d3c543ab141e8dd18bbf5ccdd100",
+    "0.2.2": "sha256:0668ec31a6224fd299e6c3e6fd6e1ea48ccddc0b85d9b8386f87c88608934af0"
+  },
+  "legacy_build_compatibility": "v0.2.1 image build copies VERSION so /api/health reports the historical release version correctly.",
+  "backup_output": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-210812.sqlite",
+  "before_rollback": {
+    "status": "ok",
+    "version": "0.2.2",
+    "mode": "local_evidence_extraction",
+    "model_configured": false,
+    "data_dir": "/app/data",
+    "checks": {
+      "database": "ok",
+      "events": 190,
+      "failed_sources": [],
+      "skipped_sources": []
+    }
+  },
+  "after_rollback": {
+    "status": "ok",
+    "version": "0.2.1",
+    "mode": "local_evidence_extraction",
+    "model_configured": false,
+    "data_dir": "/app/data",
+    "checks": {
+      "database": "ok",
+      "events": 190,
+      "failed_sources": [],
+      "skipped_sources": []
+    }
+  },
+  "after_restore": {
+    "status": "ok",
+    "version": "0.2.2",
+    "mode": "local_evidence_extraction",
+    "model_configured": false,
+    "data_dir": "/app/data",
+    "checks": {
+      "database": "ok",
+      "events": 190,
+      "failed_sources": [],
+      "skipped_sources": []
+    }
+  },
+  "events_preserved": true,
+  "finished_at": "2026-10-01T13:08:32Z"
 }

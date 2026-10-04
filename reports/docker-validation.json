@@ -1,5 +1,6 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
+  "evidence_version": "0.2.2",
   "generated_at": "2026-09-30T08:17:00.991136+00:00",
   "docker_cli_available": true,
   "docker_server": "Docker Desktop 4.93.0 / Engine 29.8.1",

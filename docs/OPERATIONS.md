@@ -115,18 +115,18 @@ powershell -ExecutionPolicy Bypass -File .\scripts\restore_database.ps1 -BackupP
 
 数据库文件回滚前会自动保存为 `intel.sqlite.before-restore-*`，避免再次覆盖时丢失现场。
 
-### 真实验证 0.2.2 -> 0.2.1 -> 0.2.2
+### 真实验证 0.2.3 -> 0.2.2 -> 0.2.3
 
 ```powershell
 .\.venv\Scripts\python.exe .\tools\run_rollback_validation.py --host-port 18001
 ```
 
-该命令从 `v0.2.1` 标签构建旧镜像，验证 `0.2.2` 健康后切到 `0.2.1`，检查版本和事件数，再恢复
-`0.2.2`。结果写入 `reports/rollback-validation.json`。
+该命令从 `v0.2.2` 标签构建旧镜像，验证 `0.2.3` 健康后切到 `0.2.2`，检查版本和事件数，再恢复
+`0.2.3`。结果写入 `reports/rollback-validation.json`。
 
 ## 7. 版本回退
 
-- 当前发布版本记录在 `VERSION`，本文档对应 `0.2.2`。
+- 当前发布版本记录在 `VERSION`，本文档对应 `0.2.3`。
 - 发布时使用 Git 标签；回退代码时切换到上一个稳定标签。
 - Docker 镜像使用 `ai-security-intelligence-workbench:<版本号>`，不要覆盖旧标签。
 - 回退前先执行 `scripts/backup_database.ps1`。
@@ -134,7 +134,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\restore_database.ps1 -BackupP
 ```powershell
 git fetch --tags
 git switch --detach v0.2.2
-docker build -t ai-security-intelligence-workbench:0.2.2 .
+docker build --build-arg APP_VERSION=0.2.2 -t ai-security-intelligence-workbench:0.2.2 .
 ```
 
 ## 8. 连续 7 天证据

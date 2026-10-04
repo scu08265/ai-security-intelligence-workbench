@@ -9,7 +9,7 @@
 命令：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\deploy.ps1 -Version 0.2.2
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy.ps1 -Version 0.2.3
 ```
 
 ## 2. CI
@@ -102,5 +102,5 @@ powershell -ExecutionPolicy Bypass -File .\scripts\finalize_v0.2.2.ps1 `
 .\.venv\Scripts\python.exe -m pip check
 node --check app\static\app.js
 docker compose config
-docker build --build-arg APP_VERSION=0.2.2 -t ai-security-intelligence-workbench:0.2.2 .
+docker build --build-arg APP_VERSION=0.2.3 -t ai-security-intelligence-workbench:0.2.3 .
 ```

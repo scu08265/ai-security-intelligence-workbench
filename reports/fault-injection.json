@@ -1,5 +1,6 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
+  "evidence_version": "0.2.2",
   "status": "recovered",
   "scenario": "NVD mock HTTP 503 followed by successful retry",
   "before": {

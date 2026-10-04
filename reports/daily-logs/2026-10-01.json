@@ -1,0 +1,5144 @@
+{
+  "date": "2026-10-01",
+  "generated_at": "2026-10-02T10:21:24Z",
+  "version": "0.2.3",
+  "scheduled_runs": [
+    {
+      "id": "run-68aa366ac0af",
+      "status": "completed",
+      "started_at": "2026-10-01T03:59:53Z",
+      "finished_at": "2026-10-01T04:21:56Z",
+      "summary": "采集 12 个来源：新增 57，更新 11，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T11:00:00+08:00",
+        "actual_at": "2026-10-01T03:59:53Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 3623,
+          "kept": 61,
+          "duration_ms": 971547,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 05:53 → 2026-10-01 03:59，共 3623 条，分 19 页扫描 3623 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 10,
+          "duration_ms": 10625,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 1,
+          "duration_ms": 6969,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "已取详细记录 2 条（并发 6 路）"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1282,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 19187,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 296,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 241608,
+          "error": "ConnectTimeout: _ssl.c:993: The handshake operation timed out",
+          "notes": []
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2078,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1032,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 718,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 18437,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 46860,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-09-30，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-88fd3ec18284",
+      "status": "completed",
+      "started_at": "2026-10-01T04:30:36Z",
+      "finished_at": "2026-10-01T04:37:43Z",
+      "summary": "采集 12 个来源：新增 1，更新 10，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T12:00:00+08:00",
+        "actual_at": "2026-10-01T04:30:36Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 1236,
+          "kept": 11,
+          "duration_ms": 354656,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 21:59 → 2026-10-01 04:30，共 1236 条，分 7 页扫描 1236 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 10,
+          "duration_ms": 10907,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 6500,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 2000,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 9281,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 280,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1046,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1688,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 812,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 264,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 37312,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 906,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-0bd7f94a671a",
+      "status": "completed",
+      "started_at": "2026-10-01T07:21:06Z",
+      "finished_at": "2026-10-01T07:27:07Z",
+      "summary": "采集 12 个来源：新增 0，更新 9，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T13:00:00+08:00",
+        "actual_at": "2026-10-01T07:21:06Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 1030,
+          "kept": 9,
+          "duration_ms": 195125,
+          "error": null,
+          "notes": [
+            "窗口 2026-09-30 22:30 → 2026-10-01 07:21，共 1030 条，分 6 页扫描 1030 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 9,
+          "duration_ms": 11610,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 91282,
+          "error": "ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1468,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 20342,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 312,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1765,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1968,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1250,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1280,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 31733,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1703,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-18de0b0e2efb",
+      "status": "completed",
+      "started_at": "2026-10-01T07:28:40Z",
+      "finished_at": "2026-10-01T07:30:30Z",
+      "summary": "采集 12 个来源：新增 0，更新 9，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T15:00:00+08:00",
+        "actual_at": "2026-10-01T07:28:40Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 254,
+          "kept": 4,
+          "duration_ms": 38093,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 01:21 → 2026-10-01 07:28，共 254 条，分 2 页扫描 254 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 9,
+          "duration_ms": 10093,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 4625,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 625,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 34359,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 266,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 859,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 281,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 702,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 625,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 17967,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 656,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-3617f5f8322a",
+      "status": "completed",
+      "started_at": "2026-10-01T11:07:30Z",
+      "finished_at": "2026-10-01T11:08:51Z",
+      "summary": "采集 12 个来源：新增 0，更新 8，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T19:00:00+08:00",
+        "actual_at": "2026-10-01T11:07:30Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 183,
+          "kept": 0,
+          "duration_ms": 2515,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 04:48 → 2026-10-01 11:07，共 183 条，分 1 页扫描 183 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 8,
+          "duration_ms": 11625,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 6360,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1110,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 37406,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 327,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 858,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 702,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 733,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1296,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 16358,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 905,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-1b86ccb63065",
+      "status": "completed",
+      "started_at": "2026-10-01T11:48:33Z",
+      "finished_at": "2026-10-01T11:51:18Z",
+      "summary": "采集 12 个来源：新增 0，更新 1，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T19:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T11:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 244,
+          "kept": 0,
+          "duration_ms": 41297,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 05:07 → 2026-10-01 11:48，共 244 条，分 2 页扫描 244 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 1,
+          "duration_ms": 59422,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 6657,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 2093,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 17046,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 12094,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1781,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 3764,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2139,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 2406,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 14656,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1093,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-72c264522ff9",
+      "status": "completed",
+      "started_at": "2026-10-01T12:07:59Z",
+      "finished_at": "2026-10-01T12:09:18Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T20:00:00+08:00",
+        "actual_at": "2026-10-01T12:07:59Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 221,
+          "kept": 0,
+          "duration_ms": 17625,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 05:48 → 2026-10-01 12:07，共 221 条，分 2 页扫描 221 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 12000,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 5046,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 2827,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 16625,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 735,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1016,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2453,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 750,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1437,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 16671,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 578,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-d5c6f25a9f74",
+      "status": "completed",
+      "started_at": "2026-10-01T12:48:33Z",
+      "finished_at": "2026-10-01T12:51:16Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T20:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T12:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 257,
+          "kept": 1,
+          "duration_ms": 24250,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 06:07 → 2026-10-01 12:48，共 257 条，分 2 页扫描 257 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 66858,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 7437,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 5125,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 17406,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 2328,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 2687,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2422,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 10688,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1343,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 21203,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1031,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-1ef84ab0939f",
+      "status": "completed",
+      "started_at": "2026-10-01T13:09:02Z",
+      "finished_at": "2026-10-01T13:10:38Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T21:00:00+08:00",
+        "actual_at": "2026-10-01T13:09:02Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 271,
+          "kept": 2,
+          "duration_ms": 10860,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 06:48 → 2026-10-01 13:09，共 271 条，分 2 页扫描 271 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 12391,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 4750,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 4484,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 23750,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 375,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 952,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2016,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 735,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1297,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 33047,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 782,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-0967de062a85",
+      "status": "completed",
+      "started_at": "2026-10-01T13:48:33Z",
+      "finished_at": "2026-10-01T13:50:46Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T21:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T13:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 299,
+          "kept": 2,
+          "duration_ms": 25187,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 07:09 → 2026-10-01 13:48，共 299 条，分 2 页扫描 299 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 37062,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 9827,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 7641,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 15733,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 6515,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 10969,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1547,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1750,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 797,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 14156,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1766,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-2df396bd06b7",
+      "status": "completed",
+      "started_at": "2026-10-01T14:09:06Z",
+      "finished_at": "2026-10-01T14:10:43Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T22:00:00+08:00",
+        "actual_at": "2026-10-01T14:09:06Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 309,
+          "kept": 2,
+          "duration_ms": 18812,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 07:48 → 2026-10-01 14:09，共 309 条，分 2 页扫描 309 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 13812,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 6514,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1953,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 17421,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 296,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 875,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 967,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 766,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1187,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 32827,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 672,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-0fb6949672f1",
+      "status": "completed",
+      "started_at": "2026-10-01T14:48:33Z",
+      "finished_at": "2026-10-01T14:50:30Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T22:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T14:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 386,
+          "kept": 2,
+          "duration_ms": 25796,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 08:09 → 2026-10-01 14:48，共 386 条，分 2 页扫描 386 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 31593,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 8217,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 3500,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 18827,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 1313,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 2046,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1031,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2875,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1110,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 18407,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 2264,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-f8f64ce6d9ab",
+      "status": "completed",
+      "started_at": "2026-10-01T15:10:04Z",
+      "finished_at": "2026-10-01T15:17:02Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T23:00:00+08:00",
+        "actual_at": "2026-10-01T15:10:04Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 324,
+          "kept": 2,
+          "duration_ms": 101843,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 08:48 → 2026-10-01 15:10，共 324 条，分 2 页扫描 324 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 10375,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 91342,
+          "error": "ConnectTimeout: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1546,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 21407,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 467,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 3953,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2047,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 98937,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 406,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 36188,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 48500,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-6dbbbf8c6b31",
+      "status": "partial",
+      "started_at": "2026-10-01T15:48:36Z",
+      "finished_at": "2026-10-01T15:51:24Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-01T23:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T15:48:36Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 422,
+          "kept": 3,
+          "duration_ms": 27422,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 09:10 → 2026-10-01 15:48，共 422 条，分 3 页扫描 422 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 50625,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 8781,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 2453,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 22280,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 1203,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 2171,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1264,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 4187,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 3686,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 32031,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 10610,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "run-8f5e17bff2d7",
+      "status": "completed",
+      "started_at": "2026-10-01T16:10:36Z",
+      "finished_at": "2026-10-01T16:14:32Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T00:00:00+08:00",
+        "actual_at": "2026-10-01T16:10:36Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 529,
+          "kept": 3,
+          "duration_ms": 122016,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 09:48 → 2026-10-01 16:10，共 529 条，分 3 页扫描 529 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 12031,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 6296,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 827,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 57608,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 297,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1218,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 875,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1875,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 264,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 31843,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 781,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-41f70ec61d76",
+      "status": "completed",
+      "started_at": "2026-10-01T16:48:33Z",
+      "finished_at": "2026-10-01T16:51:11Z",
+      "summary": "采集 12 个来源：新增 1，更新 1，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T00:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T16:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 607,
+          "kept": 5,
+          "duration_ms": 39641,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 10:10 → 2026-10-01 16:48，共 607 条，分 4 页扫描 607 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 1,
+          "duration_ms": 37688,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 9812,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 2610,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 24672,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 2797,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 2889,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 8905,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 2531,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 4030,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 18233,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 2922,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-9e8135afb11e",
+      "status": "completed",
+      "started_at": "2026-10-01T17:10:39Z",
+      "finished_at": "2026-10-01T17:14:43Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T01:00:00+08:00",
+        "actual_at": "2026-10-01T17:10:39Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 610,
+          "kept": 5,
+          "duration_ms": 80328,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 10:48 → 2026-10-01 17:10，共 610 条，分 4 页扫描 610 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 10702,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1907,
+          "kept": 0,
+          "duration_ms": 4953,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1907 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 858,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2674,
+          "kept": 10,
+          "duration_ms": 55328,
+          "error": null,
+          "notes": [
+            "更新索引共 190 份月度文档，本次解析最新 1 份（ID：2026-Sep）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 234,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1235,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1562,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1453,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1625,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 37141,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 48093,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-b16ee768c944",
+      "status": "partial",
+      "started_at": "2026-10-01T17:48:33Z",
+      "finished_at": "2026-10-01T17:50:56Z",
+      "summary": "采集 12 个来源：新增 4，更新 7，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T01:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T17:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 687,
+          "kept": 5,
+          "duration_ms": 31375,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 11:10 → 2026-10-01 17:48，共 687 条，分 4 页扫描 687 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 32656,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "partial",
+          "fetched": 1926,
+          "kept": 11,
+          "duration_ms": 13203,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "窗口内共 19 条更新，本次取最新 12 条（单次上限 12）",
+            "已取详细记录 12 条（并发 6 路）"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1796,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 10812,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 8656,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1860,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1000,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1250,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1750,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 16186,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 22062,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-cabee9d27cb0",
+      "status": "partial",
+      "started_at": "2026-10-01T18:11:06Z",
+      "finished_at": "2026-10-01T18:12:58Z",
+      "summary": "采集 12 个来源：新增 3，更新 10，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T02:00:00+08:00",
+        "actual_at": "2026-10-01T18:11:06Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 675,
+          "kept": 5,
+          "duration_ms": 39437,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 11:48 → 2026-10-01 18:11，共 675 条，分 4 页扫描 675 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 7,
+          "duration_ms": 13141,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "partial",
+          "fetched": 1926,
+          "kept": 12,
+          "duration_ms": 6514,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "窗口内共 19 条更新，本次取最新 12 条（单次上限 12）",
+            "已取详细记录 12 条（并发 6 路）"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 889,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 10687,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 641,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1735,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 765,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1218,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 358,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 34358,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 921,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-60b5e6c086d1",
+      "status": "completed",
+      "started_at": "2026-10-01T18:48:33Z",
+      "finished_at": "2026-10-01T18:51:16Z",
+      "summary": "采集 12 个来源：新增 0，更新 9，失败 0，历史数据可用 1",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T02:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T18:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 734,
+          "kept": 5,
+          "duration_ms": 35625,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 12:11 → 2026-10-01 18:48，共 734 条，分 4 页扫描 734 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 9,
+          "duration_ms": 57468,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 6312,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1327,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 10250,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 1984,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 2078,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 937,
+          "error": "HTTP 403",
+          "notes": []
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 29203,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 780,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 15530,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1093,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-fb41fea6281e",
+      "status": "completed",
+      "started_at": "2026-10-01T19:12:08Z",
+      "finished_at": "2026-10-01T19:13:48Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T03:00:00+08:00",
+        "actual_at": "2026-10-01T19:12:08Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 694,
+          "kept": 5,
+          "duration_ms": 33733,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 12:48 → 2026-10-01 19:12，共 694 条，分 4 页扫描 694 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 13219,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 6109,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 1828,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 10000,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 265,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1078,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 390,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 891,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 655,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 30640,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 641,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-0b3a783f375c",
+      "status": "completed",
+      "started_at": "2026-10-01T19:48:33Z",
+      "finished_at": "2026-10-01T19:50:58Z",
+      "summary": "采集 12 个来源：新增 0，更新 1，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T03:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T19:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 718,
+          "kept": 6,
+          "duration_ms": 55296,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 13:12 → 2026-10-01 19:48，共 718 条，分 4 页扫描 718 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 38592,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 5514,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1730,
+          "kept": 0,
+          "duration_ms": 2390,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.09.30（发布 2026-09-30T16:59:23.0688Z），全量 1730 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 10594,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 11546,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 733,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1014,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1358,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 812,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 14483,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 2125,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-a411749c4ef5",
+      "status": "completed",
+      "started_at": "2026-10-01T20:48:33Z",
+      "finished_at": "2026-10-01T20:50:10Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T04:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T20:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 769,
+          "kept": 6,
+          "duration_ms": 31718,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 13:48 → 2026-10-01 20:48，共 769 条，分 4 页扫描 769 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 23655,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 5968,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1731,
+          "kept": 0,
+          "duration_ms": 797,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.10.01（发布 2026-10-01T19:54:04.9308Z），全量 1731 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 10719,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 1219,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1780,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1141,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1094,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1797,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 14984,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1016,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-0b5d1623e1e2",
+      "status": "completed",
+      "started_at": "2026-10-01T21:14:41Z",
+      "finished_at": "2026-10-01T21:16:31Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T05:00:00+08:00",
+        "actual_at": "2026-10-01T21:14:41Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 655,
+          "kept": 6,
+          "duration_ms": 35719,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 14:48 → 2026-10-01 21:14，共 655 条，分 4 页扫描 655 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 11812,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 5844,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1731,
+          "kept": 0,
+          "duration_ms": 1750,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.10.01（发布 2026-10-01T19:54:04.9308Z），全量 1731 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 17828,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 265,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 828,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 344,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 780,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 703,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 33312,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 656,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-6ca09e39e14f",
+      "status": "completed",
+      "started_at": "2026-10-01T21:48:34Z",
+      "finished_at": "2026-10-01T21:50:35Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T05:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T21:48:34Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 647,
+          "kept": 6,
+          "duration_ms": 30625,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 15:14 → 2026-10-01 21:48，共 647 条，分 4 页扫描 647 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 28187,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 6016,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1731,
+          "kept": 0,
+          "duration_ms": 2375,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.10.01（发布 2026-10-01T19:54:04.9308Z），全量 1731 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 28906,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 843,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 1516,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 3437,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 1030,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1125,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 14407,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 1781,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-b6b063303acb",
+      "status": "completed",
+      "started_at": "2026-10-01T22:15:18Z",
+      "finished_at": "2026-10-01T22:17:01Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T06:00:00+08:00",
+        "actual_at": "2026-10-01T22:15:18Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 547,
+          "kept": 4,
+          "duration_ms": 29858,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 15:48 → 2026-10-01 22:15，共 547 条，分 3 页扫描 547 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 12844,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 8375,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1731,
+          "kept": 0,
+          "duration_ms": 1546,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.10.01（发布 2026-10-01T19:54:04.9308Z），全量 1731 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 12391,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 375,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 953,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 907,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 687,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1280,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 32750,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 672,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-bc5e2b0ddc1c",
+      "status": "partial",
+      "started_at": "2026-10-01T22:48:33Z",
+      "finished_at": "2026-10-01T22:53:53Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 3，历史数据可用 8",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T06:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T22:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27655,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27171,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 20671,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "openalex",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27171,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27141,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27155,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27141,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27141,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "nist_news",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27140,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "run-b1bb6adad53b",
+      "status": "completed",
+      "started_at": "2026-10-01T23:15:42Z",
+      "finished_at": "2026-10-01T23:17:21Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 0",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T07:00:00+08:00",
+        "actual_at": "2026-10-01T23:15:42Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "ok",
+          "fetched": 495,
+          "kept": 4,
+          "duration_ms": 23062,
+          "error": null,
+          "notes": [
+            "窗口 2026-10-01 16:15 → 2026-10-01 23:15，共 495 条，分 3 页扫描 495 条"
+          ]
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 12312,
+          "error": null,
+          "notes": [
+            "逐条核验 10 个已有 CVE 记录（单次上限 10）"
+          ]
+        },
+        {
+          "source_id": "osv",
+          "status": "ok",
+          "fetched": 1926,
+          "kept": 0,
+          "duration_ms": 4891,
+          "error": null,
+          "notes": [
+            "批量查询 42 个包，命中 1926 条 OSV 记录",
+            "本次窗口内没有新增或变更的 OSV 记录"
+          ]
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "ok",
+          "fetched": 1731,
+          "kept": 0,
+          "duration_ms": 1233,
+          "error": null,
+          "notes": [
+            "KEV 目录版本 2026.10.01（发布 2026-10-01T19:54:04.9308Z），全量 1731 条，窗口内新增 0 条"
+          ]
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 17625,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "ok",
+          "fetched": 10,
+          "kept": 0,
+          "duration_ms": 437,
+          "error": null,
+          "notes": [
+            "订阅源返回 10 条：10 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "openalex",
+          "status": "ok",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 828,
+          "error": null,
+          "notes": [
+            "OpenAlex 查询返回 0 条，0 条判定与 AI 安全无关，0 条入库"
+          ]
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 765,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（12601 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 750,
+          "error": null,
+          "notes": [
+            "页面内容较上次发生变化（7168 字符），已生成知识条目"
+          ]
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 0,
+          "duration_ms": 1030,
+          "error": null,
+          "notes": [
+            "内容哈希与上次一致，未产生新事件"
+          ]
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "ok",
+          "fetched": 1,
+          "kept": 1,
+          "duration_ms": 34905,
+          "error": null,
+          "notes": [
+            "官方 PDF 已保存并提取 606997 字符、419 个章节、849 个检索块"
+          ]
+        },
+        {
+          "source_id": "nist_news",
+          "status": "ok",
+          "fetched": 40,
+          "kept": 0,
+          "duration_ms": 625,
+          "error": null,
+          "notes": [
+            "订阅源返回 40 条：40 条早于窗口起点 2026-10-01，0 条判定与 AI 无关，0 条入库"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "run-25ecdc663ca0",
+      "status": "partial",
+      "started_at": "2026-10-01T23:48:33Z",
+      "finished_at": "2026-10-01T23:53:54Z",
+      "summary": "采集 12 个来源：新增 0，更新 0，失败 3，历史数据可用 8",
+      "scheduler": {
+        "task_id": "hourly-recommended-sources",
+        "planned_at": "2026-10-02T07:00:00.0000000+08:00",
+        "actual_at": "2026-10-01T23:48:33Z",
+        "trigger_source": "windows_task_scheduler_or_cron"
+      },
+      "sources": [
+        {
+          "source_id": "nvd",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27327,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "mitre_cve",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27203,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "osv",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "cisa_kev",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "msrc",
+          "status": "ok",
+          "fetched": 2005,
+          "kept": 10,
+          "duration_ms": 21937,
+          "error": null,
+          "notes": [
+            "更新索引共 188 份月度文档，本次解析最新 1 份（ID：2026-Jul）"
+          ]
+        },
+        {
+          "source_id": "security_blog",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "openalex",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27171,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "owasp_genai",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27171,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "nist_ai_rmf",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27141,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "mitre_atlas",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27141,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "eu_ai_act",
+          "status": "stale",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27187,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        },
+        {
+          "source_id": "nist_news",
+          "status": "failed",
+          "fetched": 0,
+          "kept": 0,
+          "duration_ms": 27203,
+          "error": "ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+          "notes": []
+        }
+      ]
+    }
+  ],
+  "actual_runs": [
+    {
+      "id": "run-68aa366ac0af",
+      "status": "completed",
+      "started_at": "2026-10-01T03:59:53Z",
+      "finished_at": "2026-10-01T04:21:56Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-88fd3ec18284",
+      "status": "completed",
+      "started_at": "2026-10-01T04:30:36Z",
+      "finished_at": "2026-10-01T04:37:43Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-0bd7f94a671a",
+      "status": "completed",
+      "started_at": "2026-10-01T07:21:06Z",
+      "finished_at": "2026-10-01T07:27:07Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-18de0b0e2efb",
+      "status": "completed",
+      "started_at": "2026-10-01T07:28:40Z",
+      "finished_at": "2026-10-01T07:30:30Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-3617f5f8322a",
+      "status": "completed",
+      "started_at": "2026-10-01T11:07:30Z",
+      "finished_at": "2026-10-01T11:08:51Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-1b86ccb63065",
+      "status": "completed",
+      "started_at": "2026-10-01T11:48:33Z",
+      "finished_at": "2026-10-01T11:51:18Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-72c264522ff9",
+      "status": "completed",
+      "started_at": "2026-10-01T12:07:59Z",
+      "finished_at": "2026-10-01T12:09:18Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-d5c6f25a9f74",
+      "status": "completed",
+      "started_at": "2026-10-01T12:48:33Z",
+      "finished_at": "2026-10-01T12:51:16Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-1ef84ab0939f",
+      "status": "completed",
+      "started_at": "2026-10-01T13:09:02Z",
+      "finished_at": "2026-10-01T13:10:38Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-0967de062a85",
+      "status": "completed",
+      "started_at": "2026-10-01T13:48:33Z",
+      "finished_at": "2026-10-01T13:50:46Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-2df396bd06b7",
+      "status": "completed",
+      "started_at": "2026-10-01T14:09:06Z",
+      "finished_at": "2026-10-01T14:10:43Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-0fb6949672f1",
+      "status": "completed",
+      "started_at": "2026-10-01T14:48:33Z",
+      "finished_at": "2026-10-01T14:50:30Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-f8f64ce6d9ab",
+      "status": "completed",
+      "started_at": "2026-10-01T15:10:04Z",
+      "finished_at": "2026-10-01T15:17:02Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-6dbbbf8c6b31",
+      "status": "partial",
+      "started_at": "2026-10-01T15:48:36Z",
+      "finished_at": "2026-10-01T15:51:24Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-58ae55070e6f",
+      "status": "failed",
+      "started_at": "2026-10-01T15:51:24Z",
+      "finished_at": "2026-10-01T15:51:33Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-8f5e17bff2d7",
+      "status": "completed",
+      "started_at": "2026-10-01T16:10:36Z",
+      "finished_at": "2026-10-01T16:14:32Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-41f70ec61d76",
+      "status": "completed",
+      "started_at": "2026-10-01T16:48:33Z",
+      "finished_at": "2026-10-01T16:51:11Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-9e8135afb11e",
+      "status": "completed",
+      "started_at": "2026-10-01T17:10:39Z",
+      "finished_at": "2026-10-01T17:14:43Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-b16ee768c944",
+      "status": "partial",
+      "started_at": "2026-10-01T17:48:33Z",
+      "finished_at": "2026-10-01T17:50:56Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-cabee9d27cb0",
+      "status": "partial",
+      "started_at": "2026-10-01T18:11:06Z",
+      "finished_at": "2026-10-01T18:12:58Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-60b5e6c086d1",
+      "status": "completed",
+      "started_at": "2026-10-01T18:48:33Z",
+      "finished_at": "2026-10-01T18:51:16Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-fb41fea6281e",
+      "status": "completed",
+      "started_at": "2026-10-01T19:12:08Z",
+      "finished_at": "2026-10-01T19:13:48Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-0b3a783f375c",
+      "status": "completed",
+      "started_at": "2026-10-01T19:48:33Z",
+      "finished_at": "2026-10-01T19:50:58Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-a411749c4ef5",
+      "status": "completed",
+      "started_at": "2026-10-01T20:48:33Z",
+      "finished_at": "2026-10-01T20:50:10Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-0b5d1623e1e2",
+      "status": "completed",
+      "started_at": "2026-10-01T21:14:41Z",
+      "finished_at": "2026-10-01T21:16:31Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-6ca09e39e14f",
+      "status": "completed",
+      "started_at": "2026-10-01T21:48:34Z",
+      "finished_at": "2026-10-01T21:50:35Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-b6b063303acb",
+      "status": "completed",
+      "started_at": "2026-10-01T22:15:18Z",
+      "finished_at": "2026-10-01T22:17:01Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-bc5e2b0ddc1c",
+      "status": "partial",
+      "started_at": "2026-10-01T22:48:33Z",
+      "finished_at": "2026-10-01T22:53:53Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-cbe01477cebb",
+      "status": "completed",
+      "started_at": "2026-10-01T22:53:53Z",
+      "finished_at": "2026-10-01T22:54:20Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-f4c739e5bb58",
+      "status": "completed",
+      "started_at": "2026-10-01T22:54:20Z",
+      "finished_at": "2026-10-01T22:54:49Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-e7dceb504828",
+      "status": "completed",
+      "started_at": "2026-10-01T22:54:49Z",
+      "finished_at": "2026-10-01T22:55:16Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-16839e1a6887",
+      "status": "completed",
+      "started_at": "2026-10-01T22:55:16Z",
+      "finished_at": "2026-10-01T22:55:43Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-8b9f600e4ca8",
+      "status": "failed",
+      "started_at": "2026-10-01T22:55:43Z",
+      "finished_at": "2026-10-01T22:56:10Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-5a620d6847fd",
+      "status": "completed",
+      "started_at": "2026-10-01T22:56:10Z",
+      "finished_at": "2026-10-01T22:56:38Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-486e9076dbc1",
+      "status": "completed",
+      "started_at": "2026-10-01T22:56:38Z",
+      "finished_at": "2026-10-01T22:57:05Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-56e66b454c4e",
+      "status": "completed",
+      "started_at": "2026-10-01T22:57:05Z",
+      "finished_at": "2026-10-01T22:57:32Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-c8ccd7b71aae",
+      "status": "failed",
+      "started_at": "2026-10-01T22:57:32Z",
+      "finished_at": "2026-10-01T22:57:59Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-d47485565728",
+      "status": "completed",
+      "started_at": "2026-10-01T22:57:59Z",
+      "finished_at": "2026-10-01T22:58:26Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-7a20e1c907cc",
+      "status": "failed",
+      "started_at": "2026-10-01T22:58:26Z",
+      "finished_at": "2026-10-01T22:58:54Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-b1bb6adad53b",
+      "status": "completed",
+      "started_at": "2026-10-01T23:15:42Z",
+      "finished_at": "2026-10-01T23:17:21Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-25ecdc663ca0",
+      "status": "partial",
+      "started_at": "2026-10-01T23:48:33Z",
+      "finished_at": "2026-10-01T23:53:54Z",
+      "trigger": "scheduled",
+      "task_id": "hourly-recommended-sources"
+    },
+    {
+      "id": "run-e6d075f8e253",
+      "status": "completed",
+      "started_at": "2026-10-01T23:53:55Z",
+      "finished_at": "2026-10-01T23:54:22Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-b8abda72ca6c",
+      "status": "completed",
+      "started_at": "2026-10-01T23:54:22Z",
+      "finished_at": "2026-10-01T23:54:49Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-a635753a423a",
+      "status": "completed",
+      "started_at": "2026-10-01T23:54:49Z",
+      "finished_at": "2026-10-01T23:55:16Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-726044d548a2",
+      "status": "completed",
+      "started_at": "2026-10-01T23:55:16Z",
+      "finished_at": "2026-10-01T23:55:43Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-60e620031ea1",
+      "status": "failed",
+      "started_at": "2026-10-01T23:55:43Z",
+      "finished_at": "2026-10-01T23:56:11Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-74c9fd015e4e",
+      "status": "completed",
+      "started_at": "2026-10-01T23:56:11Z",
+      "finished_at": "2026-10-01T23:56:38Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-d5469533478f",
+      "status": "completed",
+      "started_at": "2026-10-01T23:56:38Z",
+      "finished_at": "2026-10-01T23:57:05Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-5cd987ac812e",
+      "status": "completed",
+      "started_at": "2026-10-01T23:57:05Z",
+      "finished_at": "2026-10-01T23:57:32Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-3ae50b8c6536",
+      "status": "failed",
+      "started_at": "2026-10-01T23:57:32Z",
+      "finished_at": "2026-10-01T23:57:59Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-28e0dfa6440b",
+      "status": "completed",
+      "started_at": "2026-10-01T23:57:59Z",
+      "finished_at": "2026-10-01T23:58:29Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    },
+    {
+      "id": "run-ab7498fe75bd",
+      "status": "failed",
+      "started_at": "2026-10-01T23:58:29Z",
+      "finished_at": "2026-10-01T23:58:57Z",
+      "trigger": "self_healing",
+      "task_id": "self_healing"
+    }
+  ],
+  "alerts": [
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-10-01T23:00:00.0000000+08:00",
+        "run_id": "run-6dbbbf8c6b31",
+        "status": "partial",
+        "task_id": "hourly-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-10-01T15:51:24Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-58ae55070e6f",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "nist_news",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "nist_news 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T15:51:33Z"
+    },
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-10-02T01:00:00.0000000+08:00",
+        "run_id": "run-b16ee768c944",
+        "status": "partial",
+        "task_id": "hourly-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-10-01T17:50:56Z"
+    },
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-10-02T02:00:00+08:00",
+        "run_id": "run-cabee9d27cb0",
+        "status": "partial",
+        "task_id": "hourly-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-10-01T18:12:58Z"
+    },
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-10-02T06:00:00.0000000+08:00",
+        "run_id": "run-bc5e2b0ddc1c",
+        "status": "partial",
+        "task_id": "hourly-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:53:53Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-cbe01477cebb",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nvd 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:54:20Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-f4c739e5bb58",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "mitre_cve",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "mitre_cve 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:54:49Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-e7dceb504828",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "osv",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "osv 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:55:16Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-16839e1a6887",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "cisa_kev",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "cisa_kev 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:55:43Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-8b9f600e4ca8",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "security_blog",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "security_blog 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:56:10Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-5a620d6847fd",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "openalex",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "openalex 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:56:38Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-486e9076dbc1",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "owasp_genai",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "owasp_genai 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:57:05Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-56e66b454c4e",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nist_ai_rmf",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nist_ai_rmf 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:57:32Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-c8ccd7b71aae",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "mitre_atlas",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "mitre_atlas 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:57:59Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-d47485565728",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "eu_ai_act",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "eu_ai_act 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:58:26Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-7a20e1c907cc",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "nist_news",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "nist_news 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T22:58:54Z"
+    },
+    {
+      "code": "scheduled_collection_partial",
+      "context": {
+        "planned_at": "2026-10-02T07:00:00.0000000+08:00",
+        "run_id": "run-25ecdc663ca0",
+        "status": "partial",
+        "task_id": "hourly-recommended-sources"
+      },
+      "message": "每日计划采集部分成功",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:53:54Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-e6d075f8e253",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nvd",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nvd 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:54:22Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-b8abda72ca6c",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "mitre_cve",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "mitre_cve 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:54:49Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-a635753a423a",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "osv",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "osv 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:55:16Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-726044d548a2",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "cisa_kev",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "cisa_kev 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:55:43Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-60e620031ea1",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "security_blog",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "security_blog 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:56:11Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-74c9fd015e4e",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "openalex",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "openalex 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:56:38Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-d5469533478f",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "owasp_genai",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "owasp_genai 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:57:05Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-5cd987ac812e",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "nist_ai_rmf",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "nist_ai_rmf 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:57:32Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-3ae50b8c6536",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "mitre_atlas",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "mitre_atlas 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:57:59Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "stale",
+        "recovered": false,
+        "recovery_run_id": "run-28e0dfa6440b",
+        "retry_count": 1,
+        "run_status": "completed",
+        "source_id": "eu_ai_act",
+        "source_status_after": "stale",
+        "status": "stale"
+      },
+      "message": "eu_ai_act 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:58:29Z"
+    },
+    {
+      "code": "self_healing_failed",
+      "context": {
+        "attempts": 2,
+        "failure_class": "unknown",
+        "previous_status": "failed",
+        "recovered": false,
+        "recovery_run_id": "run-ab7498fe75bd",
+        "retry_count": 1,
+        "run_status": "failed",
+        "source_id": "nist_news",
+        "source_status_after": "failed",
+        "status": "failed"
+      },
+      "message": "nist_news 自动恢复后仍不可用",
+      "severity": "warning",
+      "timestamp": "2026-10-01T23:58:57Z"
+    }
+  ],
+  "summary": {
+    "actual_run_count": 52,
+    "scheduled_run_count": 29,
+    "scheduled_successful_run_count": 24,
+    "scheduled_partial_run_count": 5,
+    "scheduled_failed_run_count": 0
+  }
+}

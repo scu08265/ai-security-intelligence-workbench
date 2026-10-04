@@ -76,3 +76,67 @@ def test_norm_handles_empty_input_without_crashing():
 @pytest.mark.parametrize("package", ["vllm", "torch", "langchain"])
 def test_ai_packages_are_matched_case_insensitively(package):
     assert relevance.classify(package=package.upper()).included is True
+
+
+# --------------------------------------------------------------------------
+# 中文与标点：社区/博客源以中文为主，若只认 ASCII 术语会整源被过滤成 0 条
+# --------------------------------------------------------------------------
+
+def test_chinese_ai_terms_qualify_on_their_own():
+    verdict = relevance.classify("AI智能体提示词注入攻击复现")
+    assert verdict.included is True
+    assert verdict.confidence == "high"
+
+
+def test_chinese_ai_component_plus_security_intent_is_admitted():
+    verdict = relevance.classify("大模型越权调用工具链导致数据泄露")
+    assert verdict.included is True
+    # "大模型" 是无歧义的 AI 术语，因此判为高置信度而非弱信号待复核
+    assert verdict.confidence == "high"
+
+
+def test_chinese_non_ai_vulnerability_is_still_rejected():
+    verdict = relevance.classify("PostgreSQL pgcrypto 堆缓冲区溢出漏洞深度分析")
+    assert verdict.included is False
+
+
+def test_non_breaking_hyphen_does_not_hide_the_ai_signal():
+    """Feeds emit 'AI-powered' with U+2011; the token regex keeps it whole."""
+    verdict = relevance.classify(
+        "GitHub expands application security coverage with AI‑powered scanning"
+    )
+    assert verdict.included is True
+    assert verdict.confidence == "medium"
+
+
+def test_component_named_in_a_headline_qualifies_without_a_package_argument():
+    """Blog titles name the component but never pass `package`."""
+    for headline in ("CVE-2026-1234: LiteLLM 密钥泄露漏洞分析",
+                     "Ollama 未授权访问漏洞利用分析"):
+        assert relevance.classify(headline).included is True
+
+
+def test_short_component_names_do_not_match_ordinary_prose():
+    """'ray', 'jan', 'jax' would otherwise fire on unrelated headlines."""
+    for headline in ("Ray 分布式框架任务调度异常",
+                     "Jan 5 incident report on phishing"):
+        assert relevance.classify(headline).included is False
+
+
+def test_plain_security_headlines_are_not_admitted_by_the_widened_rules():
+    for headline in (
+        "Spring Framework UriComponentsBuilder SSRF 漏洞",
+        "Group Policy hijacked: PAYLOAD ransomware weaponizes Active Directory",
+        "Heap overflow in libpng image parser",
+    ):
+        assert relevance.classify(headline).included is False
+
+
+def test_teacher_recommended_community_sources_are_registered():
+    from app import sources
+
+    required = {"qax_ti_blog", "freebuf", "securelist", "talos_blog"}
+    assert required <= set(sources.recommended_sources())
+    assert sources.get("freebuf").url == "https://www.freebuf.com/feed"
+    assert sources.get("freebuf").collector == "rss"
+
