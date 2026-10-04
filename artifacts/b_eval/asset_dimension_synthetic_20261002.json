@@ -1,0 +1,70 @@
+{
+ "schema_version": "b-asset-dimension-1.0",
+ "decision_ref": "按队长口径：没有真实资产时继续明确标为合成数据，不伪造企业关联",
+ "data_source": "config/assets.example.json（synthetic=true，is_demo=true）+ config/asset_policies.example.json",
+ "import_path": "POST /api/assets/cyclonedx/import 等价调用（app.cyclonedx_assets.import_bom, is_demo=True）",
+ "target_database_copy": "D:\\ICT\\intel-data-b-poc-20261002",
+ "batch_id": "cdx-82e4efb429ffc86bf3f7",
+ "asset_count": 13,
+ "synthetic_assets": [
+  {
+   "asset_id": "asset-cdx-0d772cce01115ccd1297",
+   "component": "smolagents",
+   "version": "1.20.0",
+   "is_demo": true,
+   "authorized": true,
+   "has_policy": true
+  },
+  {
+   "asset_id": "asset-cdx-7215881ebc477e641ee5",
+   "component": "Microsoft 365 Copilot",
+   "version": "unknown",
+   "is_demo": true,
+   "authorized": true,
+   "has_policy": true
+  },
+  {
+   "asset_id": "asset-cdx-677c1739b7b26e7d180b",
+   "component": "vllm",
+   "version": "0.29.0",
+   "is_demo": true,
+   "authorized": true,
+   "has_policy": true
+  },
+  {
+   "asset_id": "asset-cdx-3d9a6598f73a1b180118",
+   "component": "vllm",
+   "version": "0.29.0",
+   "is_demo": true,
+   "authorized": true,
+   "has_policy": true
+  },
+  {
+   "asset_id": "asset-cdx-977a537bc013ac76b7db",
+   "component": "vllm",
+   "version": "0.29.0",
+   "is_demo": true,
+   "authorized": true,
+   "has_policy": true
+  },
+  {
+   "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+   "component": "open-webui",
+   "version": "0.10.0",
+   "is_demo": true,
+   "authorized": true,
+   "has_policy": true
+  }
+ ],
+ "assessment_count": 33,
+ "assessment_status_counts": {
+  "needs_confirmation": 2,
+  "affected": 13,
+  "not_affected": 18
+ },
+ "synthetic_flag_on_every_candidate": true,
+ "not_enterprise_evidence": "这些关联来自演示用合成资产，只用于验证资产维度评测通道与处置建议逻辑；不代表任何企业真实资产。",
+ "real_inventory_probe_ref": "artifacts/b_eval/asset_inventory_probe_20261002.json（工作台自身 7 个真实组件，导入成功但与库内漏洞组件零交集）",
+ "original_database_sha256": "4095a5b1ff836f70baf5552304aac95f7eab5ee95fb3a58c45768e3478254285",
+ "copy_database_sha256": "894b0b47b42cb4ae1c358bd594726bc734ff60cc728d984037190ffb97012380"
+}

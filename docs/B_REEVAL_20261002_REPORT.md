@@ -154,8 +154,29 @@ $env:INTEL_DATA_DIR='D:\ICT\intel-data-b-poc-20261002'
 **原库未被修改**（SHA256 仍为 `4095A5B1…254285`），副本路径
 `D:\ICT\intel-data-b-poc-20261002`，与原库唯一差异是 `event.poc[]` 新增。
 
-仍缺：`asset_assessment` 为 0——本机没有真实资产清单，资产处置演示用的是明确标注的
-合成数据（`config/assets.example.json`），不据此伪造企业关联。
+### 3.4 资产维度（按队长口径：无真实资产时明确标为合成数据）
+
+本机没有授权真实资产清单，因此按队长口径**使用明确标注的合成资产**补该维度，
+并且**每条候选都带 `asset_is_demo=true` / `synthetic=true`**，不冒充企业资产：
+
+```
+导入：config/assets.example.json（synthetic=true, is_demo=true）+ 对应策略
+      6 个合成资产 · 批次 cdx-2327e1e35feaecbe91c9 · policy_asset_count=6
+研判：33 条事件↔资产记录（affected 13 / not_affected 18 / needs_confirmation 2）
+候选：asset_assessment 33 条，全部标 synthetic=true
+```
+
+六维度覆盖：`paper_link 37 / version_range 50 / fixed_version 12 / cvss 22 /
+poc 32 / asset_assessment 33`，共 **186 条候选，覆盖缺口为空**。
+
+另有一条真实侧证据：把工作台自身 7 个真实运行时组件导入同一副本
+（`is_demo=false`），与库内漏洞组件零交集 → 0 关联
+（`artifacts/b_eval/asset_inventory_probe_20261002.json`）。也就是说：
+**真实资产路径已验证可用，但本机没有能产生真实关联的业务资产清单**。
+
+证据：`artifacts/b_eval/asset_dimension_synthetic_20261002.json`
+（批次、6 个合成资产、状态计数、原库/副本 SHA256）、
+`evaluation/b_relation_candidates_20261002_full.json`。
 
 待人工/待决定：这 32 条 POC 候选的复核表尚未生成（可按现有
 `relation_annotation_worksheet_v2.csv` 的列结构生成供你批量签核）；

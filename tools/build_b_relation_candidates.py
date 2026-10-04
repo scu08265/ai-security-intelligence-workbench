@@ -146,20 +146,38 @@ def build() -> dict:
             ))
 
     assets = storage.list_assets()
+    asset_by_id = {str(item.get("id")): item for item in assets}
     assessments = storage.list_assessments(limit=2000)
     for assessment in assessments:
+        asset = asset_by_id.get(str(assessment.get("asset_id"))) or {}
+        is_demo = bool(asset.get("is_demo"))
         counters["asset_assessment"] += 1
         cases.append(_candidate(
             "asset_assessment", counters["asset_assessment"],
             subject=str(assessment.get("event_id")), relation="assessed_against",
             obj=str(assessment.get("asset_id")),
-            value={"status": assessment.get("status"), "priority": assessment.get("priority")},
+            value={"status": assessment.get("status"),
+                   "priority": assessment.get("priority"),
+                   "asset_is_demo": is_demo,
+                   "asset_authorized": asset.get("authorized"),
+                   "asset_component": asset.get("component"),
+                   "asset_version": asset.get("version"),
+                   "asset_exposure": asset.get("exposure")},
             evidence={"type": "persisted_assessment",
                       "event_id": assessment.get("event_id"),
                       "asset_id": assessment.get("asset_id"),
-                      "evidence_ids": assessment.get("evidence_ids") or []},
-            uncertainty="判定依赖资产清单的组件/版本/条件；资产数据缺失时结论不可用。",
+                      "evidence_ids": assessment.get("evidence_ids") or [],
+                      "asset_is_demo": is_demo,
+                      "synthetic": is_demo},
+            uncertainty=("**合成资产**：该候选基于演示用合成资产清单（is_demo=true），"
+                         "不代表企业真实资产关联，只用于验证评测通道与处置建议逻辑。"
+                         if is_demo else
+                         "判定依赖资产清单的组件/版本/条件；资产数据缺失时结论不可用。"),
         ))
+
+    synthetic_asset_candidates = sum(
+        1 for case in cases if case["dimension"] == "asset_assessment"
+        and (case.get("evidence") or {}).get("synthetic"))
 
     coverage = {dim: counters[dim] for dim in DIMENSIONS}
     gaps = []
@@ -186,6 +204,12 @@ def build() -> dict:
         "event_sample_size": len(events),
         "events_total": total,
         "asset_count": len(assets),
+        "synthetic_asset_candidates": synthetic_asset_candidates,
+        "asset_data_source": (
+            "合成资产清单（config/assets.example.json，is_demo=true）"
+            if synthetic_asset_candidates else
+            "无资产数据来源"
+        ),
         "dimension_coverage": coverage,
         "coverage_gaps": gaps,
         "counts": {"candidates": len(cases)},
