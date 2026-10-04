@@ -124,12 +124,12 @@ def _sha256(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
-def stage_fetch(workdir: Path, per_query: int) -> dict:
+def stage_fetch(workdir: Path, per_query: int, queries: tuple[str, ...] | None = None) -> dict:
     workdir.mkdir(parents=True, exist_ok=True)
     pdf_dir = workdir / "pdf"
     pdf_dir.mkdir(exist_ok=True)
     seen: dict[str, dict] = {}
-    for index, query in enumerate(SEARCH_QUERIES):
+    for index, query in enumerate(queries or SEARCH_QUERIES):
         if index:
             time.sleep(RATE_LIMIT_SECONDS)
         for item in search(query, per_query):
@@ -336,10 +336,12 @@ def stage_edges(workdir: Path, db_dir: Path, edges_out: Path, docs_out: Path) ->
 def main() -> int:
     parser = argparse.ArgumentParser(description="补真实跨文档关系边（新增来源）")
     parser.add_argument("--stage", required=True,
-                        choices=("fetch", "screen", "ingest", "edges"))
+                        choices=("fetch", "screen", "ingest", "edges", "packet"))
     parser.add_argument("--workdir", type=Path, default=Path(r"D:\ICT\b_crossdoc_work"))
     parser.add_argument("--db-dir", type=Path, default=Path(r"D:\ICT\intel-data-b-poc-20261002"))
     parser.add_argument("--per-query", type=int, default=10)
+    parser.add_argument("--query", action="append", default=None,
+                        help="自定义 arXiv 检索式（可重复；不传则用内置主题）")
     parser.add_argument("--top", type=int, default=8)
     parser.add_argument("--edges-out", type=Path,
                         default=ROOT / "evaluation" / "b_cross_document_edges_20261002_v2.json")
@@ -348,14 +350,113 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.stage == "fetch":
-        stage_fetch(args.workdir, args.per_query)
+        stage_fetch(args.workdir, args.per_query,
+                    tuple(args.query) if args.query else None)
     elif args.stage == "screen":
         stage_screen(args.workdir)
     elif args.stage == "ingest":
         stage_ingest(args.workdir, args.db_dir, args.top)
+    elif args.stage == "packet":
+        stage_packet(args.edges_out, args.db_dir, args.docs_out,
+                     ROOT / "artifacts" / "b_eval" / "cross_document_paths_20261002.md")
     else:
         stage_edges(args.workdir, args.db_dir, args.edges_out, args.docs_out)
     return 0
+
+
+def stage_packet(edges_path: Path, db_dir: Path, docs_path: Path, out_path: Path) -> dict:
+    """把连通路径与未连通原因整理成可复核的 markdown（只读，不产生指标）。"""
+    import sqlite3
+
+    edges = json.loads(edges_path.read_text(encoding="utf-8"))
+    documents = json.loads(docs_path.read_text(encoding="utf-8"))["papers"]
+    validation = json.loads(
+        (ROOT / "artifacts" / "b_eval" / "multihop_path_validation_20261002_v2.json")
+        .read_text(encoding="utf-8"))
+    candidates = {c["question_id"]: c for c in json.loads(
+        (ROOT / "evaluation" / "b_multihop_candidates.json").read_text(encoding="utf-8"))["cases"]}
+    texts: dict[str, str] = {}
+    if (db_dir / "intel.sqlite").is_file():
+        with sqlite3.connect(f"file:{db_dir / 'intel.sqlite'}?mode=ro", uri=True) as conn:
+            texts = {row[0]: row[1] for row in conn.execute("select id, text from rag_chunks")}
+    def _node(value: str) -> str:
+        text = str(value or "")
+        return text if text.startswith(("doc:", "term:", "event:", "component:")) else f"doc:{text}"
+
+    # 证据必须按"边"对应，不能只按 chunk 反查（同一 chunk 可能承载多条边）
+    edge_index: dict[tuple[str, str], dict] = {}
+    for edge in edges["edges"]:
+        edge_index[(_node(edge["subject"]), _node(edge["object"]))] = edge
+
+    lines = [
+        "# 跨文档多跳路径复核材料（2026-10-02 批次）",
+        "",
+        "来源：`artifacts/b_eval/multihop_path_validation_20261002_v2.json`（"
+        f"跨文档 {validation['counts']['by_chain_type']['cross_document'].get('path_found', 0)}"
+        f"/{validation['counts']['by_chain_type']['cross_document'].get('total', 0)} 连通）。",
+        "每条路径都列出**节点 / 边 / evidence ID / 可回读 quote**；未连通的题保留原样。",
+        "",
+        "## 一、新增来源（{} 篇）".format(len(documents)),
+        "",
+        "| arXiv ID | 标题 | 命中目标文档 | 文档间边 | 术语边 |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for doc in documents:
+        lines.append(f"| {doc['arxiv_id']} | {doc['title'][:70]} | "
+                     f"{', '.join(doc['goals']) or '—'} | {doc['goal_edges']} | {doc['term_edges']} |")
+
+    connected = [c for c in validation["cases"]
+                 if c["chain_type"] == "cross_document" and c["path_found"]]
+    lines += ["", f"## 二、已连通路径（{len(connected)} 条）", ""]
+    for case in connected:
+        question = candidates.get(case["question_id"], {}).get("question", "")
+        lines.append(f"### {case['question_id']}｜{question}")
+        lines.append("")
+        lines.append(f"- 节点：{' → '.join(case['path_nodes'])}")
+        for edge in case["path_edges"]:
+            lines.append(f"- 边：`{edge['from']}` --{edge['relation']}--> `{edge['to']}`")
+        for edge in case["path_edges"]:
+            record = edge_index.get((edge["from"], edge["to"]))
+            if not record:
+                lines.append(f"- evidence: 该边来自图内建边（无外部边文件记录）："
+                             f"`{edge['from']}` → `{edge['to']}`")
+                continue
+            ev = record["evidence"]
+            evidence_id = ev["chunk_id"]
+            text = texts.get(evidence_id, "")
+            readback = text[ev["char_start"]:ev["char_end"]] == ev["quote"]
+            lines.append(f"- evidence `{evidence_id}` [{ev['char_start']}:{ev['char_end']}] "
+                         f"quote={ev['quote']!r} 回读={'OK' if readback else '失败'} "
+                         f"（{record['subject']} → {record['object']}）")
+            if ev.get("context"):
+                lines.append(f"    - 上下文：…{ev['context']}…")
+        lines.append(f"- 与候选声明链路一致：{case['matches_declared_path']}")
+        lines.append("")
+
+    unresolved = [c for c in validation["cases"]
+                  if c["chain_type"] == "cross_document" and not c["path_found"]]
+    lines += [f"## 三、未连通（{len(unresolved)} 条，保留 no_path）", ""]
+    lines += ["| 题号 | 起始术语 | 目标文档 | 术语是否可达 | 失败原因 |",
+              "| --- | --- | --- | --- | --- |"]
+    for case in unresolved:
+        diag = case.get("term_diagnostics") or {}
+        reason = (case.get("failure_reason") or "").replace("|", "/")
+        lines.append(f"| {case['question_id']} | {diag.get('term')} | {case['declared_path'][-1]} "
+                     f"| {diag.get('term_reachable')} | {reason[:90]} |")
+    lines += ["",
+              "## 四、复现命令",
+              "",
+              "```",
+              ".venv\\Scripts\\python.exe tools\\multihop_path_retriever.py "
+              "--candidates evaluation\\b_multihop_candidates.json "
+              "--edges evaluation\\b_cross_document_edges_20261002_v2.json "
+              "--out artifacts\\b_eval\\multihop_path_validation_20261002_v2.json",
+              "```"]
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print("复核材料:", out_path, "| 连通", len(connected), "| 未连通", len(unresolved))
+    return {"connected": len(connected), "unresolved": len(unresolved)}
 
 
 if __name__ == "__main__":

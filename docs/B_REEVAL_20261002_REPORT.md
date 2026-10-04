@@ -329,6 +329,21 @@ BMH-021: term:jailbreak →(mentioned_in) paper:2609.03999 →(cites) source:owa
 `matches_declared_path` 如实输出，不假装完全一致；**术语可达性单列为诊断字段**，
 不参与 `path_found` 判定；语料由 22 篇增至 30 篇，**50 题 QA 基线不动**。
 
+复核材料：`artifacts/b_eval/cross_document_paths_20261002.md`
+（8 篇新来源清单 + 10 条连通路径的节点/边/evidence/可回读 quote/上下文 + 11 条未连通原因）。
+该文件由 `tools/build_b_cross_document_edges.py --stage packet` 生成；
+证据按"边"精确对应（同一 chunk 承载多条边时不会串位）。
+
+**本轮未能补上的部分（如实记录）**：为了打通剩余 8 题（目标为
+`paper:2609.28915`、`paper:2606.15617`），需要"引用这两篇论文的来源"，本轮尝试：
+
+1. arXiv 定向检索 4 组主题（25 篇候选）→ 全文扫描 → **未发现引用这两篇的论文**
+   （检索只召回这两篇论文自身）；
+2. OpenAlex 与 Semantic Scholar 反查被引 → 本环境 **HTTP 429 限流**，未能取得结果。
+
+因此剩余 8 题保持 `no_path`，原因写在复核材料第三节。要打通需换网络环境重试被引反查，
+或补充"引用这两篇论文"的具体来源。
+
 ## 5. 赛题指标页面与权威 JSON 一致性（P1，已完成）
 
 命令与结果（只读，27 个字段）：

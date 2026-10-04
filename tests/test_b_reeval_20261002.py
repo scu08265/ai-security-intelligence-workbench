@@ -229,6 +229,7 @@ def test_poc_classification_counts_match_the_rows():
 CROSS_DOC_EDGES = ROOT / "evaluation" / "b_cross_document_edges_20261002_v2.json"
 MULTIHOP_V2 = ARTIFACTS / "multihop_path_validation_20261002_v2.json"
 NEW_DOCUMENTS = ARTIFACTS / "new_documents_20261002.json"
+CROSS_DOC_PACKET = ARTIFACTS / "cross_document_paths_20261002.md"
 COPY_DB = Path(r"D:\ICT\intel-data-b-poc-20261002\intel.sqlite")
 
 
@@ -284,3 +285,24 @@ def test_multihop_v2_reports_paths_term_reachability_and_keeps_no_path():
     for case in unresolved:
         assert case["failure_reason"] or case.get("missing_edges")
         assert "term_diagnostics" in case
+
+
+def test_cross_document_packet_lists_every_path_and_gap_with_readback_quotes():
+    if not CROSS_DOC_PACKET.is_file():
+        pytest.skip("复核材料尚未生成（先运行 --stage packet）")
+    text = CROSS_DOC_PACKET.read_text(encoding="utf-8")
+    payload = _load(MULTIHOP_V2)
+    connected = [c for c in payload["cases"]
+                 if c["chain_type"] == "cross_document" and c["path_found"]]
+    unresolved = [c for c in payload["cases"]
+                  if c["chain_type"] == "cross_document" and not c["path_found"]]
+    assert f"## 二、已连通路径（{len(connected)} 条）" in text
+    assert f"## 三、未连通（{len(unresolved)} 条，保留 no_path）" in text
+    for case in connected:
+        assert f"### {case['question_id']}" in text
+        for evidence_id in case["evidence_ids"]:
+            assert evidence_id in text
+    # 证据必须按边对应：术语边的 quote 就是该术语，不能串成别的边
+    for line in text.splitlines():
+        if "quote=" in line and "term:" in line:
+            assert "回读=OK" in line
