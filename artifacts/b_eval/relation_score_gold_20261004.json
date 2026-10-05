@@ -1,0 +1,91 @@
+{
+ "computable": true,
+ "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
+ "prediction_default": {
+  "used": 47,
+  "assumption": "缺少 prediction.verdict 时视为 present（候选即系统输出）"
+ },
+ "fn_source": {
+  "available": true,
+  "expected_relation_ids": 10,
+  "missing_relation_ids": [
+   "BREL-GOLD-FN-CV-0001",
+   "BREL-GOLD-FN-CV-0002",
+   "BREL-GOLD-FN-CV-0003",
+   "BREL-GOLD-FN-CV-0004",
+   "BREL-GOLD-FN-CV-0005"
+  ],
+  "reason": null
+ },
+ "per_dimension": {
+  "cvss": {
+   "tp": 10,
+   "fp": 0,
+   "fn": 5,
+   "tn": 0,
+   "undetermined": 12,
+   "pending": 0,
+   "total": 22,
+   "precision": 1.0,
+   "recall": 0.6667,
+   "f1": 0.8,
+   "evaluable": true
+  },
+  "fixed_version": {
+   "tp": 10,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 2,
+   "pending": 0,
+   "total": 12,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "paper_link": {
+   "tp": 16,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 21,
+   "pending": 0,
+   "total": 37,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "version_range": {
+   "tp": 11,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 39,
+   "pending": 0,
+   "total": 50,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  }
+ },
+ "micro": {
+  "tp": 47,
+  "fp": 0,
+  "fn": 5,
+  "tn": 0,
+  "precision": 1.0,
+  "recall": 0.9038,
+  "f1": 0.9495,
+  "evaluable_samples": 52
+ },
+ "macro": {
+  "precision": 1.0,
+  "recall": 0.9167,
+  "f1": 0.9565,
+  "dimensions_with_metrics": 4
+ },
+ "note": null
+}
