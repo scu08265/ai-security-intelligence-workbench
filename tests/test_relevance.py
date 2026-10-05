@@ -132,6 +132,20 @@ def test_plain_security_headlines_are_not_admitted_by_the_widened_rules():
         assert relevance.classify(headline).included is False
 
 
+def test_ghsa_joins_the_default_set_only_when_its_token_is_configured(monkeypatch):
+    from app import sources
+
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    assert "ghsa" not in sources.recommended_sources()
+
+    monkeypatch.setenv("GITHUB_TOKEN", "configured-for-test")
+    assert "ghsa" in sources.recommended_sources()
+
+    # arxiv stays out of the unattended set for an unrelated reason (network
+    # instability), regardless of any token.
+    assert "arxiv" not in sources.recommended_sources()
+
+
 def test_teacher_recommended_community_sources_are_registered():
     from app import sources
 

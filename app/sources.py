@@ -12,6 +12,7 @@ two would overstate it.
 
 from __future__ import annotations
 
+import os
 from dataclasses import asdict, dataclass
 
 
@@ -93,7 +94,7 @@ SOURCES: tuple[SourceSpec, ...] = (
         trust="authoritative",
         license_note="CC-BY-4.0 for the advisory database.",
         description="GitHub 已审核安全公告，支持 updated 增量过滤。未配置 GITHUB_TOKEN 时标记为已跳过，不以空结果冒充成功。",
-        auto_default=False,
+        auto_default=True,
         requires_token_env="GITHUB_TOKEN",
     ),
     SourceSpec(
@@ -413,5 +414,18 @@ def describe(source_id: str) -> dict:
 
 
 def recommended_sources() -> tuple[str, ...]:
-    """Sources safe for unattended collection without a known token dependency."""
-    return tuple(spec.id for spec in SOURCES if spec.auto_default)
+    """Sources safe for unattended collection.
+
+    A source that declares ``requires_token_env`` is included only when that
+    credential is actually configured, so an unattended run never reports a
+    ``skipped`` row for a token the deployment does not have.
+    """
+    selected: list[str] = []
+    for spec in SOURCES:
+        if not spec.auto_default:
+            continue
+        required = spec.requires_token_env
+        if required and not os.getenv(required, "").strip():
+            continue
+        selected.append(spec.id)
+    return tuple(selected)
