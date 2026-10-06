@@ -1,0 +1,12 @@
+{
+  "snapshot_dir": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\data\\snapshots\\nvd",
+  "snapshot_files": 150,
+  "events_with_poc": 1316,
+  "poc_events_updated": 0,
+  "poc_events_unchanged_or_missing": 1316,
+  "events_with_cvss": 18968,
+  "cvss_events_updated": 14,
+  "cvss_events_unchanged_or_missing": 18954,
+  "events_updated_any": 14,
+  "snapshot_errors": 0
+}

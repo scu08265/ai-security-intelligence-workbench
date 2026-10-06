@@ -1,7 +1,14 @@
-"""Backfill NVD exploit-reference POC records into already stored events.
+"""Backfill NVD-derived enrichment into already stored events.
 
-This tool never creates an event and never changes source summaries.  It only
-adds exact NVD `Exploit` reference records to the matching event's ``poc`` list.
+This tool never creates an event and never changes source summaries.  For each
+NVD record it merges two fields into the matching stored event:
+
+* exact NVD ``Exploit`` references into ``poc``
+* NVD CVSS metrics (v4.0 / v3.1 / v3.0 / v2) into ``cvss``
+
+Merging CVSS matters because an event that reached the corpus via OSV/MITRE/KEV
+carries no CVSS of its own; without this backfill the ``cvss`` relation dimension
+has nothing to extract for those events.
 """
 
 from __future__ import annotations
@@ -39,19 +46,31 @@ def main() -> int:
             continue
         for item in payload.get("vulnerabilities") or []:
             event = normalize.nvd_to_event(item)
-            if not event or not event.get("poc"):
+            if not event:
                 continue
-            counts["events_with_poc"] += 1
-            if storage.merge_event_poc(str(event.get("id")), event["poc"]):
-                counts["events_updated"] += 1
-            else:
-                counts["events_unchanged_or_missing"] += 1
+            event_id = str(event.get("id"))
+            if event.get("poc"):
+                counts["events_with_poc"] += 1
+                if storage.merge_event_poc(event_id, event["poc"]):
+                    counts["poc_events_updated"] += 1
+                else:
+                    counts["poc_events_unchanged_or_missing"] += 1
+            if event.get("cvss"):
+                counts["events_with_cvss"] += 1
+                if storage.merge_event_cvss(event_id, event["cvss"]):
+                    counts["cvss_events_updated"] += 1
+                else:
+                    counts["cvss_events_unchanged_or_missing"] += 1
     report = {
         "snapshot_dir": str(args.snapshot_dir),
         "snapshot_files": len(files),
         "events_with_poc": counts["events_with_poc"],
-        "events_updated": counts["events_updated"],
-        "events_unchanged_or_missing": counts["events_unchanged_or_missing"],
+        "poc_events_updated": counts["poc_events_updated"],
+        "poc_events_unchanged_or_missing": counts["poc_events_unchanged_or_missing"],
+        "events_with_cvss": counts["events_with_cvss"],
+        "cvss_events_updated": counts["cvss_events_updated"],
+        "cvss_events_unchanged_or_missing": counts["cvss_events_unchanged_or_missing"],
+        "events_updated_any": counts["poc_events_updated"] + counts["cvss_events_updated"],
         "snapshot_errors": counts["snapshot_errors"],
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)

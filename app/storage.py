@@ -485,6 +485,37 @@ def merge_event_poc(event_id: str, records: list[dict]) -> bool:
     return changed
 
 
+def merge_event_cvss(event_id: str, records: list[dict]) -> bool:
+    """Add CVSS metric records to an existing event without replacing it.
+
+    Deduplicated on ``(source_id, vector)`` so a vector republished by a
+    different upstream stays a distinct, separately citable record.
+    """
+    event = get_event(event_id)
+    if not event:
+        return False
+    existing = list(event.get("cvss") or [])
+    keys = {
+        (str(item.get("source_id") or ""), str(item.get("vector") or ""))
+        for item in existing if isinstance(item, dict)
+    }
+    changed = False
+    for item in records or []:
+        if not isinstance(item, dict):
+            continue
+        key = (str(item.get("source_id") or ""), str(item.get("vector") or ""))
+        if key in keys:
+            continue
+        existing.append(item)
+        keys.add(key)
+        changed = True
+    if changed:
+        event["cvss"] = existing
+        upsert_event(event)
+    return changed
+
+
+
 def find_event_by_identifier(identifier: str) -> dict | None:
     """Resolve a CVE/GHSA id through both primary ids and aliases."""
     ident = (identifier or "").strip()
