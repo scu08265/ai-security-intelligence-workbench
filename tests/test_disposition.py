@@ -119,3 +119,35 @@ def test_unknown_status_is_rejected():
         json={"event_id": event_id, "asset_id": asset_id, "status": "bogus"},
     )
     assert response.status_code == 422
+
+
+def test_accepted_is_resolved_but_not_verified():
+    event_id, asset_id = _seed_case(version="1.0.0")
+    disposition.update_disposition(
+        event_id, asset_id, status="accepted", assignee="risk-owner",
+        note="Accepted for the current maintenance window.",
+    )
+    metrics = disposition.metrics()
+    assert metrics["high_priority_closed"] == 1
+    assert metrics["high_priority_verified"] == 0
+    assert metrics["closure_rate"] == 1.0
+    assert metrics["verified_rate"] == 0.0
+
+
+def test_empty_closure_denominator_returns_null():
+    metrics = disposition.metrics()
+    assert metrics["high_priority_total"] == 0
+    assert metrics["closure_rate"] is None
+    assert metrics["verified_rate"] is None
+
+
+def test_opened_at_is_stable_across_updates():
+    event_id, asset_id = _seed_case(version="1.0.0")
+    first = disposition.update_disposition(
+        event_id, asset_id, status="in_progress", assignee="alice",
+    )["disposition"]
+    second = disposition.update_disposition(
+        event_id, asset_id, status="fixed", assignee="alice",
+        note="upgrade scheduled",
+    )["disposition"]
+    assert first["opened_at"] == second["opened_at"]
