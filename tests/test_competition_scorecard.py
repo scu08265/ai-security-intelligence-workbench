@@ -167,6 +167,18 @@ def test_active_multihop_uses_v2_batch_and_exposes_missing_edges():
     assert body["multihop"]["cross_document_found"] == 0
 
 
+def test_active_relation_uses_gold_score_and_exposes_recall():
+    body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
+    active = body["active_relation"]
+    assert active["source"].endswith("relation_score_gold_20261004.json")
+    assert active["precision"] == 1.0
+    assert active["recall"] == 0.9038
+    assert active["f1"] == 0.9495
+    assert (active["tp"], active["fp"], active["fn"]) == (47, 0, 5)
+    assert active["missing_relation_ids"] == 5
+    # 旧冻结基线保留：没有金标准时 Recall 仍不可计算
+    assert body["relation"]["recall"] is None
+
 def test_b_evaluation_artifacts_are_exposed_without_rounding_unknowns():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     assert body["available"] is True

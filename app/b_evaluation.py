@@ -107,7 +107,7 @@ def _qa_performance(payload: dict[str, Any] | None, batch: dict[str, Any] | None
     }
 
 
-def _relation(payload: dict[str, Any] | None) -> dict[str, Any]:
+def _relation(payload: dict[str, Any] | None, *, source: str | None = None) -> dict[str, Any]:
     if not payload:
         return {"available": False}
     micro = payload.get("micro") or {}
@@ -125,6 +125,8 @@ def _relation(payload: dict[str, Any] | None) -> dict[str, Any]:
         "evaluable_samples": micro.get("evaluable_samples"),
         "fn_source_available": bool(fn_source.get("available")),
         "fn_source_reason": fn_source.get("reason"),
+        "expected_relation_ids": fn_source.get("expected_relation_ids"),
+        "missing_relation_ids": len(fn_source.get("missing_relation_ids") or []),
         "dimensions": {
             name: {
                 "total": item.get("total"),
@@ -137,7 +139,7 @@ def _relation(payload: dict[str, Any] | None) -> dict[str, Any]:
             }
             for name, item in per_dimension.items() if isinstance(item, dict)
         },
-        "source": "artifacts/b_eval/relation_score_all.json",
+        "source": source or "artifacts/b_eval/relation_score_all.json",
     }
 
 
@@ -182,6 +184,19 @@ def _demo(payload: dict[str, Any] | None) -> dict[str, Any]:
 
 _BATCH_FILE_RE = re.compile(r"^(qa_human_score|qa_performance)_(\d{8})\.json$")
 _MULTIHOP_FILE_RE = re.compile(r"^multihop_path_validation_(\d{8})(_v2)?\.json$")
+_RELATION_GOLD_RE = re.compile(r"^relation_score_gold_(\d{8})\.json$")
+
+
+def _active_relation() -> str | None:
+    """Newest gold-scored relation file, where recall/F1 become computable."""
+    found: list[str] = []
+    for path in ARTIFACT_DIR.glob("relation_score_gold_*.json"):
+        match = _RELATION_GOLD_RE.match(path.name)
+        if match:
+            found.append(match.group(1))
+    if not found:
+        return None
+    return f"relation_score_gold_{max(found)}.json"
 
 
 def _active_multihop() -> str | None:
@@ -238,6 +253,11 @@ def summary() -> dict[str, Any]:
         source=("artifacts/b_eval/" + active_batch["qa_performance_file"]) if active_batch else None,
     )
     relation = _relation(_read_json("relation_score_all.json"))
+    active_relation_file = _active_relation()
+    active_relation = _relation(
+        _read_json(active_relation_file) if active_relation_file else None,
+        source=("artifacts/b_eval/" + active_relation_file) if active_relation_file else None,
+    )
     active_multihop_file = _active_multihop()
     active_multihop = _multihop(
         _read_json(active_multihop_file) if active_multihop_file else None,
@@ -249,7 +269,7 @@ def summary() -> dict[str, Any]:
         qa_quality, qa_performance, relation, multihop,
     ))
     active_available = bool(active_batch) and all(item.get("available") for item in (
-        active_qa_quality, active_qa_performance, relation, active_multihop,
+        active_qa_quality, active_qa_performance, active_relation, active_multihop,
     ))
     return {
         "available": available,
@@ -261,6 +281,7 @@ def summary() -> dict[str, Any]:
         "active_qa_quality": active_qa_quality,
         "active_qa_performance": active_qa_performance,
         "relation": relation,
+        "active_relation": active_relation,
         "multihop": multihop,
         "active_multihop": active_multihop,
         "demo": demo,

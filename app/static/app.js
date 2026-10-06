@@ -1515,7 +1515,7 @@
     const bEval = official.b_evaluation || {};
     const bQa = bEval.active_qa_quality || bEval.qa_quality || {};
     const bPerformance = bEval.active_qa_performance || bEval.qa_performance || {};
-    const bRelation = bEval.relation || {};
+    const bRelation = bEval.active_relation || bEval.relation || {};
     const bMultihop = bEval.active_multihop || bEval.multihop || {};
     const coverage = (dashboard.monitoring || {}).coverage || {};
     const metrics = evaluation.metrics || {};
@@ -1584,11 +1584,12 @@
         ['可判定关系', bRelation.evaluable_samples, ' 条'],
         ['关系 Precision', percentValue(bRelation.precision), ''],
         ['关系 Recall', percentValue(bRelation.recall), ''],
+        ['关系 F1', percentValue(bRelation.f1), ''],
         ['跨文档路径', bMultihop.cross_document_total
           ? `${bMultihop.cross_document_found}/${bMultihop.cross_document_total}` : null, ''],
         ['术语可达', bMultihop.term_reachable != null ? `${bMultihop.term_reachable}/${(bMultihop.term_reachable || 0) + (bMultihop.term_not_reachable || 0)}` : null, ''],
         ['缺文档间边', (bMultihop.missing_edge_kinds || {}).document_to_document, ' 条']
-      ], 'Recall/F1 只有在存在“应抽取但未抽取”的金标准全集时才计算；本批候选集即系统输出，缺 FN 来源，故 Recall 为待补。跨文档连通不等于完成综合推理。'),
+      ], '抽样穷尽金标准（4 个维度、样本范围见 docs/B_RELATION_GOLD_PROTOCOL.md）已建立，Recall/F1 首次可算；抽样范围外不做推算。当前识别出 ' + textOr(bRelation.missing_relation_ids, 0) + ' 条漏检关系。跨文档连通不等于完成综合推理。'),
       scoreCapability('问答性能评测', bPerformance.available ? '已验证' : '待读取', [
         ['独立批次', Array.isArray(bPerformance.batches) ? bPerformance.batches.length : null, ' 批'],
         ['P95 最大值', p95Max, ' ms'],

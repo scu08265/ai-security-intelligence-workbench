@@ -137,6 +137,14 @@ def test_scorecard_consumes_current_evidence_and_reserves_unified_api():
         assert label in SCRIPT
 
 
+def test_scorecard_reads_active_relation_gold_fields():
+    for token in (
+        "active_relation",
+        "关系 F1",
+        "missing_relation_ids",
+    ):
+        assert token in SCRIPT
+
 def test_scorecard_reads_active_multihop_fields():
     for token in (
         "active_multihop",
