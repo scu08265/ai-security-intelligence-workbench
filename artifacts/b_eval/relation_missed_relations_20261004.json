@@ -1,0 +1,134 @@
+{
+ "schema_version": "b-relation-missed-1.0",
+ "scope": {
+  "kind": "sample_exhaustive",
+  "note": "抽样穷尽，不是全语料穷尽：只声明以下对象的应抽取关系全集；其余文档与旧产物不动。",
+  "events": [
+   "CVE-2026-64849",
+   "CVE-2025-62593",
+   "CVE-2026-33017",
+   "PYSEC-2026-4000",
+   "GHSA-8pw2-6jv3-mj5j"
+  ],
+  "papers": [
+   "paper:2609.28996",
+   "paper:2609.29757",
+   "paper:2609.28900"
+  ],
+  "official_documents": [
+   "official:eu_ai_act",
+   "source:nist_ai_rmf",
+   "source:owasp_genai"
+  ],
+  "dimensions_in_scope": [
+   "paper_link",
+   "version_range",
+   "fixed_version",
+   "cvss"
+  ],
+  "dimensions_excluded": {
+   "poc": "已由 POC 签核单独核验（16 yes / 16 no），本次不并入 gold，避免与本轮四维口径混算",
+   "asset_assessment": "资产为合成资产（synthetic=true），不作为真实金标准"
+  }
+ },
+ "counts": {
+  "missed": 5
+ },
+ "missed_relations": [
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0001",
+   "dimension": "cvss",
+   "subject": "CVE-2026-64849",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-poc-20261002\\snapshots\\nvd\\CVE-2026-64849.json",
+    "source_locator": "metrics.cvssMetricV31[0]",
+    "detail": {
+     "base_score": 9.3,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV31"
+    }
+   },
+   "why_expected": "该 CVE 的 NVD 记录声明了 CVSS 指标（metrics 字段），属于 cvss 维度应抽取的关系；本系统以 NVD 为权威来源之一，因此该关系应当出现在候选集里",
+   "why_missed": "该事件的 CVSS 只存在于 NVD 快照；采集链路只把 NVD 的 Exploit 引用回填到 poc[]（见 tools/backfill_nvd_poc.py），没有合并 NVD 的 metrics，因此候选集里该事件没有 cvss 记录"
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0002",
+   "dimension": "cvss",
+   "subject": "CVE-2025-62593",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-poc-20261002\\snapshots\\nvd\\CVE-2025-62593.json",
+    "source_locator": "metrics.cvssMetricV40[0]",
+    "detail": {
+     "base_score": 9.4,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV40"
+    }
+   },
+   "why_expected": "该 CVE 的 NVD 记录声明了 CVSS 指标（metrics 字段），属于 cvss 维度应抽取的关系；本系统以 NVD 为权威来源之一，因此该关系应当出现在候选集里",
+   "why_missed": "该事件的 CVSS 只存在于 NVD 快照；采集链路只把 NVD 的 Exploit 引用回填到 poc[]（见 tools/backfill_nvd_poc.py），没有合并 NVD 的 metrics，因此候选集里该事件没有 cvss 记录"
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0003",
+   "dimension": "cvss",
+   "subject": "CVE-2025-62593",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-poc-20261002\\snapshots\\nvd\\CVE-2025-62593.json",
+    "source_locator": "metrics.cvssMetricV31[0]",
+    "detail": {
+     "base_score": 8.8,
+     "base_severity": "HIGH",
+     "metric": "cvssMetricV31"
+    }
+   },
+   "why_expected": "该 CVE 的 NVD 记录声明了 CVSS 指标（metrics 字段），属于 cvss 维度应抽取的关系；本系统以 NVD 为权威来源之一，因此该关系应当出现在候选集里",
+   "why_missed": "该事件的 CVSS 只存在于 NVD 快照；采集链路只把 NVD 的 Exploit 引用回填到 poc[]（见 tools/backfill_nvd_poc.py），没有合并 NVD 的 metrics，因此候选集里该事件没有 cvss 记录"
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0004",
+   "dimension": "cvss",
+   "subject": "CVE-2026-33017",
+   "relation": "has_cvss",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-poc-20261002\\snapshots\\nvd\\CVE-2026-33017.json",
+    "source_locator": "metrics.cvssMetricV40[0]",
+    "detail": {
+     "base_score": 9.3,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV40"
+    }
+   },
+   "why_expected": "该 CVE 的 NVD 记录声明了 CVSS 指标（metrics 字段），属于 cvss 维度应抽取的关系；本系统以 NVD 为权威来源之一，因此该关系应当出现在候选集里",
+   "why_missed": "该事件的 CVSS 只存在于 NVD 快照；采集链路只把 NVD 的 Exploit 引用回填到 poc[]（见 tools/backfill_nvd_poc.py），没有合并 NVD 的 metrics，因此候选集里该事件没有 cvss 记录"
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0005",
+   "dimension": "cvss",
+   "subject": "CVE-2026-33017",
+   "relation": "has_cvss",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-poc-20261002\\snapshots\\nvd\\CVE-2026-33017.json",
+    "source_locator": "metrics.cvssMetricV31[0]",
+    "detail": {
+     "base_score": 9.8,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV31"
+    }
+   },
+   "why_expected": "该 CVE 的 NVD 记录声明了 CVSS 指标（metrics 字段），属于 cvss 维度应抽取的关系；本系统以 NVD 为权威来源之一，因此该关系应当出现在候选集里",
+   "why_missed": "该事件的 CVSS 只存在于 NVD 快照；采集链路只把 NVD 的 Exploit 引用回填到 poc[]（见 tools/backfill_nvd_poc.py），没有合并 NVD 的 metrics，因此候选集里该事件没有 cvss 记录"
+  }
+ ]
+}
