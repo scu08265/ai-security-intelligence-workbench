@@ -1,0 +1,7 @@
+﻿label,captured_at,high_priority_total,high_priority_closed,high_priority_verified,closure_rate,verified_rate,status_breakdown
+baseline_after_assessment,2026-10-06T07:32:23Z,4,0,0,0.0,0.0,"{""open"": 4, ""in_progress"": 0, ""fixed"": 0, ""verified"": 0, ""accepted"": 0}"
+after_missing_assignee_rejected,2026-10-06T07:32:25Z,4,0,0,0.0,0.0,"{""open"": 4, ""in_progress"": 0, ""fixed"": 0, ""verified"": 0, ""accepted"": 0}"
+after_failed_reverification,2026-10-06T07:32:26Z,4,0,0,0.0,0.0,"{""open"": 3, ""in_progress"": 0, ""fixed"": 1, ""verified"": 0, ""accepted"": 0}"
+after_smolagents_verified,2026-10-06T07:32:28Z,4,1,1,0.25,0.25,"{""open"": 2, ""in_progress"": 0, ""fixed"": 1, ""verified"": 1, ""accepted"": 0}"
+after_openwebui_verified,2026-10-06T07:32:31Z,4,3,3,0.75,0.75,"{""open"": 0, ""in_progress"": 0, ""fixed"": 1, ""verified"": 3, ""accepted"": 0}"
+after_non_high_risk_accepted,2026-10-06T07:32:32Z,4,3,3,0.75,0.75,"{""open"": 0, ""in_progress"": 0, ""fixed"": 1, ""verified"": 3, ""accepted"": 0}"

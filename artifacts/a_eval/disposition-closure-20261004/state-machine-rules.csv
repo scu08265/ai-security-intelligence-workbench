@@ -1,0 +1,5 @@
+﻿rule,passed,expected,http_status,actual_status
+missing_assignee_rejected,True,HTTP 400 and no disposition transition,400,open
+unsafe_version_verified_is_downgraded,True,"applied_status=fixed, verification.passed=false, closed_at=null",200,fixed
+safe_version_verified_closes,True,applied_status=verified and closed_at present,200,verified
+assessment_status_not_overwritten,True,assessment.status remains affected while disposition_status=verified,,

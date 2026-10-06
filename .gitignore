@@ -10,6 +10,7 @@ artifacts/browser/
 artifacts/logs/
 artifacts/backups/
 artifacts/restore-test/
+artifacts/a_eval/*/data/
 artifacts/server-*.log
 work/
 .omc/

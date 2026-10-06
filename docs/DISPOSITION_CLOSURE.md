@@ -40,7 +40,9 @@
 - `mean_time_to_close_hours`：仅统计同时有 `opened_at` 与 `closed_at` 的记录，样本为空时为 `null`；
 - `status_breakdown`：27 条高优先级结论在各状态上的分布。
 
-当前真实数据：高优先级 27 条，已关闭 0 条，闭环率 0%，全部为 `open`。这是尚未登记的客观状态，不是系统缺陷。
+当前 A 证据库：高优先级 `affected` 4 条，全部为
+`asset-cdx-*` 合成资产（smolagents / open-webui）。闭环率从 `0` 增加到 `0.75`，
+其中 3 条由系统复测关闭，1 条因资产版本仍在受影响区间保持 `fixed`。
 
 ## 5. 使用方式
 
@@ -64,3 +66,50 @@
 `GET /api/dispositions/{event_id}/{asset_id}/advice` 复用同一份建议逻辑，不复制、不重写权重：
 建议是只读输入，处置记录才是系统 of record。未配置资产策略时，补丁/重启/降暴露面等破坏性动作
 进入 `blocked_actions`，需要人工决策，避免系统默认替用户执行生产动作。
+
+## 8. 2026-10-04 A 项复测证据
+
+本节记录 `feat/a-disposition-evidence-20261004` 的独立复测结果，证据位于
+`artifacts/a_eval/disposition-closure-20261004/`。
+
+复测库由正式 API 流程创建：
+
+1. 复制当前事件库到 A 独立证据目录；
+2. 通过 `/api/assets` 导入 B 记录的 6 个合成 `asset-cdx-*` 条目；
+3. 通过 `/api/assets` 导入 7 个当前运行时的真实依赖条目；
+4. 通过 `/api/assets/cyclonedx/import` 导入 SBOM 资产；
+5. 通过 `/api/assessments/run` 生成研判结论。
+
+实测结果：
+
+| 规则 | HTTP | 实际结果 |
+| --- | ---: | --- |
+| 未填写处置人进入 `in_progress` | 400 | 拒绝流转，记录仍为 `open` |
+| 版本仍受影响时标记 `verified` | 200 | 降级为 `fixed`，`verification.passed=false` |
+| 升级到安全版本后标记 `verified` | 200 | `verified`，写入 `closed_at` |
+| 关闭后检查原始研判 | - | `assessments.status` 仍为 `affected` |
+
+闭环率变化：
+
+| 阶段 | 高优先级总数 | 已关闭 | 闭环率 | verified_rate |
+| --- | ---: | ---: | ---: | ---: |
+| 基线 | 4 | 0 | 0.00 | 0.00 |
+| 失败复测后 | 4 | 0 | 0.00 | 0.00 |
+| smolagents 复测关闭后 | 4 | 1 | 0.25 | 0.25 |
+| open-webui 复测关闭后 | 4 | 3 | 0.75 | 0.75 |
+
+页面卡片读取 `/api/competition/scorecard` 的 `disposition` 字段。A 证据库确认该字段与
+`/api/dispositions/metrics` 全部核对字段一致，`field_mismatches=[]`。
+
+## 9. 证据边界与局限
+
+- 当前主机没有 B 记录中的 `D:\ICT\intel-data-b-poc-20261002` 数据库副本，因此不能声称
+  直接复现文档曾记录的 27 条基线；A 证据库记录的是实际执行和实际得到的 4 条高优先级
+  `affected` 结论。
+- 选中的 4 条高优先级关系全部来自合成 `asset-cdx-*` 资产，不应当表述为企业生产环境
+  的真实修复。
+- 7 个真实运行时依赖资产已导入并参与研判，但它们与当前事件集的组件交集没有产生高优先级
+  `affected` 条目，因此没有拿真实资产名称包装合成处置。
+- `verified` 表示系统按当前资产事实重新研判通过；系统没有执行生产升级、重启、隔离或关机。
+- `accepted` 只验证口径正确：它计入处置完成但不计入 `verified_rate`，不能说风险已消除。
+- 当前闭环率样本量仅为 4，足以验证流程和口径，不足以作为稳定性或生产修复率结论。

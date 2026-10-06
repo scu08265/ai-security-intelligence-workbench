@@ -1,0 +1,105 @@
+{
+  "closure_rate_before": 0.0,
+  "closure_rate_after": 0.75,
+  "verified_rate_before": 0.0,
+  "verified_rate_after": 0.75,
+  "selected_findings": [
+    {
+      "event_id": "CVE-2025-9959",
+      "asset_id": "asset-cdx-0d772cce01115ccd1297",
+      "component": "smolagents",
+      "version_before": "1.21.0",
+      "synthetic": true,
+      "assessment_status_before": "affected",
+      "assessment_priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-87016",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "component": "open-webui",
+      "version_before": "0.11.1",
+      "synthetic": true,
+      "assessment_status_before": "affected",
+      "assessment_priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-87995",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "component": "open-webui",
+      "version_before": "0.11.1",
+      "synthetic": true,
+      "assessment_status_before": "affected",
+      "assessment_priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-87998",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "component": "open-webui",
+      "version_before": "0.11.1",
+      "synthetic": true,
+      "assessment_status_before": "affected",
+      "assessment_priority": "high"
+    }
+  ],
+  "failed_reverification_finding": {
+    "event_id": "CVE-2026-87016",
+    "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+    "status": "fixed",
+    "verification": {
+      "checked_at": "2026-10-06T07:32:26.259692+00:00",
+      "assessment_status_before": "affected",
+      "assessment_status_after": "affected",
+      "priority_after": "high",
+      "reasons_after": [
+        "资产版本 0.10.0 命中受影响区间"
+      ],
+      "passed": false,
+      "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+    }
+  },
+  "original_assessment_after_close": {
+    "event_id": "CVE-2025-9959",
+    "asset_id": "asset-cdx-0d772cce01115ccd1297",
+    "assessment_status": "affected",
+    "disposition_status": "verified"
+  },
+  "accepted_control": {
+    "method": "PUT",
+    "path": "/api/dispositions/CVE-2026-73556/asset-cdx-529bf0826120f8823b7f",
+    "request_body": {
+      "event_id": "CVE-2026-73556",
+      "asset_id": "asset-cdx-529bf0826120f8823b7f",
+      "status": "accepted",
+      "assignee": "risk-owner",
+      "note": "Risk accepted for the current review period."
+    },
+    "http_status": 200,
+    "response": {
+      "disposition": {
+        "event_id": "CVE-2026-73556",
+        "asset_id": "asset-cdx-529bf0826120f8823b7f",
+        "status": "accepted",
+        "assignee": "risk-owner",
+        "note": "Risk accepted for the current review period.",
+        "evidence_ids": [],
+        "version_before": "0.10.0",
+        "version_after": null,
+        "opened_at": "2026-10-06T07:32:32.204881+00:00",
+        "updated_at": "2026-10-06T07:32:32.204881+00:00",
+        "closed_at": "2026-10-06T07:32:32.204881+00:00",
+        "operator": "risk-owner",
+        "system_version": "0.2.4",
+        "verification": null,
+        "status_label": "已接受风险",
+        "closed": false,
+        "resolved": true,
+        "requires_verification": false
+      },
+      "assessment_status": "affected",
+      "assessment_priority": "medium",
+      "verification": null,
+      "requested_status": "accepted",
+      "applied_status": "accepted"
+    }
+  }
+}

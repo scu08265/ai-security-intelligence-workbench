@@ -1,0 +1,1110 @@
+{
+  "schema_version": "a-disposition-evidence-20261004",
+  "generated_at": "2026-10-06T07:32:34Z",
+  "version": "0.2.4",
+  "mode": "isolated_api_evidence_database",
+  "source_database": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
+  "evidence_database": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-closure-20261004\\data\\intel.sqlite",
+  "seed": {
+    "synthetic_assets": 6,
+    "real_inventory_assets": 7,
+    "sbom_import": {
+      "method": "POST",
+      "path": "/api/assets/cyclonedx/import",
+      "request_body": {
+        "bom": {
+          "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
+          "bomFormat": "CycloneDX",
+          "specVersion": "1.7",
+          "serialNumber": "urn:uuid:bfbc43dd-1b6c-478b-8fe0-8bf10b8c2d85",
+          "version": 1,
+          "metadata": {
+            "timestamp": "2026-09-21T08:20:03+08:00",
+            "tools": {
+              "components": [
+                {
+                  "type": "application",
+                  "author": "anchore",
+                  "name": "syft",
+                  "version": "1.52.0"
+                }
+              ]
+            },
+            "component": {
+              "bom-ref": "59aab1b5d8af1d52",
+              "type": "file",
+              "name": "D:\\prj\\.2\\competition\\examples\\asset_simulation\\vllm-lab"
+            }
+          },
+          "components": [
+            {
+              "bom-ref": "pkg:pypi/fastapi@0.115.0?package-id=443ac79dc089c5c8",
+              "type": "library",
+              "name": "fastapi",
+              "version": "0.115.0",
+              "cpe": "cpe:2.3:a:python-fastapi:python-fastapi:0.115.0:*:*:*:*:*:*:*",
+              "purl": "pkg:pypi/fastapi@0.115.0",
+              "properties": [
+                {
+                  "name": "syft:package:foundBy",
+                  "value": "python-package-cataloger"
+                },
+                {
+                  "name": "syft:package:language",
+                  "value": "python"
+                },
+                {
+                  "name": "syft:package:type",
+                  "value": "python"
+                },
+                {
+                  "name": "syft:package:metadataType",
+                  "value": "python-pip-requirements-entry"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python-fastapi:python_fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_fastapi:python-fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_fastapi:python_fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:fastapi:python-fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:fastapi:python_fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python-fastapi:fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_fastapi:fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:python-fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:python_fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:fastapi:fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:fastapi:0.115.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:location:0:path",
+                  "value": "\\requirements.txt"
+                }
+              ]
+            },
+            {
+              "bom-ref": "pkg:pypi/uvicorn@0.30.6?package-id=35ea39fc66e92c7d",
+              "type": "library",
+              "name": "uvicorn",
+              "version": "0.30.6",
+              "cpe": "cpe:2.3:a:python-uvicorn:python-uvicorn:0.30.6:*:*:*:*:*:*:*",
+              "purl": "pkg:pypi/uvicorn@0.30.6",
+              "properties": [
+                {
+                  "name": "syft:package:foundBy",
+                  "value": "python-package-cataloger"
+                },
+                {
+                  "name": "syft:package:language",
+                  "value": "python"
+                },
+                {
+                  "name": "syft:package:type",
+                  "value": "python"
+                },
+                {
+                  "name": "syft:package:metadataType",
+                  "value": "python-pip-requirements-entry"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python-uvicorn:python_uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_uvicorn:python-uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_uvicorn:python_uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python-uvicorn:uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_uvicorn:uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:uvicorn:python-uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:uvicorn:python_uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:python-uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:python_uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:uvicorn:uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:uvicorn:0.30.6:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:location:0:path",
+                  "value": "\\requirements.txt"
+                }
+              ]
+            },
+            {
+              "bom-ref": "pkg:pypi/vllm@0.10.0?package-id=3ec42f4138de5b67",
+              "type": "library",
+              "name": "vllm",
+              "version": "0.10.0",
+              "cpe": "cpe:2.3:a:python-vllm:python-vllm:0.10.0:*:*:*:*:*:*:*",
+              "purl": "pkg:pypi/vllm@0.10.0",
+              "properties": [
+                {
+                  "name": "syft:package:foundBy",
+                  "value": "python-package-cataloger"
+                },
+                {
+                  "name": "syft:package:language",
+                  "value": "python"
+                },
+                {
+                  "name": "syft:package:type",
+                  "value": "python"
+                },
+                {
+                  "name": "syft:package:metadataType",
+                  "value": "python-pip-requirements-entry"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python-vllm:python_vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_vllm:python-vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_vllm:python_vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:python-vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:python_vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python-vllm:vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python_vllm:vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:vllm:python-vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:vllm:python_vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:python:vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:cpe23",
+                  "value": "cpe:2.3:a:vllm:vllm:0.10.0:*:*:*:*:*:*:*"
+                },
+                {
+                  "name": "syft:location:0:path",
+                  "value": "\\requirements.txt"
+                }
+              ]
+            }
+          ]
+        },
+        "authorized": true,
+        "is_demo": true
+      },
+      "http_status": 200,
+      "response": {
+        "batch_id": "cdx-395ea495f6d0c74aaf4a",
+        "spec_version": "1.7",
+        "serial_number": "urn:uuid:bfbc43dd-1b6c-478b-8fe0-8bf10b8c2d85",
+        "inventory_timestamp": "2026-09-21T08:20:03+08:00",
+        "generation_tools": [
+          {
+            "name": "syft",
+            "version": "1.52.0"
+          }
+        ],
+        "input_component_count": 3,
+        "deduplicated_asset_count": 3,
+        "duplicate_component_count": 0,
+        "assumptions": [
+          "每个唯一 bom-ref 代表该 SBOM 快照中的一个组件资产。",
+          "目录或镜像盘点只能证明清单可见组件，不能证明组件正在运行。",
+          "SBOM 未声明 exposure、business_criticality 或 runtime conditions；这些字段保持未知。",
+          "导入授权范围必须由调用方显式确认，不从 SBOM 推断。"
+        ],
+        "dry_run": false,
+        "created": 3,
+        "updated": 0,
+        "authorized": true,
+        "is_demo": true,
+        "policy_asset_count": 0,
+        "assessment_relationship_count": 0,
+        "idempotent": false
+      }
+    },
+    "assessment_run": {
+      "method": "POST",
+      "path": "/api/assessments/run",
+      "request_body": null,
+      "http_status": 200,
+      "response": {
+        "run_id": "run-6f7f3a477832",
+        "assessments": 117,
+        "assets": 16,
+        "events": 210,
+        "not_applicable": 0,
+        "duration_ms": 1000
+      }
+    }
+  },
+  "high_priority_total": 4,
+  "selected_count": 4,
+  "selected_synthetic_count": 4,
+  "selected_real_count": 0,
+  "baseline": {
+    "label": "baseline_after_assessment",
+    "captured_at": "2026-10-06T07:32:23Z",
+    "http_status": 200,
+    "metrics": {
+      "generated_at": "2026-10-06T07:32:23.572663+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 0,
+      "high_priority_verified": 0,
+      "high_priority_in_progress": 0,
+      "closure_rate": 0.0,
+      "verified_rate": 0.0,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 4,
+        "in_progress": 0,
+        "fixed": 0,
+        "verified": 0,
+        "accepted": 0
+      },
+      "findings_total": 71,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    }
+  },
+  "closure_timeline": [
+    {
+      "label": "baseline_after_assessment",
+      "captured_at": "2026-10-06T07:32:23Z",
+      "http_status": 200,
+      "metrics": {
+        "generated_at": "2026-10-06T07:32:23.572663+00:00",
+        "high_priority_total": 4,
+        "high_priority_closed": 0,
+        "high_priority_verified": 0,
+        "high_priority_in_progress": 0,
+        "closure_rate": 0.0,
+        "verified_rate": 0.0,
+        "mean_time_to_close_hours": null,
+        "status_breakdown": {
+          "open": 4,
+          "in_progress": 0,
+          "fixed": 0,
+          "verified": 0,
+          "accepted": 0
+        },
+        "findings_total": 71,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+        ]
+      }
+    },
+    {
+      "label": "after_missing_assignee_rejected",
+      "captured_at": "2026-10-06T07:32:25Z",
+      "http_status": 200,
+      "metrics": {
+        "generated_at": "2026-10-06T07:32:25.186848+00:00",
+        "high_priority_total": 4,
+        "high_priority_closed": 0,
+        "high_priority_verified": 0,
+        "high_priority_in_progress": 0,
+        "closure_rate": 0.0,
+        "verified_rate": 0.0,
+        "mean_time_to_close_hours": null,
+        "status_breakdown": {
+          "open": 4,
+          "in_progress": 0,
+          "fixed": 0,
+          "verified": 0,
+          "accepted": 0
+        },
+        "findings_total": 71,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+        ]
+      }
+    },
+    {
+      "label": "after_failed_reverification",
+      "captured_at": "2026-10-06T07:32:26Z",
+      "http_status": 200,
+      "metrics": {
+        "generated_at": "2026-10-06T07:32:26.831403+00:00",
+        "high_priority_total": 4,
+        "high_priority_closed": 0,
+        "high_priority_verified": 0,
+        "high_priority_in_progress": 1,
+        "closure_rate": 0.0,
+        "verified_rate": 0.0,
+        "mean_time_to_close_hours": null,
+        "status_breakdown": {
+          "open": 3,
+          "in_progress": 0,
+          "fixed": 1,
+          "verified": 0,
+          "accepted": 0
+        },
+        "findings_total": 71,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+        ]
+      }
+    },
+    {
+      "label": "after_smolagents_verified",
+      "captured_at": "2026-10-06T07:32:28Z",
+      "http_status": 200,
+      "metrics": {
+        "generated_at": "2026-10-06T07:32:28.468353+00:00",
+        "high_priority_total": 4,
+        "high_priority_closed": 1,
+        "high_priority_verified": 1,
+        "high_priority_in_progress": 1,
+        "closure_rate": 0.25,
+        "verified_rate": 0.25,
+        "mean_time_to_close_hours": 0.0,
+        "status_breakdown": {
+          "open": 2,
+          "in_progress": 0,
+          "fixed": 1,
+          "verified": 1,
+          "accepted": 0
+        },
+        "findings_total": 71,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+        ]
+      }
+    },
+    {
+      "label": "after_openwebui_verified",
+      "captured_at": "2026-10-06T07:32:31Z",
+      "http_status": 200,
+      "metrics": {
+        "generated_at": "2026-10-06T07:32:31.661958+00:00",
+        "high_priority_total": 4,
+        "high_priority_closed": 3,
+        "high_priority_verified": 3,
+        "high_priority_in_progress": 1,
+        "closure_rate": 0.75,
+        "verified_rate": 0.75,
+        "mean_time_to_close_hours": 0.0,
+        "status_breakdown": {
+          "open": 0,
+          "in_progress": 0,
+          "fixed": 1,
+          "verified": 3,
+          "accepted": 0
+        },
+        "findings_total": 71,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+        ]
+      }
+    },
+    {
+      "label": "after_non_high_risk_accepted",
+      "captured_at": "2026-10-06T07:32:32Z",
+      "http_status": 200,
+      "metrics": {
+        "generated_at": "2026-10-06T07:32:32.766687+00:00",
+        "high_priority_total": 4,
+        "high_priority_closed": 3,
+        "high_priority_verified": 3,
+        "high_priority_in_progress": 1,
+        "closure_rate": 0.75,
+        "verified_rate": 0.75,
+        "mean_time_to_close_hours": 0.0,
+        "status_breakdown": {
+          "open": 0,
+          "in_progress": 0,
+          "fixed": 1,
+          "verified": 3,
+          "accepted": 0
+        },
+        "findings_total": 71,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+        ]
+      }
+    }
+  ],
+  "rule_results": [
+    {
+      "rule": "missing_assignee_rejected",
+      "expected": "HTTP 400 and no disposition transition",
+      "request": {
+        "method": "PUT",
+        "path": "/api/dispositions/CVE-2025-9959/asset-cdx-0d772cce01115ccd1297",
+        "request_body": {
+          "event_id": "CVE-2025-9959",
+          "asset_id": "asset-cdx-0d772cce01115ccd1297",
+          "status": "in_progress"
+        },
+        "http_status": 400,
+        "response": {
+          "detail": "进入处置流转必须填写处置人（assignee）"
+        }
+      },
+      "actual_status": "open",
+      "passed": true
+    },
+    {
+      "rule": "unsafe_version_verified_is_downgraded",
+      "expected": "applied_status=fixed, verification.passed=false, closed_at=null",
+      "request": {
+        "method": "PUT",
+        "path": "/api/dispositions/CVE-2026-87016/asset-cdx-1aec991f9f50d77cb8d8",
+        "request_body": {
+          "event_id": "CVE-2026-87016",
+          "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+          "status": "verified",
+          "assignee": "a-evidence-owner",
+          "note": "Attempt verification before upgrading the asset.",
+          "version_before": "0.10.0"
+        },
+        "http_status": 200,
+        "response": {
+          "disposition": {
+            "event_id": "CVE-2026-87016",
+            "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+            "status": "fixed",
+            "assignee": "a-evidence-owner",
+            "note": "Attempt verification before upgrading the asset.",
+            "evidence_ids": [],
+            "version_before": "0.10.0",
+            "version_after": null,
+            "opened_at": "2026-10-06T07:32:26.259692+00:00",
+            "updated_at": "2026-10-06T07:32:26.259692+00:00",
+            "closed_at": null,
+            "operator": "a-evidence-owner",
+            "system_version": "0.2.4",
+            "verification": {
+              "checked_at": "2026-10-06T07:32:26.259692+00:00",
+              "assessment_status_before": "affected",
+              "assessment_status_after": "affected",
+              "priority_after": "high",
+              "reasons_after": [
+                "资产版本 0.10.0 命中受影响区间"
+              ],
+              "passed": false,
+              "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+            },
+            "status_label": "已修复待复测",
+            "closed": false,
+            "resolved": false,
+            "requires_verification": true
+          },
+          "assessment_status": "affected",
+          "assessment_priority": "high",
+          "verification": {
+            "checked_at": "2026-10-06T07:32:26.259692+00:00",
+            "assessment_status_before": "affected",
+            "assessment_status_after": "affected",
+            "priority_after": "high",
+            "reasons_after": [
+              "资产版本 0.10.0 命中受影响区间"
+            ],
+            "passed": false,
+            "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+          },
+          "requested_status": "verified",
+          "applied_status": "fixed"
+        }
+      },
+      "actual": {
+        "event_id": "CVE-2026-87016",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "status": "fixed",
+        "assignee": "a-evidence-owner",
+        "note": "Attempt verification before upgrading the asset.",
+        "evidence_ids": [],
+        "version_before": "0.10.0",
+        "version_after": null,
+        "opened_at": "2026-10-06T07:32:26.259692+00:00",
+        "updated_at": "2026-10-06T07:32:26.259692+00:00",
+        "closed_at": null,
+        "operator": "a-evidence-owner",
+        "system_version": "0.2.4",
+        "verification": {
+          "checked_at": "2026-10-06T07:32:26.259692+00:00",
+          "assessment_status_before": "affected",
+          "assessment_status_after": "affected",
+          "priority_after": "high",
+          "reasons_after": [
+            "资产版本 0.10.0 命中受影响区间"
+          ],
+          "passed": false,
+          "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+        },
+        "status_label": "已修复待复测",
+        "closed": false,
+        "resolved": false,
+        "requires_verification": true
+      },
+      "passed": true
+    },
+    {
+      "rule": "safe_version_verified_closes",
+      "expected": "applied_status=verified and closed_at present",
+      "request": {
+        "method": "PUT",
+        "path": "/api/dispositions/CVE-2025-9959/asset-cdx-0d772cce01115ccd1297",
+        "request_body": {
+          "event_id": "CVE-2025-9959",
+          "asset_id": "asset-cdx-0d772cce01115ccd1297",
+          "status": "verified",
+          "assignee": "a-evidence-owner",
+          "note": "Upgraded to the first version outside the affected range.",
+          "version_before": "1.20.0",
+          "version_after": "1.21.0"
+        },
+        "http_status": 200,
+        "response": {
+          "disposition": {
+            "event_id": "CVE-2025-9959",
+            "asset_id": "asset-cdx-0d772cce01115ccd1297",
+            "status": "verified",
+            "assignee": "a-evidence-owner",
+            "note": "Upgraded to the first version outside the affected range.",
+            "evidence_ids": [],
+            "version_before": "1.20.0",
+            "version_after": "1.21.0",
+            "opened_at": "2026-10-06T07:32:27.910922+00:00",
+            "updated_at": "2026-10-06T07:32:27.910922+00:00",
+            "closed_at": "2026-10-06T07:32:27.910922+00:00",
+            "operator": "a-evidence-owner",
+            "system_version": "0.2.4",
+            "verification": {
+              "checked_at": "2026-10-06T07:32:27.910922+00:00",
+              "assessment_status_before": "affected",
+              "assessment_status_after": "not_affected",
+              "priority_after": "low",
+              "reasons_after": [
+                "资产版本 1.21.0 不在已知受影响区间"
+              ],
+              "passed": true,
+              "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+            },
+            "status_label": "已复测关闭",
+            "closed": true,
+            "resolved": true,
+            "requires_verification": false
+          },
+          "assessment_status": "affected",
+          "assessment_priority": "high",
+          "verification": {
+            "checked_at": "2026-10-06T07:32:27.910922+00:00",
+            "assessment_status_before": "affected",
+            "assessment_status_after": "not_affected",
+            "priority_after": "low",
+            "reasons_after": [
+              "资产版本 1.21.0 不在已知受影响区间"
+            ],
+            "passed": true,
+            "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+          },
+          "requested_status": "verified",
+          "applied_status": "verified"
+        }
+      },
+      "actual": {
+        "event_id": "CVE-2025-9959",
+        "asset_id": "asset-cdx-0d772cce01115ccd1297",
+        "status": "verified",
+        "assignee": "a-evidence-owner",
+        "note": "Upgraded to the first version outside the affected range.",
+        "evidence_ids": [],
+        "version_before": "1.20.0",
+        "version_after": "1.21.0",
+        "opened_at": "2026-10-06T07:32:27.910922+00:00",
+        "updated_at": "2026-10-06T07:32:27.910922+00:00",
+        "closed_at": "2026-10-06T07:32:27.910922+00:00",
+        "operator": "a-evidence-owner",
+        "system_version": "0.2.4",
+        "verification": {
+          "checked_at": "2026-10-06T07:32:27.910922+00:00",
+          "assessment_status_before": "affected",
+          "assessment_status_after": "not_affected",
+          "priority_after": "low",
+          "reasons_after": [
+            "资产版本 1.21.0 不在已知受影响区间"
+          ],
+          "passed": true,
+          "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+        },
+        "status_label": "已复测关闭",
+        "closed": true,
+        "resolved": true,
+        "requires_verification": false
+      },
+      "passed": true
+    },
+    {
+      "rule": "assessment_status_not_overwritten",
+      "expected": "assessment.status remains affected while disposition_status=verified",
+      "actual": {
+        "assessment_status": "affected",
+        "disposition_status": "verified"
+      },
+      "passed": true
+    }
+  ],
+  "closure_steps": [
+    {
+      "method": "POST",
+      "path": "/api/assets",
+      "request_body": {
+        "id": "asset-cdx-0d772cce01115ccd1297",
+        "name": "smolagents",
+        "component": "smolagents",
+        "ecosystem": "PyPI",
+        "version": "1.21.0",
+        "exposure": "unknown",
+        "business_criticality": "unknown",
+        "conditions": {},
+        "policy": null,
+        "is_demo": true,
+        "authorized": true
+      },
+      "http_status": 200,
+      "response": {
+        "id": "asset-cdx-0d772cce01115ccd1297",
+        "name": "smolagents",
+        "component": "smolagents",
+        "ecosystem": "PyPI",
+        "version": "1.21.0",
+        "exposure": "unknown",
+        "business_criticality": "unknown",
+        "conditions": {},
+        "policy": null,
+        "is_demo": true,
+        "authorized": true,
+        "updated_at": "2026-10-06T07:32:26Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/assets",
+      "request_body": {
+        "id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "name": "open-webui",
+        "component": "open-webui",
+        "ecosystem": "PyPI",
+        "version": "0.11.1",
+        "exposure": "unknown",
+        "business_criticality": "unknown",
+        "conditions": {},
+        "policy": null,
+        "is_demo": true,
+        "authorized": true
+      },
+      "http_status": 200,
+      "response": {
+        "id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "name": "open-webui",
+        "component": "open-webui",
+        "ecosystem": "PyPI",
+        "version": "0.11.1",
+        "exposure": "unknown",
+        "business_criticality": "unknown",
+        "conditions": {},
+        "policy": null,
+        "is_demo": true,
+        "authorized": true,
+        "updated_at": "2026-10-06T07:32:28Z"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/dispositions/CVE-2026-87995/asset-cdx-1aec991f9f50d77cb8d8",
+      "request_body": {
+        "event_id": "CVE-2026-87995",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "status": "verified",
+        "assignee": "a-evidence-owner",
+        "note": "Upgraded Open WebUI to the fixed version and re-assessed.",
+        "version_before": "0.10.0",
+        "version_after": "0.11.1"
+      },
+      "http_status": 200,
+      "response": {
+        "disposition": {
+          "event_id": "CVE-2026-87995",
+          "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+          "status": "verified",
+          "assignee": "a-evidence-owner",
+          "note": "Upgraded Open WebUI to the fixed version and re-assessed.",
+          "evidence_ids": [],
+          "version_before": "0.10.0",
+          "version_after": "0.11.1",
+          "opened_at": "2026-10-06T07:32:30.065577+00:00",
+          "updated_at": "2026-10-06T07:32:30.065577+00:00",
+          "closed_at": "2026-10-06T07:32:30.065577+00:00",
+          "operator": "a-evidence-owner",
+          "system_version": "0.2.4",
+          "verification": {
+            "checked_at": "2026-10-06T07:32:30.065577+00:00",
+            "assessment_status_before": "affected",
+            "assessment_status_after": "not_affected",
+            "priority_after": "low",
+            "reasons_after": [
+              "资产版本 0.11.1 不在已知受影响区间"
+            ],
+            "passed": true,
+            "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+          },
+          "status_label": "已复测关闭",
+          "closed": true,
+          "resolved": true,
+          "requires_verification": false
+        },
+        "assessment_status": "affected",
+        "assessment_priority": "high",
+        "verification": {
+          "checked_at": "2026-10-06T07:32:30.065577+00:00",
+          "assessment_status_before": "affected",
+          "assessment_status_after": "not_affected",
+          "priority_after": "low",
+          "reasons_after": [
+            "资产版本 0.11.1 不在已知受影响区间"
+          ],
+          "passed": true,
+          "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+        },
+        "requested_status": "verified",
+        "applied_status": "verified"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/dispositions/CVE-2026-87998/asset-cdx-1aec991f9f50d77cb8d8",
+      "request_body": {
+        "event_id": "CVE-2026-87998",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "status": "verified",
+        "assignee": "a-evidence-owner",
+        "note": "Upgraded Open WebUI to the fixed version and re-assessed.",
+        "version_before": "0.10.0",
+        "version_after": "0.11.1"
+      },
+      "http_status": 200,
+      "response": {
+        "disposition": {
+          "event_id": "CVE-2026-87998",
+          "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+          "status": "verified",
+          "assignee": "a-evidence-owner",
+          "note": "Upgraded Open WebUI to the fixed version and re-assessed.",
+          "evidence_ids": [],
+          "version_before": "0.10.0",
+          "version_after": "0.11.1",
+          "opened_at": "2026-10-06T07:32:31.126737+00:00",
+          "updated_at": "2026-10-06T07:32:31.126737+00:00",
+          "closed_at": "2026-10-06T07:32:31.126737+00:00",
+          "operator": "a-evidence-owner",
+          "system_version": "0.2.4",
+          "verification": {
+            "checked_at": "2026-10-06T07:32:31.126737+00:00",
+            "assessment_status_before": "affected",
+            "assessment_status_after": "not_affected",
+            "priority_after": "low",
+            "reasons_after": [
+              "资产版本 0.11.1 不在已知受影响区间"
+            ],
+            "passed": true,
+            "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+          },
+          "status_label": "已复测关闭",
+          "closed": true,
+          "resolved": true,
+          "requires_verification": false
+        },
+        "assessment_status": "affected",
+        "assessment_priority": "high",
+        "verification": {
+          "checked_at": "2026-10-06T07:32:31.126737+00:00",
+          "assessment_status_before": "affected",
+          "assessment_status_after": "not_affected",
+          "priority_after": "low",
+          "reasons_after": [
+            "资产版本 0.11.1 不在已知受影响区间"
+          ],
+          "passed": true,
+          "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+        },
+        "requested_status": "verified",
+        "applied_status": "verified"
+      }
+    }
+  ],
+  "before_after": {
+    "closure_rate_before": 0.0,
+    "closure_rate_after": 0.75,
+    "verified_rate_before": 0.0,
+    "verified_rate_after": 0.75,
+    "selected_findings": [
+      {
+        "event_id": "CVE-2025-9959",
+        "asset_id": "asset-cdx-0d772cce01115ccd1297",
+        "component": "smolagents",
+        "version_before": "1.21.0",
+        "synthetic": true,
+        "assessment_status_before": "affected",
+        "assessment_priority": "high"
+      },
+      {
+        "event_id": "CVE-2026-87016",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "component": "open-webui",
+        "version_before": "0.11.1",
+        "synthetic": true,
+        "assessment_status_before": "affected",
+        "assessment_priority": "high"
+      },
+      {
+        "event_id": "CVE-2026-87995",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "component": "open-webui",
+        "version_before": "0.11.1",
+        "synthetic": true,
+        "assessment_status_before": "affected",
+        "assessment_priority": "high"
+      },
+      {
+        "event_id": "CVE-2026-87998",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "component": "open-webui",
+        "version_before": "0.11.1",
+        "synthetic": true,
+        "assessment_status_before": "affected",
+        "assessment_priority": "high"
+      }
+    ],
+    "failed_reverification_finding": {
+      "event_id": "CVE-2026-87016",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "status": "fixed",
+      "verification": {
+        "checked_at": "2026-10-06T07:32:26.259692+00:00",
+        "assessment_status_before": "affected",
+        "assessment_status_after": "affected",
+        "priority_after": "high",
+        "reasons_after": [
+          "资产版本 0.10.0 命中受影响区间"
+        ],
+        "passed": false,
+        "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+      }
+    },
+    "original_assessment_after_close": {
+      "event_id": "CVE-2025-9959",
+      "asset_id": "asset-cdx-0d772cce01115ccd1297",
+      "assessment_status": "affected",
+      "disposition_status": "verified"
+    },
+    "accepted_control": {
+      "method": "PUT",
+      "path": "/api/dispositions/CVE-2026-73556/asset-cdx-529bf0826120f8823b7f",
+      "request_body": {
+        "event_id": "CVE-2026-73556",
+        "asset_id": "asset-cdx-529bf0826120f8823b7f",
+        "status": "accepted",
+        "assignee": "risk-owner",
+        "note": "Risk accepted for the current review period."
+      },
+      "http_status": 200,
+      "response": {
+        "disposition": {
+          "event_id": "CVE-2026-73556",
+          "asset_id": "asset-cdx-529bf0826120f8823b7f",
+          "status": "accepted",
+          "assignee": "risk-owner",
+          "note": "Risk accepted for the current review period.",
+          "evidence_ids": [],
+          "version_before": "0.10.0",
+          "version_after": null,
+          "opened_at": "2026-10-06T07:32:32.204881+00:00",
+          "updated_at": "2026-10-06T07:32:32.204881+00:00",
+          "closed_at": "2026-10-06T07:32:32.204881+00:00",
+          "operator": "risk-owner",
+          "system_version": "0.2.4",
+          "verification": null,
+          "status_label": "已接受风险",
+          "closed": false,
+          "resolved": true,
+          "requires_verification": false
+        },
+        "assessment_status": "affected",
+        "assessment_priority": "medium",
+        "verification": null,
+        "requested_status": "accepted",
+        "applied_status": "accepted"
+      }
+    }
+  },
+  "final_metrics": {
+    "generated_at": "2026-10-06T07:32:33.312502+00:00",
+    "high_priority_total": 4,
+    "high_priority_closed": 3,
+    "high_priority_verified": 3,
+    "high_priority_in_progress": 1,
+    "closure_rate": 0.75,
+    "verified_rate": 0.75,
+    "mean_time_to_close_hours": 0.0,
+    "status_breakdown": {
+      "open": 0,
+      "in_progress": 0,
+      "fixed": 1,
+      "verified": 3,
+      "accepted": 0
+    },
+    "findings_total": 71,
+    "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。",
+    "limitations": [
+      "合成演示资产上的处置记录不等于生产环境的真实修复。",
+      "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+      "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+    ]
+  },
+  "page_consistency": {
+    "generated_at": "2026-10-06T07:32:34Z",
+    "api_metrics": {
+      "high_priority_total": 4,
+      "high_priority_closed": 3,
+      "high_priority_verified": 3,
+      "high_priority_in_progress": 1,
+      "closure_rate": 0.75,
+      "verified_rate": 0.75,
+      "status_breakdown": {
+        "open": 0,
+        "in_progress": 0,
+        "fixed": 1,
+        "verified": 3,
+        "accepted": 0
+      },
+      "findings_total": 71
+    },
+    "scorecard_disposition": {
+      "high_priority_total": 4,
+      "high_priority_closed": 3,
+      "high_priority_verified": 3,
+      "high_priority_in_progress": 1,
+      "closure_rate": 0.75,
+      "verified_rate": 0.75,
+      "status_breakdown": {
+        "open": 0,
+        "in_progress": 0,
+        "fixed": 1,
+        "verified": 3,
+        "accepted": 0
+      },
+      "findings_total": 71
+    },
+    "ui_binding": {
+      "endpoint": "/api/competition/scorecard",
+      "field": "disposition",
+      "card": "处置闭环",
+      "source": "app/static/app.js"
+    },
+    "field_mismatches": [],
+    "consistent": true
+  },
+  "limitations": [
+    "本证据库由正式 API 流程创建；高优先级条目来自合成 asset-cdx-* 资产。",
+    "B 的 D:\\ICT\\intel-data-b-poc-20261002 数据副本不在当前主机，无法声称复现其中 27 条基线。",
+    "真实运行时依赖资产已导入并参与研判，但该事件/组件交集没有产生高优先级 affected 条目。",
+    "verified 只表示系统按当前资产版本重新研判通过，不代表生产环境已经实际执行升级。",
+    "accepted 仅用于验证口径，不计入 verified_rate。"
+  ]
+}

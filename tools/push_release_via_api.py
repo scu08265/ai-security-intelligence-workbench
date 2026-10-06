@@ -95,7 +95,25 @@ def _tracked_files(full_tree: bool, base_commit: str | None) -> list[tuple[str, 
 
 
 def _blob(github: GitHub, repo: str, path: str) -> str:
-    data = (ROOT / path).read_bytes()
+    # Use the exact blob stored in Git, not the working-tree bytes. Windows
+    # checkouts may materialize CRLF while the repository blobs use LF; sending
+    # the working-tree form rewrites every text file in the remote commit.
+    result = subprocess.run(
+        [
+            str(GIT if GIT.exists() else "git"),
+            "-c", f"safe.directory={ROOT.as_posix()}",
+            "-C", str(ROOT),
+            "cat-file", "blob", f"HEAD:{path}",
+        ],
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            result.stderr.decode("utf-8", errors="replace").strip()
+            or f"Unable to read Git blob HEAD:{path}"
+        )
+    data = result.stdout
     payload = github.request(
         "POST", f"/repos/{repo}/git/blobs",
         json={
@@ -143,7 +161,7 @@ def push(
         remote_commit_sha = ""
 
     if full_tree:
-        parent = remote_commit_sha or base_commit or _git("rev-parse", "HEAD^").strip()
+        parent = base_commit or remote_commit_sha or _git("rev-parse", "HEAD^").strip()
         remote_commit = github.request("GET", f"/repos/{repo}/git/commits/{parent}")
         base_tree = str(remote_commit["tree"]["sha"])
     else:
