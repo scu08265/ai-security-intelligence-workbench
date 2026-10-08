@@ -111,6 +111,30 @@ def test_advice_endpoint_exposes_bridge_output():
     assert body["disclaimer"]
 
 
+def test_remediated_finding_stays_in_the_closure_denominator():
+    """Fixing the asset must not shrink the denominator.
+
+    Regression: the cohort used to mean 'currently affected', so a verified
+    closure followed by a re-assessment (which flips the asset to
+    not_affected) removed the finding from both numerator and denominator and
+    collapsed the closure rate to zero right after a successful fix.
+    """
+    event_id, asset_id = _seed_case(version="2.5.0")
+    disposition.update_disposition(event_id, asset_id, status="verified", assignee="alice")
+    before = disposition.metrics()
+    assert before["high_priority_total"] == 1
+    assert before["closure_rate"] == 1.0
+
+    # Simulate a later re-assessment flipping the live status.
+    storage.save_assessment({"event_id": event_id, "asset_id": asset_id,
+                             "status": "not_affected", "priority": "low"})
+
+    after = disposition.metrics()
+    assert after["high_priority_total"] == 1, "closed finding must stay in the cohort"
+    assert after["high_priority_closed"] == 1
+    assert after["closure_rate"] == 1.0
+
+
 def test_unknown_status_is_rejected():
     event_id, asset_id = _seed_case()
     client = TestClient(app)

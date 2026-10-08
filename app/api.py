@@ -52,11 +52,16 @@ class AssetRequest(BaseModel):
     id: str | None = Field(default=None, max_length=120)
     name: str = Field(min_length=1, max_length=200)
     component: str = Field(min_length=1, max_length=200)
-    ecosystem: str = Field(default="", max_length=120)
+    # A CycloneDX import keeps its context under ``deployment_context`` and
+    # leaves these top-level keys null.  Accepting None here is what lets an
+    # imported asset be read back and updated through this same endpoint;
+    # without it the round-trip fails with HTTP 422 and the asset's version
+    # can never be changed.
+    ecosystem: str | None = Field(default=None, max_length=120)
     version: str | None = Field(default=None, max_length=120)
-    exposure: str = Field(default="unknown", pattern="^(public|internal|unknown)$")
-    business_criticality: str = Field(default="medium", pattern="^(critical|high|medium|low|unknown)$")
-    conditions: dict[str, Any] = Field(default_factory=dict)
+    exposure: str | None = Field(default=None, pattern="^(public|internal|unknown)$")
+    business_criticality: str | None = Field(default=None, pattern="^(critical|high|medium|low|unknown)$")
+    conditions: dict[str, Any] | None = None
     policy: dict[str, Any] | None = None
     is_demo: bool = False
     authorized: bool = True
@@ -619,6 +624,12 @@ def _asset_payload(model: AssetRequest) -> dict:
     data = model.model_dump()
     data["component"] = data["component"].strip()
     data["name"] = data["name"].strip()
+    # Coerce the nullable context fields back to their documented defaults so
+    # the stored record always matches the shape the wider app expects.
+    data["ecosystem"] = data.get("ecosystem") or ""
+    data["exposure"] = data.get("exposure") or "unknown"
+    data["business_criticality"] = data.get("business_criticality") or "medium"
+    data["conditions"] = data.get("conditions") or {}
     return data
 
 

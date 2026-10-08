@@ -117,6 +117,36 @@ def test_asset_validation_rejects_bad_enums(client):
     assert response.status_code == 422
 
 
+def test_sbom_style_asset_round_trips_with_null_context_fields(client):
+    """A CycloneDX import leaves these null; updating it must not 422.
+
+    Regression: POST /api/assets rejected the stored record because
+    exposure / business_criticality / conditions came back as null, so an
+    imported asset's version could never be changed through the API.
+    """
+    storage.upsert_asset({
+        "id": "asset-cdx-null", "name": "vllm", "component": "vllm",
+        "version": "0.10.0", "authorized": True, "is_demo": True,
+        "deployment_context": {
+            "exposure": None, "business_criticality": None,
+            "conditions": None, "status": "not_asserted_by_sbom",
+        },
+    })
+    response = client.post("/api/assets", json={
+        "id": "asset-cdx-null", "name": "vllm", "component": "vllm",
+        "ecosystem": None, "version": "0.30.0",
+        "exposure": None, "business_criticality": None, "conditions": None,
+        "is_demo": True, "authorized": True,
+    })
+    assert response.status_code == 200
+    body = response.json()
+    assert body["version"] == "0.30.0"
+    # Nullable inputs fall back to the documented defaults, never to null.
+    assert body["exposure"] == "unknown"
+    assert body["business_criticality"] == "medium"
+    assert body["conditions"] == {}
+
+
 def test_assessments_are_joined_with_names(client):
     _seed(client)
     client.post("/api/assessments/run")

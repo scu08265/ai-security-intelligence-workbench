@@ -185,6 +185,11 @@ def update_disposition(
         "version_before": version_before,
         "version_after": version_after or existing.get("version_after"),
         "opened_at": existing.get("opened_at") or _now(),
+        # Frozen at open time.  ``metrics()`` uses this to keep a finding in
+        # the closure-rate denominator after remediation flips its live
+        # assessment to ``not_affected``.
+        "opened_priority": existing.get("opened_priority") or assessment.get("priority"),
+        "opened_assessment_status": existing.get("opened_assessment_status") or assessment.get("status"),
         "updated_at": _now(),
         "closed_at": closed_at,
         "operator": operator or assignee,
@@ -202,6 +207,28 @@ def update_disposition(
     }
 
 
+def _is_high_priority_cohort(item: dict[str, Any]) -> bool:
+    """Whether a finding belongs in the closure-rate denominator.
+
+    A finding enters the cohort while it is a high-priority ``affected``
+    assessment, and it stays there once a disposition has been opened on it.
+    The priority observed at open time is frozen in the disposition record, so
+    remediating the asset -- which flips the live assessment to
+    ``not_affected`` -- cannot silently remove the finding from both the
+    numerator and the denominator and collapse the closure rate right after a
+    successful fix.
+    """
+    assessment = item["assessment"]
+    disposition = item["disposition"]
+    if (assessment.get("status") == "affected"
+            and assessment.get("priority") in HIGH_PRIORITIES):
+        return True
+    if not disposition.get("opened_at"):
+        return False
+    opened_priority = disposition.get("opened_priority") or assessment.get("priority")
+    return opened_priority in HIGH_PRIORITIES
+
+
 def metrics() -> dict[str, Any]:
     assessments = storage.list_assessments(limit=2000)
     dispositions = {str(item.get("event_id")) + "::" + str(item.get("asset_id")): item
@@ -215,8 +242,7 @@ def metrics() -> dict[str, Any]:
 
     rows = [row(item) for item in assessments]
     findings = [item for item in rows if item["assessment"].get("status") in {"affected", "needs_confirmation"}]
-    high = [item for item in rows if item["assessment"].get("status") == "affected"
-            and item["assessment"].get("priority") in HIGH_PRIORITIES]
+    high = [item for item in rows if _is_high_priority_cohort(item)]
     closed = [item for item in high if item["disposition"]["resolved"]]
     verified = [item for item in high if item["disposition"]["status"] == "verified"]
     in_progress = [item for item in high if item["disposition"]["status"] in {"in_progress", "fixed"}]
@@ -243,6 +269,7 @@ def metrics() -> dict[str, Any]:
         "evidence_policy": (
             "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，"
             "才计入已关闭。接受风险不改变原始受影响事实。"
+            "已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。"
         ),
         "limitations": [
             "合成演示资产上的处置记录不等于生产环境的真实修复。",

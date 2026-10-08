@@ -33,12 +33,16 @@
 
 `GET /api/dispositions/metrics` 与 `/api/competition/scorecard` 的 `disposition` 字段：
 
-- `high_priority_total`：`assessments.status=affected` 且 `priority ∈ {critical, high}` 的结论数；
-- `high_priority_closed`：上述结论中状态为 `verified` 或 `accepted` 的数量；
+- `high_priority_total`：**高优先级闭环队列**的大小 —— `assessments.status=affected` 且
+  `priority ∈ {critical, high}` 的结论，**加上**已登记处置、且在登记时优先级为 high/critical 的结论；
+- `high_priority_closed`：该队列中状态为 `verified` 或 `accepted` 的数量；
+  - 队列冻结规则：处置记录会把登记那一刻的 `opened_priority` 一起存下来。资产修复后重算研判会把
+    该条刷成 `not_affected`，但它**不会离开分母**；否则一次成功的修复会同时缩小分子和分母，
+    让闭环率在修好的瞬间反而塌回 0。
 - `closure_rate = high_priority_closed / high_priority_total`；分母为 0 时返回 `null`，不返回 0；
 - `verified_rate`：只统计系统复测通过的关闭；
 - `mean_time_to_close_hours`：仅统计同时有 `opened_at` 与 `closed_at` 的记录，样本为空时为 `null`；
-- `status_breakdown`：27 条高优先级结论在各状态上的分布。
+- `status_breakdown`：高优先级闭环队列在各状态上的分布。
 
 当前 A 证据库：高优先级 `affected` 4 条，全部为
 `asset-cdx-*` 合成资产（smolagents / open-webui）。闭环率从 `0` 增加到 `0.75`，
