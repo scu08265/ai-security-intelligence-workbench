@@ -1,0 +1,106 @@
+{
+ "schema_version": "b-relation-gold-1.0",
+ "expected_relation_ids": {
+  "BREL-CV-0021": "cvss",
+  "BREL-CV-0022": "cvss",
+  "BREL-CV-0023": "cvss",
+  "BREL-CV-0024": "cvss",
+  "BREL-CV-0025": "cvss",
+  "BREL-VE-0012": "version_range",
+  "BREL-FI-0001": "fixed_version",
+  "BREL-PA-0029": "paper_link",
+  "BREL-PA-0032": "paper_link",
+  "BREL-PA-0035": "paper_link"
+ },
+ "scope": {
+  "kind": "sample_exhaustive",
+  "note": "抽样穷尽，不是全语料穷尽：只声明以下对象的应抽取关系全集；其余文档与旧产物不动。",
+  "events": [
+   "CVE-2026-64849",
+   "CVE-2025-62593",
+   "CVE-2026-33017",
+   "PYSEC-2026-4000",
+   "GHSA-8pw2-6jv3-mj5j"
+  ],
+  "papers": [
+   "paper:2609.28996",
+   "paper:2609.29757",
+   "paper:2609.28900"
+  ],
+  "official_documents": [
+   "official:eu_ai_act",
+   "source:nist_ai_rmf",
+   "source:owasp_genai"
+  ],
+  "dimensions_in_scope": [
+   "paper_link",
+   "version_range",
+   "fixed_version",
+   "cvss"
+  ],
+  "dimensions_excluded": {
+   "poc": "已由 POC 签核单独核验（16 yes / 16 no），本次不并入 gold，避免与本轮四维口径混算",
+   "asset_assessment": "资产为合成资产（synthetic=true），不作为真实金标准"
+  }
+ },
+ "completeness": {
+  "source_of_truth": [
+   "事件字段 cvss[]/affected[]/paper",
+   "副本内 NVD 快照 metrics"
+  ],
+  "sources_not_covered": [
+   "OSV 快照结构未解析成功，未用于本次枚举",
+   "NVD 只覆盖已抓取的 37 个 CVE",
+   "官方/标准文档（NIST/OWASP/EU AI Act）不参与六维度关系，预期 0 条并已核对"
+  ],
+  "sampled_relations_declared_by_sources": 17,
+  "system_extracted_and_positive": 10,
+  "system_extracted_but_undecided": 7,
+  "missed": 0
+ },
+ "uncertain": [
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-VE-0023",
+   "dimension": "version_range",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-VE-0024",
+   "dimension": "version_range",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-VE-0029",
+   "dimension": "version_range",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0010",
+   "dimension": "cvss",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0015",
+   "dimension": "cvss",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-VE-0017",
+   "dimension": "version_range",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-FI-0006",
+   "dimension": "fixed_version",
+   "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+  }
+ ],
+ "protocol_ref": "docs/B_RELATION_GOLD_PROTOCOL.md"
+}

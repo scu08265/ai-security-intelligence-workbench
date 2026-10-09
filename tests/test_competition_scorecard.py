@@ -170,11 +170,14 @@ def test_active_multihop_uses_v2_batch_and_exposes_missing_edges():
 def test_active_relation_uses_gold_score_and_exposes_recall():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     active = body["active_relation"]
-    assert active["source"].endswith("relation_score_gold_20261004.json")
+    # 页面自动选用最新的 relation_score_gold_<日期>.json：
+    # 2026-10-06 批次补齐了 5 条 cvss 漏检的可抽取内容并完成人工核验，
+    # 10-04 的冻结基线仍原样保留（见 tests/test_b_relation_cvss_recheck.py）。
+    assert active["source"].endswith("relation_score_gold_20261006.json")
     assert active["precision"] == 1.0
-    assert active["recall"] == 0.9038
-    assert active["f1"] == 0.9495
-    assert (active["tp"], active["fp"], active["fn"]) == (47, 0, 5)
+    assert active["recall"] == 0.9123
+    assert active["f1"] == 0.9541
+    assert (active["tp"], active["fp"], active["fn"]) == (52, 0, 5)
     assert active["missing_relation_ids"] == 5
     # 旧冻结基线保留：没有金标准时 Recall 仍不可计算
     assert body["relation"]["recall"] is None

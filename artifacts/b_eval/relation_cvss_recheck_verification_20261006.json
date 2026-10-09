@@ -1,0 +1,74 @@
+{
+ "schema_version": "b-relation-cvss-recheck-1.0",
+ "batch": "20261006",
+ "fix_commit": "6d15d31",
+ "verified": 5,
+ "total": 5,
+ "items": [
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0001",
+   "subject": "CVE-2026-64849",
+   "new_relation_id": "BREL-CV-0021",
+   "expected_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
+   "library_match": "FOUND",
+   "library_count": 1,
+   "library_source_id": "nvd:a3afe188ab",
+   "nvd_snapshot": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-64849.json",
+   "snapshot_sha256": "79c6a7d34b5ac84a86c717bfcdde736051b910819d044a82b70d86800316accd",
+   "snapshot_locator": "metrics.cvssMetricV31[0]",
+   "byte_rereadable": true
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0002",
+   "subject": "CVE-2025-62593",
+   "new_relation_id": "BREL-CV-0022",
+   "expected_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "library_match": "FOUND",
+   "library_count": 1,
+   "library_source_id": "nvd:b5fe826e46",
+   "nvd_snapshot": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+   "snapshot_sha256": "3410844a19ef23b5048cb6189666ad155d3b66f9a642f96eedaa97916e57b255",
+   "snapshot_locator": "metrics.cvssMetricV40[0]",
+   "byte_rereadable": true
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0003",
+   "subject": "CVE-2025-62593",
+   "new_relation_id": "BREL-CV-0023",
+   "expected_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "library_match": "FOUND",
+   "library_count": 1,
+   "library_source_id": "nvd:a408dc5f41",
+   "nvd_snapshot": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+   "snapshot_sha256": "3410844a19ef23b5048cb6189666ad155d3b66f9a642f96eedaa97916e57b255",
+   "snapshot_locator": "metrics.cvssMetricV31[0]",
+   "byte_rereadable": true
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0004",
+   "subject": "CVE-2026-33017",
+   "new_relation_id": "BREL-CV-0024",
+   "expected_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "library_match": "FOUND",
+   "library_count": 1,
+   "library_source_id": "nvd:5fdc4f2435",
+   "nvd_snapshot": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+   "snapshot_sha256": "f0ec34f6ebe098429ddce1fba6c9374dfd878b0b1c66beec20fa7b0d0aa3c4e8",
+   "snapshot_locator": "metrics.cvssMetricV40[0]",
+   "byte_rereadable": true
+  },
+  {
+   "gold_relation_id": "BREL-GOLD-FN-CV-0005",
+   "subject": "CVE-2026-33017",
+   "new_relation_id": "BREL-CV-0025",
+   "expected_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+   "library_match": "FOUND",
+   "library_count": 1,
+   "library_source_id": "nvd:ee978e071c",
+   "nvd_snapshot": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+   "snapshot_sha256": "f0ec34f6ebe098429ddce1fba6c9374dfd878b0b1c66beec20fa7b0d0aa3c4e8",
+   "snapshot_locator": "metrics.cvssMetricV31[0]",
+   "byte_rereadable": true
+  }
+ ]
+}

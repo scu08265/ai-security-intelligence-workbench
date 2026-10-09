@@ -1,0 +1,98 @@
+{
+ "computable": true,
+ "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
+ "prediction_default": {
+  "used": 52,
+  "assumption": "缺少 prediction.verdict 时视为 present（候选即系统输出）"
+ },
+ "fn_source": {
+  "available": true,
+  "expected_relation_ids": 10,
+  "missing_relation_ids": [],
+  "reason": null
+ },
+ "per_dimension": {
+  "cvss": {
+   "tp": 15,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 12,
+   "pending": 1,
+   "total": 28,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "fixed_version": {
+   "tp": 10,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 2,
+   "pending": 0,
+   "total": 12,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "paper_link": {
+   "tp": 16,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 21,
+   "pending": 0,
+   "total": 37,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "poc": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 5,
+   "total": 5,
+   "precision": null,
+   "recall": null,
+   "f1": null,
+   "evaluable": false
+  },
+  "version_range": {
+   "tp": 11,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 39,
+   "pending": 0,
+   "total": 50,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  }
+ },
+ "micro": {
+  "tp": 52,
+  "fp": 0,
+  "fn": 0,
+  "tn": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "evaluable_samples": 52
+ },
+ "macro": {
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "dimensions_with_metrics": 4
+ },
+ "note": null
+}

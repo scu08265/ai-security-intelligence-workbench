@@ -32,9 +32,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-LABELED = ROOT / "artifacts" / "b_eval" / "relation_candidates_labeled_all.json"
-SYSTEM_OUTPUT = ROOT / "evaluation" / "b_relation_candidates_20261002_full.json"
 DEFAULT_DB_DIR = Path(r"D:\ICT\intel-data-b-poc-20261002")
+
+# 默认批次（2026-10-04，冻结产物）用的输入。新批次一律用命令行显式指定
+# --system-output / --labeled-input，绝不复用旧批次的 relation_id，避免张冠李戴。
+SYSTEM_OUTPUT_DEFAULT = ROOT / "evaluation" / "b_relation_candidates_20261002_full.json"
+LABELED_DEFAULT = ROOT / "artifacts" / "b_eval" / "relation_candidates_labeled_all.json"
 
 GOLD_OUT = ROOT / "evaluation" / "b_relation_gold_20261004.json"
 MISSED_OUT = ROOT / "artifacts" / "b_eval" / "relation_missed_relations_20261004.json"
@@ -185,7 +188,18 @@ def enumerate_source_relations(db_dir: Path, events: dict[str, dict]) -> list[di
         for item in _nvd_cvss(nvd, path):
             item["subject"] = event_id
             relations.append(item)
-    return relations
+
+    # CVSS 回填后，同一条向量会同时出现在事件字段与 NVD 快照里；计分上它们是
+    # 同一条关系，按 (维度, 主体, 归一化向量) 去重，避免把分母算大。
+    deduped: list[dict] = []
+    seen: set[tuple[str, str, str]] = set()
+    for relation in relations:
+        key = (relation["dimension"], relation["subject"], _norm(relation["object"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(relation)
+    return deduped
 
 
 def match_candidate(relation: dict, index: dict) -> dict | None:
@@ -193,9 +207,10 @@ def match_candidate(relation: dict, index: dict) -> dict | None:
     return index.get(key)
 
 
-def build(db_dir: Path) -> dict:
-    labeled = _load(LABELED)["cases"]
-    system = _load(SYSTEM_OUTPUT)["cases"]
+def build(db_dir: Path, system_path: Path = SYSTEM_OUTPUT_DEFAULT,
+          labeled_path: Path = LABELED_DEFAULT) -> dict:
+    labeled = _load(labeled_path)["cases"]
+    system = _load(system_path)["cases"]
     events = _event_docs(db_dir)
 
     label_by_id = {c["relation_id"]: (c.get("annotation") or {}) for c in labeled}
@@ -306,15 +321,21 @@ def why_missed(relation: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="生成关系抽取的抽样穷尽金标准")
     parser.add_argument("--db-dir", type=Path, default=DEFAULT_DB_DIR)
+    parser.add_argument("--system-output", type=Path, default=SYSTEM_OUTPUT_DEFAULT,
+                        help="系统候选集（新批次显式指定，不要与旧批次混用）")
+    parser.add_argument("--labeled-input", type=Path, default=LABELED_DEFAULT,
+                        help="带人工标注的候选集（按关系内容与本批次 system-output 对齐）")
     parser.add_argument("--gold-out", type=Path, default=GOLD_OUT)
     parser.add_argument("--missed-out", type=Path, default=MISSED_OUT)
     parser.add_argument("--scope-input-out", type=Path, default=SCOPE_INPUT_OUT)
     args = parser.parse_args()
 
-    result = build(args.db_dir)
+    result = build(args.db_dir, args.system_output, args.labeled_input)
     gold, missed = result["gold"], result["missed"]
     if not missed:
-        print("警告：抽样范围内没有发现漏检关系，gold 无法提供 FN 来源（不应发生）")
+        print("说明：抽样范围内没有发现漏检关系（missed=0）。"
+              "这在‘修复后复核’批次里是预期结果（原 FN 已转为命中），"
+              "此时 gold 的 FN 来源为空，Recall 由‘命中/抽样全集’给出。")
 
     args.gold_out.parent.mkdir(parents=True, exist_ok=True)
     args.gold_out.write_text(json.dumps(gold, ensure_ascii=False, indent=1), encoding="utf-8")

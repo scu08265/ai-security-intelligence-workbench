@@ -1,0 +1,112 @@
+{
+ "schema_version": "b-relation-promotions-1.0",
+ "batch": "20261006",
+ "note": "新增正标注清单：仅含‘系统此前漏检、修复后已抽出’的 cvss 关系；已按 2026-10-04 批次口径由用户整体确认（人工复核-用户确认 / 2026-10-09）。",
+ "promotions": [
+  {
+   "relation_id": "BREL-CV-0021",
+   "dimension": "cvss",
+   "subject": "CVE-2026-64849",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09",
+   "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0001）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-64849.json",
+    "source_locator": "metrics.cvssMetricV31[0]",
+    "detail": {
+     "base_score": 9.3,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV31"
+    },
+    "byte_rereadable": true
+   }
+  },
+  {
+   "relation_id": "BREL-CV-0022",
+   "dimension": "cvss",
+   "subject": "CVE-2025-62593",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09",
+   "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0002）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+    "source_locator": "metrics.cvssMetricV40[0]",
+    "detail": {
+     "base_score": 9.4,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV40"
+    },
+    "byte_rereadable": true
+   }
+  },
+  {
+   "relation_id": "BREL-CV-0023",
+   "dimension": "cvss",
+   "subject": "CVE-2025-62593",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09",
+   "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0003）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+    "source_locator": "metrics.cvssMetricV31[0]",
+    "detail": {
+     "base_score": 8.8,
+     "base_severity": "HIGH",
+     "metric": "cvssMetricV31"
+    },
+    "byte_rereadable": true
+   }
+  },
+  {
+   "relation_id": "BREL-CV-0024",
+   "dimension": "cvss",
+   "subject": "CVE-2026-33017",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09",
+   "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0004）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+    "source_locator": "metrics.cvssMetricV40[0]",
+    "detail": {
+     "base_score": 9.3,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV40"
+    },
+    "byte_rereadable": true
+   }
+  },
+  {
+   "relation_id": "BREL-CV-0025",
+   "dimension": "cvss",
+   "subject": "CVE-2026-33017",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09",
+   "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0005）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
+   "evidence": {
+    "type": "nvd_snapshot",
+    "source_path": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+    "source_locator": "metrics.cvssMetricV31[0]",
+    "detail": {
+     "base_score": 9.8,
+     "base_severity": "CRITICAL",
+     "metric": "cvssMetricV31"
+    },
+    "byte_rereadable": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "schema_version": "b-nvd-cvss-fetch-manifest-1.0",
+ "retrieved_from": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=<CVE-ID>",
+ "retrieved_at": "2026-10-09",
+ "scope": "只为复核 2026-10-04 金标准的 5 条 cvss 漏检，按 CVE 定向拉取 3 个 CVE 的原始 NVD 2.0 响应；不做全量 NVD 同步。",
+ "fix_commit": "6d15d31",
+ "target_database_copy": "D:\\ICT\\intel-data-b-cvss-20261006",
+ "original_database_sha256": "4095a5b1ff836f70baf5552304aac95f7eab5ee95fb3a58c45768e3478254285",
+ "copy_database_sha256_after_backfill": "fcd319634db467550cd4ac774573dad65c95b2be1a3c6b1e8c1cfb8724c9cd5a",
+ "items": [
+  {
+   "cve": "CVE-2026-64849",
+   "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-64849",
+   "file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-64849.json",
+   "bytes": 3857,
+   "sha256": "79c6a7d34b5ac84a86c717bfcdde736051b910819d044a82b70d86800316accd",
+   "total_results": 1,
+   "metrics": {
+    "cvssMetricV40": 0,
+    "cvssMetricV31": 1,
+    "cvssMetricV30": 0,
+    "cvssMetricV2": 0
+   }
+  },
+  {
+   "cve": "CVE-2025-62593",
+   "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2025-62593",
+   "file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+   "bytes": 5250,
+   "sha256": "3410844a19ef23b5048cb6189666ad155d3b66f9a642f96eedaa97916e57b255",
+   "total_results": 1,
+   "metrics": {
+    "cvssMetricV40": 1,
+    "cvssMetricV31": 1,
+    "cvssMetricV30": 0,
+    "cvssMetricV2": 0
+   }
+  },
+  {
+   "cve": "CVE-2026-33017",
+   "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-33017",
+   "file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+   "bytes": 6617,
+   "sha256": "f0ec34f6ebe098429ddce1fba6c9374dfd878b0b1c66beec20fa7b0d0aa3c4e8",
+   "total_results": 1,
+   "metrics": {
+    "cvssMetricV40": 1,
+    "cvssMetricV31": 1,
+    "cvssMetricV30": 0,
+    "cvssMetricV2": 0
+   }
+  }
+ ],
+ "note": "快照落盘在副本 intel-data-b-cvss-20261006/snapshots/nvd/ 下；逐字节比对见 relation_cvss_recheck_verification_20261006.json。"
+}
