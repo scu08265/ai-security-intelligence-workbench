@@ -15,6 +15,11 @@
    候选里标签为 unknown 的一律放进 `uncertain`，**不进任何分母**
    （否则会被 FN 逻辑重复计数）。
 
+复核批次（`--former-missed`）额外做一件事：把上一批次的漏检条目**按关系内容**
+对应到本批次的候选，写进 gold 的 `resolved_former_ids`（旧合成 id → 新候选 id），
+于是"上一批的 FN 现在被哪条真实候选解释掉了"是显式、可机检的；
+只有当该候选已被人工判为 `human_verified` / `positive` 时才允许记入，否则直接报错。
+
 边界：
 
 * 只读数据库/快照与既有产物；只写本任务的新文件；不改 `app/`、不动旧冻结产物；
@@ -32,13 +37,20 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-LABELED = ROOT / "artifacts" / "b_eval" / "relation_candidates_labeled_all.json"
-SYSTEM_OUTPUT = ROOT / "evaluation" / "b_relation_candidates_20261002_full.json"
 DEFAULT_DB_DIR = Path(r"D:\ICT\intel-data-b-poc-20261002")
+
+# 默认批次（2026-10-04，冻结产物）用的输入。新批次一律用命令行显式指定
+# --system-output / --labeled-input，绝不复用旧批次的 relation_id，避免张冠李戴。
+SYSTEM_OUTPUT_DEFAULT = ROOT / "evaluation" / "b_relation_candidates_20261002_full.json"
+LABELED_DEFAULT = ROOT / "artifacts" / "b_eval" / "relation_candidates_labeled_all.json"
 
 GOLD_OUT = ROOT / "evaluation" / "b_relation_gold_20261004.json"
 MISSED_OUT = ROOT / "artifacts" / "b_eval" / "relation_missed_relations_20261004.json"
 SCOPE_INPUT_OUT = ROOT / "artifacts" / "b_eval" / "relation_candidates_labeled_gold_scope_20261004.json"
+
+# 复核批次用：上一批次的漏检清单（含 subject/dimension/object 与证据定位）。
+# 默认不传 —— 只有"复核上一批漏检"时才需要，避免把别的批次的内容混进来。
+FORMER_MISSED_DEFAULT: Path | None = None
 
 # 抽样范围（用户已确认）：论文 3 篇 + CVE 事件 3 个 + 生态漏洞事件 2 个 + 官方/标准文档 3 个
 SCOPE_EVENTS = (
@@ -56,6 +68,14 @@ DIMENSION_PREFIX = {
 
 def _norm(value) -> str:
     return " ".join(str(value or "").split()).casefold()
+
+
+def _repo_rel(path: Path) -> str:
+    """仓库内相对路径（命令行可能给绝对或相对路径）。"""
+    try:
+        return str(Path(path).resolve().relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(path).replace("\\", "/")
 
 
 def _load(path: Path) -> dict:
@@ -185,7 +205,18 @@ def enumerate_source_relations(db_dir: Path, events: dict[str, dict]) -> list[di
         for item in _nvd_cvss(nvd, path):
             item["subject"] = event_id
             relations.append(item)
-    return relations
+
+    # CVSS 回填后，同一条向量会同时出现在事件字段与 NVD 快照里；计分上它们是
+    # 同一条关系，按 (维度, 主体, 归一化向量) 去重，避免把分母算大。
+    deduped: list[dict] = []
+    seen: set[tuple[str, str, str]] = set()
+    for relation in relations:
+        key = (relation["dimension"], relation["subject"], _norm(relation["object"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(relation)
+    return deduped
 
 
 def match_candidate(relation: dict, index: dict) -> dict | None:
@@ -193,9 +224,49 @@ def match_candidate(relation: dict, index: dict) -> dict | None:
     return index.get(key)
 
 
-def build(db_dir: Path) -> dict:
-    labeled = _load(LABELED)["cases"]
-    system = _load(SYSTEM_OUTPUT)["cases"]
+def resolve_former_missed(former_missed_path: Path, index: dict,
+                          label_by_id: dict) -> dict[str, dict]:
+    """把上一批漏检条目按内容对应到本批候选，返回 {旧 id: 映射记录}。
+
+    任何一条对不上、或对应的候选不是人工核验过的 positive，都直接报错——
+    不允许把"修复后仍未确认"的东西写成"已解析"。
+    """
+    former = json.loads(former_missed_path.read_text(encoding="utf-8"))
+    resolved: dict[str, dict] = {}
+    problems: list[str] = []
+    for entry in former.get("missed_relations") or []:
+        gold_id = entry["gold_relation_id"]
+        key = (entry["dimension"], entry["subject"], _norm(entry["object"]))
+        candidate = index.get(key)
+        if candidate is None:
+            problems.append(f"{gold_id}：本批次候选集里找不到内容相同的候选")
+            continue
+        annotation = label_by_id.get(candidate["relation_id"]) or {}
+        if annotation.get("status") != "human_verified" or annotation.get("label") != "positive":
+            problems.append(
+                f"{gold_id} → {candidate['relation_id']}："
+                f"候选尚未人工核验为 positive（status={annotation.get('status')}）")
+            continue
+        resolved[gold_id] = {
+            "new_relation_id": candidate["relation_id"],
+            "dimension": candidate["dimension"],
+            "subject": candidate["subject"],
+            "object": candidate["object"],
+            "system_evidence_source_id": (candidate.get("evidence") or {}).get("source_id"),
+            "human_label": annotation.get("label"),
+            "verified_by": annotation.get("verified_by"),
+            "verified_at": annotation.get("verified_at"),
+        }
+    if problems:
+        raise ValueError("复核上一批漏检失败：\n  - " + "\n  - ".join(problems))
+    return resolved
+
+
+def build(db_dir: Path, system_path: Path = SYSTEM_OUTPUT_DEFAULT,
+          labeled_path: Path = LABELED_DEFAULT,
+          former_missed_path: Path | None = FORMER_MISSED_DEFAULT) -> dict:
+    labeled = _load(labeled_path)["cases"]
+    system = _load(system_path)["cases"]
     events = _event_docs(db_dir)
 
     label_by_id = {c["relation_id"]: (c.get("annotation") or {}) for c in labeled}
@@ -247,6 +318,11 @@ def build(db_dir: Path) -> dict:
             "why_missed": why_missed(relation),
         })
 
+    resolved_former_ids = (
+        resolve_former_missed(former_missed_path, index, label_by_id)
+        if former_missed_path else {}
+    )
+
     expected = {item["system_relation_id"]: item["dimension"]
                 for item in extracted_positive}
     expected.update({item["gold_relation_id"]: item["dimension"] for item in missed})
@@ -281,6 +357,14 @@ def build(db_dir: Path) -> dict:
         "uncertain": uncertain,
         "protocol_ref": "docs/B_RELATION_GOLD_PROTOCOL.md",
     }
+    if former_missed_path:
+        former = json.loads(former_missed_path.read_text(encoding="utf-8"))
+        former_total = len(former.get("missed_relations") or [])
+        gold["former_gold_ref"] = "evaluation/b_relation_gold_20261004.json"
+        gold["former_missed_ref"] = _repo_rel(former_missed_path)
+        gold["resolved_former_ids"] = resolved_former_ids
+        gold["completeness"]["former_missed_total"] = former_total
+        gold["completeness"]["former_missed_resolved"] = len(resolved_former_ids)
     return {"gold": gold, "missed": missed, "relations": relations,
             "extracted_positive": extracted_positive, "labeled": labeled}
 
@@ -306,15 +390,26 @@ def why_missed(relation: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="生成关系抽取的抽样穷尽金标准")
     parser.add_argument("--db-dir", type=Path, default=DEFAULT_DB_DIR)
+    parser.add_argument("--system-output", type=Path, default=SYSTEM_OUTPUT_DEFAULT,
+                        help="系统候选集（新批次显式指定，不要与旧批次混用）")
+    parser.add_argument("--labeled-input", type=Path, default=LABELED_DEFAULT,
+                        help="带人工标注的候选集（按关系内容与本批次 system-output 对齐）")
     parser.add_argument("--gold-out", type=Path, default=GOLD_OUT)
     parser.add_argument("--missed-out", type=Path, default=MISSED_OUT)
     parser.add_argument("--scope-input-out", type=Path, default=SCOPE_INPUT_OUT)
+    parser.add_argument("--former-missed", type=Path, default=FORMER_MISSED_DEFAULT,
+                        help="上一批次的漏检清单；给出时 gold 会带 resolved_former_ids 映射")
     args = parser.parse_args()
 
-    result = build(args.db_dir)
+    result = build(args.db_dir, args.system_output, args.labeled_input, args.former_missed)
     gold, missed = result["gold"], result["missed"]
+    if gold.get("resolved_former_ids"):
+        print("已解析上一批漏检:", len(gold["resolved_former_ids"]),
+              "/", gold["completeness"]["former_missed_total"])
     if not missed:
-        print("警告：抽样范围内没有发现漏检关系，gold 无法提供 FN 来源（不应发生）")
+        print("说明：抽样范围内没有发现漏检关系（missed=0）。"
+              "这在‘修复后复核’批次里是预期结果（原 FN 已转为命中），"
+              "此时 gold 的 FN 来源为空，Recall 由‘命中/抽样全集’给出。")
 
     args.gold_out.parent.mkdir(parents=True, exist_ok=True)
     args.gold_out.write_text(json.dumps(gold, ensure_ascii=False, indent=1), encoding="utf-8")

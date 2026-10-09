@@ -1,0 +1,38 @@
+{
+ "schema_version": "b-relation-missed-1.0",
+ "scope": {
+  "kind": "sample_exhaustive",
+  "note": "抽样穷尽，不是全语料穷尽：只声明以下对象的应抽取关系全集；其余文档与旧产物不动。",
+  "events": [
+   "CVE-2026-64849",
+   "CVE-2025-62593",
+   "CVE-2026-33017",
+   "PYSEC-2026-4000",
+   "GHSA-8pw2-6jv3-mj5j"
+  ],
+  "papers": [
+   "paper:2609.28996",
+   "paper:2609.29757",
+   "paper:2609.28900"
+  ],
+  "official_documents": [
+   "official:eu_ai_act",
+   "source:nist_ai_rmf",
+   "source:owasp_genai"
+  ],
+  "dimensions_in_scope": [
+   "paper_link",
+   "version_range",
+   "fixed_version",
+   "cvss"
+  ],
+  "dimensions_excluded": {
+   "poc": "已由 POC 签核单独核验（16 yes / 16 no），本次不并入 gold，避免与本轮四维口径混算",
+   "asset_assessment": "资产为合成资产（synthetic=true），不作为真实金标准"
+  }
+ },
+ "counts": {
+  "missed": 0
+ },
+ "missed_relations": []
+}
