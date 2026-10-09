@@ -59,11 +59,22 @@ def _f1(precision: float | None, recall: float | None) -> float | None:
     return round(2 * precision * recall / (precision + recall), 4)
 
 
-def score(payload: dict, gold: dict | None = None) -> dict:
+def _repo_rel(path: Path) -> str:
+    """仓库内相对路径（命令行可能给绝对或相对路径）。"""
+    try:
+        return str(Path(path).resolve().relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(path).replace("\\", "/")
+
+
+def score(payload: dict, gold: dict | None = None, *,
+          gold_source: str | None = None, input_source: str | None = None) -> dict:
     """计算分维度与微/宏平均的 TP/FP/FN、precision、recall、F1。
 
     `gold` 可选，格式：``{"expected_relation_ids": [...]}``，
     表示"应当抽取的关系 ID 全集"；只有提供它才可能得到 FN。
+    输出里会记下 `input_source` / `gold_source`：分数文件必须能说清自己是拿哪份
+    标注、哪份金标准算出来的（同名文件在不同批次含义不同）。
     """
     counters: dict[str, dict[str, int]] = defaultdict(
         lambda: {"tp": 0, "fp": 0, "fn": 0, "tn": 0,
@@ -142,6 +153,8 @@ def score(payload: dict, gold: dict | None = None) -> dict:
     micro_recall = _rate(micro["tp"], micro["tp"] + micro["fn"]) if fn_source_available else None
     return {
         "computable": evaluable > 0,
+        "input_source": input_source,
+        "gold_source": gold_source,
         "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；"
                 "pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
         "prediction_default": {
@@ -191,7 +204,9 @@ def main() -> int:
     args = parser.parse_args()
     payload = json.loads(args.input.read_text(encoding="utf-8"))
     gold = json.loads(args.gold.read_text(encoding="utf-8")) if args.gold else None
-    result = score(payload, gold)
+    result = score(payload, gold,
+                   gold_source=_repo_rel(args.gold) if args.gold else None,
+                   input_source=_repo_rel(args.input))
     print(json.dumps({k: v for k, v in result.items()
                       if k in {"computable", "micro", "macro", "note",
                                "prediction_default", "fn_source"}},

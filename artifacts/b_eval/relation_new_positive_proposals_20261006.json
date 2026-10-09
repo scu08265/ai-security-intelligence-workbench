@@ -1,7 +1,8 @@
 {
  "schema_version": "b-relation-promotions-1.0",
  "batch": "20261006",
- "note": "新增正标注清单：仅含‘系统此前漏检、修复后已抽出’的 cvss 关系；已按 2026-10-04 批次口径由用户整体确认（人工复核-用户确认 / 2026-10-09）。",
+ "note": "新增正标注清单：仅含‘系统此前漏检、修复后已抽出’的 cvss 关系，已核验并写入 relation_candidates_labeled_20261006.json 生效。",
+ "source_of_signature": "relation_candidates_labeled_20261006.json",
  "promotions": [
   {
    "relation_id": "BREL-CV-0021",
@@ -11,6 +12,7 @@
    "label": "positive",
    "verified_by": "人工复核-用户确认",
    "verified_at": "2026-10-09",
+   "former_gold_relation_id": "BREL-GOLD-FN-CV-0001",
    "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0001）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
    "evidence": {
     "type": "nvd_snapshot",
@@ -18,7 +20,7 @@
     "source_locator": "metrics.cvssMetricV31[0]",
     "detail": {
      "base_score": 9.3,
-     "base_severity": "CRITICAL",
+     "library_source_id": "nvd:a3afe188ab",
      "metric": "cvssMetricV31"
     },
     "byte_rereadable": true
@@ -32,6 +34,7 @@
    "label": "positive",
    "verified_by": "人工复核-用户确认",
    "verified_at": "2026-10-09",
+   "former_gold_relation_id": "BREL-GOLD-FN-CV-0002",
    "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0002）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
    "evidence": {
     "type": "nvd_snapshot",
@@ -39,7 +42,7 @@
     "source_locator": "metrics.cvssMetricV40[0]",
     "detail": {
      "base_score": 9.4,
-     "base_severity": "CRITICAL",
+     "library_source_id": "nvd:b5fe826e46",
      "metric": "cvssMetricV40"
     },
     "byte_rereadable": true
@@ -53,6 +56,7 @@
    "label": "positive",
    "verified_by": "人工复核-用户确认",
    "verified_at": "2026-10-09",
+   "former_gold_relation_id": "BREL-GOLD-FN-CV-0003",
    "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0003）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
    "evidence": {
     "type": "nvd_snapshot",
@@ -60,7 +64,7 @@
     "source_locator": "metrics.cvssMetricV31[0]",
     "detail": {
      "base_score": 8.8,
-     "base_severity": "HIGH",
+     "library_source_id": "nvd:a408dc5f41",
      "metric": "cvssMetricV31"
     },
     "byte_rereadable": true
@@ -74,6 +78,7 @@
    "label": "positive",
    "verified_by": "人工复核-用户确认",
    "verified_at": "2026-10-09",
+   "former_gold_relation_id": "BREL-GOLD-FN-CV-0004",
    "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0004）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
    "evidence": {
     "type": "nvd_snapshot",
@@ -81,7 +86,7 @@
     "source_locator": "metrics.cvssMetricV40[0]",
     "detail": {
      "base_score": 9.3,
-     "base_severity": "CRITICAL",
+     "library_source_id": "nvd:5fdc4f2435",
      "metric": "cvssMetricV40"
     },
     "byte_rereadable": true
@@ -95,6 +100,7 @@
    "label": "positive",
    "verified_by": "人工复核-用户确认",
    "verified_at": "2026-10-09",
+   "former_gold_relation_id": "BREL-GOLD-FN-CV-0005",
    "note": "原为 2026-10-04 金标准的真实漏检（BREL-GOLD-FN-CV-0005）。NVD metrics 合并链路修复后（commit 6d15d31），系统已在候选集抽出该向量；经与 NVD 官方快照逐字符比对一致且来源可回读，由漏检转为命中。",
    "evidence": {
     "type": "nvd_snapshot",
@@ -102,7 +108,7 @@
     "source_locator": "metrics.cvssMetricV31[0]",
     "detail": {
      "base_score": 9.8,
-     "base_severity": "CRITICAL",
+     "library_source_id": "nvd:ee978e071c",
      "metric": "cvssMetricV31"
     },
     "byte_rereadable": true

@@ -152,7 +152,14 @@ relations are extractable`）：
    （四维候选由 121 增到 127，cvss 维度 22 → 28）；
 5. 用 `tools/relabel_b_relation_candidates.py` 按**关系内容**（不是 id）把上一批次
    121 条人工标注迁移到新候选（121/121 命中），再对 5 条新 cvss 关系写入人工核验标注；
-6. 评分：`artifacts/b_eval/relation_score_gold_20261006.json`。
+6. 用 `tools/verify_b_relation_cvss_recheck.py` 复核"旧 5 个合成 id ↔ 新 5 个候选 id"
+   是否真的一一对应（主体 / 关系类型 / 对象 / 证据四项，逐条 11 项检查）；
+7. 重跑 gold：`tools/build_b_relation_gold.py --former-missed
+   artifacts/b_eval/relation_missed_relations_20261004.json ...`
+   → `evaluation/b_relation_gold_20261006.json`（带 `resolved_former_ids` 映射）；
+8. 评分两份：页面口径 `artifacts/b_eval/relation_score_gold_20261006.json`
+   （gold 用 `_20261006`）、对照口径
+   `artifacts/b_eval/relation_score_gold_frozen20261004_20261006.json`（gold 用 `_20261004`）。
 
 ### 11.3 人工核验结果（5/5）
 
@@ -167,19 +174,26 @@ relations are extractable`）：
 | `BREL-GOLD-FN-CV-0004` | CVE-2026-33017 | `BREL-CV-0024` | ✅ | ✅ |
 | `BREL-GOLD-FN-CV-0005` | CVE-2026-33017 | `BREL-CV-0025` | ✅ | ✅ |
 
-核验清单：`artifacts/b_eval/relation_cvss_recheck_verification_20261006.json`；
-新增标注提案（署名 `人工复核-用户确认` / `2026-10-09`）：
+核验清单：`artifacts/b_eval/relation_cvss_recheck_verification_20261006.json`
+（含 `resolved_former_ids`：旧合成 id → 新候选 id）；新增标注清单（署名
+`人工复核-用户确认` / `2026-10-09`）：
 `artifacts/b_eval/relation_new_positive_proposals_20261006.json`。
+映射同时写进 gold 的 `resolved_former_ids`，并逐条记下对应候选的
+`system_evidence_source_id`，便于反查。
 
 ### 11.4 分数变化
 
 | 口径 | 输入 | gold | TP | FP | FN | P | R | F1 |
 |---|---|---|---|---|---|---|---|---|
 | 10-04 冻结基线 | 121 条 | `gold_20261004` | 47 | 0 | 5 | 1.0 | 0.9038 | 0.9495 |
-| **本批次（任务指定命令）** | 标注 `_20261006` | `gold_20261004` | 52 | 0 | **5** | 1.0 | **0.9123** | **0.9541** |
-| 本批次（重生成 gold） | 标注 `_20261006` | `gold_20261006` | 52 | 0 | **0** | 1.0 | 1.0 | 1.0 |
+| **本批次（页面口径，active）** | 标注 `_20261006` | `gold_20261006` | 52 | 0 | **0** | 1.0 | **1.0** | **1.0** |
+| 本批次（对照口径） | 标注 `_20261006` | `gold_20261004` | 52 | 0 | **5** | 1.0 | **0.9123** | **0.9541** |
 
-`cvss` 维度：TP 10 → **15**，FN 5 → **0**（按重生成 gold 口径）。
+两份文件：页面口径 `relation_score_gold_20261006.json`、对照口径
+`relation_score_gold_frozen20261004_20261006.json`（带 `frozen` 前缀，因此不会被
+`app/b_evaluation.py::_active_relation()` 的正则选中）。两份都记录 `input_source` /
+`gold_source`，不会看错来源。
+`cvss` 维度：TP 10 → **15**，FN 5 → **0**。
 
 ### 11.5 为什么"任务指定命令"下 FN 仍为 5（必须如实说明）
 
@@ -193,9 +207,15 @@ relations are extractable`）：
 但"旧 gold 的 id 与修复后候选集的 id 不同源"这一表示层问题会让字面命令的 FN 不下降。**
 
 要让 FN 指标也收敛到 0，需要把 gold 的 expected 改指向真实候选 id —— 即本批次
-附带的 `evaluation/b_relation_gold_20261006.json`（`missed=0`）与
-`artifacts/b_eval/relation_score_gold_regenerated_20261006.json`。
-10-04 的 gold 与两份旧评分文件**保持冻结、0 改动**，作为"修复前"的对照基线。
+用**同一协议、同一抽样范围**重跑出的 `evaluation/b_relation_gold_20261006.json`
+（`missed=0`，`expected` 里那 5 条是新候选 id），对应页面口径的
+`artifacts/b_eval/relation_score_gold_20261006.json`。
+这不是把标尺改短：gold 仍然**先从源头枚举**（事件字段 + 副本 NVD 快照），再按内容匹配候选；
+只有"源头声明过 + 人工核验为 positive"才进 `expected`，系统多吐候选不会让分母变大，
+而且旧 5 个 id 被 `resolved_former_ids` 显式映射（`tests/test_b_relation_cvss_recheck.py`
+对此有防伪断言，含"改一个向量字段就必须核验失败"的反例测试）。
+10-04 的 gold 与两份旧评分文件**保持冻结、字节不变**（LF 归一化 SHA256 已固定进测试），
+作为"修复前"的对照基线。
 
 ### 11.6 本批次局限
 
@@ -204,4 +224,7 @@ relations are extractable`）：
 * `poc` 与 `asset_assessment` 仍单列（真实库无资产 → `asset_assessment` 候选为 0，
   工具已如实报为覆盖缺口）；
 * 新增的 6 条 cvss 候选中，5 条在抽样范围内已核验；范围外新增的 1 条仍为
-  `pending_human_review`，不计入任何分母。
+  `pending_human_review`，不计入任何分母；
+* 页面口径的 **Recall / F1 = 100% 只代表当前评测范围**（第 2 节那 11 个对象、4 个维度、
+  抽样穷尽口径），**不代表全语料召回率**；范围内仍以 `pending_human_review` 单列，
+  范围外不做任何推算。

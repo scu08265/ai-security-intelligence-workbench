@@ -56,7 +56,9 @@
   "sampled_relations_declared_by_sources": 17,
   "system_extracted_and_positive": 10,
   "system_extracted_but_undecided": 7,
-  "missed": 0
+  "missed": 0,
+  "former_missed_total": 5,
+  "former_missed_resolved": 5
  },
  "uncertain": [
   {
@@ -102,5 +104,59 @@
    "reason": "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
   }
  ],
- "protocol_ref": "docs/B_RELATION_GOLD_PROTOCOL.md"
+ "protocol_ref": "docs/B_RELATION_GOLD_PROTOCOL.md",
+ "former_gold_ref": "evaluation/b_relation_gold_20261004.json",
+ "former_missed_ref": "artifacts/b_eval/relation_missed_relations_20261004.json",
+ "resolved_former_ids": {
+  "BREL-GOLD-FN-CV-0001": {
+   "new_relation_id": "BREL-CV-0021",
+   "dimension": "cvss",
+   "subject": "CVE-2026-64849",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
+   "system_evidence_source_id": "nvd:a3afe188ab",
+   "human_label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09"
+  },
+  "BREL-GOLD-FN-CV-0002": {
+   "new_relation_id": "BREL-CV-0022",
+   "dimension": "cvss",
+   "subject": "CVE-2025-62593",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "system_evidence_source_id": "nvd:b5fe826e46",
+   "human_label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09"
+  },
+  "BREL-GOLD-FN-CV-0003": {
+   "new_relation_id": "BREL-CV-0023",
+   "dimension": "cvss",
+   "subject": "CVE-2025-62593",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "system_evidence_source_id": "nvd:a408dc5f41",
+   "human_label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09"
+  },
+  "BREL-GOLD-FN-CV-0004": {
+   "new_relation_id": "BREL-CV-0024",
+   "dimension": "cvss",
+   "subject": "CVE-2026-33017",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "system_evidence_source_id": "nvd:5fdc4f2435",
+   "human_label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09"
+  },
+  "BREL-GOLD-FN-CV-0005": {
+   "new_relation_id": "BREL-CV-0025",
+   "dimension": "cvss",
+   "subject": "CVE-2026-33017",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+   "system_evidence_source_id": "nvd:ee978e071c",
+   "human_label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-09"
+  }
+ }
 }

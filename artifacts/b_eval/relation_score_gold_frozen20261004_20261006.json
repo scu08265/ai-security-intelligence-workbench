@@ -1,5 +1,7 @@
 {
  "computable": true,
+ "input_source": "artifacts/b_eval/relation_candidates_labeled_20261006.json",
+ "gold_source": "evaluation/b_relation_gold_20261004.json",
  "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
  "prediction_default": {
   "used": 52,
@@ -8,21 +10,27 @@
  "fn_source": {
   "available": true,
   "expected_relation_ids": 10,
-  "missing_relation_ids": [],
+  "missing_relation_ids": [
+   "BREL-GOLD-FN-CV-0001",
+   "BREL-GOLD-FN-CV-0002",
+   "BREL-GOLD-FN-CV-0003",
+   "BREL-GOLD-FN-CV-0004",
+   "BREL-GOLD-FN-CV-0005"
+  ],
   "reason": null
  },
  "per_dimension": {
   "cvss": {
    "tp": 15,
    "fp": 0,
-   "fn": 0,
+   "fn": 5,
    "tn": 0,
    "undetermined": 12,
    "pending": 1,
    "total": 28,
    "precision": 1.0,
-   "recall": 1.0,
-   "f1": 1.0,
+   "recall": 0.75,
+   "f1": 0.8571,
    "evaluable": true
   },
   "fixed_version": {
@@ -81,17 +89,17 @@
  "micro": {
   "tp": 52,
   "fp": 0,
-  "fn": 0,
+  "fn": 5,
   "tn": 0,
   "precision": 1.0,
-  "recall": 1.0,
-  "f1": 1.0,
-  "evaluable_samples": 52
+  "recall": 0.9123,
+  "f1": 0.9541,
+  "evaluable_samples": 57
  },
  "macro": {
   "precision": 1.0,
-  "recall": 1.0,
-  "f1": 1.0,
+  "recall": 0.9375,
+  "f1": 0.9677,
   "dimensions_with_metrics": 4
  },
  "note": null

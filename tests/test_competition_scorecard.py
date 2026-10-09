@@ -170,15 +170,16 @@ def test_active_multihop_uses_v2_batch_and_exposes_missing_edges():
 def test_active_relation_uses_gold_score_and_exposes_recall():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     active = body["active_relation"]
-    # 页面自动选用最新的 relation_score_gold_<日期>.json：
-    # 2026-10-06 批次补齐了 5 条 cvss 漏检的可抽取内容并完成人工核验，
-    # 10-04 的冻结基线仍原样保留（见 tests/test_b_relation_cvss_recheck.py）。
+    # 页面自动选用最新的 relation_score_gold_<日期>.json：2026-10-06 批次按同一协议
+    # 重跑 gold 后抽样范围内已无漏检（5 条旧合成 FN id 被解析成真实候选 id）。
+    # 对 10-04 冻结 gold 的评分（FN=5 / R=0.9123）保留在
+    # relation_score_gold_frozen20261004_20261006.json 作为对照，不抢 active。
     assert active["source"].endswith("relation_score_gold_20261006.json")
     assert active["precision"] == 1.0
-    assert active["recall"] == 0.9123
-    assert active["f1"] == 0.9541
-    assert (active["tp"], active["fp"], active["fn"]) == (52, 0, 5)
-    assert active["missing_relation_ids"] == 5
+    assert active["recall"] == 1.0
+    assert active["f1"] == 1.0
+    assert (active["tp"], active["fp"], active["fn"]) == (52, 0, 0)
+    assert active["missing_relation_ids"] == 0
     # 旧冻结基线保留：没有金标准时 Recall 仍不可计算
     assert body["relation"]["recall"] is None
 

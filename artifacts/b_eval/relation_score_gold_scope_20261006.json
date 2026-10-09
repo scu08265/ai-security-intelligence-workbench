@@ -1,5 +1,7 @@
 {
  "computable": true,
+ "input_source": "artifacts/b_eval/relation_candidates_labeled_gold_scope_20261006.json",
+ "gold_source": "evaluation/b_relation_gold_20261006.json",
  "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
  "prediction_default": {
   "used": 10,
