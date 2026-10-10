@@ -32,8 +32,9 @@
 
 ## 3. 分母冻结验证
 
-复现方式：把交付的 `artifact` 证据库复制到 `work/disposition-freeze-recheck/freeze/`，
-调用 `POST /api/assessments/run` 背后的处理函数，然后再次读取指标。
+复现方式：把交付的证据库复制到 `work/disposition-freeze-recheck/freeze/`，
+经 FastAPI `TestClient` 真实调用 `POST /api/assessments/run`，再读取指标。
+两条 JSON 的 `invocation_mode` 都是 `http_testclient`，走的是真实路由与请求模型。
 
 | 指标 | 重算前 | 重算后 |
 | --- | --- | --- |
@@ -65,9 +66,18 @@
   8 个字段逐项核对，差异 0（`page-consistency.json`）。
 - 页面绑定：`app/static/app.js` 的“处置闭环”卡片读取的就是 `/api/competition/scorecard` 的
   `disposition` 字段，没有二次换算，因此页面值与 API 同源。
-- **未完成项**：本轮没有产出浏览器渲染截图。本机唯一可用的解释器是 Python 3.9，
-  FastAPI/uvicorn 依赖损坏（见第 8 节），无法启动服务，无法截图。字段级一致性已用两个 API
-  实测证明，但没有像素证据。
+- 页面截图（真实浏览器渲染，非手绘）：`screenshots/disposition-card-before.png` 与
+  `screenshots/disposition-card-after.png`，另有整页 `scorecard-panel-*.png`。
+  做法是用 `uvicorn` 起真实服务，再用 Playwright 驱动本机 Edge 打开“赛题指标”页，
+  点击后截取处置闭环卡片（脚本 `tools/capture_disposition_screenshots.py`）。
+- 页面三处对照（`page-consistency-20261010.json`）：卡片渲染出来的
+  高优先级总数 / 已复测关闭 / 闭环率，与截图当时从页面内 `fetch` 拿到的
+  `/api/competition/scorecard` 和 `/api/dispositions/metrics` 逐字段一致，差异 0。
+
+| 场景 | 卡片“高优先级总数” | 卡片“已复测关闭” | 卡片“闭环率” | 一致性 |
+| --- | --- | --- | --- | --- |
+| 操作前（未登记处置） | 4 | 0 | 0% | 一致 |
+| 操作后（本轮证据库） | 4 | 3 | 75% | 一致 |
 
 ## 6. 备份与回滚
 
@@ -92,20 +102,25 @@
 
 ## 8. 未完成项与环境阻塞
 
-| 项 | 状态 | 原因 |
+| 项 | 状态 | 说明 |
 | --- | --- | --- |
-| 34 / 4 / 11.76% 基线复现 | 无法完成 | 本机 26 个 sqlite 中没有一个含 34 条高优先级队列 |
-| 页面截图（操作前/后） | 无法完成 | 服务起不来：`.venv` 的 Python 3.13 已被删除，只剩 Python 3.9，缺少可用的 FastAPI 运行时 |
-| `pytest -q` 全量测试 | 无法重跑 | 同上，测试需要 `fastapi.testclient` |
-| Docker 重建与验收 | 未执行 | Docker 守护进程未运行（`npipe:////./pipe/docker_engine` 不存在） |
+| 34 / 4 / 11.76% 基线复现 | **无法完成** | 本机 26 个 sqlite 中没有一个含 34 条高优先级队列 |
+| `pytest -q` 全量测试 | **通过** | `590 passed, 59 skipped`（Python 3.12.15，见 `pytest-result-recheck-20261010.txt`） |
+| 分母冻结 + 状态机复核走真实 HTTP | **通过** | 两份 JSON 的 `invocation_mode` 均为 `http_testclient`，即经 FastAPI 路由 |
+| 页面截图（操作前/后） | **通过** | 真实渲染截图 4 张，页面/计分卡/指标三处字段差异 0 |
+| Docker 重建与验收 | **未执行** | Docker 守护进程未运行（`npipe:////./pipe/docker_engine` 不存在） |
 
-历史结果仍可引用：本轮之前 `pytest` 曾以完整环境跑出 **590 passed, 59 skipped, 0 failed**，
-记录在 `pytest-result.txt`；本文件不把该结果重新算作本轮新证据。
+### 运行时修复
 
-环境细节：`.venv/pyvenv.cfg` 现在指向 `C:\Users\17705\AppData\Local\Programs\Python\Python313`，
-该目录已被清空；`C:\Users\17705\Data\...` 之外的 Codex 运行时 Python 也已删除。网络受限，
-无法 `pip install` 补齐依赖。本轮所有复核脚本因此只依赖标准库与 `packaging`，
-并通过 `tools/compat/click.py` 让 `httpx` 的可选 CLI 导入干净失败。
+复核开始时本机只剩 Python 3.9，`.venv` 的 `pyvenv.cfg` 指向已被清空的
+`C:\Users\17705\AppData\Local\Programs\Python\Python313`，FastAPI 完全不可用。本轮修复方式：
+
+1. 用 `uv` 拉取独立 CPython 3.12.15 到 `D:\新建文件夹\2026-09-26\ba\.runtimes\uv-python`（仓库外）。
+2. 把失效的 `.venv` 改名为 `.venv.broken-python313-20261010` 保留，重建 `.venv` 指向新的 3.12.15，
+   再装 `requirements.txt`。修复后 `.\.venv\Scripts\python.exe -m pytest tests -q` 可用。
+3. `%TEMP%\pytest-of-17705` 仍带失效 ACL（表现为 `24 skipped, 625 errors`）。本轮把
+   `TEMP`/`TMP` 指到 `work\pytest-temp` 绕过，未修改该目录的权限。
+4. `tools/compat/click.py` 只是 Python 3.9 时期的兼容垫片，3.12 环境下用不到。
 
 `state-machine-recheck.json` 与 `denominator-freeze.json` 都会记录被复核数据库的 SHA256。
 分母冻结复核使用的是本目录已交付证据库的副本；状态机二次实测需要一份“尚未登记处置”的基线，
@@ -128,14 +143,27 @@
 cd "D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench"
 
 # 分母冻结复核 + 状态机二次实测（写入 denominator-freeze.json / state-machine-recheck.json）
-py -3 tools\run_disposition_freeze_recheck.py
+.\.venv\Scripts\python.exe tools\run_disposition_freeze_recheck.py
 
 # 队列全库扫描（写入 cohort-search.json）
-py -3 tools\scan_disposition_cohorts.py
+.\.venv\Scripts\python.exe tools\scan_disposition_cohorts.py
 
 # 备份身份与恢复演练（写入 db-backup.json）
-py -3 tools\verify_disposition_backup.py
+.\.venv\Scripts\python.exe tools\verify_disposition_backup.py
+
+# 页面截图（操作前 / 操作后各一张卡片 + 整页）
+.\.venv\Scripts\python.exe tools\capture_disposition_screenshots.py `
+  --data-dir work\shot-before --label before `
+  --output-dir artifacts\a_eval\disposition-live-closure-20261008\screenshots
+.\.venv\Scripts\python.exe tools\capture_disposition_screenshots.py `
+  --data-dir work\shot-after  --label after `
+  --output-dir artifacts\a_eval\disposition-live-closure-20261008\screenshots
+
+# 全量测试
+$env:TEMP="$PWD\work\pytest-temp"; $env:TMP=$env:TEMP
+.\.venv\Scripts\python.exe -m pytest tests -q
 ```
 
-在依赖完整的 Python 3.12 环境里，前两个脚本会自动改用 `fastapi.testclient` 走真实 HTTP，
-并在产物里把 `invocation_mode` 标为 `http_testclient`。
+三个脚本在 `fastapi` 可用时自动改用 `fastapi.testclient` 走真实 HTTP（产物里
+`invocation_mode=http_testclient`），否则退回直接调用路由背后的处理函数
+（`invocation_mode=direct_handler`），并在 JSON 里记录降级原因。

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-10T10:17:44Z",
-  "invocation_mode": "direct_handler",
+  "generated_at": "2026-10-10T10:28:56Z",
+  "invocation_mode": "http_testclient",
   "scratch_database": {
     "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\recheck\\intel.sqlite",
     "copied_from": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-trial-cdx\\intel.sqlite",
@@ -78,7 +78,7 @@
       "http_status": 200,
       "applied_status": "fixed",
       "verification": {
-        "checked_at": "2026-10-10T10:17:43.571821+00:00",
+        "checked_at": "2026-10-10T10:28:55.123774+00:00",
         "assessment_status_before": "affected",
         "assessment_status_after": "affected",
         "priority_after": "high",
@@ -91,7 +91,7 @@
       "persisted_status": "fixed",
       "persisted_closed_at": null,
       "persisted_verification": {
-        "checked_at": "2026-10-10T10:17:43.571821+00:00",
+        "checked_at": "2026-10-10T10:28:55.123774+00:00",
         "assessment_status_before": "affected",
         "assessment_status_after": "affected",
         "priority_after": "high",
@@ -119,7 +119,7 @@
       "http_status": 200,
       "applied_status": "verified",
       "verification": {
-        "checked_at": "2026-10-10T10:17:44.465663+00:00",
+        "checked_at": "2026-10-10T10:28:56.248775+00:00",
         "assessment_status_before": "affected",
         "assessment_status_after": "not_affected",
         "priority_after": "low",
@@ -130,7 +130,7 @@
         "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
       },
       "persisted_status": "verified",
-      "persisted_closed_at": "2026-10-10T10:17:44.465663+00:00",
+      "persisted_closed_at": "2026-10-10T10:28:56.248775+00:00",
       "passed": true
     },
     {
@@ -152,5 +152,5 @@
   "passed": true,
   "rules_passed": 4,
   "rules_total": 4,
-  "interpreter": "3.9.13"
+  "interpreter": "3.12.15"
 }

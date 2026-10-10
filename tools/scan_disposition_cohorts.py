@@ -21,6 +21,14 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 HIGH_PRIORITIES = {"critical", "high"}
+# Interpreter caches and pytest scratch trees ship hundreds of unrelated
+# single-fixture databases that would only add noise to the search.
+SKIP_PARTS = {".venv", "site-packages", "node_modules", "uv-python", "uv-cache", "uvtool"}
+SKIP_PREFIXES = (".venv", "pytest-")
+
+
+def _skipped(parts: tuple[str, ...]) -> bool:
+    return any(part in SKIP_PARTS or part.startswith(SKIP_PREFIXES) for part in parts)
 
 
 def _utcnow() -> str:
@@ -117,6 +125,8 @@ def main() -> int:
     for root in roots:
         for candidate in sorted(root.rglob("*.sqlite")):
             if candidate in seen:
+                continue
+            if _skipped(candidate.parts):
                 continue
             seen.add(candidate)
             entry: dict[str, Any] = {

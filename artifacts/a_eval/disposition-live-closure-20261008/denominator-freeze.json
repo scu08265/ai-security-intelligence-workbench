@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-10T10:17:41Z",
+  "generated_at": "2026-10-10T10:28:52Z",
   "endpoint_under_test": "POST /api/assessments/run",
-  "invocation_mode": "direct_handler",
+  "invocation_mode": "http_testclient",
   "scratch_database": {
     "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\freeze\\intel.sqlite",
     "copied_from": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-live-closure-20261008\\data\\intel.sqlite",
@@ -10,7 +10,7 @@
   "rule": "已登记处置的条目锁定在分母内：资产修复后研判转为不受影响，闭环率分子分母同时保持。",
   "before": {
     "metrics": {
-      "generated_at": "2026-10-10T10:17:38.393213+00:00",
+      "generated_at": "2026-10-10T10:28:48.660811+00:00",
       "high_priority_total": 4,
       "high_priority_closed": 3,
       "high_priority_verified": 3,
@@ -34,7 +34,7 @@
       ]
     },
     "scorecard_disposition": {
-      "generated_at": "2026-10-10T10:17:39.372062+00:00",
+      "generated_at": "2026-10-10T10:28:49.837804+00:00",
       "high_priority_total": 4,
       "high_priority_closed": 3,
       "high_priority_verified": 3,
@@ -61,17 +61,17 @@
   "recalculation": {
     "http_status": 200,
     "response": {
-      "run_id": "run-ebb881d656e8",
+      "run_id": "run-7c10f50c75c7",
       "assessments": 117,
       "assets": 16,
       "events": 210,
       "not_applicable": 0,
-      "duration_ms": 0
+      "duration_ms": 1000
     }
   },
   "after": {
     "metrics": {
-      "generated_at": "2026-10-10T10:17:40.756507+00:00",
+      "generated_at": "2026-10-10T10:28:51.616940+00:00",
       "high_priority_total": 4,
       "high_priority_closed": 3,
       "high_priority_verified": 3,
@@ -95,7 +95,7 @@
       ]
     },
     "scorecard_disposition": {
-      "generated_at": "2026-10-10T10:17:41.737502+00:00",
+      "generated_at": "2026-10-10T10:28:52.832780+00:00",
       "high_priority_total": 4,
       "high_priority_closed": 3,
       "high_priority_verified": 3,
@@ -555,9 +555,9 @@
     }
   ],
   "passed": true,
-  "interpreter": "3.9.13",
+  "interpreter": "3.12.15",
   "http_stack": {
-    "available": false,
-    "error": "SyntaxError: invalid syntax (_lazyimport.py, line 131)"
+    "available": true,
+    "error": null
   }
 }

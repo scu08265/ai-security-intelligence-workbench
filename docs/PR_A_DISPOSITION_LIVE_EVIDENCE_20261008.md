@@ -41,9 +41,15 @@
 - 备份恢复演练：复制回读后 SHA256、行数一致，`PRAGMA integrity_check` = `ok`。
 - 全机 26 个 sqlite 队列扫描：没有任何库含 34 条高优先级队列，任务书的 34 / 11.76% 基线
   在本机无法复现，已写入 `cohort-search.json` 与 `docs/A_DISPOSITION_LIVE_CLOSURE.md`。
-- 本轮未产出浏览器截图，也无法重跑 `pytest` / Docker：`.venv` 的 Python 3.13 已被删除，
-  仅剩 Python 3.9 且无法 `pip install`（网络受限），服务起不来。原因与命令写在
-  `docs/A_DISPOSITION_LIVE_CLOSURE.md` 第 8 节。
+- 两条复核都经 `fastapi.testclient` 走真实路由（`invocation_mode=http_testclient`）。
+- 修复失效 `.venv`（原指向已被清空的 Python 3.13）：用 `uv` 取独立 CPython 3.12.15 重建，
+  再跑 `pytest tests -q` 得 **590 passed, 59 skipped**，原始输出见
+  `pytest-result-recheck-20261010.txt`。
+- 页面截图用真实浏览器补齐：`uvicorn` + Playwright(本机 Edge) 打开“赛题指标”，
+  截取处置闭环卡片操作前（4 / 0 / 0%）与操作后（4 / 3 / 75%），见 `screenshots/`；
+  卡片 / `/api/competition/scorecard` / `/api/dispositions/metrics` 三处字段差异 0
+  （`page-consistency-20261010.json`）。
+- 仍未完成：Docker 验收（守护进程未运行）。详见 `docs/A_DISPOSITION_LIVE_CLOSURE.md` 第 8 节。
 
 ## Limitations
 

@@ -1,0 +1,97 @@
+{
+  "label": "before",
+  "captured_at": "2026-10-10T10:57:51Z",
+  "url": "http://127.0.0.1:64285/",
+  "data_dir": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\shot-before",
+  "health": {
+    "status": "ok",
+    "version": "0.2.4",
+    "mode": "local_evidence_extraction",
+    "model_configured": false,
+    "data_dir": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\shot-before",
+    "checks": {
+      "database": "ok",
+      "events": 210,
+      "failed_sources": [],
+      "skipped_sources": []
+    }
+  },
+  "card_text": "处置闭环\n已验证\n高优先级总数\n4 条\n已复测关闭\n0 条\n闭环率\n0%\n平均关闭时长\n暂无运行证据\n\n原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+  "card_facts": [
+    "高优先级总数 4 条",
+    "已复测关闭 0 条",
+    "闭环率 0%",
+    "平均关闭时长 暂无运行证据"
+  ],
+  "card_badge": "已验证",
+  "api_from_page": {
+    "scorecard_disposition": {
+      "generated_at": "2026-10-10T10:57:56.932783+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 0,
+      "high_priority_verified": 0,
+      "high_priority_in_progress": 0,
+      "closure_rate": 0,
+      "verified_rate": 0,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 4,
+        "in_progress": 0,
+        "fixed": 0,
+        "verified": 0,
+        "accepted": 0
+      },
+      "findings_total": 71,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    },
+    "metrics": {
+      "generated_at": "2026-10-10T10:57:57.477805+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 0,
+      "high_priority_verified": 0,
+      "high_priority_in_progress": 0,
+      "closure_rate": 0,
+      "verified_rate": 0,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 4,
+        "in_progress": 0,
+        "fixed": 0,
+        "verified": 0,
+        "accepted": 0
+      },
+      "findings_total": 71,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    }
+  },
+  "page_consistency": {
+    "card_fields": {
+      "高优先级总数": "4",
+      "已复测关闭": "0",
+      "闭环率": "0%",
+      "平均关闭时长": "暂无运行证据"
+    },
+    "expected_from_metrics": {
+      "高优先级总数": "4",
+      "已复测关闭": "0",
+      "闭环率": "0%"
+    },
+    "mismatches": [],
+    "metrics_matches_scorecard": true,
+    "consistent": true
+  },
+  "screenshots": {
+    "card": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-live-closure-20261008\\screenshots\\disposition-card-before.png",
+    "panel": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-live-closure-20261008\\screenshots\\scorecard-panel-before.png"
+  }
+}

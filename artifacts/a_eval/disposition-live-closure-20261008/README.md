@@ -56,6 +56,10 @@
 | `state-machine-recheck.json` | 在另一份独立副本上二次实测的 4 条状态机规则 |
 | `db-backup.json` | 生产库/备份哈希、行数，以及备份恢复演练结果 |
 | `cohort-search.json` | 全机 26 个 sqlite 的队列规模扫描（用于回答“34 条基线在哪”） |
+| `pytest-result-recheck-20261010.txt` | 修复 `.venv` 后重跑全量测试的原始输出 |
+| `page-consistency-20261010.json` | 真实页面渲染 / 计分卡 / 指标三处字段对照（操作前 + 操作后） |
+| `screenshots/disposition-card-*.png` | 处置闭环卡片的真实浏览器截图（操作前 0% / 操作后 75%） |
+| `screenshots/scorecard-panel-*.png` | 赛题指标整页截图 |
 
 ## 2026-10-10 复核补充
 
@@ -69,6 +73,16 @@
    4 / 4 通过，失败场景留有 `verification.passed=false` 的审计记录。
 3. **备份回滚**（`db-backup.json`）：备份复制到 scratch 后哈希、行数一致，
    `PRAGMA integrity_check` = `ok`。
+
+两次复核都经 `fastapi.testclient` 走真实路由，`invocation_mode` = `http_testclient`。
+本轮同时修复了失效的 `.venv`（重建为 Python 3.12.15）并重跑 `pytest tests -q`：
+**590 passed, 59 skipped**，原始输出见 `pytest-result-recheck-20261010.txt`。
+`%TEMP%\pytest-of-17705` 的失效 ACL 仍存在，跑测试前把 `TEMP`/`TMP` 指到 `work\pytest-temp` 即可。
+
+4. **页面截图与三方对照**（`screenshots/`、`page-consistency-20261010.json`）：
+   用 `uvicorn` 起真实服务，Playwright 驱动本机 Edge 打开“赛题指标”，
+   分别对“未登记处置”的基线库与本轮证据库截图。
+   卡片显示 4 / 0 / 0% 与 4 / 3 / 75%，与页面内 `fetch` 到的两个 API 逐字段一致，差异 0。
 
 同时确认：任务书中的 `total=34 / closed=4 / 11.76%` 在本机不存在对应数据库
 （`cohort-search.json` 扫描 26 个库，最大队列为 20 条）。

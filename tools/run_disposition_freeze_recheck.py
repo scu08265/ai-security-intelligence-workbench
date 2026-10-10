@@ -107,7 +107,15 @@ class Api:
         note: str | None = None,
         version_after: str | None = None,
     ) -> dict[str, Any]:
-        body = {"status": status, "assignee": assignee, "note": note}
+        # The route's request model carries the identifiers in the body as well
+        # as in the path, so mirror that on the wire.
+        body = {
+            "event_id": event_id,
+            "asset_id": asset_id,
+            "status": status,
+            "assignee": assignee,
+            "note": note,
+        }
         if version_after:
             body["version_after"] = version_after
         if self._client:
