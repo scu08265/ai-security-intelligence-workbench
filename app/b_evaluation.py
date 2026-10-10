@@ -185,6 +185,7 @@ def _demo(payload: dict[str, Any] | None) -> dict[str, Any]:
 _BATCH_FILE_RE = re.compile(r"^(qa_human_score|qa_performance)_(\d{8})\.json$")
 _MULTIHOP_FILE_RE = re.compile(r"^multihop_path_validation_(\d{8})(_v2)?\.json$")
 _RELATION_GOLD_RE = re.compile(r"^relation_score_gold_(\d{8})\.json$")
+_CONTRAST_RELATION_RE = re.compile(r"^relation_score_gold_frozen(\d{8})_(\d{8})\.json$")
 
 
 def _active_relation() -> str | None:
@@ -197,6 +198,25 @@ def _active_relation() -> str | None:
     if not found:
         return None
     return f"relation_score_gold_{max(found)}.json"
+
+
+def _contrast_relation() -> str | None:
+    """Newest score computed against a *frozen* earlier gold.
+
+    Kept separate from the active projection on purpose: the active line says
+    how good the system is now, the contrast line says what the same run
+    scores against the older ground truth.  Publishing only one of them
+    invites the wrong conclusion, so both are exposed.
+    """
+    found: list[tuple[str, str]] = []
+    for path in ARTIFACT_DIR.glob("relation_score_gold_frozen*.json"):
+        match = _CONTRAST_RELATION_RE.match(path.name)
+        if match:
+            found.append((match.group(2), match.group(1)))
+    if not found:
+        return None
+    newest = max(found)
+    return f"relation_score_gold_frozen{newest[1]}_{newest[0]}.json"
 
 
 def _active_multihop() -> str | None:
@@ -254,6 +274,11 @@ def summary() -> dict[str, Any]:
     )
     relation = _relation(_read_json("relation_score_all.json"))
     active_relation_file = _active_relation()
+    contrast_relation_file = _contrast_relation()
+    contrast_relation = _relation(
+        _read_json(contrast_relation_file) if contrast_relation_file else None,
+        source=("artifacts/b_eval/" + contrast_relation_file) if contrast_relation_file else None,
+    )
     active_relation = _relation(
         _read_json(active_relation_file) if active_relation_file else None,
         source=("artifacts/b_eval/" + active_relation_file) if active_relation_file else None,
@@ -282,6 +307,7 @@ def summary() -> dict[str, Any]:
         "active_qa_performance": active_qa_performance,
         "relation": relation,
         "active_relation": active_relation,
+        "contrast_relation": contrast_relation,
         "multihop": multihop,
         "active_multihop": active_multihop,
         "demo": demo,

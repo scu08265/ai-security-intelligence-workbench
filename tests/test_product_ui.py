@@ -145,6 +145,14 @@ def test_scorecard_reads_active_relation_gold_fields():
     ):
         assert token in SCRIPT
 
+def test_scorecard_shows_both_relation_scopes():
+    for token in (
+        "contrast_relation",
+        "对照口径 Recall",
+    ):
+        assert token in SCRIPT
+
+
 def test_scorecard_reads_active_multihop_fields():
     for token in (
         "active_multihop",
