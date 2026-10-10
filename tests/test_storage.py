@@ -155,6 +155,61 @@ def test_run_history_is_recorded_and_ordered():
     assert storage.latest_run("enrich") is None
 
 
+def test_list_runs_without_limit_returns_every_row_not_just_one_page():
+    """A cumulative day count must not depend on a page cap.
+
+    Regression: every read was silently capped at 200 rows, so once a single
+    day produced more than 200 runs the older days fell off the end and the
+    continuous-monitoring day count went backwards day over day.
+    """
+    rows = [
+        (
+            f"run-{index:04d}", "collect", "completed",
+            f"2099-01-01T00:{index // 60:02d}:{index % 60:02d}Z",
+            f"2099-01-01T00:{index // 60:02d}:{index % 60:02d}Z",
+            None, json.dumps({"results": []}),
+        )
+        for index in range(250)
+    ]
+    with storage.connect() as conn:
+        conn.executemany(
+            "INSERT INTO runs (id, kind, status, started_at, finished_at, summary, detail)"
+            " VALUES (?, ?, ?, ?, ?, ?, ?)",
+            rows,
+        )
+    # limit=None is the whole-table read the evidence aggregation relies on.
+    assert len(storage.list_runs(limit=None)) == 250
+    # A page-limited read stays bounded so the API cannot return unbounded rows.
+    assert len(storage.list_runs(limit=2000)) == 200
+
+
+def test_list_events_without_limit_returns_the_whole_corpus():
+    """The same page-cap trap as list_runs, on the event corpus.
+
+    ``all_events()`` used to claim "everything" while list_events quietly
+    clamped it to 500 rows, so pulling the corpus past 500 re-scoped every
+    metric computed from it.
+    """
+    stamp = "2099-01-01T00:00:00Z"
+    rows = [
+        (
+            f"CVE-2099-{index:05d}", stamp, stamp,
+            json.dumps({"id": f"CVE-2099-{index:05d}", "status": "confirmed"}),
+        )
+        for index in range(505)
+    ]
+    with storage.connect() as conn:
+        conn.executemany(
+            "INSERT INTO events (id, status, published_at, collected_at, doc)"
+            " VALUES (?, 'confirmed', ?, ?, ?)",
+            rows,
+        )
+    assert len(storage.all_events()) == 505
+    assert len(storage.list_events(limit=None)[0]) == 505
+    # A page-limited read stays bounded so the API cannot return unbounded rows.
+    assert len(storage.list_events(limit=2000)[0]) == 500
+
+
 def test_normalized_event_survives_a_storage_round_trip():
     event = normalize.osv_to_event(OSV_SYNTHETIC)
     storage.upsert_event(event)

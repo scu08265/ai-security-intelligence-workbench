@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Fixed cumulative collection evidence being silently truncated by a page cap:
+  `list_runs()` limited every read to 200 rows and `list_events()` to 500, so
+  once the run log or the corpus outgrew the cap the oldest days dropped out of
+  every total.  The 2026-10-08 batch alone produced 201 collection runs, which
+  hid all earlier days and made "累计有采集日期" read 2 instead of 16 while the
+  seven-day ledger showed 0 for 10-04..10-08.  Evidence aggregation now reads
+  the whole table (`limit=None`); page-limited API reads stay capped.
 - Added the teacher-recommended blog/community sources: Qianxin TI blog,
   FreeBuf, Securelist and Cisco Talos, plus Qianxin Butian community and
   AnQuanKe as additional sources.  FreeBuf uses a source-specific system-curl

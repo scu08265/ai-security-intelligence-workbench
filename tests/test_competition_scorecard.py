@@ -183,6 +183,28 @@ def test_active_relation_uses_gold_score_and_exposes_recall():
     # 旧冻结基线保留：没有金标准时 Recall 仍不可计算
     assert body["relation"]["recall"] is None
 
+def test_contrast_relation_exposes_the_frozen_gold_scope():
+    """Both scopes must be published, and the contrast file must not win.
+
+    The active line is the re-run gold; the contrast line is the same run
+    scored against the frozen 2026-10-04 gold.  Showing only the active one
+    invites the wrong conclusion, and letting the contrast file take over
+    the active slot would hide the improvement.
+    """
+    body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
+    active = body["active_relation"]
+    contrast = body["contrast_relation"]
+    assert active["source"].endswith("relation_score_gold_20261006.json")
+    assert active["fn"] == 0
+    assert active["recall"] == 1.0
+    assert contrast["source"].endswith("relation_score_gold_frozen20261004_20261006.json")
+    assert contrast["fn"] == 5
+    assert contrast["recall"] == 0.9123
+    assert contrast["f1"] == 0.9541
+    # The frozen-contrast file must never be mistaken for the active batch.
+    assert "frozen" not in active["source"]
+
+
 def test_b_evaluation_artifacts_are_exposed_without_rounding_unknowns():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     assert body["available"] is True

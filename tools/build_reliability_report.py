@@ -193,7 +193,7 @@ def _markdown_report(report: dict[str, Any]) -> str:
 
 
 def _write_daily_logs(output: Path, report: dict[str, Any]) -> list[str]:
-    runs = storage.list_runs(limit=2000)
+    runs = storage.list_runs(limit=None)
     by_id = {str(run.get("id")): run for run in runs}
     alerts = observability.recent_alerts(limit=1000)["items"]
     written: list[str] = []

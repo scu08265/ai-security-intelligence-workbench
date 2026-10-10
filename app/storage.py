@@ -536,10 +536,16 @@ def list_events(
     query: str = "",
     status: str = "",
     kind: str = "",
-    limit: int = 100,
+    limit: int | None = 100,
     offset: int = 0,
 ) -> tuple[list[dict], int]:
-    """Return (events, total) applying the contract's q/status filters."""
+    """Return (events, total) applying the contract's q/status filters.
+
+    ``limit=None`` returns the whole result set and is what evidence
+    aggregation must use.  A page-limited read makes an aggregate figure depend
+    on how many rows happen to fit in one page, so the corpus growing past the
+    cap silently re-scopes every metric that claims to describe all of it.
+    """
     where: list[str] = []
     params: list[Any] = []
     if status:
@@ -559,16 +565,22 @@ def list_events(
     clause = f"WHERE {' AND '.join(where)}" if where else ""
     with connect() as conn:
         total = conn.execute(f"SELECT COUNT(*) AS n FROM events {clause}", params).fetchone()["n"]
-        rows = conn.execute(
-            f"""SELECT doc FROM events {clause}
-                ORDER BY COALESCE(published_at, collected_at) DESC, id
-                LIMIT ? OFFSET ?""",
-            [*params, max(1, min(limit, 500)), max(0, offset)],
-        ).fetchall()
+        order = "ORDER BY COALESCE(published_at, collected_at) DESC, id"
+        if limit is None:
+            # SQLite spells "no limit" as LIMIT -1; a bare OFFSET is a syntax error.
+            rows = conn.execute(
+                f"SELECT doc FROM events {clause} {order} LIMIT -1 OFFSET ?",
+                [*params, max(0, offset)],
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                f"SELECT doc FROM events {clause} {order} LIMIT ? OFFSET ?",
+                [*params, max(1, min(int(limit), 500)), max(0, offset)],
+            ).fetchall()
     return [json.loads(r["doc"]) for r in rows], int(total)
 
 
-def all_events(limit: int = 2000) -> list[dict]:
+def all_events(limit: int | None = None) -> list[dict]:
     events, _ = list_events(limit=limit)
     return events
 
@@ -845,11 +857,22 @@ def save_run(run: dict) -> None:
         )
 
 
-def list_runs(limit: int = 30) -> list[dict]:
+def list_runs(limit: int | None = 30) -> list[dict]:
+    """Return persisted runs, newest first.
+
+    ``limit=None`` returns the whole table and is what evidence aggregation
+    must use.  A page-limited read makes a *cumulative* figure depend on how
+    many rows happen to fit in one page, so the run log growing past the cap
+    can make a cumulative count silently go backwards (and can hide the days
+    a seven-day continuous-run claim depends on).
+    """
+    sql = "SELECT * FROM runs ORDER BY started_at DESC"
+    params: tuple = ()
+    if limit is not None:
+        sql += " LIMIT ?"
+        params = (max(1, min(int(limit), 200)),)
     with connect() as conn:
-        rows = conn.execute(
-            "SELECT * FROM runs ORDER BY started_at DESC LIMIT ?", (max(1, min(limit, 200)),)
-        ).fetchall()
+        rows = conn.execute(sql, params).fetchall()
     items = []
     for row in rows:
         record = dict(row)

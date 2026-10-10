@@ -39,7 +39,7 @@ def main() -> int:
 
     storage.init_db()
     runs = [
-        run for run in storage.list_runs(limit=2000)
+        run for run in storage.list_runs(limit=None)
         if run.get("kind") == "collect"
         and (run.get("detail") or {}).get("trigger") == "scheduled"
     ]
