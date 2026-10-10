@@ -271,8 +271,10 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
 ### 12.3 候选集零变化（分数变化只来自枚举口径）
 
 `evaluation/b_relation_candidates_20261010.json` 与 `_20261006.json` **逐字节相同**
-（SHA256 `415430c4…78ae53`，132 条）。因此本轮的分数变化**全部来自源头枚举口径**，
-没有掺入任何候选集变化；`tests/test_b_relation_expansion.py` 对此有断言。
+（LF 归一化 SHA256 `0faf7bd3…b9ad79c`，132 条）。行尾在 Linux 检出是 LF、Windows 工作区
+被 `core.autocrlf` 转成 CRLF，两边内容一致，因此哈希按 **LF 归一化**后计算，CI 与本机一致；
+`tests/test_b_relation_expansion.py` 对此有断言。因此本轮的分数变化**全部来自源头枚举口径**，
+没有掺入任何候选集变化。
 
 ### 12.4 源头逐字回读核验（17 条，2026-10-10 已人工签核）
 

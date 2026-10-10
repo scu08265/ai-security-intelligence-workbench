@@ -78,8 +78,10 @@ FROZEN_SHA256 = {
         "c46c1b4761f51faaeb5679f5734b6c00ce6e8a80164830e7dfd5f3d5f0007127",
 }
 
-# 候选集在本批次必须与 10-06 逐字节相同（原始字节，两边同为 CRLF）。
-CANDIDATE_SHA256 = "415430c46ae9224cd2788e159f8f8fb6effcbcfa62f6a6ae7ec3b1a58978ae53"
+# 候选集在本批次必须与 10-06 逐字节相同。
+# 按 LF 归一化比较：CI 在 Linux 上检出为 LF，Windows 工作区被 autocrlf 转成 CRLF，
+# 两边内容一致、只有行尾不同，所以不能用原始字节哈希（那只在 CRLF 检出处成立）。
+CANDIDATE_SHA256 = "0faf7bd3ec1f75fd33d1a0ec75ffc3073f6807381d7dc81cb71c0a279b9ad79c"
 
 COPY_DIR = Path(os.environ.get("B_EXPANSION_COPY_DIR", r"D:\ICT\intel-data-b-cvss-20261006"))
 
@@ -182,7 +184,7 @@ def test_earlier_batches_are_byte_identical():
 
 def test_candidate_set_is_unchanged_so_the_delta_comes_from_the_scope():
     """候选零变化：本轮的分数变化只能来自枚举口径，不掺候选变化。"""
-    assert hashlib.sha256(CANDIDATES.read_bytes()).hexdigest() == CANDIDATE_SHA256
+    assert _lf_sha256(CANDIDATES) == CANDIDATE_SHA256
     assert CANDIDATES.read_bytes() == FORMER_CANDIDATES.read_bytes()
 
 
