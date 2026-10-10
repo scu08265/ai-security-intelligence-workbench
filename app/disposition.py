@@ -233,7 +233,7 @@ def metrics() -> dict[str, Any]:
     assessments = storage.list_assessments(limit=2000)
     dispositions = {str(item.get("event_id")) + "::" + str(item.get("asset_id")): item
                     for item in storage.list_assessment_dispositions(limit=5000)}
-    events = {str(event.get("id")): event for event in storage.all_events(limit=5000)}
+    events = {str(event.get("id")): event for event in storage.all_events()}
 
     def row(assessment: dict) -> dict:
         key = str(assessment.get("event_id")) + "::" + str(assessment.get("asset_id"))

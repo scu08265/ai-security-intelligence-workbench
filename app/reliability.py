@@ -310,7 +310,7 @@ def cumulative_run_evidence(runs: Iterable[dict] | None = None) -> dict[str, Any
     window, never from this cumulative ledger.
     """
     collect_runs = [
-        run for run in (runs if runs is not None else storage.list_runs(limit=2000))
+        run for run in (runs if runs is not None else storage.list_runs(limit=None))
         if _is_collect_run(run) and run.get("started_at")
     ]
     actual_dates = sorted({str(run["started_at"])[:10] for run in collect_runs})
@@ -331,7 +331,7 @@ def cumulative_run_evidence(runs: Iterable[dict] | None = None) -> dict[str, Any
 
 
 def continuous_run_evidence(days: int = 7, runs: Iterable[dict] | None = None) -> dict[str, Any]:
-    source_runs = list(runs or storage.list_runs(limit=2000))
+    source_runs = list(runs or storage.list_runs(limit=None))
     actual = [
         run for run in source_runs
         if _is_collect_run(run) and run.get("started_at")
@@ -420,8 +420,8 @@ def build_reliability_report(
     *, days: int = 7, events: list[dict] | None = None,
     runs: list[dict] | None = None,
 ) -> dict[str, Any]:
-    event_items = events if events is not None else storage.all_events(limit=5000)
-    run_items = runs if runs is not None else storage.list_runs(limit=2000)
+    event_items = events if events is not None else storage.all_events()
+    run_items = runs if runs is not None else storage.list_runs(limit=None)
     collect_runs = [
         run for run in run_items
         if _is_collect_run(run) and run.get("started_at")

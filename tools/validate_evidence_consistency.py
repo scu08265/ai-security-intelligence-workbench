@@ -43,7 +43,7 @@ def main() -> int:
         if "version" in payload and payload["version"] != version
     ]
     scheduler = reports["reports/scheduler-validation.json"]
-    persisted_run_ids = {run["id"] for run in storage.list_runs(limit=1000)}
+    persisted_run_ids = {run["id"] for run in storage.list_runs(limit=None)}
     referenced_runs = [
         run["run_id"] for run in scheduler.get("runs") or []
     ]

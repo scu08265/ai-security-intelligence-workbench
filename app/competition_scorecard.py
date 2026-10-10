@@ -58,7 +58,7 @@ def _source_metrics() -> dict:
 
 
 def _monitoring_metrics(runs: list[dict] | None = None) -> dict:
-    runs = list(runs) if runs is not None else storage.list_runs(limit=2000)
+    runs = list(runs) if runs is not None else storage.list_runs(limit=None)
     evidence = agents.monitoring_evidence(days=7, runs=runs)
     report = reliability.build_reliability_report(days=7, runs=runs)
     cumulative = reliability.cumulative_run_evidence(runs)
@@ -88,7 +88,7 @@ def _monitoring_metrics(runs: list[dict] | None = None) -> dict:
             "id": run.get("id"), "started_at": run.get("started_at"),
             "status": run.get("status"),
             "task_id": (run.get("detail") or {}).get("scheduler", {}).get("task_id"),
-        } for run in storage.list_runs(limit=500)
+        } for run in storage.list_runs(limit=None)
           if run.get("kind") == "collect"
           and (run.get("detail") or {}).get("trigger") == "scheduled"][:20],
         "observed_events": _metric(observed, source="event.monitoring_observations"),
@@ -217,7 +217,7 @@ def _evaluation_metrics() -> dict:
 
 
 def _agent_metrics(events: list[dict]) -> dict:
-    runs = storage.list_runs(limit=200)
+    runs = storage.list_runs(limit=None)
     scheduled_runs = [
         run for run in runs
         if (run.get("detail") or {}).get("trigger") == "scheduled"
@@ -279,7 +279,7 @@ def _agent_metrics(events: list[dict]) -> dict:
 
 
 def scorecard() -> dict:
-    events, total = storage.list_events(limit=500)
+    events, total = storage.list_events(limit=None)
     return {
         "generated_at": storage.utcnow(),
         "evidence_policy": "只聚合现有数据库、评测与运行记录；无证据的指标返回 null。",

@@ -908,7 +908,7 @@ def monitoring_evidence(days: int = 7, runs: list[dict] | None = None) -> dict:
         }
         for day in dates
     }
-    run_items = runs if runs is not None else storage.list_runs(limit=2000)
+    run_items = runs if runs is not None else storage.list_runs(limit=None)
     for run in run_items:
         if run.get("kind") not in {"collect", "scheduled_collect"} or not run.get("started_at"):
             continue
