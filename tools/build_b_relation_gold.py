@@ -32,14 +32,22 @@ from __future__ import annotations
 import argparse
 import json
 import sqlite3
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 import b_relation_sources as sources  # 同目录模块：库外快照里的版本/修复关系
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-DEFAULT_DB_DIR = Path(r"D:\ICT\intel-data-b-poc-20261002")
+# 复用应用自己的配置初始化：它会先读 .env 再算 DATA_DIR，于是
+# 显式 INTEL_DATA_DIR > .env 里的 INTEL_DATA_DIR > BASE_DIR/data 三层都生效，
+# 不再写死某一台机器的路径。命令行 --db-dir 仍然优先级最高。
+from app import config as app_config  # noqa: E402  （必须在 sys.path 调整之后）
+
+DEFAULT_DB_DIR = app_config.DATA_DIR
 
 # 默认批次（2026-10-04，冻结产物）用的输入。新批次一律用命令行显式指定
 # --system-output / --labeled-input，绝不复用旧批次的 relation_id，避免张冠李戴。

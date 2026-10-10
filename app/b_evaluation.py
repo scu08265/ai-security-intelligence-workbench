@@ -150,6 +150,10 @@ def _relation(payload: dict[str, Any] | None, *, source: str | None = None) -> d
     micro = payload.get("micro") or {}
     fn_source = payload.get("fn_source") or {}
     per_dimension = payload.get("per_dimension") or {}
+    pending = sum((item.get("pending") or 0) for item in per_dimension.values()
+                  if isinstance(item, dict))
+    undetermined = sum((item.get("undetermined") or 0) for item in per_dimension.values()
+                       if isinstance(item, dict))
     return {
         "available": True,
         "computable": bool(payload.get("computable")),
@@ -162,6 +166,10 @@ def _relation(payload: dict[str, Any] | None, *, source: str | None = None) -> d
         "fp": micro.get("fp"),
         "fn": micro.get("fn"),
         "evaluable_samples": micro.get("evaluable_samples"),
+        # 未核验（pending_human_review）与"无法定论"（unknown/not_applicable）都不进分母，
+        # 但必须让页面看得见，否则"可判定样本数"会被误读成"候选总数"。
+        "pending_samples": pending,
+        "undetermined_samples": undetermined,
         "fn_source_available": bool(fn_source.get("available")),
         "fn_source_reason": fn_source.get("reason"),
         "expected_relation_ids": fn_source.get("expected_relation_ids"),

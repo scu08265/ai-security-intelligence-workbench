@@ -181,7 +181,8 @@ def test_relabel_is_content_based_not_id_based():
     case = result["cases"][0]
     assert case["relation_id"] == "NEW-9"
     assert case["annotation"]["label"] == "positive"
-    assert result["counts"] == {"total": 1, "carried": 1, "promoted": 0, "pending": 0}
+    assert result["counts"] == {"total": 1, "carried": 1, "promoted": 0,
+                                "withheld": 0, "pending": 0}
 
 
 def test_gold_enumerations_deduplicate_repeated_vectors(monkeypatch, tmp_path):

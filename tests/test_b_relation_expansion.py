@@ -16,6 +16,8 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shutil
+import sqlite3
 import sys
 from pathlib import Path
 
@@ -99,6 +101,76 @@ def _copy_dir() -> Path:
 
 def _norm(value) -> str:
     return " ".join(str(value or "").split()).casefold()
+
+
+def _write_json(path: Path, payload: dict) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    return path
+
+
+def _mini_corpus(root: Path, *, fixed: str = "2.0.0") -> Path:
+    """隔离的最小语料：一个生态事件 + 一份 OSV 快照，只写在临时目录里。
+
+    **不接触任何真实数据目录**：事件表、文档表、快照都在 ``tmp_path`` 下现造。
+    """
+    (root / "snapshots" / "osv").mkdir(parents=True, exist_ok=True)
+    (root / "snapshots" / "osv" / "GHSA-test-0000.json").write_text(json.dumps({
+        "id": "GHSA-test-0000",
+        "affected": [{
+            "package": {"name": "pkg", "ecosystem": "PyPI"},
+            "ranges": [{"type": "ECOSYSTEM",
+                        "events": [{"introduced": "0"}, {"fixed": fixed}]}],
+        }],
+    }, ensure_ascii=False), encoding="utf-8")
+    connection = sqlite3.connect(root / "intel.sqlite")
+    connection.execute("create table events (id text primary key, doc text)")
+    connection.execute("create table rag_documents (document_key text primary key)")
+    connection.execute("insert into events values (?, ?)", (
+        "GHSA-test-0000",
+        json.dumps({"id": "GHSA-test-0000", "cvss": [], "affected": [
+            {"package": "pkg", "ecosystem": "PyPI", "range": f"< {fixed}",
+             "fixed_version": fixed, "source_id": "osv:test0000"}]})))
+    connection.commit()
+    connection.close()
+    return root
+
+
+def _source_relation(obj: str) -> dict:
+    return {
+        "dimension": "fixed_version", "subject": "GHSA-test-0000", "relation": "fixed_by",
+        "object": obj, "source": "osv_snapshot",
+        "source_path": "snapshots/osv/GHSA-test-0000.json",
+        "source_locator": "affected[0].ranges[0].events[1]",
+        "detail": {"package": "pkg", "fixed_version": obj.partition("@")[2]},
+    }
+
+
+def _replay_corpus(tmp_path: Path) -> Path:
+    """把复现 10-06 批次所需的真实数据**复制**进临时目录再跑。
+
+    真实副本以只读方式打开（``mode=ro``），写入的全部是临时副本；测试结束时
+    临时目录由 pytest 回收，真实库不会留下任何改动。
+    """
+    source = _copy_dir()
+    target = tmp_path / "replay"
+    (target / "snapshots" / "nvd").mkdir(parents=True)
+    src = sqlite3.connect(f"file:{source / 'intel.sqlite'}?mode=ro", uri=True)
+    dst = sqlite3.connect(target / "intel.sqlite")
+    dst.execute("create table events (id text primary key, doc text)")
+    dst.execute("create table rag_documents (document_key text primary key)")
+    dst.executemany("insert into events values (?, ?)",
+                    src.execute("select id, doc from events"))
+    dst.executemany("insert into rag_documents values (?)",
+                    src.execute("select document_key from rag_documents"))
+    dst.commit()
+    dst.close()
+    src.close()
+    for cve in (name for name in gold_tool.SCOPE_EVENTS if name.startswith("CVE-")):
+        snapshot = source / "snapshots" / "nvd" / f"{cve}.json"
+        if snapshot.is_file():
+            shutil.copy2(snapshot, target / "snapshots" / "nvd" / snapshot.name)
+    return target
 
 
 def test_earlier_batches_are_byte_identical():
@@ -188,15 +260,19 @@ def test_expansion_verification_only_promotes_source_readback_items():
 
     promotions = _load(PROPOSALS)["promotions"]
     assert len(promotions) == report["promotable"] == 17
+    assert _load(PROPOSALS)["signature_required"] is True
     for item in promotions:
         assert item["label"] == "positive"
         assert item["verified_by"] and item["verified_at"]
+        # 署名必须明确是"待签核"，不能借工具核验冒充人工确认
+        assert "待用户签核" in item["verified_by"]
         evidence = item["evidence"]
         assert evidence["source_path"] and evidence["source_locator"]
         assert evidence["enumerated_value"]
 
 
-def test_promoted_annotations_land_in_the_labeled_batch():
+def test_withheld_relations_stay_pending_until_someone_signs_off():
+    """17 条只经工具核验的关系必须停在 pending_human_review，且不携带人工签名。"""
     promotions = _load(PROPOSALS)["promotions"]
     labeled = {case["relation_id"]: case for case in _load(LABELED)["cases"]}
     system = {(case["dimension"], case["subject"], _norm(case["object"])): case
@@ -204,11 +280,23 @@ def test_promoted_annotations_land_in_the_labeled_batch():
     for item in promotions:
         key = (item["dimension"], item["subject"], _norm(item["object"]))
         case = system[key]
-        annotation = labeled[case["relation_id"]]["annotation"]
-        assert annotation["status"] == "human_verified"
-        assert annotation["label"] == "positive"
-        assert annotation["verified_by"] == item["verified_by"]
-        assert annotation["verified_at"] == item["verified_at"]
+        stored = labeled[case["relation_id"]]
+        annotation = stored["annotation"]
+        assert annotation["status"] == "pending_human_review"
+        assert annotation["label"] is None
+        assert annotation["verified_by"] is None
+        assert annotation["verified_at"] is None
+        assert "promotion_evidence" not in stored
+    # 工具核验记录与待审核清单都保留，撤回的只是"人工已确认"这个结论
+    assert _load(VERIFICATION)["promotable"] == len(promotions) == 17
+    cases = _load(LABELED)["cases"]
+    signed = [case for case in cases
+              if (case.get("annotation") or {}).get("verified_by") == "人工复核-用户确认"]
+    pending = [case for case in cases
+               if (case.get("annotation") or {}).get("status") == "pending_human_review"]
+    # 撤回只影响这 17 条：上一批次沿用的人工签核没有被误删（110 条仍带签名）
+    assert len(signed) == 110
+    assert len(pending) == 22
 
 
 def test_new_score_is_self_consistent_and_the_former_gold_is_the_contrast():
@@ -216,7 +304,9 @@ def test_new_score_is_self_consistent_and_the_former_gold_is_the_contrast():
     micro = active["micro"]
     assert micro["precision"] == 1.0
     assert micro["fp"] == 0
-    assert (micro["tp"], micro["fn"]) == (69, 25)
+    # 17 条待人工签核的关系不进 TP，也不进 FN（pending 单列）；
+    # FN 只由"源头写着、候选没有"的 25 条真实漏检构成。
+    assert (micro["tp"], micro["fn"]) == (52, 25)
     assert micro["recall"] == pytest.approx(micro["tp"] / (micro["tp"] + micro["fn"]), abs=1e-4)
     assert micro["f1"] == pytest.approx(
         2 * micro["precision"] * micro["recall"] / (micro["precision"] + micro["recall"]), abs=1e-4)
@@ -233,13 +323,18 @@ def test_new_score_is_self_consistent_and_the_former_gold_is_the_contrast():
         f"artifacts/b_eval/relation_candidates_labeled_{BATCH}.json")
     assert active["gold_source"] == f"evaluation/b_relation_gold_{BATCH}.json"
     assert contrast["gold_source"] == f"evaluation/b_relation_gold_{FORMER_BATCH}.json"
-    assert active["micro"]["tp"] == contrast["micro"]["tp"] == 69
+    assert active["micro"]["tp"] == contrast["micro"]["tp"] == 52
     assert (active["micro"]["fn"], contrast["micro"]["fn"]) == (25, 0)
     assert contrast["micro"]["recall"] == 1.0
+    # pending 单列，不进任何分母
+    assert active["per_dimension"]["cvss"]["pending"] == 13
+    assert active["per_dimension"]["version_range"]["pending"] == 2
+    assert active["per_dimension"]["fixed_version"]["pending"] == 2
+    assert active["micro"]["evaluable_samples"] == 77
 
 
-def test_legacy_scope_still_reproduces_the_former_expected_set():
-    db_dir = _copy_dir()
+def test_legacy_scope_still_reproduces_the_former_expected_set(tmp_path):
+    db_dir = _replay_corpus(tmp_path)
     result = gold_tool.build(db_dir, FORMER_CANDIDATES, FORMER_LABELED,
                              FORMER_MISSED_10_04, gold_tool.SCOPE_MODE_LEGACY)
     gold = result["gold"]
@@ -252,25 +347,70 @@ def test_legacy_scope_still_reproduces_the_former_expected_set():
     assert all(item["kind"] == "range_unknown" for item in excluded)
 
 
-def test_verifier_refuses_a_relation_the_source_does_not_say(monkeypatch):
+def test_verifier_refuses_a_relation_the_source_does_not_say(monkeypatch, tmp_path):
     """反例：把版本号改成源头没有的值，核验必须失败、且不得产出升级清单。"""
-    db_dir = _copy_dir()
-    fabricated = [{
-        "dimension": "version_range", "subject": "CVE-2025-62593", "relation": "affects",
-        "object": "ray@< 9.9.9-fabricated", "source": "nvd_configuration",
-        "source_path": "snapshots/nvd/CVE-2025-62593.json",
-        "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
-        "detail": {"product": "ray", "range": "< 9.9.9-fabricated"},
-    }]
+    db_dir = _mini_corpus(tmp_path / "corpus")
+    candidates = _write_json(tmp_path / "candidates.json", {"cases": [
+        {"relation_id": "BREL-FI-9001", "dimension": "fixed_version",
+         "subject": "GHSA-test-0000", "object": "pkg@9.9.9",
+         "prediction": {"verdict": "present"}}]})
+    labeled = _write_json(tmp_path / "labeled.json", {"cases": [
+        {"relation_id": "BREL-FI-9001",
+         "annotation": {"status": "human_verified", "label": "unknown"}}]})
+    fabricated = [_source_relation("pkg@9.9.9")]
     monkeypatch.setattr(gold_tool, "enumerate_source_relations",
                         lambda db_dir, events, scope=None, **kwargs: fabricated)
-    report = expansion.verify(db_dir, CANDIDATES, LABELED)
+    report = expansion.verify(db_dir, candidates, labeled)
     assert report["ok"] is False
-    assert report["missed_unreadable"] == 1
+    assert report["blocked"] == 1
     item = report["items"][0]
+    assert item["candidate_found"] is True
     assert item["source_verified"] is False
     assert item["checks"]["source_value_matches"] is False
     assert item["checks"]["source_byte_rereadable"] is False
+    promotions = expansion.build_promotions(report, verified_by="x", verified_at="d", note="n")
+    assert promotions["promotions"] == []
+
+
+def test_verifier_accepts_a_relation_the_source_states(monkeypatch, tmp_path):
+    """正例：源头逐字写着、候选对象一致、标签不冲突时才允许升级。"""
+    db_dir = _mini_corpus(tmp_path / "corpus")
+    candidates = _write_json(tmp_path / "candidates.json", {"cases": [
+        {"relation_id": "BREL-FI-9001", "dimension": "fixed_version",
+         "subject": "GHSA-test-0000", "object": "pkg@2.0.0",
+         "prediction": {"verdict": "present"},
+         "evidence": {"source_id": "osv:test0000"}}]})
+    labeled = _write_json(tmp_path / "labeled.json", {"cases": [
+        {"relation_id": "BREL-FI-9001",
+         "annotation": {"status": "human_verified", "label": "unknown"}}]})
+    monkeypatch.setattr(gold_tool, "enumerate_source_relations",
+                        lambda db_dir, events, scope=None, **kwargs: [_source_relation("pkg@2.0.0")])
+    report = expansion.verify(db_dir, candidates, labeled)
+    assert report["ok"] is True
+    assert report["promotable"] == 1 and report["missed_new"] == 0
+    item = report["items"][0]
+    assert item["checks"]["source_locator_resolves"] is True
+    assert item["checks"]["source_value_matches"] is True
+    assert item["checks"]["source_byte_rereadable"] is True
+    promotions = expansion.build_promotions(report, verified_by="x", verified_at="d", note="n")
+    assert [p["object"] for p in promotions["promotions"]] == ["pkg@2.0.0"]
+
+
+def test_verifier_does_not_promote_when_the_annotation_contradicts(monkeypatch, tmp_path):
+    """已经人工判 negative 的关系不许被覆盖。"""
+    db_dir = _mini_corpus(tmp_path / "corpus")
+    candidates = _write_json(tmp_path / "candidates.json", {"cases": [
+        {"relation_id": "BREL-FI-9001", "dimension": "fixed_version",
+         "subject": "GHSA-test-0000", "object": "pkg@2.0.0"}]})
+    labeled = _write_json(tmp_path / "labeled.json", {"cases": [
+        {"relation_id": "BREL-FI-9001",
+         "annotation": {"status": "human_verified", "label": "negative"}}]})
+    monkeypatch.setattr(gold_tool, "enumerate_source_relations",
+                        lambda db_dir, events, scope=None, **kwargs: [_source_relation("pkg@2.0.0")])
+    report = expansion.verify(db_dir, candidates, labeled)
+    assert report["ok"] is False
+    assert report["blocked"] == 1
+    assert report["items"][0]["checks"]["annotation_not_contradictory"] is False
     promotions = expansion.build_promotions(report, verified_by="x", verified_at="d", note="n")
     assert promotions["promotions"] == []
 

@@ -11,7 +11,7 @@
    "subject": "GHSA-3g9q-v48f-hh9w",
    "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -32,7 +32,7 @@
    "subject": "GHSA-8pw2-6jv3-mj5j",
    "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -53,7 +53,7 @@
    "subject": "GHSA-8pw2-6jv3-mj5j",
    "object": "vllm@< 0.28.0",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -71,7 +71,7 @@
    "subject": "GHSA-8pw2-6jv3-mj5j",
    "object": "vllm@0.28.0",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -89,7 +89,7 @@
    "subject": "GHSA-hcwq-8wjf-3gcr",
    "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -110,7 +110,7 @@
    "subject": "GHSA-mcmc-2m55-j8jj",
    "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -131,7 +131,7 @@
    "subject": "GHSA-mcmc-2m55-j8jj",
    "object": "vllm@>= 0.10.2, < 0.13.0",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -149,7 +149,7 @@
    "subject": "GHSA-mcmc-2m55-j8jj",
    "object": "vllm@0.13.0",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -167,7 +167,7 @@
    "subject": "GHSA-v39v-59xw-j98g",
    "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -188,7 +188,7 @@
    "subject": "GHSA-wvm9-9g5j-623f",
    "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -209,7 +209,7 @@
    "subject": "PYSEC-2026-3985",
    "object": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -230,7 +230,7 @@
    "subject": "PYSEC-2026-3996",
    "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -251,7 +251,7 @@
    "subject": "PYSEC-2026-3997",
    "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -272,7 +272,7 @@
    "subject": "PYSEC-2026-3998",
    "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -293,7 +293,7 @@
    "subject": "PYSEC-2026-3999",
    "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -314,7 +314,7 @@
    "subject": "PYSEC-2026-4000",
    "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {
@@ -335,7 +335,7 @@
    "subject": "CVE-2025-6558",
    "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
    "label": "positive",
-   "verified_by": "人工复核-用户确认",
+   "verified_by": "源快照逐字比对-待用户签核",
    "verified_at": "2026-10-10",
    "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
    "evidence": {

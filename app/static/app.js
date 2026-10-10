@@ -1598,6 +1598,8 @@
         ['关系 Precision', percentValue(bRelation.precision), ''],
         ['关系 Recall', percentValue(bRelation.recall), ''],
         ['关系 F1', percentValue(bRelation.f1), ''],
+        ['待人工核验', bRelation.pending_samples, ' 条'],
+        ['无法定论', bRelation.undetermined_samples, ' 条'],
         ['扩样前口径 Recall', percentValue(bContrast.recall), ''],
         ['跨文档路径', bMultihop.cross_document_total
           ? `${bMultihop.cross_document_found}/${bMultihop.cross_document_total}` : null, ''],
@@ -1607,6 +1609,8 @@
         + '"扩样前口径 Recall" 是同一批结果对上一批冻结金标准的评分（样本更小、分母更窄）。'
         + relationScopeNote
         + '扩样后新识别出 ' + textOr(bRelation.missing_relation_ids, 0) + ' 条漏检关系。'
+        + '另有 ' + textOr(bRelation.pending_samples, 0) + ' 条候选尚未人工核验、'
+        + textOr(bRelation.undetermined_samples, 0) + ' 条无法定论，两者都不计入 Precision / Recall / F1 的任何分母。'
         + '当前 Recall 只代表本批次的评测范围，不代表全语料召回率；跨文档连通不等于完成综合推理。'),
       scoreCapability('问答性能评测', bPerformance.available ? '已验证' : '待读取', [
         ['独立批次', Array.isArray(bPerformance.batches) ? bPerformance.batches.length : null, ' 批'],

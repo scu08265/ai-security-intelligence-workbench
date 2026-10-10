@@ -269,10 +269,12 @@ def build_promotions(report: dict, *, verified_by: str, verified_at: str,
     }
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="核验扩样批次里尚未标注 positive 的关系能否在源头逐字回读")
-    parser.add_argument("--db-dir", type=Path, required=True, help="副本库目录")
+    parser.add_argument("--db-dir", type=Path, default=gold_tool.DEFAULT_DB_DIR,
+                        help="副本库目录；默认取 app.config.DATA_DIR"
+                             "（显式 INTEL_DATA_DIR > .env > BASE_DIR/data）")
     parser.add_argument("--candidates", type=Path, required=True)
     parser.add_argument("--labeled", type=Path, required=True)
     parser.add_argument("--scope", choices=(gold_tool.SCOPE_MODE_FULL,
@@ -285,7 +287,11 @@ def main() -> int:
     parser.add_argument("--verified-at", default="2026-10-10")
     parser.add_argument("--note", default="工具按 source_path/source_locator 逐字比对通过；"
                                           "签名以人工签核为准")
-    args = parser.parse_args()
+    return parser
+
+
+def main() -> int:
+    args = build_parser().parse_args()
 
     report = verify(args.db_dir, args.candidates, args.labeled, args.scope)
     args.out.parent.mkdir(parents=True, exist_ok=True)

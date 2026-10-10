@@ -1,45 +1,28 @@
 {
  "schema_version": "b-relation-gold-1.0",
  "expected_relation_ids": {
-  "BREL-CV-0019": "cvss",
   "BREL-VE-0021": "version_range",
   "BREL-FI-0010": "fixed_version",
-  "BREL-CV-0015": "cvss",
-  "BREL-VE-0017": "version_range",
-  "BREL-FI-0006": "fixed_version",
-  "BREL-CV-0016": "cvss",
   "BREL-VE-0018": "version_range",
   "BREL-FI-0007": "fixed_version",
-  "BREL-CV-0026": "cvss",
-  "BREL-VE-0031": "version_range",
-  "BREL-FI-0012": "fixed_version",
-  "BREL-CV-0020": "cvss",
   "BREL-VE-0022": "version_range",
   "BREL-FI-0011": "fixed_version",
-  "BREL-CV-0018": "cvss",
   "BREL-VE-0020": "version_range",
   "BREL-FI-0009": "fixed_version",
-  "BREL-CV-0017": "cvss",
   "BREL-VE-0019": "version_range",
   "BREL-FI-0008": "fixed_version",
-  "BREL-CV-0014": "cvss",
   "BREL-VE-0016": "version_range",
   "BREL-FI-0005": "fixed_version",
-  "BREL-CV-0013": "cvss",
   "BREL-VE-0015": "version_range",
   "BREL-FI-0004": "fixed_version",
-  "BREL-CV-0011": "cvss",
   "BREL-VE-0013": "version_range",
   "BREL-FI-0002": "fixed_version",
-  "BREL-CV-0012": "cvss",
   "BREL-VE-0014": "version_range",
   "BREL-FI-0003": "fixed_version",
-  "BREL-CV-0010": "cvss",
   "BREL-VE-0012": "version_range",
   "BREL-FI-0001": "fixed_version",
   "BREL-CV-0022": "cvss",
   "BREL-CV-0023": "cvss",
-  "BREL-CV-0028": "cvss",
   "BREL-CV-0027": "cvss",
   "BREL-VE-0032": "version_range",
   "BREL-CV-0024": "cvss",
@@ -766,14 +749,117 @@
    "官方/标准文档（NIST/OWASP/EU AI Act）不参与六维度关系，预期 0 条并已核对"
   ],
   "sampled_relations_declared_by_sources": 94,
-  "system_extracted_and_positive": 69,
-  "system_extracted_but_undecided": 0,
+  "system_extracted_and_positive": 52,
+  "system_extracted_but_undecided": 17,
   "missed": 25,
   "not_enumerable": 37,
   "former_missed_total": 0,
   "former_missed_resolved": 0
  },
- "uncertain": [],
+ "uncertain": [
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0019",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0015",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-VE-0017",
+   "dimension": "version_range",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-FI-0006",
+   "dimension": "fixed_version",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0016",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0026",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-VE-0031",
+   "dimension": "version_range",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-FI-0012",
+   "dimension": "fixed_version",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0020",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0018",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0017",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0014",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0013",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0011",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0012",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0010",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  },
+  {
+   "kind": "candidate_undecided",
+   "relation_id": "BREL-CV-0028",
+   "dimension": "cvss",
+   "reason": "候选缺少人工标签"
+  }
+ ],
  "protocol_ref": "docs/B_RELATION_GOLD_PROTOCOL.md",
  "former_gold_ref": "evaluation/b_relation_gold_20261006.json",
  "former_missed_ref": "artifacts/b_eval/relation_missed_relations_20261006.json",

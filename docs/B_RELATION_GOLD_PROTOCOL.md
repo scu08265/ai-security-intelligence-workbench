@@ -245,7 +245,9 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
   非 `unknown` 区间。纳入正式 precision / recall / F1 计算。
 * **证据不足样本（23）**：事件只有一个 `unknown` 区间（KEV 类来源不给版本边界），
   副本内没有 NVD / MITRE 快照。**只统计数量与原因，不进任何分母**。
-* **新增漏检（25）**：源头明确声明、候选集里没有、且已逐字回读确认。人工复核后才计入 FN。
+* **新增漏检（25）**：源头明确声明、候选集里没有，且能从源头原字节**逐字回读**。
+  约定是"经人工复核后才计入 FN"；本批次这 25 条完成了逐字回读，但**同样等人签核**
+  （见 12.4），因此它们应被表述为"已验证的漏检"，而不是"已签核的漏检"。
 
 **16 篇论文 / 12 个生态事件 / 37 个 CVE 是盘点范围，不代表全部进同一个分母。**
 各维度的实际纳入量、证据覆盖量、排除量及排除原因都写在 gold 的 `scope` 里
@@ -272,7 +274,7 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
 （SHA256 `415430c4…78ae53`，132 条）。因此本轮的分数变化**全部来自源头枚举口径**，
 没有掺入任何候选集变化；`tests/test_b_relation_expansion.py` 对此有断言。
 
-### 12.4 人工核验（17 条，逐条逐字回读）
+### 12.4 源头逐字回读核验（17 条，**待人工签核**）
 
 `tools/verify_b_relation_expansion.py` 对"源头已声明、候选尚未判 positive"的关系逐条做
 7 项检查（`event_exists` / `candidate_found` / `candidate_object_matches` /
@@ -281,11 +283,21 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
 
 本批次核验 42 条：**可升级 17、被挡 0、新增漏检 25（其中源头不可回读 0）**。
 17 条的构成：`cvss` 13 条（含 2 个生态事件此前为 `unknown` 的 cvss）、
-`version_range` 2 条、`fixed_version` 2 条。署名沿用仓库既有口径
-（`人工复核-用户确认` / `2026-10-10`）。
+`version_range` 2 条、`fixed_version` 2 条。
 
-清单：`artifacts/b_eval/relation_expansion_verification_20261010.json`；
-升级清单：`artifacts/b_eval/relation_new_positive_proposals_20261010.json`。
+**这 17 条只过了工具核验，没有任何人工逐条确认**，因此：
+
+* 它们的 `annotation.status` 是 `pending_human_review`，`label` / `verified_by` /
+  `verified_at` 全为 `null`——**没有** `人工复核-用户确认` 签名；
+* 待审核清单里的 `verified_by` 明确写着 `源快照逐字比对-待用户签核`，
+  `signature_required = true`，即"证据已备好、结论还没签"；
+* 只有签核人显式给出 `--verified-by` 之后，才允许用
+  `relabel_b_relation_candidates.py --promote` 升级；撤回用 `--withhold`（同一份清单）一键回到
+  `pending_human_review` 并清空签名，不需要手改 JSON。
+
+核验记录：`artifacts/b_eval/relation_expansion_verification_20261010.json`；
+待审核清单：`artifacts/b_eval/relation_new_positive_proposals_20261010.json`
+（候选、源头证据、核验记录全部保留，撤回的只是"人工已确认"这个结论）。
 注意 `--labeled` 必须指向**升级前**的标注状态（本批次用的是 `_20261006`），
 否则已升级项会被跳过，得到 0 条 —— 那是自证而不是核验。
 
@@ -295,21 +307,33 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
 |---|---|---|---|---|---|---|---|---|
 | 10-04 冻结基线 | 121 条 | `gold_20261004` | 47 | 0 | 5 | 1.0 | 0.9038 | 0.9495 |
 | 10-06 批次 | 132 条 | `gold_20261006` | 52 | 0 | 0 | 1.0 | 1.0 | 1.0 |
-| **本批次（页面口径，active）** | 标注 `_20261010` | `gold_20261010` | **69** | 0 | **25** | 1.0 | **0.734** | **0.8466** |
-| 本批次（扩样前口径，对照） | 标注 `_20261010` | `gold_20261006` | 69 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+| **本批次（页面口径，active）** | 标注 `_20261010` | `gold_20261010` | **52** | 0 | **25** | 1.0 | **0.6753** | **0.8062** |
+| 本批次（扩样前口径，对照） | 标注 `_20261010` | `gold_20261006` | 52 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+
+本批次标注状态：**人工核验 positive 52 条、`pending_human_review` 22 条**
+（其中 17 条是上面待签核的关系，另外 5 条是 `poc` 维度的既有待审项）、
+`human_verified/unknown` 58 条。`pending` 一律**不进任何分母**（既不计 TP 也不计 FN），
+所以 active 的可判定样本是 77 条（52 + 25），而不是 132 条。
 
 分维度（页面口径）：
 
-| 维度 | TP | FP | FN | P | R | F1 |
-|---|---|---|---|---|---|---|
-| `cvss` | 28 | 0 | 0 | 1.0 | 1.0 | 1.0 |
-| `version_range` | 13 | 0 | 12 | 1.0 | 0.52 | 0.6842 |
-| `fixed_version` | 12 | 0 | 13 | 1.0 | 0.48 | 0.6486 |
-| `paper_link` | 16 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+| 维度 | TP | FP | FN | pending | P | R | F1 |
+|---|---|---|---|---|---|---|---|
+| `cvss` | 15 | 0 | 0 | 13 | 1.0 | 1.0 | 1.0 |
+| `version_range` | 11 | 0 | 12 | 2 | 1.0 | 0.4783 | 0.6471 |
+| `fixed_version` | 10 | 0 | 13 | 2 | 1.0 | 0.4348 | 0.6061 |
+| `paper_link` | 16 | 0 | 0 | 0 | 1.0 | 1.0 | 1.0 |
 
 **分数下降是扩样带来的，不是退化**：接入 OSV ranges / NVD configurations / MITRE
 `lessThan` 之后，分母里第一次出现了"源头早就写着、系统一直没抽"的关系。
-`cvss` 维度仍是 28/28 全中；新增 25 条 FN 全部落在 `version_range` / `fixed_version`。
+新增 25 条 FN 全部落在 `version_range` / `fixed_version`；`cvss` 维度在已签核的样本上
+没有 FN。**这 17 条待签核关系不计入 TP 或 FN**：如果后续人工签核为 positive，
+active 的 TP 会从 52 升到 69、Recall 从 0.6753 升到 0.734 —— 这是"等人确认"的差距，
+不是系统抽取能力的差距。
+
+同样要如实说明：25 条 FN 的**来源定位**已逐字回读，但同样没有逐条人工签核，
+所以这两个数字是"可复现的机器证据结论"，签核后可能微调；本批次不为了让报表好看
+而把未签核内容写进分子或分母。
 
 ### 12.6 本批次新识别的 25 条漏检
 
@@ -331,6 +355,11 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
 排除量与排除原因。页面文案明确写着"当前 Recall 只代表本批次的评测范围，
 不代表全语料召回率"。
 
+标签状态变化也反映到了页面上：`_relation()` 额外投影 `pending_samples`（未核验）与
+`undetermined_samples`（无法定论），面板单列"待人工核验 / 无法定论"两行，
+并在说明里写明**两者都不计入 Precision / Recall / F1 的任何分母**。
+本批次页面显示：可判定 77 条、待人工核验 22 条、无法定论 58 条。
+
 ### 12.8 本批次局限
 
 * 仍是**抽样穷尽**：16/12/37 是盘点范围，不是全语料；
@@ -340,8 +369,14 @@ CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接
   `uncertain` 里）；10-10 起 `unknown` 一律记为"不可枚举"（`excluded_not_enumerable`），
   `--scope legacy` 仍能复现 10-06 的 `expected_relation_ids`，差异只在这一处；
 * `poc` 与 `asset_assessment` 仍单列；
-* 工具需要显式 `--db-dir` 或环境变量：`app.config.load_env_file()` 没有在命令行工具
-  之前调用，直接跑工具时 `INTEL_DATA_DIR` 不生效（本次全程用命令行参数指定副本库，只读）。
+* 17 条待签核关系与 25 条已验证漏检都还没有逐条人工签核，因此本批次的两个分数是
+  "机器 + 源头逐字回读"的结论，签核后可能微调；
+* （已修复）`app/config.py` 曾在算完 `DATA_DIR` 之后才调用 `load_env_file()`，
+  于是 `.env` 里的 `INTEL_DATA_DIR` 被忽略，命令行工具各自写死机器路径。
+  现在 `load_env_file()` 在任何 `os.getenv` 之前执行，并新增
+  `INTEL_ENV_FILE`（只改 .env 位置，不改优先级）；`tools/build_b_relation_gold.py`
+  与 `tools/verify_b_relation_expansion.py` 的默认库目录改为复用
+  `app.config.DATA_DIR`。优先级：显式环境变量 > `.env` > `BASE_DIR/data`。
 
 ### 12.9 复现命令
 
@@ -352,29 +387,33 @@ $env:INTEL_DATA_DIR='D:\ICT\intel-data-b-cvss-20261006'   # 只读副本库
 .\.venv\Scripts\python.exe tools\build_b_relation_candidates.py `
     --out evaluation\b_relation_candidates_20261010.json
 
-# 2) 把上一批标注按内容迁移到本批候选
-.\.venv\Scripts\python.exe tools\relabel_b_relation_candidates.py `
-    --from artifacts\b_eval\relation_candidates_labeled_20261006.json `
-    --system evaluation\b_relation_candidates_20261010.json `
-    --out artifacts\b_eval\relation_candidates_labeled_20261010.json
-
-# 3) 核验"源头写着、候选还没判 positive"的关系（--labeled 用升级前的状态）
+# 2) 核验"源头写着、候选还没判 positive"的关系（--labeled 用升级前的状态）
+#    （标注迁移与落盘在第 3 步一次完成，这里不需要先写一遍中间文件）
+#    不给 --verified-by 时，清单署名是"源快照逐字比对-待用户签核"
 .\.venv\Scripts\python.exe tools\verify_b_relation_expansion.py `
     --db-dir D:\ICT\intel-data-b-cvss-20261006 `
     --candidates evaluation\b_relation_candidates_20261010.json `
     --labeled artifacts\b_eval\relation_candidates_labeled_20261006.json `
     --out artifacts\b_eval\relation_expansion_verification_20261010.json `
-    --proposals-out artifacts\b_eval\relation_new_positive_proposals_20261010.json `
-    --verified-by 人工复核-用户确认 --verified-at 2026-10-10
+    --proposals-out artifacts\b_eval\relation_new_positive_proposals_20261010.json
 
-# 4) 落标注（只升级核验清单里的条目）
+# 3) 本批次采用的口径：17 条只过工具核验，停在 pending_human_review、不带签名
 .\.venv\Scripts\python.exe tools\relabel_b_relation_candidates.py `
     --from artifacts\b_eval\relation_candidates_labeled_20261006.json `
     --system evaluation\b_relation_candidates_20261010.json `
-    --promote artifacts\b_eval\relation_new_positive_proposals_20261010.json `
+    --withhold artifacts\b_eval\relation_new_positive_proposals_20261010.json `
     --out artifacts\b_eval\relation_candidates_labeled_20261010.json
 
-# 5) 重跑 gold 与两份评分
+# 4) 签核人逐条确认之后才升级（把上一步换成 --promote，并显式给出签名）：
+#     python tools/verify_b_relation_expansion.py ... \
+#         --verified-by <签核人> --verified-at <日期>
+#     python tools/relabel_b_relation_candidates.py \
+#         --from artifacts/b_eval/relation_candidates_labeled_20261006.json \
+#         --system evaluation/b_relation_candidates_20261010.json \
+#         --promote artifacts/b_eval/relation_new_positive_proposals_20261010.json \
+#         --out artifacts/b_eval/relation_candidates_labeled_20261010.json
+
+# 5) 重跑 gold 与两份评分（改标签后必须重跑，分数必须跟着标签走）
 .\.venv\Scripts\python.exe tools\build_b_relation_gold.py `
     --db-dir D:\ICT\intel-data-b-cvss-20261006 `
     --system-output evaluation\b_relation_candidates_20261010.json `
@@ -402,12 +441,24 @@ $env:INTEL_DATA_DIR='D:\ICT\intel-data-b-cvss-20261006'   # 只读副本库
 > MITRE `lessThan` 三条源头声明正式接入枚举。CVE 按证据覆盖分层：14 个可核验样本
 > 进入评分分母，23 个只声明 `unknown` 区间且副本内无权威快照的 KEV 条目单列数量与
 > 原因、不进任何分母，避免把"无法核验"误算成漏检。候选集与上一批次逐字节相同
-> （SHA256 一致），因此本轮分数变化全部来自枚举口径：TP 52 → 69、FN 0 → 25、
-> Recall 1.0 → 0.734、F1 1.0 → 0.8466。分数下降是扩样带来的分母变大与真实漏检显形，
-> 而非系统退化；新显形的 25 条漏检集中在 NVD `configurations`（24 条，根因是采集
-> 链路从未合并该字段）与 MITRE `lessThan`（1 条，根因是 `fixed_version` 未从区间推导），
-> 每条都带可回读的源头定位与 `why_expected` / `why_missed`。17 条"源头写着、候选尚未
-> 判 positive"的关系经 7 项逐字回读核验后升级为 `human_verified/positive`；其余 25 条
-> 新漏检作为 FN 如实计入。**本批次所有 Recall / F1 只代表当前评测范围，不代表全语料
-> 召回率**；OSV 批量响应中另外 1889 条公告只带回 `id`/`modified`、离线枚举不出修复
-> 版本，这一采集侧缺口已在 gold 的 `completeness.sources_not_covered` 中如实记录。
+> （SHA256 一致），因此本轮分数变化全部来自枚举口径。
+>
+> 正式 gold（`evaluation/b_relation_gold_20261010.json`）只收两类：**人工核验为 positive
+> 的候选（52 条，构成 TP）**与**源头逐字回读确认的真实漏检（25 条，构成 FN）**。
+> active 评分（`artifacts/b_eval/relation_score_gold_20261010.json`）因此是
+> TP 52 / FP 0 / FN 25、P 1.0 / R 0.6753 / F1 0.8062，可判定样本 77 条；
+> frozen 对照（`relation_score_gold_frozen20261006_20261010.json`，同一批标注对
+> 10-06 冻结 gold）是 TP 52 / FN 0 / R 1.0，两者只差"评测范围"这一个变量。
+>
+> 另有 17 条关系（13 条 `cvss`、2 条 `version_range`、2 条 `fixed_version`）已在源头
+> 逐字回读通过 7 项核验，但**没有经过人工逐条签核**，因此保持在
+> `pending_human_review`、不带 `human_verified` 签名，也**不计入任何分母**；
+> 22 条未核验（含 5 条 `poc` 既有待审项）与 58 条"无法定论"同样单列。签核后这 17 条
+> 可经 `--promote` 落地，届时 TP 由 52 升到 69、Recall 由 0.6753 升到 0.734。
+>
+> 25 条已验证漏检集中在 NVD `configurations`（24 条，根因是采集链路从未合并该字段）
+> 与 MITRE `lessThan`（1 条，根因是 `fixed_version` 未从区间推导），每条都带可回读的
+> 源头定位与 `why_expected` / `why_missed`（不猜、不补）。**本批次所有 Recall / F1 只代表
+> 当前评测范围，不代表全语料召回率**；OSV 批量响应中另外 1889 条公告只带回
+> `id`/`modified`、离线枚举不出修复版本，这一采集侧缺口已在 gold 的
+> `completeness.sources_not_covered` 中如实记录。10-04 / 10-06 的冻结产物字节未变。
