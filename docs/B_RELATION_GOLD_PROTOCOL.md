@@ -228,3 +228,186 @@ relations are extractable`）：
 * 页面口径的 **Recall / F1 = 100% 只代表当前评测范围**（第 2 节那 11 个对象、4 个维度、
   抽样穷尽口径），**不代表全语料召回率**；范围内仍以 `pending_human_review` 单列，
   范围外不做任何推算。
+
+## 12. 2026-10-10 批次：关系评测扩样 + OSV 解析
+
+### 12.1 扩样口径（2026-10-10 确认）
+
+| 评测维度 | 原样本量 | 新样本量 | 采用方式 |
+|---|---|---|---|
+| `paper_link` | 3 篇 | 16 篇 | 16 篇论文全量纳入 |
+| `version_range` / `fixed_version` | 2 个 | 12 个 | 12 个生态事件全量纳入 |
+| CVE 相关关系 | 3 个 | 37 个 | 37 个 CVE 全量**盘点**，按证据覆盖分层 |
+
+CVE 不按"有没有 NVD 快照"挑样本，也不把没有快照的样本直接算作 FN，而是分三层：
+
+* **可核验样本（14）**：副本内有 NVD / MITRE 快照可回读，或事件自带 CVSS 向量 /
+  非 `unknown` 区间。纳入正式 precision / recall / F1 计算。
+* **证据不足样本（23）**：事件只有一个 `unknown` 区间（KEV 类来源不给版本边界），
+  副本内没有 NVD / MITRE 快照。**只统计数量与原因，不进任何分母**。
+* **新增漏检（25）**：源头明确声明、候选集里没有、且已逐字回读确认。人工复核后才计入 FN。
+
+**16 篇论文 / 12 个生态事件 / 37 个 CVE 是盘点范围，不代表全部进同一个分母。**
+各维度的实际纳入量、证据覆盖量、排除量及排除原因都写在 gold 的 `scope` 里
+（`inventory` / `tiers` / `enumerated` / `excluded_not_enumerable`），页面直接读它，
+不按批次日推测。
+
+### 12.2 新接入的源头（只翻译原文，不推断、不补全）
+
+* **OSV**：`affected[].ranges[].events[]` 的 `introduced` / `fixed` / `last_affected`；
+* **NVD**：`configurations[].nodes[].cpeMatch[]` 的 `versionStartIncluding` /
+  `versionEndExcluding` 等版本边界（`versionEndExcluding` 即首个修复版本）；
+* **MITRE CVE 记录**：`containers.cna.affected[].versions[].lessThan`（`< X` ⇒ 修复于 `X`）。
+
+明确写清的**覆盖缺口**（不伪装成已覆盖）：
+
+* OSV 批量查询响应里有 1901 条公告，但只有 `id` / `modified`，没有 `affected`，
+  离线推不出区间；采集侧按预算只取回 12 条详情（`OSV_DETAIL_BUDGET = 12`）。
+  **这是"搜不全"的真实缺口**，如实记进 `completeness.sources_not_covered`。
+* NVD 快照只覆盖副本里已抓取的 5 个 CVE（`nvd_records_without_event = 398`）。
+
+### 12.3 候选集零变化（分数变化只来自枚举口径）
+
+`evaluation/b_relation_candidates_20261010.json` 与 `_20261006.json` **逐字节相同**
+（SHA256 `415430c4…78ae53`，132 条）。因此本轮的分数变化**全部来自源头枚举口径**，
+没有掺入任何候选集变化；`tests/test_b_relation_expansion.py` 对此有断言。
+
+### 12.4 人工核验（17 条，逐条逐字回读）
+
+`tools/verify_b_relation_expansion.py` 对"源头已声明、候选尚未判 positive"的关系逐条做
+7 项检查（`event_exists` / `candidate_found` / `candidate_object_matches` /
+`source_locator_resolves` / `source_value_matches` / `source_byte_rereadable` /
+`annotation_not_contradictory`），任一项不过就 exit=1，不写"看起来没问题"的结论。
+
+本批次核验 42 条：**可升级 17、被挡 0、新增漏检 25（其中源头不可回读 0）**。
+17 条的构成：`cvss` 13 条（含 2 个生态事件此前为 `unknown` 的 cvss）、
+`version_range` 2 条、`fixed_version` 2 条。署名沿用仓库既有口径
+（`人工复核-用户确认` / `2026-10-10`）。
+
+清单：`artifacts/b_eval/relation_expansion_verification_20261010.json`；
+升级清单：`artifacts/b_eval/relation_new_positive_proposals_20261010.json`。
+注意 `--labeled` 必须指向**升级前**的标注状态（本批次用的是 `_20261006`），
+否则已升级项会被跳过，得到 0 条 —— 那是自证而不是核验。
+
+### 12.5 分数变化
+
+| 口径 | 输入 | gold | TP | FP | FN | P | R | F1 |
+|---|---|---|---|---|---|---|---|---|
+| 10-04 冻结基线 | 121 条 | `gold_20261004` | 47 | 0 | 5 | 1.0 | 0.9038 | 0.9495 |
+| 10-06 批次 | 132 条 | `gold_20261006` | 52 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+| **本批次（页面口径，active）** | 标注 `_20261010` | `gold_20261010` | **69** | 0 | **25** | 1.0 | **0.734** | **0.8466** |
+| 本批次（扩样前口径，对照） | 标注 `_20261010` | `gold_20261006` | 69 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+
+分维度（页面口径）：
+
+| 维度 | TP | FP | FN | P | R | F1 |
+|---|---|---|---|---|---|---|
+| `cvss` | 28 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+| `version_range` | 13 | 0 | 12 | 1.0 | 0.52 | 0.6842 |
+| `fixed_version` | 12 | 0 | 13 | 1.0 | 0.48 | 0.6486 |
+| `paper_link` | 16 | 0 | 0 | 1.0 | 1.0 | 1.0 |
+
+**分数下降是扩样带来的，不是退化**：接入 OSV ranges / NVD configurations / MITRE
+`lessThan` 之后，分母里第一次出现了"源头早就写着、系统一直没抽"的关系。
+`cvss` 维度仍是 28/28 全中；新增 25 条 FN 全部落在 `version_range` / `fixed_version`。
+
+### 12.6 本批次新识别的 25 条漏检
+
+| 来源 | 事件 | 条数 | 为什么漏 |
+|---|---|---|---|
+| NVD `configurations` | CVE-2025-6558 | 18（9 平台 ×2） | 采集链路从未合并 NVD 的 `configurations`（CPE 产品 + 版本边界）；事件 `affected[].range` 只有 KEV 给的 `unknown` |
+| NVD `configurations` | CVE-2025-62593 / CVE-2026-33017 / CVE-2026-64849 | 6 | 同上 |
+| MITRE `lessThan` | CVE-2025-9959 | 1 | `app/normalize.mitre_to_event` 只把区间写进 `affected[].range`，`fixed_version` 一律留空 |
+
+每条都带 `why_expected` / `why_missed` 与可回读的 `source_path` + `source_locator`
+（不猜、不补）：见 `artifacts/b_eval/relation_missed_relations_20261010.json`。
+
+### 12.7 页面口径
+
+`_active_relation()` 自动取日期最大的 `relation_score_gold_*.json`，因此产出
+`_20261010` 后页面自动切到新批次，**不需要改代码切批次**；
+`_contrast_relation()` 自动接上 `relation_score_gold_frozen20261006_20261010.json`
+（扩样前口径）。两者的 `scope` 都随金标准展示：盘点量、CVE 分层、
+排除量与排除原因。页面文案明确写着"当前 Recall 只代表本批次的评测范围，
+不代表全语料召回率"。
+
+### 12.8 本批次局限
+
+* 仍是**抽样穷尽**：16/12/37 是盘点范围，不是全语料；
+* OSV 详情只取回 12 条（预算），批量响应里另外 1889 条公告离线枚举不出区间；
+* NVD 快照只覆盖 5 个 CVE，23 个 KEV CVE 进"证据不足"层，不进分母；
+* 10-06 的 gold 曾把事件字段里的 `unknown` 区间当作可比关系枚举（因此那 3 条落在
+  `uncertain` 里）；10-10 起 `unknown` 一律记为"不可枚举"（`excluded_not_enumerable`），
+  `--scope legacy` 仍能复现 10-06 的 `expected_relation_ids`，差异只在这一处；
+* `poc` 与 `asset_assessment` 仍单列；
+* 工具需要显式 `--db-dir` 或环境变量：`app.config.load_env_file()` 没有在命令行工具
+  之前调用，直接跑工具时 `INTEL_DATA_DIR` 不生效（本次全程用命令行参数指定副本库，只读）。
+
+### 12.9 复现命令
+
+```powershell
+$env:INTEL_DATA_DIR='D:\ICT\intel-data-b-cvss-20261006'   # 只读副本库
+
+# 1) 候选集（与 10-06 逐字节相同，用来说明"分数变化不来自候选"）
+.\.venv\Scripts\python.exe tools\build_b_relation_candidates.py `
+    --out evaluation\b_relation_candidates_20261010.json
+
+# 2) 把上一批标注按内容迁移到本批候选
+.\.venv\Scripts\python.exe tools\relabel_b_relation_candidates.py `
+    --from artifacts\b_eval\relation_candidates_labeled_20261006.json `
+    --system evaluation\b_relation_candidates_20261010.json `
+    --out artifacts\b_eval\relation_candidates_labeled_20261010.json
+
+# 3) 核验"源头写着、候选还没判 positive"的关系（--labeled 用升级前的状态）
+.\.venv\Scripts\python.exe tools\verify_b_relation_expansion.py `
+    --db-dir D:\ICT\intel-data-b-cvss-20261006 `
+    --candidates evaluation\b_relation_candidates_20261010.json `
+    --labeled artifacts\b_eval\relation_candidates_labeled_20261006.json `
+    --out artifacts\b_eval\relation_expansion_verification_20261010.json `
+    --proposals-out artifacts\b_eval\relation_new_positive_proposals_20261010.json `
+    --verified-by 人工复核-用户确认 --verified-at 2026-10-10
+
+# 4) 落标注（只升级核验清单里的条目）
+.\.venv\Scripts\python.exe tools\relabel_b_relation_candidates.py `
+    --from artifacts\b_eval\relation_candidates_labeled_20261006.json `
+    --system evaluation\b_relation_candidates_20261010.json `
+    --promote artifacts\b_eval\relation_new_positive_proposals_20261010.json `
+    --out artifacts\b_eval\relation_candidates_labeled_20261010.json
+
+# 5) 重跑 gold 与两份评分
+.\.venv\Scripts\python.exe tools\build_b_relation_gold.py `
+    --db-dir D:\ICT\intel-data-b-cvss-20261006 `
+    --system-output evaluation\b_relation_candidates_20261010.json `
+    --labeled-input artifacts\b_eval\relation_candidates_labeled_20261010.json `
+    --former-missed artifacts\b_eval\relation_missed_relations_20261006.json `
+    --gold-out evaluation\b_relation_gold_20261010.json `
+    --missed-out artifacts\b_eval\relation_missed_relations_20261010.json `
+    --scope-input-out artifacts\b_eval\relation_candidates_labeled_gold_scope_20261010.json
+
+.\.venv\Scripts\python.exe tools\score_b_relation_annotations.py `
+    --input artifacts\b_eval\relation_candidates_labeled_20261010.json `
+    --gold evaluation\b_relation_gold_20261010.json `
+    --out artifacts\b_eval\relation_score_gold_20261010.json
+
+.\.venv\Scripts\python.exe tools\score_b_relation_annotations.py `
+    --input artifacts\b_eval\relation_candidates_labeled_20261010.json `
+    --gold evaluation\b_relation_gold_20261006.json `
+    --out artifacts\b_eval\relation_score_gold_frozen20261006_20261010.json
+```
+
+### 12.10 可写进报告的结论
+
+> 本批次把关系评测的抽样口径从 11 个对象扩到 16 篇论文 / 12 个生态事件 / 37 个 CVE
+> 的全量盘点，并把 OSV `ranges[].events`、NVD `configurations` 的版本边界、
+> MITRE `lessThan` 三条源头声明正式接入枚举。CVE 按证据覆盖分层：14 个可核验样本
+> 进入评分分母，23 个只声明 `unknown` 区间且副本内无权威快照的 KEV 条目单列数量与
+> 原因、不进任何分母，避免把"无法核验"误算成漏检。候选集与上一批次逐字节相同
+> （SHA256 一致），因此本轮分数变化全部来自枚举口径：TP 52 → 69、FN 0 → 25、
+> Recall 1.0 → 0.734、F1 1.0 → 0.8466。分数下降是扩样带来的分母变大与真实漏检显形，
+> 而非系统退化；新显形的 25 条漏检集中在 NVD `configurations`（24 条，根因是采集
+> 链路从未合并该字段）与 MITRE `lessThan`（1 条，根因是 `fixed_version` 未从区间推导），
+> 每条都带可回读的源头定位与 `why_expected` / `why_missed`。17 条"源头写着、候选尚未
+> 判 positive"的关系经 7 项逐字回读核验后升级为 `human_verified/positive`；其余 25 条
+> 新漏检作为 FN 如实计入。**本批次所有 Recall / F1 只代表当前评测范围，不代表全语料
+> 召回率**；OSV 批量响应中另外 1889 条公告只带回 `id`/`modified`、离线枚举不出修复
+> 版本，这一采集侧缺口已在 gold 的 `completeness.sources_not_covered` 中如实记录。

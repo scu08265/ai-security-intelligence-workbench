@@ -1,0 +1,781 @@
+{
+ "schema_version": "b-relation-gold-1.0",
+ "expected_relation_ids": {
+  "BREL-CV-0019": "cvss",
+  "BREL-VE-0021": "version_range",
+  "BREL-FI-0010": "fixed_version",
+  "BREL-CV-0015": "cvss",
+  "BREL-VE-0017": "version_range",
+  "BREL-FI-0006": "fixed_version",
+  "BREL-CV-0016": "cvss",
+  "BREL-VE-0018": "version_range",
+  "BREL-FI-0007": "fixed_version",
+  "BREL-CV-0026": "cvss",
+  "BREL-VE-0031": "version_range",
+  "BREL-FI-0012": "fixed_version",
+  "BREL-CV-0020": "cvss",
+  "BREL-VE-0022": "version_range",
+  "BREL-FI-0011": "fixed_version",
+  "BREL-CV-0018": "cvss",
+  "BREL-VE-0020": "version_range",
+  "BREL-FI-0009": "fixed_version",
+  "BREL-CV-0017": "cvss",
+  "BREL-VE-0019": "version_range",
+  "BREL-FI-0008": "fixed_version",
+  "BREL-CV-0014": "cvss",
+  "BREL-VE-0016": "version_range",
+  "BREL-FI-0005": "fixed_version",
+  "BREL-CV-0013": "cvss",
+  "BREL-VE-0015": "version_range",
+  "BREL-FI-0004": "fixed_version",
+  "BREL-CV-0011": "cvss",
+  "BREL-VE-0013": "version_range",
+  "BREL-FI-0002": "fixed_version",
+  "BREL-CV-0012": "cvss",
+  "BREL-VE-0014": "version_range",
+  "BREL-FI-0003": "fixed_version",
+  "BREL-CV-0010": "cvss",
+  "BREL-VE-0012": "version_range",
+  "BREL-FI-0001": "fixed_version",
+  "BREL-CV-0022": "cvss",
+  "BREL-CV-0023": "cvss",
+  "BREL-CV-0028": "cvss",
+  "BREL-CV-0027": "cvss",
+  "BREL-VE-0032": "version_range",
+  "BREL-CV-0024": "cvss",
+  "BREL-CV-0025": "cvss",
+  "BREL-CV-0001": "cvss",
+  "BREL-CV-0002": "cvss",
+  "BREL-CV-0003": "cvss",
+  "BREL-CV-0004": "cvss",
+  "BREL-CV-0005": "cvss",
+  "BREL-CV-0006": "cvss",
+  "BREL-CV-0007": "cvss",
+  "BREL-CV-0008": "cvss",
+  "BREL-CV-0009": "cvss",
+  "BREL-CV-0021": "cvss",
+  "BREL-PA-0009": "paper_link",
+  "BREL-PA-0016": "paper_link",
+  "BREL-PA-0022": "paper_link",
+  "BREL-PA-0023": "paper_link",
+  "BREL-PA-0024": "paper_link",
+  "BREL-PA-0025": "paper_link",
+  "BREL-PA-0026": "paper_link",
+  "BREL-PA-0027": "paper_link",
+  "BREL-PA-0028": "paper_link",
+  "BREL-PA-0029": "paper_link",
+  "BREL-PA-0030": "paper_link",
+  "BREL-PA-0031": "paper_link",
+  "BREL-PA-0032": "paper_link",
+  "BREL-PA-0033": "paper_link",
+  "BREL-PA-0034": "paper_link",
+  "BREL-PA-0035": "paper_link",
+  "BREL-GOLD-FN-VE-0001": "version_range",
+  "BREL-GOLD-FN-FI-0001": "fixed_version",
+  "BREL-GOLD-FN-VE-0002": "version_range",
+  "BREL-GOLD-FN-FI-0002": "fixed_version",
+  "BREL-GOLD-FN-VE-0003": "version_range",
+  "BREL-GOLD-FN-FI-0003": "fixed_version",
+  "BREL-GOLD-FN-VE-0004": "version_range",
+  "BREL-GOLD-FN-FI-0004": "fixed_version",
+  "BREL-GOLD-FN-VE-0005": "version_range",
+  "BREL-GOLD-FN-FI-0005": "fixed_version",
+  "BREL-GOLD-FN-VE-0006": "version_range",
+  "BREL-GOLD-FN-FI-0006": "fixed_version",
+  "BREL-GOLD-FN-VE-0007": "version_range",
+  "BREL-GOLD-FN-FI-0007": "fixed_version",
+  "BREL-GOLD-FN-VE-0008": "version_range",
+  "BREL-GOLD-FN-FI-0008": "fixed_version",
+  "BREL-GOLD-FN-VE-0009": "version_range",
+  "BREL-GOLD-FN-FI-0009": "fixed_version",
+  "BREL-GOLD-FN-VE-0010": "version_range",
+  "BREL-GOLD-FN-FI-0010": "fixed_version",
+  "BREL-GOLD-FN-VE-0011": "version_range",
+  "BREL-GOLD-FN-FI-0011": "fixed_version",
+  "BREL-GOLD-FN-VE-0012": "version_range",
+  "BREL-GOLD-FN-FI-0012": "fixed_version",
+  "BREL-GOLD-FN-FI-0013": "fixed_version"
+ },
+ "scope": {
+  "mode": "full",
+  "kind": "sample_exhaustive",
+  "note": "抽样穷尽，不是全语料穷尽：这里列出的是本批次**盘点**的全部对象；CVE 按证据覆盖分层，只有'可核验'层进入评分分母。",
+  "events": [
+   "GHSA-3g9q-v48f-hh9w",
+   "GHSA-8pw2-6jv3-mj5j",
+   "GHSA-hcwq-8wjf-3gcr",
+   "GHSA-mcmc-2m55-j8jj",
+   "GHSA-v39v-59xw-j98g",
+   "GHSA-wvm9-9g5j-623f",
+   "PYSEC-2026-3985",
+   "PYSEC-2026-3996",
+   "PYSEC-2026-3997",
+   "PYSEC-2026-3998",
+   "PYSEC-2026-3999",
+   "PYSEC-2026-4000",
+   "CVE-2014-4114",
+   "CVE-2014-6332",
+   "CVE-2020-10987",
+   "CVE-2021-27876",
+   "CVE-2021-27877",
+   "CVE-2021-27878",
+   "CVE-2021-28663",
+   "CVE-2021-28664",
+   "CVE-2021-29256",
+   "CVE-2022-22706",
+   "CVE-2022-38181",
+   "CVE-2022-4135",
+   "CVE-2023-26083",
+   "CVE-2023-4211",
+   "CVE-2024-29988",
+   "CVE-2024-4610",
+   "CVE-2025-3248",
+   "CVE-2025-34291",
+   "CVE-2025-62593",
+   "CVE-2025-6558",
+   "CVE-2025-68613",
+   "CVE-2025-9959",
+   "CVE-2026-0770",
+   "CVE-2026-33017",
+   "CVE-2026-41106",
+   "CVE-2026-41109",
+   "CVE-2026-45499",
+   "CVE-2026-47282",
+   "CVE-2026-48561",
+   "CVE-2026-50510",
+   "CVE-2026-50517",
+   "CVE-2026-55145",
+   "CVE-2026-55255",
+   "CVE-2026-56167",
+   "CVE-2026-58617",
+   "CVE-2026-64849",
+   "CVE-2026-9198"
+  ],
+  "papers": [
+   "paper:2501.13787",
+   "paper:2606.15617",
+   "paper:2609.28900",
+   "paper:2609.28915",
+   "paper:2609.28996",
+   "paper:2609.29228",
+   "paper:2609.29230",
+   "paper:2609.29333",
+   "paper:2609.29429",
+   "paper:2609.29757",
+   "paper:2609.29808",
+   "paper:2609.30028",
+   "paper:2609.30192",
+   "paper:2609.30217",
+   "paper:2609.30243",
+   "paper:2609.30266"
+  ],
+  "official_documents": [
+   "official:eu_ai_act",
+   "source:nist_ai_rmf",
+   "source:owasp_genai"
+  ],
+  "snapshot_targets": {
+   "cve": [
+    "CVE-2025-62593",
+    "CVE-2025-6558",
+    "CVE-2025-9959",
+    "CVE-2026-33017",
+    "CVE-2026-41106",
+    "CVE-2026-41109",
+    "CVE-2026-45499",
+    "CVE-2026-47282",
+    "CVE-2026-50510",
+    "CVE-2026-50517",
+    "CVE-2026-55145",
+    "CVE-2026-56167",
+    "CVE-2026-58617",
+    "CVE-2026-64849"
+   ],
+   "ecosystem": [
+    "GHSA-3g9q-v48f-hh9w",
+    "GHSA-8pw2-6jv3-mj5j",
+    "GHSA-hcwq-8wjf-3gcr",
+    "GHSA-mcmc-2m55-j8jj",
+    "GHSA-v39v-59xw-j98g",
+    "GHSA-wvm9-9g5j-623f",
+    "PYSEC-2026-3985",
+    "PYSEC-2026-3996",
+    "PYSEC-2026-3997",
+    "PYSEC-2026-3998",
+    "PYSEC-2026-3999",
+    "PYSEC-2026-4000"
+   ]
+  },
+  "inventory": {
+   "papers": 16,
+   "ecosystem_events": 12,
+   "cve_events": 37
+  },
+  "tiers": {
+   "cve_verifiable": {
+    "count": 14,
+    "items": [
+     {
+      "event": "CVE-2025-62593",
+      "evidence": [
+       "副本内有 NVD 快照（metrics / configurations 可回读）",
+       "事件自带 CVSS 向量 ×2"
+      ]
+     },
+     {
+      "event": "CVE-2025-6558",
+      "evidence": [
+       "副本内有 NVD 快照（metrics / configurations 可回读）",
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2025-9959",
+      "evidence": [
+       "副本内有 NVD 快照（metrics / configurations 可回读）",
+       "副本内有 MITRE CVE 记录（versions 可回读）",
+       "事件自带 CVSS 向量 ×1",
+       "事件已声明可比区间"
+      ]
+     },
+     {
+      "event": "CVE-2026-33017",
+      "evidence": [
+       "副本内有 NVD 快照（metrics / configurations 可回读）",
+       "事件自带 CVSS 向量 ×2"
+      ]
+     },
+     {
+      "event": "CVE-2026-41106",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-41109",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-45499",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-47282",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-50510",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-50517",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-55145",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-56167",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-58617",
+      "evidence": [
+       "事件自带 CVSS 向量 ×1"
+      ]
+     },
+     {
+      "event": "CVE-2026-64849",
+      "evidence": [
+       "副本内有 NVD 快照（metrics / configurations 可回读）",
+       "事件自带 CVSS 向量 ×1"
+      ]
+     }
+    ],
+    "note": "有权威快照或事件自带可核验事实，进评分分母"
+   },
+   "cve_insufficient_evidence": {
+    "count": 23,
+    "items": [
+     {
+      "event": "CVE-2014-4114",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2014-6332",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2020-10987",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2021-27876",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2021-27877",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2021-27878",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2021-28663",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2021-28664",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2021-29256",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2022-22706",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2022-38181",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2022-4135",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2023-26083",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2023-4211",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2024-29988",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2024-4610",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2025-3248",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2025-34291",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2025-68613",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2026-0770",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2026-48561",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2026-55255",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     },
+     {
+      "event": "CVE-2026-9198",
+      "reason": "事件只有一个 unknown 区间（KEV 类来源不给版本边界），副本内没有 NVD / MITRE 快照可回读，没有可核验的版本事实"
+     }
+    ],
+    "note": "只统计数量与原因，不进任何分母（避免把'无法核验'算成漏检）"
+   },
+   "ecosystem_events_verifiable": {
+    "count": 12,
+    "note": "每个生态事件都有 OSV 快照声明区间与修复版本，可逐字回读"
+   },
+   "papers_full": {
+    "count": 16,
+    "note": "16 篇论文全量纳入 paper_link 维度"
+   },
+   "official_documents": {
+    "count": 3,
+    "note": "官方/标准文档不参与六维度关系，预期 0 条并已核对"
+   }
+  },
+  "snapshot_coverage": {
+   "osv": {
+    "snapshot_files": 13,
+    "detail_records": 12,
+    "records_in_scope": 12,
+    "records_out_of_scope": [],
+    "batch_response_files": 1,
+    "batch_advisory_ids": 1901,
+    "batch_records_with_body": 0,
+    "ranges_skipped": [],
+    "relations": 24,
+    "relations_deduped_by_source": 24
+   },
+   "nvd": {
+    "snapshot_files": 5,
+    "records_in_scope": 5,
+    "in_scope_ids": [
+     "CVE-2025-6558",
+     "CVE-2025-9959",
+     "CVE-2025-62593",
+     "CVE-2026-33017",
+     "CVE-2026-64849"
+    ],
+    "matches_skipped": [],
+    "relations": 31,
+    "relations_by_dimension": {
+     "cvss": 7,
+     "version_range": 12,
+     "fixed_version": 12
+    }
+   },
+   "nvd_records_without_event": 398,
+   "mitre": {
+    "snapshot_files": 1,
+    "records_in_scope": 1,
+    "in_scope_ids": [
+     "CVE-2025-9959"
+    ],
+    "records_without_event": [],
+    "versions_skipped": [],
+    "relations": 2,
+    "relations_by_dimension": {
+     "version_range": 1,
+     "fixed_version": 1
+    }
+   }
+  },
+  "dimensions_in_scope": [
+   "paper_link",
+   "version_range",
+   "fixed_version",
+   "cvss"
+  ],
+  "dimensions_excluded": {
+   "poc": "已由 POC 签核单独核验（16 yes / 16 no），本次不并入 gold，避免与本轮四维口径混算",
+   "asset_assessment": "资产为合成资产（synthetic=true），不作为真实金标准"
+  },
+  "enumerated": {
+   "declared_relations": 94,
+   "by_dimension": {
+    "cvss": 28,
+    "version_range": 25,
+    "fixed_version": 25,
+    "paper_link": 16
+   },
+   "note": "枚举量 = 盘点范围内源头明确声明的关系条数（去重后）；不等于评分分母，分母只由'人工核验 positive'与'真实漏检'组成。"
+  },
+  "excluded_not_enumerable": {
+   "count": 37,
+   "items": [
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2014-4114",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2014-4114].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2014-6332",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2014-6332].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2020-10987",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2020-10987].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2021-27876",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2021-27876].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2021-27877",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2021-27877].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2021-27878",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2021-27878].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2021-28663",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2021-28663].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2021-28664",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2021-28664].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2021-29256",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2021-29256].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2022-22706",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2022-22706].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2022-38181",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2022-38181].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2022-4135",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2022-4135].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2023-26083",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2023-26083].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2023-4211",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2023-4211].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2024-29988",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2024-29988].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2024-4610",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2024-4610].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2025-3248",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2025-3248].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2025-34291",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2025-34291].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2025-62593",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2025-62593].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2025-6558",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2025-6558].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2025-68613",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2025-68613].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-0770",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-0770].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-33017",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-33017].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-41106",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-41106].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-41109",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-41109].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-45499",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-45499].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-47282",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-47282].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-48561",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-48561].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-48561",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-48561].affected[1].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-50510",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-50510].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-50517",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-50517].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-55145",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-55145].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-55255",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-55255].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-56167",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-56167].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-58617",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-58617].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-64849",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-64849].affected[0].range"
+    },
+    {
+     "kind": "range_unknown",
+     "dimension": "version_range",
+     "subject": "CVE-2026-9198",
+     "reason": "事件只有 unknown 区间（KEV/MSRC 等来源不给版本边界），源头没有可比版本，不作为应抽取关系",
+     "source_path": "events[CVE-2026-9198].affected[0].range"
+    }
+   ],
+   "note": "源头没有可比事实（unknown 区间 / GIT 区间 / 批量响应缺正文），如实排除，不计入任何分母。"
+  }
+ },
+ "completeness": {
+  "source_of_truth": [
+   "事件字段 cvss[]/affected[]/paper",
+   "副本内 NVD 快照 metrics + configurations[].nodes[].cpeMatch[]",
+   "副本内 OSV 快照 affected[].ranges[].events[]（introduced / fixed / last_affected）",
+   "副本内 MITRE CVE 记录 containers.cna.affected[].versions[]（lessThan）"
+  ],
+  "sources_not_covered": [
+   "OSV 批量查询响应里只有 id/modified，没有 affected，离线枚举不出区间（本次响应命中 1901 条公告，采集侧按预算只取回 12 条详情）",
+   "NVD 快照只覆盖副本里已抓取的文件（其余 CVE 无快照可回读）",
+   "官方/标准文档（NIST/OWASP/EU AI Act）不参与六维度关系，预期 0 条并已核对"
+  ],
+  "sampled_relations_declared_by_sources": 94,
+  "system_extracted_and_positive": 69,
+  "system_extracted_but_undecided": 0,
+  "missed": 25,
+  "not_enumerable": 37,
+  "former_missed_total": 0,
+  "former_missed_resolved": 0
+ },
+ "uncertain": [],
+ "protocol_ref": "docs/B_RELATION_GOLD_PROTOCOL.md",
+ "former_gold_ref": "evaluation/b_relation_gold_20261006.json",
+ "former_missed_ref": "artifacts/b_eval/relation_missed_relations_20261006.json",
+ "resolved_former_ids": {}
+}

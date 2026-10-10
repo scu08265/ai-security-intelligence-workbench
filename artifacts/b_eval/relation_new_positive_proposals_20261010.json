@@ -1,0 +1,355 @@
+{
+ "schema_version": "b-relation-promotions-1.0",
+ "source_verification": "evaluation/b_relation_candidates_20261010.json",
+ "signature_required": true,
+ "counts": {
+  "promotions": 17
+ },
+ "promotions": [
+  {
+   "dimension": "cvss",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-3g9q-v48f-hh9w].cvss[0]",
+    "source_locator": "osv:2a6ec98dc3",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+     "osv:2a6ec98dc3"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-8pw2-6jv3-mj5j].cvss[0]",
+    "source_locator": "osv:8334ecbb11",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+     "osv:8334ecbb11"
+    ]
+   }
+  },
+  {
+   "dimension": "version_range",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "object": "vllm@< 0.28.0",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-8pw2-6jv3-mj5j].affected[0].range",
+    "source_locator": "osv:c8c0660a20",
+    "enumerated_value": "< 0.28.0",
+    "source_node_values": [
+     "< 0.28.0"
+    ]
+   }
+  },
+  {
+   "dimension": "fixed_version",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "object": "vllm@0.28.0",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-8pw2-6jv3-mj5j].affected[0].fixed_version",
+    "source_locator": "osv:c8c0660a20",
+    "enumerated_value": "0.28.0",
+    "source_node_values": [
+     "0.28.0"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-hcwq-8wjf-3gcr].cvss[0]",
+    "source_locator": "osv:cbbeac1a7e",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+     "osv:cbbeac1a7e"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-mcmc-2m55-j8jj].cvss[0]",
+    "source_locator": "osv:c7dc69d620",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+     "osv:c7dc69d620"
+    ]
+   }
+  },
+  {
+   "dimension": "version_range",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "object": "vllm@>= 0.10.2, < 0.13.0",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-mcmc-2m55-j8jj].affected[0].range",
+    "source_locator": "osv:31793381df",
+    "enumerated_value": ">= 0.10.2, < 0.13.0",
+    "source_node_values": [
+     ">= 0.10.2, < 0.13.0"
+    ]
+   }
+  },
+  {
+   "dimension": "fixed_version",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "object": "vllm@0.13.0",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-mcmc-2m55-j8jj].affected[0].fixed_version",
+    "source_locator": "osv:31793381df",
+    "enumerated_value": "0.13.0",
+    "source_node_values": [
+     "0.13.0"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-v39v-59xw-j98g].cvss[0]",
+    "source_locator": "osv:93abe9fe20",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+     "osv:93abe9fe20"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-wvm9-9g5j-623f].cvss[0]",
+    "source_locator": "osv:14612d1d78",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+     "osv:14612d1d78"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3985",
+   "object": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3985].cvss[0]",
+    "source_locator": "osv:0eb384018c",
+    "enumerated_value": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "source_node_values": [
+     "4.0",
+     "None",
+     "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+     "osv:0eb384018c"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3996",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3996].cvss[0]",
+    "source_locator": "osv:4f35217972",
+    "enumerated_value": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "source_node_values": [
+     "4.0",
+     "None",
+     "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+     "osv:4f35217972"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3997",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3997].cvss[0]",
+    "source_locator": "osv:79d583057f",
+    "enumerated_value": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "source_node_values": [
+     "4.0",
+     "None",
+     "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+     "osv:79d583057f"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3998",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3998].cvss[0]",
+    "source_locator": "osv:0433c36f31",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+     "osv:0433c36f31"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3999",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3999].cvss[0]",
+    "source_locator": "osv:481782e92b",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+     "osv:481782e92b"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-4000",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-4000].cvss[0]",
+    "source_locator": "osv:7819297e5f",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+     "osv:7819297e5f"
+    ]
+   }
+  },
+  {
+   "dimension": "cvss",
+   "subject": "CVE-2025-6558",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "label": "positive",
+   "verified_by": "人工复核-用户确认",
+   "verified_at": "2026-10-10",
+   "note": "工具按 source_path/source_locator 逐字比对通过；签名以人工签核为准",
+   "evidence": {
+    "source": "event_field",
+    "source_path": "events[CVE-2025-6558].cvss[0]",
+    "source_locator": "nvd:7bc5297b92",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "source_node_values": [
+     "3.1",
+     "8.8",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+     "nvd:7bc5297b92"
+    ]
+   }
+  }
+ ]
+}

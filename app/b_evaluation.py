@@ -107,6 +107,43 @@ def _qa_performance(payload: dict[str, Any] | None, batch: dict[str, Any] | None
     }
 
 
+def _relation_scope(payload: dict[str, Any] | None) -> dict[str, Any]:
+    """Project the sample-scope declaration that the score names as its gold.
+
+    The scoring file only carries counts; the declared inventory and the CVE
+    evidence tiers live in the gold file it points at.  Read that file back and
+    expose it verbatim instead of inferring scope from the batch date.
+    """
+    gold_source = (payload or {}).get("gold_source")
+    if not gold_source:
+        return {}
+    try:
+        gold = json.loads((config.BASE_DIR / str(gold_source)).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False, "gold_source": str(gold_source)}
+    scope = gold.get("scope") or {}
+    tiers = scope.get("tiers") or {}
+    excluded = scope.get("excluded_not_enumerable") or {}
+    return {
+        "available": True,
+        "gold_source": str(gold_source),
+        "mode": scope.get("mode"),
+        "note": scope.get("note"),
+        "inventory": scope.get("inventory") or {},
+        "dimensions_in_scope": scope.get("dimensions_in_scope") or [],
+        "dimensions_excluded": scope.get("dimensions_excluded") or {},
+        "enumerated": scope.get("enumerated") or {},
+        "tiers": {
+            name: {"count": (value or {}).get("count"), "note": (value or {}).get("note")}
+            for name, value in tiers.items() if isinstance(value, dict)
+        },
+        "excluded_not_enumerable": {
+            "count": excluded.get("count"),
+            "note": excluded.get("note"),
+        },
+    }
+
+
 def _relation(payload: dict[str, Any] | None, *, source: str | None = None) -> dict[str, Any]:
     if not payload:
         return {"available": False}
@@ -116,6 +153,8 @@ def _relation(payload: dict[str, Any] | None, *, source: str | None = None) -> d
     return {
         "available": True,
         "computable": bool(payload.get("computable")),
+        "input_source": payload.get("input_source"),
+        "gold_source": payload.get("gold_source"),
         "precision": micro.get("precision"),
         "recall": micro.get("recall"),
         "f1": micro.get("f1"),
@@ -140,6 +179,7 @@ def _relation(payload: dict[str, Any] | None, *, source: str | None = None) -> d
             for name, item in per_dimension.items() if isinstance(item, dict)
         },
         "source": source or "artifacts/b_eval/relation_score_all.json",
+        "scope": _relation_scope(payload),
     }
 
 

@@ -170,37 +170,45 @@ def test_active_multihop_uses_v2_batch_and_exposes_missing_edges():
 def test_active_relation_uses_gold_score_and_exposes_recall():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     active = body["active_relation"]
-    # 页面自动选用最新的 relation_score_gold_<日期>.json：2026-10-06 批次按同一协议
-    # 重跑 gold 后抽样范围内已无漏检（5 条旧合成 FN id 被解析成真实候选 id）。
-    # 对 10-04 冻结 gold 的评分（FN=5 / R=0.9123）保留在
-    # relation_score_gold_frozen20261004_20261006.json 作为对照，不抢 active。
-    assert active["source"].endswith("relation_score_gold_20261006.json")
+    # 页面自动选用最新的 relation_score_gold_<日期>.json：10-10 批次把枚举口径从
+    # 11 个对象扩到"全量盘点"（16 篇论文 / 12 个生态事件 / 37 个 CVE，CVE 按证据
+    # 覆盖分层）。扩样后第一次接入 OSV ranges / NVD configurations / MITRE lessThan，
+    # 因此新识别出 25 条真实漏检：分母变大，Recall 必然低于上一批，这是如实记录。
+    assert active["source"].endswith("relation_score_gold_20261010.json")
     assert active["precision"] == 1.0
-    assert active["recall"] == 1.0
-    assert active["f1"] == 1.0
-    assert (active["tp"], active["fp"], active["fn"]) == (52, 0, 0)
-    assert active["missing_relation_ids"] == 0
+    assert active["recall"] == 0.734
+    assert active["f1"] == 0.8466
+    assert (active["tp"], active["fp"], active["fn"]) == (69, 0, 25)
+    assert active["missing_relation_ids"] == 25
+    # 抽样范围与证据分层随金标准一起暴露，不由批次日推测。
+    assert active["gold_source"] == "evaluation/b_relation_gold_20261010.json"
+    assert active["scope"]["mode"] == "full"
+    assert active["scope"]["inventory"] == {"papers": 16, "ecosystem_events": 12, "cve_events": 37}
+    assert active["scope"]["tiers"]["cve_verifiable"]["count"] == 14
+    assert active["scope"]["tiers"]["cve_insufficient_evidence"]["count"] == 23
+    assert active["scope"]["excluded_not_enumerable"]["count"] == 37
     # 旧冻结基线保留：没有金标准时 Recall 仍不可计算
     assert body["relation"]["recall"] is None
 
 def test_contrast_relation_exposes_the_frozen_gold_scope():
     """Both scopes must be published, and the contrast file must not win.
 
-    The active line is the re-run gold; the contrast line is the same run
-    scored against the frozen 2026-10-04 gold.  Showing only the active one
-    invites the wrong conclusion, and letting the contrast file take over
-    the active slot would hide the improvement.
+    The active line is the expanded 10-10 gold (bigger denominator, so it is the
+    honest lower recall); the contrast line is the same run scored against the
+    frozen 10-06 gold, which only ever asked for the old, narrower sample.
+    Showing only one of them invites the wrong conclusion, and letting the
+    contrast file take over the active slot would hide the expansion.
     """
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     active = body["active_relation"]
     contrast = body["contrast_relation"]
-    assert active["source"].endswith("relation_score_gold_20261006.json")
-    assert active["fn"] == 0
-    assert active["recall"] == 1.0
-    assert contrast["source"].endswith("relation_score_gold_frozen20261004_20261006.json")
-    assert contrast["fn"] == 5
-    assert contrast["recall"] == 0.9123
-    assert contrast["f1"] == 0.9541
+    assert active["source"].endswith("relation_score_gold_20261010.json")
+    assert active["fn"] == 25
+    assert active["recall"] == 0.734
+    assert contrast["source"].endswith("relation_score_gold_frozen20261006_20261010.json")
+    assert contrast["fn"] == 0
+    assert contrast["recall"] == 1.0
+    assert contrast["f1"] == 1.0
     # The frozen-contrast file must never be mistaken for the active batch.
     assert "frozen" not in active["source"]
 

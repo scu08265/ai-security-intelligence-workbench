@@ -1,0 +1,126 @@
+{
+ "computable": true,
+ "input_source": "artifacts/b_eval/relation_candidates_labeled_20261010.json",
+ "gold_source": "evaluation/b_relation_gold_20261010.json",
+ "rule": "只有 annotation.status=human_verified 且 label 明确的候选进入统计；pending_human_review 与 unknown/not_applicable 单列，不计入任何分母。",
+ "prediction_default": {
+  "used": 69,
+  "assumption": "缺少 prediction.verdict 时视为 present（候选即系统输出）"
+ },
+ "fn_source": {
+  "available": true,
+  "expected_relation_ids": 94,
+  "missing_relation_ids": [
+   "BREL-GOLD-FN-FI-0001",
+   "BREL-GOLD-FN-FI-0002",
+   "BREL-GOLD-FN-FI-0003",
+   "BREL-GOLD-FN-FI-0004",
+   "BREL-GOLD-FN-FI-0005",
+   "BREL-GOLD-FN-FI-0006",
+   "BREL-GOLD-FN-FI-0007",
+   "BREL-GOLD-FN-FI-0008",
+   "BREL-GOLD-FN-FI-0009",
+   "BREL-GOLD-FN-FI-0010",
+   "BREL-GOLD-FN-FI-0011",
+   "BREL-GOLD-FN-FI-0012",
+   "BREL-GOLD-FN-FI-0013",
+   "BREL-GOLD-FN-VE-0001",
+   "BREL-GOLD-FN-VE-0002",
+   "BREL-GOLD-FN-VE-0003",
+   "BREL-GOLD-FN-VE-0004",
+   "BREL-GOLD-FN-VE-0005",
+   "BREL-GOLD-FN-VE-0006",
+   "BREL-GOLD-FN-VE-0007",
+   "BREL-GOLD-FN-VE-0008",
+   "BREL-GOLD-FN-VE-0009",
+   "BREL-GOLD-FN-VE-0010",
+   "BREL-GOLD-FN-VE-0011",
+   "BREL-GOLD-FN-VE-0012"
+  ],
+  "reason": null
+ },
+ "per_dimension": {
+  "cvss": {
+   "tp": 28,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 0,
+   "total": 28,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "fixed_version": {
+   "tp": 12,
+   "fp": 0,
+   "fn": 13,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 0,
+   "total": 12,
+   "precision": 1.0,
+   "recall": 0.48,
+   "f1": 0.6486,
+   "evaluable": true
+  },
+  "paper_link": {
+   "tp": 16,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 21,
+   "pending": 0,
+   "total": 37,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "evaluable": true
+  },
+  "poc": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "undetermined": 0,
+   "pending": 5,
+   "total": 5,
+   "precision": null,
+   "recall": null,
+   "f1": null,
+   "evaluable": false
+  },
+  "version_range": {
+   "tp": 13,
+   "fp": 0,
+   "fn": 12,
+   "tn": 0,
+   "undetermined": 37,
+   "pending": 0,
+   "total": 50,
+   "precision": 1.0,
+   "recall": 0.52,
+   "f1": 0.6842,
+   "evaluable": true
+  }
+ },
+ "micro": {
+  "tp": 69,
+  "fp": 0,
+  "fn": 25,
+  "tn": 0,
+  "precision": 1.0,
+  "recall": 0.734,
+  "f1": 0.8466,
+  "evaluable_samples": 94
+ },
+ "macro": {
+  "precision": 1.0,
+  "recall": 0.75,
+  "f1": 0.8571,
+  "dimensions_with_metrics": 4
+ },
+ "note": null
+}
