@@ -1,0 +1,87 @@
+# A 项处置闭环 live 证据（2026-10-08 生产库基线）
+
+本目录由 `tools/run_disposition_evidence.py` 在**生产库的独立副本**上通过正式 API 流程生成。
+运行时间：2026-10-09 21:30 (+08:00)。代码版本：`main` @ `addeba7`，`VERSION` = `0.2.4`。
+
+## 生成方式
+
+```powershell
+.\.venv\Scripts\python.exe tools\run_disposition_evidence.py `
+  --base-db data\intel.sqlite `
+  --output-dir artifacts\a_eval\disposition-live-closure-20261008
+```
+
+- 基线库：`data/intel.sqlite`，5,496,832 B，mtime `2026-10-08 18:04:16`，
+  SHA256 `b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8`
+- 操作前备份：`artifacts/backups/intel-20261009-213026.sqlite`（本轮补做，见下方“环境问题”）
+- 隔离方式：生成器只把基线库复制到本目录 `data/intel.sqlite`，再用 FastAPI `TestClient`
+  走真实 API；**生产库不被改写**，全程不访问外网。
+
+## 生产库生成前的原始状态
+
+见 `source-db-state.json`（按生产库原文件记录，不做任何加工）：
+
+| 表 | 行数 |
+| --- | --- |
+| events | 210 |
+| assets | 0 |
+| assessments | 0 |
+| assessment_dispositions | 0 |
+| runs | 272 |
+| rag_chunks | 849 |
+
+即：本轮开始时生产库里**只有采集数据，没有任何资产、研判或处置记录**。
+
+## 结果
+
+- 高优先级 `affected` 基线：4（全部来自合成 `asset-cdx-*` 资产）
+- 复测关闭：3；失败复测并保持 `fixed`：1
+- `closure_rate`：0.0 → **0.75**；`verified_rate`：0.0 → **0.75**
+- 状态机规则：**4 / 4 通过**（缺指派人被拒、仍受影响版本被降级、安全版本验证关闭、原始研判状态不被覆盖）
+- `/api/dispositions/metrics` 与 `/api/competition/scorecard.disposition`：**字段差异 0**
+- 本次研判共 71 条 findings，其中高优先级 4 条
+
+## 文件
+
+| 文件 | 内容 |
+| --- | --- |
+| `evidence.json` | 完整请求 / 响应 / 规则结果 / 指标时间线 |
+| `before-after.json` | 处置前后对比、合成/真实边界、accepted 对照组 |
+| `page-consistency.json` | metrics 与 scorecard 的 8 个字段逐项核对 |
+| `state-machine-rules.csv` | 4 条状态机规则逐项实测 |
+| `closure-timeline.csv` | 闭环率从 0.0 到 0.75 的过程 |
+| `source-db-state.json` | 生产库生成前的行数与 SHA256 |
+| `pytest-result.txt` | 全量测试结果 |
+
+## 测试
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests -q --basetemp=<可写目录> -p no:cacheprovider
+```
+
+结果：**590 passed, 59 skipped, 0 failed**（72.80s）。
+
+## 声明与限制
+
+1. 选中的高优先级条目**全部是合成 `asset-cdx-*` 资产**。
+2. 7 个真实运行时依赖资产已导入并参与研判，但该事件/组件交集没有产生高优先级 `affected` 条目。
+3. 生产库本轮开始时资产/研判/处置均为 0 行，因此“live”指的是**在真实生产库副本上、用当前
+   `main` 代码走完整 API 闭环**，不代表生产环境已有真实高危闭环。
+4. `D:\ICT\intel-data-b-poc-20261002` 数据副本不在本机，无法声称复现其中 27 条基线。
+5. commit `b3e09b3` 提到的冻结口径场景（闭环率保持 `11.76%` 而非跌到 `3.23%`）在本机
+   **无对应数据库**：现存所有 sqlite 中没有任何一个含 34 条高优先级队列，因此无法复现该数字。
+6. `verified` 只表示系统按当前资产版本重新研判通过，**不代表生产环境已经实际执行升级**。
+7. `accepted` 仅用于验证口径，不计入 `verified_rate`。
+
+## 环境问题（复现时必须知道）
+
+- 原有 `.venv` 已损坏：`pyvenv.cfg` 指向已不存在的 Codex 运行时
+  `C:\Users\17705\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`。
+  本轮用系统 Python 3.13.5 重建 `.venv` 并 `pip install -r requirements.txt`，
+  旧环境保留为 `.venv.broken-codex-20261009/`。
+- 多个路径带有失效 ACL：`%TEMP%\pytest-of-17705`、项目内 `.pytest_cache/`、`work/pytest-*`
+  只授权给同机失效账号 `S-1-5-21-...-1007`，而当前账号是 `-1001`，导致 `pytest` 报
+  `PermissionError: [WinError 5]`。本轮用 `--basetemp` 指向可写目录绕过。
+- `artifacts/backups/intel-20261008-211841.sqlite` 在 `D:\新建文件夹\2026-09-26\ba` 下
+  并不存在（`artifacts/backups/` 只有 2026-09-27 ~ 10-01 的备份），故本轮先补做了
+  `intel-20261009-213026.sqlite` 才执行。

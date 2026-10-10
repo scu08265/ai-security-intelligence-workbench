@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-09T13:31:40Z",
+  "database": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
+  "size_bytes": 5496832,
+  "modified_at": "2026-10-08T10:04:16Z",
+  "sha256": "b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8",
+  "row_counts": {
+    "events": 210,
+    "assets": 0,
+    "assessments": 0,
+    "assessment_dispositions": 0,
+    "runs": 272,
+    "rag_chunks": 849
+  },
+  "assets_by_origin": [],
+  "assessments_by_status_priority": [],
+  "dispositions_by_status": [],
+  "note": "本文件记录 live 证据生成前的生产库原始状态。run_disposition_evidence.py 只复制该库，不改写它。"
+}

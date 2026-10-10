@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-10-09T13:30:40Z",
+  "api_metrics": {
+    "high_priority_total": 4,
+    "high_priority_closed": 3,
+    "high_priority_verified": 3,
+    "high_priority_in_progress": 1,
+    "closure_rate": 0.75,
+    "verified_rate": 0.75,
+    "status_breakdown": {
+      "open": 0,
+      "in_progress": 0,
+      "fixed": 1,
+      "verified": 3,
+      "accepted": 0
+    },
+    "findings_total": 71
+  },
+  "scorecard_disposition": {
+    "high_priority_total": 4,
+    "high_priority_closed": 3,
+    "high_priority_verified": 3,
+    "high_priority_in_progress": 1,
+    "closure_rate": 0.75,
+    "verified_rate": 0.75,
+    "status_breakdown": {
+      "open": 0,
+      "in_progress": 0,
+      "fixed": 1,
+      "verified": 3,
+      "accepted": 0
+    },
+    "findings_total": 71
+  },
+  "ui_binding": {
+    "endpoint": "/api/competition/scorecard",
+    "field": "disposition",
+    "card": "处置闭环",
+    "source": "app/static/app.js"
+  },
+  "field_mismatches": [],
+  "consistent": true
+}
