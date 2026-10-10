@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-10-10T10:17:45Z",
+  "production_database": {
+    "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
+    "size_bytes": 5496832,
+    "modified_at": "2026-10-08T10:04:16Z",
+    "sha256": "b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8",
+    "row_counts": {
+      "events": 210,
+      "assets": 0,
+      "assessments": 0,
+      "assessment_dispositions": 0,
+      "runs": 272
+    },
+    "integrity_check": "ok"
+  },
+  "backup": {
+    "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261009-213026.sqlite",
+    "size_bytes": 5496832,
+    "modified_at": "2026-10-08T10:04:16Z",
+    "sha256": "b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8",
+    "row_counts": {
+      "events": 210,
+      "assets": 0,
+      "assessments": 0,
+      "assessment_dispositions": 0,
+      "runs": 272
+    },
+    "integrity_check": "ok",
+    "created_by": "backup_database.ps1",
+    "note": "任务书里写明的 artifacts/backups/intel-20261008-211841.sqlite 在本机不存在；这是本轮实际存在的生产库备份，先备份再操作。"
+  },
+  "closure_baseline_database": {
+    "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-trial-cdx\\intel.sqlite",
+    "size_bytes": 5181440,
+    "modified_at": "2026-10-06T07:25:59Z",
+    "sha256": "c808b42f7057f9e9b5c53929701021f8050c7cd43c0205a12439d55b5d0161fa",
+    "row_counts": {
+      "events": 210,
+      "assets": 16,
+      "assessments": 117,
+      "assessment_dispositions": 0,
+      "runs": 153
+    },
+    "integrity_check": "ok",
+    "note": "闭环基线副本：16 个资产、117 条研判、0 条处置记录。2026-10-08 证据包就是在这份基线上走完整 API 流程生成的。"
+  },
+  "restore_drill": {
+    "restored_to": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-restore-drill\\intel-restored.sqlite",
+    "restored_sha256": "b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8",
+    "sha256_matches_backup": true,
+    "row_counts_match": true,
+    "integrity_check": "ok",
+    "read_only_after_restore": true,
+    "passed": true
+  },
+  "rollback_commands": [
+    "Stop-Process -Name python -ErrorAction SilentlyContinue  # 停掉本地服务",
+    "Copy-Item 'D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite' 'D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.before-rollback.sqlite' -Force",
+    "Copy-Item 'D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261009-213026.sqlite' 'D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite' -Force",
+    ".\\.venv\\Scripts\\python.exe -m uvicorn app.api:app --port 8000  # 重新启动",
+    "Invoke-RestMethod http://127.0.0.1:8000/api/health  # 确认版本与健康状态"
+  ],
+  "rollback_note": "回滚是文件级替换：把 backups 里的 sqlite 覆盖回 data/intel.sqlite。本条记录只做恢复演练（复制到 scratch 目录并校验哈希与行数），未替换生产库。"
+}

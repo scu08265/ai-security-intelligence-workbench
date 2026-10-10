@@ -1,0 +1,454 @@
+{
+  "generated_at": "2026-10-10T10:17:45Z",
+  "expected_cohort_size": 34,
+  "search_roots": [
+    "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench"
+  ],
+  "databases_scanned": 26,
+  "databases": [
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-closure-20261004\\data\\intel.sqlite",
+      "size_bytes": 5189632,
+      "row_counts": {
+        "events": 210,
+        "assets": 16,
+        "assessments": 117,
+        "assessment_dispositions": 5
+      },
+      "affected_high_priority": 4,
+      "cohort_size": 4,
+      "cohort_closed": 3,
+      "cohort_verified": 3,
+      "closure_rate": 0.75,
+      "disposition_status_breakdown": {
+        "verified": 3,
+        "fixed": 1
+      }
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-live-closure-20261008\\data\\intel.sqlite",
+      "size_bytes": 5574656,
+      "row_counts": {
+        "events": 210,
+        "assets": 16,
+        "assessments": 117,
+        "assessment_dispositions": 5
+      },
+      "affected_high_priority": 4,
+      "cohort_size": 4,
+      "cohort_closed": 3,
+      "cohort_verified": 3,
+      "closure_rate": 0.75,
+      "disposition_status_breakdown": {
+        "verified": 3,
+        "fixed": 1
+      }
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20260927-192332.sqlite",
+      "size_bytes": 2490368,
+      "row_counts": {
+        "events": 89,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20260930-134141.sqlite",
+      "size_bytes": 2990080,
+      "row_counts": {
+        "events": 124,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20260930-134758.sqlite",
+      "size_bytes": 2990080,
+      "row_counts": {
+        "events": 124,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20260930-135010.sqlite",
+      "size_bytes": 3006464,
+      "row_counts": {
+        "events": 124,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-185302.sqlite",
+      "size_bytes": 3817472,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-191420.sqlite",
+      "size_bytes": 3850240,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-192345.sqlite",
+      "size_bytes": 3850240,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-195311.sqlite",
+      "size_bytes": 3870720,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-200753.sqlite",
+      "size_bytes": 3870720,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-203036.sqlite",
+      "size_bytes": 3887104,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-203436.sqlite",
+      "size_bytes": 3887104,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-204048.sqlite",
+      "size_bytes": 3887104,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-204427.sqlite",
+      "size_bytes": 3887104,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261001-210812.sqlite",
+      "size_bytes": 3911680,
+      "row_counts": {
+        "events": 190,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\backups\\intel-20261009-213026.sqlite",
+      "size_bytes": 5496832,
+      "row_counts": {
+        "events": 210,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": 0
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\restore-test\\intel-restored-20260930-134141.sqlite",
+      "size_bytes": 2990080,
+      "row_counts": {
+        "events": 124,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\restore-test\\intel-restored-20260930-134758.sqlite",
+      "size_bytes": 2990080,
+      "row_counts": {
+        "events": 124,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\restore-test\\intel-restored-20260930-135010.sqlite",
+      "size_bytes": 3006464,
+      "row_counts": {
+        "events": 124,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": null
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
+      "size_bytes": 5496832,
+      "row_counts": {
+        "events": 210,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": 0
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\freeze\\intel.sqlite",
+      "size_bytes": 5578752,
+      "row_counts": {
+        "events": 210,
+        "assets": 16,
+        "assessments": 117,
+        "assessment_dispositions": 5
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 4,
+      "cohort_closed": 3,
+      "cohort_verified": 3,
+      "closure_rate": 0.75,
+      "disposition_status_breakdown": {
+        "verified": 3,
+        "fixed": 1
+      }
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\recheck\\intel.sqlite",
+      "size_bytes": 5181440,
+      "row_counts": {
+        "events": 210,
+        "assets": 16,
+        "assessments": 117,
+        "assessment_dispositions": 2
+      },
+      "affected_high_priority": 4,
+      "cohort_size": 4,
+      "cohort_closed": 1,
+      "cohort_verified": 1,
+      "closure_rate": 0.25,
+      "disposition_status_breakdown": {
+        "open": 2,
+        "fixed": 1,
+        "verified": 1
+      }
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-restore-drill\\intel-restored.sqlite",
+      "size_bytes": 5496832,
+      "row_counts": {
+        "events": 210,
+        "assets": 0,
+        "assessments": 0,
+        "assessment_dispositions": 0
+      },
+      "affected_high_priority": 0,
+      "cohort_size": 0,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": null,
+      "disposition_status_breakdown": {}
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-trial\\intel.sqlite",
+      "size_bytes": 5169152,
+      "row_counts": {
+        "events": 210,
+        "assets": 16,
+        "assessments": 117,
+        "assessment_dispositions": 0
+      },
+      "affected_high_priority": 20,
+      "cohort_size": 20,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": 0.0,
+      "disposition_status_breakdown": {
+        "open": 20
+      }
+    },
+    {
+      "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-trial-cdx\\intel.sqlite",
+      "size_bytes": 5181440,
+      "row_counts": {
+        "events": 210,
+        "assets": 16,
+        "assessments": 117,
+        "assessment_dispositions": 0
+      },
+      "affected_high_priority": 4,
+      "cohort_size": 4,
+      "cohort_closed": 0,
+      "cohort_verified": 0,
+      "closure_rate": 0.0,
+      "disposition_status_breakdown": {
+        "open": 4
+      }
+    }
+  ],
+  "summary": {
+    "databases_with_any_disposition": [
+      "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-closure-20261004\\data\\intel.sqlite",
+      "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-live-closure-20261008\\data\\intel.sqlite",
+      "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\freeze\\intel.sqlite",
+      "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\recheck\\intel.sqlite"
+    ],
+    "largest_cohort_found": 20,
+    "databases_matching_expected_cohort": [],
+    "conclusion": "本机没有任何数据库包含 34 条高优先级闭环队列；任务书中的 34 / 4 / 11.76% 基线无法在本机复现，本轮改为交付可复现的等价证据。"
+  }
+}

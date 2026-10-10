@@ -52,6 +52,26 @@
 | `closure-timeline.csv` | 闭环率从 0.0 到 0.75 的过程 |
 | `source-db-state.json` | 生产库生成前的行数与 SHA256 |
 | `pytest-result.txt` | 全量测试结果 |
+| `denominator-freeze.json` | 重算研判前后的队列对比：4 条条目实时结论翻转，队列与闭环率不变 |
+| `state-machine-recheck.json` | 在另一份独立副本上二次实测的 4 条状态机规则 |
+| `db-backup.json` | 生产库/备份哈希、行数，以及备份恢复演练结果 |
+| `cohort-search.json` | 全机 26 个 sqlite 的队列规模扫描（用于回答“34 条基线在哪”） |
+
+## 2026-10-10 复核补充
+
+本轮新增三份证据，全部由 `tools/` 下的脚本重新计算，未修改任何已交付文件：
+
+1. **分母冻结**（`denominator-freeze.json`）：把本目录的证据库复制到 scratch 目录后重跑
+   `POST /api/assessments/run`，4 条队列条目的实时研判全部翻转为 `not_affected`，
+   但 `high_priority_total` 仍为 4、`high_priority_closed` 仍为 3、`closure_rate` 仍为 0.75。
+   对照推导显示：若分母跟随实时研判，分母会变成 0，闭环率会变成 `null`。
+2. **状态机二次实测**（`state-machine-recheck.json`）：在另一份独立副本上重新跑四条规则，
+   4 / 4 通过，失败场景留有 `verification.passed=false` 的审计记录。
+3. **备份回滚**（`db-backup.json`）：备份复制到 scratch 后哈希、行数一致，
+   `PRAGMA integrity_check` = `ok`。
+
+同时确认：任务书中的 `total=34 / closed=4 / 11.76%` 在本机不存在对应数据库
+（`cohort-search.json` 扫描 26 个库，最大队列为 20 条）。
 
 ## 测试
 

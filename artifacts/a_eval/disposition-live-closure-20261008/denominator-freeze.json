@@ -1,0 +1,563 @@
+{
+  "generated_at": "2026-10-10T10:17:41Z",
+  "endpoint_under_test": "POST /api/assessments/run",
+  "invocation_mode": "direct_handler",
+  "scratch_database": {
+    "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\freeze\\intel.sqlite",
+    "copied_from": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\a_eval\\disposition-live-closure-20261008\\data\\intel.sqlite",
+    "source_sha256": "4f1c248d58e1948265403731f5604c5ca5219289040c9c90956efbd0c14ff072"
+  },
+  "rule": "已登记处置的条目锁定在分母内：资产修复后研判转为不受影响，闭环率分子分母同时保持。",
+  "before": {
+    "metrics": {
+      "generated_at": "2026-10-10T10:17:38.393213+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 3,
+      "high_priority_verified": 3,
+      "high_priority_in_progress": 1,
+      "closure_rate": 0.75,
+      "verified_rate": 0.75,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 0,
+        "in_progress": 0,
+        "fixed": 1,
+        "verified": 3,
+        "accepted": 0
+      },
+      "findings_total": 71,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    },
+    "scorecard_disposition": {
+      "generated_at": "2026-10-10T10:17:39.372062+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 3,
+      "high_priority_verified": 3,
+      "high_priority_in_progress": 1,
+      "closure_rate": 0.75,
+      "verified_rate": 0.75,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 0,
+        "in_progress": 0,
+        "fixed": 1,
+        "verified": 3,
+        "accepted": 0
+      },
+      "findings_total": 71,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    }
+  },
+  "recalculation": {
+    "http_status": 200,
+    "response": {
+      "run_id": "run-ebb881d656e8",
+      "assessments": 117,
+      "assets": 16,
+      "events": 210,
+      "not_applicable": 0,
+      "duration_ms": 0
+    }
+  },
+  "after": {
+    "metrics": {
+      "generated_at": "2026-10-10T10:17:40.756507+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 3,
+      "high_priority_verified": 3,
+      "high_priority_in_progress": 1,
+      "closure_rate": 0.75,
+      "verified_rate": 0.75,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 0,
+        "in_progress": 0,
+        "fixed": 1,
+        "verified": 3,
+        "accepted": 0
+      },
+      "findings_total": 47,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    },
+    "scorecard_disposition": {
+      "generated_at": "2026-10-10T10:17:41.737502+00:00",
+      "high_priority_total": 4,
+      "high_priority_closed": 3,
+      "high_priority_verified": 3,
+      "high_priority_in_progress": 1,
+      "closure_rate": 0.75,
+      "verified_rate": 0.75,
+      "mean_time_to_close_hours": null,
+      "status_breakdown": {
+        "open": 0,
+        "in_progress": 0,
+        "fixed": 1,
+        "verified": 3,
+        "accepted": 0
+      },
+      "findings_total": 47,
+      "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+      "limitations": [
+        "合成演示资产上的处置记录不等于生产环境的真实修复。",
+        "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+        "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。"
+      ]
+    }
+  },
+  "cohort_before": [
+    {
+      "key": "CVE-2025-9959::asset-cdx-0d772cce01115ccd1297",
+      "event_id": "CVE-2025-9959",
+      "asset_id": "asset-cdx-0d772cce01115ccd1297",
+      "live_status": "affected",
+      "live_priority": "high",
+      "disposition_status": "verified",
+      "opened_at": "2026-10-09T13:30:34.223597+00:00",
+      "opened_priority": "high",
+      "closed_at": "2026-10-09T13:30:34.223579+00:00",
+      "in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87016::asset-cdx-1aec991f9f50d77cb8d8",
+      "event_id": "CVE-2026-87016",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status": "affected",
+      "live_priority": "high",
+      "disposition_status": "fixed",
+      "opened_at": "2026-10-09T13:30:32.584690+00:00",
+      "opened_priority": "high",
+      "closed_at": null,
+      "in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87995::asset-cdx-1aec991f9f50d77cb8d8",
+      "event_id": "CVE-2026-87995",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status": "affected",
+      "live_priority": "high",
+      "disposition_status": "verified",
+      "opened_at": "2026-10-09T13:30:36.372195+00:00",
+      "opened_priority": "high",
+      "closed_at": "2026-10-09T13:30:36.372155+00:00",
+      "in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87998::asset-cdx-1aec991f9f50d77cb8d8",
+      "event_id": "CVE-2026-87998",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status": "affected",
+      "live_priority": "high",
+      "disposition_status": "verified",
+      "opened_at": "2026-10-09T13:30:37.442591+00:00",
+      "opened_priority": "high",
+      "closed_at": "2026-10-09T13:30:37.442576+00:00",
+      "in_cohort": true
+    }
+  ],
+  "cohort_after": [
+    {
+      "key": "CVE-2025-9959::asset-cdx-0d772cce01115ccd1297",
+      "event_id": "CVE-2025-9959",
+      "asset_id": "asset-cdx-0d772cce01115ccd1297",
+      "live_status": "not_affected",
+      "live_priority": "low",
+      "disposition_status": "verified",
+      "opened_at": "2026-10-09T13:30:34.223597+00:00",
+      "opened_priority": "high",
+      "closed_at": "2026-10-09T13:30:34.223579+00:00",
+      "in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87016::asset-cdx-1aec991f9f50d77cb8d8",
+      "event_id": "CVE-2026-87016",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status": "not_affected",
+      "live_priority": "low",
+      "disposition_status": "fixed",
+      "opened_at": "2026-10-09T13:30:32.584690+00:00",
+      "opened_priority": "high",
+      "closed_at": null,
+      "in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87995::asset-cdx-1aec991f9f50d77cb8d8",
+      "event_id": "CVE-2026-87995",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status": "not_affected",
+      "live_priority": "low",
+      "disposition_status": "verified",
+      "opened_at": "2026-10-09T13:30:36.372195+00:00",
+      "opened_priority": "high",
+      "closed_at": "2026-10-09T13:30:36.372155+00:00",
+      "in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87998::asset-cdx-1aec991f9f50d77cb8d8",
+      "event_id": "CVE-2026-87998",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status": "not_affected",
+      "live_priority": "low",
+      "disposition_status": "verified",
+      "opened_at": "2026-10-09T13:30:37.442591+00:00",
+      "opened_priority": "high",
+      "closed_at": "2026-10-09T13:30:37.442576+00:00",
+      "in_cohort": true
+    }
+  ],
+  "live_assessment_flips": [
+    {
+      "key": "CVE-2025-9959::asset-cdx-0d772cce01115ccd1297",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:34.223597+00:00",
+      "opened_priority": "high",
+      "disposition_status": "verified",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87012::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "medium",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "CVE-2026-87014::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "medium",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "CVE-2026-87015::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "medium",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "CVE-2026-87016::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:32.584690+00:00",
+      "opened_priority": "high",
+      "disposition_status": "fixed",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87994::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "medium",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "CVE-2026-87995::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:36.372195+00:00",
+      "opened_priority": "high",
+      "disposition_status": "verified",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87997::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "medium",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "CVE-2026-87998::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:37.442591+00:00",
+      "opened_priority": "high",
+      "disposition_status": "verified",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-88006::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "medium",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-34r3-9m95-vq73::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-4v28-j6q3-5m4r::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-jmc6-2wr8-h3wj::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-wpmr-8h3q-fwj7::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-p78m-89r6-pgf7::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-wjwr-xfp9-r66p::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-8r35-5x5r-hv74::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-v39v-59xw-j98g::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-3g9q-v48f-hh9w::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "GHSA-wvm9-9g5j-623f::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "PYSEC-2026-4125::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "PYSEC-2026-4122::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "PYSEC-2026-4118::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    },
+    {
+      "key": "PYSEC-2026-4115::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "low",
+      "opened_at": null,
+      "opened_priority": null,
+      "disposition_status": "open",
+      "in_cohort_before": false,
+      "still_in_cohort": false
+    }
+  ],
+  "counterfactual_without_freeze": {
+    "live_affected_high_total": 0,
+    "live_affected_high_closed": 0,
+    "closure_rate": null,
+    "note": "仅作对照推导：假设分母跟随实时研判（不使用 opened_priority 冻结），同一批数据会得到该值。它证明冻结项实际改变了结果，不是装饰性代码。"
+  },
+  "comparison": {
+    "high_priority_total": {
+      "before": 4,
+      "after": 4
+    },
+    "high_priority_closed": {
+      "before": 3,
+      "after": 3
+    },
+    "closure_rate": {
+      "before": 0.75,
+      "after": 0.75
+    },
+    "findings_that_flipped_to_not_affected": 24,
+    "cohort_findings_that_flipped_to_not_affected": 4,
+    "metrics_matches_scorecard_after": true
+  },
+  "cohort_flips": [
+    {
+      "key": "CVE-2025-9959::asset-cdx-0d772cce01115ccd1297",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:34.223597+00:00",
+      "opened_priority": "high",
+      "disposition_status": "verified",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87016::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:32.584690+00:00",
+      "opened_priority": "high",
+      "disposition_status": "fixed",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87995::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:36.372195+00:00",
+      "opened_priority": "high",
+      "disposition_status": "verified",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    },
+    {
+      "key": "CVE-2026-87998::asset-cdx-1aec991f9f50d77cb8d8",
+      "live_status_before": "affected",
+      "live_status_after": "not_affected",
+      "live_priority_before": "high",
+      "opened_at": "2026-10-09T13:30:37.442591+00:00",
+      "opened_priority": "high",
+      "disposition_status": "verified",
+      "in_cohort_before": true,
+      "still_in_cohort": true
+    }
+  ],
+  "passed": true,
+  "interpreter": "3.9.13",
+  "http_stack": {
+    "available": false,
+    "error": "SyntaxError: invalid syntax (_lazyimport.py, line 131)"
+  }
+}

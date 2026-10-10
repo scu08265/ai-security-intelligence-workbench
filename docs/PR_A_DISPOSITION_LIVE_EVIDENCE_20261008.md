@@ -27,6 +27,23 @@
 - `artifacts/a_eval/disposition-live-closure-20261008/source-db-state.json`
 - `artifacts/a_eval/disposition-live-closure-20261008/pytest-result.txt`
 - `artifacts/a_eval/disposition-live-closure-20261008/README.md`
+- `artifacts/a_eval/disposition-live-closure-20261008/denominator-freeze.json`
+- `artifacts/a_eval/disposition-live-closure-20261008/state-machine-recheck.json`
+- `artifacts/a_eval/disposition-live-closure-20261008/db-backup.json`
+- `artifacts/a_eval/disposition-live-closure-20261008/cohort-search.json`
+- `docs/A_DISPOSITION_LIVE_CLOSURE.md`
+
+## Recheck added 2026-10-10
+
+- 分母冻结独立复算：重跑研判后 4 条队列条目的实时结论全部翻转为 `not_affected`，
+  队列与闭环率仍为 4 / 3 / 0.75；未启用冻结口径时分母归零、闭环率变 `null`。
+- 状态机四条规则在另一份独立副本上二次实测，4 / 4 通过。
+- 备份恢复演练：复制回读后 SHA256、行数一致，`PRAGMA integrity_check` = `ok`。
+- 全机 26 个 sqlite 队列扫描：没有任何库含 34 条高优先级队列，任务书的 34 / 11.76% 基线
+  在本机无法复现，已写入 `cohort-search.json` 与 `docs/A_DISPOSITION_LIVE_CLOSURE.md`。
+- 本轮未产出浏览器截图，也无法重跑 `pytest` / Docker：`.venv` 的 Python 3.13 已被删除，
+  仅剩 Python 3.9 且无法 `pip install`（网络受限），服务起不来。原因与命令写在
+  `docs/A_DISPOSITION_LIVE_CLOSURE.md` 第 8 节。
 
 ## Limitations
 

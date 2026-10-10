@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-10-10T10:17:44Z",
+  "invocation_mode": "direct_handler",
+  "scratch_database": {
+    "path": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-freeze-recheck\\recheck\\intel.sqlite",
+    "copied_from": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\work\\disposition-trial-cdx\\intel.sqlite",
+    "source_sha256": "c808b42f7057f9e9b5c53929701021f8050c7cd43c0205a12439d55b5d0161fa"
+  },
+  "candidates": [
+    {
+      "event_id": "CVE-2025-9959",
+      "asset_id": "asset-cdx-0d772cce01115ccd1297",
+      "component": "smolagents",
+      "version": "1.20.0",
+      "is_demo": true,
+      "live_recheck_status": "affected",
+      "safe_version": "1.21.0"
+    },
+    {
+      "event_id": "CVE-2026-87016",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "component": "open-webui",
+      "version": "0.10.0",
+      "is_demo": true,
+      "live_recheck_status": "affected",
+      "safe_version": "0.11.1"
+    },
+    {
+      "event_id": "CVE-2026-87995",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "component": "open-webui",
+      "version": "0.10.0",
+      "is_demo": true,
+      "live_recheck_status": "affected",
+      "safe_version": "0.11.1"
+    },
+    {
+      "event_id": "CVE-2026-87998",
+      "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+      "component": "open-webui",
+      "version": "0.10.0",
+      "is_demo": true,
+      "live_recheck_status": "affected",
+      "safe_version": "0.11.1"
+    }
+  ],
+  "steps": [
+    {
+      "rule": "missing_assignee_rejected",
+      "target": {
+        "event_id": "CVE-2025-9959",
+        "asset_id": "asset-cdx-0d772cce01115ccd1297",
+        "component": "smolagents",
+        "version": "1.20.0",
+        "is_demo": true,
+        "live_recheck_status": "affected",
+        "safe_version": "1.21.0"
+      },
+      "requested_status": "in_progress",
+      "assignee": null,
+      "http_status": 400,
+      "detail": "进入处置流转必须填写处置人（assignee）",
+      "disposition_after": null,
+      "passed": true
+    },
+    {
+      "rule": "unsafe_version_verified_is_downgraded",
+      "target": {
+        "event_id": "CVE-2026-87016",
+        "asset_id": "asset-cdx-1aec991f9f50d77cb8d8",
+        "component": "open-webui",
+        "version": "0.10.0",
+        "is_demo": true,
+        "live_recheck_status": "affected",
+        "safe_version": "0.11.1"
+      },
+      "requested_status": "verified",
+      "http_status": 200,
+      "applied_status": "fixed",
+      "verification": {
+        "checked_at": "2026-10-10T10:17:43.571821+00:00",
+        "assessment_status_before": "affected",
+        "assessment_status_after": "affected",
+        "priority_after": "high",
+        "reasons_after": [
+          "资产版本 0.10.0 命中受影响区间"
+        ],
+        "passed": false,
+        "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+      },
+      "persisted_status": "fixed",
+      "persisted_closed_at": null,
+      "persisted_verification": {
+        "checked_at": "2026-10-10T10:17:43.571821+00:00",
+        "assessment_status_before": "affected",
+        "assessment_status_after": "affected",
+        "priority_after": "high",
+        "reasons_after": [
+          "资产版本 0.10.0 命中受影响区间"
+        ],
+        "passed": false,
+        "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+      },
+      "passed": true
+    },
+    {
+      "rule": "safe_version_verified_closes",
+      "target": {
+        "event_id": "CVE-2025-9959",
+        "asset_id": "asset-cdx-0d772cce01115ccd1297",
+        "component": "smolagents",
+        "version": "1.20.0",
+        "is_demo": true,
+        "live_recheck_status": "affected",
+        "safe_version": "1.21.0"
+      },
+      "version_before": "1.20.0",
+      "version_after": "1.21.0",
+      "http_status": 200,
+      "applied_status": "verified",
+      "verification": {
+        "checked_at": "2026-10-10T10:17:44.465663+00:00",
+        "assessment_status_before": "affected",
+        "assessment_status_after": "not_affected",
+        "priority_after": "low",
+        "reasons_after": [
+          "资产版本 1.21.0 不在已知受影响区间"
+        ],
+        "passed": true,
+        "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+      },
+      "persisted_status": "verified",
+      "persisted_closed_at": "2026-10-10T10:17:44.465663+00:00",
+      "passed": true
+    },
+    {
+      "rule": "assessment_status_not_overwritten",
+      "target": {
+        "event_id": "CVE-2025-9959",
+        "asset_id": "asset-cdx-0d772cce01115ccd1297",
+        "component": "smolagents",
+        "version": "1.20.0",
+        "is_demo": true,
+        "live_recheck_status": "affected",
+        "safe_version": "1.21.0"
+      },
+      "assessment_status": "affected",
+      "disposition_status": "verified",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "rules_passed": 4,
+  "rules_total": 4,
+  "interpreter": "3.9.13"
+}
