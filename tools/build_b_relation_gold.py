@@ -10,10 +10,10 @@
    ＋ 副本里的 NVD 快照（`metrics`）；**不从候选集反推**；
 3. **逐条与系统候选比对**：源头声明但候选集里没有的 = 真实 FN，单独输出并说明原因；
 4. **gold 只收两类 id**：
-   * 已人工判 positive 的候选 id（构成 TP）；
+   * `status == human_verified` 且 `label == positive` 的候选 id（构成 TP）；
    * 确认漏检的新 id（构成 FN）。
-   候选里标签为 unknown 的一律放进 `uncertain`，**不进任何分母**
-   （否则会被 FN 逻辑重复计数）。
+   只标了 positive、状态却不是 `human_verified` 的候选（例如等人签核）一律放进
+   `uncertain`，**不进任何分母**（否则会被 FN 逻辑重复计数）。
 
 复核批次（`--former-missed`）额外做一件事：把上一批次的漏检条目**按关系内容**
 对应到本批次的候选，写进 gold 的 `resolved_former_ids`（旧合成 id → 新候选 id），
@@ -323,6 +323,17 @@ def match_candidate(relation: dict, index: dict) -> dict | None:
     return index.get(key)
 
 
+def _undecided_reason(annotation: dict) -> str:
+    """候选对上了源头关系、却不能算"已抽取"时，如实写明是哪一类未定。"""
+    status, label = annotation.get("status"), annotation.get("label")
+    if label == "positive":
+        return (f"候选标了 positive，但状态是 {status}（不是人工核验），"
+                "不能算已抽取")
+    if label:
+        return "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检"
+    return "候选缺少人工标签"
+
+
 def resolve_former_missed(former_missed_path: Path, index: dict,
                           label_by_id: dict) -> dict[str, dict]:
     """把上一批漏检条目按内容对应到本批候选，返回 {旧 id: 映射记录}。
@@ -493,12 +504,12 @@ def build(db_dir: Path, system_path: Path = SYSTEM_OUTPUT_DEFAULT,
             label = annotation.get("label")
             record = {**relation, "system_relation_id": candidate["relation_id"],
                       "system_object": candidate["object"]}
-            if label == "positive":
+            # 纳入条件必须与评分器一致：光有 positive 不够，还得是人工核验过的。
+            if annotation.get("status") == "human_verified" and label == "positive":
                 extracted_positive.append(record)
             else:
                 record["human_label"] = label
-                record["uncertain_reason"] = (
-                    "候选已存在但人工判为 unknown/未确认，无法确认系统是否漏检" if label else "候选缺少人工标签")
+                record["uncertain_reason"] = _undecided_reason(annotation)
                 extracted_undecided.append(record)
                 uncertain.append({"kind": "candidate_undecided",
                                   "relation_id": candidate["relation_id"],

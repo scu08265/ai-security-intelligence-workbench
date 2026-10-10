@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import b_relation_sources as sources  # noqa: E402
 import build_b_relation_gold as gold_tool  # noqa: E402
+import relabel_b_relation_candidates as relabel  # noqa: E402
 import verify_b_relation_expansion as expansion  # noqa: E402
 
 BATCH = "20261010"
@@ -260,53 +261,147 @@ def test_expansion_verification_only_promotes_source_readback_items():
 
     promotions = _load(PROPOSALS)["promotions"]
     assert len(promotions) == report["promotable"] == 17
-    assert _load(PROPOSALS)["signature_required"] is True
+    # 这 17 条已由签核人逐条确认，清单因此不再要求签名
+    assert _load(PROPOSALS)["signature_required"] is False
     for item in promotions:
         assert item["label"] == "positive"
-        assert item["verified_by"] and item["verified_at"]
-        # 署名必须明确是"待签核"，不能借工具核验冒充人工确认
-        assert "待用户签核" in item["verified_by"]
+        assert item["verified_by"] == "人工复核-用户确认"
+        assert item["verified_at"] == "2026-10-10"
         evidence = item["evidence"]
         assert evidence["source_path"] and evidence["source_locator"]
         assert evidence["enumerated_value"]
 
 
-def test_withheld_relations_stay_pending_until_someone_signs_off():
-    """17 条只经工具核验的关系必须停在 pending_human_review，且不携带人工签名。"""
+def test_verification_tool_refuses_to_self_sign():
+    """工具只逐字回读证据：不给 ``--verified-by`` 时一律停在"待签核"。"""
+    report = _load(VERIFICATION)
+
+    unsigned = expansion.build_promotions(report, verified_by=None,
+                                          verified_at="2026-10-10", note="n")
+    assert unsigned["signature_required"] is True
+    assert {item["verified_by"] for item in unsigned["promotions"]} == {
+        expansion.PLACEHOLDER_VERIFIED_BY}
+    # 把占位串显式传回来也不算签核，不能借它把状态"签"成已确认
+    placeholder = expansion.build_promotions(
+        report, verified_by=expansion.PLACEHOLDER_VERIFIED_BY,
+        verified_at="2026-10-10", note="n")
+    assert placeholder["signature_required"] is True
+    # 只有显式给出的真实署名才把 signature_required 置为 false
+    signed = expansion.build_promotions(report, verified_by="人工复核-用户确认",
+                                        verified_at="2026-10-10", note="n")
+    assert signed["signature_required"] is False
+    assert {item["verified_by"] for item in signed["promotions"]} == {"人工复核-用户确认"}
+
+
+def test_note_suffix_only_touches_the_named_subject():
+    """审计补充说明按主体追加，不能糊到别的关系上。"""
+    report = _load(VERIFICATION)
+    proposals = expansion.build_promotions(
+        report, verified_by="人工复核-用户确认", verified_at="2026-10-10",
+        note="base", note_suffixes={"CVE-2025-6558": "extra"})
+    by_subject = {item["subject"]: item["note"] for item in proposals["promotions"]}
+    assert by_subject["CVE-2025-6558"] == "base extra"
+    assert {note for subject, note in by_subject.items()
+            if subject != "CVE-2025-6558"} == {"base"}
+    with pytest.raises(SystemExit):
+        expansion.parse_note_suffixes(["没有等号的补充说明"])
+
+
+def _signed_relation_fixture() -> tuple[dict, dict, dict]:
+    """一条"上一批次已带人工签名"的候选，用来跑 promote / withhold 两阶段。"""
+    case = {"relation_id": "BREL-CV-0001", "dimension": "cvss",
+            "subject": "CVE-9999-00001", "relation": "has_cvss", "object": "CVSS:3.1/x"}
+    source = {"cases": [{**case,
+                         "annotation": {"status": "human_verified", "label": "positive",
+                                        "verified_by": "人工复核-用户确认",
+                                        "verified_at": "2026-10-09", "note": "旧签名"},
+                         "promotion_evidence": {"source": "old"}}]}
+    system = {"cases": [dict(case)]}
+    proposals = {"promotions": [{**case, "label": "positive",
+                                 "verified_by": "人工复核-用户确认",
+                                 "verified_at": "2026-10-10", "note": "新签名",
+                                 "evidence": {"source_path": "p", "source_locator": "l"}}]}
+    return source, system, proposals
+
+
+def test_withhold_then_promote_round_trip_clears_and_restores_signature():
+    """撤回要把签名 / 标签 / promotion_evidence 一起清掉，签核时再按清单写回。"""
+    source, system, proposals = _signed_relation_fixture()
+
+    withheld = relabel.relabel(source, system, None, proposals)
+    assert withheld["counts"]["withheld"] == 1
+    assert withheld["unmatched_withholdings"] == []
+    stored = withheld["cases"][0]
+    assert stored["annotation"] == {"status": "pending_human_review", "label": None,
+                                    "verified_by": None, "verified_at": None, "note": None}
+    assert "promotion_evidence" not in stored
+
+    promoted = relabel.relabel(withheld, system, proposals)
+    assert promoted["counts"]["promoted"] == 1
+    assert promoted["unmatched_promotions"] == []
+    stored = promoted["cases"][0]
+    assert stored["annotation"]["status"] == "human_verified"
+    assert stored["annotation"]["label"] == "positive"
+    assert stored["annotation"]["verified_by"] == "人工复核-用户确认"
+    assert stored["annotation"]["verified_at"] == "2026-10-10"
+    assert stored["promotion_evidence"] == {"source_path": "p", "source_locator": "l"}
+
+
+def test_signed_batch_matches_the_promotion_manifest():
+    """本批次落地后的真实标注：17 条带签名，其余维持在上一批次或待审核。"""
     promotions = _load(PROPOSALS)["promotions"]
     labeled = {case["relation_id"]: case for case in _load(LABELED)["cases"]}
     system = {(case["dimension"], case["subject"], _norm(case["object"])): case
               for case in _load(CANDIDATES)["cases"]}
+
+    promoted_ids = set()
     for item in promotions:
         key = (item["dimension"], item["subject"], _norm(item["object"]))
-        case = system[key]
-        stored = labeled[case["relation_id"]]
+        stored = labeled[system[key]["relation_id"]]
+        promoted_ids.add(stored["relation_id"])
         annotation = stored["annotation"]
-        assert annotation["status"] == "pending_human_review"
-        assert annotation["label"] is None
-        assert annotation["verified_by"] is None
-        assert annotation["verified_at"] is None
-        assert "promotion_evidence" not in stored
-    # 工具核验记录与待审核清单都保留，撤回的只是"人工已确认"这个结论
+        assert annotation["status"] == "human_verified"
+        assert annotation["label"] == "positive"
+        assert annotation["verified_by"] == item["verified_by"] == "人工复核-用户确认"
+        assert annotation["verified_at"] == item["verified_at"] == "2026-10-10"
+        assert stored["promotion_evidence"]["source_path"] == item["evidence"]["source_path"]
+
+    signed = {rid for rid, case in labeled.items()
+              if (case.get("annotation") or {}).get("verified_by") == "人工复核-用户确认"}
+    pending = {rid for rid, case in labeled.items()
+               if (case.get("annotation") or {}).get("status") == "pending_human_review"}
+    # 签核只动这 17 条：上一批次沿用的人工签核没被误删，poc 的既有待审项原样保留
+    assert promoted_ids <= signed
+    assert len(signed) == 127
+    assert pending == {"BREL-PO-0001", "BREL-PO-0002", "BREL-PO-0003",
+                       "BREL-PO-0004", "BREL-PO-0005"}
+    # 工具核验记录与待审核清单都保留，变化的只是"人工已确认"这个结论
     assert _load(VERIFICATION)["promotable"] == len(promotions) == 17
-    cases = _load(LABELED)["cases"]
-    signed = [case for case in cases
-              if (case.get("annotation") or {}).get("verified_by") == "人工复核-用户确认"]
-    pending = [case for case in cases
-               if (case.get("annotation") or {}).get("status") == "pending_human_review"]
-    # 撤回只影响这 17 条：上一批次沿用的人工签核没有被误删（110 条仍带签名）
-    assert len(signed) == 110
-    assert len(pending) == 22
+
+
+def test_cvss_6558_template_clarification_survives_the_signature():
+    """CVE-2025-6558 候选有"分数为 null"的通用模板，审计必须留澄清且不动候选字节。"""
+    promotions = _load(PROPOSALS)["promotions"]
+    entry = next(item for item in promotions if item["subject"] == "CVE-2025-6558")
+    assert "不适用于本条" in entry["note"] and "baseScore=8.8" in entry["note"]
+    stored = {case["relation_id"]: case for case in _load(LABELED)["cases"]}["BREL-CV-0028"]
+    assert stored["annotation"]["note"] == entry["note"]
+    # 候选本身（含那条通用模板 uncertainty）一个字节都没动
+    candidate = next(case for case in _load(CANDIDATES)["cases"]
+                     if case["relation_id"] == "BREL-CV-0028")
+    assert candidate["candidate_value"]["score"] == 8.8
+    assert "分数为 null" in candidate["uncertainty"]
 
 
 def test_new_score_is_self_consistent_and_the_former_gold_is_the_contrast():
     active, contrast = _load(SCORE_ACTIVE), _load(SCORE_CONTRAST)
     micro = active["micro"]
+    # 候选关系都是系统自己抽的，precision=1.0 是构造口径造成的上限；
+    # 真正有区分度的是 recall / FN —— 它由 25 条"源头写着、候选没有"的真实漏检构成。
     assert micro["precision"] == 1.0
     assert micro["fp"] == 0
-    # 17 条待人工签核的关系不进 TP，也不进 FN（pending 单列）；
-    # FN 只由"源头写着、候选没有"的 25 条真实漏检构成。
-    assert (micro["tp"], micro["fn"]) == (52, 25)
+    # 17 条已签核的关系从此进 TP；FN 仍然只有那 25 条真实漏检
+    assert (micro["tp"], micro["fn"]) == (69, 25)
     assert micro["recall"] == pytest.approx(micro["tp"] / (micro["tp"] + micro["fn"]), abs=1e-4)
     assert micro["f1"] == pytest.approx(
         2 * micro["precision"] * micro["recall"] / (micro["precision"] + micro["recall"]), abs=1e-4)
@@ -323,14 +418,18 @@ def test_new_score_is_self_consistent_and_the_former_gold_is_the_contrast():
         f"artifacts/b_eval/relation_candidates_labeled_{BATCH}.json")
     assert active["gold_source"] == f"evaluation/b_relation_gold_{BATCH}.json"
     assert contrast["gold_source"] == f"evaluation/b_relation_gold_{FORMER_BATCH}.json"
-    assert active["micro"]["tp"] == contrast["micro"]["tp"] == 52
+    assert active["micro"]["tp"] == contrast["micro"]["tp"] == 69
     assert (active["micro"]["fn"], contrast["micro"]["fn"]) == (25, 0)
     assert contrast["micro"]["recall"] == 1.0
-    # pending 单列，不进任何分母
-    assert active["per_dimension"]["cvss"]["pending"] == 13
-    assert active["per_dimension"]["version_range"]["pending"] == 2
-    assert active["per_dimension"]["fixed_version"]["pending"] == 2
-    assert active["micro"]["evaluable_samples"] == 77
+    # 四维口径里已无 pending：17 条签核落地，剩下的 5 条 poc 待审项不在四维口径
+    assert active["per_dimension"]["cvss"]["pending"] == 0
+    assert active["per_dimension"]["version_range"]["pending"] == 0
+    assert active["per_dimension"]["fixed_version"]["pending"] == 0
+    assert active["per_dimension"]["poc"]["pending"] == 5
+    assert active["micro"]["evaluable_samples"] == 94
+    # frozen 对照的 100% 只代表 10-06 抽样 gold 的 10 条预期，不是全语料召回率
+    assert contrast["micro"]["evaluable_samples"] == 69
+    assert contrast["fn_source"]["expected_relation_ids"] == 10
 
 
 def test_legacy_scope_still_reproduces_the_former_expected_set(tmp_path):

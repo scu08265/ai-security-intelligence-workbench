@@ -3,8 +3,8 @@
  "counts": {
   "total": 132,
   "carried": 115,
-  "promoted": 0,
-  "withheld": 17,
+  "promoted": 17,
+  "withheld": 0,
   "pending": 0
  },
  "unmatched_promotions": [],
@@ -1584,13 +1584,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-4000].cvss[0]",
+    "source_locator": "osv:7819297e5f",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+     "osv:7819297e5f"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0013",
@@ -1664,13 +1676,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3998].cvss[0]",
+    "source_locator": "osv:0433c36f31",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+     "osv:0433c36f31"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0014",
@@ -1744,13 +1768,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3999].cvss[0]",
+    "source_locator": "osv:481782e92b",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+     "osv:481782e92b"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0015",
@@ -1824,13 +1860,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3997].cvss[0]",
+    "source_locator": "osv:79d583057f",
+    "enumerated_value": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "source_node_values": [
+     "4.0",
+     "None",
+     "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+     "osv:79d583057f"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0016",
@@ -1904,13 +1952,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3996].cvss[0]",
+    "source_locator": "osv:4f35217972",
+    "enumerated_value": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "source_node_values": [
+     "4.0",
+     "None",
+     "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+     "osv:4f35217972"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0017",
@@ -1931,13 +1991,22 @@
    },
    "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-8pw2-6jv3-mj5j].affected[0].range",
+    "source_locator": "osv:c8c0660a20",
+    "enumerated_value": "< 0.28.0",
+    "source_node_values": [
+     "< 0.28.0"
+    ]
+   }
   },
   {
    "relation_id": "BREL-FI-0006",
@@ -1957,13 +2026,22 @@
    },
    "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-8pw2-6jv3-mj5j].affected[0].fixed_version",
+    "source_locator": "osv:c8c0660a20",
+    "enumerated_value": "0.28.0",
+    "source_node_values": [
+     "0.28.0"
+    ]
+   }
   },
   {
    "relation_id": "BREL-CV-0015",
@@ -1984,13 +2062,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-8pw2-6jv3-mj5j].cvss[0]",
+    "source_locator": "osv:8334ecbb11",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+     "osv:8334ecbb11"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0018",
@@ -2064,13 +2154,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-hcwq-8wjf-3gcr].cvss[0]",
+    "source_locator": "osv:cbbeac1a7e",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+     "osv:cbbeac1a7e"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0019",
@@ -2144,13 +2246,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[PYSEC-2026-3985].cvss[0]",
+    "source_locator": "osv:0eb384018c",
+    "enumerated_value": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "source_node_values": [
+     "4.0",
+     "None",
+     "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+     "osv:0eb384018c"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0020",
@@ -2224,13 +2338,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-wvm9-9g5j-623f].cvss[0]",
+    "source_locator": "osv:14612d1d78",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+     "osv:14612d1d78"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0021",
@@ -2304,13 +2430,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-3g9q-v48f-hh9w].cvss[0]",
+    "source_locator": "osv:2a6ec98dc3",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+     "osv:2a6ec98dc3"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0022",
@@ -2384,13 +2522,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-v39v-59xw-j98g].cvss[0]",
+    "source_locator": "osv:93abe9fe20",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+     "osv:93abe9fe20"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0023",
@@ -2892,13 +3042,22 @@
    },
    "verification_method": "对照来源公告原文，确认 package/ecosystem/range 三元组与受影响区间一致。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。"
+   "uncertainty": "区间来自单一来源；不同来源之间可能存在冲突，未做交叉核验。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-mcmc-2m55-j8jj].affected[0].range",
+    "source_locator": "osv:31793381df",
+    "enumerated_value": ">= 0.10.2, < 0.13.0",
+    "source_node_values": [
+     ">= 0.10.2, < 0.13.0"
+    ]
+   }
   },
   {
    "relation_id": "BREL-FI-0012",
@@ -2918,13 +3077,22 @@
    },
    "verification_method": "对照来源公告原文，确认修复版本号与受影响区间不矛盾。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。"
+   "uncertainty": "修复版本可能表示为区间下界（如 '>= 0.24.0'），需人工确认语义。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-mcmc-2m55-j8jj].affected[0].fixed_version",
+    "source_locator": "osv:31793381df",
+    "enumerated_value": "0.13.0",
+    "source_node_values": [
+     "0.13.0"
+    ]
+   }
   },
   {
    "relation_id": "BREL-CV-0026",
@@ -2945,13 +3113,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[GHSA-mcmc-2m55-j8jj].cvss[0]",
+    "source_locator": "osv:c7dc69d620",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "source_node_values": [
+     "3.1",
+     "None",
+     "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+     "osv:c7dc69d620"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0032",
@@ -3053,13 +3233,25 @@
    },
    "verification_method": "对照来源公告原文，确认 score 与 vector 逐字一致，且确实来自该来源。",
    "annotation": {
-    "status": "pending_human_review",
-    "label": null,
-    "verified_by": null,
-    "verified_at": null,
-    "note": null
+    "status": "human_verified",
+    "label": "positive",
+    "verified_by": "人工复核-用户确认",
+    "verified_at": "2026-10-10",
+    "note": "用户逐条人工核验并采纳（2026-10-10）。工具逐字回读证据见 source_path / source_locator / source_node_values。 注：该条候选记录中的“分数为 null”系通用模板，不适用于本条——NVD 原始快照 metrics.cvssMetricV31[0] 为 baseScore=8.8、baseSeverity=HIGH、type=Secondary、source=134c704f-9b21-4f2e-91b3-4a467353bcc0，向量与分数均逐字可回读。"
    },
-   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。"
+   "uncertainty": "部分来源只给向量不给分数；此类样本分数为 null，不得当作 0。",
+   "promotion_evidence": {
+    "source": "event_field",
+    "source_path": "events[CVE-2025-6558].cvss[0]",
+    "source_locator": "nvd:7bc5297b92",
+    "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "source_node_values": [
+     "3.1",
+     "8.8",
+     "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+     "nvd:7bc5297b92"
+    ]
+   }
   },
   {
    "relation_id": "BREL-VE-0034",
@@ -3523,6 +3715,6 @@
  ],
  "source_labeled": "artifacts\\b_eval\\relation_candidates_labeled_20261006.json",
  "system_output": "evaluation\\b_relation_candidates_20261010.json",
- "promote_input": null,
- "withhold_input": "artifacts\\b_eval\\relation_new_positive_proposals_20261010.json"
+ "promote_input": "artifacts\\b_eval\\relation_new_positive_proposals_20261010.json",
+ "withhold_input": null
 }

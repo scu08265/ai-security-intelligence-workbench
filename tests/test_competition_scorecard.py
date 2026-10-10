@@ -174,17 +174,19 @@ def test_active_relation_uses_gold_score_and_exposes_recall():
     # 11 个对象扩到"全量盘点"（16 篇论文 / 12 个生态事件 / 37 个 CVE，CVE 按证据
     # 覆盖分层）。扩样后第一次接入 OSV ranges / NVD configurations / MITRE lessThan，
     # 因此新识别出 25 条真实漏检：分母变大，Recall 必然低于上一批，这是如实记录。
-    # 另有 17 条只经工具逐字回读、尚未人工签核的关系停在 pending_human_review，
-    # 既不计 TP 也不计 FN。
+    # 17 条只经工具逐字回读的关系已在 2026-10-10 由用户逐条签核，计入 TP。
     assert active["source"].endswith("relation_score_gold_20261010.json")
     assert active["precision"] == 1.0
-    assert active["recall"] == 0.6753
-    assert active["f1"] == 0.8062
-    assert (active["tp"], active["fp"], active["fn"]) == (52, 0, 25)
+    # precision 恒为 1.0 是口径上限（TP/FP 只在系统自己抽出的候选里判），
+    # 有区分度的是 recall / fn。
+    assert active["recall"] == 0.734
+    assert active["f1"] == 0.8466
+    assert (active["tp"], active["fp"], active["fn"]) == (69, 0, 25)
     assert active["missing_relation_ids"] == 25
-    assert active["evaluable_samples"] == 77
+    assert active["evaluable_samples"] == 94
     # 未核验/无法定论的候选单列，页面不能把它们读成"已判定"
-    assert active["pending_samples"] == 22
+    # （四维口径里只剩 poc 的 5 条既有待审项）
+    assert active["pending_samples"] == 5
     assert active["undetermined_samples"] == 58
     # 抽样范围与证据分层随金标准一起暴露，不由批次日推测。
     assert active["gold_source"] == "evaluation/b_relation_gold_20261010.json"
@@ -210,7 +212,7 @@ def test_contrast_relation_exposes_the_frozen_gold_scope():
     contrast = body["contrast_relation"]
     assert active["source"].endswith("relation_score_gold_20261010.json")
     assert active["fn"] == 25
-    assert active["recall"] == 0.6753
+    assert active["recall"] == 0.734
     assert contrast["source"].endswith("relation_score_gold_frozen20261006_20261010.json")
     assert contrast["fn"] == 0
     assert contrast["recall"] == 1.0

@@ -13,9 +13,11 @@
    （是的话不许覆盖）。
 
 第 7 项只保证"不覆盖相反结论"。**升级成 ``human_verified/positive`` 属于人工签核**，
-所以本工具默认把清单写成"待签核"署名，签核人可用 ``--verified-by`` / ``--verified-at``
-显式传入（例如 ``--verified-by 人工复核-用户确认``），再交给
-``relabel_b_relation_candidates.py --promote`` 落地。
+所以本工具**不能自签**：不显式给 ``--verified-by`` 时，清单署名是占位串
+``源快照逐字比对-待用户签核``、``signature_required`` 为 ``true``；只有签核人显式传入
+``--verified-by``（例如 ``--verified-by 人工复核-用户确认``）时，才把
+``signature_required`` 置为 ``false``，再交给 ``relabel_b_relation_candidates.py
+--promote`` 落地。
 
 用法::
 
@@ -50,6 +52,9 @@ POSITIVE = "positive"
 CONTRADICTORY = {"negative", "not_applicable"}
 SOURCE_CHECKS = ("event_exists", "source_locator_resolves", "source_value_matches",
                  "source_byte_rereadable")
+
+# 未显式签核时的占位署名：语义是"证据已备好、结论还没签"，不是人工确认。
+PLACEHOLDER_VERIFIED_BY = "源快照逐字比对-待用户签核"
 
 _STEP = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)(?:\[(\d+)\])?$")
 _EVENT_PATH = re.compile(r"^events\[(?P<subject>.+?)\]\.(?P<rest>.+)$")
@@ -238,20 +243,49 @@ def _verify_one(db_dir: Path, events: dict, relation: dict, candidate: dict,
     }
 
 
-def build_promotions(report: dict, *, verified_by: str, verified_at: str,
-                     note: str) -> dict:
+def resolve_signature(verified_by: str | None) -> tuple[str, bool]:
+    """把 ``--verified-by`` 解析成（清单署名, 是否仍需人工签核）。
+
+    只有**显式传入、且不是占位串**的署名才算人工签核；``None``（未传）或占位串一律
+    退回待签核状态 —— 本工具只负责逐字回读证据，不许拿自己的核验结论冒充人工确认。
+    """
+    name = (verified_by or "").strip()
+    if not name or name == PLACEHOLDER_VERIFIED_BY:
+        return PLACEHOLDER_VERIFIED_BY, True
+    return name, False
+
+
+def parse_note_suffixes(raw: list[str] | None) -> dict[str, str]:
+    """把 ``--note-suffix Subject=补充说明`` 解析成 {subject: 补充说明}。"""
+    suffixes: dict[str, str] = {}
+    for entry in raw or []:
+        subject, sep, text = entry.partition("=")
+        subject, text = subject.strip(), text.strip()
+        if not sep or not subject or not text:
+            raise SystemExit(f"--note-suffix 需要写成 Subject=补充说明，收到：{entry!r}")
+        suffixes[subject] = text
+    return suffixes
+
+
+def build_promotions(report: dict, *, verified_by: str | None, verified_at: str,
+                     note: str, note_suffixes: dict[str, str] | None = None) -> dict:
+    signer, signature_required = resolve_signature(verified_by)
     promotions = []
     for item in report["items"]:
         if not (item["candidate_found"] and item["all_checks_passed"]):
             continue
+        item_note = note
+        suffix = (note_suffixes or {}).get(item["subject"])
+        if suffix:
+            item_note = f"{note} {suffix}"
         promotions.append({
             "dimension": item["dimension"],
             "subject": item["subject"],
             "object": item["object"],
             "label": POSITIVE,
-            "verified_by": verified_by,
+            "verified_by": signer,
             "verified_at": verified_at,
-            "note": note,
+            "note": item_note,
             "evidence": {
                 "source": item["source"],
                 "source_path": item["source_path"],
@@ -263,7 +297,7 @@ def build_promotions(report: dict, *, verified_by: str, verified_at: str,
     return {
         "schema_version": "b-relation-promotions-1.0",
         "source_verification": report.get("candidates_ref"),
-        "signature_required": True,
+        "signature_required": signature_required,
         "counts": {"promotions": len(promotions)},
         "promotions": promotions,
     }
@@ -282,11 +316,15 @@ def build_parser() -> argparse.ArgumentParser:
                         default=gold_tool.SCOPE_MODE_FULL)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--proposals-out", type=Path, default=None)
-    parser.add_argument("--verified-by", default="源快照逐字比对-待用户签核",
-                        help="清单里的署名人；人工签核后应显式改为确认人")
+    parser.add_argument("--verified-by", default=None,
+                        help="签核人；不传时署名占位串、signature_required=true，"
+                             "显式传入才把 signature_required 置为 false")
     parser.add_argument("--verified-at", default="2026-10-10")
     parser.add_argument("--note", default="工具按 source_path/source_locator 逐字比对通过；"
                                           "签名以人工签核为准")
+    parser.add_argument("--note-suffix", action="append", default=None,
+                        metavar="SUBJECT=补充说明",
+                        help="可选：给某条主体的 note 追加一句审计说明（可重复）")
     return parser
 
 
@@ -311,7 +349,8 @@ def main() -> int:
 
     if args.proposals_out:
         promotions = build_promotions(report, verified_by=args.verified_by,
-                                      verified_at=args.verified_at, note=args.note)
+                                      verified_at=args.verified_at, note=args.note,
+                                      note_suffixes=parse_note_suffixes(args.note_suffix))
         args.proposals_out.parent.mkdir(parents=True, exist_ok=True)
         args.proposals_out.write_text(
             json.dumps(promotions, ensure_ascii=False, indent=1), encoding="utf-8")
