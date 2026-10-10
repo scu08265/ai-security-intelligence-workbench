@@ -14,7 +14,7 @@
 - 安全版本复测通过并写入 `closed_at`，原始 `assessments.status=affected` 不被覆盖。
 - `closure_rate` 0.0 → **0.75**；`verified_rate` 0.0 → **0.75**（仅用 API 指标）。
 - `/api/dispositions/metrics` 与 `/api/competition/scorecard.disposition` 字段差异 **0**。
-- 全量测试：**590 passed, 59 skipped, 0 failed**（72.80s）。
+- 全量测试：**590 passed, 59 skipped, 0 failed**（2026-10-10 修复 ACL 后普通权限裸跑 44.31s）。
 - 生成前后 `data/intel.sqlite` SHA256 一致：`b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8`。
 
 ## Evidence
@@ -46,6 +46,7 @@
 
 - `.venv` 原 `pyvenv.cfg` 指向 `C:\Users\17705\.cache\codex-runtimes\codex-primary-runtime\
   dependencies\python\python.exe`（已删除），本轮用系统 Python 3.13.5 重建。
-- `%TEMP%\pytest-of-17705`、项目 `.pytest_cache/`、`work/pytest-*` 带失效 ACL，仅授权给同机已
-  消失的账号 `S-1-5-21-...-1007`（当前账号为 `-1001`），`pytest` 直接跑会 `PermissionError
-  [WinError 5]`。本轮以 `--basetemp` 指向可写目录绕过；该 ACL 修复需要管理员权限，尚未完成。
+- `%TEMP%\pytest-of-17705`、项目 `.pytest_cache/`、`work\pytest-*` 曾带失效 ACL，仅授权给同机
+  已消失的账号 `S-1-5-21-...-1007`（当前账号为 `-1001`），`pytest` 直接跑会 `PermissionError
+  [WinError 5]`。生成证据时以 `--basetemp` 指向可写目录绕过；**2026-10-10 已修复**（管理员权限
+  `takeown` + 删除这些目录），普通权限裸跑 `pytest tests -q` 现通过 `590 passed, 59 skipped`。

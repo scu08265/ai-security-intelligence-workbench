@@ -56,10 +56,14 @@
 ## 测试
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest tests -q --basetemp=<可写目录> -p no:cacheprovider
+.\.venv\Scripts\python.exe -m pytest tests -q
 ```
 
-结果：**590 passed, 59 skipped, 0 failed**（72.80s）。
+结果：**590 passed, 59 skipped, 0 failed**（44.31s，2026-10-10 普通权限重跑）。
+
+> 生成证据的当天（2026-10-09）环境带失效 ACL，必须加 `--basetemp=<可写目录> -p no:cacheprovider`
+> 才能跑；该问题已于 2026-10-10 修复（见下方“环境问题”），故此处记录修复后的裸命令结果，
+> 通过/跳过数量与当天完全一致。
 
 ## 声明与限制
 
@@ -79,9 +83,14 @@
   `C:\Users\17705\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`。
   本轮用系统 Python 3.13.5 重建 `.venv` 并 `pip install -r requirements.txt`，
   旧环境保留为 `.venv.broken-codex-20261009/`。
-- 多个路径带有失效 ACL：`%TEMP%\pytest-of-17705`、项目内 `.pytest_cache/`、`work/pytest-*`
+- 曾有多个路径带失效 ACL：`%TEMP%\pytest-of-17705`、项目内 `.pytest_cache/`、`work\pytest-*`
   只授权给同机失效账号 `S-1-5-21-...-1007`，而当前账号是 `-1001`，导致 `pytest` 报
-  `PermissionError: [WinError 5]`。本轮用 `--basetemp` 指向可写目录绕过。
+  `PermissionError: [WinError 5]`（表现为 `24 skipped, 625 errors`）。生成证据时以
+  `--basetemp` 指向可写目录绕过。**2026-10-10 已修复**：管理员权限下对上述目录执行
+  `takeown` 并删除，`%TEMP%` 与 `.pytest_cache` 重新生成后属主恢复正常，普通权限裸跑
+  `pytest tests -q` 现通过 `590 passed, 59 skipped`。
+  注意 `icacls ... /grant "$env:USERNAME:(OI)(CI)F"` 这种写法会被 PowerShell 误解析为变量名
+  （报 `无效参数"(OI)(CI)F"`），需要写成 `${env:USERNAME}:(OI)(CI)F`。
 - `artifacts/backups/intel-20261008-211841.sqlite` 在 `D:\新建文件夹\2026-09-26\ba` 下
   并不存在（`artifacts/backups/` 只有 2026-09-27 ~ 10-01 的备份），故本轮先补做了
   `intel-20261009-213026.sqlite` 才执行。

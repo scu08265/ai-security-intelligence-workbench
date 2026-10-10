@@ -14,4 +14,4 @@ ssssssssssss..........sss.......ssssssssssssssssssssssssssssss.......... [ 88%]
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-590 passed, 59 skipped, 1 warning in 72.80s (0:01:12)
+590 passed, 59 skipped, 1 warning in 44.31s
