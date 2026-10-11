@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Made two tests independent of the checkout path and locale, so the suite
+  passes from a Chinese working directory too: the config subprocess test now
+  decodes the child with the same UTF-8 it pins, and the candidate-set
+  comparison normalises line endings instead of comparing raw bytes.
 - Fixed cumulative collection evidence being silently truncated by a page cap:
   `list_runs()` limited every read to 200 rows and `list_events()` to 500, so
   once the run log or the corpus outgrew the cap the oldest days dropped out of

@@ -29,8 +29,11 @@ def _run(code: str, *, env_file: Path | None, data_dir: str | None) -> str:
         env.pop("INTEL_ENV_FILE", None)
     if data_dir is not None:
         env["INTEL_DATA_DIR"] = data_dir
+    # The child is pinned to UTF-8 above, so decode as UTF-8 as well.  Letting
+    # subprocess guess from the locale breaks every path that contains non-ASCII
+    # characters (this checkout lives under a Chinese directory name).
     done = subprocess.run([sys.executable, "-c", code], cwd=ROOT, env=env,
-                          capture_output=True, text=True)
+                          capture_output=True, text=True, encoding="utf-8")
     assert done.returncode == 0, done.stderr
     return done.stdout.strip()
 

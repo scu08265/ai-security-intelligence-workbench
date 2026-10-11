@@ -93,7 +93,12 @@ def _load(path: Path) -> dict:
 
 
 def _lf_sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    return hashlib.sha256(_lf_bytes(path)).hexdigest()
+
+
+def _lf_bytes(path: Path) -> bytes:
+    """Line endings are a checkout artefact, never a change in the data."""
+    return path.read_bytes().replace(b"\r\n", b"\n")
 
 
 def _copy_dir() -> Path:
@@ -185,7 +190,9 @@ def test_earlier_batches_are_byte_identical():
 def test_candidate_set_is_unchanged_so_the_delta_comes_from_the_scope():
     """候选零变化：本轮的分数变化只能来自枚举口径，不掺候选变化。"""
     assert _lf_sha256(CANDIDATES) == CANDIDATE_SHA256
-    assert CANDIDATES.read_bytes() == FORMER_CANDIDATES.read_bytes()
+    # 按 LF 归一化后再比对：Windows 检出让本批次落到 CRLF、旧批次保持 LF，
+    # 直接比原始字节会把纯粹的检出差异报成候选集变化。
+    assert _lf_bytes(CANDIDATES) == _lf_bytes(FORMER_CANDIDATES)
 
 
 def test_full_scope_inventory_and_evidence_tiers_are_self_consistent():
