@@ -9,24 +9,15 @@ response, a log line or the export snapshot.
 from __future__ import annotations
 
 import os
+from collections.abc import Mapping
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 VERSION_FILE = BASE_DIR / "VERSION"
-try:
-    _FILE_VERSION = VERSION_FILE.read_text(encoding="utf-8").strip()
-except OSError:
-    _FILE_VERSION = ""
-APP_VERSION = (
-    os.getenv("APP_VERSION", "").strip()
-    or _FILE_VERSION
-    or "0.2.3"
-)
-DATA_DIR = Path(os.getenv("INTEL_DATA_DIR") or (BASE_DIR / "data"))
-SNAPSHOT_DIR = DATA_DIR / "snapshots"
-DB_PATH = DATA_DIR / "intel.sqlite"
-STATIC_DIR = Path(__file__).resolve().parent / "static"
-ENV_FILE = BASE_DIR / ".env"
+
+# ``INTEL_ENV_FILE`` only redirects where the .env is read from (useful for tests and
+# for pointing a checkout at a shared .env); it never changes precedence.
+ENV_FILE = Path(os.getenv("INTEL_ENV_FILE") or (BASE_DIR / ".env"))
 
 # The only environment variable names this project understands.
 API_KEY_ENV = "DEEPSEEK_API_KEY"
@@ -61,6 +52,39 @@ def load_env_file(path: Path | None = None) -> None:
             continue
         value = value.strip().strip('"').strip("'")
         os.environ.setdefault(name, value)
+
+
+# 必须在任何 os.getenv 读取配置之前执行：否则 .env 里的 INTEL_DATA_DIR / APP_VERSION
+# 会被"先算好的模块常量"绕过，只有显式环境变量生效。
+# os.environ.setdefault 保证显式环境变量 > .env > 默认值 的优先级不变。
+load_env_file()
+
+try:
+    _FILE_VERSION = VERSION_FILE.read_text(encoding="utf-8").strip()
+except OSError:
+    _FILE_VERSION = ""
+APP_VERSION = (
+    os.getenv("APP_VERSION", "").strip()
+    or _FILE_VERSION
+    or "0.2.3"
+)
+
+
+def resolve_data_dir(source: Mapping[str, str] | None = None) -> Path:
+    """数据集目录：显式 ``INTEL_DATA_DIR`` > 默认 ``BASE_DIR/data``。
+
+    ``.env`` 里的值由 :func:`load_env_file` 写进 ``os.environ``（``setdefault``），
+    所以它同样生效，但不会覆盖已经显式设置的环境变量。
+    """
+    values = os.environ if source is None else source
+    raw = (values.get("INTEL_DATA_DIR") or "").strip()
+    return Path(raw) if raw else (BASE_DIR / "data")
+
+
+DATA_DIR = resolve_data_dir()
+SNAPSHOT_DIR = DATA_DIR / "snapshots"
+DB_PATH = DATA_DIR / "intel.sqlite"
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 
 def _flag(name: str, default: bool) -> bool:
@@ -112,6 +136,3 @@ def model_configured() -> bool:
 def ensure_dirs() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-load_env_file()

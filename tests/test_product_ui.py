@@ -148,7 +148,11 @@ def test_scorecard_reads_active_relation_gold_fields():
 def test_scorecard_shows_both_relation_scopes():
     for token in (
         "contrast_relation",
-        "对照口径 Recall",
+        "扩样前口径 Recall",
+        "relationScope",
+        "待人工核验",
+        "pending_samples",
+        "不代表全语料召回率",
     ):
         assert token in SCRIPT
 

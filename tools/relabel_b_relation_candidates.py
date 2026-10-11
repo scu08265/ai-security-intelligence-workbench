@@ -16,6 +16,10 @@
 ``--promote`` 是可选的显式“新增标注”清单：只有清单里写明的
 ``(dimension, subject, object)`` 才会被打上新标签，其余新候选保持
 ``pending_human_review``。这样每一处标注变化都能追溯到来源。
+
+``--withhold`` 是它的反向操作，专门用于**撤回人工签核**：清单里写明的候选一律回到
+``pending_human_review``（label / verified_by / verified_at 全部清空）。当一批
+``human_verified`` 标注没有经过人工逐条确认时，必须能一键退回，而不是手改 JSON。
 """
 
 from __future__ import annotations
@@ -45,20 +49,29 @@ def _pending() -> dict:
             "verified_by": None, "verified_at": None, "note": None}
 
 
-def relabel(source: dict, system: dict, promotions: dict | None) -> dict:
+def relabel(source: dict, system: dict, promotions: dict | None,
+            withhold: dict | None = None) -> dict:
     carried_by_key: dict[tuple, dict] = {}
     for case in source.get("cases") or []:
         carried_by_key.setdefault(_key(case), case.get("annotation") or _pending())
 
     promotion_by_key = {_key(item): item for item in (promotions or {}).get("promotions", [])}
+    withhold_keys = {_key(item) for item in (withhold or {}).get("promotions", [])}
 
     cases: list[dict] = []
-    counts = {"total": 0, "carried": 0, "promoted": 0, "pending": 0}
+    counts = {"total": 0, "carried": 0, "promoted": 0, "withheld": 0, "pending": 0}
     seen_promotions: set[tuple] = set()
+    seen_withheld: set[tuple] = set()
     for case in system.get("cases") or []:
         case = copy.deepcopy(case)
         key = _key(case)
-        if key in promotion_by_key:
+        if key in withhold_keys:
+            # 撤回人工签核：回到"未核验"，连上一批次带来的签名也一并去掉。
+            case["annotation"] = _pending()
+            case.pop("promotion_evidence", None)
+            counts["withheld"] += 1
+            seen_withheld.add(key)
+        elif key in promotion_by_key:
             promo = promotion_by_key[key]
             case["annotation"] = {
                 "status": "human_verified",
@@ -85,6 +98,8 @@ def relabel(source: dict, system: dict, promotions: dict | None) -> dict:
         "schema_version": "b-relation-candidates-labeled-1.0",
         "counts": counts,
         "unmatched_promotions": unmatched,
+        "unmatched_withholdings": [item for item in (withhold or {}).get("promotions", [])
+                                   if _key(item) not in seen_withheld],
         "cases": cases,
     }
 
@@ -97,16 +112,26 @@ def main() -> int:
                         help="新批次的系统候选文件（未标注）")
     parser.add_argument("--promote", type=Path, default=None,
                         help="可选：显式新增标注清单（promotions）")
+    parser.add_argument("--withhold", type=Path, default=None,
+                        help="可选：撤回人工签核清单；清单里的候选一律回到 "
+                             "pending_human_review，并清空 verified_by / verified_at")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
 
     promotions = _load(args.promote) if args.promote else None
-    result = relabel(_load(args.source), _load(args.system), promotions)
+    withhold = _load(args.withhold) if args.withhold else None
+    result = relabel(_load(args.source), _load(args.system), promotions, withhold)
     result["source_labeled"] = str(args.source)
     result["system_output"] = str(args.system)
+    result["promote_input"] = str(args.promote) if args.promote else None
+    result["withhold_input"] = str(args.withhold) if args.withhold else None
     if result["unmatched_promotions"]:
         print("警告：%d 条 promotion 没有匹配到候选：" % len(result["unmatched_promotions"]))
         for item in result["unmatched_promotions"]:
+            print("   ", item.get("subject"), item.get("object"))
+    if result["unmatched_withholdings"]:
+        print("警告：%d 条 withdraw 没有匹配到候选：" % len(result["unmatched_withholdings"]))
+        for item in result["unmatched_withholdings"]:
             print("   ", item.get("subject"), item.get("object"))
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")

@@ -1,0 +1,1603 @@
+{
+ "schema_version": "b-relation-expansion-verification-1.0",
+ "scope_mode": "full",
+ "candidates_ref": "evaluation/b_relation_candidates_20261010.json",
+ "labeled_ref": "artifacts/b_eval/relation_candidates_labeled_20261006.json",
+ "total": 42,
+ "candidate_backed": 17,
+ "promotable": 17,
+ "blocked": 0,
+ "missed_new": 25,
+ "missed_unreadable": 0,
+ "ok": true,
+ "items": [
+  {
+   "relation_id": "BREL-CV-0019",
+   "dimension": "cvss",
+   "subject": "GHSA-3g9q-v48f-hh9w",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+   "source": "event_field",
+   "source_path": "events[GHSA-3g9q-v48f-hh9w].cvss[0]",
+   "source_locator": "osv:2a6ec98dc3",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "osv:2a6ec98dc3"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:2a6ec98dc3",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0015",
+   "dimension": "cvss",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "source": "event_field",
+   "source_path": "events[GHSA-8pw2-6jv3-mj5j].cvss[0]",
+   "source_locator": "osv:8334ecbb11",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "osv:8334ecbb11"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:8334ecbb11",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-VE-0017",
+   "dimension": "version_range",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "object": "vllm@< 0.28.0",
+   "package": "vllm",
+   "enumerated_value": "< 0.28.0",
+   "source": "event_field",
+   "source_path": "events[GHSA-8pw2-6jv3-mj5j].affected[0].range",
+   "source_locator": "osv:c8c0660a20",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "< 0.28.0"
+   ],
+   "tokens": [
+    "0.28.0"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:c8c0660a20",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-FI-0006",
+   "dimension": "fixed_version",
+   "subject": "GHSA-8pw2-6jv3-mj5j",
+   "object": "vllm@0.28.0",
+   "package": "vllm",
+   "enumerated_value": "0.28.0",
+   "source": "event_field",
+   "source_path": "events[GHSA-8pw2-6jv3-mj5j].affected[0].fixed_version",
+   "source_locator": "osv:c8c0660a20",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "0.28.0"
+   ],
+   "tokens": [
+    "0.28.0"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:c8c0660a20",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0016",
+   "dimension": "cvss",
+   "subject": "GHSA-hcwq-8wjf-3gcr",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+   "source": "event_field",
+   "source_path": "events[GHSA-hcwq-8wjf-3gcr].cvss[0]",
+   "source_locator": "osv:cbbeac1a7e",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "osv:cbbeac1a7e"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:cbbeac1a7e",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0026",
+   "dimension": "cvss",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+   "source": "event_field",
+   "source_path": "events[GHSA-mcmc-2m55-j8jj].cvss[0]",
+   "source_locator": "osv:c7dc69d620",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "osv:c7dc69d620"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:c7dc69d620",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-VE-0031",
+   "dimension": "version_range",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "object": "vllm@>= 0.10.2, < 0.13.0",
+   "package": "vllm",
+   "enumerated_value": ">= 0.10.2, < 0.13.0",
+   "source": "event_field",
+   "source_path": "events[GHSA-mcmc-2m55-j8jj].affected[0].range",
+   "source_locator": "osv:31793381df",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    ">= 0.10.2, < 0.13.0"
+   ],
+   "tokens": [
+    "0.10.2",
+    "0.13.0"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:31793381df",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-FI-0012",
+   "dimension": "fixed_version",
+   "subject": "GHSA-mcmc-2m55-j8jj",
+   "object": "vllm@0.13.0",
+   "package": "vllm",
+   "enumerated_value": "0.13.0",
+   "source": "event_field",
+   "source_path": "events[GHSA-mcmc-2m55-j8jj].affected[0].fixed_version",
+   "source_locator": "osv:31793381df",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "0.13.0"
+   ],
+   "tokens": [
+    "0.13.0"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:31793381df",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0020",
+   "dimension": "cvss",
+   "subject": "GHSA-v39v-59xw-j98g",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+   "source": "event_field",
+   "source_path": "events[GHSA-v39v-59xw-j98g].cvss[0]",
+   "source_locator": "osv:93abe9fe20",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+    "osv:93abe9fe20"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:93abe9fe20",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0018",
+   "dimension": "cvss",
+   "subject": "GHSA-wvm9-9g5j-623f",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+   "source": "event_field",
+   "source_path": "events[GHSA-wvm9-9g5j-623f].cvss[0]",
+   "source_locator": "osv:14612d1d78",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+    "osv:14612d1d78"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:14612d1d78",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0017",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3985",
+   "object": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "package": null,
+   "enumerated_value": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "source": "event_field",
+   "source_path": "events[PYSEC-2026-3985].cvss[0]",
+   "source_locator": "osv:0eb384018c",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "4.0",
+    "None",
+    "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "osv:0eb384018c"
+   ],
+   "tokens": [
+    "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:0eb384018c",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0014",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3996",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "package": null,
+   "enumerated_value": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "source": "event_field",
+   "source_path": "events[PYSEC-2026-3996].cvss[0]",
+   "source_locator": "osv:4f35217972",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "4.0",
+    "None",
+    "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "osv:4f35217972"
+   ],
+   "tokens": [
+    "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:4f35217972",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0013",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3997",
+   "object": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "package": null,
+   "enumerated_value": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+   "source": "event_field",
+   "source_path": "events[PYSEC-2026-3997].cvss[0]",
+   "source_locator": "osv:79d583057f",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "4.0",
+    "None",
+    "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+    "osv:79d583057f"
+   ],
+   "tokens": [
+    "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:79d583057f",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0011",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3998",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "source": "event_field",
+   "source_path": "events[PYSEC-2026-3998].cvss[0]",
+   "source_locator": "osv:0433c36f31",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+    "osv:0433c36f31"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:0433c36f31",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0012",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-3999",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+   "source": "event_field",
+   "source_path": "events[PYSEC-2026-3999].cvss[0]",
+   "source_locator": "osv:481782e92b",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+    "osv:481782e92b"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:481782e92b",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0010",
+   "dimension": "cvss",
+   "subject": "PYSEC-2026-4000",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+   "source": "event_field",
+   "source_path": "events[PYSEC-2026-4000].cvss[0]",
+   "source_locator": "osv:7819297e5f",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "None",
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+    "osv:7819297e5f"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N"
+   ],
+   "current_annotation": {
+    "status": "human_verified",
+    "label": "unknown"
+   },
+   "candidate_source_id": "osv:7819297e5f",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": "BREL-CV-0028",
+   "dimension": "cvss",
+   "subject": "CVE-2025-6558",
+   "object": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "package": null,
+   "enumerated_value": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+   "source": "event_field",
+   "source_path": "events[CVE-2025-6558].cvss[0]",
+   "source_locator": "nvd:7bc5297b92",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\intel.sqlite",
+   "source_node_values": [
+    "3.1",
+    "8.8",
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "nvd:7bc5297b92"
+   ],
+   "tokens": [
+    "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+   ],
+   "current_annotation": {
+    "status": "pending_human_review",
+    "label": null
+   },
+   "candidate_source_id": "nvd:7bc5297b92",
+   "candidate_found": true,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": true,
+    "candidate_object_matches": true,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": true
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "chrome@< 138.0.7204.157",
+   "package": "chrome",
+   "enumerated_value": "< 138.0.7204.157",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:google:chrome:*:*:*:*:*:*:*:*",
+    "138.0.7204.157",
+    "85E11AEA-0ABB-4CBB-9236-1459F7C94F7A"
+   ],
+   "tokens": [
+    "138.0.7204.157"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "chrome@138.0.7204.157",
+   "package": "chrome",
+   "enumerated_value": "138.0.7204.157",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:google:chrome:*:*:*:*:*:*:*:*",
+    "138.0.7204.157",
+    "85E11AEA-0ABB-4CBB-9236-1459F7C94F7A"
+   ],
+   "tokens": [
+    "138.0.7204.157"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "safari@< 18.6",
+   "package": "safari",
+   "enumerated_value": "< 18.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:apple:safari:*:*:*:*:*:*:*:*",
+    "18.6",
+    "969AD7A8-5CCF-4607-BBE8-E06E642A170C"
+   ],
+   "tokens": [
+    "18.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "safari@18.6",
+   "package": "safari",
+   "enumerated_value": "18.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:apple:safari:*:*:*:*:*:*:*:*",
+    "18.6",
+    "969AD7A8-5CCF-4607-BBE8-E06E642A170C"
+   ],
+   "tokens": [
+    "18.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "ipados@< 18.6",
+   "package": "ipados",
+   "enumerated_value": "< 18.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[1]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:ipados:*:*:*:*:*:*:*:*",
+    "18.6",
+    "8ED4015E-C707-4A91-86B3-23100E0DFA8F"
+   ],
+   "tokens": [
+    "18.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "ipados@18.6",
+   "package": "ipados",
+   "enumerated_value": "18.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[1]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:ipados:*:*:*:*:*:*:*:*",
+    "18.6",
+    "8ED4015E-C707-4A91-86B3-23100E0DFA8F"
+   ],
+   "tokens": [
+    "18.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "iphone_os@< 18.6",
+   "package": "iphone_os",
+   "enumerated_value": "< 18.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[2]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:iphone_os:*:*:*:*:*:*:*:*",
+    "18.6",
+    "BD9D42A7-DE2A-4D5A-8C7B-002A60148483"
+   ],
+   "tokens": [
+    "18.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "iphone_os@18.6",
+   "package": "iphone_os",
+   "enumerated_value": "18.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[2]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:iphone_os:*:*:*:*:*:*:*:*",
+    "18.6",
+    "BD9D42A7-DE2A-4D5A-8C7B-002A60148483"
+   ],
+   "tokens": [
+    "18.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "macos@< 15.6",
+   "package": "macos",
+   "enumerated_value": "< 15.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[3]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:macos:*:*:*:*:*:*:*:*",
+    "15.6",
+    "077E4BB7-4A8B-4D18-BCD7-2938A2B8B9C8"
+   ],
+   "tokens": [
+    "15.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "macos@15.6",
+   "package": "macos",
+   "enumerated_value": "15.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[3]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:macos:*:*:*:*:*:*:*:*",
+    "15.6",
+    "077E4BB7-4A8B-4D18-BCD7-2938A2B8B9C8"
+   ],
+   "tokens": [
+    "15.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "visionos@< 2.6",
+   "package": "visionos",
+   "enumerated_value": "< 2.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[4]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:visionos:*:*:*:*:*:*:*:*",
+    "2.6",
+    "EADBC0BD-ECAC-4E0A-B490-24649AFE5355"
+   ],
+   "tokens": [
+    "2.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "visionos@2.6",
+   "package": "visionos",
+   "enumerated_value": "2.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[4]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:visionos:*:*:*:*:*:*:*:*",
+    "2.6",
+    "EADBC0BD-ECAC-4E0A-B490-24649AFE5355"
+   ],
+   "tokens": [
+    "2.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "watchos@< 11.6",
+   "package": "watchos",
+   "enumerated_value": "< 11.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[5]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:watchos:*:*:*:*:*:*:*:*",
+    "11.6",
+    "35D9C2D7-6120-4631-8D0B-259641DFD85B"
+   ],
+   "tokens": [
+    "11.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "watchos@11.6",
+   "package": "watchos",
+   "enumerated_value": "11.6",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[2].nodes[0].cpeMatch[5]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:o:apple:watchos:*:*:*:*:*:*:*:*",
+    "11.6",
+    "35D9C2D7-6120-4631-8D0B-259641DFD85B"
+   ],
+   "tokens": [
+    "11.6"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "wpe_webkit@< 2.48.0",
+   "package": "wpe_webkit",
+   "enumerated_value": "< 2.48.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[3].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:wpewebkit:wpe_webkit:*:*:*:*:*:*:*:*",
+    "2.48.0",
+    "26159029-7303-4539-8085-94CD929A1EFF"
+   ],
+   "tokens": [
+    "2.48.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "wpe_webkit@2.48.0",
+   "package": "wpe_webkit",
+   "enumerated_value": "2.48.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[3].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:wpewebkit:wpe_webkit:*:*:*:*:*:*:*:*",
+    "2.48.0",
+    "26159029-7303-4539-8085-94CD929A1EFF"
+   ],
+   "tokens": [
+    "2.48.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-6558",
+   "object": "webkitgtk@< 2.48.0",
+   "package": "webkitgtk",
+   "enumerated_value": "< 2.48.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[4].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:webkitgtk:webkitgtk:*:*:*:*:*:*:*:*",
+    "2.48.0",
+    "E72E4309-7EB2-4486-9AF4-06D95CAF3E58"
+   ],
+   "tokens": [
+    "2.48.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-6558",
+   "object": "webkitgtk@2.48.0",
+   "package": "webkitgtk",
+   "enumerated_value": "2.48.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_locator": "configurations[4].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\6b69782b9647694c021150ed8f3f1d9821217e1a81613367437425954b7884b9.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:webkitgtk:webkitgtk:*:*:*:*:*:*:*:*",
+    "2.48.0",
+    "E72E4309-7EB2-4486-9AF4-06D95CAF3E58"
+   ],
+   "tokens": [
+    "2.48.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2025-62593",
+   "object": "ray@< 2.52.0",
+   "package": "ray",
+   "enumerated_value": "< 2.52.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/CVE-2025-62593.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:anyscale:ray:*:*:*:*:*:*:*:*",
+    "2.52.0",
+    "EEAA235D-B305-4247-8840-CCABC90D54C1"
+   ],
+   "tokens": [
+    "2.52.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-62593",
+   "object": "ray@2.52.0",
+   "package": "ray",
+   "enumerated_value": "2.52.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/CVE-2025-62593.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2025-62593.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:anyscale:ray:*:*:*:*:*:*:*:*",
+    "2.52.0",
+    "EEAA235D-B305-4247-8840-CCABC90D54C1"
+   ],
+   "tokens": [
+    "2.52.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2026-33017",
+   "object": "langflow@< 1.8.2",
+   "package": "langflow",
+   "enumerated_value": "< 1.8.2",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/CVE-2026-33017.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:langflow:langflow:*:*:*:*:*:*:*:*",
+    "1.8.2",
+    "B38E7511-B77D-4E5F-B33A-458EE5770358"
+   ],
+   "tokens": [
+    "1.8.2"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2026-33017",
+   "object": "langflow@1.8.2",
+   "package": "langflow",
+   "enumerated_value": "1.8.2",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/CVE-2026-33017.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-33017.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:langflow:langflow:*:*:*:*:*:*:*:*",
+    "1.8.2",
+    "B38E7511-B77D-4E5F-B33A-458EE5770358"
+   ],
+   "tokens": [
+    "1.8.2"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "version_range",
+   "subject": "CVE-2026-64849",
+   "object": "mlflow@>= 3.3.0, < 3.15.0",
+   "package": "mlflow",
+   "enumerated_value": ">= 3.3.0, < 3.15.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/CVE-2026-64849.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-64849.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:lfprojects:mlflow:*:*:*:*:*:*:*:*",
+    "3.3.0",
+    "3.15.0",
+    "1020A84A-9C92-4581-ADC4-4522AD465BA2"
+   ],
+   "tokens": [
+    "3.3.0",
+    "3.15.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2026-64849",
+   "object": "mlflow@3.15.0",
+   "package": "mlflow",
+   "enumerated_value": "3.15.0",
+   "source": "nvd_configuration",
+   "source_path": "snapshots/nvd/CVE-2026-64849.json",
+   "source_locator": "configurations[0].nodes[0].cpeMatch[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\nvd\\CVE-2026-64849.json",
+   "source_node_values": [
+    "True",
+    "cpe:2.3:a:lfprojects:mlflow:*:*:*:*:*:*:*:*",
+    "3.3.0",
+    "3.15.0",
+    "1020A84A-9C92-4581-ADC4-4522AD465BA2"
+   ],
+   "tokens": [
+    "3.15.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  },
+  {
+   "relation_id": null,
+   "dimension": "fixed_version",
+   "subject": "CVE-2025-9959",
+   "object": "smolagents@1.21.0",
+   "package": "smolagents",
+   "enumerated_value": "1.21.0",
+   "source": "mitre_snapshot",
+   "source_path": "snapshots/mitre_cve/01ee9fb7ff63a9d52e0b92173e5a4f59fcebc3314ece65c114ea8eb7192c85e5.json",
+   "source_locator": "containers.cna.affected[0].versions[0]",
+   "source_file": "D:\\ICT\\intel-data-b-cvss-20261006\\snapshots\\mitre_cve\\01ee9fb7ff63a9d52e0b92173e5a4f59fcebc3314ece65c114ea8eb7192c85e5.json",
+   "source_node_values": [
+    "1.21.0",
+    "affected",
+    "0",
+    "python"
+   ],
+   "tokens": [
+    "1.21.0"
+   ],
+   "current_annotation": {
+    "status": null,
+    "label": null
+   },
+   "candidate_source_id": null,
+   "candidate_found": false,
+   "checks": {
+    "event_exists": true,
+    "candidate_found": false,
+    "candidate_object_matches": false,
+    "annotation_not_contradictory": true,
+    "source_locator_resolves": true,
+    "source_value_matches": true,
+    "source_byte_rereadable": true
+   },
+   "source_verified": true,
+   "all_checks_passed": false
+  }
+ ]
+}
