@@ -13,13 +13,17 @@
 冻结基线（2026-09-30 产出）在 `feat/b-evaluation` 及其合并记录中；重评测批次
 （2026-10-02 产出，文件后缀 `_20261002`）在分支 `feat/b-reevaluation-20261002`（自 `8db19cf` 开）。
 
-> **数据可达性（2026-10-12 更新）**：B 已交付 `B_CORPUS_20261012.zip`，交付机按 `MANIFEST.sha256`
-> 逐文件核验 47 / 47 通过，并还原到 `D:\ICT\intel-data-b`（`intel.sqlite` = 8,183,808 B /
-> `4095a5b1…8254285`，与本节上文记录一致）。**B 项评测现在可以在交付机上复跑验证**，不再只是
-> 引用历史数字；测试由 618 passed / 60 skipped 变为 674 passed / 4 skipped。
-> 仍未提供的是两个衍生副本 `intel-data-b-cvss-20261006` 与 `intel-data-b-poc-20261002`，
-> 对应 4 条跳过。语料交接记录见 `docs/B_CORPUS_HANDOVER_REQUEST.md`。
-> 语料本身仍不进仓库（`.gitignore` 排除 `data/*.sqlite*`），这是既定约定。
+> **数据可达性（2026-10-12 更新）**：B 交付了主语料包 `B_CORPUS_20261012.zip`（整包 SHA-256
+> `3aa9e9be…e76e42`），交付机按 `MANIFEST.sha256` 逐文件核验 47 / 47 通过，并还原到
+> `D:\ICT\intel-data-b`（`intel.sqlite` = 8,183,808 B / `4095a5b1…8254285`，与上文记录一致）；
+> 同日追加交付两个衍生副本包 `B_DERIVATIVE_CORPORA_20261012.zip`（整包 SHA-256
+> `98bd19c5…961674a`，139 文件 / 172 条目，含 `intel-data-b-cvss-20261006` 与
+> `intel-data-b-poc-20261002`，包内 `MANIFEST.sha256` 逐行 `<SHA256>  <字节数>  <相对路径>`）。
+> **B 项评测现在可以在交付机上复跑验证**，不再只是引用历史数字：主语料到位后测试由
+> 618 passed / 60 skipped 变为 674 passed / 4 skipped，两个衍生副本到位后最后 4 条跳过解除。
+> 语料交接记录见 `docs/B_CORPUS_HANDOVER_REQUEST.md`。
+> 语料本身仍不进仓库（`.gitignore` 排除 `data/*.sqlite*`），这是既定约定；
+> 交付方式固定为整包外发 + 哈希核验。
 
 ---
 
@@ -89,10 +93,16 @@
 
 ## 6. 已知缺口（事实陈述）
 
-1. **POC 状态、资产关联两个维度无候选**：本地 `events[].poc[]` 全空、`assets` 表 0 条，无法给出该两维度指标。
+1. **POC 状态、资产关联两个维度无数据**：交付语料（`D:\ICT\intel-data-b\intel.sqlite`，2026-10-12 只读复核）
+   `events` 93 条中含 `poc[]` 的 0 条，`assets` / `assessments` 表无记录，因此这两个维度没有可计算的分母。
+   **记"无数据"，不记 0**——0 分与"没有分母"是两种含义。来源、可补性与报告写法见
+   `docs/B_DIMENSION_SCOPE_POC_ASSET.md`。
 2. **关系 recall / F1 不可计算**：缺"应抽取而未抽取"的金标准全集，`relation_score_all.json → fn_source.available = false`。
 3. **多跳/跨文档能力受限**：见 `multihop_path_validation.json → counts.by_chain_type` 与 `missing_edge_summary`；31 条题**人工核验状态**见题集内 `annotation`（未核验则不计入任何指标）。
-4. **资产为合成数据**：`assets` 表 0 条，`asset_disposal_demo.json` 中 `asset.synthetic = true`；因此表述为"策略感知处置建议"，非个性化推荐。
+4. **资产维度没有真实资产源**：交付语料 `assets` / `assessments` 无记录；可用的只有合成 BOM
+   （`config/assets.example.json`，`synthetic=true` / `is_demo=true`）与本机依赖清单，均非企业资产源。
+   `asset_disposal_demo.json` 中 `asset.synthetic = true`，因此表述为"策略感知处置建议"，非个性化推荐。
+   判定口径见 `docs/B_DIMENSION_SCOPE_POC_ASSET.md`。
 5. **问答人工指标的分母构成**：见 `qa_human_score.json` 各字段与 `docs/B_QA_GOLD_STANDARD_REPORT.md` §21（含 `not_applicable`、空值、`unknown` 的处理说明）。
 
 ## 7. 复现命令
@@ -153,12 +163,36 @@
 **本批次缺口（如实记录）**：
 
 * 人工金标准：新回答的人工核验尚未完成，因此人工答案/引用/拒答指标**暂不可计算**。
-* `poc` 维度：本机库 `events[].poc[]` 全空，且本机 NVD 快照与库不同源（回填实测 0 条），
-  需队长提供已回填的库/快照后才能评测。
+* `poc` 维度：交付语料 `events[].poc[]` 全空；库外 NVD 快照与本库不同源
+  （`nvd_poc_backfill_20261002.json` 实测 `events_updated = 0`），只有按库内 CVE 定向抓取后
+  回填副本才有数据（`nvd_poc_backfill_cve_scope_20261002.json`：16 个事件）。口径见
+  `docs/B_DIMENSION_SCOPE_POC_ASSET.md`。
 * 跨文档路径：语料内论文无互引、论文正文 CVE 与库内 CVE 无交集，0/21 无法在不造假的
   前提下提升，需新增来源。
-* 共享问答主链路回归：`tests/test_rag_mixed_language_query.py` 的中频词用例在
-  `8db19cf`/`7dcb064` 上失败（改造前通过），已上报，本轮未改 `app/`。
+* 共享问答主链路回归**已关闭（2026-10-12）**：`tests/test_rag_mixed_language_query.py` 的中频词用例
+  已随 `9ff7383` 修复转绿（该模块 30 passed）。根因不是 `len(chunks) // 10` 阈值——`kernel-level`
+  （df 9.0%）本来就通过守卫，失败的是 `multi-agent` 那条，且输在排序：中文短语的同义词组
+  （`论文` → `paper / study / arxiv`）原先被逐词独立计分，把真正讨论 `multi-agent` 的论文挤出前 8；
+  现改为按一个概念取最强成员计分。
+
+## 10. 重评测确认批次（2026-10-12，A1 排序修改后）
+
+**背景**：`9ff7383` 改了 `app/rag.py` 的同义词组计分（中文短语按一个概念取最强成员），
+问答的引用集合随之变化。用同一份交付语料重跑，并做了 A1 前后的对照。
+
+| 环节 | 权威产物（新批次） | 关键字段 / 口径 |
+| --- | --- | --- |
+| 问答机器评测 | `artifacts/b_eval/formal_qa_results_20261012.json` | 与 `formal_qa_results_20261002.json` 同结构；50 题，`records[]`、`totals.*`、`latency_ms.*` |
+| 关系评测 | 无需新批次 | 重跑 `relation_score_gold_20261010.json` 与冻结对照 `relation_score_gold_frozen20261006_20261010.json`，均与已交付文件**逐字节相同**，无漂移 |
+| 阶段报告 | `docs/B_REEVAL_20261012_REPORT.md` | 对照方法、逐题差异（BQA-002 / 003 / 005 / 034）、原因归属、未刷新的下游产物清单 |
+
+**仅问答机器指标变化**：引用命中 0.8889 → **0.9722**，预期词命中 0.8158 → **0.9211**，
+拒答一致率 0.84 不变，引用总数 217 → 222。A1 之前的代码（`b020090`）在同一语料上
+**逐项复现**了 0.8889 / 0.8158 / 0.84 / 217，因此差异可确定性归因于 A1，而非机器或语料差异。
+
+**边界**：09-30 基线的 `formal_qa_results.json` 未改动；由它派生的
+`qa_auto_review*` / `qa_candidate_answers*` / 复核工作包 / 拒答分类 / 性能统计等产物本批次**未重跑**，
+口径仍是 09-30 基线。是否整体刷新到 10-12 批次（涉及人工标签是否重签）由队长决定。
 
 ## 8. 维护约定
 
