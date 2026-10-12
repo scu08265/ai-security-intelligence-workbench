@@ -1,8 +1,15 @@
 # A: disposition live closure evidence (20261008 database / 20261009 run)
 
+> **运行环境限定（2026-10-12 补）**：本文件的 `4 / 3 / 0.75` 来自 A 机器
+> `D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench\data\intel.sqlite` 的副本，
+> **那份库不在交付机上**，所以这个数字只能读作"A 机器上的流程落地演示"，用来证明状态机与
+> 分母冻结逻辑成立，**不是交付闭环率**。交付口径的闭环率取交付机 `data/intel.sqlite`：
+> **高优先级 48 / 已复测关闭 4 / `closure_rate` 8.33% / `verified_rate` 6.25%**。
+> 引用规则见 `docs/METRICS_BASELINE.md` 第 3 节；两个数字不得混排在同一张指标表里。
+
 ## What changed
 
-- 在**真实生产库** `data/intel.sqlite` 的独立副本上重跑处置闭环状态机，产物落在
+- 在**A 机器上的生产库** `data/intel.sqlite` 的独立副本上重跑处置闭环状态机，产物落在
   `artifacts/a_eval/disposition-live-closure-20261008/`。
 - 新增 `source-db-state.json`，记录生产库生成前的行数与 SHA256（生产库本身未被改写）。
 - 重建项目 `.venv`：原环境指向已不存在的 Codex 运行时 Python，无法运行任何测试。
@@ -12,7 +19,8 @@
 - 缺指派人被拒（HTTP 400，无状态迁移）。
 - 仍受影响的版本从 `verified` 降级为 `fixed`，保留失败的复测审计记录。
 - 安全版本复测通过并写入 `closed_at`，原始 `assessments.status=affected` 不被覆盖。
-- `closure_rate` 0.0 → **0.75**；`verified_rate` 0.0 → **0.75**（仅用 API 指标）。
+- `closure_rate` 0.0 → **0.75**；`verified_rate` 0.0 → **0.75**（仅用 API 指标；A 机器口径，
+  交付口径见上方限定语）
 - `/api/dispositions/metrics` 与 `/api/competition/scorecard.disposition` 字段差异 **0**。
 - 全量测试：**590 passed, 59 skipped, 0 failed**（2026-10-10 修复 ACL 后普通权限裸跑 44.31s）。
 - 生成前后 `data/intel.sqlite` SHA256 一致：`b4f99eae5c9200e62e439a3d83ea7e1b71909d7e29a810ce5ef1b3a8092637d8`。

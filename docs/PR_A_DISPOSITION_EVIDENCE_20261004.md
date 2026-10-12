@@ -1,5 +1,12 @@
 # A: disposition closure verification and evidence
 
+> **Environment qualifier (added 2026-10-12)**: the `4 / 3 / 0.75` below comes from the copy of
+> the A machine's `data/intel.sqlite`. That database is **not present on the delivery machine**,
+> so this number reads as a process-landing demo on the A machine, not as the delivery closure
+> rate. The delivery baseline is the delivery machine's `data/intel.sqlite`:
+> **48 high-priority / 4 closed / `closure_rate` 8.33% / `verified_rate` 6.25%**.
+> See `docs/METRICS_BASELINE.md` section 3; do not mix the two in one metrics table.
+
 ## What changed
 
 - Added an isolated API evidence runner for the remediation disposition state machine.
@@ -15,7 +22,8 @@
   failed re-verification audit record.
 - A safe version is verified, closes with `closed_at`, and leaves the original
   `assessments.status=affected`.
-- Closure rate moved from `0.0` to `0.75` using API-derived metrics only.
+- Closure rate moved from `0.0` to `0.75` using API-derived metrics only (A-machine scope; the
+  delivery-machine closure rate is 8.33%, see the qualifier above).
 - `/api/dispositions/metrics` and `/api/competition/scorecard.disposition` have
   zero field mismatches.
 - Full test suite: `577 passed, 57 skipped`.
