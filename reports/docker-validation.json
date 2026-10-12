@@ -1,30 +1,43 @@
 {
-  "version": "0.2.3",
-  "evidence_version": "0.2.2",
-  "generated_at": "2026-09-30T08:17:00.991136+00:00",
-  "docker_cli_available": true,
-  "docker_server": "Docker Desktop 4.93.0 / Engine 29.8.1",
+  "version": "0.2.4",
+  "generated_at": "2026-10-12T05:27:52.348527+00:00",
+  "docker_runtime_verified": true,
+  "docker_cli": "D:\\Docker\\Docker\\resources\\bin\\docker.EXE",
+  "docker_client": "29.8.1",
+  "docker_server": "29.8.1",
   "compose_config_valid": true,
-  "image": "ai-security-intelligence-workbench:0.2.2",
+  "compose_config_error": null,
+  "image": "ai-security-intelligence-workbench:0.2.4",
   "container_name": "ai-security-intelligence-workbench",
   "container_running": true,
   "container_health": "healthy",
   "host_port": 18000,
+  "health_endpoint_http_status": 200,
   "health_response": {
     "status": "ok",
-    "version": "0.2.2",
+    "version": "0.2.4",
     "mode": "local_evidence_extraction",
     "model_configured": false,
     "data_dir": "/app/data",
     "checks": {
       "database": "ok",
-      "events": 124,
+      "events": 548,
       "failed_sources": [],
       "skipped_sources": []
     }
   },
-  "health_endpoint_http_status": 200,
+  "checks": {
+    "compose_config_valid": true,
+    "docker_server_available": true,
+    "image_built": true,
+    "container_running": true,
+    "container_healthy": true,
+    "health_endpoint_reachable": true,
+    "health_status_ok": true,
+    "reported_version_matches_version_file": true,
+    "evidence_has_no_credentials": true
+  },
+  "credential_findings": [],
   "evidence_log": "reports/docker-acceptance.log",
-  "screenshot": "docs/screenshots/08-docker-healthy.png",
   "verified": true
 }

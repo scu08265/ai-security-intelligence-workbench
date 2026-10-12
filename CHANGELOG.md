@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- Completed the local container acceptance on a real Docker Engine (29.8.1): the
+  image builds, the Compose stack starts, the container reports `healthy` and
+  `/api/health` answers `status=ok` with the version in `VERSION`.  The evidence
+  is `reports/docker-acceptance.log` plus `reports/docker-validation.json`, which
+  now records the nine individual checks instead of a hand-written summary.
+  Two blockers were removed along the way: `scripts/run_docker_acceptance.cmd`
+  hard-coded the CLI path to `C:\Program Files` (this machine installs under
+  `D:\Docker`) and waited with `timeout`, which exits immediately when stdin is
+  redirected, so the health wait never actually waited.  The build now passes
+  `--build-arg APP_VERSION` from `VERSION` like CI does, so the container no
+  longer reports 0.2.3 while the repository says 0.2.4.
+- Stopped the container acceptance from copying credentials into a committed
+  artifact: `docker compose config` and `docker inspect` both print resolved
+  environment values, so the real `GITHUB_TOKEN` from `.env` landed in
+  `reports/docker-acceptance.log` and GitHub push protection rejected the push.
+  Compose is now pointed at a scratch `--env-file`, because clearing the shell
+  variable alone makes Compose fall back to `./.env`, and the acceptance tool
+  fails verification if any secret shape or `.env` value reaches the evidence.
 - Made two tests independent of the checkout path and locale, so the suite
   passes from a Chinese working directory too: the config subprocess test now
   decodes the child with the same UTF-8 it pins, and the candidate-set
