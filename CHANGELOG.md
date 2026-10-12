@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- Fixed the mid-frequency retrieval regression that had been failing on the B
+  corpus for days, and it was not the discriminative-term guard: `kernel-level`
+  already passed.  A Chinese phrase in a question expands into several English
+  synonyms (`论文` -> paper/study/arxiv) and every synonym was scored as its own
+  term, so in a corpus of papers a chunk that merely contains the word "paper"
+  collected roughly four times what the actual subject term scored.  Asking
+  `multi-agent 主题出现在哪些论文中？` pushed the paper genuinely about
+  multi-agent out of the top 8, while the same question phrased with 文章 or
+  文档 retrieved it first.  A synonym group now counts as one concept, at the
+  strength of its best member.
+- Received and verified the B evaluation corpus: 47 files, every SHA-256 and
+  byte count matching `MANIFEST.sha256`, restored to `D:\ICT\intel-data-b`
+  (`intel.sqlite` = 8,183,808 B / `4095a5b1…8254285`).  The suite went from
+  618 passed / 60 skipped to **674 passed / 4 skipped**; the four remaining
+  skips need the two derived copies that were not in the archive
+  (`intel-data-b-cvss-20261006`, `intel-data-b-poc-20261002`).
 - Completed the local container acceptance on a real Docker Engine (29.8.1): the
   image builds, the Compose stack starts, the container reports `healthy` and
   `/api/health` answers `status=ok` with the version in `VERSION`.  The evidence

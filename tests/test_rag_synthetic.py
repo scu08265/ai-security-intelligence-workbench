@@ -3,7 +3,10 @@
 import hashlib
 
 from app.intelligence import answer_question
-from app.rag import SearchHit, answer_with_rag, events_to_documents
+from app.rag import (
+    SearchHit, answer_with_rag, chunks_from_records, events_to_documents,
+    retrieve_chunks,
+)
 
 
 def _record(document_id: str, text: str) -> dict:
@@ -41,6 +44,51 @@ def test_single_generic_security_word_does_not_create_a_false_answer():
     )
     assert result["refused"] is True
     assert result["citations"] == []
+
+
+def _chunk(document_id: str, index: int, text: str) -> dict:
+    return {
+        "document_id": document_id, "chunk_id": f"{document_id}#{index}",
+        "text": text, "char_start": 0, "char_end": len(text),
+        "snapshot_hash": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        "provenance": "fulltext", "corpus_class": "synthetic",
+    }
+
+
+def test_a_question_word_does_not_outrank_the_subject_it_asks_about():
+    """论文 expands to paper/study/arxiv, so scoring each synonym separately
+    lets a question word decide the ranking.
+
+    In the B corpus that pushed the paper actually about multi-agent out of the
+    top 8 while the same question phrased with 文章 retrieved it first.  The
+    corpus lives outside the repository (and is absent in CI), so the shape is
+    reproduced here instead, with the same statistics: the question's synonyms
+    are rarer than the subject term, the subject chunks also carry one synonym,
+    and enough chunks match the synonyms alone to fill the result page.  Twelve
+    such chunks beat the ten subject chunks only because three synonyms were
+    counted three times; grouped, they beat nothing.
+    """
+    padding = [
+        _chunk(f"paper:PAD-{index}", index,
+               "An unrelated survey of deployment practice and reporting.")
+        for index in range(380)
+    ]
+    filler = [
+        _chunk(f"paper:FILLER-{index // 3}", index,
+               "This paper studies a study published on arxiv with evidence.")
+        for index in range(12)
+    ]
+    subject = [
+        _chunk("paper:TARGET", index,
+               "Codetta keeps multi-agent collusion undetectable; "
+               "the arxiv record holds the details.")
+        for index in range(10)
+    ]
+    hits = retrieve_chunks(
+        "multi-agent 主题出现在哪些论文中？",
+        chunks_from_records(padding + filler + subject), limit=8,
+    )
+    assert "paper:TARGET" in {hit.chunk.document_id for hit in hits}
 
 
 def test_replaceable_reranker_controls_order_without_inventing_hits():

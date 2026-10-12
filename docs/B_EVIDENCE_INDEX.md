@@ -13,11 +13,13 @@
 冻结基线（2026-09-30 产出）在 `feat/b-evaluation` 及其合并记录中；重评测批次
 （2026-10-02 产出，文件后缀 `_20261002`）在分支 `feat/b-reevaluation-20261002`（自 `8db19cf` 开）。
 
-> **数据可达性提醒（2026-10-12 复核）**：`D:\ICT\intel-data-b` **在交付机（队长演示机）上不存在**，
-> 该语料没有进过仓库，也无法从已提交的产物重建——RAG 分块来自原始快照文件，而快照从未提交。
-> 因此本文件列出的 B 项评测数字是**在 B 机器语料上测得的历史证据**，交付机上只能复现代码路径，
-> 不能复现这些数值。对外引用时请按 `docs/METRICS_BASELINE.md` 第 3 节加限定语。
-> 语料交接请求见 `docs/B_CORPUS_HANDOVER_REQUEST.md`。
+> **数据可达性（2026-10-12 更新）**：B 已交付 `B_CORPUS_20261012.zip`，交付机按 `MANIFEST.sha256`
+> 逐文件核验 47 / 47 通过，并还原到 `D:\ICT\intel-data-b`（`intel.sqlite` = 8,183,808 B /
+> `4095a5b1…8254285`，与本节上文记录一致）。**B 项评测现在可以在交付机上复跑验证**，不再只是
+> 引用历史数字；测试由 618 passed / 60 skipped 变为 674 passed / 4 skipped。
+> 仍未提供的是两个衍生副本 `intel-data-b-cvss-20261006` 与 `intel-data-b-poc-20261002`，
+> 对应 4 条跳过。语料交接记录见 `docs/B_CORPUS_HANDOVER_REQUEST.md`。
+> 语料本身仍不进仓库（`.gitignore` 排除 `data/*.sqlite*`），这是既定约定。
 
 ---
 

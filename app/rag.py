@@ -81,6 +81,22 @@ def terms(value: str) -> list[str]:
     return tokens
 
 
+def expansion_terms(value: str) -> set[str]:
+    """Synonyms :func:`terms` injects for the phrases present in ``value``.
+
+    Kept separate from the token list so the ranker can treat one Chinese
+    phrase as one concept instead of as however many synonyms it happens to
+    have; see the scoring loop in :func:`retrieve_chunks`.
+    """
+    lowered = _text(value).casefold()
+    return {
+        addition
+        for phrase, additions in _EXPANSIONS.items()
+        if phrase in lowered
+        for addition in additions
+    }
+
+
 @dataclass(frozen=True)
 class Document:
     document_id: str
@@ -323,6 +339,7 @@ def retrieve_chunks(
     doc_terms = [terms(" ".join((chunk.title, chunk.text))) for chunk in chunks]
     avg_len = sum(len(item) for item in doc_terms) / max(1, len(doc_terms))
     unique_query = set(query_terms)
+    injected = expansion_terms(query)
     df = {term: sum(1 for item in doc_terms if term in set(item)) for term in unique_query}
     identifiers = {
         item.casefold() for item in re.findall(r"(?:cve-\d{4}-\d{4,}|ghsa-[a-z0-9-]+|arxiv-\d{4}\.\d+)", query, re.I)
@@ -370,14 +387,28 @@ def retrieve_chunks(
             if only_match is None or df.get(only_match, 0) > max(1, len(chunks) // 10):
                 continue
         score = 8.0 if exact_identifier else 0.0
+        injected_score = 0.0
         for term in query_terms:
             frequency = tokens.count(term)
             if not frequency:
                 continue
             inverse = math.log(1 + (len(chunks) - df.get(term, 0) + 0.5) / (df.get(term, 0) + 0.5))
-            score += inverse * (frequency * 2.2) / (
+            contribution = inverse * (frequency * 2.2) / (
                 frequency + 1.2 * (1 - 0.75 + 0.75 * len(tokens) / max(avg_len, 1))
             )
+            if term in injected:
+                # One Chinese phrase can inject several synonyms ("论文" ->
+                # paper/study/arxiv).  Scoring each synonym on its own let a
+                # *question* word outrank the subject of the question: in a
+                # corpus of papers a chunk that merely says "paper" collected
+                # about four times what the term "multi-agent" scored, which
+                # pushed the paper actually about multi-agent out of the top 8.
+                # The expansion still counts, but as one concept, at the
+                # strength of its best-matching synonym.
+                injected_score = max(injected_score, contribution)
+                continue
+            score += contribution
+        score += injected_score
         if score >= min_score:
             scored.append(SearchHit(chunk=chunk, score=score, matched_terms=matched))
     scored.sort(key=lambda hit: (-hit.score, hit.chunk.document_id, hit.chunk.char_start))
