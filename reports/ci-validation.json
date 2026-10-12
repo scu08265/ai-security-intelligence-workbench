@@ -1,31 +1,33 @@
 {
-  "version": "0.2.3",
   "workflow": "CI",
   "workflow_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/workflows/ci.yml",
-  "run_id": 36992851906,
-  "run_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906",
-  "head_sha": "8db19cf1f808eec6c91e8461ea308d54525cac1a",
+  "branch": "main",
+  "head_sha": "08a41fa803c309e0c1d646eacc08116f11d04156",
   "status": "completed",
   "conclusion": "success",
-  "updated_at": "2026-10-02T09:58:33Z",
+  "generated_at": "2026-10-12T14:23:39Z",
+  "run_id": 38256322401,
+  "run_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/38256322401",
+  "created_at": "2026-10-12T13:31:56Z",
+  "updated_at": "2026-10-12T13:32:40Z",
   "jobs": [
-    {
-      "name": "test",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906/job/110792824865"
-    },
     {
       "name": "container",
       "status": "completed",
       "conclusion": "success",
-      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906/job/110792824763"
+      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/38256322401/job/114835229710"
     },
     {
       "name": "rollback",
       "status": "completed",
       "conclusion": "success",
-      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/36992851906/job/110792824572"
+      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/38256322401/job/114835230146"
+    },
+    {
+      "name": "test",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/scu08265/ai-security-intelligence-workbench/actions/runs/38256322401/job/114835230264"
     }
   ]
 }
