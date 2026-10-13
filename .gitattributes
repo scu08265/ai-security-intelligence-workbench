@@ -1,0 +1,13 @@
+# Without these, a Windows checkout with core.autocrlf=true rewrites the line
+# endings inside binary deliverables and silently corrupts them.
+*.pdf   binary
+*.docx  binary
+*.xlsx  binary
+*.png   binary
+*.jpg   binary
+*.sqlite binary
+*.sqlite3 binary
+
+# Text files are deliberately left to the local autocrlf setting.  Pinning LF
+# here would renormalise every source file and make every teammate's checkout
+# dirty until they run `git add --renormalize`, which is not worth the churn.
