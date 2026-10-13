@@ -844,7 +844,13 @@ def answer(
 
 def monitoring_summary() -> dict:
     """Honest source coverage: registered vs. actually producing data."""
+    # Imported here rather than at module scope: self_healing reuses this module
+    # for collection, so a top-level import would close a cycle.
+    from . import self_healing
+
     states = storage.all_source_states()
+    runs = storage.list_runs(limit=None)
+    degradations = {entry["source_id"]: entry for entry in storage.all_source_degradations()}
     items = []
     producing = 0
     for spec in sources.SOURCES:
@@ -858,10 +864,13 @@ def monitoring_summary() -> dict:
             "realtime": spec.realtime, "independent_origin": spec.independent_origin,
             "auto_default": spec.auto_default,
             "requires_token_env": spec.requires_token_env,
+            "backup_sources": list(spec.backup_sources),
             "status": state.get("status") or "idle",
             "last_run": state.get("last_run"), "last_success": state.get("last_success"),
             "last_error": state.get("last_error"), "events_count": count,
             "cursor": state.get("cursor"),
+            "consecutive_failures": self_healing.consecutive_failures(spec.id, runs),
+            "degradation": degradations.get(spec.id),
         })
     coverage = sources.coverage()
     coverage.update({

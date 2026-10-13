@@ -12,6 +12,7 @@ here rather than left to callers:
 from __future__ import annotations
 
 import time
+from collections import Counter
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query, Request
@@ -488,6 +489,90 @@ def system_reliability(days: int = Query(default=7, ge=1, le=31)) -> dict:
 @app.get("/api/system/alerts")
 def system_alerts(limit: int = Query(default=100, ge=1, le=1000)) -> dict:
     return observability.recent_alerts(limit=limit)
+
+
+@app.get("/api/system/health")
+def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
+    """One place for 'is anything wrong right now'.
+
+    Modules are reported from persisted evidence only: a module counts as
+    ``ok`` because its own records say so, and anything without evidence stays
+    ``unknown`` instead of being rounded up to healthy.
+    """
+    sources_block = agents.monitoring_summary()
+    items = sources_block["items"]
+    statuses = Counter(item.get("status") or "idle" for item in items)
+    streaks = {
+        item["id"]: item.get("consecutive_failures") or 0
+        for item in items if (item.get("consecutive_failures") or 0) > 0
+    }
+    last_runs = [item.get("last_success") for item in items if item.get("last_success")]
+    last_success = max(last_runs) if last_runs else None
+    degraded = [item for item in items if item.get("degradation")]
+    monitoring_state = (
+        "ok" if statuses.get("failed", 0) == 0 and statuses.get("stale", 0) == 0
+        else "degraded"
+    )
+    alerts = observability.recent_alerts(limit=20)
+    alert_items = alerts.get("items") if isinstance(alerts, dict) else alerts
+    knowledge_counts = knowledge_views.overview().get("counts") or {}
+    modules = [
+        {
+            "id": "monitoring",
+            "label": "采集与监测",
+            "state": monitoring_state,
+            "detail": (
+                f"{sources_block['coverage']['endpoints_with_data']} / {len(items)} 个来源产出数据，"
+                f"最近一次成功 {last_success or '未知'}"
+            ),
+            "counters": statuses,
+        },
+        {
+            "id": "self_healing",
+            "label": "自愈与降级",
+            "state": "degraded" if degraded else "ok",
+            "detail": (
+                f"{len(degraded)} 个来源处于降级冷却中" if degraded
+                else f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次连续失败）"
+            ),
+            "counters": {"degraded_sources": len(degraded)},
+        },
+        {
+            "id": "knowledge",
+            "label": "知识库与问答",
+            "state": "ok",
+            "detail": (
+                "事件 {e} 条 / 文档 {d} 份 / 带证据关系 {r} 条".format(
+                    e=knowledge_counts.get("events", 0),
+                    d=knowledge_counts.get("documents", 0),
+                    r=knowledge_counts.get("evidence_bound_relationships", 0),
+                )
+            ),
+            "counters": knowledge_counts,
+        },
+        {
+            "id": "alerts",
+            "label": "告警",
+            "state": "degraded" if alert_items else "ok",
+            "detail": f"最近 {len(alert_items or [])} 条告警",
+            "counters": {},
+        },
+    ]
+    return {
+        "generated_at": storage.utcnow(),
+        "modules": modules,
+        "sources": items,
+        "coverage": sources_block["coverage"],
+        "source_status_counts": dict(statuses),
+        "consecutive_failure_streaks": streaks,
+        "active_degradations": storage.active_source_degradations(),
+        "recent_alerts": alert_items or [],
+        "policy": {
+            "consecutive_failure_threshold": self_healing.CONSECUTIVE_FAILURE_THRESHOLD,
+            "cooldown_hours": self_healing.DEGRADE_COOLDOWN_HOURS,
+            "note": "连续失败达到阈值后移出无人值守采集；配置了备用源的来源改由备用源代采。",
+        },
+    }
 
 
 @app.get("/api/system/logs")

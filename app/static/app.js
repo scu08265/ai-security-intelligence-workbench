@@ -1445,11 +1445,13 @@
         optionalGet('/api/monitoring/evidence?days=7'),
         optionalGet('/api/evaluation'),
         optionalGet('/api/orchestration'),
-        optionalGet('/api/ai-participation')
+        optionalGet('/api/ai-participation'),
+        optionalGet('/api/system/health')
       ]);
       state.scorecard.data = {
         official: results[0], dashboard: results[1], monitoring: results[2],
-        evaluation: results[3], orchestration: results[4], participation: results[5]
+        evaluation: results[3], orchestration: results[4], participation: results[5],
+        health: results[6]
       };
       state.scorecard.error = null;
     } catch (err) {
@@ -1546,6 +1548,67 @@
     const p95Max = p95Values.length ? Math.max(...p95Values) : null;
     const officialReady = Object.keys(official).length > 0;
 
+    /* 来源健康度与系统健康：每个来源的最近采集时间、成功/失败状态与连续失败
+     * 次数都来自 /api/system/health 的持久化记录，前端不做任何推算。 */
+    const health = all.health || {};
+    const healthSources = Array.isArray(health.sources) ? health.sources : [];
+    const activeDegradations = Array.isArray(health.active_degradations)
+      ? health.active_degradations : [];
+    const recentAlerts = Array.isArray(health.recent_alerts) ? health.recent_alerts : [];
+    const statusLabel = {
+      ok: '正常', failed: '失败', stale: '陈旧（保留历史数据）',
+      partial: '部分成功', skipped: '已跳过', idle: '未运行'
+    };
+    const sourceHealthBlock = healthSources.length ? h('article', { class: 'score-capability' },
+      h('div', { class: 'score-capability-head' },
+        h('h3', {}, '来源健康度'),
+        badge(healthSources.some((item) => item.degradation) ? 'plain' : 'ok',
+          `${textOr(health.coverage && health.coverage.endpoints_with_data, healthSources.filter((s) => (s.events_count || 0) > 0).length)} / ${healthSources.length} 个来源产出数据`)),
+      dataTable(
+        [{ text: '来源' }, { text: '类别' }, { text: '状态' }, { text: '最近成功' },
+         { text: '产出' }, { text: '连续失败' }],
+        healthSources.map((item) => [
+          textOr(item.name, item.id),
+          textOr(item.category_label, '未分类'),
+          item.degradation
+            ? `降级中 · ${item.degradation.action === 'switch_backup' ? '已切备用源' : '已降频'}`
+            : textOr(statusLabel[item.status], item.status || '未运行'),
+          item.last_success ? fmtTime(item.last_success) : '从未成功',
+          textOr(item.events_count, 0),
+          item.consecutive_failures || 0
+        ])
+      ),
+      h('p', { class: 'plain-note' },
+        '状态、最近成功时间与产出条数都来自 source_state 的持久化记录；'
+        + '连续失败达到阈值后该来源会退出无人值守采集，恢复后再自动回到采集集合。'))
+      : h('article', { class: 'score-capability' },
+        h('div', { class: 'score-capability-head' }, h('h3', {}, '来源健康度'), badge('plain', '待读取')),
+        h('p', { class: 'plain-note' }, '未能读取 /api/system/health，无法核对来源状态。'));
+    const systemHealthBlock = h('article', { class: 'score-capability' },
+      h('div', { class: 'score-capability-head' },
+        h('h3', {}, '系统健康'),
+        badge((health.modules || []).some((item) => item.state !== 'ok') ? 'plain' : 'ok',
+          (health.modules || []).length ? `${(health.modules || []).filter((m) => m.state === 'ok').length} / ${(health.modules || []).length} 个模块正常` : '待读取')),
+      (health.modules || []).length
+        ? dataTable([{ text: '模块' }, { text: '状态' }, { text: '说明' }],
+          (health.modules || []).map((module) => [
+            textOr(module.label, module.id),
+            module.state === 'ok' ? '正常' : '需关注',
+            textOr(typeof module.detail === 'string' ? module.detail : '', '—')
+          ]))
+        : h('p', {}, '未能读取模块状态。'),
+      activeDegradations.length
+        ? dataTable([{ text: '降级来源' }, { text: '动作' }, { text: '连续失败' }, { text: '冷却截止' }],
+          activeDegradations.map((item) => [
+            textOr(item.source_id), textOr(item.action),
+            item.consecutive_failures || 0, item.expires_at ? fmtTime(item.expires_at) : '未设置'
+          ]))
+        : h('p', {}, '当前没有处于降级冷却中的来源。'),
+      h('p', { class: 'plain-note' },
+        `最近告警 ${recentAlerts.length} 条。` +
+        `自愈策略：连续失败 ${textOr((health.policy || {}).consecutive_failure_threshold, 3)} 次后进入 ` +
+        `${textOr((health.policy || {}).cooldown_hours, 6)} 小时冷却；声明了备用源的来源由备用源代采。`));
+
     setBox(view.status,
       h('div', { class: 'scorecard-status' },
         badge(officialReady ? 'ok' : 'plain', officialReady ? '已接入统一计分接口' : '兼容模式'),
@@ -1616,7 +1679,9 @@
         ['独立批次', Array.isArray(bPerformance.batches) ? bPerformance.batches.length : null, ' 批'],
         ['P95 最大值', p95Max, ' ms'],
         ['超时 / 异常', bPerformance.available ? `${bPerformance.timeouts || 0}/${bPerformance.errors || 0}` : null, '']
-      ], (bPerformance.batch_id ? `当前活动批次 ${bPerformance.batch_id}；各批次分位数独立计算，不跨批次合并。` : '赛题性能目标为单题 5 秒内；延迟和失败数来自两批各 50 题的真实运行。')));
+      ], (bPerformance.batch_id ? `当前活动批次 ${bPerformance.batch_id}；各批次分位数独立计算，不跨批次合并。` : '赛题性能目标为单题 5 秒内；延迟和失败数来自两批各 50 题的真实运行。')),
+      sourceHealthBlock,
+      systemHealthBlock);
   }
 
   async function loadDashboard() {

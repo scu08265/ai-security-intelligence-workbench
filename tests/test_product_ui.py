@@ -18,6 +18,14 @@ HTML = (ROOT / "app/static/index.html").read_text(encoding="utf-8")
 SCRIPT = (ROOT / "app/static/app.js").read_text(encoding="utf-8")
 
 
+def test_scorecard_surfaces_source_health_and_system_health():
+    """The two review-requested panels read persisted state, not guesses."""
+    assert '来源健康度' in SCRIPT
+    assert '系统健康' in SCRIPT
+    assert "'/api/system/health'" in SCRIPT
+    assert 'consecutive_failures' in SCRIPT
+
+
 def test_rail_has_exactly_three_user_task_entries():
     tabs = re.findall(r'class="tab[^"]*"[^>]*data-tab="([a-z]+)"', HTML)
     assert tabs == ["overview", "knowledge", "scorecard"]

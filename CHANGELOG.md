@@ -2,6 +2,31 @@
 
 ## Unreleased
 
+- Extended self-healing from "retry once" to a bounded degradation policy.  A
+  source that misses three collection attempts in a row now leaves the
+  unattended set for a six-hour cooldown, or hands over to a substitute that is
+  declared on the source itself (`arxiv` → `openalex`) instead of being
+  invented.  Degradations live in their own table so existing databases pick
+  them up without a migration runner, every substitution is written into the
+  run record, and a source that answers again is un-degraded automatically.
+  `tools/run_self_healing_drill.py` proves the loop on a database copy with an
+  injected fault and writes `reports/self-healing-drill.json`.
+- Added the two panels the review asked for: a source-health panel (per-source
+  status, last success, consecutive failures, active degradation) and a system
+  health panel (module states, cooldowns, recent alerts) on the scorecard tab,
+  backed by a new `GET /api/system/health` that reports only persisted state.
+- Added `docs/COMPETITION_RUBRIC_MAPPING.md`, which maps every scoring line to
+  the tier it actually reaches with the evidence for it, plus the source
+  classification table the review requested.  It records the three honest
+  gaps: no real-time monitoring, timeliness reaching only the qualifying tier,
+  and cross-document paths at 10/21.
+- Added `docs/CASE_ENRICHMENT_INFERENCE.md` (a real event traced through CVSS,
+  affected ranges and fixed versions, each step carrying its own source id) and
+  `docs/CASE_QA_MULTITURN_CROSSDOC.md` (the multi-turn and cross-document demo
+  script taken from the 50-question evaluation set).
+- Added the technical report as Word and PDF, generated from one content model
+  by `tools/build_technical_report.py` so the two files cannot drift apart,
+  with four consistent figures.  `docs/report/` also keeps the figures.
 - Fixed the mid-frequency retrieval regression that had been failing on the B
   corpus for days, and it was not the discriminative-term guard: `kernel-level`
   already passed.  A Chinese phrase in a question expands into several English

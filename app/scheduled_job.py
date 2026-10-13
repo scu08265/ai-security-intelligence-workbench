@@ -17,9 +17,12 @@ def run_scheduled_collection(
     agents.refresh_source_event_counts()
     planned = planned_at or storage.utcnow()
     selected = source_ids or list(sources.recommended_sources())
+    requested = list(selected)
+    selected, degradation_notes = self_healing.apply_degradation_policy(selected)
     observability.log_event(
         "scheduled_collection_started", task_id=task_id,
         planned_at=planned, source_ids=selected,
+        requested_source_ids=requested, degradation_notes=degradation_notes,
     )
     result = agents.run_collection(
         selected,
@@ -77,6 +80,8 @@ def run_scheduled_collection(
     result["task_id"] = task_id
     result["planned_at"] = planned
     result["actual_at"] = result.get("started_at") or storage.utcnow()
+    result["requested_source_ids"] = requested
+    result["degradation_notes"] = degradation_notes
     return result
 
 

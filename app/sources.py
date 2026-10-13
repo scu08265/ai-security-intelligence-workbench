@@ -36,6 +36,10 @@ class SourceSpec:
     # Low-frequency sources publish monthly, so a 30-day window silently skips
     # their newest post and the cursor then makes it unreachable forever.
     lookback_days: int = 30
+    # Sources that can stand in while this one is degraded.  Only declare a
+    # substitute that really carries the same information: an invented backup
+    # would turn a visible outage into silent coverage.
+    backup_sources: tuple[str, ...] = ()
 
 
 SOURCES: tuple[SourceSpec, ...] = (
@@ -154,6 +158,7 @@ SOURCES: tuple[SourceSpec, ...] = (
         license_note="arXiv content is provided under the arXiv API terms; preprints are not peer-reviewed.",
         description="AI 安全方向论文预印本，为知识底座提供研究线索。标注为 preprint，不等同于同行评审结论。",
         auto_default=False,
+        backup_sources=("openalex",),
     ),
     SourceSpec(
         id="openalex",

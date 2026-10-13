@@ -61,6 +61,21 @@ CREATE TABLE IF NOT EXISTS source_state (
     last_hash    TEXT
 );
 
+-- Bounded degradation state for a source that keeps failing.  Kept in its own
+-- table rather than as extra columns on source_state so an existing database
+-- picks it up with CREATE TABLE IF NOT EXISTS; there is no migration runner.
+CREATE TABLE IF NOT EXISTS source_degradations (
+    source_id            TEXT PRIMARY KEY,
+    action               TEXT NOT NULL,
+    failure_class        TEXT,
+    consecutive_failures INTEGER NOT NULL DEFAULT 0,
+    backup_sources       TEXT NOT NULL DEFAULT '[]',
+    reason               TEXT,
+    degraded_at          TEXT NOT NULL,
+    expires_at           TEXT,
+    doc                  TEXT
+);
+
 CREATE TABLE IF NOT EXISTS assets (
     id           TEXT PRIMARY KEY,
     name         TEXT,
@@ -643,6 +658,80 @@ def update_source_state(source_id: str, **fields: Any) -> None:
             f"UPDATE source_state SET {assignments} WHERE id = ?",
             [*updates.values(), source_id],
         )
+
+
+# --------------------------------------------------------------------------
+# source degradations
+# --------------------------------------------------------------------------
+
+def save_source_degradation(record: dict) -> dict:
+    """Persist the bounded degradation applied to one source."""
+    entry = dict(record)
+    entry.setdefault("degraded_at", utcnow())
+    entry.setdefault("consecutive_failures", 0)
+    entry.setdefault("backup_sources", [])
+    with connect() as conn:
+        conn.execute(
+            """INSERT INTO source_degradations
+                   (source_id, action, failure_class, consecutive_failures,
+                    backup_sources, reason, degraded_at, expires_at, doc)
+               VALUES (:source_id, :action, :failure_class, :consecutive_failures,
+                       :backup_sources, :reason, :degraded_at, :expires_at, :doc)
+               ON CONFLICT(source_id) DO UPDATE SET
+                   action = excluded.action,
+                   failure_class = excluded.failure_class,
+                   consecutive_failures = excluded.consecutive_failures,
+                   backup_sources = excluded.backup_sources,
+                   reason = excluded.reason,
+                   degraded_at = excluded.degraded_at,
+                   expires_at = excluded.expires_at,
+                   doc = excluded.doc""",
+            {
+                "source_id": entry["source_id"],
+                "action": entry["action"],
+                "failure_class": entry.get("failure_class"),
+                "consecutive_failures": int(entry.get("consecutive_failures") or 0),
+                "backup_sources": json.dumps(entry.get("backup_sources") or [], ensure_ascii=False),
+                "reason": entry.get("reason"),
+                "degraded_at": entry["degraded_at"],
+                "expires_at": entry.get("expires_at"),
+                "doc": json.dumps(entry, ensure_ascii=False),
+            },
+        )
+    return entry
+
+
+def all_source_degradations() -> list[dict]:
+    with connect() as conn:
+        rows = conn.execute(
+            "SELECT doc FROM source_degradations ORDER BY degraded_at DESC"
+        ).fetchall()
+    return [json.loads(row["doc"]) for row in rows if row["doc"]]
+
+
+def source_degradation(source_id: str) -> dict | None:
+    with connect() as conn:
+        row = conn.execute(
+            "SELECT doc FROM source_degradations WHERE source_id = ?", (source_id,)
+        ).fetchone()
+    return json.loads(row["doc"]) if row and row["doc"] else None
+
+
+def active_source_degradations(now: str | None = None) -> list[dict]:
+    """Degradations whose cooldown has not expired yet."""
+    moment = now or utcnow()
+    return [
+        entry for entry in all_source_degradations()
+        if not entry.get("expires_at") or str(entry["expires_at"]) > moment
+    ]
+
+
+def clear_source_degradation(source_id: str) -> bool:
+    with connect() as conn:
+        cursor = conn.execute(
+            "DELETE FROM source_degradations WHERE source_id = ?", (source_id,)
+        )
+    return cursor.rowcount > 0
 
 
 # --------------------------------------------------------------------------

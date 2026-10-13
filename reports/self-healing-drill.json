@@ -1,0 +1,159 @@
+{
+  "status": "completed",
+  "generated_at": "2026-10-13T11:42:50Z",
+  "policy": {
+    "consecutive_failure_threshold": 3,
+    "cooldown_hours": 6,
+    "automatic_actions": [
+      "有限重试",
+      "连续失败后降频（移出无人值守采集）",
+      "有备用源的来源切换到备用源",
+      "历史数据降级",
+      "来源跳过"
+    ]
+  },
+  "phase_1_inject": {
+    "note": "网络采集被替换为可控故障注入，未发起真实请求；库为演示库副本，生产库未被写入。",
+    "injected_runs": [
+      {
+        "source_id": "osv",
+        "status": "failed",
+        "attempt": 1
+      },
+      {
+        "source_id": "osv",
+        "status": "failed",
+        "attempt": 2
+      },
+      {
+        "source_id": "osv",
+        "status": "failed",
+        "attempt": 3
+      }
+    ],
+    "streak_after_injection": 3
+  },
+  "phase_2_retry": {
+    "retry_attempted": [
+      [
+        "osv"
+      ]
+    ],
+    "failed_after_retry": [
+      "osv"
+    ]
+  },
+  "phase_3_degrade": {
+    "degradations": [
+      {
+        "source_id": "osv",
+        "action": "reduce_frequency",
+        "backup_sources": [],
+        "failure_class": "unknown",
+        "consecutive_failures": 3,
+        "reason": "连续 3 次采集未成功，冷却期内不再进入无人值守采集",
+        "expires_at": "2026-10-13T17:42:50.491676+00:00"
+      }
+    ],
+    "active_degradations": [
+      {
+        "source_id": "osv",
+        "action": "reduce_frequency",
+        "backup_sources": [],
+        "failure_class": "unknown",
+        "consecutive_failures": 3,
+        "reason": "连续 3 次采集未成功，冷却期内不再进入无人值守采集",
+        "expires_at": "2026-10-13T17:42:50.491676+00:00",
+        "degraded_at": "2026-10-13T11:42:50Z"
+      }
+    ],
+    "unattended_before": [
+      "nvd",
+      "mitre_cve",
+      "osv",
+      "ghsa",
+      "cisa_kev",
+      "msrc",
+      "security_blog",
+      "openalex",
+      "owasp_genai",
+      "nist_ai_rmf",
+      "mitre_atlas",
+      "eu_ai_act",
+      "qax_ti_blog",
+      "butian_community",
+      "freebuf",
+      "anquanke",
+      "securelist",
+      "talos_blog",
+      "nist_news"
+    ],
+    "unattended_after": [
+      "nvd",
+      "mitre_cve",
+      "ghsa",
+      "cisa_kev",
+      "msrc",
+      "security_blog",
+      "openalex",
+      "owasp_genai",
+      "nist_ai_rmf",
+      "mitre_atlas",
+      "eu_ai_act",
+      "qax_ti_blog",
+      "butian_community",
+      "freebuf",
+      "anquanke",
+      "securelist",
+      "talos_blog",
+      "nist_news"
+    ],
+    "degradation_notes": [
+      {
+        "source_id": "osv",
+        "action": "reduce_frequency",
+        "substituted_with": [],
+        "reason": "连续 3 次采集未成功，冷却期内不再进入无人值守采集",
+        "expires_at": "2026-10-13T17:42:50.491676+00:00"
+      }
+    ]
+  },
+  "phase_4_recover": {
+    "recovered": [],
+    "degradations_cleared": [
+      "osv"
+    ],
+    "unattended_final": [
+      "nvd",
+      "mitre_cve",
+      "osv",
+      "ghsa",
+      "cisa_kev",
+      "msrc",
+      "security_blog",
+      "openalex",
+      "owasp_genai",
+      "nist_ai_rmf",
+      "mitre_atlas",
+      "eu_ai_act",
+      "qax_ti_blog",
+      "butian_community",
+      "freebuf",
+      "anquanke",
+      "securelist",
+      "talos_blog",
+      "nist_news"
+    ]
+  },
+  "assertions": {
+    "faulty_source_left_unattended": true,
+    "faulty_source_back_after_recovery": true,
+    "no_backup_declared_so_frequency_drops": true,
+    "declared_substitute_is_used": true
+  },
+  "environment": {
+    "database_copy": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\.pytest-tmp\\self-healing-drill-mbl18s4k\\intel.sqlite",
+    "source_database": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\data\\intel.sqlite"
+  },
+  "verified": true
+}

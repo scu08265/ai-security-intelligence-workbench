@@ -63,6 +63,18 @@ def test_reliability_and_alert_endpoints_are_available(client):
     assert alerts["items"] == []
 
 
+def test_system_health_reports_sources_without_inventing_health(client):
+    body = client.get("/api/system/health").json()
+    assert body["policy"]["consecutive_failure_threshold"] >= 1
+    assert body["active_degradations"] == []
+    modules = {item["id"] for item in body["modules"]}
+    assert {"monitoring", "self_healing", "knowledge", "alerts"} <= modules
+    # A source that never ran is reported as idle with a zero streak, not as ok.
+    idle = [item for item in body["sources"] if item["status"] == "idle"]
+    assert idle, "a fresh database should have sources that never ran"
+    assert all(item["consecutive_failures"] == 0 for item in idle)
+
+
 def test_seed_loads_research_cases_and_flags_demo_assets(client):
     _seed(client)
     events = client.get("/api/events").json()
