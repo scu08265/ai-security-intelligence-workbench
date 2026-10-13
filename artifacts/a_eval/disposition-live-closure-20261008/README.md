@@ -3,6 +3,13 @@
 本目录由 `tools/run_disposition_evidence.py` 在**生产库的独立副本**上通过正式 API 流程生成。
 运行时间：2026-10-09 21:30 (+08:00)。代码版本：`main` @ `addeba7`，`VERSION` = `0.2.4`。
 
+> **运行环境限定（2026-10-12 补）**：这里的"生产库"是 **A 机器**上的
+> `D:\新建文件夹\2026-09-26\ba\ai-security-intelligence-workbench\data\intel.sqlite`，
+> **那份库不在交付机上**，所以本目录的 `4 / 3 / 0.75` 只能读作 A 机器上的流程落地演示，
+> 不是交付闭环率。交付口径取交付机 `data/intel.sqlite`：
+> **高优先级 48 / 已复测关闭 4 / `closure_rate` 8.33% / `verified_rate` 6.25%**。
+> 引用规则见 `docs/METRICS_BASELINE.md` 第 3 节。
+
 ## 生成方式
 
 ```powershell
