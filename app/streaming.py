@@ -421,7 +421,7 @@ def _pipeline_body(
 
     # -- 3. assess ----------------------------------------------------------
     assets = storage.list_assets()
-    stored_events, _ = storage.list_events(limit=500)
+    stored_events, _ = storage.list_events(limit=None)
 
     yield _stage(
         seq, phase="assess", role="assessor", status="running",
@@ -585,7 +585,7 @@ def stream_answer(
 
     # -- 2. retrieve --------------------------------------------------------
     retrieve_start = time.monotonic()
-    events, total = storage.list_events(limit=500)
+    events, total = storage.list_events(limit=None)
     assets = storage.list_assets()
     chunks = rag_corpus.list_chunk_records(current_only=True)
     tool_calls.extend([

@@ -342,7 +342,7 @@ def run_evaluation() -> dict:
         "synthetic_case_passed": sum(1 for r in synthetic if r.passed),
         "by_category": by_category,
     }
-    stored_events, _ = storage.list_events(limit=500)
+    stored_events, _ = storage.list_events(limit=None)
     labelled_metrics = run_labelled_evaluation(stored_events, storage.list_assets())
     for key in ("retrieval_precision", "retrieval_recall", "answer_accuracy",
                 "citation_accuracy", "refusal_accuracy"):

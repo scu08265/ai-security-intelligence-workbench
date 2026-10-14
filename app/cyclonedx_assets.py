@@ -209,7 +209,7 @@ def assess_batch(batch_id: str) -> dict:
               if (item.get("sbom") or {}).get("batch_id") == batch_id]
     if not assets:
         raise CycloneDXError("批次不存在或尚未导入")
-    events, _ = storage.list_events(limit=500)
+    events, _ = storage.list_events(limit=None)
     counts: Counter[str] = Counter()
     relationships = []
     for event in events:

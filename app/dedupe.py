@@ -243,7 +243,7 @@ def resolve(event: dict) -> DedupeResult:
         return DedupeResult(action, merged)
 
     # Layers 2 and 3 need the current corpus; load it once.
-    known, _ = storage.list_events(limit=400)
+    known, _ = storage.list_events(limit=None)
 
     # Layer 2: identical upstream text under a different identifier.
     digest = event.get("content_hash")

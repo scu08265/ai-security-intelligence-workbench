@@ -326,8 +326,17 @@ def run(base: str) -> int:
         check("类型下拉里有「论文」", "论文" in options, str(options))
         page.select_option("#events-category", "论文")
         page.click("#body-events button[type=submit]")
-        wait_until(lambda: page.locator("#body-events .event-item").count() >= 1,
-                   timeout_s=20, what="论文列表")
+        # Wait for the list to stop changing, not merely to start: reading it as
+        # soon as one row appeared caught a half-updated list and reported a
+        # failure that a re-run could not reproduce.  Two identical reads is a
+        # stable signal that does not depend on any label's wording.
+        previous = -1
+        for _ in range(100):
+            current = page.locator("#body-events .event-item").count()
+            if current >= 1 and current == previous:
+                break
+            previous = current
+            page.wait_for_timeout(200)
         rows = page.locator("#body-events .event-item").count()
         labels = page.eval_on_selector_all(
             "#body-events .event-item", "els => els.map(e => e.textContent)")

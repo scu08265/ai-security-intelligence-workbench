@@ -134,7 +134,7 @@ def collect_nvd(spec: SourceSpec, since: str | None) -> CollectOutcome:
 
 def _cve_candidates(limit: int = MITRE_BUDGET) -> list[tuple[str, dict]]:
     """Events that carry a CVE id but no MITRE record yet."""
-    events, _ = storage.list_events(limit=200)
+    events, _ = storage.list_events(limit=None)
     out = []
     for event in events:
         if not str(event.get("id", "")).startswith("CVE-"):

@@ -343,7 +343,7 @@ def seed_demo_assets() -> dict:
     Condition names are read from the stored events rather than hard-coded, so
     the demo stays correct when the underlying advisories change.
     """
-    events, _ = storage.list_events(limit=200)
+    events, _ = storage.list_events(limit=None)
     created = 0
     for template in DEMO_ASSETS:
         asset = dict(template)
@@ -598,7 +598,7 @@ def run_enrichment(limit: int = 20, *, only_pending: bool = True) -> dict:
     """Enrich stored events, running the gap-closing scheduler on each."""
     started_at = storage.utcnow()
     run_id = storage.new_id("run")
-    events, _ = storage.list_events(limit=500)
+    events, _ = storage.list_events(limit=None)
     if only_pending:
         # "Pending" means either never enriched, or enriched with gaps left.
         events = [
@@ -655,7 +655,7 @@ def run_assessment() -> dict:
     started_at = storage.utcnow()
     run_id = storage.new_id("run")
     assets = storage.list_assets()
-    events, _ = storage.list_events(limit=500)
+    events, _ = storage.list_events(limit=None)
 
     stored = 0
     not_applicable = 0
@@ -777,7 +777,7 @@ def answer(
     chunks: list[dict] = []
     for action in plan["actions"]:
         if action == "load_event_evidence":
-            events, _ = storage.list_events(limit=500)
+            events, _ = storage.list_events(limit=None)
             tool_calls.append(agent_orchestration.audit(
                 action, status="completed", result="已读取本地事件证据快照", count=len(events)))
         elif action == "load_knowledge_evidence":
@@ -934,7 +934,7 @@ def monitoring_evidence(days: int = 7, runs: list[dict] | None = None) -> dict:
             if result.get("status") in {"ok", "partial"}:
                 bucket["sources"].append(result.get("source_id"))
 
-    events, _ = storage.list_events(limit=2000)
+    events, _ = storage.list_events(limit=None)
     for record in reliability.latency_records(events):
         day = str(record.get("discovered_at") or "")[:10]
         if day not in buckets:
