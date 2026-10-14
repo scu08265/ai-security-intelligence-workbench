@@ -387,7 +387,8 @@
       filters: { q: '', status: '', category: '', limit: 100 },
       selectedId: null, detail: null, detailLoading: false, detailError: null
     },
-    knowledge: { documents: [], sources: [], total: 0, loading: false, error: null },
+    knowledge: { documents: [], sources: [], total: 0, loading: false, error: null,
+                 terms: [], termCoverage: null, graph: null },
     enrich: { running: false, result: null, error: null },
     assets: { items: [], loading: false, error: null, running: false },
     assessments: { items: [], loading: false, error: null, running: false, filter: '' },
@@ -1258,7 +1259,8 @@
         api.get('/api/knowledge/documents?limit=200'),
         api.get('/api/rag/documents?limit=200'),
         api.get('/api/sources'),
-        api.get('/api/knowledge/terms')
+        api.get('/api/knowledge/terms'),
+        api.get('/api/knowledge/graph?event_limit=40')
       ]);
       const valueOf = (result) => result.status === 'fulfilled' ? result.value : null;
       const failures = results.filter((result) => result.status === 'rejected');
@@ -1266,6 +1268,7 @@
       const fullTextResult = valueOf(results[1]);
       const sourceResult = valueOf(results[2]);
       const termResult = valueOf(results[3]);
+      const graphResult = valueOf(results[4]);
       if (!eventResult && !fullTextResult && !sourceResult) {
         throw new Error(failures.map((result) => result.reason && result.reason.message).filter(Boolean).join('；') || '知识服务暂不可用');
       }
@@ -1276,6 +1279,7 @@
       state.knowledge.sources = Array.isArray(sourceResult && sourceResult.items) ? sourceResult.items : (Array.isArray(sourceResult) ? sourceResult : []);
       state.knowledge.terms = termResult && Array.isArray(termResult.items) ? termResult.items : [];
       state.knowledge.termCoverage = (termResult && termResult.coverage) || null;
+      state.knowledge.graph = graphResult || null;
       state.knowledge.error = null;
     } catch (err) {
       state.knowledge.error = err.message;
@@ -1418,6 +1422,42 @@
             : null)))
       : emptyState('尚未读取术语字典', '术语卡随知识库一起加载。'));
 
+    /* 术语 → 文档两跳：节点与边都取自 /api/knowledge/graph，术语节点与文档节点
+     * 用不同的 class 渲染。这一层只说明"术语出现在哪些文档里"，不是文档之间的
+     * 跨文档推理——跨文档指标仍按抽样穷尽金标准单独报，不因为多了这层就上调。 */
+    const graph = state.knowledge.graph;
+    const graphNodes = graph && Array.isArray(graph.nodes) ? graph.nodes : [];
+    const graphEdges = graph && Array.isArray(graph.edges) ? graph.edges : [];
+    const graphById = new Map(graphNodes.map((node) => [node.id, node]));
+    const termNodes = graphNodes.filter((node) => node.type === 'term');
+    const termEdges = graphEdges.filter((edge) => edge.type === 'term_in_document');
+    const nodeClass = (node) => node.type === 'term' ? 'term'
+      : (node.type === 'document' ? 'document' : node.type);
+    const nodeTitle = (node) => node.type === 'document'
+      ? `文档节点${node.corpus_document ? '（语料文档）' : ''}`
+      : (node.type === 'event' ? '事件节点：该术语出现在这条事件的文本里' : '术语节点');
+    const termGraph = termNodes.length
+      ? card('术语 → 文档两跳（术语节点 vs 文档节点）',
+        h('p', { class: 'plain-note' },
+          `术语节点 ${termNodes.length} 个，术语→文档边 ${termEdges.length} 条。`
+          + '术语节点用实心标签、文档节点用描边标签区分；'
+          + '这一层只证明术语出现在哪些文档里，不等于文档之间的跨文档推理，'
+          + '跨文档指标仍按抽样穷尽金标准单独报。'),
+        h('div', { class: 'term-graph' }, ...termNodes.slice(0, 8).map((term) => {
+          const targets = termEdges
+            .filter((edge) => edge.source === term.id)
+            .map((edge) => graphById.get(edge.target))
+            .filter(Boolean);
+          return h('div', { class: 'term-graph-row' },
+            h('span', { class: 'knowledge-node term', title: nodeTitle(term) },
+              textOr(term.label, term.ref_id)),
+            h('span', { class: 'term-graph-arrow', 'aria-hidden': 'true' }, '→'),
+            h('span', { class: 'term-graph-targets' }, ...targets.slice(0, 6).map((node) =>
+              h('span', { class: `knowledge-node ${nodeClass(node)}`, title: nodeTitle(node) },
+                textOr(node.label, node.ref_id)))));
+        })))
+      : null;
+
     const relation = h('div', { class: 'knowledge-map', role: 'img', 'aria-label': '来源、文档与研判关系图' },
       h('div', { class: 'knowledge-map-column' }, h('span', { class: 'knowledge-map-title' }, '来源'),
         ...Object.keys(sourceCategories).slice(0, 5).map((name) => h('span', { class: 'knowledge-node source' }, name))),
@@ -1440,6 +1480,7 @@
 
     setBox(view.visual,
       termSection,
+      termGraph,
       card('知识关系与覆盖', relation),
       h('div', { class: 'grid-cards grid-cards--wide knowledge-grid' },
         card('文档类别分布', categoryBars),
