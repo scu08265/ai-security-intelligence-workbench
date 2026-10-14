@@ -1,15 +1,28 @@
 # 报告数字一致性核对（2026-10-14）
 
-**用途**：提交前最后一道闸——把技术报告与评分对照表里出现的每一个数字，逐条回指到
-`artifacts/b_eval/`、`reports/`、`docs/METRICS_BASELINE.md` 或接口读数。对不上的直接给正确值。
+**用途**：提交前最后一道闸——把技术报告与评分对照表里出现的每一个数字，逐条回指到证据来源。
+对不上的直接列出并给正确值。
+
+**比对源（2026-10-14 起，按队长口径）**：演示机读数一律以 `docs/report/metrics_snapshot.json`
+为**唯一**比对源。它由 `python tools/refresh_metrics_snapshot.py --write` 同时重写
+`docs/METRICS_BASELINE.md` 的快照块，因此**快照 JSON、基线文档、报告三处必须是同一组数**；
+对不上就是某一处没刷新（`tests/test_metrics_snapshot.py` 会让它直接失败）。
+数据自然增长导致的过期**不算口径变更**（`METRICS_BASELINE.md` §4.4），刷新即可，不用把报告退回旧值。
+
+**当前快照**（`snapshot_date` = 2026-10-14）：`events 637`、`event_aliases 211`、`runs 1001`、
+`assets / assessments / assessment_dispositions 8 / 190 / 6`、
+`rag_documents / rag_chunks 1 / 849`、`duplicate_candidates 210`；
+累计采集日 **20**、累计定时运行 **10 天**、`continuous_target_met = false`、
+时效性 `p50 = 15.69 小时`（296 个有效样本）、处置闭环 48 / 4 / 8.33%；
+关系 P 1.0 / R 0.734 / F1 0.8466。
 
 **核对对象**
 
 * `docs/report/AI安全知识情报系统技术报告.docx`（同名 pdf 同源，数字一致）
 * `docs/COMPETITION_RUBRIC_MAPPING.md`
 
-**方法**：从 docx 正文与表格抽出全部数值 token，再逐个回查证据文件并重算。
-本机能读到的证据文件一律实算，不照抄；读不到的（演示机数据库读数）标为"本机不可核"。
+**方法**：从 docx 正文与表格抽出全部数值 token，逐个回查证据并重算。B 侧证据一律本机实算；
+演示机读数与快照 JSON 逐字段比对。
 
 ## 1. B 侧数字：本机可逐条核验，全部一致
 
@@ -24,65 +37,52 @@
 | 50 题构成 10/8/6/6/8/2/5/5 | 第五章 | `evaluation/b_formal_qa_set.json → cases[].category` | 一致 |
 | 跨文档 10/21 | 概览、第五章、第十章、对照表 §2/§3 | `artifacts/b_eval/multihop_path_validation_20261002_v2.json → counts.by_chain_type.cross_document` | 一致 |
 | 缺 52 条文档间边 | 同上 | 同上 `→ counts.missing_edge_kinds.document_to_document` | 一致 |
+| 术语可达 29/31 | 对照表 §2/§3/§4、§5 | 同上 `→ counts.term_reachable / term_not_reachable` | 一致（本分支新增进报告） |
 | 关系 Precision 1.0 / Recall 0.734 | 关键数字表、第十章、对照表 §2/§3 | `artifacts/b_eval/relation_score_gold_20261010.json → micro` | 一致 |
 | 可判定样本 94 条 | 同上 | 同上 `→ micro.evaluable_samples` | 一致 |
 
-## 2. 演示机数字：本机不可核，且有四处对不上
+## 2. 演示机数字：与快照 JSON 逐字段比对
 
-这些数取自演示机数据库/接口，本机没有那份库，因此只能做"与基线文档是否一致"的比对。
-
-| 数字 | 出现位置 | 与基线文档比对 | 结论 |
+| 数字 | 出现位置 | 与 `metrics_snapshot.json` 比对 | 结论 |
 | --- | --- | --- | --- |
-| **596 个事件** | 关键数字表 | `docs/METRICS_BASELINE.md` §1 记录 **548**（2026-10-12 快照） | **对不上**：报告用了比基线更新的读数，但 §4 规则 1 要求"只放 §2 的数字并标注快照日期" |
-| **3,639 分块** | 关键数字表（与 596 事件**同一行同一格**） | 3,639 是 **B 评测语料** `D:\ICT\intel-data-b` 的 `rag_chunks`；演示机库是 **1 个文档 / 849 分块**（§1） | **口径混引**：一行里放了两个不同数据集的数 |
-| **累计 19 个采集日** | 关键数字表、第十章、对照表 §3 | §2 记录 **18 天**（2026-10-12 快照） | **对不上**：19 vs 18 |
-| 定时运行 8 天 | 同上 | §2 记录 8 天 | 一致 |
-| 处置闭环 48 / 4 / 8.33% | 关键数字表 | §2 记录 48 / 4 / 0.0833 | 一致 |
-| 去重候选 210 条 | 第三章 | §1 记录 duplicate_candidates 210 | 一致 |
-| p50 18.1 小时 / 267 个有效样本 | 关键数字表、第十章、对照表 §2 | 无仓库产物可回读；与 `docs/TASK_BRIEF_20261013.md` 记的同值 | 无证据文件，"演示机接口读数" |
-| 来源产出 273 / 202 / 91 / 108 / 26 / 10 / 35 / 114 / 36 / 7 | 第三章来源表 | 无仓库产物 | 同上 |
-| 六维覆盖 388 / 150 / 101 / 74 / 48 / 26（分母 596） | 第四章 | 无仓库产物；分母随 596 变 | 同上 |
-| 6 个角色 / 455 次工具调用 / 781 条运行记录 / 112 次外部计划任务 | 第二章 | 无仓库产物 | 同上 |
-| 容器验收 9 项 | 关键数字表、第十章 | `reports/docker-validation.json` | 一致（产物在库） |
+| 语料规模（事件数） | 关键数字表 | 报告已改为读 `scorecard.events_total` = 637 | 一致（快照驱动） |
+| 连续监测天数 | 关键数字表、第十章 | 报告读 `cumulative_actual_run_days` = 20 / `cumulative_scheduled_run_days` = 10 | 一致 |
+| 连续运行目标 | 第十章 | 报告读 `continuous_target_met`；当前 `false`，文案已改为"当前窗口未达成" | 一致；**false 不是 bug** |
+| 监测时效性 p50 | 关键数字表、第十章 | 报告读 `latency_p50_hours` = 15.69 | 一致 |
+| 有效样本数 | 第十章 | 报告读 `effective_denominator` = 296 | 一致 |
+| 处置闭环 48 / 4 / 8.33% | 关键数字表 | 快照 `disposition` = 48 / 4 / 0.0833 | 一致 |
+| 去重候选 210 条 | 第三章 | 快照 `database.counts.duplicate_candidates` = 210 | 一致 |
+| 容器验收 9 项 | 关键数字表 | `reports/docker-validation.json` | 一致 |
+| 语料规模（分块）3,639 | 关键数字表（原与事件数同格） | 3,639 是 **B 评测语料**的 `rag_chunks`；快照里演示机是 1 文档 / 849 分块 | 已拆行，各带数据集限定语 |
+| 来源产出 273 / 202 / 91 / 108 / 26 / 10 / 35 / 114 / 36 / 7 | 第三章来源表 | 快照里**没有**这些字段 | **仍写死**，见 §7 |
+| 六维覆盖 388 / 150 / 101 / 74 / 48 / 26（分母 596） | 第四章 | 快照只有 `enrichment_sample` = 637；六个分子不在快照里 | **仍写死且分母过期**，见 §7 |
+| 6 角色 / 455 次工具调用 / 781 条运行记录 / 112 次计划任务 | 第二章 | 快照里没有这些字段 | **仍写死**，见 §7 |
+| ~~596 个事件 / 19 个采集日 与基线 548 / 18 对不上~~ | — | **已由 `df90eaf` 解决**：两者都是相隔一天的实时读数，现统一由快照 JSON 驱动，当前为 637 / 20 | 已闭环 |
 
-## 3. 必须改的三处
+## 3. 曾经列出的三处问题：现状
 
-1. **自动化测试 675 通过 / 4 跳过**（关键数字表与第十章各出现一次）
-   → 应为 **682 通过 / 4 跳过**。675 出自 `docs/A_RAG_MIDFREQ_VERIFICATION.md` 的旧记录，
-   而 `docs/TASK_BRIEF_20261013.md` 记的交付机现状是 682 / 4。
-   4 条跳过需要两份衍生语料副本——这一点与事实相符（见 `docs/B_CORPUS_HANDOVER_REQUEST.md`）。
-2. **语料规模一行把两个数据集并在一格**
-   → 拆开：演示机库的"596 个事件"（或按基线文档的 548）与 B 评测语料的"3,639 个分块"分列，
-   并各带数据集限定语。这直接违反 `docs/METRICS_BASELINE.md` §3"不得与上表混排在同一张指标表里"。
-3. **596 个事件 / 19 个采集日 与基线文档的 548 / 18 对不上**
-   → 二选一：先更新 `docs/METRICS_BASELINE.md` §1/§2 的快照（换机、换库、换语料按 §4 规则 3
-   "先改本文件，再改下游文档"），或者报告回到 §2 的现有快照值并标注日期。
+| 原问题 | 现状 |
+| --- | --- |
+| 1. 自动化测试 675 通过 / 4 跳过 | **上游已改**：现在写 **691 通过 / 4 跳过**（`df90eaf`）。交付衍生副本后应更新为 **695 passed / 0 skipped**，等交付机核验结果。我原先按 10-13 任务书建议的 682 已作废 |
+| 2. 语料规模一行把两个数据集并在一格 | **已解决**：该行改由快照驱动；B 评测语料的分块数在正文单列并带数据集限定语 |
+| 3. 596 事件 / 19 采集日 与基线 548 / 18 对不上 | **已闭环**，见 §2 末行 |
 
 ## 4. 次要项
 
-* **报告正文没有给出问答延迟的 P95 实测值**，而 `docs/COMPETITION_RUBRIC_MAPPING.md` §2/§3
-  写着"P95 延迟有实测"。证据是现成的：`formal_qa_results_20261012.json → latency_ms`
-  （p50 449.9 ms / p95 627.9 ms / max 709.4 ms，50 个样本）。建议在第十章补一行。
-* **报告尚未包含"术语可达 29/31"**。生成器 `tools/build_technical_report.py` 已补上
-  （第五章与边界段，明确"属检索覆盖、与 10/21 分列不合并"），
-  但 `docs/report/` 下的 docx/pdf **本轮没有重新生成**——该产物需要 matplotlib / reportlab /
-  python-docx，本机环境不具备，且 A 正在为任务 A4 补状态机图后重生成报告。
-  请由生成方在合入 A4 后统一重跑一次，本核对清单随之复验。
-* 第十章"4 条跳过需要两份未交付的衍生语料副本"——与事实一致，无需改。
+* **问答延迟 P95**：报告第十章原只写"分位数按批次独立统计"，没有数值。我在生成器里补上了实测值
+  （`formal_qa_results_20261012.json → latency_ms`：p50 449.9 ms / p95 627.9 ms / max 709.4 ms，50 个样本）。
+* **术语可达 29/31**：报告原本没有这个数。我在生成器第五章与边界段补上，并写明
+  "属检索覆盖、与 10/21 分列不合并"。
+* **docx/pdf 的重生成顺序**：`df90eaf` 已经重生成过一版（随快照机制落地），但那一版**不含**上面两条，
+  因为本分支尚未合并。**正确顺序是先合并本分支，再由生成方重跑 `tools/build_technical_report.py`**；
+  否则重生成的报告会缺 29/31 与 P95。
 
-## 5. 本机不可核的部分怎么补
+## 5. 快照怎么刷新（原建议已被上游实现）
 
-演示机读数需要在那台机器上取，建议一次性把下面的读数落成一份 JSON 快照放进 `reports/`，
-之后报告只引这份快照（与 `docs/METRICS_BASELINE.md` §2 同源）：
-
-```powershell
-# 演示机
-curl.exe -s http://127.0.0.1:8000/api/competition/scorecard   # 语料规模、连续运行、处置闭环、时效性
-curl.exe -s http://127.0.0.1:8000/api/sources                 # 登记来源数、类别数、实际产出数
-curl.exe -s http://127.0.0.1:8000/api/system/health           # 模块状态、活跃降级
-```
-
-取到后写进 `reports/scorecard-snapshot-<日期>.json`，并在 `docs/METRICS_BASELINE.md` §2 更新快照日期。
+我原先建议"把演示机读数落成一份 JSON 快照放进 `reports/`"。上游已用更彻底的方式实现了：
+`python tools/refresh_metrics_snapshot.py --write` 同时重写 `METRICS_BASELINE.md` 的快照块与
+`docs/report/metrics_snapshot.json`，报告生成器读同一个 JSON，`tests/test_metrics_snapshot.py` 守护两者同步。
+提交前跑一次即可，不需要手工核对两处。
 
 ## 6. 2026-10-14 新增待核对项
 
@@ -90,7 +90,7 @@ curl.exe -s http://127.0.0.1:8000/api/system/health           # 模块状态、�
 
 | 数字 | 出现位置 | 证据路径 | 结论 |
 | --- | --- | --- | --- |
-| 术语字典 **14 个种子 / 10 个已覆盖 / 关联 44 份文档** | `docs/COMPETITION_RUBRIC_MAPPING.md` §5 | `GET /api/knowledge/terms` → `coverage()` 的 `terms / covered_terms / documents_referenced`；算法在 `app/term_dictionary.py` | **已过期**：本轮 B2 领域复核把种子由 14 扩到 **26** 条，因此"14 个 / 10 个"不再成立。§5 已改为"26 条 + 覆盖数以接口返回为准"；26 条在 B 评测语料（3,639 分块 + 93 事件）上实测 **25 覆盖 / 37 文档**，演示机需用同一接口重取。明细见 `docs/B_TERM_SEED_REVIEW.md` |
+| 术语字典 **14 个种子 / 10 个已覆盖 / 关联 44 份文档** | `docs/COMPETITION_RUBRIC_MAPPING.md` §5 | `GET /api/knowledge/terms` → `coverage()` 的 `terms / covered_terms / documents_referenced`；算法在 `app/term_dictionary.py` | **已过期**：本轮 B2 领域复核把种子由 14 扩到 **26** 条，"14 个 / 10 个"不再成立。§5 已改为"26 条 + 覆盖数以接口返回为准"；26 条在 B 评测语料（3,639 分块 + 93 事件）上实测 **25 覆盖 / 37 文档**，演示机需用同一接口重取。明细见 `docs/B_TERM_SEED_REVIEW.md` |
 | 模型链 **三级** | 同上 §5；报告"模型降级链与角色绑定表" | `app/model_chain.py::chain()` → `levels` 恰为 3 项（1 远端模型协助 / 2 模型计划+本地拼装 / 3 本地确定性抽取），`role_bindings` 7 个角色 | 一致（3 级） |
 | 推荐问法 **38 道可提问** | 同上 §5 | `/api/qa/suggestions`（`app/api.py`）取 `evaluation/b_formal_qa_set.json` 并跳过 `should_refuse`：50 − 12 = **38** | 一致 |
 | 自愈演练 **四项断言** | 报告"可复现的自愈演练" | `tools/run_self_healing_drill.py:139-149` 的四个键；产物 `reports/self-healing-drill.json → assertions` 与 `verified` | 一致（4 项） |
@@ -99,3 +99,17 @@ curl.exe -s http://127.0.0.1:8000/api/system/health           # 模块状态、�
 （如 Ollama / 本地权重）"，而语料里 `ollama` 命中 3 个文档 / 24 条记录（本轮 B2 已把它加进术语表）。
 两者不冲突：前者说的是**本系统不跑本地模型**，后者说的是**语料在讨论 Ollama 这个主题**。
 报告与答辩引用时要带上这层限定，避免被读成"系统用了 Ollama"。
+
+## 7. 本轮新发现：生成器里仍写死的过期数
+
+`df90eaf` 把"关键数字表"与"第十章性能表"接上了快照，但下面几处**仍是硬编码**，
+会随演示机库增长再次过期。按"三处必须是同一组数"的口径，这些就是对不上的地方。
+
+| 位置 | 现写死 | 快照里的正确值 | 建议 |
+| --- | --- | --- | --- |
+| `tools/build_technical_report.py` 第四章富化覆盖率表 6 行 | `388 / 596`、`150 / 596`、`101 / 596`、`74 / 596`、`48 / 596`、`26 / 596` | 分母应为 `enrichment_sample` = **637**；六个分子需按新快照重取 | 把六个分子一并纳入 `tools/refresh_metrics_snapshot.py`，与分母一起由快照驱动 |
+| 同文件第十章末段 | "首次观测的中位延迟是 **18.1 小时**" | `latency_p50_hours` = **15.69** | 这句属 A1（时效性归因）的范围，**我没有改**，留给 A1 一并重写；若 A1 不重写这句，则需接快照 |
+| 同文件第十章自动化测试 | `691 通过 / 4 跳过` | 交付衍生副本后应为 `695 passed / 0 skipped` | 等交付机核验结果回来再改 |
+
+**另外**：快照 `continuous_target_met = false` 是**事实**，不是 bug——计划任务窗口 2026-10-11 到期后
+10-12 无计划运行，连续天数已重新起算。报告里那句已被上游改成如实陈述，核对时不要当成错误。
