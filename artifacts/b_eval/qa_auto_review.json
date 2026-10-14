@@ -9,10 +9,10 @@
  "counts": {
   "total": 50,
   "by_judgment": {
-   "supported": 33,
-   "insufficient_evidence": 7,
-   "not_applicable": 6,
-   "contradicted": 4
+   "supported": 38,
+   "insufficient_evidence": 2,
+   "not_applicable": 4,
+   "contradicted": 6
   },
   "by_category": {
    "中英文混合查询": {
@@ -22,12 +22,10 @@
     "supported": 10
    },
    "多轮追问": {
-    "insufficient_evidence": 5,
-    "supported": 1
+    "supported": 6
    },
    "拒答及证据不足": {
-    "contradicted": 3,
-    "not_applicable": 2
+    "contradicted": 5
    },
    "无证据问题与范围外问题": {
     "not_applicable": 4,
@@ -46,60 +44,60 @@
  },
  "metrics": {
   "answer_support_rate_auto": {
-   "numerator": 33,
+   "numerator": 38,
    "denominator": 38,
-   "rate": 0.8684,
+   "rate": 1.0,
    "scope": "仅对'应作答'的题；是自动评审判定，不是人工准确率"
   },
   "citation_support_rate_auto": {
-   "numerator": 24,
-   "denominator": 24,
-   "rate": 1.0,
+   "numerator": 0,
+   "denominator": 0,
+   "rate": null,
    "scope": "答案正文是否逐字由被引用原文构成；不代表引用内容语义上支持答案。分母只含'答案是文档引用格式'的题。",
-   "with_citations": 35,
-   "not_applicable": 11,
+   "with_citations": 42,
+   "not_applicable": 42,
    "not_applicable_reason": "有文档引用，但答案来自结构化事件路径，答案正文不是引用拼接，无法用该规则核验"
   },
   "confusion": {
    "should_refuse_true": {
     "n": 12,
-    "refused_ok": 6,
-    "answered_wrongly": 6
+    "refused_ok": 4,
+    "answered_wrongly": 8
    },
    "should_refuse_false": {
     "n": 38,
-    "answered_ok": 33,
-    "refused_wrongly": 5
+    "answered_ok": 38,
+    "refused_wrongly": 0
    }
   },
   "refusal_recall": {
-   "numerator": 6,
+   "numerator": 4,
    "denominator": 12,
-   "rate": 0.5
+   "rate": 0.3333
   },
   "answer_rate": {
-   "numerator": 33,
+   "numerator": 38,
    "denominator": 38,
-   "rate": 0.8684
+   "rate": 1.0
   },
   "coverage": {
    "auto_reviewed": 50,
    "total": 50,
    "coverage_rate": 1.0,
-   "undetermined": 7,
-   "undetermined_rate": 0.14,
-   "low_confidence": 22,
+   "undetermined": 2,
+   "undetermined_rate": 0.04,
+   "low_confidence": 20,
    "manual_review_required": 26
   },
   "consistency_violations": 0,
-  "contradicted": 4,
+  "contradicted": 6,
   "latency_ms_from_previous_run": {
    "samples": 50,
-   "p50": 427.1,
-   "p95": 584.6,
-   "min": 314.5,
-   "max": 679.9,
-   "mean": 445.3
+   "p50": 449.9,
+   "p95": 627.9,
+   "min": 311.7,
+   "max": 709.4,
+   "mean": 461.7
   },
   "latency_source": "artifacts/b_eval/formal_qa_results.json（上一轮同一批 50 题的实测值，本轮未重新计时）",
   "failures": {
@@ -127,11 +125,11 @@
      "paper:2609.28996"
     ],
     "cited_chunk_ids": [
-     "chunk-1e26fb499bb6dbae04a358d4",
-     "chunk-c58221ed9828a62061aaeec7",
-     "chunk-fef1ae1764a6dee6f3705bd6",
      "chunk-3e02e30d18b6d9d534a09cad",
-     "chunk-60353af87ed264ff1ebf2e47"
+     "chunk-1e26fb499bb6dbae04a358d4",
+     "chunk-611d2ee6fcbcd7740fc8e908",
+     "chunk-0ce253b1b064be3f7dafd9a6",
+     "chunk-4607af632c4a1e1728692fa0"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -146,8 +144,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2337 ≤ 上界 2378=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -177,17 +175,17 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 6,
+    "citation_count": 5,
     "cited_document_keys": [
+     "paper:2501.13787",
      "paper:2609.29757"
     ],
     "cited_chunk_ids": [
-     "chunk-7e16e6ece9b5fa7bb906f527",
-     "chunk-2e3b3fec713324c33c3b0880",
-     "chunk-f04f6a92012135f57321f790",
-     "chunk-1d263630fc98f67bc8257def",
-     "chunk-f1f210c2e843456a23f64f7e",
-     "chunk-df7e311eaa475d978286b5b5"
+     "chunk-e7c4f5f3c7751a3ffa30b7ce",
+     "chunk-1c80f502e72fb42699eeb0ab",
+     "chunk-b64f03dfbfeb5c0b6ef222a4",
+     "chunk-416dcc9bbdc311768335eb76",
+     "chunk-a26721953fbdcee9bce4ff42"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -198,12 +196,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 6 条"
+     "detail": "事件证据 0 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 591 ≤ 上界 632=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -233,17 +231,17 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 6,
+    "citation_count": 5,
     "cited_document_keys": [
+     "paper:2501.13787",
      "paper:2609.28900"
     ],
     "cited_chunk_ids": [
-     "chunk-40710bf2b8e507ad4f7c387b",
-     "chunk-1656e6198f3d4eb7310cce90",
-     "chunk-e45c6b3a852060d4b6ed1edd",
-     "chunk-86ce9e6b5b0e6ce787a30993",
-     "chunk-ebe17bce2bf3c43a07bfae05",
-     "chunk-ee4b3e79d54da71275cae71a"
+     "chunk-d7489ff3b07026aca9a7948d",
+     "chunk-292b9c3eb0203f0aa1f5ba2e",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-94de2b4db54500c51e11b9b3",
+     "chunk-8fefaaeedccce5c69028d6df"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -254,12 +252,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 6 条"
+     "detail": "事件证据 0 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 1367 ≤ 上界 1408=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -294,11 +292,11 @@
      "paper:2609.30192"
     ],
     "cited_chunk_ids": [
-     "chunk-772965adcd179139bcd06485",
-     "chunk-865c3fc82db601b61deb31de",
-     "chunk-99f6facf8375a778cae6aea8",
-     "chunk-dd1e7b4c423f2efb51430a33",
-     "chunk-8500d9c105c4b1356d5b2c17"
+     "chunk-03317ba315f16be669e3c769",
+     "chunk-9a6ae6087bfe15b36556ced3",
+     "chunk-4b72fc8fa621782e6f526842",
+     "chunk-f6292119dac456a957c56f50",
+     "chunk-231d76a16bf6e347697d42bc"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -313,8 +311,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2218 ≤ 上界 2259=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -344,17 +342,16 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 6,
+    "citation_count": 4,
     "cited_document_keys": [
+     "paper:2501.13787",
      "paper:2609.29230"
     ],
     "cited_chunk_ids": [
-     "chunk-72ead54d06cf2c62969163b6",
-     "chunk-8e8a07516863b486bd58920e",
-     "chunk-4fef66f74b75d70611829266",
-     "chunk-88fdfe6ea53367bfaaa69e60",
-     "chunk-0e890ae5a0de528274b4f0df",
-     "chunk-043bc308f0cf8c7d79bf4b3c"
+     "chunk-02feaa66f1ec1de5d612aabb",
+     "chunk-2159d09ae638094b2ef02ca6",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-683fcc4bca0226f943bba4af"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -365,12 +362,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 6 条"
+     "detail": "事件证据 0 条 / 文档引用 4 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 1886 ≤ 上界 1927=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -400,17 +397,16 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 6,
+    "citation_count": 5,
     "cited_document_keys": [
      "paper:2606.15617"
     ],
     "cited_chunk_ids": [
-     "chunk-675668ff34c9d9eeb7b36b4a",
-     "chunk-6ece9563486747c798438a8e",
      "chunk-5c71aaa24bd8d7056ac0313a",
-     "chunk-4be51f4b81e36bbffa7fb8de",
-     "chunk-a7874d53d8db6974b188f298",
-     "chunk-522eb9d8deff2a4d6e345452"
+     "chunk-6ece9563486747c798438a8e",
+     "chunk-7b3ba17746f32905b1b37285",
+     "chunk-560523d6a5ad1e6a8faf82d5",
+     "chunk-ff13260e5bc0da5782f08a65"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -421,12 +417,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 6 条"
+     "detail": "事件证据 0 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2315 ≤ 上界 2356=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -480,8 +476,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2898 ≤ 上界 2939=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -558,16 +554,15 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 5,
+    "citation_count": 4,
     "cited_document_keys": [
      "paper:2501.13787"
     ],
     "cited_chunk_ids": [
-     "chunk-a6aaa41c451888d03395cd44",
      "chunk-1c81026ab5a957ec178913c4",
-     "chunk-af92a77db28f15236d9501e0",
-     "chunk-8e22077c669275cfa3e1fd10",
-     "chunk-0b6a9c456122108958f74640"
+     "chunk-a785e777ad83e7d8cb364c69",
+     "chunk-0b6a9c456122108958f74640",
+     "chunk-814a5762a84023da0855c97b"
     ],
     "event_ids": [
      "OPENALEX-W4406794439"
@@ -580,7 +575,7 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 1 条 / 文档引用 5 条"
+     "detail": "事件证据 1 条 / 文档引用 4 条"
     },
     {
      "rule": "R-QA-QUOTE",
@@ -615,17 +610,16 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 6,
+    "citation_count": 5,
     "cited_document_keys": [
      "paper:2609.30243"
     ],
     "cited_chunk_ids": [
-     "chunk-b1c2dbf1124d49e8c1e960f2",
      "chunk-1e1b1f7a4deebb53d0b33fc8",
-     "chunk-b1620540c0899bd702ed5cda",
-     "chunk-e49b86c958642fd07f990a89",
+     "chunk-97612802b3c8a4294d9575f3",
      "chunk-1934b1e31fc0d9c70d011fdb",
-     "chunk-027c0961ee9fe6d31d788bb2"
+     "chunk-1ffc5fffcebd7981342ef157",
+     "chunk-3fdc886795d1ba8148959255"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -636,12 +630,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 6 条"
+     "detail": "事件证据 0 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2130 ≤ 上界 2171=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -673,15 +667,17 @@
    "auto_evidence": {
     "citation_count": 6,
     "cited_document_keys": [
+     "paper:2609.28915",
+     "paper:2609.29429",
      "source:owasp_genai"
     ],
     "cited_chunk_ids": [
      "chunk-90c768cd5de7c577f26397d2",
+     "chunk-0d170d53396ba2d8ccadecbe",
      "chunk-e8cc2b6834a2c530e2fcad10",
      "chunk-ff8a87d0d88c14f7168efde2",
-     "chunk-7061149ba14708176205f246",
-     "chunk-71ae55e2e6545c119a797617",
-     "chunk-b9d2b917a3e216d060bdd256"
+     "chunk-e034e370e78e5da118c53abc",
+     "chunk-7061149ba14708176205f246"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -696,8 +692,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 1283 ≤ 上界 1324=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -751,8 +747,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2164 ≤ 上界 2205=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -865,8 +861,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2083 ≤ 上界 2124=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -921,8 +917,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2876 ≤ 上界 2917=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -952,16 +948,15 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "high",
    "auto_evidence": {
-    "citation_count": 5,
+    "citation_count": 4,
     "cited_document_keys": [
      "paper:2501.13787"
     ],
     "cited_chunk_ids": [
+     "chunk-ae717b77f38375b526b5ba5f",
      "chunk-e78516a997d4da76b6632007",
-     "chunk-f5ae901ee6258438880b216e",
-     "chunk-0d912b6e54b1e8560e120f71",
-     "chunk-149345792c2f8071dac76ee5",
-     "chunk-f5c8e3e5a1bd2f37e723c148"
+     "chunk-cc04d0eb85d3eba34d8233c3",
+     "chunk-8e22077c669275cfa3e1fd10"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -972,12 +967,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 5 条"
+     "detail": "事件证据 0 条 / 文档引用 4 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2578 ≤ 上界 2619=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1032,8 +1027,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2444 ≤ 上界 2485=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1144,8 +1139,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2337 ≤ 上界 2378=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1200,8 +1195,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 591 ≤ 上界 632=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1256,8 +1251,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 1367 ≤ 上界 1408=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1370,8 +1365,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2315 ≤ 上界 2356=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1453,14 +1448,23 @@
    "question_id": "BQA-025",
    "category": "多轮追问",
    "should_refuse": false,
-   "actual_refused": true,
-   "auto_judgment": "insufficient_evidence",
-   "auto_reason": "标准答案或证据不足，无法自动判定对错",
+   "actual_refused": false,
+   "auto_judgment": "supported",
+   "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 6,
+    "cited_document_keys": [
+     "paper:2609.28996"
+    ],
+    "cited_chunk_ids": [
+     "chunk-c58221ed9828a62061aaeec7",
+     "chunk-1b8a5b3bb855e6ee7df0a863",
+     "chunk-1e26fb499bb6dbae04a358d4",
+     "chunk-fef1ae1764a6dee6f3705bd6",
+     "chunk-0ce253b1b064be3f7dafd9a6",
+     "chunk-dac56e9551cdb17c11d3dd1d"
+    ],
     "event_ids": [],
     "expected_document_keys": [
      "paper:2609.28996"
@@ -1469,18 +1473,18 @@
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "fail",
-     "detail": "应拒答=False 实际拒答=True"
+     "result": "pass",
+     "detail": "应拒答=False 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",
@@ -1489,8 +1493,8 @@
     },
     {
      "rule": "R-QA-AMBIGUOUS",
-     "result": "fail",
-     "detail": "候选多跳题或无任何证据可依据，标准答案存在歧义"
+     "result": "pass",
+     "detail": "标准答案有明确依据"
     }
    ],
    "manual_review_required": true,
@@ -1500,14 +1504,23 @@
    "question_id": "BQA-026",
    "category": "多轮追问",
    "should_refuse": false,
-   "actual_refused": true,
-   "auto_judgment": "insufficient_evidence",
-   "auto_reason": "标准答案或证据不足，无法自动判定对错",
+   "actual_refused": false,
+   "auto_judgment": "supported",
+   "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 6,
+    "cited_document_keys": [
+     "paper:2609.28900"
+    ],
+    "cited_chunk_ids": [
+     "chunk-40710bf2b8e507ad4f7c387b",
+     "chunk-1656e6198f3d4eb7310cce90",
+     "chunk-e45c6b3a852060d4b6ed1edd",
+     "chunk-86ce9e6b5b0e6ce787a30993",
+     "chunk-ebe17bce2bf3c43a07bfae05",
+     "chunk-ee4b3e79d54da71275cae71a"
+    ],
     "event_ids": [],
     "expected_document_keys": [
      "paper:2609.28900"
@@ -1516,18 +1529,18 @@
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "fail",
-     "detail": "应拒答=False 实际拒答=True"
+     "result": "pass",
+     "detail": "应拒答=False 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",
@@ -1536,8 +1549,8 @@
     },
     {
      "rule": "R-QA-AMBIGUOUS",
-     "result": "fail",
-     "detail": "候选多跳题或无任何证据可依据，标准答案存在歧义"
+     "result": "pass",
+     "detail": "标准答案有明确依据"
     }
    ],
    "manual_review_required": true,
@@ -1594,14 +1607,23 @@
    "question_id": "BQA-028",
    "category": "多轮追问",
    "should_refuse": false,
-   "actual_refused": true,
-   "auto_judgment": "insufficient_evidence",
-   "auto_reason": "标准答案或证据不足，无法自动判定对错",
+   "actual_refused": false,
+   "auto_judgment": "supported",
+   "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 6,
+    "cited_document_keys": [
+     "paper:2606.15617"
+    ],
+    "cited_chunk_ids": [
+     "chunk-675668ff34c9d9eeb7b36b4a",
+     "chunk-6ece9563486747c798438a8e",
+     "chunk-5c71aaa24bd8d7056ac0313a",
+     "chunk-4be51f4b81e36bbffa7fb8de",
+     "chunk-a7874d53d8db6974b188f298",
+     "chunk-522eb9d8deff2a4d6e345452"
+    ],
     "event_ids": [],
     "expected_document_keys": [
      "paper:2606.15617"
@@ -1610,18 +1632,18 @@
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "fail",
-     "detail": "应拒答=False 实际拒答=True"
+     "result": "pass",
+     "detail": "应拒答=False 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",
@@ -1630,8 +1652,8 @@
     },
     {
      "rule": "R-QA-AMBIGUOUS",
-     "result": "fail",
-     "detail": "候选多跳题或无任何证据可依据，标准答案存在歧义"
+     "result": "pass",
+     "detail": "标准答案有明确依据"
     }
    ],
    "manual_review_required": true,
@@ -1641,14 +1663,22 @@
    "question_id": "BQA-029",
    "category": "多轮追问",
    "should_refuse": false,
-   "actual_refused": true,
-   "auto_judgment": "insufficient_evidence",
-   "auto_reason": "标准答案或证据不足，无法自动判定对错",
+   "actual_refused": false,
+   "auto_judgment": "supported",
+   "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 5,
+    "cited_document_keys": [
+     "paper:2609.30192"
+    ],
+    "cited_chunk_ids": [
+     "chunk-03317ba315f16be669e3c769",
+     "chunk-9a6ae6087bfe15b36556ced3",
+     "chunk-4b72fc8fa621782e6f526842",
+     "chunk-f6292119dac456a957c56f50",
+     "chunk-231d76a16bf6e347697d42bc"
+    ],
     "event_ids": [],
     "expected_document_keys": [
      "paper:2609.30192"
@@ -1657,18 +1687,18 @@
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "fail",
-     "detail": "应拒答=False 实际拒答=True"
+     "result": "pass",
+     "detail": "应拒答=False 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",
@@ -1677,8 +1707,8 @@
     },
     {
      "rule": "R-QA-AMBIGUOUS",
-     "result": "fail",
-     "detail": "候选多跳题或无任何证据可依据，标准答案存在歧义"
+     "result": "pass",
+     "detail": "标准答案有明确依据"
     }
    ],
    "manual_review_required": true,
@@ -1688,14 +1718,22 @@
    "question_id": "BQA-030",
    "category": "多轮追问",
    "should_refuse": false,
-   "actual_refused": true,
-   "auto_judgment": "insufficient_evidence",
-   "auto_reason": "标准答案或证据不足，无法自动判定对错",
+   "actual_refused": false,
+   "auto_judgment": "supported",
+   "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 5,
+    "cited_document_keys": [
+     "paper:2609.29808"
+    ],
+    "cited_chunk_ids": [
+     "chunk-9aa9b7f0bfc461185e805840",
+     "chunk-40e6485386bfdf62a9f37df0",
+     "chunk-dd6697dfa7ef5bd2eb0080ec",
+     "chunk-6b9546662a106a418714e03e",
+     "chunk-f9d26319bd709c7eebf87b3b"
+    ],
     "event_ids": [],
     "expected_document_keys": [
      "paper:2609.29808"
@@ -1704,18 +1742,18 @@
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "fail",
-     "detail": "应拒答=False 实际拒答=True"
+     "result": "pass",
+     "detail": "应拒答=False 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",
@@ -1724,8 +1762,8 @@
     },
     {
      "rule": "R-QA-AMBIGUOUS",
-     "result": "fail",
-     "detail": "候选多跳题或无任何证据可依据，标准答案存在歧义"
+     "result": "pass",
+     "detail": "标准答案有明确依据"
     }
    ],
    "manual_review_required": true,
@@ -1766,8 +1804,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2876 ≤ 上界 2917=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1824,8 +1862,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2056 ≤ 上界 2097=True；另有 3 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -1919,17 +1957,18 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 5,
+    "citation_count": 6,
     "cited_document_keys": [
      "paper:2609.28900",
      "paper:2609.30028"
     ],
     "cited_chunk_ids": [
-     "chunk-1656e6198f3d4eb7310cce90",
-     "chunk-86f5cd3318bfb7da386309bd",
-     "chunk-588cced1264eec1b2b7b6151",
-     "chunk-86ce9e6b5b0e6ce787a30993",
-     "chunk-b82299bc638b7678cb7945c5"
+     "chunk-1b4f521dd158e5c09cce53e2",
+     "chunk-2469bb50935f6d93f9649e5f",
+     "chunk-f45a5a661459307308c8b4a7",
+     "chunk-d7489ff3b07026aca9a7948d",
+     "chunk-0e4c22c479001fcc218e6b38",
+     "chunk-d9d9a58bdc35374c7cda0188"
     ],
     "event_ids": [],
     "expected_document_keys": [
@@ -1941,12 +1980,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 5 条"
+     "detail": "事件证据 0 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2083 ≤ 上界 2124=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -2155,17 +2194,17 @@
    "auto_reason": "答案由引用原文或结构化事件证据支撑",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 5,
+    "citation_count": 6,
     "cited_document_keys": [
-     "paper:2609.29230",
      "paper:2609.29429"
     ],
     "cited_chunk_ids": [
-     "chunk-50f3942425c9e6b2065d2b65",
-     "chunk-72ead54d06cf2c62969163b6",
-     "chunk-824d23b596fb7ee11ca590c7",
+     "chunk-15641d6a59af6d328b210e81",
+     "chunk-f16db047c8ac29168019d5a8",
+     "chunk-2f5ba76b9d89c55863d2acfa",
+     "chunk-b657ed18a979443b61097afe",
      "chunk-95728533c01bb6067e4da24a",
-     "chunk-88fdfe6ea53367bfaaa69e60"
+     "chunk-62e346264b770de0114453f5"
     ],
     "event_ids": [
      "OPENALEX-W7214342592",
@@ -2181,7 +2220,7 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 3 条 / 文档引用 5 条"
+     "detail": "事件证据 3 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
@@ -2216,14 +2255,17 @@
    "auto_reason": "标准答案或证据不足，无法自动判定对错",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 3,
+    "citation_count": 5,
     "cited_document_keys": [
+     "paper:2501.13787",
      "paper:2609.28915"
     ],
     "cited_chunk_ids": [
      "chunk-a7fda3d62674c6d15a012d7a",
      "chunk-da50e9d9dd079a0a4d942c36",
-     "chunk-ffc266e4bbbc4c487c6c2957"
+     "chunk-ffc266e4bbbc4c487c6c2957",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df"
     ],
     "event_ids": [
      "CVE-2025-62593",
@@ -2238,7 +2280,7 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 5 条 / 文档引用 3 条"
+     "detail": "事件证据 5 条 / 文档引用 5 条"
     },
     {
      "rule": "R-QA-QUOTE",
@@ -2273,16 +2315,17 @@
    "auto_reason": "标准答案或证据不足，无法自动判定对错",
    "auto_confidence": "low",
    "auto_evidence": {
-    "citation_count": 5,
+    "citation_count": 6,
     "cited_document_keys": [
      "paper:2609.29757"
     ],
     "cited_chunk_ids": [
-     "chunk-791a99218eb26e365aa244e1",
-     "chunk-f79cb023919171692bfdb65c",
-     "chunk-e1488d4e077dbfd9cccc81db",
-     "chunk-ec7233a50b6ded0aa59e99c2",
-     "chunk-7e16e6ece9b5fa7bb906f527"
+     "chunk-df7e311eaa475d978286b5b5",
+     "chunk-7e16e6ece9b5fa7bb906f527",
+     "chunk-2e3b3fec713324c33c3b0880",
+     "chunk-f04f6a92012135f57321f790",
+     "chunk-1d263630fc98f67bc8257def",
+     "chunk-791a99218eb26e365aa244e1"
     ],
     "event_ids": [],
     "expected_document_keys": []
@@ -2291,12 +2334,12 @@
     {
      "rule": "R-QA-EVIDENCE",
      "result": "pass",
-     "detail": "事件证据 0 条 / 文档引用 5 条"
+     "detail": "事件证据 0 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2786 ≤ 上界 2827=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -2484,8 +2527,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 2913 ≤ 上界 2954=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -2636,8 +2679,8 @@
     },
     {
      "rule": "R-QA-QUOTE",
-     "result": "pass",
-     "detail": "答案由 3 条引言组成，与前 3 条引用逐字一致=True；长度 1973 ≤ 上界 2014=True；另有 2 条引用仅挂载未出现在答案正文"
+     "result": "unavailable",
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
@@ -2662,32 +2705,40 @@
    "question_id": "BQA-048",
    "category": "拒答及证据不足",
    "should_refuse": true,
-   "actual_refused": true,
-   "auto_judgment": "not_applicable",
-   "auto_reason": "系统拒答且应拒答，无需判定答案支持性",
-   "auto_confidence": "low",
+   "actual_refused": false,
+   "auto_judgment": "contradicted",
+   "auto_reason": "R-QA-REFUSAL: 应拒答=True 实际拒答=False",
+   "auto_confidence": "medium",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 4,
+    "cited_document_keys": [
+     "paper:2501.13787",
+     "paper:2609.30192"
+    ],
+    "cited_chunk_ids": [
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df",
+     "chunk-96678528eaa8245edbabe3c7",
+     "chunk-d6cfa21a91b8a957b9a214ea"
+    ],
     "event_ids": [],
     "expected_document_keys": []
    },
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 4 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "pass",
-     "detail": "应拒答=True 实际拒答=True"
+     "result": "fail",
+     "detail": "应拒答=True 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",
@@ -2707,32 +2758,45 @@
    "question_id": "BQA-049",
    "category": "拒答及证据不足",
    "should_refuse": true,
-   "actual_refused": true,
-   "auto_judgment": "not_applicable",
-   "auto_reason": "系统拒答且应拒答，无需判定答案支持性",
-   "auto_confidence": "low",
+   "actual_refused": false,
+   "auto_judgment": "contradicted",
+   "auto_reason": "R-QA-REFUSAL: 应拒答=True 实际拒答=False",
+   "auto_confidence": "medium",
    "auto_evidence": {
-    "citation_count": 0,
-    "cited_document_keys": [],
-    "cited_chunk_ids": [],
+    "citation_count": 6,
+    "cited_document_keys": [
+     "official:eu_ai_act",
+     "paper:2609.29230",
+     "paper:2609.29429",
+     "paper:2609.30217",
+     "source:nist_news"
+    ],
+    "cited_chunk_ids": [
+     "chunk-d0d1f08e5b3fd260dac246ae",
+     "chunk-022f2a439d595e688f906e91",
+     "chunk-d13b4d600755e9dec4d4774a",
+     "chunk-4e41be5dbb5c565966504b1e",
+     "chunk-f7bbefb749c256b5be855e69",
+     "chunk-293d7df7d2696b5b16fa8597"
+    ],
     "event_ids": [],
     "expected_document_keys": []
    },
    "auto_rules": [
     {
      "rule": "R-QA-EVIDENCE",
-     "result": "unavailable",
-     "detail": "既无事件证据也无文档引用（可能是正确拒答）"
+     "result": "pass",
+     "detail": "事件证据 0 条 / 文档引用 6 条"
     },
     {
      "rule": "R-QA-QUOTE",
      "result": "unavailable",
-     "detail": "没有文档引用，无法核验引用支持性"
+     "detail": "答案不是文档引用格式（可能来自事件路径），不适用"
     },
     {
      "rule": "R-QA-REFUSAL",
-     "result": "pass",
-     "detail": "应拒答=True 实际拒答=True"
+     "result": "fail",
+     "detail": "应拒答=True 实际拒答=False"
     },
     {
      "rule": "R-QA-CONSISTENCY",

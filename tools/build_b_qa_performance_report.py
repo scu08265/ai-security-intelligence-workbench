@@ -10,7 +10,7 @@
 用法::
 
     python tools/build_b_qa_performance_report.py \
-        --run A=artifacts/b_eval/formal_qa_results.json \
+        --run A=artifacts/b_eval/formal_qa_results_20261012.json \
         --run B=artifacts/b_eval/formal_qa_performance_run2.json \
         --out artifacts/b_eval/qa_performance_stats.json
 """

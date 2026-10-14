@@ -5,7 +5,7 @@
  "counts": {
   "questions": 50,
   "contested": 10,
-  "with_citations": 35,
+  "with_citations": 42,
   "refusal_recommended": 12
  },
  "cases": [
@@ -24,30 +24,9 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three second stage as supervision and employs the LoRA (Low- research questions: Rank Adaptive) method to efficiently fine-tune the parameters RQ1:How was our DistillGuard trained, and what were of the open-source Qwen3-8B model. Its RQ2:How effective is our tool DistillGuard in detection input is the complete concatenated source code of an NPM on the dataset? strategies are further proposed to boost detection titatively characterize NPM attack patterns and summarize robustness.",
+   "candidate_answer": "n feature completeness and vulnerable to obfuscated malicious knowledge with lightweight LoRA fine-tuning, DistillGuard code. Recently, LLMs have become prevalent for code secu- achieves accurate and offline malicious NPM package detec- rity analysis. The experimental results show that DistillGuard sub- iterative prompting and graph-assisted semantic matching to stantially outperforms existing state-of-the-art rule, machine mine malicious code behavior and context.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
-    {
-     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
-     "document_key": "paper:2609.28996",
-     "char_start": 23478,
-     "char_end": 24466,
-     "snippet": "While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer from insurmountable knowledge reasoning, and lightweight local deployment.\nlimita …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-c58221ed9828a62061aaeec7",
-     "document_key": "paper:2609.28996",
-     "char_start": 49027,
-     "char_end": 49374,
-     "snippet": "strategies are further proposed to boost detection titatively characterize NPM attack patterns and summarize\nrobustness. DONAPI [26] identifies obfuscated packages via typical malicious API attack chains. DistillGuard provides an\ncode depen …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
-     "document_key": "paper:2609.28996",
-     "char_start": 4192,
-     "char_end": 5175,
-     "snippet": ".\nmake it a primary target for software supply chain attacks. To overcome these limitations, we propose DistillGuard, a\nAttackers typically employ techniques such as domain name lightweight malicious NPM packet detection framework that\nhija …（已截断）"
-    },
     {
      "chunk_id": "chunk-3e02e30d18b6d9d534a09cad",
      "document_key": "paper:2609.28996",
@@ -56,11 +35,32 @@
      "snippet": "n\nfeature completeness and vulnerable to obfuscated malicious knowledge with lightweight LoRA fine-tuning, DistillGuard\ncode. Recently, LLMs have become prevalent for code secu- achieves accurate and offline malicious NPM package detec-\nrit …（已截断）"
     },
     {
-     "chunk_id": "chunk-60353af87ed264ff1ebf2e47",
+     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
      "document_key": "paper:2609.28996",
-     "char_start": 792,
-     "char_end": 1343,
-     "snippet": "package installation, import, and runtime. Traditional static devices, posing an urgent challenge to open source supply\nanalysis fails to understand code semantics; machine learning- chain security governance.\nbased methods rely on feature  …（已截断）"
+     "char_start": 23478,
+     "char_end": 24466,
+     "snippet": "While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer from insurmountable knowledge reasoning, and lightweight local deployment.\nlimita …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-611d2ee6fcbcd7740fc8e908",
+     "document_key": "paper:2609.28996",
+     "char_start": 9627,
+     "char_end": 10431,
+     "snippet": "ies.\ninstallation, importation, and runtime. B. Case Study\nThe installation phase initiates automatically when the ‘npm\ninstall’ command is executed. During this process, lifecycle Case Study #1:Figure 1 is a typical malicious NPM\nscripts—s …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-0ce253b1b064be3f7dafd9a6",
+     "document_key": "paper:2609.28996",
+     "char_start": 47311,
+     "char_end": 48309,
+     "snippet": "adata anomalies, represented by Overall, most existing detection tools are platform-specific and\nGUARDDOG and OSSGadget. Nevertheless, they rely heavily lack universal generalization across different registries.\non manual feature engineerin …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-4607af632c4a1e1728692fa0",
+     "document_key": "paper:2609.28996",
+     "char_start": 5419,
+     "char_end": 5498,
+     "snippet": "structure into structured regulatory labels. Finally, we employ\nan efficient Lo"
     }
    ],
    "matched_terms": [
@@ -69,7 +69,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -100,61 +100,54 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": ":Low-interactionhoneypots emulate a basic service skeleton,medium-interactionsystems provide partial functionality, and high-interactionhoneypots expose full system functionality.",
+   "candidate_answer": "Our work aims to address this gap by introducing a dedicated honeypot that explicitly mimics an LLM API. Deploying this honeypot enables an extended passive Internet measurement study of real-world attacks targeting LLM API endpoints. 3 Honeypot Architecture We introduce Ollure, a honeypot mimicking the Ollama API framework.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
     {
-     "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
+     "chunk_id": "chunk-e7c4f5f3c7751a3ffa30b7ce",
      "document_key": "paper:2609.29757",
-     "char_start": 5071,
-     "char_end": 5291,
-     "snippet": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full system functionality. [13]\n1 https://github.com/k-elzer/Ollure"
+     "char_start": 13667,
+     "char_end": 14122,
+     "snippet": "full range\nof specialized LLM API endpoints.\nOur work aims to address this gap by introducing a dedicated honeypot that\nexplicitly mimics an LLM API. Deploying this honeypot enables an extended\npassive Internet measurement study of real-wor …（已截断）"
     },
     {
-     "chunk_id": "chunk-2e3b3fec713324c33c3b0880",
+     "chunk_id": "chunk-1c80f502e72fb42699eeb0ab",
      "document_key": "paper:2609.29757",
-     "char_start": 28781,
-     "char_end": 28943,
-     "snippet": "62 requests specified the explicit string\nnonexistent, 44 referenced legitimate model names, and a single instance con-\ntained the string__gguf_header_overflow__."
+     "char_start": 11091,
+     "char_end": 12088,
+     "snippet": "OllamaDrama 5\n2.4 Related Work\nIn recent years, cyber deception has increasingly integrated LLMs to enhance\nhoneypot interactivity and scale automated defense techniques [3], rather than\nstudying LLM infrastructure itself as a target. Honey …（已截断）"
     },
     {
-     "chunk_id": "chunk-f04f6a92012135f57321f790",
+     "chunk_id": "chunk-b64f03dfbfeb5c0b6ef222a4",
      "document_key": "paper:2609.29757",
-     "char_start": 42847,
-     "char_end": 43037,
-     "snippet": "isrupting availability and driving up costs via\nImpact Context Overflow, Input resource exhaustion, token flooding, and\nToken Flooding, Infinite computational overload.\nGeneration Abuse, DoS"
+     "char_start": 11968,
+     "char_end": 12920,
+     "snippet": "perational window served to validate the\ndefensive pipeline rather than provide a broad passive measurement study. This\nleft detailed mapping of attacks unaddressed. In contrast, our work presents a\nhoneypot tailored specifically to the Oll …（已截断）"
     },
     {
-     "chunk_id": "chunk-1d263630fc98f67bc8257def",
+     "chunk_id": "chunk-416dcc9bbdc311768335eb76",
      "document_key": "paper:2609.29757",
-     "char_start": 60787,
-     "char_end": 60948,
-     "snippet": "24 K. Elzer et al..\nFig.7: Mean inter-request gap and overall duration boxplot of IP-instance com-\nbinations for the Digital Ocean (DO) and university locations."
+     "char_start": 4222,
+     "char_end": 5191,
+     "snippet": "ng threat actor interest and showing active exploitation attempts of exposed\nLLM endpoints.\n2 Background & Related Work\nThis section provides the technical background for this study by covering cyber\ndeception concepts, Large Language Model …（已截断）"
     },
     {
-     "chunk_id": "chunk-f1f210c2e843456a23f64f7e",
-     "document_key": "paper:2609.29757",
-     "char_start": 33942,
-     "char_end": 34139,
-     "snippet": "ming prompts engineered to align the model\ninto different AI assistant persona. Furthermore, the/api/chatdataset exhib-\nited a slightly higher concentration of toxic prompts. On the other hand, the"
-    },
-    {
-     "chunk_id": "chunk-df7e311eaa475d978286b5b5",
-     "document_key": "paper:2609.29757",
-     "char_start": 7811,
-     "char_end": 8025,
-     "snippet": "ng to encompass multi-step execution\nloops, external tool use, and complex privilege delegation. In this work, we focus\nspecifically on mapping attacks against AI infrastructure and models, excluding\ntraining-time."
+     "chunk_id": "chunk-a26721953fbdcee9bce4ff42",
+     "document_key": "paper:2501.13787",
+     "char_start": 89923,
+     "char_end": 90377,
+     "snippet": "n Recognition, 2024.\nof large language models,” ArXiv, vol. abs/2106.09685, [52]Y. Ge, S. Zhao, J. Zhu, Y. Ge, K. Yi, L. Song, C. Li,\n2021. X. Ding, and Y. Shan, “Seed-x: Multimodal models\n[37]X. Liu, K. Ji, Y. Fu, Z. Du, Z. Yang, and J. Ta …（已截断）"
     }
    ],
    "matched_terms": [
     "honeypot"
    ],
    "machine_suggested_label": {
-    "答案正确性": "partial",
-    "引用准确性": "partially_supported",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "预期文档或预期要点只有一项命中（机器核对）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -182,50 +175,43 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "FINANCIAL IFEVAL CTF Method Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral Capacity (bits per token) CODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511 HARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0.0665 0.1378 0.0072 0.0465 0.0571 ARS 0.0016 0.0142 0.0131 0.0044 0.0189 0.0204 0.0003 0.0064 0.0064 Gain ofCODETTA over HARQ LDPC 4.8× 6.4× 4.8× 4.7× 5.3× 4.1× 4.2× 6.1× 4.4× over ARS 87× 16× 34× 57× 19× 28× 94× 44× 39× Encoding throughput (tokens per second) CODETTA 244 204 155 212 350 152 72 85 56 HARQ LDPC, draft-free 306 249 203 331 472 205 84 90 63 ARS 248 207 172 258 340 172 84 91 63 Decoding throughput (tokens per second) CODETTA 1.0k 1.3k 0.7k 0.5k …（已截断）",
+   "candidate_answer": "In this paper, we make the systematic threat of undetectable agent collusion concrete by proposing CODETTA, a high-capacity steganographic protocol for independently deployed agents under realistic asymmetric settings.CODETTAcombines a shared public model for estimating the communication channel, a sampling mechanism that preserves the sender’s output distribution, and an adaptive error- correcting code for high-capacity communication. When autonomy goes rogue: Preparing for risks of multi-agent collusion in social systems.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
     {
-     "chunk_id": "chunk-40710bf2b8e507ad4f7c387b",
+     "chunk_id": "chunk-d7489ff3b07026aca9a7948d",
      "document_key": "paper:2609.28900",
-     "char_start": 105705,
-     "char_end": 106648,
-     "snippet": "FINANCIAL IFEVAL CTF\nMethod Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral\nCapacity (bits per token)\nCODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511\nHARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0. …（已截断）"
+     "char_start": 131804,
+     "char_end": 132240,
+     "snippet": "Jiahao Li, Cheng Yang, Weize\nChen, Yusheng Su, Xin Cong, et al. Chatdev: Communicative agents for software development.\nInProceedings of the 62nd annual meeting of the association for computational linguistics\n(volume 1: Long papers), pages …（已截断）"
     },
     {
-     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
+     "chunk_id": "chunk-292b9c3eb0203f0aa1f5ba2e",
      "document_key": "paper:2609.28900",
-     "char_start": 26606,
-     "char_end": 26792,
-     "snippet": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAon three agent workloads.\n7"
+     "char_start": 849,
+     "char_end": 1844,
+     "snippet": "capacity schemes typically assume a symmetric setting where the receiver can reproduce\nthe sender’s output distribution. The state-of-the-art practical protocol for asymmetric agents has very low\ncapacity. Additionally, most existing approa …（已截断）"
     },
     {
-     "chunk_id": "chunk-e45c6b3a852060d4b6ed1edd",
-     "document_key": "paper:2609.28900",
-     "char_start": 57625,
-     "char_end": 57844,
-     "snippet": "\nWe analyze undetectability, the substitution channel, and correctness and soundness ofAlgorithm 2, following\nSection 4. All three rest onLemma 1, the one-step lemma of the strawman, which applies unchanged. Part (i)\n16"
+     "chunk_id": "chunk-a26721953fbdcee9bce4ff42",
+     "document_key": "paper:2501.13787",
+     "char_start": 89923,
+     "char_end": 90909,
+     "snippet": "n Recognition, 2024.\nof large language models,” ArXiv, vol. abs/2106.09685, [52]Y. Ge, S. Zhao, J. Zhu, Y. Ge, K. Yi, L. Song, C. Li,\n2021. X. Ding, and Y. Shan, “Seed-x: Multimodal models\n[37]X. Liu, K. Ji, Y. Fu, Z. Du, Z. Yang, and J. Ta …（已截断）"
     },
     {
-     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+     "chunk_id": "chunk-94de2b4db54500c51e11b9b3",
      "document_key": "paper:2609.28900",
-     "char_start": 0,
-     "char_end": 969,
-     "snippet": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting}@cmu.edu\nAbstract\nMulti-agent systems built on large language models (LLMs) are …（已截断）"
+     "char_start": 132242,
+     "char_end": 133217,
+     "snippet": "[RU08] Tom Richardson and Rüdiger Urbanke.Modern Coding Theory. Cambridge University Press,\n2008.doi:10.1017/CBO9780511791338.\n[RXW+25] Qibing Ren, Sitao Xie, Longxuan Wei, Zhenfei Yin, Junchi Yan, Lizhuang Ma, and Jing Shao.\nWhen autonomy  …（已截断）"
     },
     {
-     "chunk_id": "chunk-ebe17bce2bf3c43a07bfae05",
-     "document_key": "paper:2609.28900",
-     "char_start": 80477,
-     "char_end": 80689,
-     "snippet": "hable from a uniform vector over Zq, so each of its coefficients can be handed to the carrier as a\nuniform q-ary symbol. The transport is also robust to small additive errors, because the receiver recovers the\n22"
-    },
-    {
-     "chunk_id": "chunk-ee4b3e79d54da71275cae71a",
-     "document_key": "paper:2609.28900",
-     "char_start": 51483,
-     "char_end": 51712,
-     "snippet": "tions” can be\nposed for any number of answers, so the alphabet may change from token to token. “Questions” can be asked\nfor as long as generation continues, so this construction becomes rateless. A wrong token introduces error\n14"
+     "chunk_id": "chunk-8fefaaeedccce5c69028d6df",
+     "document_key": "paper:2501.13787",
+     "char_start": 111794,
+     "char_end": 112229,
+     "snippet": "e-tuning of 100+\n“A survey of large language models,” arXiv preprint language models,” arXiv preprint arXiv:2403.13372,\narXiv:2303.18223, 2023. 2024.\n[153]L. Floridi and M. Chiriatti, “Gpt-3: Its nature, scope, [167]S.-Y. Liu, C.-Y. Wang, H …（已截断）"
     }
    ],
    "matched_terms": [
@@ -233,11 +219,11 @@
     "collusion"
    ],
    "machine_suggested_label": {
-    "答案正确性": "partial",
-    "引用准确性": "partially_supported",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "预期文档或预期要点只有一项命中（机器核对）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -265,54 +251,54 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "We also observe that SAGE is less sensitive to the KL coefficient than GRPO. While GRPO performance varies substantially acrossβKL, SAGE withβKL = 10−3 outperforms the strongest GRPO variants in this sweep. Left: SAGE scales consistently across Pass@K budgets.",
+   "candidate_answer": "5.1 Experimental Settings Models.We evaluate SAGE across multiple model backbones, including Qwen3.5 (2B, 9B, 35B) (Team, 2026), Qwen3.6-27B (Team, 2026), Qwen3-32B (Yang et al., 2025), DeepSeekMath- 6 ΨSAGE(τ)−sup τ∈G ΨSAGE(τ)≥∆ , thenPEBM(G)/P EBM(F)≤e −λ∆ πθold(G)/π θold(F). 5 Experiment We comprehensively evaluate SAGE across 12 diverse benchmarks, 7 backbone models and 3 competitive baselines.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
     {
-     "chunk_id": "chunk-772965adcd179139bcd06485",
+     "chunk_id": "chunk-03317ba315f16be669e3c769",
      "document_key": "paper:2609.30192",
-     "char_start": 65258,
-     "char_end": 66137,
-     "snippet": "g improves the quality\nof the sampled reasoning distribution rather than merely exploiting a narrow decoding regime. We\nalso observe that SAGE is less sensitive to the KL coefficient than GRPO. While GRPO performance\nvaries substantially ac …（已截断）"
+     "char_start": 22865,
+     "char_end": 23258,
+     "snippet": "soning as\na stress test for exploration and compounding biases. Section 5.4 is the ablation study of the two\ncomponents. We report implementation details and additional results in Appendix E.\n5.1 Experimental Settings\nModels.We evaluate SAG …（已截断）"
     },
     {
-     "chunk_id": "chunk-865c3fc82db601b61deb31de",
+     "chunk_id": "chunk-9a6ae6087bfe15b36556ced3",
      "document_key": "paper:2609.30192",
-     "char_start": 32637,
-     "char_end": 33010,
-     "snippet": "rection. Building on SCA,\nwe propose SAGE, a topology-guided post-training framework that implements these requirements\nthrough algebraic sparsification and hyperbolic structural guidance. Across 12 benchmarks and 7\nmodel backbones, SAGE co …（已截断）"
+     "char_start": 22041,
+     "char_end": 22985,
+     "snippet": "ΨSAGE(τ)−sup τ∈G ΨSAGE(τ)≥∆ ,\nthenPEBM(G)/P EBM(F)≤e −λ∆ πθold(G)/π θold(F). Thus, increasingλ exponentially suppresses\nlocally inadmissible mass relative to feasible mass.\n5 Experiment\nWe comprehensively evaluate SAGE across 12 diverse ben …（已截断）"
     },
     {
-     "chunk_id": "chunk-99f6facf8375a778cae6aea8",
+     "chunk_id": "chunk-4b72fc8fa621782e6f526842",
      "document_key": "paper:2609.30192",
-     "char_start": 30124,
-     "char_end": 31071,
-     "snippet": "w/oΨ P 39.12 17.68 38.85 21.18\nthe strongest end-to-end verified performance- SAGE w/ Euclidean 38.01 16.92 38.02 20.89\nconfirming that both signals are needed when SAGE w/ Shuffledg 37.99 17.01 37.83 19.91\nstructural validity and long-hori …（已截断）"
+     "char_start": 72777,
+     "char_end": 73768,
+     "snippet": "NeurIPS Paper Checklist\n1.Claims\nQuestion: Do the main claims made in the abstract and introduction accurately reflect the\npaper’s contributions and scope?\nAnswer:[Yes]\nJustification: The abstract and introduction state the main theoretical …（已截断）"
     },
     {
-     "chunk_id": "chunk-dd1e7b4c423f2efb51430a33",
+     "chunk_id": "chunk-f6292119dac456a957c56f50",
      "document_key": "paper:2609.30192",
-     "char_start": 21167,
-     "char_end": 22161,
-     "snippet": "R term(τ i) +η· 1Ti t=1 ΨSAGE(s it,ait), with group-relative\nadvantageAi = (eR(τ i)−mean j eR(τ j))/(std j eR(τ j) +ε) . This makes the sparse terminal signal\nusable in low-resource regimes by supplementing it with dense structural feedback …（已截断）"
+     "char_start": 91088,
+     "char_end": 92081,
+     "snippet": "com/datasets\nhas curated licenses for some datasets. Their licensing guide can help determine the\nlicense of a dataset.\n• For existing datasets that are re-packaged, both the original license and the license of\nthe derived asset (if it has  …（已截断）"
     },
     {
-     "chunk_id": "chunk-8500d9c105c4b1356d5b2c17",
+     "chunk_id": "chunk-231d76a16bf6e347697d42bc",
      "document_key": "paper:2609.30192",
-     "char_start": 20289,
-     "char_end": 20923,
-     "snippet": "tdj(η ¯ΨSAGE(τ j)) +ϵ \u0001 remains nonzero, providing\nan update signal even under uninformative terminal rewards.\n4.2 SAGE\nThe two potentials combine into the SAGE mechanism: ΨSAGE(s t,at) =αΨ P(s t,at) +\nγΨ H(s t,at), withα,γ≥0controlling rel …（已截断）"
+     "char_start": 92829,
+     "char_end": 93335,
+     "snippet": "ion.\nGuidelines:\n• The answer[N/A]means that the paper does not involve crowdsourcing nor research\nwith human subjects.\n• Including this information in the supplemental material is fine, but if the main contribu-\ntion of the paper involves  …（已截断）"
     }
    ],
    "matched_terms": [
     "sage"
    ],
    "machine_suggested_label": {
-    "答案正确性": "partial",
-    "引用准确性": "partially_supported",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "预期文档或预期要点只有一项命中（机器核对）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -340,59 +326,42 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "EAGER: Enhancing Generative Event Extraction via Reinforcement Learning with Verifiable Rewards Omar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2 1German Research Center for Artificial Intelligence (DFKI), Germany 2Carl von Ossietzky Universität Oldenburg, Germany {omar.adjali, siting.liang, omair_shahzad.bhatti, daniel.sonntag}@dfki.de Abstract End-to-end event extraction remains challeng- ing for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained …（已截断）",
-   "candidate_answer_type": "extractive_with_terms",
+   "candidate_answer": "Zhai, Jihan Yang, Sheng-\nAdditionally, we primarily assessed error cat- bang Tong, Saining Xie, Dale Schuurmans, Quoc V\negories that captures surface-level extraction Le, Sergey Levine, and Yi Ma. 2025. Sft mem-\nanomaly  …（已截断） 6 +5.15\nTable 2: Mean F1 results for end-to-end event extraction on the test split of the seven benchmark datasets.Avg.\ndenotes the average F1 performance across datasets and EE subtasks. Best results are shown in bold.  …（已截断）",
+   "candidate_answer_type": "extractive_fallback",
    "evidence": [
     {
-     "chunk_id": "chunk-72ead54d06cf2c62969163b6",
+     "chunk_id": "chunk-02feaa66f1ec1de5d612aabb",
      "document_key": "paper:2609.29230",
-     "char_start": 0,
-     "char_end": 942,
-     "snippet": "EAGER: Enhancing Generative Event Extraction via Reinforcement\nLearning with Verifiable Rewards\nOmar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2\n1German Research Center for Artificial Intelligence (DFKI), Germany\n2Car …（已截断）"
+     "char_start": 34345,
+     "char_end": 35341,
+     "snippet": "Zhai, Jihan Yang, Sheng-\nAdditionally, we primarily assessed error cat- bang Tong, Saining Xie, Dale Schuurmans, Quoc V\negories that captures surface-level extraction Le, Sergey Levine, and Yi Ma. 2025. Sft mem-\nanomaly and does not fully m …（已截断）"
     },
     {
-     "chunk_id": "chunk-8e8a07516863b486bd58920e",
+     "chunk_id": "chunk-2159d09ae638094b2ef02ca6",
      "document_key": "paper:2609.29230",
-     "char_start": 62921,
-     "char_end": 63321,
-     "snippet": "chmark centered on\nConsistent with findings reported in prior DAPO security incident reports, featuring highly special-\nwork (Yu et al.,2026), we observe that the final re- ized event schemas and technical vocabulary.\nward on the training s …（已截断）"
+     "char_start": 22467,
+     "char_end": 23444,
+     "snippet": "6 +5.15\nTable 2: Mean F1 results for end-to-end event extraction on the test split of the seven benchmark datasets.Avg.\ndenotes the average F1 performance across datasets and EE subtasks. Best results are shown in bold. Green values\nindicat …（已截断）"
     },
     {
-     "chunk_id": "chunk-4fef66f74b75d70611829266",
-     "document_key": "paper:2609.29230",
-     "char_start": 28905,
-     "char_end": 29430,
-     "snippet": "tion tasks, informative re-\nEAGERreduces average F1 from 30.79 to 22.61 ward modeling must be coupled with optimization\nand GoLLIE-7B from 16.35 to 5.81 which is con- strategies that preserve reward diversity.\nsistent with the hypothesis th …（已截断）"
+     "chunk_id": "chunk-a26721953fbdcee9bce4ff42",
+     "document_key": "paper:2501.13787",
+     "char_start": 89923,
+     "char_end": 90909,
+     "snippet": "n Recognition, 2024.\nof large language models,” ArXiv, vol. abs/2106.09685, [52]Y. Ge, S. Zhao, J. Zhu, Y. Ge, K. Yi, L. Song, C. Li,\n2021. X. Ding, and Y. Shan, “Seed-x: Multimodal models\n[37]X. Liu, K. Ji, Y. Fu, Z. Du, Z. Yang, and J. Ta …（已截断）"
     },
     {
-     "chunk_id": "chunk-88fdfe6ea53367bfaaa69e60",
+     "chunk_id": "chunk-683fcc4bca0226f943bba4af",
      "document_key": "paper:2609.29230",
-     "char_start": 70357,
-     "char_end": 70766,
-     "snippet": ".HewastransferredtherefromaBostonhospitalwhere\nhehadbeenreceivingtreatmentforinjuriessustainedduringhiscapturelastweek.\nFederalMedicalCenterDevens,Ayer,MassachusettsAspokesmandidnotgivedetailsabout\ntheconditionofthe19-year-old,whoofficialss …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-0e890ae5a0de528274b4f0df",
-     "document_key": "paper:2609.29230",
-     "char_start": 89882,
-     "char_end": 90148,
-     "snippet": "Site:List#Thespecificlocationontheproteinwherethedephosphorylationoccurs.\nExamplesare'Mcl-1','serine157','tyrosine123'.\n6 Theme:List#Theproteinthatundergoesdephosphorylation.Examplesare'Mcl-1','ERK\nkinase','histoneH3'.\nFigure 19:MLEEevent s …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-043bc308f0cf8c7d79bf4b3c",
-     "document_key": "paper:2609.29230",
-     "char_start": 86903,
-     "char_end": 87361,
-     "snippet": "Importance:Thementionargumentiscrucialin\nidentifyingthetypeofproteindegradationevent,whichisessentialinunderstandingthe\ncellularprocess.\n5 Theme:List#Examplesare'IkappaBalpha','A3G','p105',andotherproteinnames.Therole\noftheThemeargumentisto …（已截断）"
+     "char_start": 26349,
+     "char_end": 27252,
+     "snippet": "1.02\nGenia13 +R span 44.60 39.23 20.41 18.29 12.07 11.02 Sainz et al.,2024).\n+R ovr 40.80 36.55 17.99 16.25 11.10 10.16\n+R grd 41.90 37.10 18.41 16.60 10.88 9.98\n+R cov 44.13 39.44 20.44 18.59 11.82 10.90 5.2 Ablation Study\nAll 46.55 34.74  …（已截断）"
     }
    ],
-   "matched_terms": [
-    "eager",
-    "verifiable rewards"
-   ],
+   "matched_terms": [],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -423,15 +392,15 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "Overall, NeRD demon- strates higher intervention-efficient refinement by enabling larger diagnostic im- provements with substantially fewer concept edits. 4 Conclusion We propose NeRD, a neuro-symbolic framework that bridges rule-based concept interpretability with MCoT reasoning for medical image diagnosis. By select- ing concepts based on diagnostic necessity, NeRD distills induced logical rules",
+   "candidate_answer": "NeRD 3 Fig.2: Framework of our method. Step 2: Execute Neuro-Symbolic Rule Distillation (NeRD) to select, simplify, and ground rules. NeRD, a novel framework that bridges rule-based concept interpretability with MCoT reasoning for medical image diagnosis.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
     {
-     "chunk_id": "chunk-675668ff34c9d9eeb7b36b4a",
+     "chunk_id": "chunk-5c71aaa24bd8d7056ac0313a",
      "document_key": "paper:2606.15617",
-     "char_start": 19528,
-     "char_end": 19944,
-     "snippet": "tervened cases. Overall, NeRD demon-\nstrates higher intervention-efficient refinement by enabling larger diagnostic im-\nprovements with substantially fewer concept edits.\n4 Conclusion\nWe propose NeRD, a neuro-symbolic framework that bridges …（已截断）"
+     "char_start": 5197,
+     "char_end": 6130,
+     "snippet": "NeRD 3\nFig.2: Framework of our method. Step 1: Induce a diagnostic rule set from\nconcepts. Step 2: Execute Neuro-Symbolic Rule Distillation (NeRD) to select,\nsimplify, and ground rules. Step 3: Organize the reasoning chains into MCoT.\nNeRD, …（已截断）"
     },
     {
      "chunk_id": "chunk-6ece9563486747c798438a8e",
@@ -441,32 +410,25 @@
      "snippet": "r all items to obtain a mean score per method.\nMain Results.Fig. 3(b) summarizes the results of the human expert study.\nNeRD attains the highest mean score on both datasets (Derm7pt: 1.17; F17k:\n0.94), surpassing WISE (0.83; 0.25) and All-C …（已截断）"
     },
     {
-     "chunk_id": "chunk-5c71aaa24bd8d7056ac0313a",
+     "chunk_id": "chunk-7b3ba17746f32905b1b37285",
      "document_key": "paper:2606.15617",
-     "char_start": 5197,
-     "char_end": 6130,
-     "snippet": "NeRD 3\nFig.2: Framework of our method. Step 1: Induce a diagnostic rule set from\nconcepts. Step 2: Execute Neuro-Symbolic Rule Distillation (NeRD) to select,\nsimplify, and ground rules. Step 3: Organize the reasoning chains into MCoT.\nNeRD, …（已截断）"
+     "char_start": 816,
+     "char_end": 1781,
+     "snippet": "xisting concept-driven interpretable methods have\nkey limitations: Concept Bottleneck Models (CBMs) require scoring all\npredefined concepts at inference time and for manual intervention, im-\nposing a substantial burden on clinicians, while  …（已截断）"
     },
     {
-     "chunk_id": "chunk-4be51f4b81e36bbffa7fb8de",
+     "chunk_id": "chunk-560523d6a5ad1e6a8faf82d5",
      "document_key": "paper:2606.15617",
-     "char_start": 15048,
-     "char_end": 15995,
-     "snippet": "NeRD 7\nFig.4: NeRD generated MCoTs.\nTable 2: Average concept count. Pos Table 3: Intervention results on Derm7pt.\n/ Neg: present / absent per case N: intervened samples; Concepts: average\n(CBM); supportive / refutational corrected concepts  …（已截断）"
+     "char_start": 19946,
+     "char_end": 20886,
+     "snippet": "NeRD 9\ninto compact, criterion-aligned reasoning chains. Experiments on two skin im-\nage datasets demonstrate strong diagnostic performance and concept fidelity.\nBlinded expert evaluation further confirms the clinical plausibility of NeRD r …（已截断）"
     },
     {
-     "chunk_id": "chunk-a7874d53d8db6974b188f298",
+     "chunk_id": "chunk-ff13260e5bc0da5782f08a65",
      "document_key": "paper:2606.15617",
-     "char_start": 14779,
-     "char_end": 15046,
-     "snippet": "s for reaching correct conclusions without image access.\n3.3 Experiment 2: Fine-Tuned MLLMs for Interpretable Diagnosis\nBaselines and Implementation Details.We compare NeRD against three\ncategories of baselines: (1) Black-box models. An Inc …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-522eb9d8deff2a4d6e345452",
-     "document_key": "paper:2606.15617",
-     "char_start": 16739,
-     "char_end": 17003,
-     "snippet": " fixed schema, we use GPT-5 Mini [14] to parse the\npredicted concepts and diagnosis from free-form text for evaluation.\nMain Results.Table 1 reports diagnostic performance and concept prediction\naccuracy on Derm7pt and F17k datasets. Among  …（已截断）"
+     "char_start": 13127,
+     "char_end": 13169,
+     "snippet": "ator we randomly sample 8 training cases,\n"
     }
    ],
    "matched_terms": [
@@ -475,7 +437,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -551,7 +513,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -619,16 +581,9 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "In real-world applications, fine- Awesome-Parameter-Efficient-Fine-Tuning-for-Foundation-Models. Index Terms—Parameter-Efficient Fine-Tuning, Foundation Parameter-Efficient Fine-Tuning (PEFT) technology [32,33, Model, Large Language Model, Visual Foundation Model, Multi- 34, 35], a highly active topic, demonstrates notable cost- Modal Foundation Model effectiveness during the fine-tuning process, as depicted in Fig.1and Fig.2(right). Du, “Parameter-efficient fine-tuning for diffusion models,” 2021.",
+   "candidate_answer": "Du, “Parameter-efficient fine-tuning for diffusion models,” 2021. Zhang, “Parameter-efficient fine-tuning for large [49]M. Pan, “An empirical study on parameter-efficient context,” arXiv preprint arXiv:2403.05530, 2024.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
-    {
-     "chunk_id": "chunk-a6aaa41c451888d03395cd44",
-     "document_key": "paper:2501.13787",
-     "char_start": 1685,
-     "char_end": 2651,
-     "snippet": "ctions for improving PEFTs in the future. This survey E [28], Sora [29], and Veo2 1 specialize in generative tasks, and\nprovides a valuable resource for both newcomers and experts\nseeking to understand and use the power of PEFT across FMs.  …（已截断）"
-    },
     {
      "chunk_id": "chunk-1c81026ab5a957ec178913c4",
      "document_key": "paper:2501.13787",
@@ -637,25 +592,25 @@
      "snippet": "[32]Y. Xin, S. Luo, H. Zhou, J. Du, X. Liu, Y. Fan, B. Ommer, “High-resolution image synthesis with latent\nQ. Li, and Y. Du, “Parameter-efficient fine-tuning for diffusion models,” 2021.\npre-trained vision models: A survey,” arXiv preprint  …（已截断）"
     },
     {
-     "chunk_id": "chunk-af92a77db28f15236d9501e0",
+     "chunk_id": "chunk-a785e777ad83e7d8cb364c69",
      "document_key": "paper:2501.13787",
-     "char_start": 74832,
-     "char_end": 75380,
-     "snippet": "ideo dif- samples) and parameter-efficient (fewer than 40M parameters)\nfusion, like T-LoRA [113] from Customize-A-Video. Adapter- fine-tuning strategy to facilitate visual and multimodal gener-\nrelated techniques [87,88,255] prefer to intro …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-8e22077c669275cfa3e1fd10",
-     "document_key": "paper:2501.13787",
-     "char_start": 0,
-     "char_end": 970,
-     "snippet": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 1\nParameter-Efficient Fine-Tuning for\nFoundation Models\nDan Zhang∗, Tao Feng∗, Lilong Xue∗, Yuandong Wang, Yuxiao Dong, Jie Tang\nThe Knowledge Engineering Group (KEG), Tsinghua Un …（已截断）"
+     "char_start": 89049,
+     "char_end": 90043,
+     "snippet": "ons of tokens of\nJ. Z. Pan, “An empirical study on parameter-efficient context,” arXiv preprint arXiv:2403.05530, 2024.\nfine-tuning for multimodal large language models,” [50]Z. Tang, Z. Yang, C. Zhu, M. Zeng, and M. Bansal,\narXiv preprint  …（已截断）"
     },
     {
      "chunk_id": "chunk-0b6a9c456122108958f74640",
      "document_key": "paper:2501.13787",
      "char_start": 99552,
-     "char_end": 99941,
+     "char_end": 100541,
      "snippet": "nnual Meeting of the\nH. Li, and Y. Qiao, “Clip-adapter: Better vision- Association for Computational Linguistics, 2021.\nlanguage models with feature adapters,” International [107]L. Zhang, L. Zhang, S. Shi, X. Chu, and B. Li,\nJournal of Com …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-814a5762a84023da0855c97b",
+     "document_key": "paper:2501.13787",
+     "char_start": 114383,
+     "char_end": 115308,
+     "snippet": " low-rank adaptation,” arXiv preprint efficient fine-tuning via salient channels,” International\narXiv:2406.11909, 2024. Journal of Computer Vision, 2024.\n[160]H. Wang, T. Sun, K. Ji, J. Wang, C. Fan, and J. Gu, [174]Y.-C. Liu, C.-Y. Ma, J. …（已截断）"
     }
    ],
    "matched_terms": [
@@ -695,16 +650,9 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "JevOut: Natural Context Can Flip Decision Models Figure 5: Frozen context additions redirect other models. JevOut: Natural Context Can Flip Decision Models Zixiang Xu1 1University of Southern California Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger actions. JevOut: Natural Context Can Flip Decision Models M.",
+   "candidate_answer": "JevOut: Natural Context Can Flip Decision Models Zixiang Xu1 1University of Southern California Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger actions. JevOut: Natural Context Can Flip Decision Models M. JevOut: Natural Context Can Flip Decision Models Pouya Pezeshkpour and Estevam Hruschka.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
-    {
-     "chunk_id": "chunk-b1c2dbf1124d49e8c1e960f2",
-     "document_key": "paper:2609.30243",
-     "char_start": 28266,
-     "char_end": 29199,
-     "snippet": "JevOut: Natural Context Can Flip Decision Models\nFigure 5: Frozen context additions redirect other models. Rowsspecifythesourceofoptimization;columns\nspecifythedestination. Eachoff-diagonalcellgivestargetedtransferrate(%)anditsmatchedinitia …（已截断）"
-    },
     {
      "chunk_id": "chunk-1e1b1f7a4deebb53d0b33fc8",
      "document_key": "paper:2609.30243",
@@ -713,18 +661,11 @@
      "snippet": "JevOut: Natural Context Can Flip Decision Models\nZixiang Xu1\n1University of Southern California\nDedicated decision models such as Jev map unstructured language to probability distributions over finite\nchoices, allowing their outputs to dire …（已截断）"
     },
     {
-     "chunk_id": "chunk-b1620540c0899bd702ed5cda",
+     "chunk_id": "chunk-97612802b3c8a4294d9575f3",
      "document_key": "paper:2609.30243",
-     "char_start": 20085,
-     "char_end": 20304,
-     "snippet": "decisionswithin64acceptedtarget\nevaluations(Table 1). Theresulting61.4%TFR(95%Wilsoninterval: 57.1%–65.5%)contrastswith\n16.9% for one target-aware addition and 2.2% for one neutral addition. Target awareness therefore\n6"
-    },
-    {
-     "chunk_id": "chunk-e49b86c958642fd07f990a89",
-     "document_key": "paper:2609.30243",
-     "char_start": 82087,
-     "char_end": 82291,
-     "snippet": "eaches 0.7. Thus label-only names the allocation feedback, not a restriction to label access through-\nout the evaluator. Full feedback has 86 successes, compared with 89 for probability-only and 79 for\n24"
+     "char_start": 32501,
+     "char_end": 33401,
+     "snippet": "e Association for Computational Linguistics, pages 15959–15983, 2024. URL https:\n//aclanthology.org/2024.acl-long.847/.\nOdysseas S. Chlapanis, Dimitrios Galanis, and Ion Androutsopoulos. LAR-ECHR: A new legal argument reasoning task\nand dat …（已截断）"
     },
     {
      "chunk_id": "chunk-1934b1e31fc0d9c70d011fdb",
@@ -734,11 +675,18 @@
      "snippet": "JevOut: Natural Context Can Flip Decision Models\nM. Scope and Generalization\nThe current study targets systems that expose a finite, typed distribution and conditions analysis\non decisions that begin correct. TFR measures how often a bounde …（已截断）"
     },
     {
-     "chunk_id": "chunk-027c0961ee9fe6d31d788bb2",
+     "chunk_id": "chunk-1ffc5fffcebd7981342ef157",
      "document_key": "paper:2609.30243",
-     "char_start": 3363,
-     "char_end": 3764,
-     "snippet": "d sentence introduces\na related intergenerational consideration, but it does not change the definition being asked for.\nPriorworkhasestablishedthatlanguagemodelsaresensitivetoseeminglyminorchangesinhow\naninputispresented, includingpromptfor …（已截断）"
+     "char_start": 35390,
+     "char_end": 36386,
+     "snippet": "JevOut: Natural Context Can Flip Decision Models\nPouya Pezeshkpour and Estevam Hruschka. Large language models sensitivity to the order of options in multiple-choice\nquestions. In Findings of the Association for Computational Linguistics: N …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-3fdc886795d1ba8148959255",
+     "document_key": "paper:2609.30243",
+     "char_start": 10039,
+     "char_end": 10086,
+     "snippet": "JevOut: Natural Context Can Flip Decision Model"
     }
    ],
    "matched_terms": [
@@ -746,7 +694,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -788,6 +736,13 @@
      "snippet": "While prompt injection and jailbreaking are related concepts in LLM security, they are often used interchangeably. Prompt injection involves manipulating model responses through specific inputs to alter its behavior, which can include bypas …（已截断）"
     },
     {
+     "chunk_id": "chunk-0d170d53396ba2d8ccadecbe",
+     "document_key": "paper:2609.28915",
+     "char_start": 163418,
+     "char_end": 164367,
+     "snippet": "C≈0.57) because its default rules are calibrated for server workloads\nand trigger on the Claude CLI’s baseline behavior. Neither substitutes for a trained detector on this\nworkload.\nL.1 PRE-DEPLOYMENTMCPSCANNER(CISCO MCP-SCANNER)\nL.1.1 SETU …（已截断）"
+    },
+    {
      "chunk_id": "chunk-e8cc2b6834a2c530e2fcad10",
      "document_key": "source:owasp_genai",
      "char_start": 3363,
@@ -802,25 +757,18 @@
      "snippet": "The severity and nature of the impact of a successful prompt injection attack can vary greatly and are largely dependent on both the business context the model operates in, and the agency with which the model is architected. Generally, howe …（已截断）"
     },
     {
+     "chunk_id": "chunk-e034e370e78e5da118c53abc",
+     "document_key": "paper:2609.29429",
+     "char_start": 148531,
+     "char_end": 149527,
+     "snippet": "nerate.Evidence: the measurement that exposes the defect.\nFN/FP: Jev false negatives/positives against the scorer label. Audit protocol and counts: Appendix F.\nBenchmark Label defect Effect Evidence\n(failure)\nOpen-Prompt- Positive only if t …（已截断）"
+    },
+    {
      "chunk_id": "chunk-7061149ba14708176205f246",
      "document_key": "source:owasp_genai",
      "char_start": 307,
      "char_end": 814,
      "snippet": "Prompt Injection vulnerabilities exist in how models process prompts, and how input may force the model to incorrectly pass prompt data to other parts of the model, potentially causing them to violate guidelines, generate harmful content, e …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-71ae55e2e6545c119a797617",
-     "document_key": "source:owasp_genai",
-     "char_start": 7371,
-     "char_end": 7503,
-     "snippet": "Not what you’ve signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection Cornell University"
-    },
-    {
-     "chunk_id": "chunk-b9d2b917a3e216d060bdd256",
-     "document_key": "source:owasp_genai",
-     "char_start": 8671,
-     "char_end": 8799,
-     "snippet": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways. These inputs..."
     }
    ],
    "matched_terms": [
@@ -828,7 +776,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -903,7 +851,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1060,7 +1008,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1135,7 +1083,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1166,9 +1114,16 @@
     "confidence": "high",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "systems that can continuously learn new tasks while retaining In conclusion, the integration of PEFT with FMs showcases\nmemory and performance on learned tasks. The combination a promising avenue for efficient model adap …（已截断） for\nPEFT. Therefore, this survey aims to provide a comprehensive\noverview of PEFT techniques applied to diverse FMs and\naddress critical gaps in understanding the techniques, trends,\nand applications. We start by providi …（已截断）",
-   "candidate_answer_type": "extractive_fallback",
+   "candidate_answer": "9, SEPTEMBER 2020 1 Parameter-Efficient Fine-Tuning for Foundation Models Dan Zhang∗, Tao Feng∗, Lilong Xue∗, Yuandong Wang, Yuxiao Dong, Jie Tang The Knowledge Engineering Group (KEG), Tsinghua University zd21@mails.tsinghua.edu.cn https://Awesome-PEFT-for-Foundation-Models.github.io Abstract—This survey delves into the realm of Parameter- Efficient Fine-Tuning (PEFT) within the context of Foundation Models (FMs).",
+   "candidate_answer_type": "extractive_with_terms",
    "evidence": [
+    {
+     "chunk_id": "chunk-ae717b77f38375b526b5ba5f",
+     "document_key": "paper:2501.13787",
+     "char_start": 70650,
+     "char_end": 71630,
+     "snippet": "g in\nmask) into prompts embedding as inputs to segment anything. diffusion model; B. LoRA tuning in diffusion model; C.\nPIN [215] presents a visual prompt method that an input- Reward tuning in diffusion model.\nagnostic positional insert to …（已截断）"
+    },
     {
      "chunk_id": "chunk-e78516a997d4da76b6632007",
      "document_key": "paper:2501.13787",
@@ -1177,41 +1132,29 @@
      "snippet": "systems that can continuously learn new tasks while retaining In conclusion, the integration of PEFT with FMs showcases\nmemory and performance on learned tasks. The combination a promising avenue for efficient model adaptation across vari-\n …（已截断）"
     },
     {
-     "chunk_id": "chunk-f5ae901ee6258438880b216e",
+     "chunk_id": "chunk-cc04d0eb85d3eba34d8233c3",
      "document_key": "paper:2501.13787",
-     "char_start": 850,
-     "char_end": 1805,
-     "snippet": "for\nPEFT. Therefore, this survey aims to provide a comprehensive\noverview of PEFT techniques applied to diverse FMs and\naddress critical gaps in understanding the techniques, trends,\nand applications. We start by providing a detailed develo …（已截断）"
+     "char_start": 7419,
+     "char_end": 8378,
+     "snippet": "ation models (VGMs) are gaining traction as secondary SectionVfor VFMs, and SectionVIfor MFMs). Finally,\nareas of focus. we provide observations on current research trends and po-\nTrend iii: In contrast, multimodal foundation models tential …（已截断）"
     },
     {
-     "chunk_id": "chunk-0d912b6e54b1e8560e120f71",
+     "chunk_id": "chunk-8e22077c669275cfa3e1fd10",
      "document_key": "paper:2501.13787",
-     "char_start": 81216,
-     "char_end": 81890,
-     "snippet": "vantages of specific architectures for PEFT and explore how bridPEFT, and across different model structures (e.g., LLM,\nto design more effective PEFT schemes for particular archi- VFM, VLM, MFM, and VGM), this survey offers insights into\nte …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-149345792c2f8071dac76ee5",
-     "document_key": "paper:2501.13787",
-     "char_start": 77892,
-     "char_end": 78889,
-     "snippet": "\nlike Hugging Face’s PEFT and AdapterHub, there remains a to build from simple to complex representations. This layered\nnotable lack of comprehensive benchmarks for PEFT. Differ- design not only improves model flexibility but also allows fo …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-f5c8e3e5a1bd2f37e723c148",
-     "document_key": "paper:2501.13787",
-     "char_start": 75382,
-     "char_end": 75653,
-     "snippet": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 15\nVII. DISCUSSION AND FUTURE DIRECTIONS Scaling Laws of PEFT. Current efforts reveal diminishing\nA. Observation of Current Trend returns beyond a certain threshold of trainable p …（已截断）"
+     "char_start": 0,
+     "char_end": 970,
+     "snippet": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 1\nParameter-Efficient Fine-Tuning for\nFoundation Models\nDan Zhang∗, Tao Feng∗, Lilong Xue∗, Yuandong Wang, Yuxiao Dong, Jie Tang\nThe Knowledge Engineering Group (KEG), Tsinghua Un …（已截断）"
     }
    ],
-   "matched_terms": [],
+   "matched_terms": [
+    "parameter-efficient"
+   ],
    "machine_suggested_label": {
-    "答案正确性": "partial",
-    "引用准确性": "partially_supported",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "预期文档或预期要点只有一项命中（机器核对）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -1290,7 +1233,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1440,7 +1383,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1519,11 +1462,11 @@
    ],
    "matched_terms": [],
    "machine_suggested_label": {
-    "答案正确性": "partial",
-    "引用准确性": "partially_supported",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "预期文档或预期要点只有一项命中（机器核对）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -1602,7 +1545,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1759,7 +1702,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -1857,24 +1800,69 @@
    "expected_action": "应回答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low",
-    "reason": "标准答案或证据不足，无法自动判定对错"
+    "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）",
-   "candidate_answer_type": "no_evidence",
-   "evidence": [],
-   "matched_terms": [],
+   "candidate_answer": "DistillGuard provides an code dependency reconstruction, while MALGUARD [27] effective, lightweight, data secure detection solution and offers This paper uses a high-quality dataset extracted in the To evaluate DistillGuard, we investigate the following three second stage as supervision and employs the LoRA (Low- research questions: Rank Adaptive) method to efficiently fine-tune the parameters RQ1:How was our DistillGuard trained, and what were of the open-source Qwen3-8B model. Its RQ2:How effective is our tool DistillGuard in detection input is the complete concatenated source code of an NPM on the dataset?",
+   "candidate_answer_type": "extractive_with_terms",
+   "evidence": [
+    {
+     "chunk_id": "chunk-c58221ed9828a62061aaeec7",
+     "document_key": "paper:2609.28996",
+     "char_start": 49027,
+     "char_end": 49374,
+     "snippet": "strategies are further proposed to boost detection titatively characterize NPM attack patterns and summarize\nrobustness. DONAPI [26] identifies obfuscated packages via typical malicious API attack chains. DistillGuard provides an\ncode depen …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-1b8a5b3bb855e6ee7df0a863",
+     "document_key": "paper:2609.28996",
+     "char_start": 19056,
+     "char_end": 19332,
+     "snippet": "igh-risk configuration characteristics as key evidence. that is difficult to detect using rule-based detection methods,\n2) Dependency Import Parser:This component, based on\nAbstract Syntax Tree (AST) parsing technology, traverses 1https://w …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-1e26fb499bb6dbae04a358d4",
+     "document_key": "paper:2609.28996",
+     "char_start": 23478,
+     "char_end": 24466,
+     "snippet": "While online pedestal models possess superior secure in- static graph structure feature extraction, high-level security\nference capabilities, they also suffer from insurmountable knowledge reasoning, and lightweight local deployment.\nlimita …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-fef1ae1764a6dee6f3705bd6",
+     "document_key": "paper:2609.28996",
+     "char_start": 4192,
+     "char_end": 5175,
+     "snippet": ".\nmake it a primary target for software supply chain attacks. To overcome these limitations, we propose DistillGuard, a\nAttackers typically employ techniques such as domain name lightweight malicious NPM packet detection framework that\nhija …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-0ce253b1b064be3f7dafd9a6",
+     "document_key": "paper:2609.28996",
+     "char_start": 47311,
+     "char_end": 48309,
+     "snippet": "adata anomalies, represented by Overall, most existing detection tools are platform-specific and\nGUARDDOG and OSSGadget. Nevertheless, they rely heavily lack universal generalization across different registries.\non manual feature engineerin …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-dac56e9551cdb17c11d3dd1d",
+     "document_key": "paper:2609.28996",
+     "char_start": 15771,
+     "char_end": 15971,
+     "snippet": "Fig. 3.The overall architecture of the DistillGuard detection framework first extracts multidimensional features, including static graphs. Then, it\nuses knowledge distillation based on online teacher "
+    }
+   ],
+   "matched_terms": [
+    "distillguard"
+   ],
    "machine_suggested_label": {
-    "答案正确性": "incorrect",
-    "引用准确性": "not_applicable",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "本地语料存在预期文档，但系统未返回任何引用（疑似检索/上下文问题）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -1885,7 +1873,7 @@
      "consequence": "该题单列，不计入分子分母，需在备注写明缺什么证据"
     }
    ],
-   "minimal_human_judgment": "系统答案是否满足题目要求（无引用，需要看事件路径证据）？"
+   "minimal_human_judgment": "系统答案是否覆盖候选标准答案的要点，是否完整（correct/partial/incorrect）？"
   },
   {
    "question_id": "BQA-026",
@@ -1894,24 +1882,69 @@
    "expected_action": "应回答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low",
-    "reason": "标准答案或证据不足，无法自动判定对错"
+    "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）",
-   "candidate_answer_type": "no_evidence",
-   "evidence": [],
-   "matched_terms": [],
+   "candidate_answer": "FINANCIAL IFEVAL CTF Method Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral Capacity (bits per token) CODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511 HARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0.0665 0.1378 0.0072 0.0465 0.0571 ARS 0.0016 0.0142 0.0131 0.0044 0.0189 0.0204 0.0003 0.0064 0.0064 Gain ofCODETTA over HARQ LDPC 4.8× 6.4× 4.8× 4.7× 5.3× 4.1× 4.2× 6.1× 4.4× over ARS 87× 16× 34× 57× 19× 28× 94× 44× 39× Encoding throughput (tokens per second) CODETTA 244 204 155 212 350 152 72 85 56 HARQ LDPC, draft-free 306 249 203 331 472 205 84 90 63 ARS 248 207 172 258 340 172 84 91 63 Decoding throughput (tokens per second) CODETTA 1.0k 1.3k 0.7k 0.5k …（已截断）",
+   "candidate_answer_type": "extractive_with_terms",
+   "evidence": [
+    {
+     "chunk_id": "chunk-40710bf2b8e507ad4f7c387b",
+     "document_key": "paper:2609.28900",
+     "char_start": 105705,
+     "char_end": 106648,
+     "snippet": "FINANCIAL IFEVAL CTF\nMethod Qwen Llama Ministral Qwen Llama Ministral Qwen Llama Ministral\nCapacity (bits per token)\nCODETTA 0.1354 0.2289 0.4476 0.2510 0.3544 0.5685 0.0303 0.2844 0.2511\nHARQ LDPC, draft-free 0.0280 0.0358 0.0936 0.0528 0. …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
+     "document_key": "paper:2609.28900",
+     "char_start": 26606,
+     "char_end": 26792,
+     "snippet": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAon three agent workloads.\n7"
+    },
+    {
+     "chunk_id": "chunk-e45c6b3a852060d4b6ed1edd",
+     "document_key": "paper:2609.28900",
+     "char_start": 57625,
+     "char_end": 57844,
+     "snippet": "\nWe analyze undetectability, the substitution channel, and correctness and soundness ofAlgorithm 2, following\nSection 4. All three rest onLemma 1, the one-step lemma of the strawman, which applies unchanged. Part (i)\n16"
+    },
+    {
+     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
+     "document_key": "paper:2609.28900",
+     "char_start": 0,
+     "char_end": 969,
+     "snippet": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting}@cmu.edu\nAbstract\nMulti-agent systems built on large language models (LLMs) are …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-ebe17bce2bf3c43a07bfae05",
+     "document_key": "paper:2609.28900",
+     "char_start": 80477,
+     "char_end": 80689,
+     "snippet": "hable from a uniform vector over Zq, so each of its coefficients can be handed to the carrier as a\nuniform q-ary symbol. The transport is also robust to small additive errors, because the receiver recovers the\n22"
+    },
+    {
+     "chunk_id": "chunk-ee4b3e79d54da71275cae71a",
+     "document_key": "paper:2609.28900",
+     "char_start": 51483,
+     "char_end": 51712,
+     "snippet": "tions” can be\nposed for any number of answers, so the alphabet may change from token to token. “Questions” can be asked\nfor as long as generation continues, so this construction becomes rateless. A wrong token introduces error\n14"
+    }
+   ],
+   "matched_terms": [
+    "codetta"
+   ],
    "machine_suggested_label": {
-    "答案正确性": "incorrect",
-    "引用准确性": "not_applicable",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "本地语料存在预期文档，但系统未返回任何引用（疑似检索/上下文问题）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -1922,7 +1955,7 @@
      "consequence": "该题单列，不计入分子分母，需在备注写明缺什么证据"
     }
    ],
-   "minimal_human_judgment": "系统答案是否满足题目要求（无引用，需要看事件路径证据）？"
+   "minimal_human_judgment": "系统答案是否覆盖候选标准答案的要点，是否完整（correct/partial/incorrect）？"
   },
   {
    "question_id": "BQA-027",
@@ -1968,24 +2001,69 @@
    "expected_action": "应回答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low",
-    "reason": "标准答案或证据不足，无法自动判定对错"
+    "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）",
-   "candidate_answer_type": "no_evidence",
-   "evidence": [],
-   "matched_terms": [],
+   "candidate_answer": "Overall, NeRD demon- strates higher intervention-efficient refinement by enabling larger diagnostic im- provements with substantially fewer concept edits. 4 Conclusion We propose NeRD, a neuro-symbolic framework that bridges rule-based concept interpretability with MCoT reasoning for medical image diagnosis. By select- ing concepts based on diagnostic necessity, NeRD distills induced logical rules",
+   "candidate_answer_type": "extractive_with_terms",
+   "evidence": [
+    {
+     "chunk_id": "chunk-675668ff34c9d9eeb7b36b4a",
+     "document_key": "paper:2606.15617",
+     "char_start": 19528,
+     "char_end": 19944,
+     "snippet": "tervened cases. Overall, NeRD demon-\nstrates higher intervention-efficient refinement by enabling larger diagnostic im-\nprovements with substantially fewer concept edits.\n4 Conclusion\nWe propose NeRD, a neuro-symbolic framework that bridges …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-6ece9563486747c798438a8e",
+     "document_key": "paper:2606.15617",
+     "char_start": 13952,
+     "char_end": 14899,
+     "snippet": "r all items to obtain a mean score per method.\nMain Results.Fig. 3(b) summarizes the results of the human expert study.\nNeRD attains the highest mean score on both datasets (Derm7pt: 1.17; F17k:\n0.94), surpassing WISE (0.83; 0.25) and All-C …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-5c71aaa24bd8d7056ac0313a",
+     "document_key": "paper:2606.15617",
+     "char_start": 5197,
+     "char_end": 6130,
+     "snippet": "NeRD 3\nFig.2: Framework of our method. Step 1: Induce a diagnostic rule set from\nconcepts. Step 2: Execute Neuro-Symbolic Rule Distillation (NeRD) to select,\nsimplify, and ground rules. Step 3: Organize the reasoning chains into MCoT.\nNeRD, …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-4be51f4b81e36bbffa7fb8de",
+     "document_key": "paper:2606.15617",
+     "char_start": 15048,
+     "char_end": 15995,
+     "snippet": "NeRD 7\nFig.4: NeRD generated MCoTs.\nTable 2: Average concept count. Pos Table 3: Intervention results on Derm7pt.\n/ Neg: present / absent per case N: intervened samples; Concepts: average\n(CBM); supportive / refutational corrected concepts  …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-a7874d53d8db6974b188f298",
+     "document_key": "paper:2606.15617",
+     "char_start": 14779,
+     "char_end": 15046,
+     "snippet": "s for reaching correct conclusions without image access.\n3.3 Experiment 2: Fine-Tuned MLLMs for Interpretable Diagnosis\nBaselines and Implementation Details.We compare NeRD against three\ncategories of baselines: (1) Black-box models. An Inc …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-522eb9d8deff2a4d6e345452",
+     "document_key": "paper:2606.15617",
+     "char_start": 16739,
+     "char_end": 17003,
+     "snippet": " fixed schema, we use GPT-5 Mini [14] to parse the\npredicted concepts and diagnosis from free-form text for evaluation.\nMain Results.Table 1 reports diagnostic performance and concept prediction\naccuracy on Derm7pt and F17k datasets. Among  …（已截断）"
+    }
+   ],
+   "matched_terms": [
+    "nerd"
+   ],
    "machine_suggested_label": {
-    "答案正确性": "incorrect",
-    "引用准确性": "not_applicable",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "本地语料存在预期文档，但系统未返回任何引用（疑似检索/上下文问题）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -1996,7 +2074,7 @@
      "consequence": "该题单列，不计入分子分母，需在备注写明缺什么证据"
     }
    ],
-   "minimal_human_judgment": "系统答案是否满足题目要求（无引用，需要看事件路径证据）？"
+   "minimal_human_judgment": "系统答案是否覆盖候选标准答案的要点，是否完整（correct/partial/incorrect）？"
   },
   {
    "question_id": "BQA-029",
@@ -2005,24 +2083,62 @@
    "expected_action": "应回答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low",
-    "reason": "标准答案或证据不足，无法自动判定对错"
+    "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）",
-   "candidate_answer_type": "no_evidence",
-   "evidence": [],
-   "matched_terms": [],
+   "candidate_answer": "5.1 Experimental Settings Models.We evaluate SAGE across multiple model backbones, including Qwen3.5 (2B, 9B, 35B) (Team, 2026), Qwen3.6-27B (Team, 2026), Qwen3-32B (Yang et al., 2025), DeepSeekMath- 6 ΨSAGE(τ)−sup τ∈G ΨSAGE(τ)≥∆ , thenPEBM(G)/P EBM(F)≤e −λ∆ πθold(G)/π θold(F). 5 Experiment We comprehensively evaluate SAGE across 12 diverse benchmarks, 7 backbone models and 3 competitive baselines.",
+   "candidate_answer_type": "extractive_with_terms",
+   "evidence": [
+    {
+     "chunk_id": "chunk-03317ba315f16be669e3c769",
+     "document_key": "paper:2609.30192",
+     "char_start": 22865,
+     "char_end": 23258,
+     "snippet": "soning as\na stress test for exploration and compounding biases. Section 5.4 is the ablation study of the two\ncomponents. We report implementation details and additional results in Appendix E.\n5.1 Experimental Settings\nModels.We evaluate SAG …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-9a6ae6087bfe15b36556ced3",
+     "document_key": "paper:2609.30192",
+     "char_start": 22041,
+     "char_end": 22985,
+     "snippet": "ΨSAGE(τ)−sup τ∈G ΨSAGE(τ)≥∆ ,\nthenPEBM(G)/P EBM(F)≤e −λ∆ πθold(G)/π θold(F). Thus, increasingλ exponentially suppresses\nlocally inadmissible mass relative to feasible mass.\n5 Experiment\nWe comprehensively evaluate SAGE across 12 diverse ben …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-4b72fc8fa621782e6f526842",
+     "document_key": "paper:2609.30192",
+     "char_start": 72777,
+     "char_end": 73768,
+     "snippet": "NeurIPS Paper Checklist\n1.Claims\nQuestion: Do the main claims made in the abstract and introduction accurately reflect the\npaper’s contributions and scope?\nAnswer:[Yes]\nJustification: The abstract and introduction state the main theoretical …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-f6292119dac456a957c56f50",
+     "document_key": "paper:2609.30192",
+     "char_start": 91088,
+     "char_end": 92081,
+     "snippet": "com/datasets\nhas curated licenses for some datasets. Their licensing guide can help determine the\nlicense of a dataset.\n• For existing datasets that are re-packaged, both the original license and the license of\nthe derived asset (if it has  …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-231d76a16bf6e347697d42bc",
+     "document_key": "paper:2609.30192",
+     "char_start": 92829,
+     "char_end": 93335,
+     "snippet": "ion.\nGuidelines:\n• The answer[N/A]means that the paper does not involve crowdsourcing nor research\nwith human subjects.\n• Including this information in the supplemental material is fine, but if the main contribu-\ntion of the paper involves  …（已截断）"
+    }
+   ],
+   "matched_terms": [
+    "sage"
+   ],
    "machine_suggested_label": {
-    "答案正确性": "incorrect",
-    "引用准确性": "not_applicable",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "本地语料存在预期文档，但系统未返回任何引用（疑似检索/上下文问题）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -2033,7 +2149,7 @@
      "consequence": "该题单列，不计入分子分母，需在备注写明缺什么证据"
     }
    ],
-   "minimal_human_judgment": "系统答案是否满足题目要求（无引用，需要看事件路径证据）？"
+   "minimal_human_judgment": "系统答案是否覆盖候选标准答案的要点，是否完整（correct/partial/incorrect）？"
   },
   {
    "question_id": "BQA-030",
@@ -2042,24 +2158,62 @@
    "expected_action": "应回答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low",
-    "reason": "标准答案或证据不足，无法自动判定对错"
+    "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "（系统未返回任何引用，无法从现有输出抽取候选标准答案；需人工按语料核对题目要求）",
-   "candidate_answer_type": "no_evidence",
-   "evidence": [],
-   "matched_terms": [],
+   "candidate_answer": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint # 2. Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint } exceptException: pass returnNone defexecute_quiescence_and_preempt( self, diagnostic: Dict[str, Any] )->Dict[str, Any]: \"\"\"Executes physical preemption and out-of-band WAL extraction.\"\"\" ifself.supervisor: self.supervisor.freeze_process_group() state=self.supervisor.extract_clean_checkpoint_snapshot() return{ \"diagnostic\": diagnostic, \"committed_state\": state, \"quiesced\":True, } return{ \"diagnostic\": diagnostic, \"committed_state\":None, \"quiesced\":False, } defandon_circuit_breaker_node( state: Dict[str, Any], breaker: AndonCircuitBreaker )- …（已截断）",
+   "candidate_answer_type": "extractive_with_terms",
+   "evidence": [
+    {
+     "chunk_id": "chunk-9aa9b7f0bfc461185e805840",
+     "document_key": "paper:2609.29808",
+     "char_start": 53472,
+     "char_end": 54461,
+     "snippet": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n# 2. Template Injection & Traversal Prohibited Strings\npayload=f\"{file_path_accessedor''}{command_stror''}\"\nprohibited=[\n\"cycler.__init__\",\"__globals__\",\"__builtins__ …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-40e6485386bfdf62a9f37df0",
+     "document_key": "paper:2609.29808",
+     "char_start": 55172,
+     "char_end": 56138,
+     "snippet": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n}\nexceptException:\npass\nreturnNone\ndefexecute_quiescence_and_preempt(\nself, diagnostic: Dict[str, Any]\n)->Dict[str, Any]:\n\"\"\"Executes physical preemption and out-of-b …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-dd6697dfa7ef5bd2eb0080ec",
+     "document_key": "paper:2609.29808",
+     "char_start": 51788,
+     "char_end": 52712,
+     "snippet": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\ndefterminate_process_group(self)->bool:\n\"\"\"Issues non-maskable SIGKILL to isolate rogue process group and its children.\"\"\"\npgid=self._get_target_pgid()\ntry:\nifpgidisn …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-6b9546662a106a418714e03e",
+     "document_key": "paper:2609.29808",
+     "char_start": 45480,
+     "char_end": 45766,
+     "snippet": "===========\nPlatform: AMD Zen 5 (Kern), Linux 6.11 PREEMPT_DYNAMIC, Python 3.14\nReference: Kalibera & Jones (2013) ISMM. doi:10.1145/2464157.2464160\nSource: https://github.com/joseluispino/hardstop (Apache-2.0)\n============================= …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-f9d26319bd709c7eebf87b3b",
+     "document_key": "paper:2609.29808",
+     "char_start": 32611,
+     "char_end": 33273,
+     "snippet": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nSecurity & Concurrency\nMechanism / Layer Latency Profile Guarantee\nbpf_override_return(eBPF <0.050ms Immediate syscall rejection at\nLSM) kernel entry; prevents\nTASK_U …（已截断）"
+    }
+   ],
+   "matched_terms": [
+    "hard stop"
+   ],
    "machine_suggested_label": {
-    "答案正确性": "incorrect",
-    "引用准确性": "not_applicable",
+    "答案正确性": "correct",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "本地语料存在预期文档，但系统未返回任何引用（疑似检索/上下文问题）",
+   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -2070,7 +2224,7 @@
      "consequence": "该题单列，不计入分子分母，需在备注写明缺什么证据"
     }
    ],
-   "minimal_human_judgment": "系统答案是否满足题目要求（无引用，需要看事件路径证据）？"
+   "minimal_human_judgment": "系统答案是否覆盖候选标准答案的要点，是否完整（correct/partial/incorrect）？"
   },
   {
    "question_id": "BQA-031",
@@ -2131,7 +2285,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -2230,7 +2384,7 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
@@ -2375,43 +2529,50 @@
     "confidence": "low",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "capacity of the strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key exchange, andSection 7evaluates CODETTAon three agent workloads. Smarter Sabo- teurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint arXiv:2606.12709, 2026. The Best-Laid SCHEMEs: Coordinated Sabotage and Monitoring in Multi-Agent Systems.arXiv preprint arXiv:2605.29178, 2026.",
+   "candidate_answer": "uestion for multi-agent LLM systems: how much protection does an honest majority provide as a deceptive minority grows? 5 CONCLUSION We study how multi-agent systems respond to deception as groups grow and deceptive participants become more prevalent. Our work focuses on how ad- versarial influence scales in multi-agent LLM systems and how it changes the behavior of otherwise capable agents.",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
     {
-     "chunk_id": "chunk-1656e6198f3d4eb7310cce90",
-     "document_key": "paper:2609.28900",
-     "char_start": 26606,
-     "char_end": 26792,
-     "snippet": " capacity of the\nstrawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key\nexchange, andSection 7evaluates CODETTAon three agent workloads.\n7"
-    },
-    {
-     "chunk_id": "chunk-86f5cd3318bfb7da386309bd",
+     "chunk_id": "chunk-1b4f521dd158e5c09cce53e2",
      "document_key": "paper:2609.30028",
-     "char_start": 38557,
-     "char_end": 39503,
-     "snippet": "em Ozmen Garibay. Smarter Sabo-\nteurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint\narXiv:2606.12709, 2026. URLhttps://arxiv.org/abs/2606.12709.\nDara Mojtahedi, Maria Ioannou, and Laura Hammond. Group Siz …（已截断）"
+     "char_start": 3367,
+     "char_end": 3801,
+     "snippet": "uestion for multi-agent LLM systems:\nhow much protection does an honest majority provide as a deceptive minority grows?\nWe study how deceptive agents influence collective reasoning on questions from Humanity’s Last\nExam (HLE) (Center for AI …（已截断）"
     },
     {
-     "chunk_id": "chunk-588cced1264eec1b2b7b6151",
+     "chunk_id": "chunk-2469bb50935f6d93f9649e5f",
      "document_key": "paper:2609.30028",
-     "char_start": 42220,
-     "char_end": 43152,
-     "snippet": "2505.22960.\nBinwei Yao, Chao Shang, Wanyu Du, Jianfeng He, Ruixue Lian, Yi Zhang, Hang Su, Sandesh\nSwamy, and Yanjun Qi. Peacemaker or Troublemaker: How Sycophancy Shapes Multi-Agent\nDebate.arXiv preprint arXiv:2509.23055, 2025. URLhttps:// …（已截断）"
+     "char_start": 23933,
+     "char_end": 24896,
+     "snippet": "5 CONCLUSION\nWe study how multi-agent systems respond to deception as groups grow and deceptive participants\nbecome more prevalent. Across closed and open-source models, honest agents are more likely to\nabandon initially correct answers as  …（已截断）"
     },
     {
-     "chunk_id": "chunk-86ce9e6b5b0e6ce787a30993",
-     "document_key": "paper:2609.28900",
-     "char_start": 0,
-     "char_end": 969,
-     "snippet": "CODETTA: High-Capacity, Keyless, and Undetectable\nMulti-Agent Collusion\nQi Pang Virginia Smith Wenting Zheng\nCarnegie Mellon University\n{qipang, smithv, wenting}@cmu.edu\nAbstract\nMulti-agent systems built on large language models (LLMs) are …（已截断）"
+     "chunk_id": "chunk-f45a5a661459307308c8b4a7",
+     "document_key": "paper:2609.30028",
+     "char_start": 23426,
+     "char_end": 23931,
+     "snippet": "n-driven adversarial influence in debate and find\nthat adding agents or rounds does not reliably protect group accuracy. Our work focuses on how ad-\nversarial influence scales in multi-agent LLM systems and how it changes the behavior of ot …（已截断）"
     },
     {
-     "chunk_id": "chunk-b82299bc638b7678cb7945c5",
+     "chunk_id": "chunk-d7489ff3b07026aca9a7948d",
      "document_key": "paper:2609.28900",
-     "char_start": 133974,
-     "char_end": 134768,
-     "snippet": " and\nNenghai Yu. Breaking the generative steganography trilemma: Anstega for optimal capacity,\nefficiency, and security. In33rd Annual Network and Distributed System Security Symposium.\nThe Internet Society, 2026.doi:10.14722/ndss.2026.2406 …（已截断）"
+     "char_start": 131804,
+     "char_end": 132240,
+     "snippet": "Jiahao Li, Cheng Yang, Weize\nChen, Yusheng Su, Xin Cong, et al. Chatdev: Communicative agents for software development.\nInProceedings of the 62nd annual meeting of the association for computational linguistics\n(volume 1: Long papers), pages …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-0e4c22c479001fcc218e6b38",
+     "document_key": "paper:2609.30028",
+     "char_start": 32777,
+     "char_end": 33775,
+     "snippet": "n, Igor Krawczuk, Max Lamparth,\nNiklas Lauffer, Alexander Meinke, Sumeet Motwani, Anka Reuel, Vincent Conitzer, Michael\nDennis, Iason Gabriel, Adam Gleave, Gillian Hadfield, Nika Haghtalab, Atoosa Kasirzadeh,\nS´ebastien Krier, Kate Larson,  …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-d9d9a58bdc35374c7cda0188",
+     "document_key": "paper:2609.30028",
+     "char_start": 29862,
+     "char_end": 30318,
+     "snippet": "dvances in Neural Information Pro-\ncessing Systems, volume 38, pp. 101732–101764, 2025a. doi: 10.52202/085713-3405. URL\nhttps://openreview.net/forum?id=iUjGNJzrF1.\nMin Choi, Keonwoo Kim, Sungwon Chae, and Sangyeop Baek. An Empirical Study o …（已截断）"
     }
    ],
    "matched_terms": [
@@ -2419,24 +2580,22 @@
    ],
    "machine_suggested_label": {
     "答案正确性": "correct",
-    "引用准确性": "partially_supported",
+    "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
    "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
    "cross_document_facts": [
     {
-     "document_key": "paper:2609.28900",
-     "supports": "capacity of the strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key exchange, andSection 7evaluates CODETTAon three agent workloads. CODETTA: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion Qi Pang Virginia Smith Wenting Zheng Carnegie Mellon University {qipang, smithv, wenting}@cmu.edu Abstract Multi-agent systems built on large language models (LLMs) are increasingly being deployed in high- stakes settings such as finance, healthcare, and software engineering, where agents coordinate through natural-language messages. Tradingagents: Multi-agents LLM financial trading framework.",
+     "document_key": "paper:2609.30028",
+     "supports": "uestion for multi-agent LLM systems: how much protection does an honest majority provide as a deceptive minority grows? 5 CONCLUSION We study how multi-agent systems respond to deception as groups grow and deceptive participants become more prevalent. Our work focuses on how ad- versarial influence scales in multi-agent LLM systems and how it changes the behavior of otherwise capable agents.",
      "term_hits": [
       "multi-agent"
      ]
     },
     {
-     "document_key": "paper:2609.30028",
-     "supports": "Smarter Sabo- teurs, Better Fixers: Scaling & Security in Linear Multi-Agent Workflows.arXiv preprint arXiv:2606.12709, 2026. The Best-Laid SCHEMEs: Coordinated Sabotage and Monitoring in Multi-Agent Systems.arXiv preprint arXiv:2605.29178, 2026. Peacemaker or Troublemaker: How Sycophancy Shapes Multi-Agent Debate.arXiv preprint arXiv:2509.23055, 2025.",
-     "term_hits": [
-      "multi-agent"
-     ]
+     "document_key": "paper:2609.28900",
+     "supports": "Jiahao Li, Cheng Yang, Weize\nChen, Yusheng Su, Xin Cong, et al. Chatdev: Communicative agents for software development.\nInProceedings of the 62nd annual meeting of the association for computational linguistics\n(volume 1: …（已截断）",
+     "term_hits": []
     }
    ],
    "synthesis_conclusion": "无法证明综合：系统输出为多文档引用拼接，未见跨来源一致性/比较/推理的显式表述，需人工判定",
@@ -2736,29 +2895,36 @@
     "confidence": "low",
     "reason": "答案由引用原文或结构化事件证据支撑"
    },
-   "candidate_answer": "Second, we proposeSchema-Contrastive Ad- 2.2 Preference and Reinforcement Learning vantage Estimation(SCAE), which alleviates ad- for Structured Extraction vantage collapse by independently sampling dis- tinct sets of negative schemas across completions Beyond supervised instruction tuning, a grow- within each optimization group. This structural ing body of work has explored aligning LLMs diversity induces variability in event type discrim- to structured extraction objectives through pref- ination difficulty, increasing intra-group reward erence learning and reinforcement learning. EAGER: Enhancing Generative Event Extraction via Reinforcement Learning with Verifiable Rewards Omar Adjali1, S …（已截断）",
+   "candidate_answer": "Under review as a conference paper at ICLR 2027 JUST ASKJEV: REINFORCEMENT LEARNING FOR CALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR OFAI ALIGNMENTFAILURES Ruoqi Guo Yi Liu∗ Griffith University Griffith University ruoqi.guo@griffithuni.edu.au yi.liu@griffith.edu.au Gelei Deng Yuekang Li Nanyang Technological University UNSW gelei.deng@ntu.edu.sg yuekang.li@unsw.edu.au Lida Zhao Yutao Wu Independent Researcher Deakin University LIDA001@e.ntu.edu.sg oscar.w@deakin.edu.au Simin Chen Ying Zhang George Mason University Wake Forest University schen68@gmu.edu ying.zhang@wfu.edu Leo Yu Zhang Griffith University leo.zhang@griffith.edu.au ABSTRACT Detectors of alignment failures screen deployed language  …（已截断）",
    "candidate_answer_type": "extractive_with_terms",
    "evidence": [
     {
-     "chunk_id": "chunk-50f3942425c9e6b2065d2b65",
-     "document_key": "paper:2609.29230",
-     "char_start": 6344,
-     "char_end": 7263,
-     "snippet": "raints of generative extraction.\nEE. Second, we proposeSchema-Contrastive Ad- 2.2 Preference and Reinforcement Learning\nvantage Estimation(SCAE), which alleviates ad- for Structured Extraction\nvantage collapse by independently sampling dis- …（已截断）"
+     "chunk_id": "chunk-15641d6a59af6d328b210e81",
+     "document_key": "paper:2609.29429",
+     "char_start": 40246,
+     "char_end": 40506,
+     "snippet": "87, 2017. URLhttps://proceedings.neurips.cc/paper/2017/hash/\n4a8423d5e91fda00bb7e46540e2b0cf1-Abstract.html.\nGemma Team. Gemma 2: Improving open language models at a practical size. arXiv preprint\narXiv:2408.00118, 2024. URLhttps://arxiv.or …（已截断）"
     },
     {
-     "chunk_id": "chunk-72ead54d06cf2c62969163b6",
-     "document_key": "paper:2609.29230",
-     "char_start": 0,
-     "char_end": 942,
-     "snippet": "EAGER: Enhancing Generative Event Extraction via Reinforcement\nLearning with Verifiable Rewards\nOmar Adjali1, Siting Liang1,2, Omair Shahzad Bhatti1, Daniel Sonntag1,2\n1German Research Center for Artificial Intelligence (DFKI), Germany\n2Car …（已截断）"
+     "chunk_id": "chunk-f16db047c8ac29168019d5a8",
+     "document_key": "paper:2609.29429",
+     "char_start": 51600,
+     "char_end": 51940,
+     "snippet": "orum?id=\nXccDXrDNLek.\nCurtis G. Northcutt, Lu Jiang, and Isaac L. Chuang. Confident learning: Estimating uncertainty in\ndataset labels.Journal of Artificial Intelligence Research, 70:1373–1411, 2021b. doi: 10.1613/\njair.1.12125.\nOpenAI. GPT …（已截断）"
     },
     {
-     "chunk_id": "chunk-824d23b596fb7ee11ca590c7",
-     "document_key": "paper:2609.29230",
-     "char_start": 15962,
-     "char_end": 16911,
-     "snippet": "Advantages are then estimated by normalizing 4 Experimental Setup\nrewards within each schema-contrastive group and BaselinesWe compare EAGER against repre-\nsubstituted into the DAPO objective (Eq.3). (See sentative methods spanning promptin …（已截断）"
+     "chunk_id": "chunk-2f5ba76b9d89c55863d2acfa",
+     "document_key": "paper:2609.29429",
+     "char_start": 55374,
+     "char_end": 55734,
+     "snippet": ".12784.\nLiyan Tang, Philippe Laban, and Greg Durrett. MiniCheck: Efficient fact-checking of LLMs on\ngrounding documents. InProceedings of the 2024 Conference on Empirical Methods in Natural\nLanguage Processing (EMNLP), 2024. URLhttps://arxi …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-b657ed18a979443b61097afe",
+     "document_key": "paper:2609.29429",
+     "char_start": 61208,
+     "char_end": 61732,
+     "snippet": "306.05685.\nLianghui Zhu, Xinggang Wang, and Xinlong Wang. JudgeLM: Fine-tuned large language models\nare scalable judges. InInternational Conference on Learning Representations (ICLR), 2025. URL\nhttps://arxiv.org/abs/2310.17631.\nAndy Zou, Lo …（已截断）"
     },
     {
      "chunk_id": "chunk-95728533c01bb6067e4da24a",
@@ -2768,30 +2934,23 @@
      "snippet": "Under review as a conference paper at ICLR 2027\nJUST ASKJEV: REINFORCEMENT LEARNING FOR\nCALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR\nOFAI ALIGNMENTFAILURES\nRuoqi Guo Yi Liu∗\nGriffith University Griffith University\nruoqi.guo@griffithuni.edu.au  …（已截断）"
     },
     {
-     "chunk_id": "chunk-88fdfe6ea53367bfaaa69e60",
-     "document_key": "paper:2609.29230",
-     "char_start": 70357,
-     "char_end": 70404,
-     "snippet": ".HewastransferredtherefromaBostonhospitalwhere\n"
+     "chunk_id": "chunk-62e346264b770de0114453f5",
+     "document_key": "paper:2609.29429",
+     "char_start": 192907,
+     "char_end": 193231,
+     "snippet": "es: strategy rescor-\ning and split-half selection, the context ablation with its permutation null and paired bootstrap,\ncalibration and threshold analysis, cost accounting, human agreement, baselines, and the generators\nof every figure and  …（已截断）"
     }
    ],
    "matched_terms": [
     "reinforcement"
    ],
    "machine_suggested_label": {
-    "答案正确性": "correct",
+    "答案正确性": "partial",
     "引用准确性": "unknown",
     "拒答正确性": "not_applicable"
    },
-   "rationale": "预期文档被引用命中，且预期要点逐字出现在答案中（机器核对，仍需人工确认完整性）",
+   "rationale": "预期文档或预期要点只有一项命中（机器核对）",
    "cross_document_facts": [
-    {
-     "document_key": "paper:2609.29230",
-     "supports": "Second, we proposeSchema-Contrastive Ad- 2.2 Preference and Reinforcement Learning vantage Estimation(SCAE), which alleviates ad- for Structured Extraction vantage collapse by independently sampling dis- tinct sets of negative schemas across completions Beyond supervised instruction tuning, a grow- within each optimization group. This structural ing body of work has explored aligning LLMs diversity induces variability in event type discrim- to structured extraction objectives through pref- ination difficulty, increasing intra-group reward erence learning and reinforcement learning. EAGER: Enhancing Generative Event Extraction via Reinforcement Learning with Verifiable Rewards Omar Adjali1, S …（已截断）",
-     "term_hits": [
-      "reinforcement"
-     ]
-    },
     {
      "document_key": "paper:2609.29429",
      "supports": "Under review as a conference paper at ICLR 2027 JUST ASKJEV: REINFORCEMENT LEARNING FOR CALIBRATEDDECISIONS AS AZERO-SHOTDETECTOR OFAI ALIGNMENTFAILURES Ruoqi Guo Yi Liu∗ Griffith University Griffith University ruoqi.guo@griffithuni.edu.au yi.liu@griffith.edu.au Gelei Deng Yuekang Li Nanyang Technological University UNSW gelei.deng@ntu.edu.sg yuekang.li@unsw.edu.au Lida Zhao Yutao Wu Independent Researcher Deakin University LIDA001@e.ntu.edu.sg oscar.w@deakin.edu.au Simin Chen Ying Zhang George Mason University Wake Forest University schen68@gmu.edu ying.zhang@wfu.edu Leo Yu Zhang Griffith University leo.zhang@griffith.edu.au ABSTRACT Detectors of alignment failures screen deployed language  …（已截断）",
@@ -2800,7 +2959,7 @@
      ]
     }
    ],
-   "synthesis_conclusion": "无法证明综合：系统输出为多文档引用拼接，未见跨来源一致性/比较/推理的显式表述，需人工判定",
+   "synthesis_conclusion": "只命中单一文档，不构成跨文档综合",
    "alternatives": [
     {
      "option": "确认答案正确性（correct/partial/incorrect）",
@@ -2853,6 +3012,20 @@
      "char_start": 39082,
      "char_end": 40071,
      "snippet": "Preprint\nSoftware Engineering Conference and Symposium on the Foundations of Software Engineering\n(ESEC/FSE), 2026.https://arxiv.org/abs/2510.21236.\nZijun Cheng, Qiujian Lv, Jinyuan Liang, Yan Wang, Degang Sun, Thomas Pasquier, and Xueyuan\n …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-a26721953fbdcee9bce4ff42",
+     "document_key": "paper:2501.13787",
+     "char_start": 89923,
+     "char_end": 90909,
+     "snippet": "n Recognition, 2024.\nof large language models,” ArXiv, vol. abs/2106.09685, [52]Y. Ge, S. Zhao, J. Zhu, Y. Ge, K. Yi, L. Song, C. Li,\n2021. X. Ding, and Y. Shan, “Seed-x: Multimodal models\n[37]X. Liu, K. Ji, Y. Fu, Z. Du, Z. Yang, and J. Ta …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-8fefaaeedccce5c69028d6df",
+     "document_key": "paper:2501.13787",
+     "char_start": 111794,
+     "char_end": 112358,
+     "snippet": "e-tuning of 100+\n“A survey of large language models,” arXiv preprint language models,” arXiv preprint arXiv:2403.13372,\narXiv:2303.18223, 2023. 2024.\n[153]L. Floridi and M. Chiriatti, “Gpt-3: Its nature, scope, [167]S.-Y. Liu, C.-Y. Wang, H …（已截断）"
     }
    ],
    "machine_suggested_label": {
@@ -2893,39 +3066,46 @@
    "rationale": "仅有主题相关引用不构成多跳关系证据（缺实体—关系—客体路径）（实测分类：candidate_multihop_answered_topically）；分类依据：候选多跳题：系统返回了主题相关的引用，但没有推理链，属于能力边界而非检索失败",
    "evidence": [
     {
-     "chunk_id": "chunk-791a99218eb26e365aa244e1",
+     "chunk_id": "chunk-df7e311eaa475d978286b5b5",
      "document_key": "paper:2609.29757",
-     "char_start": 43039,
-     "char_end": 43995,
-     "snippet": "18 K. Elzer et al..\nUnfortunately, we’ve discovered a flaw in your system & found our way in\nMake a donation to our BTC wallet we’re a small business & we employ\nmany engineers to make your software safer and bugless!\n-deadbugz\nBTC: bc1q5xp …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-f79cb023919171692bfdb65c",
-     "document_key": "paper:2609.29757",
-     "char_start": 14928,
-     "char_end": 15791,
-     "snippet": "H architectural design including the core components alongside\nthe two expected attack categories we intend to observe.\nFig.1: Architectural overview of the Ollure honeypot, featuring its core API,\nmodel and prompt response handling, and se …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-e1488d4e077dbfd9cccc81db",
-     "document_key": "paper:2609.29757",
-     "char_start": 27081,
-     "char_end": 28029,
-     "snippet": " 2,841\n(103 IPs) (115 IPs) (43 IPs) (78 IPs) (174 IPs)\n/api/embed 1 225 1 1 228\n(1 IPs) (8 IPs) (1 IPs) (1 IPs) (9 IPs)\n/api/create 31 81 4 5 121\n(11 IPs) (11 IPs) (2 IPs) (3 IPs) (16 IPs)\n/api/push 11 9 1 3 24\n(8 IPs) (5 IPs) (1 IPs) (3 IP …（已截断）"
-    },
-    {
-     "chunk_id": "chunk-ec7233a50b6ded0aa59e99c2",
-     "document_key": "paper:2609.29757",
-     "char_start": 37182,
-     "char_end": 38156,
-     "snippet": "by read-only activity conducted to gather\ninfrastructure and model metadata. However, these interactions cannot be com-\npletely disregarded as non-malicious scanner activity. Threat actors perform\npreliminary fingerprinting and active probi …（已截断）"
+     "char_start": 7811,
+     "char_end": 8025,
+     "snippet": "ng to encompass multi-step execution\nloops, external tool use, and complex privilege delegation. In this work, we focus\nspecifically on mapping attacks against AI infrastructure and models, excluding\ntraining-time."
     },
     {
      "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
      "document_key": "paper:2609.29757",
      "char_start": 5071,
-     "char_end": 5157,
-     "snippet": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems p"
+     "char_end": 5291,
+     "snippet": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full system functionality. [13]\n1 https://github.com/k-elzer/Ollure"
+    },
+    {
+     "chunk_id": "chunk-2e3b3fec713324c33c3b0880",
+     "document_key": "paper:2609.29757",
+     "char_start": 28781,
+     "char_end": 28943,
+     "snippet": "62 requests specified the explicit string\nnonexistent, 44 referenced legitimate model names, and a single instance con-\ntained the string__gguf_header_overflow__."
+    },
+    {
+     "chunk_id": "chunk-f04f6a92012135f57321f790",
+     "document_key": "paper:2609.29757",
+     "char_start": 42847,
+     "char_end": 43037,
+     "snippet": "isrupting availability and driving up costs via\nImpact Context Overflow, Input resource exhaustion, token flooding, and\nToken Flooding, Infinite computational overload.\nGeneration Abuse, DoS"
+    },
+    {
+     "chunk_id": "chunk-1d263630fc98f67bc8257def",
+     "document_key": "paper:2609.29757",
+     "char_start": 60787,
+     "char_end": 60948,
+     "snippet": "24 K. Elzer et al..\nFig.7: Mean inter-request gap and overall duration boxplot of IP-instance com-\nbinations for the Digital Ocean (DO) and university locations."
+    },
+    {
+     "chunk_id": "chunk-791a99218eb26e365aa244e1",
+     "document_key": "paper:2609.29757",
+     "char_start": 43039,
+     "char_end": 43995,
+     "snippet": "18 K. Elzer et al..\nUnfortunately, we’ve discovered a flaw in your system & found our way in\nMake a donation to our BTC wallet we’re a small business & we employ\nmany engineers to make your software safer and bugless!\n-deadbugz\nBTC: bc1q5xp …（已截断）"
     }
    ],
    "machine_suggested_label": {
@@ -3283,23 +3463,52 @@
    "expected_action": "应拒答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "not_applicable",
-    "confidence": "low",
-    "reason": "系统拒答且应拒答，无需判定答案支持性"
+    "judgment": "contradicted",
+    "confidence": "medium",
+    "reason": "R-QA-REFUSAL: 应拒答=True 实际拒答=False"
    },
    "candidate_answer": "应拒答（候选建议）",
    "candidate_answer_type": "refusal_recommended",
-   "refusal_rule": "R1/R2",
-   "rationale": "缺少必要证据时拒答正确（实测分类：correct_refusal）；分类依据：系统确实拒答，符合 should_refuse",
-   "evidence": [],
+   "refusal_rule": "R2",
+   "rationale": "缺少必要证据时应拒答或说明不确定（实测分类：other）；分类依据：未能归入已知类别，需人工判断",
+   "evidence": [
+    {
+     "chunk_id": "chunk-a26721953fbdcee9bce4ff42",
+     "document_key": "paper:2501.13787",
+     "char_start": 89923,
+     "char_end": 90909,
+     "snippet": "n Recognition, 2024.\nof large language models,” ArXiv, vol. abs/2106.09685, [52]Y. Ge, S. Zhao, J. Zhu, Y. Ge, K. Yi, L. Song, C. Li,\n2021. X. Ding, and Y. Shan, “Seed-x: Multimodal models\n[37]X. Liu, K. Ji, Y. Fu, Z. Du, Z. Yang, and J. Ta …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-8fefaaeedccce5c69028d6df",
+     "document_key": "paper:2501.13787",
+     "char_start": 111794,
+     "char_end": 112756,
+     "snippet": "e-tuning of 100+\n“A survey of large language models,” arXiv preprint language models,” arXiv preprint arXiv:2403.13372,\narXiv:2303.18223, 2023. 2024.\n[153]L. Floridi and M. Chiriatti, “Gpt-3: Its nature, scope, [167]S.-Y. Liu, C.-Y. Wang, H …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-96678528eaa8245edbabe3c7",
+     "document_key": "paper:2501.13787",
+     "char_start": 8844,
+     "char_end": 9804,
+     "snippet": "JOURNAL OF LATEX CLASS FILES, VOL. 18, NO. 9, SEPTEMBER 2020 3\nSurvey Venue FMs (Fig.2,3,4,5,6) Trend Stats. Pros&Cons\nLLM VFM VLM/MFM VGM (Fig.1) (Tab.II)\nXin et al. [32] arXiv, 2024\nHan et al. [33] arXiv, 2024\nZhou et al. [34] arXiv, 2024 …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-d6cfa21a91b8a957b9a214ea",
+     "document_key": "paper:2609.30192",
+     "char_start": 85319,
+     "char_end": 86273,
+     "snippet": "uired for the experiments in\nAppendix I.\nGuidelines:\n•The answer[N/A]means that the paper does not include experiments.\n• The paper should indicate the type of compute workers CPU or GPU, internal cluster,\nor cloud provider, including relev …（已截断）"
+    }
+   ],
    "machine_suggested_label": {
-    "拒答正确性": "correct",
+    "拒答正确性": "incorrect",
     "答案正确性": "not_applicable",
-    "引用准确性": "not_applicable"
+    "引用准确性": "unknown"
    },
    "alternatives": [
     {
@@ -3320,23 +3529,66 @@
    "expected_action": "应拒答",
    "suggestion_level": "machine_candidate",
    "human_confirmed": false,
-   "system_refused": true,
+   "system_refused": false,
    "contested": false,
    "contested_reason": null,
    "auto_review": {
-    "judgment": "not_applicable",
-    "confidence": "low",
-    "reason": "系统拒答且应拒答，无需判定答案支持性"
+    "judgment": "contradicted",
+    "confidence": "medium",
+    "reason": "R-QA-REFUSAL: 应拒答=True 实际拒答=False"
    },
    "candidate_answer": "应拒答（候选建议）",
    "candidate_answer_type": "refusal_recommended",
-   "refusal_rule": "R1/R2",
-   "rationale": "缺少必要证据时拒答正确（实测分类：correct_refusal）；分类依据：系统确实拒答，符合 should_refuse",
-   "evidence": [],
+   "refusal_rule": "R2",
+   "rationale": "缺少必要证据时应拒答或说明不确定（实测分类：other）；分类依据：未能归入已知类别，需人工判断",
+   "evidence": [
+    {
+     "chunk_id": "chunk-d0d1f08e5b3fd260dac246ae",
+     "document_key": "official:eu_ai_act",
+     "char_start": 602205,
+     "char_end": 602854,
+     "snippet": "heir scope and main characteristics; how the\ndata was obtained and selected as well as all other measures to detect the\nunsuitability of data source s and methods to detect identifiable biases, where\napplicable;\n(d) the computational resour …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-022f2a439d595e688f906e91",
+     "document_key": "paper:2609.29230",
+     "char_start": 10130,
+     "char_end": 11107,
+     "snippet": "pt Structure\nFigure 2: Structure of a prompt for end-to-end Event Each training instance is constructed as a structured\nExtraction, comprising a task instruction a set of event prompt sequence as illustrated in Figure2:\nschemas and the inpu …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-d13b4d600755e9dec4d4774a",
+     "document_key": "official:eu_ai_act",
+     "char_start": 397997,
+     "char_end": 398762,
+     "snippet": "or the\nsemantics thereof, or where authorised by law to detect, prevent, investi gate or prosecute\ncriminal offences.\n3. Deployers of an emotion recognition system or a biometric categorisation system shall\ninform the natural persons expose …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-4e41be5dbb5c565966504b1e",
+     "document_key": "paper:2609.29429",
+     "char_start": 3998,
+     "char_end": 4991,
+     "snippet": "or thresholded. Reading\ntoken probabilities gives a score, as in Llama Guard’sP(unsafe)or G-Eval’s probability-weighted\nratings (Liu et al., 2023). However, each call still scores one label or criterion, because the proba-\nbility is read of …（已截断）"
+    },
+    {
+     "chunk_id": "chunk-f7bbefb749c256b5be855e69",
+     "document_key": "paper:2609.30217",
+     "char_start": 82027,
+     "char_end": 82164,
+     "snippet": "tion.\nNumbers identify selected zero-based monitor decisions; scaffold events are unnumbered. Task, policy, and actions\nare condensed.\n25"
+    },
+    {
+     "chunk_id": "chunk-293d7df7d2696b5b16fa8597",
+     "document_key": "source:nist_news",
+     "char_start": 6825,
+     "char_end": 7001,
+     "snippet": "Researchers and manufacturers rely on the library to identify unknown compounds in food, drugs, cosmetics, the environment, body fluids, forensic evidence and even space rocks."
+    }
+   ],
    "machine_suggested_label": {
-    "拒答正确性": "correct",
+    "拒答正确性": "incorrect",
     "答案正确性": "not_applicable",
-    "引用准确性": "not_applicable"
+    "引用准确性": "unknown"
    },
    "alternatives": [
     {

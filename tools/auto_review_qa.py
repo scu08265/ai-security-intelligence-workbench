@@ -31,7 +31,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 DATASET = ROOT / "evaluation" / "b_formal_qa_set.json"
-RESULTS = ROOT / "artifacts" / "b_eval" / "formal_qa_results.json"
+# 10-12 批次（A1 排序修复后的机器结果；2026-10-13 队长决定把下游产物刷新到该批次）
+RESULTS = ROOT / "artifacts" / "b_eval" / "formal_qa_results_20261012.json"
 DOCUMENT_TEMPLATE = "根据命中的原文证据："
 REFUSAL_FRAGMENT = "未找到可匹配的事件"
 

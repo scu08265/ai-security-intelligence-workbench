@@ -11,44 +11,42 @@
   "tier_B_machine_assisted_suggestion": 50,
   "tier_C_human_confirmed_gold": 0,
   "contested": 10,
-  "needs_human_review": 16,
+  "needs_human_review": 44,
   "by_dimension": {
    "answer_correctness": {
     "suggestions": {
-     "correct": 15,
-     "partial": 18,
-     "incorrect": 5,
+     "correct": 25,
+     "partial": 13,
      "not_applicable": 12
     },
     "pending_human_review": 8
    },
    "citation_support": {
     "suggestions": {
-     "partially_supported": 24,
-     "not_applicable": 15,
-     "unknown": 11
+     "unknown": 42,
+     "not_applicable": 8
     },
-    "pending_human_review": 11
+    "pending_human_review": 42
    },
    "refusal_correctness": {
     "suggestions": {
-     "correct": 39,
-     "incorrect": 11
+     "correct": 42,
+     "incorrect": 8
     },
-    "pending_human_review": 2
+    "pending_human_review": 4
    }
   },
   "by_category_answer_suggestion": {
    "中英文混合查询": {
-    "correct": 3,
-    "partial": 3
+    "correct": 4,
+    "partial": 2
    },
    "基础事实问答": {
-    "correct": 6,
-    "partial": 4
+    "correct": 9,
+    "partial": 1
    },
    "多轮追问": {
-    "incorrect": 5,
+    "correct": 5,
     "partial": 1
    },
    "拒答及证据不足": {
@@ -58,8 +56,8 @@
     "not_applicable": 5
    },
    "术语及语义查询": {
-    "correct": 6,
-    "partial": 2
+    "correct": 7,
+    "partial": 1
    },
    "真实多跳问答": {
     "not_applicable": 2
@@ -95,24 +93,24 @@
     "confidence": "medium",
     "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-1e26fb499bb6dbae04a358d4",
-     "chunk-c58221ed9828a62061aaeec7",
-     "chunk-fef1ae1764a6dee6f3705bd6",
      "chunk-3e02e30d18b6d9d534a09cad",
-     "chunk-60353af87ed264ff1ebf2e47"
+     "chunk-1e26fb499bb6dbae04a358d4",
+     "chunk-611d2ee6fcbcd7740fc8e908",
+     "chunk-0ce253b1b064be3f7dafd9a6",
+     "chunk-4607af632c4a1e1728692fa0"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-1e26fb499bb6dbae04a358d4",
-     "chunk-c58221ed9828a62061aaeec7",
-     "chunk-fef1ae1764a6dee6f3705bd6",
      "chunk-3e02e30d18b6d9d534a09cad",
-     "chunk-60353af87ed264ff1ebf2e47"
+     "chunk-1e26fb499bb6dbae04a358d4",
+     "chunk-611d2ee6fcbcd7740fc8e908",
+     "chunk-0ce253b1b064be3f7dafd9a6",
+     "chunk-4607af632c4a1e1728692fa0"
     ]
    },
    "refusal_correctness": {
@@ -125,8 +123,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-002",
@@ -142,31 +140,29 @@
     "confidence": "high"
    },
    "answer_correctness": {
-    "suggestion": "partial",
+    "suggestion": "correct",
     "status": "suggested",
-    "confidence": "low",
-    "rationale": "预期文档或预期要点只有一项命中，可能遗漏关键条件",
+    "confidence": "medium",
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-7e16e6ece9b5fa7bb906f527",
-     "chunk-2e3b3fec713324c33c3b0880",
-     "chunk-f04f6a92012135f57321f790",
-     "chunk-1d263630fc98f67bc8257def",
-     "chunk-f1f210c2e843456a23f64f7e",
-     "chunk-df7e311eaa475d978286b5b5"
+     "chunk-e7c4f5f3c7751a3ffa30b7ce",
+     "chunk-1c80f502e72fb42699eeb0ab",
+     "chunk-b64f03dfbfeb5c0b6ef222a4",
+     "chunk-416dcc9bbdc311768335eb76",
+     "chunk-a26721953fbdcee9bce4ff42"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-7e16e6ece9b5fa7bb906f527",
-     "chunk-2e3b3fec713324c33c3b0880",
-     "chunk-f04f6a92012135f57321f790",
-     "chunk-1d263630fc98f67bc8257def",
-     "chunk-f1f210c2e843456a23f64f7e",
-     "chunk-df7e311eaa475d978286b5b5"
+     "chunk-e7c4f5f3c7751a3ffa30b7ce",
+     "chunk-1c80f502e72fb42699eeb0ab",
+     "chunk-b64f03dfbfeb5c0b6ef222a4",
+     "chunk-416dcc9bbdc311768335eb76",
+     "chunk-a26721953fbdcee9bce4ff42"
     ]
    },
    "refusal_correctness": {
@@ -179,8 +175,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-003",
@@ -196,31 +192,29 @@
     "confidence": "high"
    },
    "answer_correctness": {
-    "suggestion": "partial",
+    "suggestion": "correct",
     "status": "suggested",
-    "confidence": "low",
-    "rationale": "预期文档或预期要点只有一项命中，可能遗漏关键条件",
+    "confidence": "medium",
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-40710bf2b8e507ad4f7c387b",
-     "chunk-1656e6198f3d4eb7310cce90",
-     "chunk-e45c6b3a852060d4b6ed1edd",
-     "chunk-86ce9e6b5b0e6ce787a30993",
-     "chunk-ebe17bce2bf3c43a07bfae05",
-     "chunk-ee4b3e79d54da71275cae71a"
+     "chunk-d7489ff3b07026aca9a7948d",
+     "chunk-292b9c3eb0203f0aa1f5ba2e",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-94de2b4db54500c51e11b9b3",
+     "chunk-8fefaaeedccce5c69028d6df"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-40710bf2b8e507ad4f7c387b",
-     "chunk-1656e6198f3d4eb7310cce90",
-     "chunk-e45c6b3a852060d4b6ed1edd",
-     "chunk-86ce9e6b5b0e6ce787a30993",
-     "chunk-ebe17bce2bf3c43a07bfae05",
-     "chunk-ee4b3e79d54da71275cae71a"
+     "chunk-d7489ff3b07026aca9a7948d",
+     "chunk-292b9c3eb0203f0aa1f5ba2e",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-94de2b4db54500c51e11b9b3",
+     "chunk-8fefaaeedccce5c69028d6df"
     ]
    },
    "refusal_correctness": {
@@ -233,8 +227,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-004",
@@ -250,29 +244,29 @@
     "confidence": "high"
    },
    "answer_correctness": {
-    "suggestion": "partial",
+    "suggestion": "correct",
     "status": "suggested",
-    "confidence": "low",
-    "rationale": "预期文档或预期要点只有一项命中，可能遗漏关键条件",
+    "confidence": "medium",
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-772965adcd179139bcd06485",
-     "chunk-865c3fc82db601b61deb31de",
-     "chunk-99f6facf8375a778cae6aea8",
-     "chunk-dd1e7b4c423f2efb51430a33",
-     "chunk-8500d9c105c4b1356d5b2c17"
+     "chunk-03317ba315f16be669e3c769",
+     "chunk-9a6ae6087bfe15b36556ced3",
+     "chunk-4b72fc8fa621782e6f526842",
+     "chunk-f6292119dac456a957c56f50",
+     "chunk-231d76a16bf6e347697d42bc"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-772965adcd179139bcd06485",
-     "chunk-865c3fc82db601b61deb31de",
-     "chunk-99f6facf8375a778cae6aea8",
-     "chunk-dd1e7b4c423f2efb51430a33",
-     "chunk-8500d9c105c4b1356d5b2c17"
+     "chunk-03317ba315f16be669e3c769",
+     "chunk-9a6ae6087bfe15b36556ced3",
+     "chunk-4b72fc8fa621782e6f526842",
+     "chunk-f6292119dac456a957c56f50",
+     "chunk-231d76a16bf6e347697d42bc"
     ]
    },
    "refusal_correctness": {
@@ -285,8 +279,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-005",
@@ -305,28 +299,24 @@
     "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "rationale": "预期文档被引用命中（4 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-72ead54d06cf2c62969163b6",
-     "chunk-8e8a07516863b486bd58920e",
-     "chunk-4fef66f74b75d70611829266",
-     "chunk-88fdfe6ea53367bfaaa69e60",
-     "chunk-0e890ae5a0de528274b4f0df",
-     "chunk-043bc308f0cf8c7d79bf4b3c"
+     "chunk-02feaa66f1ec1de5d612aabb",
+     "chunk-2159d09ae638094b2ef02ca6",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-683fcc4bca0226f943bba4af"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-72ead54d06cf2c62969163b6",
-     "chunk-8e8a07516863b486bd58920e",
-     "chunk-4fef66f74b75d70611829266",
-     "chunk-88fdfe6ea53367bfaaa69e60",
-     "chunk-0e890ae5a0de528274b4f0df",
-     "chunk-043bc308f0cf8c7d79bf4b3c"
+     "chunk-02feaa66f1ec1de5d612aabb",
+     "chunk-2159d09ae638094b2ef02ca6",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-683fcc4bca0226f943bba4af"
     ]
    },
    "refusal_correctness": {
@@ -339,8 +329,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-006",
@@ -359,28 +349,26 @@
     "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-675668ff34c9d9eeb7b36b4a",
-     "chunk-6ece9563486747c798438a8e",
      "chunk-5c71aaa24bd8d7056ac0313a",
-     "chunk-4be51f4b81e36bbffa7fb8de",
-     "chunk-a7874d53d8db6974b188f298",
-     "chunk-522eb9d8deff2a4d6e345452"
+     "chunk-6ece9563486747c798438a8e",
+     "chunk-7b3ba17746f32905b1b37285",
+     "chunk-560523d6a5ad1e6a8faf82d5",
+     "chunk-ff13260e5bc0da5782f08a65"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-675668ff34c9d9eeb7b36b4a",
-     "chunk-6ece9563486747c798438a8e",
      "chunk-5c71aaa24bd8d7056ac0313a",
-     "chunk-4be51f4b81e36bbffa7fb8de",
-     "chunk-a7874d53d8db6974b188f298",
-     "chunk-522eb9d8deff2a4d6e345452"
+     "chunk-6ece9563486747c798438a8e",
+     "chunk-7b3ba17746f32905b1b37285",
+     "chunk-560523d6a5ad1e6a8faf82d5",
+     "chunk-ff13260e5bc0da5782f08a65"
     ]
    },
    "refusal_correctness": {
@@ -393,8 +381,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-007",
@@ -423,10 +411,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-9aa9b7f0bfc461185e805840",
      "chunk-40e6485386bfdf62a9f37df0",
@@ -445,8 +433,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-008",
@@ -505,13 +493,12 @@
     "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "rationale": "预期文档被引用命中（4 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-a6aaa41c451888d03395cd44",
      "chunk-1c81026ab5a957ec178913c4",
-     "chunk-af92a77db28f15236d9501e0",
-     "chunk-8e22077c669275cfa3e1fd10",
-     "chunk-0b6a9c456122108958f74640"
+     "chunk-a785e777ad83e7d8cb364c69",
+     "chunk-0b6a9c456122108958f74640",
+     "chunk-814a5762a84023da0855c97b"
     ]
    },
    "citation_support": {
@@ -520,11 +507,10 @@
     "confidence": "low",
     "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-a6aaa41c451888d03395cd44",
      "chunk-1c81026ab5a957ec178913c4",
-     "chunk-af92a77db28f15236d9501e0",
-     "chunk-8e22077c669275cfa3e1fd10",
-     "chunk-0b6a9c456122108958f74640"
+     "chunk-a785e777ad83e7d8cb364c69",
+     "chunk-0b6a9c456122108958f74640",
+     "chunk-814a5762a84023da0855c97b"
     ]
    },
    "refusal_correctness": {
@@ -557,28 +543,26 @@
     "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
-     "chunk-b1c2dbf1124d49e8c1e960f2",
      "chunk-1e1b1f7a4deebb53d0b33fc8",
-     "chunk-b1620540c0899bd702ed5cda",
-     "chunk-e49b86c958642fd07f990a89",
+     "chunk-97612802b3c8a4294d9575f3",
      "chunk-1934b1e31fc0d9c70d011fdb",
-     "chunk-027c0961ee9fe6d31d788bb2"
+     "chunk-1ffc5fffcebd7981342ef157",
+     "chunk-3fdc886795d1ba8148959255"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-b1c2dbf1124d49e8c1e960f2",
      "chunk-1e1b1f7a4deebb53d0b33fc8",
-     "chunk-b1620540c0899bd702ed5cda",
-     "chunk-e49b86c958642fd07f990a89",
+     "chunk-97612802b3c8a4294d9575f3",
      "chunk-1934b1e31fc0d9c70d011fdb",
-     "chunk-027c0961ee9fe6d31d788bb2"
+     "chunk-1ffc5fffcebd7981342ef157",
+     "chunk-3fdc886795d1ba8148959255"
     ]
    },
    "refusal_correctness": {
@@ -591,8 +575,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-011",
@@ -614,25 +598,25 @@
     "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
      "chunk-90c768cd5de7c577f26397d2",
+     "chunk-0d170d53396ba2d8ccadecbe",
      "chunk-e8cc2b6834a2c530e2fcad10",
      "chunk-ff8a87d0d88c14f7168efde2",
-     "chunk-7061149ba14708176205f246",
-     "chunk-71ae55e2e6545c119a797617",
-     "chunk-b9d2b917a3e216d060bdd256"
+     "chunk-e034e370e78e5da118c53abc",
+     "chunk-7061149ba14708176205f246"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-90c768cd5de7c577f26397d2",
+     "chunk-0d170d53396ba2d8ccadecbe",
      "chunk-e8cc2b6834a2c530e2fcad10",
      "chunk-ff8a87d0d88c14f7168efde2",
-     "chunk-7061149ba14708176205f246",
-     "chunk-71ae55e2e6545c119a797617",
-     "chunk-b9d2b917a3e216d060bdd256"
+     "chunk-e034e370e78e5da118c53abc",
+     "chunk-7061149ba14708176205f246"
     ]
    },
    "refusal_correctness": {
@@ -645,8 +629,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-012",
@@ -675,10 +659,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-6ea63ce05320edcd881e0931",
      "chunk-522eb9d8deff2a4d6e345452",
@@ -697,8 +681,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-013",
@@ -781,10 +765,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-1656e6198f3d4eb7310cce90",
      "chunk-86f5cd3318bfb7da386309bd",
@@ -803,8 +787,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-015",
@@ -833,10 +817,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-2c548b7cb0cbd3d90614329e",
      "chunk-44cd582860c79d6783e5fbed",
@@ -855,8 +839,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-016",
@@ -872,29 +856,27 @@
     "confidence": "high"
    },
    "answer_correctness": {
-    "suggestion": "partial",
+    "suggestion": "correct",
     "status": "suggested",
-    "confidence": "low",
-    "rationale": "预期文档或预期要点只有一项命中，可能遗漏关键条件",
+    "confidence": "medium",
+    "rationale": "预期文档被引用命中（4 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
+     "chunk-ae717b77f38375b526b5ba5f",
      "chunk-e78516a997d4da76b6632007",
-     "chunk-f5ae901ee6258438880b216e",
-     "chunk-0d912b6e54b1e8560e120f71",
-     "chunk-149345792c2f8071dac76ee5",
-     "chunk-f5c8e3e5a1bd2f37e723c148"
+     "chunk-cc04d0eb85d3eba34d8233c3",
+     "chunk-8e22077c669275cfa3e1fd10"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
+     "chunk-ae717b77f38375b526b5ba5f",
      "chunk-e78516a997d4da76b6632007",
-     "chunk-f5ae901ee6258438880b216e",
-     "chunk-0d912b6e54b1e8560e120f71",
-     "chunk-149345792c2f8071dac76ee5",
-     "chunk-f5c8e3e5a1bd2f37e723c148"
+     "chunk-cc04d0eb85d3eba34d8233c3",
+     "chunk-8e22077c669275cfa3e1fd10"
     ]
    },
    "refusal_correctness": {
@@ -907,8 +889,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-017",
@@ -938,10 +920,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-e7c4f5f3c7751a3ffa30b7ce",
      "chunk-1c80f502e72fb42699eeb0ab",
@@ -961,8 +943,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-018",
@@ -1043,10 +1025,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-1e26fb499bb6dbae04a358d4",
      "chunk-c58221ed9828a62061aaeec7",
@@ -1065,8 +1047,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-020",
@@ -1082,10 +1064,10 @@
     "confidence": "high"
    },
    "answer_correctness": {
-    "suggestion": "partial",
+    "suggestion": "correct",
     "status": "suggested",
-    "confidence": "low",
-    "rationale": "预期文档或预期要点只有一项命中，可能遗漏关键条件",
+    "confidence": "medium",
+    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
     "evidence_ids": [
      "chunk-7e16e6ece9b5fa7bb906f527",
      "chunk-2e3b3fec713324c33c3b0880",
@@ -1096,10 +1078,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-7e16e6ece9b5fa7bb906f527",
      "chunk-2e3b3fec713324c33c3b0880",
@@ -1119,8 +1101,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-021",
@@ -1150,10 +1132,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-40710bf2b8e507ad4f7c387b",
      "chunk-1656e6198f3d4eb7310cce90",
@@ -1173,8 +1155,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-022",
@@ -1256,10 +1238,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-675668ff34c9d9eeb7b36b4a",
      "chunk-6ece9563486747c798438a8e",
@@ -1279,8 +1261,8 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": ""
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-024",
@@ -1341,45 +1323,59 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应回答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low"
    },
    "answer_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "语料中存在预期证据（文档 ['paper:2609.28996']、词命中 [('DistillGuard', 24)]），系统却未返回任何引用",
-    "evidence_ids": []
+    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "evidence_ids": [
+     "chunk-c58221ed9828a62061aaeec7",
+     "chunk-1b8a5b3bb855e6ee7df0a863",
+     "chunk-1e26fb499bb6dbae04a358d4",
+     "chunk-fef1ae1764a6dee6f3705bd6",
+     "chunk-0ce253b1b064be3f7dafd9a6",
+     "chunk-dac56e9551cdb17c11d3dd1d"
+    ]
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-c58221ed9828a62061aaeec7",
+     "chunk-1b8a5b3bb855e6ee7df0a863",
+     "chunk-1e26fb499bb6dbae04a358d4",
+     "chunk-fef1ae1764a6dee6f3705bd6",
+     "chunk-0ce253b1b064be3f7dafd9a6",
+     "chunk-dac56e9551cdb17c11d3dd1d"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "该题应作答，系统却拒答",
+    "rationale": "该题应作答，系统未拒答",
     "evidence_ids": []
    },
    "capability_analysis": {
     "multiturn": {
      "applies": true,
-     "context_used": false,
+     "context_used": true,
      "corpus_had_evidence": true,
-     "conclusion": "系统未返回引用，而语料中存在预期证据 → 上下文/证据未被使用"
+     "conclusion": "系统返回了引用，多轮上下文是否被使用仍需人工确认"
     }
    },
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-026",
@@ -1388,45 +1384,59 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应回答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low"
    },
    "answer_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "语料中存在预期证据（文档 ['paper:2609.28900']、词命中 [('Codetta', 40)]），系统却未返回任何引用",
-    "evidence_ids": []
+    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "evidence_ids": [
+     "chunk-40710bf2b8e507ad4f7c387b",
+     "chunk-1656e6198f3d4eb7310cce90",
+     "chunk-e45c6b3a852060d4b6ed1edd",
+     "chunk-86ce9e6b5b0e6ce787a30993",
+     "chunk-ebe17bce2bf3c43a07bfae05",
+     "chunk-ee4b3e79d54da71275cae71a"
+    ]
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-40710bf2b8e507ad4f7c387b",
+     "chunk-1656e6198f3d4eb7310cce90",
+     "chunk-e45c6b3a852060d4b6ed1edd",
+     "chunk-86ce9e6b5b0e6ce787a30993",
+     "chunk-ebe17bce2bf3c43a07bfae05",
+     "chunk-ee4b3e79d54da71275cae71a"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "该题应作答，系统却拒答",
+    "rationale": "该题应作答，系统未拒答",
     "evidence_ids": []
    },
    "capability_analysis": {
     "multiturn": {
      "applies": true,
-     "context_used": false,
+     "context_used": true,
      "corpus_had_evidence": true,
-     "conclusion": "系统未返回引用，而语料中存在预期证据 → 上下文/证据未被使用"
+     "conclusion": "系统返回了引用，多轮上下文是否被使用仍需人工确认"
     }
    },
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-027",
@@ -1482,45 +1492,59 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应回答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low"
    },
    "answer_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "语料中存在预期证据（文档 ['paper:2606.15617']、词命中 [('NeRD', 18)]），系统却未返回任何引用",
-    "evidence_ids": []
+    "rationale": "预期文档被引用命中（6 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "evidence_ids": [
+     "chunk-675668ff34c9d9eeb7b36b4a",
+     "chunk-6ece9563486747c798438a8e",
+     "chunk-5c71aaa24bd8d7056ac0313a",
+     "chunk-4be51f4b81e36bbffa7fb8de",
+     "chunk-a7874d53d8db6974b188f298",
+     "chunk-522eb9d8deff2a4d6e345452"
+    ]
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-675668ff34c9d9eeb7b36b4a",
+     "chunk-6ece9563486747c798438a8e",
+     "chunk-5c71aaa24bd8d7056ac0313a",
+     "chunk-4be51f4b81e36bbffa7fb8de",
+     "chunk-a7874d53d8db6974b188f298",
+     "chunk-522eb9d8deff2a4d6e345452"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "该题应作答，系统却拒答",
+    "rationale": "该题应作答，系统未拒答",
     "evidence_ids": []
    },
    "capability_analysis": {
     "multiturn": {
      "applies": true,
-     "context_used": false,
+     "context_used": true,
      "corpus_had_evidence": true,
-     "conclusion": "系统未返回引用，而语料中存在预期证据 → 上下文/证据未被使用"
+     "conclusion": "系统返回了引用，多轮上下文是否被使用仍需人工确认"
     }
    },
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-029",
@@ -1529,45 +1553,57 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应回答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low"
    },
    "answer_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "语料中存在预期证据（文档 ['paper:2609.30192']、词命中 [('SAGE', 229)]），系统却未返回任何引用",
-    "evidence_ids": []
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "evidence_ids": [
+     "chunk-03317ba315f16be669e3c769",
+     "chunk-9a6ae6087bfe15b36556ced3",
+     "chunk-4b72fc8fa621782e6f526842",
+     "chunk-f6292119dac456a957c56f50",
+     "chunk-231d76a16bf6e347697d42bc"
+    ]
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-03317ba315f16be669e3c769",
+     "chunk-9a6ae6087bfe15b36556ced3",
+     "chunk-4b72fc8fa621782e6f526842",
+     "chunk-f6292119dac456a957c56f50",
+     "chunk-231d76a16bf6e347697d42bc"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "该题应作答，系统却拒答",
+    "rationale": "该题应作答，系统未拒答",
     "evidence_ids": []
    },
    "capability_analysis": {
     "multiturn": {
      "applies": true,
-     "context_used": false,
+     "context_used": true,
      "corpus_had_evidence": true,
-     "conclusion": "系统未返回引用，而语料中存在预期证据 → 上下文/证据未被使用"
+     "conclusion": "系统返回了引用，多轮上下文是否被使用仍需人工确认"
     }
    },
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-030",
@@ -1576,45 +1612,57 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应回答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "insufficient_evidence",
+    "judgment": "supported",
     "confidence": "low"
    },
    "answer_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "语料中存在预期证据（文档 ['paper:2609.29808']、词命中 [('Hard Stop', 22)]），系统却未返回任何引用",
-    "evidence_ids": []
+    "rationale": "预期文档被引用命中（5 条引用）且预期要点逐字出现在答案中；机器核对，仍需人工确认完整性与是否答非所问",
+    "evidence_ids": [
+     "chunk-9aa9b7f0bfc461185e805840",
+     "chunk-40e6485386bfdf62a9f37df0",
+     "chunk-dd6697dfa7ef5bd2eb0080ec",
+     "chunk-6b9546662a106a418714e03e",
+     "chunk-f9d26319bd709c7eebf87b3b"
+    ]
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-9aa9b7f0bfc461185e805840",
+     "chunk-40e6485386bfdf62a9f37df0",
+     "chunk-dd6697dfa7ef5bd2eb0080ec",
+     "chunk-6b9546662a106a418714e03e",
+     "chunk-f9d26319bd709c7eebf87b3b"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "incorrect",
+    "suggestion": "correct",
     "status": "suggested",
     "confidence": "medium",
-    "rationale": "该题应作答，系统却拒答",
+    "rationale": "该题应作答，系统未拒答",
     "evidence_ids": []
    },
    "capability_analysis": {
     "multiturn": {
      "applies": true,
-     "context_used": false,
+     "context_used": true,
      "corpus_had_evidence": true,
-     "conclusion": "系统未返回引用，而语料中存在预期证据 → 上下文/证据未被使用"
+     "conclusion": "系统返回了引用，多轮上下文是否被使用仍需人工确认"
     }
    },
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
-   "missing_evidence_or_criteria": "系统无引用，但语料疑似存在证据（多轮上下文/检索链路待查）"
+   "needs_human_review": true,
+   "missing_evidence_or_criteria": "引用内容是否支持答案中的结论需人工判断（引用可追溯 ≠ 引用支持结论）"
   },
   {
    "question_id": "BQA-031",
@@ -1643,10 +1691,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-2c548b7cb0cbd3d90614329e",
      "chunk-44cd582860c79d6783e5fbed",
@@ -1706,10 +1754,10 @@
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-7c6fdba1430ff6e44db50349",
      "chunk-dce559be9fb9fbb750a526c5",
@@ -1825,24 +1873,26 @@
     "confidence": "low",
     "rationale": "多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认",
     "evidence_ids": [
-     "chunk-1656e6198f3d4eb7310cce90",
-     "chunk-86f5cd3318bfb7da386309bd",
-     "chunk-588cced1264eec1b2b7b6151",
-     "chunk-86ce9e6b5b0e6ce787a30993",
-     "chunk-b82299bc638b7678cb7945c5"
+     "chunk-1b4f521dd158e5c09cce53e2",
+     "chunk-2469bb50935f6d93f9649e5f",
+     "chunk-f45a5a661459307308c8b4a7",
+     "chunk-d7489ff3b07026aca9a7948d",
+     "chunk-0e4c22c479001fcc218e6b38",
+     "chunk-d9d9a58bdc35374c7cda0188"
     ]
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-1656e6198f3d4eb7310cce90",
-     "chunk-86f5cd3318bfb7da386309bd",
-     "chunk-588cced1264eec1b2b7b6151",
-     "chunk-86ce9e6b5b0e6ce787a30993",
-     "chunk-b82299bc638b7678cb7945c5"
+     "chunk-1b4f521dd158e5c09cce53e2",
+     "chunk-2469bb50935f6d93f9649e5f",
+     "chunk-f45a5a661459307308c8b4a7",
+     "chunk-d7489ff3b07026aca9a7948d",
+     "chunk-0e4c22c479001fcc218e6b38",
+     "chunk-d9d9a58bdc35374c7cda0188"
     ]
    },
    "refusal_correctness": {
@@ -2073,11 +2123,12 @@
     "confidence": "low",
     "rationale": "多来源被引用但未证明跨来源信息整合（输出为并列摘录）；按统一口径「跨文档综合」答案正确性最多判 partial，需人工确认",
     "evidence_ids": [
-     "chunk-50f3942425c9e6b2065d2b65",
-     "chunk-72ead54d06cf2c62969163b6",
-     "chunk-824d23b596fb7ee11ca590c7",
+     "chunk-15641d6a59af6d328b210e81",
+     "chunk-f16db047c8ac29168019d5a8",
+     "chunk-2f5ba76b9d89c55863d2acfa",
+     "chunk-b657ed18a979443b61097afe",
      "chunk-95728533c01bb6067e4da24a",
-     "chunk-88fdfe6ea53367bfaaa69e60"
+     "chunk-62e346264b770de0114453f5"
     ]
    },
    "citation_support": {
@@ -2086,11 +2137,12 @@
     "confidence": "low",
     "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-50f3942425c9e6b2065d2b65",
-     "chunk-72ead54d06cf2c62969163b6",
-     "chunk-824d23b596fb7ee11ca590c7",
+     "chunk-15641d6a59af6d328b210e81",
+     "chunk-f16db047c8ac29168019d5a8",
+     "chunk-2f5ba76b9d89c55863d2acfa",
+     "chunk-b657ed18a979443b61097afe",
      "chunk-95728533c01bb6067e4da24a",
-     "chunk-88fdfe6ea53367bfaaa69e60"
+     "chunk-62e346264b770de0114453f5"
     ]
    },
    "refusal_correctness": {
@@ -2104,11 +2156,10 @@
     "cross_document": {
      "applies": true,
      "sources": [
-      "paper:2609.29230",
       "paper:2609.29429"
      ],
      "synthesis_proven": false,
-     "conclusion": "多个来源被引用，但输出为并列摘录，未见跨来源比较/推理 → 不能宣称已综合"
+     "conclusion": "仅命中单一来源，不构成跨文档综合"
     }
    },
    "contested": true,
@@ -2144,7 +2195,9 @@
     "evidence_ids": [
      "chunk-a7fda3d62674c6d15a012d7a",
      "chunk-da50e9d9dd079a0a4d942c36",
-     "chunk-ffc266e4bbbc4c487c6c2957"
+     "chunk-ffc266e4bbbc4c487c6c2957",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df"
     ]
    },
    "refusal_correctness": {
@@ -2155,7 +2208,9 @@
     "evidence_ids": [
      "chunk-a7fda3d62674c6d15a012d7a",
      "chunk-da50e9d9dd079a0a4d942c36",
-     "chunk-ffc266e4bbbc4c487c6c2957"
+     "chunk-ffc266e4bbbc4c487c6c2957",
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df"
     ]
    },
    "capability_analysis": {
@@ -2191,16 +2246,17 @@
     "evidence_ids": []
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
-     "chunk-791a99218eb26e365aa244e1",
-     "chunk-f79cb023919171692bfdb65c",
-     "chunk-e1488d4e077dbfd9cccc81db",
-     "chunk-ec7233a50b6ded0aa59e99c2",
-     "chunk-7e16e6ece9b5fa7bb906f527"
+     "chunk-df7e311eaa475d978286b5b5",
+     "chunk-7e16e6ece9b5fa7bb906f527",
+     "chunk-2e3b3fec713324c33c3b0880",
+     "chunk-f04f6a92012135f57321f790",
+     "chunk-1d263630fc98f67bc8257def",
+     "chunk-791a99218eb26e365aa244e1"
     ]
    },
    "refusal_correctness": {
@@ -2209,11 +2265,12 @@
     "confidence": "medium",
     "rationale": "应拒答却作答，失败分类 candidate_multihop_answered_topically（规则明确）",
     "evidence_ids": [
-     "chunk-791a99218eb26e365aa244e1",
-     "chunk-f79cb023919171692bfdb65c",
-     "chunk-e1488d4e077dbfd9cccc81db",
-     "chunk-ec7233a50b6ded0aa59e99c2",
-     "chunk-7e16e6ece9b5fa7bb906f527"
+     "chunk-df7e311eaa475d978286b5b5",
+     "chunk-7e16e6ece9b5fa7bb906f527",
+     "chunk-2e3b3fec713324c33c3b0880",
+     "chunk-f04f6a92012135f57321f790",
+     "chunk-1d263630fc98f67bc8257def",
+     "chunk-791a99218eb26e365aa244e1"
     ]
    },
    "capability_analysis": {
@@ -2225,7 +2282,7 @@
    },
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
+   "needs_human_review": true,
    "missing_evidence_or_criteria": "需人工按拒答规则确认该题是否确属证据不足"
   },
   {
@@ -2369,10 +2426,10 @@
     "evidence_ids": []
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-d86f26ed40a6d58a18458899",
      "chunk-c31fcd3b34fc78bab9f78cd5",
@@ -2397,7 +2454,7 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
+   "needs_human_review": true,
    "missing_evidence_or_criteria": "需人工按拒答规则确认该题是否确属证据不足"
   },
   {
@@ -2501,10 +2558,10 @@
     "evidence_ids": []
    },
    "citation_support": {
-    "suggestion": "partially_supported",
-    "status": "suggested",
-    "confidence": "medium",
-    "rationale": "答案正文由引用原文拼接（自动规则 R-QA-QUOTE 通过），文本层可追溯到 chunk；引用是否支持答案中的**结论**仍需人工判断",
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
     "evidence_ids": [
      "chunk-ebc2ddc7ee4bb700d216d628",
      "chunk-cf530a338ae66b8a214ee727",
@@ -2529,7 +2586,7 @@
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
+   "needs_human_review": true,
    "missing_evidence_or_criteria": "需人工按拒答规则确认该题是否确属证据不足"
   },
   {
@@ -2539,11 +2596,11 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应拒答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "not_applicable",
-    "confidence": "low"
+    "judgment": "contradicted",
+    "confidence": "medium"
    },
    "answer_correctness": {
     "suggestion": "not_applicable",
@@ -2553,23 +2610,33 @@
     "evidence_ids": []
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df",
+     "chunk-96678528eaa8245edbabe3c7",
+     "chunk-d6cfa21a91b8a957b9a214ea"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "correct",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统拒答，且按拒答规则确属证据不足",
-    "evidence_ids": []
+    "suggestion": "incorrect",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "应拒答却作答，失败分类 other；该题期望行为本身存在口径分歧，需人工裁定",
+    "evidence_ids": [
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df",
+     "chunk-96678528eaa8245edbabe3c7",
+     "chunk-d6cfa21a91b8a957b9a214ea"
+    ]
    },
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
+   "needs_human_review": true,
    "missing_evidence_or_criteria": "需人工按拒答规则确认该题是否确属证据不足"
   },
   {
@@ -2579,11 +2646,11 @@
    "tier": "B_machine_assisted_suggestion",
    "human_confirmed": false,
    "expected_action": "应拒答",
-   "system_refused": true,
+   "system_refused": false,
    "auto_review": {
     "tier": "A_machine_auto_detection",
-    "judgment": "not_applicable",
-    "confidence": "low"
+    "judgment": "contradicted",
+    "confidence": "medium"
    },
    "answer_correctness": {
     "suggestion": "not_applicable",
@@ -2593,23 +2660,37 @@
     "evidence_ids": []
    },
    "citation_support": {
-    "suggestion": "not_applicable",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统未返回任何引用",
-    "evidence_ids": []
+    "suggestion": "unknown",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "引用可追溯（chunk 可在库中取回），但答案来自结构化事件路径，无法用引用核验其结论",
+    "evidence_ids": [
+     "chunk-d0d1f08e5b3fd260dac246ae",
+     "chunk-022f2a439d595e688f906e91",
+     "chunk-d13b4d600755e9dec4d4774a",
+     "chunk-4e41be5dbb5c565966504b1e",
+     "chunk-f7bbefb749c256b5be855e69",
+     "chunk-293d7df7d2696b5b16fa8597"
+    ]
    },
    "refusal_correctness": {
-    "suggestion": "correct",
-    "status": "suggested",
-    "confidence": "high",
-    "rationale": "系统拒答，且按拒答规则确属证据不足",
-    "evidence_ids": []
+    "suggestion": "incorrect",
+    "status": "pending_human_review",
+    "confidence": "low",
+    "rationale": "应拒答却作答，失败分类 other；该题期望行为本身存在口径分歧，需人工裁定",
+    "evidence_ids": [
+     "chunk-d0d1f08e5b3fd260dac246ae",
+     "chunk-022f2a439d595e688f906e91",
+     "chunk-d13b4d600755e9dec4d4774a",
+     "chunk-4e41be5dbb5c565966504b1e",
+     "chunk-f7bbefb749c256b5be855e69",
+     "chunk-293d7df7d2696b5b16fa8597"
+    ]
    },
    "capability_analysis": {},
    "contested": false,
    "contested_reason": null,
-   "needs_human_review": false,
+   "needs_human_review": true,
    "missing_evidence_or_criteria": "需人工按拒答规则确认该题是否确属证据不足"
   },
   {

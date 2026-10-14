@@ -8,7 +8,7 @@
    "low": 2
   },
   "label_options": "correct|incorrect|partially_correct|undetermined",
-  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\qa_review_worksheet.csv"
+  "path": "artifacts\\b_eval\\qa_review_worksheet.csv"
  },
  "relation_worksheet": {
   "rows": 121,
@@ -23,7 +23,7 @@
    "asset_assessment": "资产表当前有 0 条记录，没有可匹配的资产，因此没有任何资产研判记录。"
   },
   "label_options": "positive|negative|unknown|not_applicable",
-  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\relation_review_worksheet.csv"
+  "path": "artifacts\\b_eval\\relation_review_worksheet.csv"
  },
  "relation_final_review_worksheet": {
   "rows": 121,
@@ -32,7 +32,7 @@
    "insufficient_evidence": 58
   },
   "label_options": "positive|negative|unknown|not_applicable",
-  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\relation_final_review_worksheet.csv"
+  "path": "artifacts\\b_eval\\relation_final_review_worksheet.csv"
  },
  "relation_annotation_worksheet_v2": {
   "rows": 121,
@@ -43,7 +43,7 @@
    "4-较低": 37
   },
   "label_options": "positive|negative|unknown|not_applicable",
-  "path": "D:\\ICT\\ai-security-intelligence-workbench-git\\artifacts\\b_eval\\relation_annotation_worksheet_v2.csv"
+  "path": "artifacts\\b_eval\\relation_annotation_worksheet_v2.csv"
  },
  "instructions": {
   "qa": "在'人工判定_*'列填写；答案正确性取值 correct|incorrect|partially_correct|undetermined",
