@@ -169,9 +169,23 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true", help="rewrite the baseline and the snapshot json")
     parser.add_argument("--json-only", action="store_true", help="write the json without touching the markdown")
+    parser.add_argument("--tests", default="",
+                        help='last full-suite summary line, e.g. "698 passed, 0 skipped"')
     args = parser.parse_args()
 
     snapshot = read_live()
+    # The suite result is tied to the commit, not to the clock, so it is passed
+    # in rather than measured here; keeping the previous value when it is omitted
+    # stops a refresh from silently blanking it.
+    if args.tests.strip():
+        snapshot["tests"] = args.tests.strip()
+    elif SNAPSHOT_JSON.is_file():
+        try:
+            previous = json.loads(SNAPSHOT_JSON.read_text(encoding="utf-8"))
+            if previous.get("tests"):
+                snapshot["tests"] = previous["tests"]
+        except (OSError, json.JSONDecodeError):
+            pass
     SNAPSHOT_JSON.parent.mkdir(parents=True, exist_ok=True)
     if args.write or args.json_only:
         SNAPSHOT_JSON.write_text(
@@ -185,6 +199,7 @@ def main() -> int:
         "collection_days": snapshot["scorecard"]["cumulative_actual_run_days"],
         "scheduled_days": snapshot["scorecard"]["cumulative_scheduled_run_days"],
         "latency_p50_hours": snapshot["scorecard"]["latency_p50_hours"],
+        "tests": snapshot.get("tests"),
         "written": bool(args.write or args.json_only),
         "baseline": str(BASELINE.relative_to(ROOT)),
         "json": str(SNAPSHOT_JSON.relative_to(ROOT)),

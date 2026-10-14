@@ -203,7 +203,8 @@ def headline_rows() -> list[list[str]]:
                      f"{disposition.get('high_priority_closed')}"
                      f"（{disposition.get('closure_rate'):.2%}）",
          "仅计入系统复测通过的条目"],
-        ["自动化测试", "691 通过 / 4 跳过", "交付机全量 pytest（提交前重跑）"],
+        ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
+         f"交付机全量 pytest（快照 {date}）"],
         ["容器验收", "9 项检查全部通过", "reports/docker-validation.json"],
     ]
 
@@ -384,7 +385,8 @@ SECTIONS = [
         if _snap("scorecard", "continuous_target_met", default=False)
         else "7 天连续运行目标：当前窗口未达成——计划任务窗口 10-11 到期后 10-12 无计划运行，"
              "连续天数已重新起算，恢复运行后需重新累积")],
-      ["自动化测试", "691 通过 / 4 跳过 / 0 失败", "4 条跳过需要两份未交付的衍生语料副本"]]),
+      ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
+       "交付机全量 pytest；语料与衍生副本均已交付核验"]]),
     ("figure", "fig4", "图 4  校内初赛功能与性能项自评（按评分细则档位）"),
     ("p", "对时效性的分析：采集是小时级的，但首次观测的中位延迟是 18.1 小时，说明延迟主要不来自采集间隔，"
           "更可能来自事件被记到较慢的来源上。这是下一步要查清的问题，本轮没有把它归因于网络或上游。"),
