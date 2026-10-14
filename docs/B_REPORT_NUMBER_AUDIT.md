@@ -83,3 +83,19 @@ curl.exe -s http://127.0.0.1:8000/api/system/health           # 模块状态、�
 ```
 
 取到后写进 `reports/scorecard-snapshot-<日期>.json`，并在 `docs/METRICS_BASELINE.md` §2 更新快照日期。
+
+## 6. 2026-10-14 新增待核对项
+
+任务书 2026-10-14 的 B5 另外点名四组数，逐条核如下。
+
+| 数字 | 出现位置 | 证据路径 | 结论 |
+| --- | --- | --- | --- |
+| 术语字典 **14 个种子 / 10 个已覆盖 / 关联 44 份文档** | `docs/COMPETITION_RUBRIC_MAPPING.md` §5 | `GET /api/knowledge/terms` → `coverage()` 的 `terms / covered_terms / documents_referenced`；算法在 `app/term_dictionary.py` | **已过期**：本轮 B2 领域复核把种子由 14 扩到 **26** 条，因此"14 个 / 10 个"不再成立。§5 已改为"26 条 + 覆盖数以接口返回为准"；26 条在 B 评测语料（3,639 分块 + 93 事件）上实测 **25 覆盖 / 37 文档**，演示机需用同一接口重取。明细见 `docs/B_TERM_SEED_REVIEW.md` |
+| 模型链 **三级** | 同上 §5；报告"模型降级链与角色绑定表" | `app/model_chain.py::chain()` → `levels` 恰为 3 项（1 远端模型协助 / 2 模型计划+本地拼装 / 3 本地确定性抽取），`role_bindings` 7 个角色 | 一致（3 级） |
+| 推荐问法 **38 道可提问** | 同上 §5 | `/api/qa/suggestions`（`app/api.py`）取 `evaluation/b_formal_qa_set.json` 并跳过 `should_refuse`：50 − 12 = **38** | 一致 |
+| 自愈演练 **四项断言** | 报告"可复现的自愈演练" | `tools/run_self_healing_drill.py:139-149` 的四个键；产物 `reports/self-healing-drill.json → assertions` 与 `verified` | 一致（4 项） |
+
+**另需注意一处容易读成矛盾的地方**：`app/model_chain.py` 的说明写着"本系统没有本地模型层
+（如 Ollama / 本地权重）"，而语料里 `ollama` 命中 3 个文档 / 24 条记录（本轮 B2 已把它加进术语表）。
+两者不冲突：前者说的是**本系统不跑本地模型**，后者说的是**语料在讨论 Ollama 这个主题**。
+报告与答辩引用时要带上这层限定，避免被读成"系统用了 Ollama"。
