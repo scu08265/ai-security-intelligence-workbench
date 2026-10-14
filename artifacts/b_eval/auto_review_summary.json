@@ -3,7 +3,7 @@
  "generated_from": {
   "relation_auto_review": "artifacts\\b_eval\\relation_auto_review.json",
   "qa_auto_review": "artifacts\\b_eval\\qa_auto_review.json",
-  "formal_qa_results": "artifacts\\b_eval\\formal_qa_results.json"
+  "formal_qa_results": "artifacts\\b_eval\\formal_qa_results_20261012.json"
  },
  "headline": {
   "relation_candidates_reviewed": 121,
@@ -11,10 +11,10 @@
   "relation_contradicted": 0,
   "relation_insufficient_evidence": 58,
   "qa_questions_reviewed": 50,
-  "qa_supported": 33,
-  "qa_contradicted": 4,
-  "qa_insufficient_evidence": 7,
-  "qa_not_applicable": 6
+  "qa_supported": 38,
+  "qa_contradicted": 6,
+  "qa_insufficient_evidence": 2,
+  "qa_not_applicable": 4
  },
  "relation_metrics": {
   "auto_support_rate": {
@@ -53,60 +53,60 @@
  },
  "qa_metrics": {
   "answer_support_rate_auto": {
-   "numerator": 33,
+   "numerator": 38,
    "denominator": 38,
-   "rate": 0.8684,
+   "rate": 1.0,
    "scope": "仅对'应作答'的题；是自动评审判定，不是人工准确率"
   },
   "citation_support_rate_auto": {
-   "numerator": 24,
-   "denominator": 24,
-   "rate": 1.0,
+   "numerator": 0,
+   "denominator": 0,
+   "rate": null,
    "scope": "答案正文是否逐字由被引用原文构成；不代表引用内容语义上支持答案。分母只含'答案是文档引用格式'的题。",
-   "with_citations": 35,
-   "not_applicable": 11,
+   "with_citations": 42,
+   "not_applicable": 42,
    "not_applicable_reason": "有文档引用，但答案来自结构化事件路径，答案正文不是引用拼接，无法用该规则核验"
   },
   "confusion": {
    "should_refuse_true": {
     "n": 12,
-    "refused_ok": 6,
-    "answered_wrongly": 6
+    "refused_ok": 4,
+    "answered_wrongly": 8
    },
    "should_refuse_false": {
     "n": 38,
-    "answered_ok": 33,
-    "refused_wrongly": 5
+    "answered_ok": 38,
+    "refused_wrongly": 0
    }
   },
   "refusal_recall": {
-   "numerator": 6,
+   "numerator": 4,
    "denominator": 12,
-   "rate": 0.5
+   "rate": 0.3333
   },
   "answer_rate": {
-   "numerator": 33,
+   "numerator": 38,
    "denominator": 38,
-   "rate": 0.8684
+   "rate": 1.0
   },
   "coverage": {
    "auto_reviewed": 50,
    "total": 50,
    "coverage_rate": 1.0,
-   "undetermined": 7,
-   "undetermined_rate": 0.14,
-   "low_confidence": 22,
+   "undetermined": 2,
+   "undetermined_rate": 0.04,
+   "low_confidence": 20,
    "manual_review_required": 26
   },
   "consistency_violations": 0,
-  "contradicted": 4,
+  "contradicted": 6,
   "latency_ms_from_previous_run": {
    "samples": 50,
-   "p50": 427.1,
-   "p95": 584.6,
-   "min": 314.5,
-   "max": 679.9,
-   "mean": 445.3
+   "p50": 449.9,
+   "p95": 627.9,
+   "min": 311.7,
+   "max": 709.4,
+   "mean": 461.7
   },
   "latency_source": "artifacts/b_eval/formal_qa_results.json（上一轮同一批 50 题的实测值，本轮未重新计时）",
   "failures": {
@@ -116,11 +116,11 @@
  },
  "qa_latency_ms": {
   "samples": 50,
-  "p50": 427.1,
-  "p95": 584.6,
-  "min": 314.5,
-  "max": 679.9,
-  "mean": 445.3
+  "p50": 449.9,
+  "p95": 627.9,
+  "min": 311.7,
+  "max": 709.4,
+  "mean": 461.7
  },
  "qa_latency_source": "artifacts/b_eval/formal_qa_results.json（同一批 50 题的实测值）",
  "not_computable": {

@@ -40,7 +40,7 @@ if str(ROOT) not in sys.path:
 
 ARTIFACTS = ROOT / "artifacts" / "b_eval"
 QA_DATASET = ROOT / "evaluation" / "b_formal_qa_set.json"
-RESULTS = ARTIFACTS / "formal_qa_results.json"
+RESULTS = ARTIFACTS / "formal_qa_results_20261012.json"
 AUTO_REVIEW = ARTIFACTS / "qa_auto_review.json"
 REFUSAL_CLASSIFICATION = ARTIFACTS / "refusal_failure_classification.json"
 GOLD_WORKSHEET = ARTIFACTS / "qa_gold_standard_worksheet.csv"

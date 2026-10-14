@@ -3,16 +3,17 @@
  "scope": "只覆盖 should_refuse=True 的题目；只读复现，未修改问答主流程",
  "counts": {
   "should_refuse_cases": 12,
-  "correctly_refused": 6,
-  "wrongly_answered": 6,
+  "correctly_refused": 4,
+  "wrongly_answered": 8,
   "by_category": {
    "candidate_multihop_answered_topically": 2,
-   "correct_refusal": 6,
+   "correct_refusal": 4,
    "numeric_token_false_positive": 1,
    "generic_word_answered_from_event_index": 2,
-   "synthesis_request_answered_with_quotes": 1
+   "synthesis_request_answered_with_quotes": 1,
+   "other": 2
   },
-  "needs_human_review": 2
+  "needs_human_review": 4
  },
  "rule_misjudgments": {
   "found": 0,
@@ -27,8 +28,9 @@
    "actually_refused": false,
    "system_answer_head": "CVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitab",
    "evidence": {
-    "document_citations": 3,
+    "document_citations": 5,
     "cited_document_keys": [
+     "paper:2501.13787",
      "paper:2609.28915"
     ],
     "related_event_ids": [
@@ -59,9 +61,9 @@
    "question": "OllamaDrama 蜜罐观察到的攻击，与已知在野利用漏洞清单中的哪些条目对应？",
    "should_refuse": true,
    "actually_refused": false,
-   "system_answer_head": "根据命中的原文证据：\n- 18 K. Elzer et al..\nUnfortunately, we’ve discovered a flaw in your system & found our way in\nMake a donation to our BTC wallet we’re a small business & we employ\nmany engineers to make yo",
+   "system_answer_head": "检索到的相关原文证据如下：\n- “specifically on mapping attacks against AI infrastructure and models, excluding” [OllamaDrama: Designing and Deploying a Honeypot to Measure Attacks on Exposed LLM Infrastructure · ch",
    "evidence": {
-    "document_citations": 5,
+    "document_citations": 6,
     "cited_document_keys": [
      "paper:2609.29757"
     ],
@@ -69,7 +71,7 @@
     "auto_judgment": "insufficient_evidence",
     "auto_rules": [
      "R-QA-EVIDENCE=pass",
-     "R-QA-QUOTE=pass",
+     "R-QA-QUOTE=unavailable",
      "R-QA-REFUSAL=fail",
      "R-QA-CONSISTENCY=pass",
      "R-QA-AMBIGUOUS=fail"
@@ -165,7 +167,7 @@
    "question": "2027 年世界杯冠军是谁？",
    "should_refuse": true,
    "actually_refused": false,
-   "system_answer_head": "根据命中的原文证据：\n- 0.1109/EuroSP68448.2026.00063\n4.Catledge, L.D., Pitkow, J.E.: Characterizing browsing strategies in the World-\nWide web. Computer Networks and ISDN Systems27(6), 1065–1073 (1995).\nhttps:/",
+   "system_answer_head": "根据检索到的原文证据：\n- “Under review as a conference paper at ICLR 2027” [Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures · chunk-c31fcd3b34fc78ba",
    "evidence": {
     "document_citations": 5,
     "cited_document_keys": [
@@ -176,7 +178,7 @@
     "auto_judgment": "contradicted",
     "auto_rules": [
      "R-QA-EVIDENCE=pass",
-     "R-QA-QUOTE=pass",
+     "R-QA-QUOTE=unavailable",
      "R-QA-REFUSAL=fail",
      "R-QA-CONSISTENCY=pass",
      "R-QA-AMBIGUOUS=pass"
@@ -252,7 +254,7 @@
    "question": "请总结全部 22 份文档的主要结论",
    "should_refuse": true,
    "actually_refused": false,
-   "system_answer_head": "根据命中的原文证据：\n- 22 K. Elzer et al..\n15.NIST: CVE-2025-63389. (Missing Authentication for Critical Function) (2025),\nhttps://nvd.nist.gov/vuln/detail/cve-2025-63389\n16.NIST: CVE-2026-85180. (Server-Side R",
+   "system_answer_head": "根据检索到的原文证据：\n- “ΨP(r t,Sj) =∥P Sjrt∥22∥r t∥22 +ε , (4)” [SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance · chunk-cf530a338ae66b8a214ee727]\n- “search?query=product%3A%22ollama%22",
    "evidence": {
     "document_citations": 5,
     "cited_document_keys": [
@@ -265,7 +267,7 @@
     "auto_judgment": "contradicted",
     "auto_rules": [
      "R-QA-EVIDENCE=pass",
-     "R-QA-QUOTE=pass",
+     "R-QA-QUOTE=unavailable",
      "R-QA-REFUSAL=fail",
      "R-QA-CONSISTENCY=pass",
      "R-QA-AMBIGUOUS=pass"
@@ -282,52 +284,61 @@
    "category_of_question": "拒答及证据不足",
    "question": "那篇论文的实验结果是多少？",
    "should_refuse": true,
-   "actually_refused": true,
-   "system_answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "actually_refused": false,
+   "system_answer_head": "根据检索到的原文证据：\n- “of large language models,” ArXiv, vol.” [Parameter-Efficient Fine-Tuning for Foundation Models · chunk-a26721953fbdcee9bce4ff42]\n- “The answer[N/A]means that the paper does not include ",
    "evidence": {
-    "document_citations": 0,
-    "cited_document_keys": [],
+    "document_citations": 4,
+    "cited_document_keys": [
+     "paper:2501.13787",
+     "paper:2609.30192"
+    ],
     "related_event_ids": [],
-    "auto_judgment": "not_applicable",
+    "auto_judgment": "contradicted",
     "auto_rules": [
-     "R-QA-EVIDENCE=unavailable",
+     "R-QA-EVIDENCE=pass",
      "R-QA-QUOTE=unavailable",
-     "R-QA-REFUSAL=pass",
+     "R-QA-REFUSAL=fail",
      "R-QA-CONSISTENCY=pass",
      "R-QA-AMBIGUOUS=pass"
     ]
    },
    "is_rule_misjudgment": false,
-   "failure_category": "correct_refusal",
-   "reason": "系统确实拒答，符合 should_refuse",
-   "minimal_fix": null,
-   "needs_human_review": false
+   "failure_category": "other",
+   "reason": "未能归入已知类别，需人工判断",
+   "minimal_fix": "需要人工判断后再定",
+   "needs_human_review": true
   },
   {
    "question_id": "BQA-049",
    "category_of_question": "拒答及证据不足",
    "question": "TrustedGuard 的量子纠缠检测机制是什么？",
    "should_refuse": true,
-   "actually_refused": true,
-   "system_answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "actually_refused": false,
+   "system_answer_head": "检索到的原文直接证据：\n- “Numbers identify selected zero-based monitor decisions; scaffold events are unnumbered.” [Instrumental Monitor Evasion Emerges Under Ordinary Task Pressure · chunk-f7bbefb749c256b5be855",
    "evidence": {
-    "document_citations": 0,
-    "cited_document_keys": [],
+    "document_citations": 6,
+    "cited_document_keys": [
+     "official:eu_ai_act",
+     "paper:2609.29230",
+     "paper:2609.29429",
+     "paper:2609.30217",
+     "source:nist_news"
+    ],
     "related_event_ids": [],
-    "auto_judgment": "not_applicable",
+    "auto_judgment": "contradicted",
     "auto_rules": [
-     "R-QA-EVIDENCE=unavailable",
+     "R-QA-EVIDENCE=pass",
      "R-QA-QUOTE=unavailable",
-     "R-QA-REFUSAL=pass",
+     "R-QA-REFUSAL=fail",
      "R-QA-CONSISTENCY=pass",
      "R-QA-AMBIGUOUS=pass"
     ]
    },
    "is_rule_misjudgment": false,
-   "failure_category": "correct_refusal",
-   "reason": "系统确实拒答，符合 should_refuse",
-   "minimal_fix": null,
-   "needs_human_review": false
+   "failure_category": "other",
+   "reason": "未能归入已知类别，需人工判断",
+   "minimal_fix": "需要人工判断后再定",
+   "needs_human_review": true
   },
   {
    "question_id": "BQA-050",

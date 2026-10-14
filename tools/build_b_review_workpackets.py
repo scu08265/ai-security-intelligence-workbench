@@ -30,7 +30,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 QA_DATASET = ROOT / "evaluation" / "b_formal_qa_set.json"
-QA_RESULTS = ROOT / "artifacts" / "b_eval" / "formal_qa_results.json"
+QA_RESULTS = ROOT / "artifacts" / "b_eval" / "formal_qa_results_20261012.json"
 RELATION_CANDIDATES = ROOT / "evaluation" / "b_relation_candidates.json"
 
 QA_COLUMNS = [

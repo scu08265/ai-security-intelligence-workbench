@@ -21,7 +21,7 @@ if str(ROOT) not in sys.path:
 ARTIFACTS = ROOT / "artifacts" / "b_eval"
 RELATION_REVIEW = ARTIFACTS / "relation_auto_review.json"
 QA_REVIEW = ARTIFACTS / "qa_auto_review.json"
-QA_RESULTS = ARTIFACTS / "formal_qa_results.json"
+QA_RESULTS = ARTIFACTS / "formal_qa_results_20261012.json"
 RELATION_SCORE = ARTIFACTS / "relation_score.json"
 
 

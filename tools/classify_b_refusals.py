@@ -21,7 +21,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 DATASET = ROOT / "evaluation" / "b_formal_qa_set.json"
-RESULTS = ROOT / "artifacts" / "b_eval" / "formal_qa_results.json"
+RESULTS = ROOT / "artifacts" / "b_eval" / "formal_qa_results_20261012.json"
 AUTO_REVIEW = ROOT / "artifacts" / "b_eval" / "qa_auto_review.json"
 
 # 与通用安全词一致（与 app/rag.py::_GENERIC_SECURITY_TERMS 保持同样口径）
