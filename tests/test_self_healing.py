@@ -123,6 +123,7 @@ def test_below_the_threshold_nothing_is_degraded():
 
 
 def test_recovery_clears_an_active_cooldown(monkeypatch):
+    """A source that answers again leaves the cooldown on the next selection."""
     for day in (1, 2, 3):
         _collect_run("nvd", "failed", day)
     storage.update_source_state("nvd", status="failed", last_error="HTTP 503 timeout")
@@ -143,3 +144,28 @@ def test_recovery_clears_an_active_cooldown(monkeypatch):
     assert result["degradations"] == []
     assert result["degradations_cleared"] == ["nvd"]
     assert storage.source_degradation("nvd") is None
+
+
+def test_selection_lifts_a_cooldown_once_the_source_answers_again():
+    """Regression: after a transient outage the recovered source stayed out.
+
+    Clearing only inside run_self_healing was not enough, because self-healing
+    runs when a collection comes back failed or partial.  Once the sources
+    recovered, later collections reported `completed`, self-healing never ran,
+    and 19 healthy sources stayed out of the unattended set for the rest of the
+    cooldown.
+    """
+    storage.save_source_degradation({
+        "source_id": "msrc", "action": "reduce_frequency",
+        "consecutive_failures": 3, "expires_at": self_healing._expiry(),
+    })
+    storage.update_source_state("msrc", status="failed")
+    selected, notes = self_healing.apply_degradation_policy(["nvd", "msrc"])
+    assert selected == ["nvd"]
+    assert notes and notes[0]["source_id"] == "msrc"
+
+    storage.update_source_state("msrc", status="ok")
+    selected, notes = self_healing.apply_degradation_policy(["nvd", "msrc"])
+    assert selected == ["nvd", "msrc"], "a recovered source must be collectable again"
+    assert notes == []
+    assert storage.source_degradation("msrc") is None

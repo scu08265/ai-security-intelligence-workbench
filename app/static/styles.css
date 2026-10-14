@@ -1374,6 +1374,19 @@ details.raw pre {
 .knowledge-node.chunk { border-left: 3px solid var(--green-line); }
 button.knowledge-node.category { border-left: 3px solid var(--green-line); cursor: pointer; }
 button.knowledge-node.category:hover { border-color: var(--accent); background: var(--accent-soft); }
+/* 术语 → 文档两跳：术语节点实心加粗、文档/事件节点保持描边，两种节点一眼分得开 */
+.term-graph { display: flex; flex-direction: column; gap: 8px; }
+.term-graph-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+.term-graph-row > .knowledge-node { display: inline-block; width: auto; max-width: 220px; }
+.term-graph-arrow { color: var(--dim); font-family: var(--font-mono); font-size: 11px; }
+.term-graph-targets { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.knowledge-node.term {
+  border-color: var(--accent);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+.knowledge-node.event { border-left: 3px dashed var(--accent-line); }
 .knowledge-map-flow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--dim); font-size: 10.5px; }
 .knowledge-map-flow b { color: var(--accent); font-size: 20px; font-weight: 400; }
 .knowledge-documents { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }

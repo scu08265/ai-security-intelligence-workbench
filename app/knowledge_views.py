@@ -10,7 +10,7 @@ from __future__ import annotations
 from collections import Counter
 from typing import Any
 
-from . import agents, intelligence, sources, storage, streaming, task_dag
+from . import agents, intelligence, sources, storage, streaming, task_dag, term_dictionary
 
 
 def _events(limit: int = 500) -> tuple[list[dict], int]:
@@ -166,9 +166,73 @@ def graph(*, event_limit: int = 200) -> dict:
                   "label": assessment.get("status") or "unknown",
                   "evidence_ids": list(assessment.get("evidence_ids") or []),
                   "basis": "persisted_assessment", "priority": assessment.get("priority")})
+    # 术语 → 文档：术语字典已经把这层两跳算好了，这里把它并进图谱返回，让图谱视图
+    # 第一次能看到术语节点。只并入**有文档命中的**术语——未覆盖的术语放进图里会变成
+    # 孤点、看起来像渲染错误，它们在 /api/knowledge/terms 里已经如实标为"语料未覆盖"。
+    #
+    # 边界（必须与跨文档指标分开表述）：这只是术语 → 文档的两跳，不是文档之间的
+    # 跨文档推理；跨文档路径仍按 10/21 报，不因为多了这一层就上调。
+    term_edge_count = 0
+    covered_terms = 0
+    for card in term_dictionary.entries():
+        documents = card.get("related_documents") or []
+        if not documents:
+            continue
+        covered_terms += 1
+        term_node = f"term:{card.get('key')}"
+        add_node({
+            "id": term_node, "type": "term", "ref_id": card.get("key"),
+            "label": card.get("label") or card.get("term") or card.get("key"),
+            "term": card.get("term"), "category": card.get("category"),
+            "document_count": len(documents),
+            "definition_chunk_id": (card.get("definition") or {}).get("chunk_id"),
+        })
+        definition_chunk = (card.get("definition") or {}).get("chunk_id")
+        for item in documents:
+            document_key = str(item.get("document_key") or "")
+            if not document_key:
+                continue
+            # 术语字典的"文档"是两类东西：事件的标题摘要（document_key 就是事件 ID），
+            # 以及 RAG 分块文档（document_key 形如 paper:…）。节点类型必须跟着真实身份走，
+            # 否则会出现 document:CVE-… 这种把事件当文档的错标。
+            event_record = storage.get_event(document_key)
+            if event_record is not None:
+                target = f"event:{document_key}"
+                add_node({
+                    "id": target, "type": "event", "ref_id": document_key,
+                    "label": event_record.get("title") or document_key,
+                    "category": sources.event_group(event_record),
+                    "status": event_record.get("status"),
+                    # 这个事件节点是术语层带进来的，没有加载它的 sources / relationships，
+                    # 标出来避免被读成"事件节点没有证据"。
+                    "term_only": True,
+                })
+            else:
+                target = f"document:{document_key}"
+                add_node({
+                    "id": target, "type": "document", "ref_id": document_key,
+                    "label": document_key, "source_id": _source_prefix(document_key),
+                    "corpus_document": True,
+                })
+            add_edge({
+                "id": f"term_documents:{card.get('key')}:{document_key}",
+                "source": term_node, "target": target, "type": "term_in_document",
+                "label": "术语出现在文档", "chunks": item.get("chunks"),
+                "evidence_ids": [definition_chunk] if definition_chunk else [],
+                "basis": "term_dictionary.entries",
+            })
+            term_edge_count += 1
+
     return {"nodes": list(nodes.values()), "edges": list(edges.values()),
             "event_total": total, "event_limit": event_limit, "truncated": total > len(events),
-            "policy": "不推断边：仅展示 event.sources、带有效 evidence_ids 的 relationships 和已保存 assessments。"}
+            "term_summary": {
+                "covered_terms": covered_terms,
+                "term_document_edges": term_edge_count,
+                "note": ("术语 → 文档的两跳；不等于跨文档推理，跨文档指标另按抽样穷尽金标准报。"),
+            },
+            "policy": ("不推断边：仅展示 event.sources、带有效 evidence_ids 的 relationships、"
+                       "已保存 assessments，以及术语字典算出的术语 → 文档两跳。"
+                       "术语 → 文档不等于跨文档推理，跨文档指标另按抽样穷尽金标准报。")}
 
 
 def agent_workbench() -> dict:

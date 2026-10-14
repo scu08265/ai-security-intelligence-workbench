@@ -13,14 +13,14 @@
 
 <!-- snapshot:start 由 tools/refresh_metrics_snapshot.py 重写，不要手工改这一段 -->
 
-快照时间 **2026-10-14**（本机时区 2026-10-14 12:21 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
+快照时间 **2026-10-14**（本机时区 2026-10-14 13:25 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
 
 | 项 | 值 |
 | --- | --- |
 | 路径 | `data/intel.sqlite`（仓库内） |
-| 大小 | 12,439,552 字节 |
-| SHA-256 | `3732094bdbce8656af03b4b9b75e6dad97bbefa1000bc3c22ceed4394e2926fb` |
-| runs | 1001 |
+| 大小 | 12,517,376 字节 |
+| SHA-256 | `8b1c83563a7377c81f0ad772d65a6046fe59c32918c86ce947532aded79a13d9` |
+| runs | 1005 |
 | events / event_aliases | 637 / 211 |
 | assets / assessments / assessment_dispositions | 8 / 190 / 6 |
 | rag_documents / rag_chunks | 1 / 849 |
@@ -37,7 +37,7 @@
 | 赛题连续运行（7 天窗口） | 10 天，`target_met = false` |
 | 语料 | `events_loaded = 637` / `events_total = 637`，`truncated = false` |
 | 监测时效性 | 6 小时内 31.8%，12 小时内 44.9%，24 小时内 61.8%；p50 = 15.69 小时（296 个有效样本） |
-| 处置闭环 | 高优先级 48 / 已复测关闭 4 / `closure_rate = 0.0833` / `verified_rate = 0.0625` / `findings_total = 94` |
+| 处置闭环 | 高优先级 53 / 已复测关闭 4 / `closure_rate = 0.0755` / `verified_rate = 0.0566` / `findings_total = 126` |
 | 关系评测（当前批次口径） | P = 1.0，R = 0.734，F1 = 0.8466（TP 69 / FP 0 / FN 25） |
 | 富化样本量 | 637 个事件 |
 
@@ -59,12 +59,12 @@
 | B 的关系抽取 / 问答 / RAG 评测 | 语料已于 2026-10-12 交付到演示机 `D:\ICT\intel-data-b`，按 `MANIFEST.sha256` 核验 47/47 通过 | **可以在演示机上复跑**；引用时注明语料是外部交付、经哈希核验，且语料本身不入库 |
 | A 的处置闭环 live 证据（4 条队列 / 3 条关闭 / 0.75） | A 的机器，`D:\新建文件夹\2026-09-26\ba\...\data\intel.sqlite` 的副本，本机不存在 | 注明是 A 机器上的流程落地演示；**交付闭环率写本机口径 48 / 4 / 8.33%** |
 
-2026-10-12 语料到位后，全量测试由 618 passed / 60 skipped 变为 **674 passed / 4 skipped**，
-其中包含此前唯一一条已知失败用例（中频词检索）——该缺陷已定位并修复（`9ff7383`），
-问题不在词频阈值，而在中文短语的同义词扩展被逐词计分。剩余 4 条跳过依赖两个衍生副本
-（`intel-data-b-cvss-20261006`、`intel-data-b-poc-20261002`）。这两个副本已打包为
-`B_DERIVATIVE_CORPORA_20261012.zip`（整包 SHA-256 `98bd19c5…961674a`，139 文件），
-**尚未交到交付机**；交付机按包内 `MANIFEST.sha256` 逐文件核验通过后，这 4 条才解除。
+2026-10-14 两个衍生副本到位后，全量测试**已无跳过**：**698 passed / 0 skipped / 0 failed**。
+此前 4 条跳过依赖 `intel-data-b-cvss-20261006` 与 `intel-data-b-poc-20261002`，
+两者随 `B_DERIVATIVE_CORPORA_20261012.zip`（80,208,714 字节 / SHA-256 `98bd19c5…961674a`）
+交付，交付机按包内 `MANIFEST.sha256` 逐文件核验 **139 / 139 通过**，两个主库哈希也与记录一致
+（`FCD31963…` / `CEC88D75…`），落位后跳过归零。更早一次从 618 passed / 60 skipped 出发的
+变化，另见 `docs/B_CORPUS_HANDOVER_REQUEST.md`；中频词那条已知失败用例已由 `9ff7383` 修复。
 
 两份证据本身都没有造假：它们各自在各自的数据集上成立。问题只在于**不能跨数据集混引**。
 

@@ -1,7 +1,12 @@
 param(
     [string]$TaskName = "AI-Security-Intelligence-Hourly-Collection",
     [int]$IntervalHours = 1,
-    [int]$DurationHours = 24,
+    # 0 = repeat indefinitely.  A finite window expires silently: once the
+    # repetition duration runs out the task still exists but NextRunTime goes
+    # blank, so the schedule stops without any error.  The task on this machine
+    # sat at LastRunTime 2026-10-02 17:48 with LastTaskResult 0 (success) and an
+    # empty NextRunTime, which is why "re-hung" looked fine but never fired.
+    [int]$DurationHours = 0,
     [string]$UserId = "$env:USERDOMAIN\$env:USERNAME"
 )
 
@@ -19,11 +24,15 @@ $Action = New-ScheduledTaskAction `
     -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$Runner`" -TaskId `"hourly-recommended-sources`" -Hourly" `
     -WorkingDirectory $Root
 $StartAt = (Get-Date).AddMinutes(1)
-$Trigger = New-ScheduledTaskTrigger `
-    -Once `
-    -At $StartAt `
-    -RepetitionInterval (New-TimeSpan -Hours $IntervalHours) `
-    -RepetitionDuration (New-TimeSpan -Hours $DurationHours)
+$TriggerArgs = @{
+    Once               = $true
+    At                 = $StartAt
+    RepetitionInterval = (New-TimeSpan -Hours $IntervalHours)
+}
+if ($DurationHours -gt 0) {
+    $TriggerArgs["RepetitionDuration"] = (New-TimeSpan -Hours $DurationHours)
+}
+$Trigger = New-ScheduledTaskTrigger @TriggerArgs
 $Settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
@@ -49,10 +58,11 @@ Register-ScheduledTask `
     -Trigger $Trigger `
     -Settings $Settings `
     -Principal $Principal `
-    -Description "Run recommended AI security intelligence sources every $IntervalHours hour(s) for $DurationHours hour(s)." `
+    -Description "Run recommended AI security intelligence sources every $IntervalHours hour(s)." `
     -Force | Out-Null
 
 Write-Host "Installed scheduled task: $TaskName"
-Write-Host "Schedule: every $IntervalHours hour(s) for $DurationHours hour(s), starting $StartAt"
+$Window = if ($DurationHours -gt 0) { "for $DurationHours hour(s)" } else { "indefinitely (no expiry)" }
+Write-Host "Schedule: every $IntervalHours hour(s) $Window, starting $StartAt"
 Write-Host "Sleep and hibernation are disabled; display timeout is unchanged."
 Write-Host "Manual test: Start-ScheduledTask -TaskName '$TaskName'"
