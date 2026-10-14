@@ -26,6 +26,17 @@ def test_scorecard_surfaces_source_health_and_system_health():
     assert 'consecutive_failures' in SCRIPT
 
 
+def test_console_surfaces_the_dictionary_suggestions_chain_and_tech_details():
+    """The four capabilities added after the reference-project review."""
+    assert '术语语义字典' in SCRIPT
+    assert "'/api/knowledge/terms'" in SCRIPT
+    assert '推荐问法' in SCRIPT
+    assert "'/api/qa/suggestions'" in SCRIPT
+    assert '模型降级链与角色绑定' in SCRIPT
+    assert "'/api/system/model-chain'" in SCRIPT
+    assert '技术详情：本轮计划与工具调用' in SCRIPT
+
+
 def test_rail_has_exactly_three_user_task_entries():
     tabs = re.findall(r'class="tab[^"]*"[^>]*data-tab="([a-z]+)"', HTML)
     assert tabs == ["overview", "knowledge", "scorecard"]

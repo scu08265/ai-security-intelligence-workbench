@@ -11,6 +11,7 @@ here rather than left to callers:
 
 from __future__ import annotations
 
+import json
 import time
 from collections import Counter
 from typing import Any
@@ -24,7 +25,7 @@ from . import (agent_context, agents, b_evaluation, competition_scorecard, confi
                  disposition,
                evaluation, intelligence, knowledge_views, observability, rag_corpus,
                reliability, self_healing, sources, storage, streaming,
-               multi_agent_runtime)
+               multi_agent_runtime, model_chain, term_dictionary)
 from . import dag_executor, task_dag
 
 MAX_QUESTION = 2000
@@ -471,6 +472,61 @@ def knowledge_graph(event_limit: int = Query(default=200, ge=1, le=500)) -> dict
     return knowledge_views.graph(event_limit=event_limit)
 
 
+@app.get("/api/knowledge/terms")
+def knowledge_terms(category: str = Query(default="", max_length=60)) -> dict:
+    """Semantic dictionary: each term card is grounded in the stored corpus."""
+    items = term_dictionary.entries()
+    if category:
+        items = [item for item in items if item["category"] == category]
+    return {
+        "generated_at": storage.utcnow(),
+        "items": items,
+        "coverage": term_dictionary.coverage(),
+    }
+
+
+@app.get("/api/qa/suggestions")
+def qa_suggestions(limit: int = Query(default=24, ge=1, le=60)) -> dict:
+    """Recommended questions taken from the frozen evaluation set.
+
+    Using the evaluation set rather than ad-hoc examples means the suggested
+    questions and the scored questions are the same population: what the page
+    invites you to ask is exactly what the report measures.
+    """
+    path = config.BASE_DIR / "evaluation" / "b_formal_qa_set.json"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False, "items": [], "source": str(path)}
+    cases = payload.get("cases") or []
+    groups: dict[str, list[dict]] = {}
+    for case in cases:
+        question = str(case.get("question") or "").strip()
+        if not question or case.get("should_refuse"):
+            continue
+        category = str(case.get("category") or "未分类")
+        groups.setdefault(category, []).append({
+            "question_id": case.get("question_id"),
+            "question": question,
+            "expected_document_keys": case.get("expected_document_keys") or [],
+            "has_history": bool(case.get("history")),
+            "reasoning_steps": case.get("expected_reasoning_steps") or [],
+        })
+    items = [
+        {"category": category, "questions": questions}
+        for category, questions in groups.items()
+    ]
+    total = sum(len(group["questions"]) for group in items)
+    return {
+        "available": True,
+        "source": "evaluation/b_formal_qa_set.json",
+        "limit": limit,
+        "total_questions": total,
+        "items": items,
+        "note": "推荐问法直接取自固定评测集，与报告里的评测口径同源；拒答类题目不进推荐列表。",
+    }
+
+
 @app.get("/api/agent/workbench")
 def agent_workbench() -> dict:
     return knowledge_views.agent_workbench()
@@ -578,6 +634,12 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
 @app.get("/api/system/logs")
 def system_logs(limit: int = Query(default=100, ge=1, le=1000)) -> dict:
     return observability.recent_logs(limit=limit)
+
+
+@app.get("/api/system/model-chain")
+def system_model_chain() -> dict:
+    """The model fallback chain plus which agent role uses a model."""
+    return model_chain.chain()
 
 
 @app.post("/api/collect")
