@@ -30,6 +30,9 @@ from playwright.sync_api import sync_playwright
 QUESTION = "CVE-2026-22778 会影响我的哪些资产？"
 FAST_SOURCE = "cisa_kev"
 SHOT_DIR = Path(__file__).resolve().parent.parent / "artifacts" / "browser"
+# The two health panels are quoted in the technical report, so their screenshots
+# belong next to the other report screenshots, not only in the scratch dir.
+DOC_SHOT_DIR = Path(__file__).resolve().parent.parent / "docs" / "screenshots"
 
 failures: list[str] = []
 
@@ -62,6 +65,7 @@ def wait_until(predicate, timeout_s: float = 60.0, what: str = "condition"):
 
 def run(base: str) -> int:
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
+    DOC_SHOT_DIR.mkdir(parents=True, exist_ok=True)
     console_errors: list[str] = []
     failed_requests: list[str] = []
 
@@ -78,8 +82,8 @@ def run(base: str) -> int:
         page.wait_for_timeout(500)
         check("模式横幅已渲染", bool(page.inner_text("#mode-text").strip()))
         check("默认打开任务台", page.is_visible("#panel-overview"))
-        check("首页优先展示风险处置指标",
-              "立即处置" in page.inner_text("#panel-overview"))
+        check("首页渲染任务引导",
+              bool(page.inner_text("#body-onboarding").strip()))
 
         print("\n2. 三入口结构与赛题指标")
         check("导航只保留 3 个任务入口", page.locator(".tablist .tab").count() == 3,
@@ -87,11 +91,64 @@ def run(base: str) -> int:
         check("三个入口名称清晰",
               all(label in page.inner_text(".rail") for label in ("任务工作台", "知识图谱", "赛题指标")))
         page.click("#mode-link")
-        wait_until(lambda: page.locator("#body-scorecard .score-capability").count() == 5,
-                   timeout_s=20, what="五类赛题指标")
-        check("五类赛题能力均直接展示", page.locator("#body-scorecard .score-capability").count() == 5)
+        wait_until(lambda: page.locator("#body-scorecard .score-capability").count() >= 9,
+                   timeout_s=20, what="赛题指标卡")
+        check("赛题指标卡全部渲染",
+              page.locator("#body-scorecard .score-capability").count() >= 9,
+              f"{page.locator('#body-scorecard .score-capability').count()} 张")
         check("统一计分接口兼容状态已说明", bool(page.inner_text("#body-scorecard .scorecard-status").strip()))
         page.screenshot(path=str(SHOT_DIR / "01-scorecard.png"), full_page=True)
+
+        print("\n2a. 来源健康度与系统健康面板（浏览器实测 + 与接口逐项核对）")
+        health = page.evaluate("() => fetch('/api/system/health').then(r => r.json())")
+        source_panel = page.locator("#body-scorecard article.score-capability").filter(
+            has=page.locator("h3", has_text="来源健康度")).first
+        system_panel = page.locator("#body-scorecard article.score-capability").filter(
+            has=page.locator("h3", has_text="系统健康")).first
+        check("来源健康度面板已渲染", source_panel.count() > 0)
+        check("系统健康面板已渲染", system_panel.count() > 0)
+
+        api_sources = health.get("sources") or []
+        api_modules = health.get("modules") or []
+        source_rows = source_panel.locator("tbody tr").count()
+        check("来源健康度按来源逐行渲染",
+              source_rows == len(api_sources),
+              f"页面 {source_rows} 行 / 接口 {len(api_sources)} 个来源")
+        module_rows = system_panel.locator("tbody tr").count()
+        check("系统健康按模块逐行渲染",
+              module_rows == len(api_modules),
+              f"页面 {module_rows} 行 / 接口 {len(api_modules)} 个模块")
+
+        ok_modules = sum(1 for item in api_modules if item.get("state") == "ok")
+        expected_badge = f"{ok_modules} / {len(api_modules)} 个模块正常"
+        check("系统健康徽标与接口一致", expected_badge in system_panel.inner_text(),
+              expected_badge)
+
+        source_text = source_panel.inner_text()
+        rendered = [
+            (item.get("name") or item.get("id"))
+            for item in api_sources
+            if (item.get("name") or item.get("id")) in source_text
+        ]
+        check("来源行内容来自接口而非前端推算",
+              len(rendered) == len(api_sources),
+              f"{len(rendered)} / {len(api_sources)} 行可对上接口名称")
+
+        status_labels = {"ok": "正常", "failed": "失败", "stale": "陈旧（保留历史数据）",
+                         "partial": "部分成功", "skipped": "已跳过", "idle": "未运行"}
+        mismatch = []
+        for item in api_sources:
+            if item.get("degradation"):
+                continue
+            label = status_labels.get(str(item.get("status")), str(item.get("status") or "未运行"))
+            if label not in source_text:
+                mismatch.append((item.get("id"), label))
+        check("来源状态文案与接口状态取值一致", not mismatch, str(mismatch[:3]))
+
+        source_panel.screenshot(path=str(DOC_SHOT_DIR / "09-source-health.png"))
+        system_panel.screenshot(path=str(DOC_SHOT_DIR / "10-system-health.png"))
+        source_panel.screenshot(path=str(SHOT_DIR / "09-source-health.png"))
+        system_panel.screenshot(path=str(SHOT_DIR / "10-system-health.png"))
 
         print("\n2b. 知识图谱可视化")
         page.click("#tab-knowledge")
@@ -118,7 +175,10 @@ def run(base: str) -> int:
         check("合成样例标记清晰", "合成仿真数据" in page.inner_text("#body-simulation"))
         check("假设确认前运行按钮禁用",
               page.locator("#body-simulation button.btn--primary").is_disabled())
-        page.check("#body-simulation .simulation-confirm input")
+        # 两个确认框：第一个是"标记为合成演示资产"，第二个才是"我同意纳入评估"。
+        # 勾错那个不会解锁运行按钮，所以按文案定位。
+        page.locator("#body-simulation .simulation-confirm").filter(
+            has_text="我已核对以上来源和假设").locator("input").check()
         check("确认假设后可运行",
               not page.locator("#body-simulation button.btn--primary").is_disabled())
         page.locator("#body-simulation button.btn--primary").click()

@@ -369,11 +369,18 @@ SECTIONS = [
           "docs/CASE_QA_MULTITURN_CROSSDOC.md（问答演示）、reports/（容器与自愈验收产物）。"),
     ("h1", "九、各功能模块实现效果展示"),
     ("table", ["模块", "展示方式", "证据文件"],
-     [["监测与来源健康", "赛题指标页的来源健康度面板（每个来源的状态、最近成功时间、连续失败次数）", "app/static/app.js、/api/system/health"],
-      ["系统健康", "模块状态、活跃降级、冷却截止与最近告警", "/api/system/health"],
+     [["监测与来源健康", "赛题指标页的来源健康度面板（每个来源的状态、类别、最近成功时间、产出条数、连续失败次数）",
+       "docs/screenshots/09-source-health.png、/api/system/health"],
+      ["系统健康", "模块状态、活跃降级、冷却截止与最近告警",
+       "docs/screenshots/10-system-health.png、/api/system/health"],
       ["富化", "事件详情中的 CVSS、受影响区间、修复版本与来源标识", "docs/CASE_ENRICHMENT_INFERENCE.md"],
       ["问答与多轮", "多轮追问、跨文档引用、拒答三组界面截图", "docs/screenshots/b-qa-0*.png"],
       ["处置闭环", "高优先级队列、复测关闭与操作前后对比截图", "docs/A_DISPOSITION_LIVE_CLOSURE.md"]]),
+    ("p", "上表前两行是浏览器级实测，不是结构性断言：tools/browser_check.py 用真实 Chromium 打开页面，"
+          "把渲染出来的行数与 /api/system/health 的返回逐项对齐——来源方向 20 行对 20 个来源、"
+          "系统健康 4 行对 4 个模块、徽标文案与模块状态计数一致、每个来源的状态文案都能在接口取值里找到对应项，"
+          "截图分别是 docs/screenshots/09-source-health.png 与 10-system-health.png。"
+          "这两张图的数据全部来自 source_state 与 source_degradations 的持久化记录，前端不做任何推算。"),
     ("h1", "十、性能测试结果与分析"),
     ("table", ["指标", "实测", "说明"],
      [["监测时效性（漏洞类，赛题口径）", "GHSA 中位 1.8 小时；NVD 中位 12.4 小时",
