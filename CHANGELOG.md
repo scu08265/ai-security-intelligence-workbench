@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- Made the dated metrics snapshot refreshable instead of hand-edited, after a
+  reviewer found the report saying 596 events / 19 collection days while
+  `docs/METRICS_BASELINE.md` said 548 / 18.  Both were live readings taken a day
+  apart, which is the real defect: a hand-written snapshot goes stale within a
+  day because the collection task adds events hourly.  `tools/refresh_metrics_snapshot.py`
+  now rewrites the marked block in the baseline document and writes
+  `docs/report/metrics_snapshot.json`, and `tools/build_technical_report.py`
+  reads that same file for its headline and performance figures, so the two
+  cannot disagree.
+- Corrected an overclaim the refresh exposed: the report asserted the seven-day
+  continuous-run target was met.  It was met for the window ending 2026-10-10,
+  but the scheduled task's trigger window expired on 10-11, 10-12 has no
+  scheduled run at all, and the streak has restarted.  The report now states the
+  current status from the snapshot instead of a fixed claim.
 - Added a term dictionary that treats a term as a first-class object.  Each of
   the 14 seeded AI-security terms is grounded in the stored corpus: how many
   documents carry it, which ones, and the sentence that introduces it, with the

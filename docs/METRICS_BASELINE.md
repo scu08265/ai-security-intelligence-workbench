@@ -11,16 +11,17 @@
 
 ## 1. 基线数据集快照
 
-快照时间 **2026-10-12**（Asia/Shanghai）。数据库每小时可能因采集任务增长，因此快照会过期；
-引用时请连同日期一起引用，或直接用第 2 节的接口实时读数。
+<!-- snapshot:start 由 tools/refresh_metrics_snapshot.py 重写，不要手工改这一段 -->
+
+快照时间 **2026-10-14**（本机时区 2026-10-14 12:21 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
 
 | 项 | 值 |
 | --- | --- |
 | 路径 | `data/intel.sqlite`（仓库内） |
-| 大小 | 10,682,368 字节 |
-| SHA-256 | `e4863d04e67851b531e7c1670ecd2b84049165e6814e86afc2df66f78645ab1f` |
-| runs | 779 |
-| events / event_aliases | 548 / 185 |
+| 大小 | 12,439,552 字节 |
+| SHA-256 | `3732094bdbce8656af03b4b9b75e6dad97bbefa1000bc3c22ceed4394e2926fb` |
+| runs | 1001 |
+| events / event_aliases | 637 / 211 |
 | assets / assessments / assessment_dispositions | 8 / 190 / 6 |
 | rag_documents / rag_chunks | 1 / 849 |
 | duplicate_candidates | 210 |
@@ -31,12 +32,16 @@
 
 | 指标 | 值 |
 | --- | --- |
-| 累计有采集日期 | 18 天（首次采集 2026-09-25） |
-| 累计定时运行日期 | 8 天 |
-| 赛题连续运行（7 天窗口） | 8 天，`target_met = true` |
-| 语料 | `events_loaded = 548` / `events_total = 548`，`truncated = false` |
-| 处置闭环 | 高优先级 48 / 已复测关闭 4 / `closure_rate = 0.0833` / `verified_rate = 0.0625` / `findings_total = 91` |
+| 累计有采集日期 | 20 天（首次采集 2026-09-25） |
+| 累计定时运行日期 | 10 天 |
+| 赛题连续运行（7 天窗口） | 10 天，`target_met = false` |
+| 语料 | `events_loaded = 637` / `events_total = 637`，`truncated = false` |
+| 监测时效性 | 6 小时内 31.8%，12 小时内 44.9%，24 小时内 61.8%；p50 = 15.69 小时（296 个有效样本） |
+| 处置闭环 | 高优先级 48 / 已复测关闭 4 / `closure_rate = 0.0833` / `verified_rate = 0.0625` / `findings_total = 94` |
 | 关系评测（当前批次口径） | P = 1.0，R = 0.734，F1 = 0.8466（TP 69 / FP 0 / FN 25） |
+| 富化样本量 | 637 个事件 |
+
+<!-- snapshot:end -->
 
 **权威来源始终是接口本身**：这份表只是某一时刻的定格，供报告写作时对齐用。数值变化时改这一处，
 不要在各份文档里各写一份。
@@ -75,6 +80,11 @@
 1. 报告与 PPT 的指标表只放第 2 节的数字，并标注快照日期。
 2. 任何来自其他机器或数据集的数字，必须紧跟一行限定语说明运行环境；没有限定语的数字不进正文。
 3. 口径变了（换机、换库、换语料）先改本文件，再改下游文档。
+4. **快照因数据自然增长而过期，不属于第 3 条的"口径变了"**。采集任务每小时写入，所以任何数字
+   过一天就会变旧。这种情况直接重跑 `python tools/refresh_metrics_snapshot.py --write`，
+   它会同时重写本文件的快照块与 `docs/report/metrics_snapshot.json`，报告读的是同一个文件，
+   因此**不需要把报告退回旧值**，也不需要手工核对两处。只有换机、换库、换语料才走第 3 条。
+   提交前跑一次刷新，让快照日期等于提交当刻。
 
 ## 5. 相关文件
 

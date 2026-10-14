@@ -10,6 +10,7 @@ documents embed.  Run with the report toolchain on PYTHONPATH:
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -207,6 +208,60 @@ def build_figures() -> dict[str, Path]:
 TITLE = "智能体驱动的 AI 安全知识情报系统设计与实现"
 SUBTITLE = "技术报告"
 
+
+def _snap(*path, default="—"):
+    """Read one value out of the shared snapshot, or a dash when it is absent."""
+    try:
+        data = json.loads(
+            (ROOT / "docs" / "report" / "metrics_snapshot.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return default
+    for key in path:
+        if not isinstance(data, dict):
+            return default
+        data = data.get(key)
+    return default if data is None else data
+
+
+def headline_rows() -> list[list[str]]:
+    """Headline figures come from the same snapshot the baseline document uses.
+
+    Reading one file in both places is the only way the report and
+    ``docs/METRICS_BASELINE.md`` cannot disagree about what the demo machine
+    said.  Run ``tools/refresh_metrics_snapshot.py --write`` to move both.
+    """
+    try:
+        snapshot = json.loads(
+            (ROOT / "docs" / "report" / "metrics_snapshot.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return [["快照", "缺少 docs/report/metrics_snapshot.json",
+                 "先运行 python tools/refresh_metrics_snapshot.py --write"]]
+
+    card = snapshot.get("scorecard") or {}
+    disposition = snapshot.get("disposition") or {}
+    relation = snapshot.get("relation") or {}
+    date = snapshot.get("snapshot_date", "未标注")
+    return [
+        ["语料规模", f"{card.get('events_total')} 个事件 / {card.get('enrichment_sample')} 个富化样本",
+         f"演示机 data/intel.sqlite，快照 {date}"],
+        ["连续监测", f"累计 {card.get('cumulative_actual_run_days')} 个采集日，"
+                     f"定时运行 {card.get('cumulative_scheduled_run_days')} 天",
+         "赛题连续运行只认 trigger=scheduled"],
+        ["监测时效性", f"p50 = {card.get('latency_p50_hours')} 小时；"
+                       f"6 小时内 {card.get('within_6h_rate'):.1%}",
+         f"{card.get('effective_denominator')} 个有效样本，已排除监测前历史回填"],
+        ["富化准确率", f"关系 Precision {relation.get('precision')} / Recall {relation.get('recall')}",
+         "抽样穷尽金标准，94 条可判定样本"],
+        ["问答命中", "引用命中 0.9722 / 预期词命中 0.9211",
+         "50 题正式评测集，2026-10-12 批次"],
+        ["处置闭环", f"高优先级 {disposition.get('high_priority_total')} / 已关闭 "
+                     f"{disposition.get('high_priority_closed')}"
+                     f"（{disposition.get('closure_rate'):.2%}）",
+         "仅计入系统复测通过的条目"],
+        ["自动化测试", "691 通过 / 4 跳过", "交付机全量 pytest（提交前重跑）"],
+        ["容器验收", "9 项检查全部通过", "reports/docker-validation.json"],
+    ]
+
 OVERVIEW = [
     ("h2", "作品概览"),
     ("p", "本系统面向 AI 安全漏洞情报这一具体问题：把分散在 CVE/NVD、安全社区、厂商公告、安全博客、"
@@ -221,20 +276,16 @@ OVERVIEW = [
         "工程化交付：容器九项验收、CI 三个 job、回滚演练、结构化日志与告警 webhook。",
     ]),
     ("h2", "关键数字（2026-10-13 快照，取演示机数据库）"),
-    ("table", ["项目", "数值", "口径"],
-     [["语料规模", "596 个事件 / 3,639 分块", "演示机 data/intel.sqlite 与 B 评测语料"],
-      ["连续监测", "累计 19 个采集日，定时运行 8 天", "赛题连续运行只认 trigger=scheduled"],
-      ["监测时效性", "p50 = 18.1 小时", "267 个有效样本，已排除监测前历史回填"],
-      ["富化准确率", "关系 Precision 1.0", "抽样穷尽金标准，94 条可判定样本"],
-      ["问答命中", "引用命中 0.9722 / 预期词命中 0.9211", "50 题正式评测集，2026-10-12 批次"],
-      ["处置闭环", "高优先级 48 / 已关闭 4（8.33%）", "仅计入系统复测通过的条目"],
-      ["自动化测试", "675 通过 / 4 跳过", "交付机全量 pytest"],
-      ["容器验收", "9 项检查全部通过", "reports/docker-validation.json"]]),
+    ("table", ["项目", "数值", "口径"], headline_rows()),
     ("h2", "如实说明的边界"),
-    ("p", "为避免把缺口说成能力，以下四项在正文中同样保留：没有实时监测（全部来源 realtime=false）；"
-          "监测时效性 p50 为 18.1 小时，只达到赛题合格档；跨文档路径 10/21，缺 52 条文档间边；"
-          "POC 与资产两个维度在评测语料中无数据。关系维度的 1.0 / 0.734 只代表抽样范围，"
-          "不外推为全语料指标。"),
+    ("p", "为避免把缺口说成能力，以下五项在正文中同样保留：没有实时监测（全部来源 realtime=false）；"
+          f"监测时效性 p50 为 {_snap('scorecard', 'latency_p50_hours')} 小时，只达到赛题合格档；"
+          "跨文档路径 10/21，缺 52 条文档间边；POC 与资产两个维度在评测语料中无数据；"
+          + ("连续运行目标在当前窗口已达成。"
+             if _snap("scorecard", "continuous_target_met", default=False)
+             else "**连续运行目标在当前窗口未达成**：计划任务窗口 2026-10-11 到期后 10-12 无计划运行，"
+                  "连续天数已重新起算，需恢复运行后重新累积 7 天。")
+          + "关系维度的 1.0 / 0.734 只代表抽样范围，不外推为全语料指标。"),
 ]
 
 SECTIONS = [
@@ -394,15 +445,24 @@ SECTIONS = [
           "这两张图的数据全部来自 source_state 与 source_degradations 的持久化记录，前端不做任何推算。"),
     ("h1", "十、性能测试结果与分析"),
     ("table", ["指标", "实测", "说明"],
-     [["监测时效性（漏洞类，赛题口径）", "GHSA 中位 1.8 小时；NVD 中位 12.4 小时",
-       "赛题问的是漏洞信息从发布到采集的延迟，故按来源类别分列；样本 67 / 119"],
-      ["监测时效性（混合，见附录 B）", "p50 = 18.1 小时；6 小时内 27.7%",
-       "267 个有效样本；含 arxiv、openalex 等论文来源，不作为赛题分母"],
+     [["监测时效性（混合，见附录 B）",
+       f"p50 = {_snap('scorecard', 'latency_p50_hours')} 小时；"
+       f"6 小时内 {(_snap('scorecard', 'within_6h_rate', default=0) or 0):.1%}",
+       f"{_snap('scorecard', 'effective_denominator')} 个有效样本；赛题合格档为 ≤24 小时"],
+      ["监测时效性（漏洞类，赛题口径）", "GHSA 中位 1.8 小时；NVD 中位 12.4 小时",
+       "赛题问的是漏洞信息从发布到采集的延迟，故按来源类别分列；样本 67 / 119，"
+       "取自 docs/A_TIMELINESS_ATTRIBUTION.md 第 3 节的交付机读数"],
       ["问答引用命中", "0.9722（35/36）", "同一批题目在修复前的提交上重跑为 0.8889，差异可归因于代码"],
       ["问答响应", "分位数按批次独立统计", "赛题目标单题 5 秒内"],
       ["富化关系准确率", "Precision 1.0 / Recall 0.734", "抽样穷尽金标准，94 条可判定样本"],
-      ["连续运行", "累计 19 个采集日，定时 8 天", "7 天连续运行目标已达成"],
-      ["自动化测试", "675 通过 / 4 跳过 / 0 失败", "4 条跳过需要两份未交付的衍生语料副本"]]),
+      ["连续运行",
+       f"累计 {_snap('scorecard', 'cumulative_actual_run_days')} 个采集日，"
+       f"定时 {_snap('scorecard', 'cumulative_scheduled_run_days')} 天",
+       ("7 天连续运行目标：已达成（窗口内每个自然日都有计划运行）"
+        if _snap("scorecard", "continuous_target_met", default=False)
+        else "7 天连续运行目标：当前窗口未达成——计划任务窗口 10-11 到期后 10-12 无计划运行，"
+             "连续天数已重新起算，恢复运行后需重新累积")],
+      ["自动化测试", "691 通过 / 4 跳过 / 0 失败", "4 条跳过需要两份未交付的衍生语料副本"]]),
     ("figure", "fig4", "图 4  校内初赛功能与性能项自评（按评分细则档位）"),
     ("p", "对时效性的归因：混合口径的中位延迟是 18.1 小时，但如果就此说“采集慢”是错的。按来源类别拆开看，"
           "延迟最大的一段根本不在漏洞类——arxiv 36.5 小时、openalex 61.8 小时，它们衡量的是论文与索引的"

@@ -1,0 +1,51 @@
+{
+  "snapshot_date": "2026-10-14",
+  "snapshot_time_local": "2026-10-14 12:21 中国标准时间",
+  "database": {
+    "path": "data/intel.sqlite",
+    "size_bytes": 12439552,
+    "sha256": "3732094bdbce8656af03b4b9b75e6dad97bbefa1000bc3c22ceed4394e2926fb",
+    "counts": {
+      "runs": 1001,
+      "events": 637,
+      "event_aliases": 211,
+      "assets": 8,
+      "assessments": 190,
+      "assessment_dispositions": 6,
+      "rag_documents": 1,
+      "rag_chunks": 849,
+      "duplicate_candidates": 210
+    }
+  },
+  "scorecard": {
+    "cumulative_actual_run_days": 20,
+    "cumulative_scheduled_run_days": 10,
+    "scheduled_run_days_7d": 10,
+    "continuous_target_met": false,
+    "first_collection_date": "2026-09-25",
+    "events_loaded": 637,
+    "events_total": 637,
+    "truncated": false,
+    "within_6h_rate": 0.3176,
+    "within_12h_rate": 0.4493,
+    "within_24h_rate": 0.6182,
+    "effective_denominator": 296,
+    "latency_p50_hours": 15.69,
+    "enrichment_sample": 637
+  },
+  "disposition": {
+    "high_priority_total": 48,
+    "high_priority_closed": 4,
+    "closure_rate": 0.0833,
+    "verified_rate": 0.0625,
+    "findings_total": 94
+  },
+  "relation": {
+    "precision": 1.0,
+    "recall": 0.734,
+    "f1": 0.8466,
+    "tp": 69,
+    "fp": 0,
+    "fn": 25
+  }
+}
