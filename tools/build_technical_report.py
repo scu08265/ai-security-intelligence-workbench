@@ -146,6 +146,61 @@ def build_figures() -> dict[str, Path]:
     fig.savefig(path, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     out["fig4"] = path
+
+    # 图 5 采集状态机
+    fig, ax = plt.subplots(figsize=(7.4, 3.4), dpi=200)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    _style_axes(ax, "图 5  采集状态机：五种状态的定义与迁移")
+    _box(ax, 0.05, 0.56, 0.24, 0.20, "ok\n本轮成功\n库中有该来源数据",
+         facecolor=ACCENT, edgecolor=ACCENT, fontsize=8.5)
+    _box(ax, 0.62, 0.56, 0.33, 0.20, "stale\n本轮失败，但历史数据仍在\n检索不受影响，只是没有新数据",
+         facecolor="#fdf3e3", edgecolor="#c99a4e", fontsize=8.5)
+    _arrow(ax, (0.29, 0.72), (0.62, 0.72))
+    ax.text(0.455, 0.80, "本轮采集失败（库中已有历史数据）", ha="center", fontsize=7.8, color="#555555")
+    _arrow(ax, (0.62, 0.60), (0.29, 0.60))
+    ax.text(0.455, 0.47, "下一轮采集成功", ha="center", fontsize=7.8, color="#555555")
+
+    _box(ax, 0.05, 0.15, 0.24, 0.19, "failed\n本轮失败且无历史数据\n该来源本轮不可用",
+         fontsize=8.2)
+    _box(ax, 0.37, 0.15, 0.24, 0.19, "partial\n一轮中部分来源完成\n未完成留到下一轮，不算成功",
+         fontsize=8.2)
+    _box(ax, 0.69, 0.15, 0.26, 0.19, "skipped\n主动跳过，例如缺只读令牌\n记为跳过而不是失败",
+         fontsize=8.2)
+    ax.text(0.5, 0.05, "状态取 source_state.status，页面对应的来源健康度面板逐源展示",
+            ha="center", fontsize=8, color="#555555")
+    path = FIGURES_DIR / "fig5-collection-states.png"
+    fig.savefig(path, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    out["fig5"] = path
+
+    # 图 6 自愈状态机
+    fig, ax = plt.subplots(figsize=(7.4, 3.2), dpi=200)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    _style_axes(ax, "图 6  自愈状态机：失败 → 重试 → 降级 → 恢复")
+    stages = [
+        (0.01, "正常采集\n来源在集合内"),
+        (0.205, "失败分类\n限流·超时\n鉴权·格式·连接"),
+        (0.40, "受控重试\n仅重试一次"),
+        (0.595, "连续失败计数\n记入降级表"),
+        (0.79, "达阈值降级\n退出或切备用"),
+    ]
+    width = 0.185
+    for x, label in stages:
+        _box(ax, x, 0.55, width, 0.26, label, fontsize=7.6)
+    for index in range(len(stages) - 1):
+        _arrow(ax, (stages[index][0] + width, 0.68), (stages[index + 1][0], 0.68))
+    _box(ax, 0.55, 0.14, 0.42, 0.18,
+         "冷却期 → 恢复探测\n恢复后自动回到集合，并解除冷却",
+         facecolor="#e8f3e8", edgecolor="#5c8a5c", fontsize=8.2)
+    _arrow(ax, (0.882, 0.55), (0.882, 0.32), color="#5c8a5c")
+    _arrow(ax, (0.55, 0.23), (0.10, 0.23), color="#5c8a5c")
+    _arrow(ax, (0.10, 0.23), (0.10, 0.55), color="#5c8a5c")
+    ax.text(0.33, 0.09, "恢复路径（自动解除，不需要人工重挂）", ha="center",
+            fontsize=7.8, color="#3f6b3f")
+    path = FIGURES_DIR / "fig6-self-healing-states.png"
+    fig.savefig(path, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    out["fig6"] = path
     return out
 
 
@@ -225,6 +280,7 @@ SECTIONS = [
           "stale 表示本轮失败但历史数据仍在，因此检索不受影响、只是没有新数据；partial 表示部分成功，"
           "系统会把未处理完的部分留到下一轮而不是标记成功；skipped 表示主动跳过，"
           "例如缺少只读令牌的 GHSA。把这五种状态区分开，是为了让“部分成功”不被读成“成功”。"),
+    ("figure", "fig5", "图 5  采集状态机：五种状态的定义与迁移"),
     ("p", "重复信息在采集后会进入去重候选表（当前 210 条候选），同一漏洞的多来源记录不会各自成为独立知识点，"
           "而是合并成一个事件并保留各自的来源标识。这样问答引用到的是一条事件，"
           "但答题时仍能指出这条结论来自 NVD 还是 OSV。"),
@@ -279,6 +335,7 @@ SECTIONS = [
           "问答与研判读取同一份知识库，回答带引用返回。任一环节失败都进入自愈分支：先做失败分类，"
           "再执行一次受控重试；重试仍失败则计入连续失败，达到阈值后该来源退出无人值守采集或切换到备用源，"
           "同时发出告警。整个链路的状态都落在 runs 与 source_state 两张表里，可逐条核查。"),
+    ("figure", "fig6", "图 6  自愈状态机：失败 → 重试 → 降级 → 恢复"),
     ("h1", "八、系统实现细节与核心代码说明"),
     ("p", "采集编排入口是 app/agents.py 的 run_collection：逐个来源调用采集器，把结果写回 source_state，"
           "并把每个来源的状态、抓取数、保留数、过滤数、耗时与错误写入运行记录。"
@@ -312,22 +369,40 @@ SECTIONS = [
           "docs/CASE_QA_MULTITURN_CROSSDOC.md（问答演示）、reports/（容器与自愈验收产物）。"),
     ("h1", "九、各功能模块实现效果展示"),
     ("table", ["模块", "展示方式", "证据文件"],
-     [["监测与来源健康", "赛题指标页的来源健康度面板（每个来源的状态、最近成功时间、连续失败次数）", "app/static/app.js、/api/system/health"],
-      ["系统健康", "模块状态、活跃降级、冷却截止与最近告警", "/api/system/health"],
+     [["监测与来源健康", "赛题指标页的来源健康度面板（每个来源的状态、类别、最近成功时间、产出条数、连续失败次数）",
+       "docs/screenshots/09-source-health.png、/api/system/health"],
+      ["系统健康", "模块状态、活跃降级、冷却截止与最近告警",
+       "docs/screenshots/10-system-health.png、/api/system/health"],
       ["富化", "事件详情中的 CVSS、受影响区间、修复版本与来源标识", "docs/CASE_ENRICHMENT_INFERENCE.md"],
       ["问答与多轮", "多轮追问、跨文档引用、拒答三组界面截图", "docs/screenshots/b-qa-0*.png"],
       ["处置闭环", "高优先级队列、复测关闭与操作前后对比截图", "docs/A_DISPOSITION_LIVE_CLOSURE.md"]]),
+    ("p", "上表前两行是浏览器级实测，不是结构性断言：tools/browser_check.py 用真实 Chromium 打开页面，"
+          "把渲染出来的行数与 /api/system/health 的返回逐项对齐——来源方向 20 行对 20 个来源、"
+          "系统健康 4 行对 4 个模块、徽标文案与模块状态计数一致、每个来源的状态文案都能在接口取值里找到对应项，"
+          "截图分别是 docs/screenshots/09-source-health.png 与 10-system-health.png。"
+          "这两张图的数据全部来自 source_state 与 source_degradations 的持久化记录，前端不做任何推算。"),
     ("h1", "十、性能测试结果与分析"),
     ("table", ["指标", "实测", "说明"],
-     [["监测时效性", "p50 = 18.1 小时；6 小时内 27.7%", "267 个有效样本；赛题合格档为 ≤24 小时"],
+     [["监测时效性（漏洞类，赛题口径）", "GHSA 中位 1.8 小时；NVD 中位 12.4 小时",
+       "赛题问的是漏洞信息从发布到采集的延迟，故按来源类别分列；样本 67 / 119"],
+      ["监测时效性（混合，见附录 B）", "p50 = 18.1 小时；6 小时内 27.7%",
+       "267 个有效样本；含 arxiv、openalex 等论文来源，不作为赛题分母"],
       ["问答引用命中", "0.9722（35/36）", "同一批题目在修复前的提交上重跑为 0.8889，差异可归因于代码"],
       ["问答响应", "分位数按批次独立统计", "赛题目标单题 5 秒内"],
       ["富化关系准确率", "Precision 1.0 / Recall 0.734", "抽样穷尽金标准，94 条可判定样本"],
       ["连续运行", "累计 19 个采集日，定时 8 天", "7 天连续运行目标已达成"],
       ["自动化测试", "675 通过 / 4 跳过 / 0 失败", "4 条跳过需要两份未交付的衍生语料副本"]]),
     ("figure", "fig4", "图 4  校内初赛功能与性能项自评（按评分细则档位）"),
-    ("p", "对时效性的分析：采集是小时级的，但首次观测的中位延迟是 18.1 小时，说明延迟主要不来自采集间隔，"
-          "更可能来自事件被记到较慢的来源上。这是下一步要查清的问题，本轮没有把它归因于网络或上游。"),
+    ("p", "对时效性的归因：混合口径的中位延迟是 18.1 小时，但如果就此说“采集慢”是错的。按来源类别拆开看，"
+          "延迟最大的一段根本不在漏洞类——arxiv 36.5 小时、openalex 61.8 小时，它们衡量的是论文与索引的"
+          "发布节奏；而赛题问的是漏洞信息。漏洞类里 GHSA 中位 1.8 小时、NVD 中位 12.4 小时。"),
+    ("p", "瓶颈在上游而不在我们：采集间隔是 1 小时（计划任务每小时触发一次），而同一个 CVE 在 MITRE 登记记录与"
+          "NVD 记录之间的发布时差本身就有中位 0.68 小时（79 对样本）。也就是说上游两个登记库是先后滚动的，"
+          "我们把 NVD 那条记到时，NVD 自己才刚发出来。跨来源时间线的可回读样例（含事件 ID 与两个来源时间戳）"
+          "见 docs/A_TIMELINESS_ATTRIBUTION.md 第 4 节，机读产物是 reports/timeliness-attribution.json。"),
+    ("p", "因此结论写成一句可引用的话：采集间隔 1 小时；GHSA 中位 1.8 小时，NVD 中位 12.4 小时，"
+          "差值来自上游发布与入库节奏。分列把混合口径里那些与漏洞无关的发布节奏剥出去，但混合口径本身"
+          "保留在附录 B，两个数都能被追问。"),
     ("h1", "十一、创新点总结"),
     ("bullets", [
         "证据分层而非结论合并：同一事件的多个来源区间分别保留，避免合并后给出错误的修复版本。",
@@ -335,6 +410,21 @@ SECTIONS = [
         "口径与展示同源：页面、接口与证据文件读同一份持久化状态，指标不靠前端估算。",
         "可复现的工程证据：容器验收、CI、回滚、自愈演练都留下可重跑的脚本与产物。",
     ]),
+    ("h1", "附录 B：时效性的混合口径（保留，不进正表）"),
+    ("p", "第十章的主表按来源类别分列，因为赛题问的是漏洞信息。混合口径不删除、不隐藏，列在这里备查："
+          "267 个有效样本，中位 18.1 小时，6 小时内 27.7%、12 小时内 39.7%、24 小时内 58.4%。"
+          "这一档只够赛题的合格档，分列并不改变档位判定——本项交付的是归因，不是抬分。"),
+    ("table", ["口径", "来源", "样本", "中位延迟", "最大延迟"],
+     [["漏洞类", "ghsa", "67", "1.8 小时", "94.1 小时"],
+      ["漏洞类", "nvd", "119", "12.4 小时", "287.3 小时"],
+      ["学术类", "arxiv", "76", "36.5 小时", "91.8 小时"],
+      ["学术类", "openalex", "4", "61.8 小时", "61.8 小时"],
+      ["其他", "anquanke", "1", "89.9 小时", "89.9 小时"],
+      ["混合（本表合计）", "全部来源", "267", "18.1 小时", "—"]]),
+    ("p", "类别归属取自 app/sources.py 的 category 字段：漏洞类含 cve_database、ecosystem_advisory、"
+          "community_advisory、exploitation_intel、vendor_advisory 与 security_blog；"
+          "学术类为 academic_paper；政策类为 policy_regulation、technical_standard、risk_framework、threat_framework。"
+          "不另造一套分类，避免出现“报告里的类别”与“代码里的类别”两套口径。"),
     ("h1", "附：评分细则档位对照"),
     ("p", "每一条评分细则对应到合格／良好／优秀的哪一档、证据在哪，见 docs/COMPETITION_RUBRIC_MAPPING.md。"
           "该表同时列出三处必须如实说明的缺口：无实时监测、时效性只到合格档、跨文档路径 10/21。"),
