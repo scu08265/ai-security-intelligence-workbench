@@ -150,6 +150,28 @@ def run(base: str) -> int:
         source_panel.screenshot(path=str(SHOT_DIR / "09-source-health.png"))
         system_panel.screenshot(path=str(SHOT_DIR / "10-system-health.png"))
 
+        print("\n2a2. 模型降级链与角色绑定（浏览器实测 + 与接口核对）")
+        chain = page.evaluate("() => fetch('/api/system/model-chain').then(r => r.json())")
+        chain_panel = page.locator("#body-scorecard article.score-capability").filter(
+            has=page.locator("h3", has_text="模型降级链与角色绑定")).first
+        check("模型降级链面板已渲染", chain_panel.count() > 0)
+        levels = chain.get("levels") or []
+        bindings = chain.get("role_bindings") or []
+        level_rows = chain_panel.locator("table").first.locator("tbody tr").count()
+        check("降级链逐级渲染", level_rows == len(levels),
+              f"页面 {level_rows} 行 / 接口 {len(levels)} 级")
+        check("当前生效层级与接口一致",
+              f"第 {chain.get('active_level')} 级" in chain_panel.inner_text(),
+              f"active_level={chain.get('active_level')}")
+        role_rows = chain_panel.locator("table").nth(1).locator("tbody tr").count()
+        check("角色绑定逐行渲染", role_rows == len(bindings),
+              f"页面 {role_rows} 行 / 接口 {len(bindings)} 个角色")
+        skip_reasons = [item.get("skip_reason") for item in levels if item.get("skip_reason")]
+        check("每一级被跳过的原因都写在页面上",
+              all(reason in chain_panel.inner_text() for reason in skip_reasons),
+              f"{len(skip_reasons)} 条原因")
+        chain_panel.screenshot(path=str(DOC_SHOT_DIR / "12-model-chain.png"))
+
         print("\n2b. 知识图谱可视化")
         page.click("#tab-knowledge")
         wait_until(lambda: page.locator("#body-knowledge .knowledge-map").count() == 1,
@@ -166,6 +188,35 @@ def run(base: str) -> int:
             check("文档可展开核查正文与块级状态",
                   "章节" in detail_text and ("正文块" in detail_text or "块" in detail_text))
         page.screenshot(path=str(SHOT_DIR / "02c-knowledge.png"), full_page=True)
+
+        print("\n2b2. 术语语义字典与术语 → 文档两跳（浏览器实测 + 与接口核对）")
+        terms_payload = page.evaluate("() => fetch('/api/knowledge/terms').then(r => r.json())")
+        terms_api = terms_payload.get("items") or []
+        wait_until(lambda: page.locator("#body-knowledge .term-card").count() >= 1,
+                   timeout_s=20, what="术语卡")
+        term_cards = page.locator("#body-knowledge .term-card").count()
+        check("术语卡逐条渲染", term_cards == len(terms_api),
+              f"页面 {term_cards} 张 / 接口 {len(terms_api)} 个术语")
+        knowledge_now = page.inner_text("#body-knowledge")
+        covered = [item for item in terms_api if item.get("covered")]
+        check("已覆盖术语标出关联文档数",
+              all(f"覆盖 {item['document_count']} 份文档" in knowledge_now for item in covered),
+              f"{len(covered)} 个已覆盖术语")
+        check("未覆盖术语如实标注而不是编造释义",
+              all("语料未覆盖" in knowledge_now for item in terms_api if not item.get("covered")))
+
+        term_graph = page.locator("#body-knowledge .term-graph")
+        check("术语 → 文档两跳已渲染", term_graph.count() == 1)
+        term_nodes = term_graph.locator(".knowledge-node.term").count()
+        other_nodes = term_graph.locator(".knowledge-node.document, .knowledge-node.event").count()
+        check("图谱里术语节点与文档节点分型渲染",
+              term_nodes >= 1 and other_nodes >= 1,
+              f"术语节点 {term_nodes} / 文档与事件节点 {other_nodes}")
+        check("两跳卡片写明不等同跨文档推理",
+              "不等于文档之间的跨文档推理" in knowledge_now)
+        term_card = page.locator("#body-knowledge .card").filter(
+            has=page.locator(".term-card")).first
+        term_card.screenshot(path=str(DOC_SHOT_DIR / "11-term-dictionary.png"))
 
         print("\n2c. 标准资产仿真")
         page.click("#tab-overview")
@@ -270,6 +321,22 @@ def run(base: str) -> int:
         page.click("#tab-overview")
         page.click('details[data-module="chat"] > summary')
         page.wait_for_timeout(200)
+
+        print("\n4a. 推荐问法（取自固定评测集）")
+        suggestions = page.evaluate("() => fetch('/api/qa/suggestions').then(r => r.json())")
+        wait_until(lambda: page.locator("#body-chat .suggestion-chip").count() >= 1,
+                   timeout_s=20, what="推荐问法")
+        chips = page.locator("#body-chat .suggestion-chip").count()
+        expected_chips = sum(len((group.get("questions") or [])[:4])
+                             for group in (suggestions.get("items") or []))
+        check("推荐问法按钮与接口同源", chips == expected_chips,
+              f"页面 {chips} 个 / 接口可渲染 {expected_chips} 个")
+        check("推荐问法注明取自固定评测集",
+              "固定评测集" in page.inner_text("#body-chat"))
+        suggestion_card = page.locator("#body-chat .chat-log > .card").filter(
+            has_text="推荐问法").first
+        suggestion_card.screenshot(path=str(DOC_SHOT_DIR / "13-question-suggestions.png"))
+
         page.fill("#body-chat textarea", QUESTION)
         page.click("#body-chat button.btn--primary")
         wait_until(lambda: page.locator("#body-chat .stream-line").count() >= 1,
@@ -299,6 +366,20 @@ def run(base: str) -> int:
             citation = page.locator("#body-chat .citation-drilldown").first
             check("Citation drills down to a chunk or an explicit source-level limitation",
                   citation.locator(".rag-chunk").count() > 0 or citation.locator(".alert--warn").count() > 0)
+
+        print("\n4b. 技术详情：本轮计划与工具调用")
+        detail = page.locator("#body-chat details").filter(has_text="技术详情").first
+        check("技术详情折叠区已渲染", detail.count() > 0)
+        if detail.count():
+            detail.locator("summary").first.click()
+            page.wait_for_timeout(250)
+            detail_text = detail.inner_text()
+            check("技术详情列出工具调用与耗时",
+                  "工具" in detail_text and "耗时" in detail_text)
+            check("技术详情列出本轮计划",
+                  "计划" in detail_text)
+            detail.screenshot(path=str(DOC_SHOT_DIR / "14-technical-detail.png"))
+
         page.fill("#body-chat textarea", "\u524d\u8005\u5f71\u54cd\u54ea\u4e2a\u8d44\u4ea7\uff1f")
         page.click("#body-chat button.btn--primary")
         wait_until(lambda: page.locator("#body-chat .context-confirmation .alert--warn").count() == 1,
