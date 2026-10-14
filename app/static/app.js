@@ -1257,13 +1257,15 @@
       const results = await Promise.allSettled([
         api.get('/api/knowledge/documents?limit=200'),
         api.get('/api/rag/documents?limit=200'),
-        api.get('/api/sources')
+        api.get('/api/sources'),
+        api.get('/api/knowledge/terms')
       ]);
       const valueOf = (result) => result.status === 'fulfilled' ? result.value : null;
       const failures = results.filter((result) => result.status === 'rejected');
       const eventResult = valueOf(results[0]);
       const fullTextResult = valueOf(results[1]);
       const sourceResult = valueOf(results[2]);
+      const termResult = valueOf(results[3]);
       if (!eventResult && !fullTextResult && !sourceResult) {
         throw new Error(failures.map((result) => result.reason && result.reason.message).filter(Boolean).join('；') || '知识服务暂不可用');
       }
@@ -1272,6 +1274,8 @@
       state.knowledge.documents = [...fullTextDocuments, ...eventDocuments].map(ragDocument);
       state.knowledge.total = state.knowledge.documents.length;
       state.knowledge.sources = Array.isArray(sourceResult && sourceResult.items) ? sourceResult.items : (Array.isArray(sourceResult) ? sourceResult : []);
+      state.knowledge.terms = termResult && Array.isArray(termResult.items) ? termResult.items : [];
+      state.knowledge.termCoverage = (termResult && termResult.coverage) || null;
       state.knowledge.error = null;
     } catch (err) {
       state.knowledge.error = err.message;
@@ -1382,6 +1386,38 @@
 
     const recentDocuments = documents.slice(0, 6).map((item) => h('li', {}, renderRagDocument(item)));
 
+    /* 术语语义字典：每张术语卡的覆盖范围与定义句都来自持久化语料，未覆盖的
+     * 术语直接标明，不给模型生成的释义。 */
+    const terms = Array.isArray(state.knowledge.terms) ? state.knowledge.terms : [];
+    const termCoverage = state.knowledge.termCoverage || {};
+    const termSection = card('术语语义字典', terms.length
+      ? h('div', { class: 'grid-cards grid-cards--wide' },
+        h('p', { class: 'plain-note' },
+          `共 ${textOr(termCoverage.terms, terms.length)} 个术语，语料已覆盖 ${textOr(termCoverage.covered_terms, '—')} 个，`
+          + `关联 ${textOr(termCoverage.documents_referenced, '—')} 份文档。`
+          + '定义句取自语料原文并可回读；语料里没有的术语如实标为未覆盖。'),
+        ...terms.map((item) => h('article', { class: 'score-capability term-card' },
+          h('div', { class: 'score-capability-head' },
+            h('h3', {}, `${textOr(item.label, item.key)}（${textOr(item.term)}）`),
+            badge(item.covered ? 'ok' : 'plain',
+              item.covered ? `覆盖 ${item.document_count} 份文档` : '语料未覆盖')),
+          h('p', { class: 'plain-note' }, textOr(item.why)),
+          item.structured
+            ? h('p', {}, `结构化字段：${item.structured.present_events} / ${item.structured.total_events} 个事件带 ${item.structured.field}`)
+            : null,
+          item.definition && item.definition.quote
+            ? h('div', { class: 'rag-chunk' },
+              h('div', { class: 'rag-chunk-head' },
+                mono(textOr(item.definition.chunk_id, '—')),
+                h('span', { class: 'muted' }, `字符偏移 ${textOr(item.definition.char_offset, '—')}`)),
+              h('p', { class: 'excerpt' }, item.definition.quote))
+            : null,
+          item.related_documents && item.related_documents.length
+            ? h('div', { class: 'chips' }, item.related_documents.slice(0, 6).map((document) =>
+              h('span', { class: 'chip', title: `${document.chunks} 个块命中` }, textOr(document.document_key))))
+            : null)))
+      : emptyState('尚未读取术语字典', '术语卡随知识库一起加载。'));
+
     const relation = h('div', { class: 'knowledge-map', role: 'img', 'aria-label': '来源、文档与研判关系图' },
       h('div', { class: 'knowledge-map-column' }, h('span', { class: 'knowledge-map-title' }, '来源'),
         ...Object.keys(sourceCategories).slice(0, 5).map((name) => h('span', { class: 'knowledge-node source' }, name))),
@@ -1403,6 +1439,7 @@
         } }, `${name} ${categoryCounts[name]}`))));
 
     setBox(view.visual,
+      termSection,
       card('知识关系与覆盖', relation),
       h('div', { class: 'grid-cards grid-cards--wide knowledge-grid' },
         card('文档类别分布', categoryBars),
@@ -1446,12 +1483,13 @@
         optionalGet('/api/evaluation'),
         optionalGet('/api/orchestration'),
         optionalGet('/api/ai-participation'),
-        optionalGet('/api/system/health')
+        optionalGet('/api/system/health'),
+        optionalGet('/api/system/model-chain')
       ]);
       state.scorecard.data = {
         official: results[0], dashboard: results[1], monitoring: results[2],
         evaluation: results[3], orchestration: results[4], participation: results[5],
-        health: results[6]
+        health: results[6], modelChain: results[7]
       };
       state.scorecard.error = null;
     } catch (err) {
@@ -1584,6 +1622,35 @@
       : h('article', { class: 'score-capability' },
         h('div', { class: 'score-capability-head' }, h('h3', {}, '来源健康度'), badge('plain', '待读取')),
         h('p', { class: 'plain-note' }, '未能读取 /api/system/health，无法核对来源状态。'));
+    /* 模型降级链与"哪个角色用模型"：两者都在代码里存在，但界面上没有出口，
+     * 于是答辩时最容易被追问的两点（为什么这么编排、模型挂了怎么办）无处可看。 */
+    const modelChain = all.modelChain || {};
+    const modelChainBlock = h('article', { class: 'score-capability' },
+      h('div', { class: 'score-capability-head' },
+        h('h3', {}, '模型降级链与角色绑定'),
+        badge(modelChain.active_level === 3 ? 'plain' : 'ok',
+          `当前生效：第 ${textOr(modelChain.active_level, '—')} 级 · ${textOr(modelChain.mode, '未知模式')}`)),
+      (modelChain.levels || []).length
+        ? dataTable([{ text: '层级' }, { text: '能力' }, { text: '状态' }, { text: '说明' }],
+          (modelChain.levels || []).map((level) => [
+            String(textOr(level.level, '—')),
+            textOr(level.name),
+            level.active ? '生效中' : (level.available ? '可用' : '不可用'),
+            textOr(level.detail, '—') + (level.skip_reason ? `（${level.skip_reason}）` : '')
+          ]))
+        : h('p', {}, '未能读取模型链。'),
+      (modelChain.role_bindings || []).length
+        ? dataTable([{ text: '角色' }, { text: '用不用模型' }, { text: '说明' }],
+          (modelChain.role_bindings || []).map((role) => [
+            textOr(role.label, role.role),
+            role.binding === 'code' ? '确定性代码'
+              : (role.binding === 'model' ? '使用模型' : '模型可选'),
+            textOr(role.detail, '—')
+          ]))
+        : null,
+      h('p', { class: 'plain-note' },
+        `${textOr(modelChain.policy, '')}${textOr(modelChain.note, '')}`));
+
     const systemHealthBlock = h('article', { class: 'score-capability' },
       h('div', { class: 'score-capability-head' },
         h('h3', {}, '系统健康'),
@@ -1681,7 +1748,8 @@
         ['超时 / 异常', bPerformance.available ? `${bPerformance.timeouts || 0}/${bPerformance.errors || 0}` : null, '']
       ], (bPerformance.batch_id ? `当前活动批次 ${bPerformance.batch_id}；各批次分位数独立计算，不跨批次合并。` : '赛题性能目标为单题 5 秒内；延迟和失败数来自两批各 50 题的真实运行。')),
       sourceHealthBlock,
-      systemHealthBlock);
+      systemHealthBlock,
+      modelChainBlock);
   }
 
   async function loadDashboard() {
@@ -3238,6 +3306,45 @@
     return shell.modelLine;
   }
 
+  /* 推荐问法直接取自固定评测集，与报告里的评测口径同源；点一下就是一次真实提问。 */
+  async function loadChatSuggestions() {
+    if (state.chat.suggestions || state.chat.suggestionsLoading) return;
+    state.chat.suggestionsLoading = true;
+    try {
+      state.chat.suggestions = await optionalGet('/api/qa/suggestions');
+    } catch (err) {
+      state.chat.suggestions = null;
+    }
+    state.chat.suggestionsLoading = false;
+    renderChat();
+  }
+
+  function chatSuggestionsBlock() {
+    const payload = state.chat.suggestions;
+    if (!payload) return h('div', {});
+    if (!payload.available) {
+      return card('推荐问法', emptyState('评测集不可读', textOr(payload.source, '')));
+    }
+    return card('推荐问法（取自固定评测集）', h('div', {},
+      h('p', { class: 'plain-note' },
+        `共 ${textOr(payload.total_questions, 0)} 道可提问；下列问题与报告里的评测口径同源，`
+        + '点一下即填入输入框。拒答类题目不进推荐列表。'),
+      h('div', { class: 'chips suggestion-groups' },
+        ...(payload.items || []).flatMap((group) =>
+          (group.questions || []).slice(0, 4).map((item) =>
+            h('button', {
+              type: 'button', class: 'chip suggestion-chip',
+              title: `${textOr(item.question_id, '')} · 期望文档 ${(item.expected_document_keys || []).join(', ') || '未标注'}`
+                + (item.has_history ? ' · 多轮题' : ''),
+              onclick: () => {
+                if (state.dom.chat && state.dom.chat.input) {
+                  state.dom.chat.input.value = item.question;
+                  state.dom.chat.input.focus();
+                }
+              }
+            }, textOr(item.question)))))));
+  }
+
   function renderChat() {
     const view = state.dom.chat;
     if (!view) return;
@@ -3248,6 +3355,8 @@
         '还没有提问',
         '可以先在「全流程直播」跑一遍，把资料存进来，再用漏洞编号或软件名在这里提问。'
         + '回答会一段一段实时出现，每段都标着它来自哪条证据。'));
+      view.log.appendChild(chatSuggestionsBlock());
+      loadChatSuggestions();
     }
 
     for (const turn of state.chat.turns) {
@@ -3304,6 +3413,32 @@
               .filter(Boolean).join(' · ') || '文档位置未记录')),
           h('p', { class: 'excerpt' }, textOr(chunk.text, '该上下文块未返回可显示的原文。')))))
       : emptyState('后端未返回块级上下文', '当前回答可能只使用事件摘要或来源摘录，不能据此声称完成全文RAG。')));
+
+    /* 技术详情：本轮系统实际做了什么。计划、工具调用与耗时在界面上原本没有
+     * 出口，只有 trace 表，读者看不到"预算用了几次、每步返回了什么"。 */
+    const plan = data.agent_plan || {};
+    const toolCalls = Array.isArray(data.tool_calls) ? data.tool_calls : [];
+    if (toolCalls.length || (plan.actions || []).length) {
+      blocks.push(h('details', { class: 'section-block tech-details' },
+        h('summary', {}, `技术详情：本轮计划与工具调用（${toolCalls.length} 次调用，耗时 ${textOr(data.duration_ms, '—')} ms）`),
+        h('div', { class: 'section-body' },
+          h('p', { class: 'plain-note' },
+            `计划来源：${textOr(plan.planner, plan.source, '规则计划')}；`
+            + `动作：${(plan.actions || []).join(' → ') || '—'}。`
+            + '工具调用是本地确定性动作，参数不能由模型编造，出错与跳过都如实记录。'),
+          toolCalls.length
+            ? dataTable([{ text: '动作' }, { text: '状态' }, { text: '结果' }, { text: '返回条数', cls: 'num' }],
+              toolCalls.map((call) => [
+                mono(textOr(call.action)),
+                textOr(call.status),
+                textOr(call.result || call.note),
+                textOr(call.count, DASH)
+              ]))
+            : h('p', {}, '本轮没有记录工具调用。'),
+          (Array.isArray(data.limitations) && data.limitations.length)
+            ? h('p', { class: 'plain-note' }, `已知限制：${data.limitations.join('；')}`)
+            : null)));
+    }
 
     const trace = Array.isArray(data.trace) ? data.trace : [];
     if (trace.length) {

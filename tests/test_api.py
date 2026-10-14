@@ -63,6 +63,34 @@ def test_reliability_and_alert_endpoints_are_available(client):
     assert alerts["items"] == []
 
 
+def test_knowledge_terms_endpoint_is_grounded(client):
+    body = client.get("/api/knowledge/terms").json()
+    assert body["items"], "seed terms should produce cards"
+    assert body["coverage"]["terms"] == len(body["items"])
+    uncovered = [item for item in body["items"] if not item["covered"]]
+    assert all(item["definition"]["quote"] is None for item in uncovered)
+
+
+def test_qa_suggestions_come_from_the_evaluation_set(client):
+    body = client.get("/api/qa/suggestions").json()
+    assert body["available"] is True
+    assert body["total_questions"] > 0
+    questions = [item for group in body["items"] for item in group["questions"]]
+    assert questions, "the frozen evaluation set should yield suggestions"
+    assert all(item["question"] for item in questions)
+
+
+def test_model_chain_reports_every_level_and_role_binding(client):
+    body = client.get("/api/system/model-chain").json()
+    assert {level["level"] for level in body["levels"]} == {1, 2, 3}
+    assert sum(1 for level in body["levels"] if level["active"]) == 1
+    # The bottom level is always reachable: no configuration can disable it.
+    assert next(level for level in body["levels"] if level["level"] == 3)["available"] is True
+    bindings = {item["role"]: item["binding"] for item in body["role_bindings"]}
+    assert bindings["retriever"] == "code"
+    assert bindings["planner"] == "model"
+
+
 def test_system_health_reports_sources_without_inventing_health(client):
     body = client.get("/api/system/health").json()
     assert body["policy"]["consecutive_failure_threshold"] >= 1

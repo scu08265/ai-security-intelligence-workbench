@@ -2,6 +2,33 @@
 
 ## Unreleased
 
+- Added a term dictionary that treats a term as a first-class object.  Each of
+  the 14 seeded AI-security terms is grounded in the stored corpus: how many
+  documents carry it, which ones, and the sentence that introduces it, with the
+  chunk id and character offset needed to read it back.  On the demo database
+  10 of 14 are covered across 44 documents, and the four the corpus does not
+  contain are reported as uncovered rather than given an invented definition.
+  Terms stored as structured fields (CVSS, POC) report an event count instead
+  of a quote, and `term_edges()` exposes the term → document link for callers
+  that want it as a graph edge.
+- Added the model fallback chain and the role binding table behind
+  `GET /api/system/model-chain`: three levels with the reason each is skipped,
+  plus which orchestration role consults a model and which is deterministic
+  code.  The chain has three levels rather than a list of local models because
+  this system has no local model runtime, and the endpoint says so instead of
+  implying a tier that does not exist.
+- Added the answer's technical detail section: the plan, the tool calls with
+  their recorded result and row count, the elapsed time and the known
+  limitations.  The trace table already existed, but the plan and the tool
+  budget had no outlet in the interface at all.
+- Added recommended questions taken from the frozen 50-question evaluation set,
+  so what the page invites you to ask is the same population the report scores;
+  refusal cases are left out of the suggestions.
+- Fixed a defect found while building the term dictionary: ASCII aliases were
+  matched as substrings, so `rag` matched `fragmenta` and the dictionary
+  reported the wrong document with a nonsense definition sentence.  Aliases now
+  require a word boundary, and the sentence search is case-insensitive against
+  the original text so the reported offset stays correct.
 - Extended self-healing from "retry once" to a bounded degradation policy.  A
   source that misses three collection attempts in a row now leaves the
   unattended set for a six-hour cooldown, or hands over to a substitute that is
