@@ -27,6 +27,21 @@ ACCENT_ALT = "#8faadc"
 INK = "#222222"
 
 
+def _term_dictionary_line() -> str:
+    """Describe the dictionary from the dictionary itself, not from a count."""
+    try:
+        from app import term_dictionary
+
+        coverage = term_dictionary.coverage()
+        return (
+            f"知识图谱页：{coverage['terms']} 张术语卡，其中 {coverage['covered_terms']} 条语料已覆盖、"
+            f"共关联 {coverage['documents_referenced']} 份文档；已覆盖的标出关联文档数并给出语料原文定义句"
+            "（带 chunk id 与字符偏移），未覆盖的如实标注、不给释义"
+        )
+    except Exception:  # noqa: BLE001 - the report must still build without the app
+        return "知识图谱页：术语语义字典（条数与覆盖数随语料变化，见 GET /api/knowledge/terms）"
+
+
 def _style_axes(ax, title: str) -> None:
     ax.set_title(title, fontsize=11, color=INK, pad=10)
     for spine in ax.spines.values():
@@ -255,6 +270,26 @@ def _latency_class_rows() -> list[list[str]]:
     return rows
 
 
+ENRICHMENT_LABELS = (
+    ("cvss", "CVSS 评分", "事件文档 cvss[]，含向量与评分"),
+    ("paper_link", "论文关联", "事件自身的论文属性或已保存的预印本来源"),
+    ("fixed_version", "修复版本", "affected[].fixed_version，逐条带 source_id"),
+    ("poc", "POC 引用", "事件 poc[]，回填自 NVD 的 Exploit 标签引用"),
+    ("asset_assessment", "资产研判", "assessments 表，事件与资产的处置研判记录"),
+    ("evidence_relationship", "带证据关系", "relationships 中至少一条关系带 evidence_ids"),
+)
+
+
+def _enrichment_row(key: str) -> str:
+    item = ((_snap("enrichment", "dimensions", default={}) or {}).get(key) or {})
+    present, total = item.get("present_events"), item.get("total_events")
+    return f"{present} / {total} 事件" if present is not None else "—"
+
+
+def _enrichment_rows() -> list[list[str]]:
+    return [[label, _enrichment_row(key), source] for key, label, source in ENRICHMENT_LABELS]
+
+
 def headline_rows() -> list[list[str]]:
     """Headline figures come from the same snapshot the baseline document uses.
 
@@ -370,9 +405,13 @@ SECTIONS = [
           "而是合并成一个事件并保留各自的来源标识。这样问答引用到的是一条事件，"
           "但答题时仍能指出这条结论来自 NVD 还是 OSV。"),
     ("h1", "四、情报富化模块详细设计"),
-    ("p", "富化对采集到的事件做多维扩展。六个维度在演示机上都有数据：CVSS 覆盖 388 个事件、"
-          "论文关联 150 个、修复版本 101 个、POC 引用 74 个、资产研判 48 个、带证据关系 26 个。"
-          "每个字段都保存来源标识，可以逐条回读原始快照。"),
+    ("p", "富化对采集到的事件做多维扩展。六个维度在演示机上都有数据："
+          + "、".join(
+              f"{label} {_enrichment_row(key).split(' /')[0].strip()} 个事件"
+              for key, label, _ in ENRICHMENT_LABELS
+          )
+          + "。每个字段都保存来源标识，可以逐条回读原始快照。"
+            "这里的覆盖数来自同一份快照，分母随事件总量变化，不再手写。"),
     ("p", "关联推理的关键约束是不合并证据。以真实事件 GHSA-w794-rj3p-xv45（Langflow 命令注入）为例，"
           "同一事件下有三条受影响区间，分别属于 1.x 与 0.x 两条版本线，各自带独立 source_id 与各自的修复版本。"
           "系统没有把它们合并成一条更整洁的结论，因为合并会让 0.x 线的用户拿到错误的修复版本。"
@@ -381,12 +420,7 @@ SECTIONS = [
           "events[].poc[] 也为空，因此这两个维度没有可计算的分母；报告里写无数据，不写 0。"
           "演示机上的资产条目为合成资产，结论限定为策略感知处置建议，不声称个性化资产推荐。"),
     ("table", ["富化维度", "演示机覆盖", "数据来源"],
-     [["CVSS 评分", "388 / 596 事件", "事件文档 cvss[]，含向量与评分"],
-      ["论文关联", "150 / 596 事件", "事件自身的论文属性或已保存的预印本来源"],
-      ["修复版本", "101 / 596 事件", "affected[].fixed_version，逐条带 source_id"],
-      ["POC 引用", "74 / 596 事件", "事件 poc[]，回填自 NVD 的 Exploit 标签引用"],
-      ["资产研判", "48 / 596 事件", "assessments 表，事件与资产的处置研判记录"],
-      ["带证据关系", "26 / 596 事件", "relationships 中至少一条关系带 evidence_ids"]]),
+     _enrichment_rows()),
     ("p", "覆盖率的读法需要克制：覆盖率低不等于这是缺陷，例如论文关联只对论文类事件有意义。"
           "报告里给出的是“有该维度数据的事件数 / 全部事件数”，不是准确率，两者不能互相替代。"),
     ("h1", "五、情报问答模块详细设计"),
@@ -460,8 +494,7 @@ SECTIONS = [
        "docs/screenshots/09-source-health.png、/api/system/health"],
       ["系统健康", "模块状态、活跃降级、冷却截止与最近告警",
        "docs/screenshots/10-system-health.png、/api/system/health"],
-      ["术语语义字典", "知识图谱页：14 张术语卡，已覆盖的标出关联文档数并给出语料原文定义句（带 chunk id 与字符偏移），"
-     "未覆盖的如实标注而不是编造释义",
+      ["术语语义字典", _term_dictionary_line(),
        "docs/screenshots/11-term-dictionary.png、/api/knowledge/terms"],
       ["术语 → 文档两跳", "知识图谱页：术语节点与文档节点分型渲染的两跳关系",
        "docs/screenshots/11-term-dictionary.png、/api/knowledge/graph"],

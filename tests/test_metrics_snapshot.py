@@ -66,7 +66,8 @@ def test_the_report_generator_does_not_carry_its_own_copy_of_the_numbers():
     main table of the same document (267 samples against 296)."""
     source = (ROOT / "tools" / "build_technical_report.py").read_text(encoding="utf-8")
     assert "latency_by_class" in source, "归因表必须来自快照"
-    for stale in ("267 个有效样本", "18.1 小时", "27.7%"):
+    for stale in ("267 个有效样本", "18.1 小时", "27.7%",
+                  "388 / 596", "14 张术语卡"):
         assert stale not in source, f"报告生成器里仍有硬编码的旧数字：{stale}"
 
 

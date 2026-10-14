@@ -174,6 +174,7 @@ def read_live() -> dict:
             "fn": relation.get("fn"),
         },
         "latency_by_class": latency_breakdown(timeliness),
+        "enrichment": card["enrichment"],
     }
 
 
