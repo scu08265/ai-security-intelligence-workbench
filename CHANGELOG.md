@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- Received the two derived corpus copies that had been blocking four tests.
+  `B_DERIVATIVE_CORPORA_20261012.zip` verified at 80,208,714 bytes / SHA-256
+  `98bd19c5…961674a`, its 139 manifest entries checked one by one with zero
+  mismatches, and both main databases hashed against the recorded values before
+  they were put in place.  The suite no longer skips anything: **698 passed,
+  0 skipped**, where the relation recheck, expansion and 2026-10-02 reeval
+  modules alone went from 42 passed / 4 skipped to 46 passed / 0 skipped.
+  The archive stays out of the repository, as the ignore rules and the task
+  brief require.
+- The test summary is now part of the shared snapshot, so the report's
+  "automated tests" row cannot go stale on its own: pass it to
+  `tools/refresh_metrics_snapshot.py --write --tests "698 passed, 0 skipped"`,
+  and omitting it keeps the previous value rather than blanking the row.  Two
+  places in the report generator still hard-coded the old figure and are now
+  read from the snapshot.
 - Made the dated metrics snapshot refreshable instead of hand-edited, after a
   reviewer found the report saying 596 events / 19 collection days while
   `docs/METRICS_BASELINE.md` said 548 / 18.  Both were live readings taken a day
