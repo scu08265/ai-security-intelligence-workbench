@@ -13,7 +13,7 @@
 
 <!-- snapshot:start 由 tools/refresh_metrics_snapshot.py 重写，不要手工改这一段 -->
 
-快照时间 **2026-10-14**（本机时区 2026-10-14 13:25 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
+快照时间 **2026-10-14**（本机时区 2026-10-14 14:11 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
 
 | 项 | 值 |
 | --- | --- |

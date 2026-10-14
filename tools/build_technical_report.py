@@ -223,6 +223,38 @@ def _snap(*path, default="—"):
     return default if data is None else data
 
 
+CLASS_LABEL_CN = {"vulnerability": "漏洞类", "academic": "学术类",
+                  "policy": "政策类", "other": "其他"}
+
+
+def _bucket(key: str) -> dict:
+    for item in (_snap("latency_by_class", "classes", default=[]) or []):
+        if item.get("key") == key:
+            return item
+    return {}
+
+
+def _source_latency(source_id: str) -> dict:
+    for item in (_snap("latency_by_class", "per_source", default=[]) or []):
+        if item.get("source_id") == source_id:
+            return item
+    return {}
+
+
+def _latency_class_rows() -> list[list[str]]:
+    """Per-source latency rows plus the mixed total, all from the snapshot."""
+    rows = [
+        [CLASS_LABEL_CN.get(item.get("class"), "其他"), str(item.get("source_id")),
+         str(item.get("n")), f"{item.get('p50_hours')} 小时", f"{item.get('max_hours')} 小时"]
+        for item in (_snap("latency_by_class", "per_source", default=[]) or [])
+    ]
+    mixed = _snap("latency_by_class", "mixed", default={}) or {}
+    if mixed:
+        rows.append(["混合（本表合计）", "全部来源", str(mixed.get("n")),
+                     f"{mixed.get('p50_hours')} 小时", "—"])
+    return rows
+
+
 def headline_rows() -> list[list[str]]:
     """Headline figures come from the same snapshot the baseline document uses.
 
@@ -450,9 +482,12 @@ SECTIONS = [
        f"p50 = {_snap('scorecard', 'latency_p50_hours')} 小时；"
        f"6 小时内 {(_snap('scorecard', 'within_6h_rate', default=0) or 0):.1%}",
        f"{_snap('scorecard', 'effective_denominator')} 个有效样本；赛题合格档为 ≤24 小时"],
-      ["监测时效性（漏洞类，赛题口径）", "GHSA 中位 1.8 小时；NVD 中位 12.4 小时",
-       "赛题问的是漏洞信息从发布到采集的延迟，故按来源类别分列；样本 67 / 119，"
-       "取自 docs/A_TIMELINESS_ATTRIBUTION.md 第 3 节的交付机读数"],
+      ["监测时效性（漏洞类，赛题口径）",
+       f"GHSA 中位 {_source_latency('ghsa').get('p50_hours', '—')} 小时；"
+       f"NVD 中位 {_source_latency('nvd').get('p50_hours', '—')} 小时",
+       f"赛题问的是漏洞信息从发布到采集的延迟，故按来源类别分列；"
+       f"样本 {_source_latency('ghsa').get('n', '—')} / {_source_latency('nvd').get('n', '—')}，"
+       f"与附录 B 同一份快照（{_snap('snapshot_date')}）"],
       ["问答引用命中", "0.9722（35/36）", "同一批题目在修复前的提交上重跑为 0.8889，差异可归因于代码"],
       ["问答响应", "分位数按批次独立统计", "赛题目标单题 5 秒内"],
       ["富化关系准确率", "Precision 1.0 / Recall 0.734", "抽样穷尽金标准，94 条可判定样本"],
@@ -466,16 +501,23 @@ SECTIONS = [
       ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
        "交付机全量 pytest；语料与衍生副本均已交付核验"]]),
     ("figure", "fig4", "图 4  校内初赛功能与性能项自评（按评分细则档位）"),
-    ("p", "对时效性的归因：混合口径的中位延迟是 18.1 小时，但如果就此说“采集慢”是错的。按来源类别拆开看，"
-          "延迟最大的一段根本不在漏洞类——arxiv 36.5 小时、openalex 61.8 小时，它们衡量的是论文与索引的"
-          "发布节奏；而赛题问的是漏洞信息。漏洞类里 GHSA 中位 1.8 小时、NVD 中位 12.4 小时。"),
+    ("p", f"对时效性的归因：混合口径的中位延迟是 "
+          f"{_snap('latency_by_class', 'mixed', 'p50_hours')} 小时，但如果就此说“采集慢”是错的。"
+          f"按来源类别拆开看，延迟最大的一段根本不在漏洞类——"
+          f"arxiv {_source_latency('arxiv').get('p50_hours', '—')} 小时、"
+          f"openalex {_source_latency('openalex').get('p50_hours', '—')} 小时，"
+          "它们衡量的是论文与索引的发布节奏；而赛题问的是漏洞信息。"
+          f"漏洞类里 GHSA 中位 {_source_latency('ghsa').get('p50_hours', '—')} 小时、"
+          f"NVD 中位 {_source_latency('nvd').get('p50_hours', '—')} 小时。"),
     ("p", "瓶颈在上游而不在我们：采集间隔是 1 小时（计划任务每小时触发一次），而同一个 CVE 在 MITRE 登记记录与"
           "NVD 记录之间的发布时差本身就有中位 0.68 小时（79 对样本）。也就是说上游两个登记库是先后滚动的，"
           "我们把 NVD 那条记到时，NVD 自己才刚发出来。跨来源时间线的可回读样例（含事件 ID 与两个来源时间戳）"
           "见 docs/A_TIMELINESS_ATTRIBUTION.md 第 4 节，机读产物是 reports/timeliness-attribution.json。"),
-    ("p", "因此结论写成一句可引用的话：采集间隔 1 小时；GHSA 中位 1.8 小时，NVD 中位 12.4 小时，"
+    ("p", f"因此结论写成一句可引用的话：采集间隔 1 小时；"
+          f"GHSA 中位 {_source_latency('ghsa').get('p50_hours', '—')} 小时，"
+          f"NVD 中位 {_source_latency('nvd').get('p50_hours', '—')} 小时，"
           "差值来自上游发布与入库节奏。分列把混合口径里那些与漏洞无关的发布节奏剥出去，但混合口径本身"
-          "保留在附录 B，两个数都能被追问。"),
+          "保留在附录 B，两个数都能被追问；两者的样本量与分位数由同一份快照生成，不会再各写一份。"),
     ("h1", "十一、创新点总结"),
     ("bullets", [
         "证据分层而非结论合并：同一事件的多个来源区间分别保留，避免合并后给出错误的修复版本。",
@@ -485,15 +527,14 @@ SECTIONS = [
     ]),
     ("h1", "附录 B：时效性的混合口径（保留，不进正表）"),
     ("p", "第十章的主表按来源类别分列，因为赛题问的是漏洞信息。混合口径不删除、不隐藏，列在这里备查："
-          "267 个有效样本，中位 18.1 小时，6 小时内 27.7%、12 小时内 39.7%、24 小时内 58.4%。"
-          "这一档只够赛题的合格档，分列并不改变档位判定——本项交付的是归因，不是抬分。"),
-    ("table", ["口径", "来源", "样本", "中位延迟", "最大延迟"],
-     [["漏洞类", "ghsa", "67", "1.8 小时", "94.1 小时"],
-      ["漏洞类", "nvd", "119", "12.4 小时", "287.3 小时"],
-      ["学术类", "arxiv", "76", "36.5 小时", "91.8 小时"],
-      ["学术类", "openalex", "4", "61.8 小时", "61.8 小时"],
-      ["其他", "anquanke", "1", "89.9 小时", "89.9 小时"],
-      ["混合（本表合计）", "全部来源", "267", "18.1 小时", "—"]]),
+          f"{_snap('latency_by_class', 'mixed', 'n')} 个有效样本，"
+          f"中位 {_snap('latency_by_class', 'mixed', 'p50_hours')} 小时，"
+          f"6 小时内 {_snap('scorecard', 'within_6h_rate', default=0):.1%}、"
+          f"12 小时内 {_snap('scorecard', 'within_12h_rate', default=0):.1%}、"
+          f"24 小时内 {_snap('scorecard', 'within_24h_rate', default=0):.1%}。"
+          "这一档只够赛题的合格档，分列并不改变档位判定——本项交付的是归因，不是抬分。"
+          "本表与第十章共用同一份快照，不单独维护。"),
+    ("table", ["口径", "来源", "样本", "中位延迟", "最大延迟"], _latency_class_rows()),
     ("p", "类别归属取自 app/sources.py 的 category 字段：漏洞类含 cve_database、ecosystem_advisory、"
           "community_advisory、exploitation_intel、vendor_advisory 与 security_blog；"
           "学术类为 academic_paper；政策类为 policy_regulation、technical_standard、risk_framework、threat_framework。"

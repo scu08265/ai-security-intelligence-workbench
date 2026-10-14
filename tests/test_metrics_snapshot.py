@@ -61,6 +61,15 @@ def test_rewriting_is_idempotent():
     assert "## 4. 引用规则" in once
 
 
+def test_the_report_generator_does_not_carry_its_own_copy_of_the_numbers():
+    """The latency appendix once hard-coded its figures and contradicted the
+    main table of the same document (267 samples against 296)."""
+    source = (ROOT / "tools" / "build_technical_report.py").read_text(encoding="utf-8")
+    assert "latency_by_class" in source, "归因表必须来自快照"
+    for stale in ("267 个有效样本", "18.1 小时", "27.7%"):
+        assert stale not in source, f"报告生成器里仍有硬编码的旧数字：{stale}"
+
+
 def test_the_committed_baseline_agrees_with_the_committed_snapshot():
     """A refresh that updates only one of the two files fails here."""
     if not SNAPSHOT.is_file():

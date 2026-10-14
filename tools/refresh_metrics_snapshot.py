@@ -36,6 +36,80 @@ COUNTED_TABLES = (
     "assessment_dispositions", "rag_documents", "rag_chunks", "duplicate_candidates",
 )
 
+# Which source categories count as vulnerability reporting for the competition's
+# timeliness question.  Taken from the registry rather than invented here, so the
+# report cannot end up with its own definition of "vulnerability source".
+CLASS_OF_CATEGORY = {
+    "cve_database": "vulnerability",
+    "ecosystem_advisory": "vulnerability",
+    "community_advisory": "vulnerability",
+    "exploitation_intel": "vulnerability",
+    "vendor_advisory": "vulnerability",
+    "security_blog": "vulnerability",
+    "academic_paper": "academic",
+    "policy_regulation": "policy",
+    "technical_standard": "policy",
+    "risk_framework": "policy",
+    "threat_framework": "policy",
+}
+CLASS_LABEL = {
+    "vulnerability": "漏洞类（赛题口径）",
+    "academic": "学术类（不计入赛题分母）",
+    "policy": "政策类（不计入赛题分母）",
+}
+
+
+def _percentile(values: list[float], fraction: float) -> float:
+    ordered = sorted(values)
+    index = min(len(ordered) - 1, int(round(fraction * (len(ordered) - 1))))
+    return ordered[index]
+
+
+def latency_breakdown(timeliness: dict) -> dict:
+    """Split the post-monitoring latency samples by source class.
+
+    The competition asks for vulnerability information specifically, so the
+    report needs both the mixed figure and the split; computing the split here
+    keeps the two from being edited independently, which is how the report once
+    ended up stating 267 samples in one table and 296 in another.
+    """
+    from app import sources as registry
+
+    buckets: dict[str, list[float]] = {}
+    per_source: dict[str, list[float]] = {}
+    for record in timeliness.get("records") or []:
+        if not record.get("valid"):
+            continue
+        source_id = str(record.get("source_id") or "unknown")
+        hours = float(record.get("latency_seconds") or 0) / 3600.0
+        spec = registry.get(source_id)
+        klass = CLASS_OF_CATEGORY.get(getattr(spec, "category", ""), "other")
+        buckets.setdefault(klass, []).append(hours)
+        per_source.setdefault(source_id, []).append(hours)
+
+    def summarize(values: list[float]) -> dict:
+        return {
+            "n": len(values),
+            "p50_hours": round(_percentile(values, 0.5), 2),
+            "max_hours": round(max(values), 1),
+            "within_6h": sum(1 for value in values if value <= 6),
+            "within_24h": sum(1 for value in values if value <= 24),
+        }
+
+    return {
+        "mixed": summarize([item for values in buckets.values() for item in values]),
+        "classes": [
+            {"key": key, "label": CLASS_LABEL.get(key, "其他"), **summarize(buckets[key])}
+            for key in ("vulnerability", "academic", "policy", "other") if buckets.get(key)
+        ],
+        "per_source": [
+            {"source_id": source_id,
+             "class": CLASS_OF_CATEGORY.get(getattr(registry.get(source_id), "category", ""), "other"),
+             **summarize(values)}
+            for source_id, values in sorted(per_source.items(), key=lambda item: -len(item[1]))
+        ],
+    }
+
 
 def read_live() -> dict:
     db_path = config.DB_PATH
@@ -99,6 +173,7 @@ def read_live() -> dict:
             "fp": relation.get("fp"),
             "fn": relation.get("fn"),
         },
+        "latency_by_class": latency_breakdown(timeliness),
     }
 
 

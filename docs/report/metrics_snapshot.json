@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-10-14",
-  "snapshot_time_local": "2026-10-14 13:25 中国标准时间",
+  "snapshot_time_local": "2026-10-14 14:11 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
     "size_bytes": 12517376,
@@ -48,5 +48,81 @@
     "fp": 0,
     "fn": 25
   },
-  "tests": "701 passed, 0 skipped, 0 failed"
+  "latency_by_class": {
+    "mixed": {
+      "n": 296,
+      "p50_hours": 15.69,
+      "max_hours": 287.3,
+      "within_6h": 94,
+      "within_24h": 183
+    },
+    "classes": [
+      {
+        "key": "vulnerability",
+        "label": "漏洞类（赛题口径）",
+        "n": 216,
+        "p50_hours": 7.34,
+        "max_hours": 287.3,
+        "within_6h": 94,
+        "within_24h": 153
+      },
+      {
+        "key": "academic",
+        "label": "学术类（不计入赛题分母）",
+        "n": 80,
+        "p50_hours": 37.46,
+        "max_hours": 91.8,
+        "within_6h": 0,
+        "within_24h": 30
+      }
+    ],
+    "per_source": [
+      {
+        "source_id": "nvd",
+        "class": "vulnerability",
+        "n": 146,
+        "p50_hours": 8.34,
+        "max_hours": 287.3,
+        "within_6h": 52,
+        "within_24h": 103
+      },
+      {
+        "source_id": "arxiv",
+        "class": "academic",
+        "n": 76,
+        "p50_hours": 36.53,
+        "max_hours": 91.8,
+        "within_6h": 0,
+        "within_24h": 29
+      },
+      {
+        "source_id": "ghsa",
+        "class": "vulnerability",
+        "n": 69,
+        "p50_hours": 1.75,
+        "max_hours": 129.4,
+        "within_6h": 42,
+        "within_24h": 50
+      },
+      {
+        "source_id": "openalex",
+        "class": "academic",
+        "n": 4,
+        "p50_hours": 61.81,
+        "max_hours": 61.8,
+        "within_6h": 0,
+        "within_24h": 1
+      },
+      {
+        "source_id": "anquanke",
+        "class": "vulnerability",
+        "n": 1,
+        "p50_hours": 89.89,
+        "max_hours": 89.9,
+        "within_6h": 0,
+        "within_24h": 0
+      }
+    ]
+  },
+  "tests": "702 passed, 0 skipped, 0 failed"
 }
