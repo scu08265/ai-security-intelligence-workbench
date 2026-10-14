@@ -1,12 +1,12 @@
 {
   "snapshot_date": "2026-10-14",
-  "snapshot_time_local": "2026-10-14 13:02 中国标准时间",
+  "snapshot_time_local": "2026-10-14 13:25 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
-    "size_bytes": 12460032,
-    "sha256": "03373ff917f27aea701ed82bc34ff3cb68bc9d4bdc983caa00d3497c61587bdb",
+    "size_bytes": 12517376,
+    "sha256": "8b1c83563a7377c81f0ad772d65a6046fe59c32918c86ce947532aded79a13d9",
     "counts": {
-      "runs": 1002,
+      "runs": 1005,
       "events": 637,
       "event_aliases": 211,
       "assets": 8,
@@ -34,11 +34,11 @@
     "enrichment_sample": 637
   },
   "disposition": {
-    "high_priority_total": 48,
+    "high_priority_total": 53,
     "high_priority_closed": 4,
-    "closure_rate": 0.0833,
-    "verified_rate": 0.0625,
-    "findings_total": 94
+    "closure_rate": 0.0755,
+    "verified_rate": 0.0566,
+    "findings_total": 126
   },
   "relation": {
     "precision": 1.0,
@@ -48,5 +48,5 @@
     "fp": 0,
     "fn": 25
   },
-  "tests": "698 passed, 0 skipped, 0 failed"
+  "tests": "701 passed, 0 skipped, 0 failed"
 }

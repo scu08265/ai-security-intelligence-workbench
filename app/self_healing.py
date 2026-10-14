@@ -129,7 +129,20 @@ def apply_degradation_policy(
     Returns the sources to actually collect plus a note per decision, so the
     run record shows why a source is missing instead of it quietly vanishing.
     """
-    active = {entry["source_id"]: entry for entry in storage.active_source_degradations(now)}
+    # A source that answers again is no longer degraded.  Clearing only inside
+    # run_self_healing was not enough: self-healing is invoked when a collection
+    # comes back failed or partial, so after a transient outage the recovered
+    # sources could stay out of the unattended set for the rest of the cooldown
+    # while every later run reported "completed".  19 sources were sitting in
+    # that state when this was found.
+    states = storage.all_source_states()
+    active: dict[str, dict[str, Any]] = {}
+    for entry in storage.active_source_degradations(now):
+        source_id = entry["source_id"]
+        if (states.get(source_id) or {}).get("status") == "ok":
+            storage.clear_source_degradation(source_id)
+            continue
+        active[source_id] = entry
     final: list[str] = []
     notes: list[dict[str, Any]] = []
     for source_id in selected:

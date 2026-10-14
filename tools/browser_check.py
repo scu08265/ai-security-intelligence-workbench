@@ -63,6 +63,25 @@ def wait_until(predicate, timeout_s: float = 60.0, what: str = "condition"):
     raise TimeoutError(f"timed out after {timeout_s}s waiting for {what}")
 
 
+def _launch(pw):
+    """Launch the installed Edge when the Chromium bundle is absent.
+
+    ``tools/capture_operations_screenshots.py`` already prefers the system Edge
+    so no browser download is needed; this check should not require a 130 MB
+    download just to look at the same page.
+    """
+    try:
+        return pw.chromium.launch(channel="msedge")
+    except Exception:
+        try:
+            return pw.chromium.launch()
+        except Exception as exc:  # noqa: BLE001 - reported to the operator
+            raise SystemExit(
+                "没有可用浏览器：装 Edge，或先跑 `playwright install chromium`。"
+                f"（{type(exc).__name__}）"
+            ) from None
+
+
 def run(base: str) -> int:
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
     DOC_SHOT_DIR.mkdir(parents=True, exist_ok=True)
@@ -70,7 +89,7 @@ def run(base: str) -> int:
     failed_requests: list[str] = []
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch()
+        browser = _launch(pw)
         page = browser.new_page(viewport={"width": 1440, "height": 1000})
         page.on("console", lambda m: console_errors.append(f"{m.type}: {m.text}")
                 if m.type == "error" else None)
@@ -114,7 +133,8 @@ def run(base: str) -> int:
         check("来源健康度按来源逐行渲染",
               source_rows == len(api_sources),
               f"页面 {source_rows} 行 / 接口 {len(api_sources)} 个来源")
-        module_rows = system_panel.locator("tbody tr").count()
+        # 该面板有两张表（模块表，其后是活跃降级表），行数必须只数第一张。
+        module_rows = system_panel.locator("table").first.locator("tbody tr").count()
         check("系统健康按模块逐行渲染",
               module_rows == len(api_modules),
               f"页面 {module_rows} 行 / 接口 {len(api_modules)} 个模块")
