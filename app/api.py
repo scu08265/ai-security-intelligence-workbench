@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import (agent_context, agents, b_evaluation, competition_scorecard, config, cyclonedx_assets,
                  disposition,
+                 disposition_ops,
                evaluation, intelligence, knowledge_views, observability, rag_corpus,
                reliability, self_healing, sources, storage, streaming,
                multi_agent_runtime, model_chain, term_dictionary)
@@ -793,6 +794,15 @@ def update_dispositions_batch(payload: DispositionBatchRequest) -> dict:
         [item.model_dump() for item in payload.items],
         run_verification=payload.run_verification,
     )
+
+
+@app.post("/api/dispositions/run")
+def run_disposition_sweep() -> dict:
+    """编排一次处置队列巡检，并留下可调度的运行记录（A2）。
+
+    只做巡检、提醒与到期扫描；关闭仍必须走单条 ``verified`` 并由系统复测。
+    """
+    return disposition_ops.run_disposition_ops(trigger="manual")
 
 
 @app.get("/api/dispositions/{event_id}/{asset_id}/advice")

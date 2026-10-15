@@ -66,3 +66,25 @@ $Window = if ($DurationHours -gt 0) { "for $DurationHours hour(s)" } else { "ind
 Write-Host "Schedule: every $IntervalHours hour(s) $Window, starting $StartAt"
 Write-Host "Sleep and hibernation are disabled; display timeout is unchanged."
 Write-Host "Manual test: Start-ScheduledTask -TaskName '$TaskName'"
+
+# A2: the disposition queue is swept once a day.  It is a separate task on
+# purpose: collection is hourly and must not be coupled to a daily reminder.
+$DispositionTask = "AI-Security-Intelligence-Daily-Disposition"
+$DispositionRunner = Join-Path $Root "scripts\run_disposition_ops.ps1"
+if (Test-Path -LiteralPath $DispositionRunner) {
+    $DispositionAction = New-ScheduledTaskAction `
+        -Execute $PowerShell `
+        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$DispositionRunner`" -TaskId `"daily-disposition-queue`"" `
+        -WorkingDirectory $Root
+    $DispositionTrigger = New-ScheduledTaskTrigger -Daily -At "09:00"
+    Register-ScheduledTask `
+        -TaskName $DispositionTask `
+        -Action $DispositionAction `
+        -Trigger $DispositionTrigger `
+        -Settings $Settings `
+        -Principal $Principal `
+        -Description "Sweep the disposition queue once a day: overdue reminder and re-check due scan." `
+        -Force | Out-Null
+    Write-Host "Installed scheduled task: $DispositionTask (daily at 09:00)"
+    Write-Host "Manual test: Start-ScheduledTask -TaskName '$DispositionTask'"
+}

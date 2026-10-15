@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-10-15T14:25:28Z",
+  "base_url": "http://127.0.0.1:8020",
+  "dry_run": true,
+  "assignee": "a-ops",
+  "counts": {
+    "pending": 5,
+    "synthetic_actionable": 5,
+    "already_out_of_range": 0,
+    "not_actionable": 0
+  },
+  "five_numbers": {
+    "before": {
+      "high_priority_total": 5,
+      "high_priority_registered": 0,
+      "high_priority_unopened": 5,
+      "closure_rate": 0.0,
+      "registered_closure_rate": null
+    },
+    "after": {
+      "high_priority_total": 5,
+      "high_priority_registered": 0,
+      "high_priority_unopened": 5,
+      "closure_rate": 0.0,
+      "registered_closure_rate": null
+    }
+  },
+  "batch_result": null,
+  "single_verified": [],
+  "unregistered": []
+}

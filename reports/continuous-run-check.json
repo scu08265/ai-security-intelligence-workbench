@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-15T06:31:14Z",
+  "generated_at": "2026-10-15T14:36:09Z",
   "timezone_note": "日期按 UTC 切分，与 /api/competition/scorecard 的日界一致（本机为 UTC+8）。",
   "source": {
     "database": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
-    "database_sha256": "25cc428274373e0b2b0d5ca215b20bffda75dd030704a3f7dd9b68c855d4628a",
+    "database_sha256": "0018a5eecd348da35cd80440bc8981a77106052aa22a77b679100192603406b9",
     "rule": "kind in {collect, scheduled_collect} 且 detail.trigger == 'scheduled'"
   },
   "scorecard_view": {
@@ -93,8 +93,9 @@
       },
       {
         "date": "2026-10-15",
-        "scheduled_run_count": 4,
+        "scheduled_run_count": 5,
         "statuses": [
+          "completed",
           "completed",
           "completed",
           "completed",
@@ -104,10 +105,11 @@
           "run-fc78a9eaacba",
           "run-41bd2b22158b",
           "run-9914dfc9d97b",
-          "run-21e0bbd6ea74"
+          "run-21e0bbd6ea74",
+          "run-734e25e4c1e8"
         ],
         "first_started_at": "2026-10-15T01:46:01Z",
-        "last_started_at": "2026-10-15T05:46:01Z"
+        "last_started_at": "2026-10-15T06:46:00Z"
       }
     ],
     "days_missing_scheduled_run": [

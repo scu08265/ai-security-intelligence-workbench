@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-10-15T14:25:49.296708+00:00",
+  "pending_total": 5,
+  "returned": 5,
+  "by_priority": {
+    "high": 5
+  },
+  "items": [
+    {
+      "event_id": "CVE-2026-100651",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "event_title": "disclosure@vulncheck.com",
+      "asset_name": "vllm",
+      "assessment_status": "affected",
+      "priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-100650",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "event_title": "disclosure@vulncheck.com",
+      "asset_name": "vllm",
+      "assessment_status": "affected",
+      "priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-100647",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "event_title": "disclosure@vulncheck.com",
+      "asset_name": "vllm",
+      "assessment_status": "affected",
+      "priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-100654",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "event_title": "disclosure@vulncheck.com",
+      "asset_name": "vllm",
+      "assessment_status": "affected",
+      "priority": "high"
+    },
+    {
+      "event_id": "CVE-2026-103241",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "event_title": "PYSEC-2026-4186",
+      "asset_name": "vllm",
+      "assessment_status": "affected",
+      "priority": "high"
+    }
+  ],
+  "note": "只列出尚无处置记录的条目；比率低是因为这些还没被接手，不是处置失败。"
+}

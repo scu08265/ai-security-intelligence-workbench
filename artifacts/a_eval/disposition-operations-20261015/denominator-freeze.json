@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-10-15T14:29:21Z",
+  "base_url": "http://127.0.0.1:8020",
+  "assessment_run": {
+    "run_id": "run-9e7bc683a8f1",
+    "assessments": 41,
+    "assets": 3,
+    "events": 523,
+    "not_applicable": 0,
+    "duration_ms": 1000
+  },
+  "before": {
+    "high_priority_total": 5,
+    "high_priority_closed": 3,
+    "high_priority_registered": 5,
+    "high_priority_unopened": 0,
+    "closure_rate": 0.6,
+    "registered_closure_rate": 0.6
+  },
+  "after": {
+    "high_priority_total": 5,
+    "high_priority_closed": 3,
+    "high_priority_registered": 5,
+    "high_priority_unopened": 0,
+    "closure_rate": 0.6,
+    "registered_closure_rate": 0.6
+  },
+  "status_breakdown": {
+    "before": {
+      "open": 0,
+      "in_progress": 2,
+      "fixed": 0,
+      "verified": 3,
+      "accepted": 0
+    },
+    "after": {
+      "open": 0,
+      "in_progress": 2,
+      "fixed": 0,
+      "verified": 3,
+      "accepted": 0
+    }
+  },
+  "frozen": true,
+  "note": "重算研判（POST /api/assessments/run）前后六个读数完全一致，说明已登记条目没有因为资产修好、研判翻成 not_affected 而掉出分母。"
+}
