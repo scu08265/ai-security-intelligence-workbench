@@ -1,0 +1,1204 @@
+{
+ "schema_version": "b-citation-support-classification-1.0",
+ "rule_ref": "docs/B_CITATION_SUPPORT_RUBRIC.md",
+ "results_source": "artifacts\\b_eval\\formal_qa_results_20261012.json",
+ "worksheet_source": "artifacts\\b_eval\\qa_final_confirmation_worksheet_20261002.csv",
+ "note": "子类是机械信号给出的建议归类，用于统一重签尺度与给 A1 的第 2 类修复定位；supported / partially_supported 的最终边界仍由人工按细则判定。",
+ "partially_supported_total": 27,
+ "by_subclass": {
+  "insufficient": 22,
+  "off_topic": 2,
+  "not_signalled": 3
+ },
+ "cases": [
+  {
+   "question_id": "BQA-041",
+   "category": "无证据问题与范围外问题",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-042",
+   "category": "无证据问题与范围外问题",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-043",
+   "category": "无证据问题与范围外问题",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-045",
+   "category": "无证据问题与范围外问题",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-001",
+   "category": "基础事实问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28996"
+    ],
+    "expected_documents": [
+     "paper:2609.28996"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "DistillGuard",
+     "NPM"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-002",
+   "category": "基础事实问答",
+   "human_label": "unsupported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 5,
+    "citations_unused": 3,
+    "citations_off_expected_document": 1,
+    "cited_documents": [
+     "paper:2501.13787",
+     "paper:2609.29757"
+    ],
+    "expected_documents": [
+     "paper:2609.29757"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "OllamaDrama",
+     "honeypot"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": [
+     "chunk-a26721953fbdcee9bce4ff42"
+    ]
+   }
+  },
+  {
+   "question_id": "BQA-003",
+   "category": "基础事实问答",
+   "human_label": "unsupported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 5,
+    "citations_unused": 3,
+    "citations_off_expected_document": 2,
+    "cited_documents": [
+     "paper:2501.13787",
+     "paper:2609.28900"
+    ],
+    "expected_documents": [
+     "paper:2609.28900"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Codetta",
+     "collusion"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": [
+     "chunk-a26721953fbdcee9bce4ff42",
+     "chunk-8fefaaeedccce5c69028d6df"
+    ]
+   }
+  },
+  {
+   "question_id": "BQA-004",
+   "category": "基础事实问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.30192"
+    ],
+    "expected_documents": [
+     "paper:2609.30192"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "SAGE",
+     "Topological"
+    ],
+    "expected_terms_not_in_citations": [
+     "Topological"
+    ],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-005",
+   "category": "基础事实问答",
+   "human_label": "unsupported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 4,
+    "citations_unused": 2,
+    "citations_off_expected_document": 1,
+    "cited_documents": [
+     "paper:2501.13787",
+     "paper:2609.29230"
+    ],
+    "expected_documents": [
+     "paper:2609.29230"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "EAGER",
+     "Verifiable Rewards"
+    ],
+    "expected_terms_not_in_citations": [
+     "EAGER",
+     "Verifiable Rewards"
+    ],
+    "off_topic_candidates": [
+     "chunk-a26721953fbdcee9bce4ff42"
+    ]
+   }
+  },
+  {
+   "question_id": "BQA-006",
+   "category": "基础事实问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2606.15617"
+    ],
+    "expected_documents": [
+     "paper:2606.15617"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "NeRD",
+     "Medical"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-007",
+   "category": "基础事实问答",
+   "human_label": "supported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29808"
+    ],
+    "expected_documents": [
+     "paper:2609.29808"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Hard Stop",
+     "Preemption"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-008",
+   "category": "基础事实问答",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [
+     "CVE-2026-41106"
+    ],
+    "expected_terms_not_in_citations": [
+     "CVE-2026-41106"
+    ],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-009",
+   "category": "基础事实问答",
+   "human_label": "unknown",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 4,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2501.13787"
+    ],
+    "expected_documents": [
+     "paper:2501.13787"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Parameter-Efficient",
+     "Fine-Tuning"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-010",
+   "category": "基础事实问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.30243"
+    ],
+    "expected_documents": [
+     "paper:2609.30243"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "JevOut"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-011",
+   "category": "术语及语义查询",
+   "human_label": "supported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 3,
+    "citations_total": 6,
+    "citations_unused": 3,
+    "citations_off_expected_document": 2,
+    "cited_documents": [
+     "paper:2609.28915",
+     "paper:2609.29429",
+     "source:owasp_genai"
+    ],
+    "expected_documents": [
+     "source:owasp_genai"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Prompt Injection"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": [
+     "chunk-0d170d53396ba2d8ccadecbe",
+     "chunk-e034e370e78e5da118c53abc"
+    ]
+   }
+  },
+  {
+   "question_id": "BQA-012",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2606.15617"
+    ],
+    "expected_documents": [
+     "paper:2606.15617"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Derm7pt"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-013",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 6,
+    "citations_unused": 6,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28915"
+    ],
+    "expected_documents": [
+     "paper:2609.28915"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-014",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "off_topic",
+   "signals": {
+    "excerpts_used": 3,
+    "citations_total": 5,
+    "citations_unused": 2,
+    "citations_off_expected_document": 2,
+    "cited_documents": [
+     "paper:2609.28900",
+     "paper:2609.30028"
+    ],
+    "expected_documents": [
+     "paper:2609.28900"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "multi-agent"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": [
+     "chunk-86f5cd3318bfb7da386309bd",
+     "chunk-588cced1264eec1b2b7b6151"
+    ]
+   }
+  },
+  {
+   "question_id": "BQA-015",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "off_topic",
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 5,
+    "citations_unused": 3,
+    "citations_off_expected_document": 2,
+    "cited_documents": [
+     "paper:2609.28915",
+     "paper:2609.29429"
+    ],
+    "expected_documents": [
+     "paper:2609.29429"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "AUROC"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": [
+     "chunk-20a31f7b632b76ef56327c75",
+     "chunk-b6e12a610c133c01a06e9ac8"
+    ]
+   }
+  },
+  {
+   "question_id": "BQA-016",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 4,
+    "citations_unused": 3,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2501.13787"
+    ],
+    "expected_documents": [
+     "paper:2501.13787"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Parameter-Efficient"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-017",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29757"
+    ],
+    "expected_documents": [
+     "paper:2609.29757"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "honeypot"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-018",
+   "category": "术语及语义查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 5,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.30266"
+    ],
+    "expected_documents": [
+     "paper:2609.30266"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "trace"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-019",
+   "category": "中英文混合查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28996"
+    ],
+    "expected_documents": [
+     "paper:2609.28996"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "DistillGuard"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-020",
+   "category": "中英文混合查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29757"
+    ],
+    "expected_documents": [
+     "paper:2609.29757"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "OllamaDrama"
+    ],
+    "expected_terms_not_in_citations": [
+     "OllamaDrama"
+    ],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-021",
+   "category": "中英文混合查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28900"
+    ],
+    "expected_documents": [
+     "paper:2609.28900"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Codetta"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-022",
+   "category": "中英文混合查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 5,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.30192"
+    ],
+    "expected_documents": [
+     "paper:2609.30192"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-023",
+   "category": "中英文混合查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2606.15617"
+    ],
+    "expected_documents": [
+     "paper:2606.15617"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "NeRD"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-024",
+   "category": "中英文混合查询",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 5,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29808"
+    ],
+    "expected_documents": [
+     "paper:2609.29808"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-025",
+   "category": "多轮追问",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28996"
+    ],
+    "expected_documents": [
+     "paper:2609.28996"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "DistillGuard"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-026",
+   "category": "多轮追问",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28900"
+    ],
+    "expected_documents": [
+     "paper:2609.28900"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Codetta"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-027",
+   "category": "多轮追问",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [
+     "CVE-2026-41106"
+    ],
+    "expected_terms_not_in_citations": [
+     "CVE-2026-41106"
+    ],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-028",
+   "category": "多轮追问",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 6,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2606.15617"
+    ],
+    "expected_documents": [
+     "paper:2606.15617"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "NeRD"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-029",
+   "category": "多轮追问",
+   "human_label": "unsupported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.30192"
+    ],
+    "expected_documents": [
+     "paper:2609.30192"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "SAGE"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-030",
+   "category": "多轮追问",
+   "human_label": "supported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 1,
+    "citations_total": 5,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29808"
+    ],
+    "expected_documents": [
+     "paper:2609.29808"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Hard Stop"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-039",
+   "category": "真实多跳问答",
+   "human_label": "unknown",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 5,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2501.13787",
+     "paper:2609.28915"
+    ],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-040",
+   "category": "真实多跳问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "not_signalled",
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 6,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29757"
+    ],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-044",
+   "category": "无证据问题与范围外问题",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 5,
+    "citations_unused": 3,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29429",
+     "paper:2609.29757"
+    ],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-047",
+   "category": "拒答及证据不足",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 3,
+    "citations_total": 5,
+    "citations_unused": 2,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28900",
+     "paper:2609.29757",
+     "paper:2609.30192",
+     "paper:2609.30243"
+    ],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-048",
+   "category": "拒答及证据不足",
+   "human_label": "unknown",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 4,
+    "citations_unused": 2,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2501.13787",
+     "paper:2609.30192"
+    ],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-049",
+   "category": "拒答及证据不足",
+   "human_label": "unknown",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 3,
+    "citations_total": 6,
+    "citations_unused": 3,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "official:eu_ai_act",
+     "paper:2609.29230",
+     "paper:2609.29429",
+     "paper:2609.30217",
+     "source:nist_news"
+    ],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-031",
+   "category": "跨文档问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "not_signalled",
+   "signals": {
+    "excerpts_used": 3,
+    "citations_total": 5,
+    "citations_unused": 2,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28915",
+     "paper:2609.29429"
+    ],
+    "expected_documents": [
+     "paper:2609.28915",
+     "paper:2609.29429"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "AUROC"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-032",
+   "category": "跨文档问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "not_signalled",
+   "signals": {
+    "excerpts_used": 3,
+    "citations_total": 6,
+    "citations_unused": 3,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28915",
+     "paper:2609.29808"
+    ],
+    "expected_documents": [
+     "paper:2609.28915",
+     "paper:2609.29808"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "kernel-level"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-033",
+   "category": "跨文档问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 6,
+    "citations_unused": 6,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "official:eu_ai_act",
+     "source:nist_ai_rmf"
+    ],
+    "expected_documents": [
+     "official:eu_ai_act",
+     "source:nist_ai_rmf"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "AI Risk Management Framework"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-034",
+   "category": "跨文档问答",
+   "human_label": "unsupported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 2,
+    "citations_total": 6,
+    "citations_unused": 4,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28900",
+     "paper:2609.30028"
+    ],
+    "expected_documents": [
+     "paper:2609.28900",
+     "paper:2609.30028"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "multi-agent"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-035",
+   "category": "跨文档问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 5,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "official:eu_ai_act",
+     "source:nist_ai_rmf"
+    ],
+    "expected_documents": [
+     "official:eu_ai_act",
+     "source:nist_ai_rmf"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "risk management"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-036",
+   "category": "跨文档问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 6,
+    "citations_unused": 6,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "source:owasp_genai"
+    ],
+    "expected_documents": [
+     "source:owasp_genai"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Prompt Injection"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-037",
+   "category": "跨文档问答",
+   "human_label": "unsupported",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 5,
+    "citations_unused": 5,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.28996"
+    ],
+    "expected_documents": [
+     "paper:2609.28996"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "malicious"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-038",
+   "category": "跨文档问答",
+   "human_label": "partially_supported",
+   "proposed_subclass": "insufficient",
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 6,
+    "citations_unused": 6,
+    "citations_off_expected_document": 0,
+    "cited_documents": [
+     "paper:2609.29429"
+    ],
+    "expected_documents": [
+     "paper:2609.29230",
+     "paper:2609.29429"
+    ],
+    "covers_expected_document": true,
+    "expected_terms_in_answer": [
+     "Reinforcement"
+    ],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-046",
+   "category": "拒答及证据不足",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  },
+  {
+   "question_id": "BQA-050",
+   "category": "拒答及证据不足",
+   "human_label": "not_applicable",
+   "proposed_subclass": null,
+   "signals": {
+    "excerpts_used": 0,
+    "citations_total": 0,
+    "citations_unused": 0,
+    "citations_off_expected_document": 0,
+    "cited_documents": [],
+    "expected_documents": [],
+    "covers_expected_document": null,
+    "expected_terms_in_answer": [],
+    "expected_terms_not_in_citations": [],
+    "off_topic_candidates": []
+   }
+  }
+ ]
+}

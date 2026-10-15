@@ -280,6 +280,20 @@ ENRICHMENT_LABELS = (
 )
 
 
+def _term_two_hop_line() -> str:
+    """术语 → 文档的两跳，直接从术语字典取，不写死条数。"""
+    try:
+        from app import term_dictionary
+
+        coverage = term_dictionary.coverage()
+        edges = term_dictionary.term_edges()
+        return (
+            f"知识图谱页：术语节点与文档节点分型渲染的两跳关系；"
+            f"{coverage['terms']} 条术语命中 {coverage['documents_referenced']} 份文档，共 {len(edges)} 条边"
+        )
+    except Exception:
+        return "知识图谱页：术语节点与文档节点分型渲染的两跳关系；条数以 GET /api/knowledge/terms 为准"
+
 def _enrichment_row(key: str) -> str:
     item = ((_snap("enrichment", "dimensions", default={}) or {}).get(key) or {})
     present, total = item.get("present_events"), item.get("total_events")
@@ -356,7 +370,8 @@ OVERVIEW = [
                   "2026-10-15 亦已触发；但 10-09/11/12/13 四天无计划运行，连续天数需重新累积，"
                   "预计 2026-10-20 回到目标（逐日核对见 docs/A_CONTINUOUS_RUN_STATUS_20261015.md）。")
           + "关系维度的 1.0 / 0.734 只代表抽样范围，不外推为全语料指标。"
-            "术语可达 29/31 属检索覆盖，与 10/21 是两个口径，正文中分列、不合并。"),
+            "术语可达 29/31 属检索覆盖；术语 → 文档两跳计的是“术语命中了哪些文档”。"
+            "三个口径分列、不合并，任一都不能替代跨文档推理。"),
 ]
 
 SECTIONS = [
@@ -498,7 +513,7 @@ SECTIONS = [
        "docs/screenshots/10-system-health.png、/api/system/health"],
       ["术语语义字典", _term_dictionary_line(),
        "docs/screenshots/11-term-dictionary.png、/api/knowledge/terms"],
-      ["术语 → 文档两跳", "知识图谱页：术语节点与文档节点分型渲染的两跳关系",
+      ["术语 → 文档两跳", _term_two_hop_line(),
        "docs/screenshots/11-term-dictionary.png、/api/knowledge/graph"],
       ["模型降级链与角色绑定", "赛题指标页：三级降级链（含每一级被跳过的原因）与七个角色的模型绑定",
        "docs/screenshots/12-model-chain.png、/api/system/model-chain"],

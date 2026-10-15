@@ -221,14 +221,42 @@ def test_contrast_relation_exposes_the_frozen_gold_scope():
     assert "frozen" not in active["source"]
 
 
+def _newest_complete_batch() -> str:
+    """最新的一对 qa_human_score_<日期>.json + qa_performance_<日期>.json。
+
+    人工核验批次会随重签前移（10-02 → 10-12 → …），所以这里按产物算，
+    不写死某一个日期；写死会让每次重签都要改测试。
+    """
+    import re
+    from pathlib import Path
+
+    art = Path(__file__).resolve().parents[1] / "artifacts" / "b_eval"
+    pattern = re.compile(r"^(qa_human_score|qa_performance)_(\d{8})\.json$")
+    kinds: dict[str, set[str]] = {}
+    for path in art.glob("qa_*_*.json"):
+        match = pattern.match(path.name)
+        if match:
+            kinds.setdefault(match.group(2), set()).add(match.group(1))
+    complete = [b for b, k in kinds.items() if {"qa_human_score", "qa_performance"} <= k]
+    return sorted(complete)[-1]
+
+
 def test_b_evaluation_artifacts_are_exposed_without_rounding_unknowns():
     body = TestClient(app).get("/api/competition/scorecard").json()["b_evaluation"]
     assert body["available"] is True
-    assert body["active_batch"]["batch_id"] == "20261002"
-    assert body["active_qa_quality"]["human_judged_cases"] == 50
-    assert body["active_qa_quality"]["answer_accuracy"] == 0.1316
-    assert body["active_qa_quality"]["citation_support"] == 0.0833
-    assert body["active_qa_quality"]["refusal_recall"] == 0.3333
+    batch = _newest_complete_batch()
+    assert body["active_batch"]["batch_id"] == batch
+    # 活动批次的人工指标必须与它自己的 JSON 一致（不写死数值，跟着批次走）
+    import json
+    from pathlib import Path
+
+    human = json.loads((Path(__file__).resolve().parents[1] / "artifacts" / "b_eval"
+                        / f"qa_human_score_{batch}.json").read_text(encoding="utf-8"))
+    assert body["active_qa_quality"]["human_judged_cases"] == human["human_judged_cases"] == 50
+    assert body["active_qa_quality"]["answer_accuracy"] == human["answer"]["rate"]
+    assert body["active_qa_quality"]["citation_support"] == human["citation"]["rate"]
+    assert (body["active_qa_quality"]["refusal_recall"]
+            == human["refusal"]["should_refuse"]["refused_recall"])
     # Legacy fields stay on the old 2026-09-30 baseline for backward compatibility.
     assert body["qa_quality"]["human_judged_cases"] == 50
     assert body["qa_quality"]["answer_accuracy"] == 0.2121
