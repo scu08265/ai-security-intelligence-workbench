@@ -510,13 +510,22 @@ def _answer_sentence_candidates(
     question: str, citations: Sequence[dict[str, Any]],
 ) -> list[tuple[float, dict[str, Any], str]]:
     query_terms = set(terms(question))
+    # 与 retrieve_chunks 同一口径：一个中文短语扩展出的同义词组只算**一个概念**。
+    # 否则"XX 这篇论文…"里的"论文"会注入 paper/study/arxiv，凡是含
+    # "paper" + "study" 的样板句（论文里到处都是）就能靠两个同义词各得一分，
+    # 压过真正命中主题词的句子——BQA-004 就是这样把 IRB 清单句选成了"直接证据"。
+    injected = expansion_terms(question)
     candidates: list[tuple[float, dict[str, Any], str]] = []
     for citation in citations:
         for index, sentence in enumerate(_answer_sentences(str(citation.get("quote") or ""))):
             sentence_terms = set(terms(sentence))
             overlap = query_terms & sentence_terms
-            specific = overlap - _GENERIC_SECURITY_TERMS
-            score = float(len(overlap) * 2 + len(specific) * 2)
+            counted = overlap - injected
+            specific = counted - _GENERIC_SECURITY_TERMS
+            score = float(len(counted) * 2 + len(specific) * 2)
+            if overlap & injected:
+                # 扩展词组整体算一个概念，权重等同于一个普通词。
+                score += 2.0
             if index == 0:
                 score += 0.25
             if query_terms and not overlap:

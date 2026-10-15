@@ -1,0 +1,603 @@
+{
+  "generated_at": null,
+  "source_worksheet": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\b_eval\\qa_final_confirmation_worksheet_20261002.csv",
+  "source_results": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\artifacts\\b_eval\\formal_qa_results_20261002.json",
+  "scoped_questions": 28,
+  "answer_partial_total": 26,
+  "citation_partial_total": 27,
+  "buckets": {
+    "citation_does_not_support": 3,
+    "answer_missing_terms": 3,
+    "rubric_review": 22
+  },
+  "policy": "分类只使用已有事实：期望术语是否出现在答案里、是否出现在引用原文里。③ 类是给 B 的判定标准复核项，本工具不做任何重新评分。",
+  "cases": [
+    {
+      "question_id": "BQA-004",
+      "category": "基础事实问答",
+      "question": "SAGE 这篇论文的方法名称是什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "citation_does_not_support",
+      "expected_terms": [
+        "SAGE",
+        "Topological"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [
+        "Topological"
+      ],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.29429",
+        "paper:2609.30192"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “Question: Does the paper describe potential risks incurred by study participants, whether” [SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance · chunk-5c35e2d194d9c"
+    },
+    {
+      "question_id": "BQA-020",
+      "category": "中英文混合查询",
+      "question": "OllamaDrama 蜜罐观察到了什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "citation_does_not_support",
+      "expected_terms": [
+        "OllamaDrama"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [
+        "OllamaDrama"
+      ],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.29757"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "根据检索到的原文证据：\n- “:Low-interactionhoneypots emulate a basic” [OllamaDrama: Designing and Deploying a Honeypot to Measure Attacks on Exposed LLM Infrastructure · chunk-7e16e6ece9b5fa7bb906f527]"
+    },
+    {
+      "question_id": "BQA-038",
+      "category": "跨文档问答",
+      "question": "reinforcement learning 出现在哪些论文里？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "citation_does_not_support",
+      "expected_terms": [
+        "Reinforcement"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [
+        "Reinforcement"
+      ],
+      "missing_expected_documents": [
+        "paper:2609.29230"
+      ],
+      "cited_documents": [
+        "paper:2609.29429"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "OPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extracti"
+    },
+    {
+      "question_id": "BQA-013",
+      "category": "术语及语义查询",
+      "question": "什么是 kernel-level evidence？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "answer_missing_terms",
+      "expected_terms": [
+        "kernel"
+      ],
+      "missing_in_answer": [
+        "kernel"
+      ],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28915"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "OPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the applicatio"
+    },
+    {
+      "question_id": "BQA-022",
+      "category": "中英文混合查询",
+      "question": "SAGE 如何缓解 reasoning bias？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "answer_missing_terms",
+      "expected_terms": [
+        "SAGE"
+      ],
+      "missing_in_answer": [
+        "SAGE"
+      ],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.30192"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "OPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by c"
+    },
+    {
+      "question_id": "BQA-024",
+      "category": "中英文混合查询",
+      "question": "Hard Stop 的 kernel preemption 是什么意思？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "answer_missing_terms",
+      "expected_terms": [
+        "kernel"
+      ],
+      "missing_in_answer": [
+        "kernel"
+      ],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.29808"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "OPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-an"
+    },
+    {
+      "question_id": "BQA-001",
+      "category": "基础事实问答",
+      "question": "DistillGuard 这篇论文的标题是什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "DistillGuard",
+        "NPM"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28996",
+        "paper:2609.30192"
+      ],
+      "citation_count": 4,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “the Node.js ecosystem; however, its open-source supply chain this paper presents a research study on the detection of ma” [DistillGuard: Malicious NPM Package Detection and API Attack C"
+    },
+    {
+      "question_id": "BQA-006",
+      "category": "基础事实问答",
+      "question": "NeRD 论文的应用领域是什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "NeRD",
+        "Medical"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2606.15617",
+        "paper:2609.29429"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “expert study to assess the clinical plausibility, showing that NeRD rationales” [NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image"
+    },
+    {
+      "question_id": "BQA-009",
+      "category": "基础事实问答",
+      "question": "Parameter-Efficient Fine-Tuning 这篇论文的主题是什么？",
+      "human_answer": "partial",
+      "human_citation": "unknown",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "Parameter-Efficient",
+        "Fine-Tuning"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2501.13787"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "OPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models"
+    },
+    {
+      "question_id": "BQA-010",
+      "category": "基础事实问答",
+      "question": "JevOut 论文的主题是什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "JevOut"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2501.13787",
+        "paper:2609.29429",
+        "paper:2609.30243"
+      ],
+      "citation_count": 4,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “Pan, “An empirical study on parameter-efficient context,” arXiv preprint arXiv:2403.05530, 2024.” [Parameter-Efficient Fine-Tuning for Foundation Models · chunk-a785e777ad83e7d8cb364c69"
+    },
+    {
+      "question_id": "BQA-012",
+      "category": "术语及语义查询",
+      "question": "Derm7pt 是什么数据集？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "Derm7pt"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2606.15617"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “achieves the strongest overall results: 80.76% ACC / 60.00% F1 on Derm7pt and” [NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image "
+    },
+    {
+      "question_id": "BQA-014",
+      "category": "术语及语义查询",
+      "question": "multi-agent 系统在哪些研究里被讨论？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "multi-agent"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28900",
+        "paper:2609.30028"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的相关原文证据如下：\n- “strawman under realistic multi-agent deployment of model and context asymmetry.Section 6builds the key” [Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion · chun"
+    },
+    {
+      "question_id": "BQA-015",
+      "category": "术语及语义查询",
+      "question": "AUROC 是什么指标？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "AUROC"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28915",
+        "paper:2609.29429"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “The AUROC advantage does” [Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures · chunk-44cd582860c79d6783e5fbed]\n- “Table 18:K"
+    },
+    {
+      "question_id": "BQA-016",
+      "category": "术语及语义查询",
+      "question": "PEFT 在基础模型上解决什么问题？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "Parameter-Efficient"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2501.13787"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "根据检索到的原文证据：\n- “PEFT for Visual Content Generation Models subsection subsume the scope of the multi-modal model as” [Parameter-Efficient Fine-Tuning for Foundation Models · chunk-ae717b77f38375b526b5ba"
+    },
+    {
+      "question_id": "BQA-017",
+      "category": "术语及语义查询",
+      "question": "OllamaDrama 中的 honeypot 部署在哪里？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "honeypot"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.29757"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "根据检索到的原文证据：\n- “\"OllamaDrama: Designing and Deploying a Honeypot to Measure Attacks on Ex” [OllamaDrama: Designing and Deploying a Honeypot to Measure Attacks on Exposed LLM Infrastructure · chunk-ada3"
+    },
+    {
+      "question_id": "BQA-018",
+      "category": "术语及语义查询",
+      "question": "什么是 agent trace tampering？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "trace"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.30266"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "OPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot t"
+    },
+    {
+      "question_id": "BQA-019",
+      "category": "中英文混合查询",
+      "question": "DistillGuard 是做什么的？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "DistillGuard"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28996"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “feature completeness and vulnerable to obfuscated malicious knowledge with lightweight LoRA fine-tuning, DistillGuard” [DistillGuard: Malicious NPM Package Detection and API Attack Chai"
+    },
+    {
+      "question_id": "BQA-021",
+      "category": "中英文混合查询",
+      "question": "Codetta 是什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "Codetta"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28900"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “CODETTA: High-Capacity, Keyless, and Undetectable” [Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion · chunk-86ce9e6b5b0e6ce787a30993]"
+    },
+    {
+      "question_id": "BQA-023",
+      "category": "中英文混合查询",
+      "question": "NeRD 是什么方法？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "NeRD"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2606.15617"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “Overall, NeRD demon” [NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image Diagnosis · chunk-675668ff34c9d9eeb7b36b4a]"
+    },
+    {
+      "question_id": "BQA-025",
+      "category": "多轮追问",
+      "question": "它检测什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "DistillGuard"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28996"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “that is difficult to detect using rule-based detection methods,” [DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation · chu"
+    },
+    {
+      "question_id": "BQA-026",
+      "category": "多轮追问",
+      "question": "它的研究对象是什么？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "Codetta"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28900"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “CODETTA: High-Capacity, Keyless, and Undetectable” [Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion · chunk-86ce9e6b5b0e6ce787a30993]"
+    },
+    {
+      "question_id": "BQA-028",
+      "category": "多轮追问",
+      "question": "它用在哪个领域？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "NeRD"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2606.15617"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "检索到的原文直接证据：\n- “Overall, NeRD demon” [NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image Diagnosis · chunk-675668ff34c9d9eeb7b36b4a]"
+    },
+    {
+      "question_id": "BQA-031",
+      "category": "跨文档问答",
+      "question": "AUROC 在哪些文档中被讨论？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "AUROC"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28915",
+        "paper:2609.29429"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的相关原文证据如下：\n- “The AUROC advantage does” [Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures · chunk-44cd582860c79d6783e5fbed]\n- “Table 18"
+    },
+    {
+      "question_id": "BQA-032",
+      "category": "跨文档问答",
+      "question": "kernel-level 在哪些文档中出现？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "kernel-level"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.28915",
+        "paper:2609.29808"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "检索到的相关原文证据如下：\n- “Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint” [Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution · chunk-7c6fdba1430ff6e44db5"
+    },
+    {
+      "question_id": "BQA-033",
+      "category": "跨文档问答",
+      "question": "NIST AI Risk Management Framework 与欧盟 AI 法案分别在哪些文档中被提到？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "AI Risk Management Framework"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "official:eu_ai_act",
+        "source:nist_ai_rmf"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "NIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A"
+    },
+    {
+      "question_id": "BQA-035",
+      "category": "跨文档问答",
+      "question": "risk management 在哪些文档中讨论？",
+      "human_answer": "partial",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "risk management"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "official:eu_ai_act",
+        "source:nist_ai_rmf"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "OPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition i"
+    },
+    {
+      "question_id": "BQA-036",
+      "category": "跨文档问答",
+      "question": "prompt injection 在哪些文档中被提到？",
+      "human_answer": "correct",
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [
+        "Prompt Injection"
+      ],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "source:owasp_genai"
+      ],
+      "citation_count": 6,
+      "refused": false,
+      "answer_head": "CVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injectio"
+    },
+    {
+      "question_id": "BQA-040",
+      "category": "真实多跳问答",
+      "question": "OllamaDrama 蜜罐观察到的攻击，与已知在野利用漏洞清单中的哪些条目对应？",
+      "human_answer": null,
+      "human_citation": "partially_supported",
+      "bucket": "rubric_review",
+      "expected_terms": [],
+      "missing_in_answer": [],
+      "missing_in_quotes": [],
+      "missing_expected_documents": [],
+      "cited_documents": [
+        "paper:2609.29757"
+      ],
+      "citation_count": 5,
+      "refused": false,
+      "answer_head": "检索到的相关原文证据如下：\n- “Table 5: Summary & MITRE ATLAS Mapping of Observed Attack Behaviors” [OllamaDrama: Designing and Deploying a Honeypot to Measure Attacks on Exposed LLM Infrastructure · chunk-f7fd040b"
+    }
+  ]
+}

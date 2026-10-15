@@ -104,6 +104,25 @@ def test_replaceable_reranker_controls_order_without_inventing_hits():
     assert {item["document_id"] for item in result["citations"]} == {"SYNTHETIC-A", "SYNTHETIC-B"}
 
 
+def test_a_question_word_does_not_decide_which_sentence_is_quoted():
+    """Sibling of the ranking fix, one layer down.
+
+    论文 injects paper/study/arxiv.  ``_answer_sentence_candidates`` used to add
+    one point per overlapping synonym, so a boilerplate sentence containing both
+    "paper" and "study" outscored the sentence that actually names the subject —
+    which is how the 2026-10-02 answers ended up quoting an IRB checklist line
+    for "SAGE 这篇论文的方法名称是什么？".
+    """
+    text = (
+        "Question: Does the paper describe potential risks incurred by study "
+        "participants? SAGE is a topological guidance method for long-horizon reasoning."
+    )
+    result = answer_with_rag("SAGE 这篇论文的方法名称是什么？", chunks=[_record("SYNTHETIC-3", text)])
+    assert result["refused"] is False
+    assert "SAGE is a topological guidance method" in result["answer"]
+    assert "study participants" not in result["answer"]
+
+
 def test_summary_fallback_is_explicit_and_never_labelled_fulltext():
     documents = events_to_documents([{
         "id": "SYNTHETIC-SUMMARY", "summary": "Synthetic agent memory poisoning case.",
