@@ -621,10 +621,13 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "detail": (
                 f"{len(degraded)} 个来源处于降级冷却中" if degraded
                 else (
-                    f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次连续失败；"
+                    f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次非完全成功，含 partial；"
                     f"{len(expired_degradations)} 条历史降级记录已到期）"
                     if expired_degradations
-                    else f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次连续失败）"
+                    else (
+                        "无降级中的来源"
+                        f"（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次非完全成功，含 partial）"
+                    )
                 )
             ),
             "counters": {"degraded_sources": len(degraded),
@@ -668,7 +671,7 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
         "policy": {
             "consecutive_failure_threshold": self_healing.CONSECUTIVE_FAILURE_THRESHOLD,
             "cooldown_hours": self_healing.DEGRADE_COOLDOWN_HOURS,
-            "note": "连续失败达到阈值后移出无人值守采集；配置了备用源的来源改由备用源代采。",
+            "note": "连续非完全成功（含 partial）达到阈值后移出无人值守采集；配置了备用源的来源改由备用源代采。",
         },
     }
 

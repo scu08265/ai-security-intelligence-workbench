@@ -169,3 +169,43 @@ def test_selection_lifts_a_cooldown_once_the_source_answers_again():
     assert selected == ["nvd", "msrc"], "a recovered source must be collectable again"
     assert notes == []
     assert storage.source_degradation("msrc") is None
+
+
+def test_degradation_reason_says_partial_counts():
+    """The trigger counts ``partial``, so the reason must not claim a failure."""
+    decision = self_healing.degradation_for("osv", 33)
+    assert "非完全成功（含 partial）" in decision["reason"]
+    assert "33" in decision["reason"]
+    assert "33" == str(decision["consecutive_failures"])
+    backup = self_healing.degradation_for("arxiv", 3)
+    assert "非完全成功（含 partial）" in backup["reason"]
+
+
+def test_a_same_second_expiry_is_not_read_as_expired():
+    """Regression: the cooldown comparison was a raw string compare.
+
+    ``utcnow()`` writes ``2026-10-15T12:19:35Z`` (second precision) while the
+    self-healing expiry is written as ``...35.500000+00:00``.  As strings,
+    ``'.' < 'Z'``, so an expiry half a second in the future was read as already
+    expired.
+    """
+    storage.save_source_degradation({
+        "source_id": "osv", "action": "reduce_frequency",
+        "degraded_at": "2026-10-15T06:19:35Z",
+        "expires_at": "2026-10-15T12:19:35.500000+00:00",
+        "consecutive_failures": 30,
+    })
+    assert storage.active_source_degradations("2026-10-15T12:19:35Z"), \
+        "an expiry later in the same second is still cooling down"
+    assert storage.active_source_degradations("2026-10-15T12:19:36Z") == [], \
+        "an expiry in the past is not"
+    # The mixed forms must also agree with each other.
+    assert storage.active_source_degradations("2026-10-15T12:19:35+00:00")
+
+
+def test_a_degradation_without_an_expiry_never_lapses():
+    storage.save_source_degradation({
+        "source_id": "nvd", "action": "reduce_frequency",
+        "degraded_at": "2026-01-01T00:00:00Z", "consecutive_failures": 3,
+    })
+    assert storage.active_source_degradations("2099-01-01T00:00:00Z")

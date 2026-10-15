@@ -70,6 +70,10 @@ def consecutive_failures(source_id: str, runs: list[dict] | None = None) -> int:
     Only persisted ``collect`` runs count, newest first, and a source that has
     never been attempted has a streak of zero rather than a streak of success.
     Self-healing retries are ordinary attempts and therefore count too.
+
+    ``partial`` counts towards the streak: a collector that stopped at its fetch
+    budget did not fully succeed.  The human-readable reason says so, because a
+    source can be producing events and still be on this list.
     """
     items = runs if runs is not None else storage.list_runs(limit=None)
     streak = 0
@@ -105,7 +109,7 @@ def degradation_for(source_id: str, streak: int) -> dict[str, Any] | None:
             "backup_sources": backups,
             "failure_class": classify_failure("failed", None),
             "consecutive_failures": streak,
-            "reason": f"连续 {streak} 次采集未成功，切换到已登记的备用源",
+            "reason": f"连续 {streak} 次非完全成功（含 partial），切换到已登记的备用源",
         }
     return {
         "source_id": source_id,
@@ -113,7 +117,7 @@ def degradation_for(source_id: str, streak: int) -> dict[str, Any] | None:
         "backup_sources": [],
         "failure_class": classify_failure("failed", None),
         "consecutive_failures": streak,
-        "reason": f"连续 {streak} 次采集未成功，冷却期内不再进入无人值守采集",
+        "reason": f"连续 {streak} 次非完全成功（含 partial），冷却期内不再进入无人值守采集",
     }
 
 
@@ -260,7 +264,7 @@ def run_self_healing(
         observability.emit_alert(
             "source_degraded",
             (
-                f"{source_id} 连续 {streak} 次采集未成功，"
+                f"{source_id} 连续 {streak} 次非完全成功（含 partial），"
                 + (
                     f"已切换到备用源 {', '.join(entry['backup_sources'])}"
                     if entry["action"] == "switch_backup"
@@ -289,7 +293,7 @@ def run_self_healing(
         "policy": {
             "automatic_actions": [
                 "有限重试",
-                "连续失败后降频（移出无人值守采集）",
+                "连续非完全成功（含 partial）后降频（移出无人值守采集）",
                 "有备用源的来源切换到备用源",
                 "历史数据降级",
                 "来源跳过",

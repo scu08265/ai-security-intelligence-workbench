@@ -717,13 +717,41 @@ def source_degradation(source_id: str) -> dict | None:
     return json.loads(row["doc"]) if row and row["doc"] else None
 
 
+def _iso_moment(value: Any) -> datetime | None:
+    """Parse an ISO-8601 instant, tolerating both 'Z' and '+00:00' forms.
+
+    ``utcnow()`` writes second-precision ``...Z`` while the self-healing expiry
+    is written as ``...microseconds+00:00``.  Comparing those two as strings put
+    an expiry inside the same second on the wrong side of "now", so both sides
+    are parsed and compared as instants.
+    """
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+
+
 def active_source_degradations(now: str | None = None) -> list[dict]:
     """Degradations whose cooldown has not expired yet."""
-    moment = now or utcnow()
-    return [
-        entry for entry in all_source_degradations()
-        if not entry.get("expires_at") or str(entry["expires_at"]) > moment
-    ]
+    moment = _iso_moment(now) or datetime.now(timezone.utc)
+    active: list[dict] = []
+    for entry in all_source_degradations():
+        raw = entry.get("expires_at")
+        if not raw:
+            # An unset expiry never lapses.
+            active.append(entry)
+            continue
+        expires = _iso_moment(raw)
+        # An expiry we cannot parse keeps the bounded action in place instead of
+        # silently returning a failing source to the unattended set; it is
+        # cleared as soon as the source answers ok again.
+        if expires is None or expires > moment:
+            active.append(entry)
+    return active
 
 
 def clear_source_degradation(source_id: str) -> bool:
