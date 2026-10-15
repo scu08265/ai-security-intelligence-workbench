@@ -347,12 +347,14 @@ OVERVIEW = [
     ("table", ["项目", "数值", "口径"], headline_rows()),
     ("h2", "如实说明的边界"),
     ("p", "为避免把缺口说成能力，以下五项在正文中同样保留：没有实时监测（全部来源 realtime=false）；"
-          f"监测时效性 p50 为 {_snap('scorecard', 'latency_p50_hours')} 小时，只达到赛题合格档；"
+          f"监测时效性按漏洞类判定为良好档，距优秀档（≤6 小时）仍有距离（混合口径 p50 "
+          f"{_snap('scorecard', 'latency_p50_hours')} 小时只作附录，不作为本项分母）；"
           "跨文档路径 10/21，缺 52 条文档间边；POC 与资产两个维度在评测语料中无数据；"
           + ("连续运行目标在当前窗口已达成。"
              if _snap("scorecard", "continuous_target_met", default=False)
-             else "**连续运行目标在当前窗口未达成**：计划任务窗口 2026-10-11 到期后 10-12 无计划运行，"
-                  "连续天数已重新起算，需恢复运行后重新累积 7 天。")
+             else "**连续运行目标在当前窗口未达成**：计划任务已改为无限重复，2026-10-14 当日按小时运行 9 次，"
+                  "2026-10-15 亦已触发；但 10-09/11/12/13 四天无计划运行，连续天数需重新累积，"
+                  "预计 2026-10-20 回到目标（逐日核对见 docs/A_CONTINUOUS_RUN_STATUS_20261015.md）。")
           + "关系维度的 1.0 / 0.734 只代表抽样范围，不外推为全语料指标。"
             "术语可达 29/31 属检索覆盖，与 10/21 是两个口径，正文中分列、不合并。"),
 ]
@@ -517,7 +519,7 @@ SECTIONS = [
      [["监测时效性（混合，见附录 B）",
        f"p50 = {_snap('scorecard', 'latency_p50_hours')} 小时；"
        f"6 小时内 {(_snap('scorecard', 'within_6h_rate', default=0) or 0):.1%}",
-       f"{_snap('scorecard', 'effective_denominator')} 个有效样本；赛题合格档为 ≤24 小时"],
+       f"{_snap('scorecard', 'effective_denominator')} 个有效样本；混合口径只作附录，不作为本项判定分母"],
       ["监测时效性（漏洞类，赛题口径）",
        f"GHSA 中位 {_source_latency('ghsa').get('p50_hours', '—')} 小时；"
        f"NVD 中位 {_source_latency('nvd').get('p50_hours', '—')} 小时",
@@ -532,8 +534,9 @@ SECTIONS = [
        f"定时 {_snap('scorecard', 'cumulative_scheduled_run_days')} 天",
        ("7 天连续运行目标：已达成（窗口内每个自然日都有计划运行）"
         if _snap("scorecard", "continuous_target_met", default=False)
-        else "7 天连续运行目标：当前窗口未达成——计划任务窗口 10-11 到期后 10-12 无计划运行，"
-             "连续天数已重新起算，恢复运行后需重新累积")],
+        else "7 天连续运行目标：当前窗口未达成——计划任务已改为无限重复，2026-10-14 当日运行 9 次、"
+             "10-15 已触发，但 10-09/11/12/13 无计划运行；连续天数需重新累积，"
+             "预计 2026-10-20 回到目标（见 docs/A_CONTINUOUS_RUN_STATUS_20261015.md）")],
       ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
        "交付机全量 pytest；语料与衍生副本均已交付核验"]]),
     ("figure", "fig4", "图 4  校内初赛功能与性能项自评（按评分细则档位）"),
@@ -554,6 +557,15 @@ SECTIONS = [
           f"NVD 中位 {_source_latency('nvd').get('p50_hours', '—')} 小时，"
           "差值来自上游发布与入库节奏。分列把混合口径里那些与漏洞无关的发布节奏剥出去，但混合口径本身"
           "保留在附录 B，两个数都能被追问；两者的样本量与分位数由同一份快照生成，不会再各写一份。"),
+    ("p", "本项的档位口径也一并定稿：**按漏洞类判定为良好**——GHSA 与 NVD 两个漏洞来源的中位延迟都落在"
+          f"≤12 小时区间（GHSA {_source_latency('ghsa').get('p50_hours', '—')} 小时、"
+          f"NVD {_source_latency('nvd').get('p50_hours', '—')} 小时，均取自同一份快照）；混合口径不算本项分母，"
+          f"只作附录 B 的参考（当前快照 {_snap('latency_by_class', 'mixed', 'n')} 个有效样本、"
+          f"中位 {_snap('latency_by_class', 'mixed', 'p50_hours')} 小时）。数字来源分两类：混合口径只认"
+          "docs/report/metrics_snapshot.json 的快照块，分列与上游归因以 docs/A_TIMELINESS_ATTRIBUTION.md "
+          "第 3、4 节为准（本机机读产物 reports/timeliness-attribution.json）。对照表 §2.1、"
+          "docs/METRICS_BASELINE.md 的 2.1 节与本报告三处写的是同一条口径；"
+          "tools/refresh_metrics_snapshot.py --write 只推进快照块，档位判定不随刷新改写。"),
     ("h1", "十一、创新点总结"),
     ("bullets", [
         "证据分层而非结论合并：同一事件的多个来源区间分别保留，避免合并后给出错误的修复版本。",
@@ -568,7 +580,9 @@ SECTIONS = [
           f"6 小时内 {_snap('scorecard', 'within_6h_rate', default=0):.1%}、"
           f"12 小时内 {_snap('scorecard', 'within_12h_rate', default=0):.1%}、"
           f"24 小时内 {_snap('scorecard', 'within_24h_rate', default=0):.1%}。"
-          "这一档只够赛题的合格档，分列并不改变档位判定——本项交付的是归因，不是抬分。"
+          "混合口径只用于说明瓶颈在上游，不作为本项判定分母——本项判的是漏洞类，档位是良好。"
+          "下面这张表是 2026-10-13 交付机的一次读数，与第十章主表第一行的快照读数日期和样本量都不同",
+          "（基线库每小时增长），不是同一时点，不得混引在一张表里。"
           "本表与第十章共用同一份快照，不单独维护。"),
     ("table", ["口径", "来源", "样本", "中位延迟", "最大延迟"], _latency_class_rows()),
     ("p", "类别归属取自 app/sources.py 的 category 字段：漏洞类含 cve_database、ecosystem_advisory、"
@@ -577,7 +591,8 @@ SECTIONS = [
           "不另造一套分类，避免出现“报告里的类别”与“代码里的类别”两套口径。"),
     ("h1", "附：评分细则档位对照"),
     ("p", "每一条评分细则对应到合格／良好／优秀的哪一档、证据在哪，见 docs/COMPETITION_RUBRIC_MAPPING.md。"
-          "该表同时列出三处必须如实说明的缺口：无实时监测、时效性只到合格档、跨文档路径 10/21。"),
+          "该表同时列出三处必须如实说明的缺口：无实时监测、时效性距优秀档（≤6 小时）尚有距离、"
+          "跨文档路径 10/21。"),
 ]
 
 BLOCKS = OVERVIEW + SECTIONS

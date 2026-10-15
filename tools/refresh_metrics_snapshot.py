@@ -218,7 +218,7 @@ def render_block(snapshot: dict) -> str:
         f"`target_met = {str(card['continuous_target_met']).lower()}` |",
         f"| 语料 | `events_loaded = {card['events_loaded']}` / "
         f"`events_total = {card['events_total']}`，`truncated = {str(card['truncated']).lower()}` |",
-        f"| 监测时效性 | 6 小时内 {card['within_6h_rate']:.1%}，12 小时内 {card['within_12h_rate']:.1%}，"
+        f"| 监测时效性（混合口径，附录） | 6 小时内 {card['within_6h_rate']:.1%}，12 小时内 {card['within_12h_rate']:.1%}，"
         f"24 小时内 {card['within_24h_rate']:.1%}；p50 = {card['latency_p50_hours']} 小时"
         f"（{card['effective_denominator']} 个有效样本） |",
         f"| 处置闭环 | 高优先级 {disp['high_priority_total']} / 已复测关闭 "

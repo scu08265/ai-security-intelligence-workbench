@@ -36,7 +36,7 @@
 | 累计定时运行日期 | 10 天 |
 | 赛题连续运行（7 天窗口） | 10 天，`target_met = false` |
 | 语料 | `events_loaded = 638` / `events_total = 638`，`truncated = false` |
-| 监测时效性 | 6 小时内 32.0%，12 小时内 45.1%，24 小时内 62.0%；p50 = 15.58 小时（297 个有效样本） |
+| 监测时效性（混合口径，附录） | 6 小时内 32.0%，12 小时内 45.1%，24 小时内 62.0%；p50 = 15.58 小时（297 个有效样本） |
 | 处置闭环 | 高优先级 53 / 已复测关闭 4 / `closure_rate = 0.0755` / `verified_rate = 0.0566` / `findings_total = 126` |
 | 关系评测（当前批次口径） | P = 1.0，R = 0.734，F1 = 0.8466（TP 69 / FP 0 / FN 25） |
 | 富化样本量 | 638 个事件 |
@@ -45,6 +45,32 @@
 
 **权威来源始终是接口本身**：这份表只是某一时刻的定格，供报告写作时对齐用。数值变化时改这一处，
 不要在各份文档里各写一份。
+
+### 2.1 监测时效性判定口径（静态，不随快照重写）
+
+这一段写在**快照标记之外**，刷新快照不会覆盖它。三条定稿口径如下，2026-10-15 生效：
+
+1. **本项按漏洞类判定，档位为良好（4）**。赛题问的是**漏洞信息**从发布到采集的延迟，判据只引用
+   漏洞来源：漏洞类整体中位 7.34 小时（GHSA 1.75 小时、NVD 8.34 小时，均取自
+   `docs/report/metrics_snapshot.json` 的 `latency_by_class`），落在 ≤12 小时的良好区间。
+   上面第 2 节表里的"监测时效性"一行是**混合口径**，只作附录参考，**不作为本项分母**。
+2. **混合口径不删，只作附录**。它的权威读数就是第 2 节那一行（快照日期见上，当前 297 个有效样本、
+   中位 15.58 小时）；另有一次 2026-10-13 交付机读数（267 个有效样本、中位 18.1 小时）保留在
+   `docs/A_TIMELINESS_ATTRIBUTION.md` 第 5 节作为历史记录。两次读数的**日期与样本量都不同**
+   （基线库每小时增长），不是同一时点，**不得混引在一张表里**。
+3. **三处同源**。`docs/COMPETITION_RUBRIC_MAPPING.md` §2.1（含初赛与决赛两行档位）、本文件
+   本节、技术报告第十章与附录 B，写的是同一条定稿口径。数字来源：**混合口径与分列**都读
+   `docs/report/metrics_snapshot.json` 的 `latency_by_class`；**上游归因**读
+   `docs/A_TIMELINESS_ATTRIBUTION.md` 第 4 节与 `reports/timeliness-attribution.json`。
+   快照刷新用 `python tools/refresh_metrics_snapshot.py --write`（在持有本基线库的机器上跑），
+   快照块与上面三条里的数字随之前进，**档位判定不随刷新改写**。
+
+分列是为了忠实赛题口径，不是为了抬分：漏洞类内部 GHSA 与 NVD 的差距（1.75 vs 8.34 小时）
+如实保留；漏洞类整体（217 个样本、中位 7.34 小时）仍差优秀档（≤6 小时），只有 GHSA 单项进得去。
+
+> 复算边界：分列表里的 `ghsa` / `arxiv` 等来源，在成员 A 的机器上不存在（本机 `data/intel.sqlite`
+> 没有这两个源的事件记录），因此分列表**只能在持有本基线库的机器上重跑**
+> `python tools/build_timeliness_attribution.py` 得到完整结果。
 
 ## 3. 哪些指标能用这条基线，哪些不能
 
@@ -89,5 +115,6 @@
 ## 5. 相关文件
 
 - 处置闭环细节与口径边界：`docs/A_DISPOSITION_LIVE_CLOSURE.md`
+- 时效性分列与上游归因：`docs/A_TIMELINESS_ATTRIBUTION.md`、`reports/timeliness-attribution.json`
 - B 项证据路径与缺口：`docs/B_EVIDENCE_INDEX.md`
 - 容器验收证据：`reports/docker-validation.json`、`docs/DOCKER_CI_GUIDE.md` 第 7 节
