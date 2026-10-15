@@ -191,7 +191,19 @@ def test_scorecard_page_matches_frozen_json_and_prefers_active_batch():
     assert payload["mismatches"] == []
     assert payload["conclusion"]["page_matches_frozen_json"] is True
     assert payload["conclusion"]["page_shows_new_batch"] is True
-    assert payload["active_batch"]["batch_id"] == "20261002"
+    # 人工核验批次会随重签前移（10-02 → 10-12 → …），所以按产物算最新完整批次，
+    # 不写死日期；契约是"页面取的是最新一对，而不是冻结的那一份"。
+    import re
+
+    pattern = re.compile(r"^(qa_human_score|qa_performance)_(\d{8})\.json$")
+    kinds: dict[str, set[str]] = {}
+    for path in ARTIFACTS.glob("qa_*_*.json"):
+        match = pattern.match(path.name)
+        if match:
+            kinds.setdefault(match.group(2), set()).add(match.group(1))
+    complete = sorted(b for b, k in kinds.items()
+                      if {"qa_human_score", "qa_performance"} <= k)
+    assert payload["active_batch"]["batch_id"] == complete[-1]
 
 
 def test_poc_review_worksheet_covers_every_candidate_with_signed_human_labels():

@@ -1,0 +1,1025 @@
+{
+ "schema_version": "b-qa-performance-1.0",
+ "batches": [
+  {
+   "label": "A_prev",
+   "source": "artifacts\\b_eval\\formal_qa_results.json",
+   "cases": 50,
+   "latency_ms": {
+    "samples": 50,
+    "mean": 445.3,
+    "p50": 427.1,
+    "p95": 584.6,
+    "min": 314.5,
+    "max": 679.9,
+    "scope": "单题端到端耗时（含本地检索），同一批次内统计；最近秩分位数、不做插值；超时阈值 5000 ms"
+   },
+   "outcomes": {
+    "answered": 39,
+    "refused": 11,
+    "errors": 0,
+    "timeouts": 0,
+    "failures": 0
+   },
+   "quality": {
+    "document_hit": {
+     "ok": 31,
+     "n": 36,
+     "rate": 0.8611,
+     "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
+    },
+    "term_hit": {
+     "ok": 25,
+     "n": 38,
+     "rate": 0.6579,
+     "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
+    },
+    "refusal_accuracy": {
+     "ok": 39,
+     "n": 50,
+     "rate": 0.78
+    },
+    "citations": {
+     "total": 187,
+     "retrievable": 187,
+     "rate": 1.0
+    },
+    "answer_semantic_accuracy": {
+     "value": null,
+     "reason": "无人工核验标准答案，按规则不计入正式准确率"
+    }
+   },
+   "per_category": {
+    "中英文混合查询": {
+     "cases": 6,
+     "answered": 6,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 6,
+     "document_hit_ok": 6,
+     "term_hit_n": 6,
+     "term_hit_ok": 3,
+     "refusal_n": 6,
+     "refusal_ok": 6,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.5,
+     "refusal_accuracy": 1.0
+    },
+    "基础事实问答": {
+     "cases": 10,
+     "answered": 10,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 9,
+     "document_hit_ok": 9,
+     "term_hit_n": 10,
+     "term_hit_ok": 7,
+     "refusal_n": 10,
+     "refusal_ok": 10,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.7,
+     "refusal_accuracy": 1.0
+    },
+    "多轮追问": {
+     "cases": 6,
+     "answered": 1,
+     "refused": 5,
+     "errors": 0,
+     "document_hit_n": 5,
+     "document_hit_ok": 0,
+     "term_hit_n": 6,
+     "term_hit_ok": 1,
+     "refusal_n": 6,
+     "refusal_ok": 1,
+     "document_hit_rate": 0.0,
+     "term_hit_rate": 0.1667,
+     "refusal_accuracy": 0.1667
+    },
+    "拒答及证据不足": {
+     "cases": 5,
+     "answered": 3,
+     "refused": 2,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 2,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.4
+    },
+    "无证据问题与范围外问题": {
+     "cases": 5,
+     "answered": 1,
+     "refused": 4,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 4,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.8
+    },
+    "术语及语义查询": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 8,
+     "term_hit_n": 8,
+     "term_hit_ok": 6,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.75,
+     "refusal_accuracy": 1.0
+    },
+    "真实多跳问答": {
+     "cases": 2,
+     "answered": 2,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 2,
+     "refusal_ok": 0,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.0
+    },
+    "跨文档问答": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 8,
+     "term_hit_n": 8,
+     "term_hit_ok": 8,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 1.0,
+     "refusal_accuracy": 1.0
+    }
+   }
+  },
+  {
+   "label": "B_prev",
+   "source": "artifacts\\b_eval\\formal_qa_performance_run2.json",
+   "cases": 50,
+   "latency_ms": {
+    "samples": 50,
+    "mean": 437.3,
+    "p50": 427.4,
+    "p95": 566.5,
+    "min": 317.2,
+    "max": 685.0,
+    "scope": "单题端到端耗时（含本地检索），同一批次内统计；最近秩分位数、不做插值；超时阈值 5000 ms"
+   },
+   "outcomes": {
+    "answered": 39,
+    "refused": 11,
+    "errors": 0,
+    "timeouts": 0,
+    "failures": 0
+   },
+   "quality": {
+    "document_hit": {
+     "ok": 31,
+     "n": 36,
+     "rate": 0.8611,
+     "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
+    },
+    "term_hit": {
+     "ok": 25,
+     "n": 38,
+     "rate": 0.6579,
+     "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
+    },
+    "refusal_accuracy": {
+     "ok": 39,
+     "n": 50,
+     "rate": 0.78
+    },
+    "citations": {
+     "total": 187,
+     "retrievable": 187,
+     "rate": 1.0
+    },
+    "answer_semantic_accuracy": {
+     "value": null,
+     "reason": "无人工核验标准答案，按规则不计入正式准确率"
+    }
+   },
+   "per_category": {
+    "中英文混合查询": {
+     "cases": 6,
+     "answered": 6,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 6,
+     "document_hit_ok": 6,
+     "term_hit_n": 6,
+     "term_hit_ok": 3,
+     "refusal_n": 6,
+     "refusal_ok": 6,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.5,
+     "refusal_accuracy": 1.0
+    },
+    "基础事实问答": {
+     "cases": 10,
+     "answered": 10,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 9,
+     "document_hit_ok": 9,
+     "term_hit_n": 10,
+     "term_hit_ok": 7,
+     "refusal_n": 10,
+     "refusal_ok": 10,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.7,
+     "refusal_accuracy": 1.0
+    },
+    "多轮追问": {
+     "cases": 6,
+     "answered": 1,
+     "refused": 5,
+     "errors": 0,
+     "document_hit_n": 5,
+     "document_hit_ok": 0,
+     "term_hit_n": 6,
+     "term_hit_ok": 1,
+     "refusal_n": 6,
+     "refusal_ok": 1,
+     "document_hit_rate": 0.0,
+     "term_hit_rate": 0.1667,
+     "refusal_accuracy": 0.1667
+    },
+    "拒答及证据不足": {
+     "cases": 5,
+     "answered": 3,
+     "refused": 2,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 2,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.4
+    },
+    "无证据问题与范围外问题": {
+     "cases": 5,
+     "answered": 1,
+     "refused": 4,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 4,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.8
+    },
+    "术语及语义查询": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 8,
+     "term_hit_n": 8,
+     "term_hit_ok": 6,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.75,
+     "refusal_accuracy": 1.0
+    },
+    "真实多跳问答": {
+     "cases": 2,
+     "answered": 2,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 2,
+     "refusal_ok": 0,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.0
+    },
+    "跨文档问答": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 8,
+     "term_hit_n": 8,
+     "term_hit_ok": 8,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 1.0,
+     "refusal_accuracy": 1.0
+    }
+   }
+  },
+  {
+   "label": "C_20261012",
+   "source": "artifacts\\b_eval\\formal_qa_results_20261012.json",
+   "cases": 50,
+   "latency_ms": {
+    "samples": 50,
+    "mean": 461.7,
+    "p50": 449.9,
+    "p95": 627.9,
+    "min": 311.7,
+    "max": 709.4,
+    "scope": "单题端到端耗时（含本地检索），同一批次内统计；最近秩分位数、不做插值；超时阈值 5000 ms"
+   },
+   "outcomes": {
+    "answered": 46,
+    "refused": 4,
+    "errors": 0,
+    "timeouts": 0,
+    "failures": 0
+   },
+   "quality": {
+    "document_hit": {
+     "ok": 35,
+     "n": 36,
+     "rate": 0.9722,
+     "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
+    },
+    "term_hit": {
+     "ok": 35,
+     "n": 38,
+     "rate": 0.9211,
+     "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
+    },
+    "refusal_accuracy": {
+     "ok": 42,
+     "n": 50,
+     "rate": 0.84
+    },
+    "citations": {
+     "total": 222,
+     "retrievable": 222,
+     "rate": 1.0
+    },
+    "answer_semantic_accuracy": {
+     "value": null,
+     "reason": "无人工核验标准答案，按规则不计入正式准确率"
+    }
+   },
+   "per_category": {
+    "中英文混合查询": {
+     "cases": 6,
+     "answered": 6,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 6,
+     "document_hit_ok": 6,
+     "term_hit_n": 6,
+     "term_hit_ok": 4,
+     "refusal_n": 6,
+     "refusal_ok": 6,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.6667,
+     "refusal_accuracy": 1.0
+    },
+    "基础事实问答": {
+     "cases": 10,
+     "answered": 10,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 9,
+     "document_hit_ok": 9,
+     "term_hit_n": 10,
+     "term_hit_ok": 10,
+     "refusal_n": 10,
+     "refusal_ok": 10,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 1.0,
+     "refusal_accuracy": 1.0
+    },
+    "多轮追问": {
+     "cases": 6,
+     "answered": 6,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 5,
+     "document_hit_ok": 5,
+     "term_hit_n": 6,
+     "term_hit_ok": 6,
+     "refusal_n": 6,
+     "refusal_ok": 6,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 1.0,
+     "refusal_accuracy": 1.0
+    },
+    "拒答及证据不足": {
+     "cases": 5,
+     "answered": 5,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 0,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.0
+    },
+    "无证据问题与范围外问题": {
+     "cases": 5,
+     "answered": 1,
+     "refused": 4,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 4,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.8
+    },
+    "术语及语义查询": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 8,
+     "term_hit_n": 8,
+     "term_hit_ok": 7,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.875,
+     "refusal_accuracy": 1.0
+    },
+    "真实多跳问答": {
+     "cases": 2,
+     "answered": 2,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 2,
+     "refusal_ok": 0,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.0
+    },
+    "跨文档问答": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 7,
+     "term_hit_n": 8,
+     "term_hit_ok": 8,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 0.875,
+     "term_hit_rate": 1.0,
+     "refusal_accuracy": 1.0
+    }
+   }
+  }
+ ],
+ "comparison": {
+  "same_question_ids": true,
+  "question_count": 50,
+  "rule": "只有题号集合完全一致时才逐题对照；不同批次的分位数不得合并计算",
+  "per_question": [
+   {
+    "question_id": "BQA-001",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 471.0,
+    "latency_ms_C_20261012": 520.8,
+    "delta_ms": 49.8,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-002",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 491.1,
+    "latency_ms_C_20261012": 485.0,
+    "delta_ms": -6.1,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-003",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 501.2,
+    "latency_ms_C_20261012": 485.1,
+    "delta_ms": -16.1,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-004",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 529.5,
+    "latency_ms_C_20261012": 509.6,
+    "delta_ms": -19.9,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-005",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 516.7,
+    "latency_ms_C_20261012": 493.2,
+    "delta_ms": -23.5,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-006",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 496.4,
+    "latency_ms_C_20261012": 539.8,
+    "delta_ms": 43.4,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-007",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 584.6,
+    "latency_ms_C_20261012": 627.9,
+    "delta_ms": 43.3,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-008",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 400.2,
+    "latency_ms_C_20261012": 461.4,
+    "delta_ms": 61.2,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-009",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 451.3,
+    "latency_ms_C_20261012": 569.5,
+    "delta_ms": 118.2,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-010",
+    "category": "基础事实问答",
+    "latency_ms_A_prev": 483.8,
+    "latency_ms_C_20261012": 455.1,
+    "delta_ms": -28.7,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-011",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 492.7,
+    "latency_ms_C_20261012": 422.0,
+    "delta_ms": -70.7,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-012",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 392.1,
+    "latency_ms_C_20261012": 386.6,
+    "delta_ms": -5.5,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-013",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 425.8,
+    "latency_ms_C_20261012": 360.1,
+    "delta_ms": -65.7,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-014",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 458.1,
+    "latency_ms_C_20261012": 442.8,
+    "delta_ms": -15.3,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-015",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 433.8,
+    "latency_ms_C_20261012": 361.0,
+    "delta_ms": -72.8,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-016",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 533.0,
+    "latency_ms_C_20261012": 489.0,
+    "delta_ms": -44.0,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-017",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 461.7,
+    "latency_ms_C_20261012": 386.5,
+    "delta_ms": -75.2,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-018",
+    "category": "术语及语义查询",
+    "latency_ms_A_prev": 372.1,
+    "latency_ms_C_20261012": 373.3,
+    "delta_ms": 1.2,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-019",
+    "category": "中英文混合查询",
+    "latency_ms_A_prev": 377.5,
+    "latency_ms_C_20261012": 378.7,
+    "delta_ms": 1.2,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-020",
+    "category": "中英文混合查询",
+    "latency_ms_A_prev": 398.3,
+    "latency_ms_C_20261012": 413.9,
+    "delta_ms": 15.6,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-021",
+    "category": "中英文混合查询",
+    "latency_ms_A_prev": 350.4,
+    "latency_ms_C_20261012": 343.4,
+    "delta_ms": -7.0,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-022",
+    "category": "中英文混合查询",
+    "latency_ms_A_prev": 421.6,
+    "latency_ms_C_20261012": 420.6,
+    "delta_ms": -1.0,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-023",
+    "category": "中英文混合查询",
+    "latency_ms_A_prev": 369.1,
+    "latency_ms_C_20261012": 375.1,
+    "delta_ms": 6.0,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-024",
+    "category": "中英文混合查询",
+    "latency_ms_A_prev": 424.2,
+    "latency_ms_C_20261012": 426.9,
+    "delta_ms": 2.7,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-025",
+    "category": "多轮追问",
+    "latency_ms_A_prev": 348.5,
+    "latency_ms_C_20261012": 476.3,
+    "delta_ms": 127.8,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-026",
+    "category": "多轮追问",
+    "latency_ms_A_prev": 410.9,
+    "latency_ms_C_20261012": 422.0,
+    "delta_ms": 11.1,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-027",
+    "category": "多轮追问",
+    "latency_ms_A_prev": 454.5,
+    "latency_ms_C_20261012": 479.0,
+    "delta_ms": 24.5,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-028",
+    "category": "多轮追问",
+    "latency_ms_A_prev": 382.9,
+    "latency_ms_C_20261012": 449.9,
+    "delta_ms": 67.0,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-029",
+    "category": "多轮追问",
+    "latency_ms_A_prev": 413.9,
+    "latency_ms_C_20261012": 573.5,
+    "delta_ms": 159.6,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-030",
+    "category": "多轮追问",
+    "latency_ms_A_prev": 418.1,
+    "latency_ms_C_20261012": 561.0,
+    "delta_ms": 142.9,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-031",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 430.3,
+    "latency_ms_C_20261012": 424.7,
+    "delta_ms": -5.6,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-032",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 416.7,
+    "latency_ms_C_20261012": 406.1,
+    "delta_ms": -10.6,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-033",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 551.9,
+    "latency_ms_C_20261012": 564.8,
+    "delta_ms": 12.9,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-034",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 442.0,
+    "latency_ms_C_20261012": 487.4,
+    "delta_ms": 45.4,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-035",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 417.0,
+    "latency_ms_C_20261012": 426.3,
+    "delta_ms": 9.3,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-036",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 427.1,
+    "latency_ms_C_20261012": 440.3,
+    "delta_ms": 13.2,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-037",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 418.7,
+    "latency_ms_C_20261012": 535.4,
+    "delta_ms": 116.7,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-038",
+    "category": "跨文档问答",
+    "latency_ms_A_prev": 420.7,
+    "latency_ms_C_20261012": 473.6,
+    "delta_ms": 52.9,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-039",
+    "category": "真实多跳问答",
+    "latency_ms_A_prev": 644.1,
+    "latency_ms_C_20261012": 700.1,
+    "delta_ms": 56.0,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-040",
+    "category": "真实多跳问答",
+    "latency_ms_A_prev": 679.9,
+    "latency_ms_C_20261012": 709.4,
+    "delta_ms": 29.5,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-041",
+    "category": "无证据问题与范围外问题",
+    "latency_ms_A_prev": 394.8,
+    "latency_ms_C_20261012": 384.1,
+    "delta_ms": -10.7,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-042",
+    "category": "无证据问题与范围外问题",
+    "latency_ms_A_prev": 485.8,
+    "latency_ms_C_20261012": 484.5,
+    "delta_ms": -1.3,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-043",
+    "category": "无证据问题与范围外问题",
+    "latency_ms_A_prev": 401.0,
+    "latency_ms_C_20261012": 398.6,
+    "delta_ms": -2.4,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-044",
+    "category": "无证据问题与范围外问题",
+    "latency_ms_A_prev": 400.3,
+    "latency_ms_C_20261012": 402.1,
+    "delta_ms": 1.8,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-045",
+    "category": "无证据问题与范围外问题",
+    "latency_ms_A_prev": 453.0,
+    "latency_ms_C_20261012": 441.7,
+    "delta_ms": -11.3,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-046",
+    "category": "拒答及证据不足",
+    "latency_ms_A_prev": 314.5,
+    "latency_ms_C_20261012": 311.7,
+    "delta_ms": -2.8,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-047",
+    "category": "拒答及证据不足",
+    "latency_ms_A_prev": 467.0,
+    "latency_ms_C_20261012": 467.0,
+    "delta_ms": 0.0,
+    "refused_same": true,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-048",
+    "category": "拒答及证据不足",
+    "latency_ms_A_prev": 449.9,
+    "latency_ms_C_20261012": 494.0,
+    "delta_ms": 44.1,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-049",
+    "category": "拒答及证据不足",
+    "latency_ms_A_prev": 464.6,
+    "latency_ms_C_20261012": 529.5,
+    "delta_ms": 64.9,
+    "refused_same": false,
+    "error_same": true
+   },
+   {
+    "question_id": "BQA-050",
+    "category": "拒答及证据不足",
+    "latency_ms_A_prev": 321.2,
+    "latency_ms_C_20261012": 314.1,
+    "delta_ms": -7.1,
+    "refused_same": true,
+    "error_same": true
+   }
+  ],
+  "outcome_changes": [
+   {
+    "question_id": "BQA-025",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   },
+   {
+    "question_id": "BQA-026",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   },
+   {
+    "question_id": "BQA-028",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   },
+   {
+    "question_id": "BQA-029",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   },
+   {
+    "question_id": "BQA-030",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   },
+   {
+    "question_id": "BQA-048",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   },
+   {
+    "question_id": "BQA-049",
+    "refused_A_prev": true,
+    "refused_C_20261012": false
+   }
+  ],
+  "delta_ms": {
+   "mean": 16.4,
+   "p50": 1.2,
+   "min": -75.2,
+   "max": 159.6,
+   "scope": "C_20261012 − A_prev（同一题逐题差值）"
+  }
+ },
+ "notes": {
+  "no_mixing": "每个批次的分位数独立计算，绝不合并；逐题对照只展示差异",
+  "env": "本机 .venv、本地 RAG（临时数据库副本）、串行执行、无网络问答服务",
+  "scope": "计时覆盖单题端到端（检索+作答），不含进程启动",
+  "quality_caveat": "文档/词命中为机械指标；语义答案准确率在人工金标准前不可计算"
+ }
+}
