@@ -1,0 +1,176 @@
+{
+  "run_id": "run-525456887f4b",
+  "task_id": "daily-disposition-queue",
+  "status": "completed",
+  "started_at": "2026-10-15T14:32:02Z",
+  "finished_at": "2026-10-15T14:32:02Z",
+  "planned_at": "2026-10-15T14:32:02Z",
+  "queue": {
+    "generated_at": "2026-10-15T14:32:02Z",
+    "pending_total": 0,
+    "pending_by_priority": {},
+    "registered_total": 5,
+    "queue_total": 5,
+    "closure_rate": 0.6,
+    "registered_closure_rate": 0.6,
+    "status_counts": {
+      "verified": 3,
+      "in_progress": 2
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "stage": "queue",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "pending_total": 0,
+        "queue_total": 5,
+        "registered_total": 5,
+        "status_counts": {
+          "verified": 3,
+          "in_progress": 2
+        }
+      }
+    },
+    {
+      "step": 2,
+      "stage": "assign",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "unassigned": [],
+        "overdue": [],
+        "overdue_hours": 24
+      }
+    },
+    {
+      "step": 3,
+      "stage": "recheck",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "recheck_due": [],
+        "recheck_due_hours": 24,
+        "note": "本轮只做到期扫描，不自动关闭；关闭仍走单条复测入口。"
+      }
+    },
+    {
+      "step": 4,
+      "stage": "close_or_accept",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "closed": [
+          {
+            "event_id": "CVE-2026-100647",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "verified",
+            "assignee": "a-ops",
+            "opened_at": "2026-10-15T14:25:51.071181+00:00",
+            "version_before": "0.10.0"
+          },
+          {
+            "event_id": "CVE-2026-100650",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "verified",
+            "assignee": "a-ops",
+            "opened_at": "2026-10-15T14:25:50.527802+00:00",
+            "version_before": "0.10.0"
+          },
+          {
+            "event_id": "CVE-2026-100651",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "verified",
+            "assignee": "a-ops",
+            "opened_at": "2026-10-15T14:25:49.953760+00:00",
+            "version_before": "0.10.0"
+          }
+        ],
+        "accepted_risk": [],
+        "accepted_note": "接受风险是处置决策，不代表风险已消除。"
+      }
+    }
+  ],
+  "scheduler_trace": [
+    {
+      "step": 1,
+      "stage": "queue",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "pending_total": 0,
+        "queue_total": 5,
+        "registered_total": 5,
+        "status_counts": {
+          "verified": 3,
+          "in_progress": 2
+        }
+      }
+    },
+    {
+      "step": 2,
+      "stage": "assign",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "unassigned": [],
+        "overdue": [],
+        "overdue_hours": 24
+      }
+    },
+    {
+      "step": 3,
+      "stage": "recheck",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "recheck_due": [],
+        "recheck_due_hours": 24,
+        "note": "本轮只做到期扫描，不自动关闭；关闭仍走单条复测入口。"
+      }
+    },
+    {
+      "step": 4,
+      "stage": "close_or_accept",
+      "status": "ok",
+      "at": "2026-10-15T14:32:02Z",
+      "detail": {
+        "closed": [
+          {
+            "event_id": "CVE-2026-100647",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "verified",
+            "assignee": "a-ops",
+            "opened_at": "2026-10-15T14:25:51.071181+00:00",
+            "version_before": "0.10.0"
+          },
+          {
+            "event_id": "CVE-2026-100650",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "verified",
+            "assignee": "a-ops",
+            "opened_at": "2026-10-15T14:25:50.527802+00:00",
+            "version_before": "0.10.0"
+          },
+          {
+            "event_id": "CVE-2026-100651",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "verified",
+            "assignee": "a-ops",
+            "opened_at": "2026-10-15T14:25:49.953760+00:00",
+            "version_before": "0.10.0"
+          }
+        ],
+        "accepted_risk": [],
+        "accepted_note": "接受风险是处置决策，不代表风险已消除。"
+      }
+    }
+  ],
+  "unassigned": [],
+  "overdue": [],
+  "recheck_due": [],
+  "alerts": [],
+  "summary": "处置队列巡检：待处置 0，处置中 2，待复测 0，逾期 0 条"
+}
