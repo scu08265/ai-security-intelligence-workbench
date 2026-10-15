@@ -31,28 +31,75 @@
 
 ## 4. 指标口径
 
-`GET /api/dispositions/metrics` 与 `/api/competition/scorecard` 的 `disposition` 字段：
+`GET /api/dispositions/metrics` 与 `/api/competition/scorecard` 的 `disposition` 字段。
 
-- `high_priority_total`：**高优先级闭环队列**的大小 —— `assessments.status=affected` 且
-  `priority ∈ {critical, high}` 的结论，**加上**已登记处置、且在登记时优先级为 high/critical 的结论；
+### 4.1 两个比率（分母不可互换）
+
+一个比率分不清"处置失败"和"根本没人接手"，所以接口同时给两个分母：
+
+| 字段 | 分子 | 分母 | 回答的问题 |
+| --- | --- | --- | --- |
+| `closure_rate` | `high_priority_closed` | `high_priority_total`（**全队列**） | 整个高优先级队列里关闭了多少 |
+| `registered_closure_rate` | 已登记处置且已关闭 | `high_priority_registered`（**只含已登记处置的条目**） | 已经接手的那些处理得怎么样 |
+
+配套计数字段：`high_priority_registered`（已登记处置）、`high_priority_unopened`（从未登记处置）。
+
+**两个分母不可互换**：`closure_rate` 低可能是"没人接手"，`registered_closure_rate` 低才是"接手的没处理好"。
+引用时必须写明用的是哪一个分母；只写"闭环率"而不说分母，等同于制造歧义。
+
+### 4.2 分母冻结规则
+
+处置记录会把登记那一刻的 `opened_priority` 一起存下来。资产修复后重算研判会把该条刷成
+`not_affected`，但它**不会离开分母**；否则一次成功的修复会同时缩小分子和分母，
+让闭环率在修好的瞬间反而塌回 0。原始 `assessments.status` 也永不被处置记录覆盖，
+`affected` 事实长期保留。
+
+### 4.3 其余字段
+
 - `high_priority_closed`：该队列中状态为 `verified` 或 `accepted` 的数量；
-  - 队列冻结规则：处置记录会把登记那一刻的 `opened_priority` 一起存下来。资产修复后重算研判会把
-    该条刷成 `not_affected`，但它**不会离开分母**；否则一次成功的修复会同时缩小分子和分母，
-    让闭环率在修好的瞬间反而塌回 0。
-- `closure_rate = high_priority_closed / high_priority_total`；分母为 0 时返回 `null`，不返回 0；
-- `verified_rate`：只统计系统复测通过的关闭；
+- `verified_rate`：只统计系统复测通过的关闭（`verified`），与 `accepted` 分开；
 - `mean_time_to_close_hours`：仅统计同时有 `opened_at` 与 `closed_at` 的记录，样本为空时为 `null`；
-- `status_breakdown`：高优先级闭环队列在各状态上的分布。
+- `status_breakdown`：高优先级闭环队列在各状态上的分布，**各分项之和等于 `high_priority_total`**；
+- 分母为 0 时比率返回 `null`，不返回 0。
 
-当前 A 证据库：高优先级 `affected` 4 条，全部为
-`asset-cdx-*` 合成资产（smolagents / open-webui）。闭环率从 `0` 增加到 `0.75`，
-其中 3 条由系统复测关闭，1 条因资产版本仍在受影响区间保持 `fixed`。
+### 4.4 接口 `limitations` 的原文（照抄，不要改写标点或加粗）
 
-> **运行环境限定（2026-10-12 补）**：上面这个 `4 / 0.75` 是 **A 机器**上那份数据库副本的读数
-> （`D:\新建文件夹\2026-09-26\ba\...\data\intel.sqlite`），该库不在交付机上，因此它是
-> "流程落地演示"，不是交付闭环率。交付口径取交付机 `data/intel.sqlite`：
-> **48 / 4 / 8.33%**（`verified_rate` 6.25%）。规则见 `docs/METRICS_BASELINE.md` 第 3 节，
-> 两个数字不得混排在同一张指标表里。
+> 合成演示资产上的处置记录不等于生产环境的真实修复。
+> 接受风险（accepted）只表示处置决策，不代表风险已消除。
+> 平均关闭时长只统计已有 opened_at 与 closed_at 的记录。
+> closure_rate 的分母是全队列；registered_closure_rate 的分母只含已登记处置的条目，两者不可互换。
+
+这四条与 `GET /api/dispositions/metrics` 的 `limitations` 数组**逐字一致**，
+由 `tests/test_disposition.py::test_closure_scope_is_documented_verbatim` 守护：
+文档里少一句、或改写标点，测试就会失败。
+
+**为什么单独强调"接受风险 ≠ 风险消除"**：`accepted` 会进 `high_priority_closed` 的分子，
+所以它**会抬高闭环率**；但它只是"决定不修"的处置决策，风险本身仍然存在。
+原始 `assessments.status=affected` 事实、以及资产的受影响版本区间都不会因此改变。
+
+**为什么单独强调"合成资产上的处置 ≠ 生产修复"**：演示库里的资产
+（`config/assets.example.json`，`synthetic=true`、条目 `is_demo=true`）没有真实补丁动作，
+在其上登记的 `verified` 只证明"系统复测链路可用"，不证明任何生产系统被修好。
+
+### 4.5 当前读数（2026-10-15，`/api/dispositions/metrics`）
+
+| 项 | 读数 |
+| --- | --- |
+| 高优先级队列 | 53 条（critical 37 + high 16） |
+| 已复测关闭 | 4 条 |
+| 全队列闭环率 | **4 / 53 = 7.55%** |
+| 已登记处置 | 6 条 |
+| 从未登记处置 | **47 条** |
+| 已登记处置内闭环率 | **4 / 6 = 66.67%**（`registered_closure_rate`） |
+
+**怎么读这一组数**：7.55% 低，是因为 53 条里 **47 条从未被接手**——根因是系统此前没有自动处置编排，
+不是处置能力差；同样这 6 条登记过的记录里 4 条已关闭或已接受风险，即 66.67%。
+两个数一起讲，并说明分母不同。数值随采集与处置变化，快照以 `docs/METRICS_BASELINE.md` §2 为准。
+
+> **运行环境限定（2026-10-12 补，保留备查）**：早期出现过的 `4 / 0.75` 是 **A 机器**上那份数据库
+> 副本的读数（`D:\新建文件夹\2026-09-26\ba\...\data\intel.sqlite`），该库不在交付机上，
+> 属于"流程落地演示"，不是交付闭环率。规则见 `docs/METRICS_BASELINE.md` 第 3 节：
+> 不同数据集的数字不得混排在同一张指标表里。
 
 ## 5. 使用方式
 

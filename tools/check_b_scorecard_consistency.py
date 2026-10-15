@@ -158,6 +158,49 @@ def build() -> dict:
             _check(checks, f"active_qa_performance.batches[{index}].{key}",
                    row.get(key), active_batch.get("qa_performance_file"), source_value)
 
+    # ---- 处置闭环：页面卡片口径 vs 接口，逐字段 + 内部自洽 ----
+    from fastapi.testclient import TestClient
+
+    from app import disposition as disposition_module
+    from app.api import app as api_app
+
+    client = TestClient(api_app)
+    metrics_endpoint = client.get("/api/dispositions/metrics").json()
+    page_disposition = client.get("/api/competition/scorecard").json().get("disposition") or {}
+
+    # 页面处置闭环卡片实际读取的字段（见 app/static/app.js 的处置闭环卡片）
+    PAGE_FIELDS = ("closure_rate", "registered_closure_rate", "high_priority_unopened")
+    for field in PAGE_FIELDS:
+        _check(checks, f"disposition.{field}", page_disposition.get(field),
+               "/api/dispositions/metrics", metrics_endpoint.get(field))
+    for field in ("high_priority_total", "high_priority_closed", "high_priority_registered",
+                  "high_priority_verified", "verified_rate", "status_breakdown",
+                  "findings_total"):
+        _check(checks, f"disposition.{field}", page_disposition.get(field),
+               "/api/dispositions/metrics", metrics_endpoint.get(field))
+
+    # 内部自洽：状态分布求和、登记与未登记之和、以及闭环率能否由计数重算
+    total = metrics_endpoint.get("high_priority_total")
+    breakdown = metrics_endpoint.get("status_breakdown") or {}
+    _check(checks, "disposition.status_breakdown_sum", sum(breakdown.values()),
+           "disposition.metrics() 自洽：status_breakdown 各分项之和",
+           metrics_endpoint.get("high_priority_total"))
+    _check(checks, "disposition.registered_plus_unopened",
+           (metrics_endpoint.get("high_priority_registered") or 0)
+           + (metrics_endpoint.get("high_priority_unopened") or 0),
+           "disposition.metrics() 自洽：registered + unopened",
+           metrics_endpoint.get("high_priority_total"))
+    _check(checks, "disposition.closure_rate_recomputed",
+           (round((metrics_endpoint.get("high_priority_closed") or 0) / total, 4)
+            if total else None),
+           "disposition.metrics() 自洽：high_priority_closed / high_priority_total",
+           metrics_endpoint.get("closure_rate"))
+    _check(checks, "disposition.registered_closure_rate_recomputed",
+           (round((metrics_endpoint.get("high_priority_closed") or 0)
+                  / (metrics_endpoint.get("high_priority_registered") or 1), 4)
+            if metrics_endpoint.get("high_priority_registered") else None),
+           "处置记录口径：已登记且已关闭 / 已登记（与 closure_rate 分母不同）",
+           metrics_endpoint.get("registered_closure_rate"))
     new_batch = {
         "formal_qa_results_20261002.json": (ARTIFACTS / "formal_qa_results_20261002.json").is_file(),
         "qa_performance_20261002.json": (ARTIFACTS / "qa_performance_20261002.json").is_file(),

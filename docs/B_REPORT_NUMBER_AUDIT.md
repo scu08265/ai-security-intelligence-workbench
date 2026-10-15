@@ -133,3 +133,32 @@
 
 **仍然成立的一条**：快照 `continuous_target_met = false` 是**事实**，不是 bug——计划任务窗口
 2026-10-11 到期后 10-12 无计划运行，连续天数已重新起算。核对时不要当成错误。
+## 8. 处置闭环的"双口径"登记（2026-10-15 新增）
+
+处置闭环率此前只有一个比率，容易被读成"处置能力差"。`5cdd92f` 起接口同时给两个分母，
+本清单登记这条新口径，避免以后又把单一比率单独引用。
+
+| 字段 | 分母 | 回答的问题 | 权威来源 |
+| --- | --- | --- | --- |
+| `closure_rate` | `high_priority_total`（**全队列**） | 整个高优先级队列里关闭了多少 | `GET /api/dispositions/metrics` |
+| `registered_closure_rate` | `high_priority_registered`（**只含已登记处置的条目**） | 已经接手的那些处理得怎么样 | 同上 |
+
+配套计数字段：`high_priority_registered`（已登记处置）、`high_priority_unopened`（从未登记处置）。
+
+**（2026-10-15 当日读数，引用时须带日期）**：高优先级 53 条 / 已复测关闭 4 条 /
+`closure_rate = 7.55%` / 已登记处置 6 条 / 从未登记处置 47 条 /
+`registered_closure_rate = 66.67%`。7.55% 低是因为 47 条从未被接手，不是处置失败。
+
+**三条必须一起引用的限定**（与接口 `limitations` 逐字一致，文档侧见
+`docs/DISPOSITION_CLOSURE.md` §4.4）：
+
+1. 合成演示资产上的处置记录不等于生产环境的真实修复。
+2. 接受风险（accepted）只表示处置决策，不代表风险已消除。
+3. closure_rate 的分母是全队列；registered_closure_rate 的分母只含已登记处置的条目，两者不可互换。
+
+**核对要求**：对照表、基线文档与报告三处都不允许出现"闭环率"这一单一比率而不写分母；
+字段级一致性核对由 `tools/check_b_scorecard_consistency.py` 的 disposition 段覆盖
+（见该脚本与 `tests/test_b_reeval_20261002.py`）。
+
+**另注**：资产维度的数据缺口本身记在 `docs/B_ASSET_DATA_SOURCE.md`——
+本队拿不到真实企业资产清单，因此上面这组闭环率必须按"合成资产上的流程演示"引用。
