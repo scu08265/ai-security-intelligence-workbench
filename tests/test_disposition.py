@@ -175,3 +175,79 @@ def test_opened_at_is_stable_across_updates():
         note="upgrade scheduled",
     )["disposition"]
     assert first["opened_at"] == second["opened_at"]
+
+
+def test_metrics_separate_the_whole_queue_from_the_opened_rows():
+    """A single ratio hides "nobody opened it". Both denominators must be exposed."""
+    event_id, asset_id = _seed_case()
+    untouched = disposition.metrics()
+    assert untouched["high_priority_total"] == 1
+    assert untouched["high_priority_registered"] == 0
+    assert untouched["high_priority_unopened"] == 1
+    assert untouched["closure_rate"] == 0.0
+    assert untouched["registered_closure_rate"] is None
+
+    disposition.update_disposition(event_id, asset_id, status="in_progress", assignee="alice")
+    opened = disposition.metrics()
+    assert opened["high_priority_registered"] == 1
+    assert opened["high_priority_unopened"] == 0
+    assert opened["closure_rate"] == 0.0
+    assert opened["registered_closure_rate"] == 0.0
+
+    disposition.update_disposition(event_id, asset_id, status="accepted", assignee="alice")
+    resolved = disposition.metrics()
+    assert resolved["closure_rate"] == 1.0
+    assert resolved["registered_closure_rate"] == 1.0
+    assert resolved["high_priority_verified"] == 0
+
+
+def test_pending_cohort_lists_only_findings_without_a_disposition():
+    event_id, asset_id = _seed_case()
+    queue = disposition.pending_cohort()
+    assert queue["pending_total"] == 1
+    assert queue["by_priority"] == {"high": 1}
+    assert queue["items"][0]["event_id"] == event_id
+    assert queue["items"][0]["asset_id"] == asset_id
+
+    disposition.update_disposition(event_id, asset_id, status="in_progress", assignee="alice")
+    assert disposition.pending_cohort()["pending_total"] == 0
+    assert disposition.pending_cohort()["items"] == []
+
+
+def test_batch_keeps_going_when_one_row_is_invalid():
+    """One bad row must not roll back the rest of the queue."""
+    event_id, asset_id = _seed_case()
+    result = disposition.update_many([
+        {"event_id": event_id, "asset_id": asset_id, "status": "in_progress", "assignee": "alice"},
+        {"event_id": event_id, "asset_id": "asset-no-assessment", "status": "in_progress", "assignee": "alice"},
+        {"event_id": event_id, "asset_id": asset_id, "status": "bogus", "assignee": "alice"},
+    ])
+    assert result["requested"] == 3
+    assert result["applied"] == 1
+    assert result["failed"] == 2
+    assert [entry["ok"] for entry in result["results"]] == [True, False, False]
+    assert result["results"][1]["error"]
+    assert result["results"][2]["error"]
+    assert disposition.get_disposition(event_id, asset_id)["status"] == "in_progress"
+    assert result["metrics"]["high_priority_registered"] == 1
+
+
+def test_batch_endpoint_reports_each_item_outcome():
+    event_id, asset_id = _seed_case(version="2.5.0")
+    client = TestClient(app)
+    response = client.post("/api/dispositions/batch", json={"items": [
+        {"event_id": event_id, "asset_id": asset_id, "status": "verified", "assignee": "alice",
+         "version_after": "2.5.0"},
+        {"event_id": event_id, "asset_id": "asset-no-assessment", "status": "in_progress",
+         "assignee": "alice"},
+    ]})
+    assert response.status_code == 200
+    body = response.json()
+    assert body["applied"] == 1
+    assert body["failed"] == 1
+    assert body["results"][0]["applied_status"] == "verified"
+    assert body["results"][0]["verification_passed"] is True
+    assert body["results"][1]["ok"] is False
+
+    pending = client.get("/api/dispositions/pending").json()
+    assert "pending_total" in pending

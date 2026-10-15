@@ -229,11 +229,11 @@ def _is_high_priority_cohort(item: dict[str, Any]) -> bool:
     return opened_priority in HIGH_PRIORITIES
 
 
-def metrics() -> dict[str, Any]:
+def _cohort() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Join assessments with their dispositions once, for metrics and the queue."""
     assessments = storage.list_assessments(limit=2000)
     dispositions = {str(item.get("event_id")) + "::" + str(item.get("asset_id")): item
                     for item in storage.list_assessment_dispositions(limit=5000)}
-    events = {str(event.get("id")): event for event in storage.all_events()}
 
     def row(assessment: dict) -> dict:
         key = str(assessment.get("event_id")) + "::" + str(assessment.get("asset_id"))
@@ -243,6 +243,11 @@ def metrics() -> dict[str, Any]:
     rows = [row(item) for item in assessments]
     findings = [item for item in rows if item["assessment"].get("status") in {"affected", "needs_confirmation"}]
     high = [item for item in rows if _is_high_priority_cohort(item)]
+    return rows, findings, high
+
+
+def metrics() -> dict[str, Any]:
+    _rows, findings, high = _cohort()
     closed = [item for item in high if item["disposition"]["resolved"]]
     verified = [item for item in high if item["disposition"]["status"] == "verified"]
     in_progress = [item for item in high if item["disposition"]["status"] in {"in_progress", "fixed"}]
@@ -255,14 +260,23 @@ def metrics() -> dict[str, Any]:
     ]
     ages = [age for age in ages if age is not None]
     total = len(high)
+    # One ratio cannot tell "remediation is failing" apart from "nobody picked
+    # the finding up".  Expose both denominators: the whole queue, and the part
+    # that actually has a disposition opened on it.
+    registered = [item for item in high if item["disposition"].get("opened_at")]
+    registered_closed = [item for item in registered if item["disposition"]["resolved"]]
     return {
         "generated_at": _now(),
         "high_priority_total": total,
         "high_priority_closed": len(closed),
         "high_priority_verified": len(verified),
         "high_priority_in_progress": len(in_progress),
+        "high_priority_registered": len(registered),
+        "high_priority_unopened": total - len(registered),
         "closure_rate": round(len(closed) / total, 4) if total else None,
         "verified_rate": round(len(verified) / total, 4) if total else None,
+        "registered_closure_rate": (round(len(registered_closed) / len(registered), 4)
+                                   if registered else None),
         "mean_time_to_close_hours": round(sum(ages) / len(ages), 1) if ages else None,
         "status_breakdown": by_status,
         "findings_total": len(findings),
@@ -275,7 +289,94 @@ def metrics() -> dict[str, Any]:
             "合成演示资产上的处置记录不等于生产环境的真实修复。",
             "接受风险（accepted）只表示处置决策，不代表风险已消除。",
             "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。",
+            "closure_rate 的分母是全队列；registered_closure_rate 的分母只含已登记处置的条目，两者不可互换。",
         ],
+    }
+
+
+def pending_cohort(limit: int = 200) -> dict[str, Any]:
+    """High-priority findings that still have no disposition record.
+
+    This is the actionable half of the closure rate.  Listing the rows is what
+    makes the denominator self-explaining: the ratio is low because these have
+    not been opened, not because remediation failed.
+    """
+    _rows, _findings, high = _cohort()
+    pending = [item for item in high if not item["disposition"].get("opened_at")]
+    capped = max(1, min(int(limit or 200), 1000))
+    items = []
+    for item in pending[:capped]:
+        assessment = item["assessment"]
+        items.append({
+            "event_id": assessment.get("event_id"),
+            "asset_id": assessment.get("asset_id"),
+            "event_title": assessment.get("event_title"),
+            "asset_name": assessment.get("asset_name"),
+            "assessment_status": assessment.get("status"),
+            "priority": assessment.get("priority"),
+        })
+    by_priority: dict[str, int] = {}
+    for item in pending:
+        priority = str(item["assessment"].get("priority") or "unknown")
+        by_priority[priority] = by_priority.get(priority, 0) + 1
+    return {
+        "generated_at": _now(),
+        "pending_total": len(pending),
+        "returned": len(items),
+        "by_priority": by_priority,
+        "items": items,
+        "note": "只列出尚无处置记录的条目；比率低是因为这些还没被接手，不是处置失败。",
+    }
+
+
+def update_many(items: list[dict[str, Any]], *, run_verification: bool = True) -> dict[str, Any]:
+    """Apply a batch of disposition transitions, isolating per-item failures.
+
+    One invalid row must not roll back the rest of the queue, so each entry gets
+    its own outcome and a failure is reported as a failure instead of vanishing.
+    """
+    results: list[dict[str, Any]] = []
+    applied = 0
+    for index, item in enumerate(items or []):
+        event_id = str(item.get("event_id") or "").strip()
+        asset_id = str(item.get("asset_id") or "").strip()
+        try:
+            outcome = update_disposition(
+                event_id,
+                asset_id,
+                status=item.get("status"),
+                assignee=item.get("assignee"),
+                note=item.get("note"),
+                version_before=item.get("version_before"),
+                version_after=item.get("version_after"),
+                operator=item.get("operator"),
+                run_verification=run_verification,
+            )
+        except Exception as exc:  # noqa: BLE001 - the batch boundary keeps other rows alive
+            results.append({
+                "index": index,
+                "event_id": event_id,
+                "asset_id": asset_id,
+                "ok": False,
+                "error": str(exc) or type(exc).__name__,
+            })
+            continue
+        applied += 1
+        results.append({
+            "index": index,
+            "event_id": event_id,
+            "asset_id": asset_id,
+            "ok": True,
+            "requested_status": outcome.get("requested_status"),
+            "applied_status": outcome.get("applied_status"),
+            "verification_passed": (outcome.get("verification") or {}).get("passed"),
+        })
+    return {
+        "requested": len(results),
+        "applied": applied,
+        "failed": len(results) - applied,
+        "results": results,
+        "metrics": metrics(),
     }
 
 # --------------------------------------------------------------------------

@@ -177,6 +177,21 @@ class DispositionUpdateRequest(StrictRequest):
     run_verification: bool = True
 
 
+class DispositionBatchItemRequest(StrictRequest):
+    event_id: str = Field(min_length=1, max_length=200)
+    asset_id: str = Field(min_length=1, max_length=200)
+    status: str = Field(pattern="^(open|in_progress|fixed|verified|accepted)$")
+    assignee: str | None = Field(default=None, max_length=200)
+    note: str | None = Field(default=None, max_length=4000)
+    version_before: str | None = Field(default=None, max_length=200)
+    version_after: str | None = Field(default=None, max_length=200)
+
+
+class DispositionBatchRequest(StrictRequest):
+    items: list[DispositionBatchItemRequest] = Field(min_length=1, max_length=200)
+    run_verification: bool = True
+
+
 class AgentTaskRequest(StrictRequest):
     task_id: str | None = Field(default=None, max_length=160)
     objective: str = Field(min_length=1, max_length=2000)
@@ -680,6 +695,19 @@ def list_dispositions(limit: int = Query(default=1000, ge=1, le=2000)) -> dict:
 @app.get("/api/dispositions/metrics")
 def disposition_metrics() -> dict:
     return disposition.metrics()
+
+
+@app.get("/api/dispositions/pending")
+def pending_dispositions(limit: int = Query(default=200, ge=1, le=1000)) -> dict:
+    return disposition.pending_cohort(limit=limit)
+
+
+@app.post("/api/dispositions/batch")
+def update_dispositions_batch(payload: DispositionBatchRequest) -> dict:
+    return disposition.update_many(
+        [item.model_dump() for item in payload.items],
+        run_verification=payload.run_verification,
+    )
 
 
 @app.get("/api/dispositions/{event_id}/{asset_id}/advice")

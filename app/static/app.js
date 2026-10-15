@@ -1754,7 +1754,10 @@
       scoreCapability('处置闭环', disposal.closure_rate !== null ? '已验证' : '待积累', [
         ['高优先级总数', disposal.high_priority_total, ' 条'],
         ['已复测关闭', disposal.high_priority_closed, ' 条'],
-        ['闭环率', percentValue(disposal.closure_rate), ''],
+        ['全队列闭环率', percentValue(disposal.closure_rate), ''],
+        ['已登记处置', disposal.high_priority_registered, ' 条'],
+        ['已登记处置内闭环率', percentValue(disposal.registered_closure_rate), ''],
+        ['从未登记处置', disposal.high_priority_unopened, ' 条'],
         ['平均关闭时长', disposal.mean_time_to_close_hours, ' 小时'],
         /* 只给一个比率会让人以为是"处置能力差"；把构成摊开才看得出分母里
          * 有多少条根本还没人接手。状态取自接口的 status_breakdown。 */
@@ -1763,8 +1766,9 @@
           (disposal.status_breakdown || {}).in_progress + (disposal.status_breakdown || {}).fixed, ' 条'],
         ['已接受风险', (disposal.status_breakdown || {}).accepted, ' 条']
       ], textOr(disposal.evidence_policy, '原始研判结论不会被处置记录覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。')
-        + ' 闭环率 = （已复测关闭 + 已接受风险）/ 高优先级总数；已登记处置的条目锁定在分母内，'
-        + '所以"未开始处置"那一行才是拉低比率的直接原因，而不是处置失败。'),
+        + ' 全队列闭环率 = （已复测关闭 + 已接受风险）/ 高优先级总数；'
+        + '已登记处置内闭环率只看已经开过处置的那几条，两者分母不同、不能互换。'
+        + '已登记处置的条目锁定在分母内，所以"从未登记处置"那一行才是拉低全队列比率的直接原因，而不是处置失败。'),
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
         ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],
@@ -2893,6 +2897,7 @@
 
     const runBtn = h('button', { type: 'button', class: 'btn btn--primary', onclick: () => runAssessments(runBtn) }, icon('play'), '重新执行研判');
     const refreshBtn = h('button', { type: 'button', class: 'btn btn--ghost', onclick: () => { refreshBtn.disabled = true; loadAssessments().finally(() => { refreshBtn.disabled = false; }); } }, icon('refresh'), '刷新');
+    const queueBtn = h('button', { type: 'button', class: 'btn btn--ghost', onclick: () => { queueBtn.disabled = true; loadPendingQueue().finally(() => { queueBtn.disabled = false; }); } }, icon('warn'), '载入待处置队列');
     const filterSelect = h('select', { class: 'select', 'aria-label': '按状态筛选研判结论', onchange: () => { state.assessments.filter = filterSelect.value; renderAssessments(); } },
       h('option', { value: '' }, '全部状态'),
       h('option', { value: 'affected' }, '受影响'),
@@ -2904,20 +2909,23 @@
     const statsBox = h('div');
     const tableBox = h('div');
     const dispositionBox = h('div');
+    const queueBox = h('div');
 
     state.assessments.selected = null;
-    state.dom.assessments = { table: tableBox, stats: statsBox, runResult: runResult, disposition: dispositionBox };
+    state.dom.assessments = { table: tableBox, stats: statsBox, runResult: runResult, disposition: dispositionBox, queue: queueBox };
 
     body.append(
       card('研判控制',
-        h('div', { class: 'btn-row' }, runBtn, refreshBtn, filterSelect),
+        h('div', { class: 'btn-row' }, runBtn, refreshBtn, queueBtn, filterSelect),
         h('p', { class: 'dim' }, '对全部事件与全部资产执行影响判断；未标记授权的资产会被记录为“不适用”而非静默跳过。'),
         runResult),
+      queueBox,
       statsBox,
       tableBox,
       dispositionBox);
 
     renderAssessments();
+    loadPendingQueue();
   }
 
   async function loadAssessments() {
@@ -2993,6 +3001,90 @@
         { text: '事件' }, { text: '资产' }, { text: '研判状态' }, { text: '优先级' }, { text: '处置状态' },
         { text: '判定理由' }, { text: '证据 ID' }
       ], rows));
+  }
+
+  /* 闭环率的分母是"高优先级队列"，其中一大半还没人登记过处置。这里把那些
+   * 条目直接列出来并可批量登记，让比率低这件事变成一个能动手的清单。 */
+  async function loadPendingQueue() {
+    const view = state.dom.assessments;
+    if (!view || !view.queue) return;
+    setBox(view.queue, loadingBlock('正在读取待处置队列…'));
+    let data;
+    try {
+      data = await api.get('/api/dispositions/pending?limit=200');
+    } catch (err) {
+      setBox(view.queue, errorBlock(err.message, () => loadPendingQueue()));
+      return;
+    }
+    const items = Array.isArray(data.items) ? data.items : [];
+    if (!items.length) {
+      setBox(view.queue, card('待处置队列 · 高优先级',
+        emptyState('没有待登记的处置项', '高优先级队列里的条目都已经登记过处置，比率进入复测阶段。')));
+      return;
+    }
+    const picks = [];
+    const rows = items.map((item) => {
+      const box = h('input', { type: 'checkbox', 'aria-label': '选择该处置项' });
+      picks.push({ box: box, item: item });
+      return [
+        h('div', {}, box),
+        h('div', {}, h('div', {}, textOr(item.event_title, '（无标题）')), mono(textOr(item.event_id), 'dim')),
+        h('div', {}, h('div', {}, textOr(item.asset_name, '（未知资产）')), mono(textOr(item.asset_id), 'dim')),
+        priorityBadge(item.priority),
+        assessStatusBadge(item.assessment_status)
+      ];
+    });
+    const assignee = h('input', { class: 'input', placeholder: '处置人 / 负责人（必填）' });
+    const statusSelect = h('select', { class: 'select', 'aria-label': '批量处置状态' },
+      [['in_progress', '处置中'], ['fixed', '已修复待复测'], ['accepted', '已接受风险']]
+        .map((pair) => h('option', { value: pair[0] }, pair[1])));
+    const feedback = h('div');
+    const submit = h('button', { type: 'button', class: 'btn btn--primary' }, icon('check'), '批量登记');
+    submit.addEventListener('click', async () => {
+      const picked = picks.filter((entry) => entry.box.checked).map((entry) => entry.item);
+      if (!picked.length) {
+        setBox(feedback, alertBox('warn', '请先勾选要登记的条目', h('p', {}, '只有勾选的高优先级条目会被写入处置记录。')));
+        return;
+      }
+      if (!assignee.value.trim()) {
+        setBox(feedback, alertBox('warn', '需要填写处置人', h('p', {}, '进入处置流转必须记录负责人，系统不接受匿名处置。')));
+        return;
+      }
+      submit.disabled = true;
+      setBox(feedback, loadingBlock('正在批量登记处置…'));
+      try {
+        const result = await api.post('/api/dispositions/batch', {
+          items: picked.map((item) => ({
+            event_id: item.event_id,
+            asset_id: item.asset_id,
+            status: statusSelect.value,
+            assignee: assignee.value.trim()
+          }))
+        });
+        const failed = (result.results || []).filter((entry) => !entry.ok);
+        setBox(feedback, alertBox(failed.length ? 'warn' : 'ok',
+          `已登记 ${textOr(result.applied, 0)} 条，失败 ${textOr(result.failed, 0)} 条`,
+          failed.length
+            ? h('ul', { class: 'cell-list' }, failed.slice(0, 10).map((entry) =>
+                h('li', {}, textOr(entry.event_id) + ' / ' + textOr(entry.asset_id) + '：' + textOr(entry.error))))
+            : null,
+          h('p', { class: 'dim' }, '“已复测关闭”不提供批量入口：关闭必须由系统对每条资产单独复测确认，不能批量声明。')));
+        await Promise.all([loadAssessments(), loadScorecard(), loadPendingQueue()]);
+      } catch (err) {
+        setBox(feedback, errorBlock(err.message));
+      } finally {
+        submit.disabled = false;
+      }
+    });
+    setBox(view.queue, card('待处置队列 · 高优先级 ' + textOr(data.pending_total, 0) + ' 条',
+      h('p', { class: 'dim' }, '这些条目还没有任何处置记录，构成全队列闭环率的分母。勾选后可一次推进到“处置中 / 已修复待复测 / 已接受风险”；'
+        + '每条资产仍单独校验，单条失败不影响其余条目。'),
+      dataTable([{ text: '选择' }, { text: '事件' }, { text: '资产' }, { text: '优先级' }, { text: '研判状态' }], rows),
+      h('div', { class: 'disposition-form' },
+        h('label', {}, '处置人', assignee),
+        h('label', {}, '批量状态', statusSelect),
+        h('div', { class: 'btn-row' }, submit)),
+      feedback));
   }
 
   function openDisposition(item) {

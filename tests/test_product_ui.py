@@ -34,6 +34,17 @@ def test_closure_card_shows_the_composition_not_only_the_rate():
     assert 'disposal.status_breakdown' in SCRIPT
 
 
+def test_closure_card_and_queue_make_the_low_rate_actionable():
+    """The whole-queue rate and the opened-rows rate must both be visible, and
+    the untouched queue must be operable from the console."""
+    assert '全队列闭环率' in SCRIPT
+    assert '已登记处置内闭环率' in SCRIPT
+    assert 'disposal.registered_closure_rate' in SCRIPT
+    assert '待处置队列' in SCRIPT
+    assert "'/api/dispositions/pending" in SCRIPT
+    assert "'/api/dispositions/batch'" in SCRIPT
+
+
 def test_console_surfaces_the_dictionary_suggestions_chain_and_tech_details():
     """The four capabilities added after the reference-project review."""
     assert '术语语义字典' in SCRIPT

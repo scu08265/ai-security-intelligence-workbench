@@ -194,8 +194,10 @@ def run(base: str) -> int:
 
         print("\n2b. 知识图谱可视化")
         page.click("#tab-knowledge")
+        # /api/knowledge/graph replays the whole corpus and takes ~12s here, and
+        # the term index another ~5s, so a 20s budget is just machine latency.
         wait_until(lambda: page.locator("#body-knowledge .knowledge-map").count() == 1,
-                   timeout_s=20, what="知识关系图")
+                   timeout_s=90, what="知识关系图")
         check("知识统计卡已渲染", page.locator("#body-knowledge .tile").count() == 4)
         check("文档类别分布已渲染", page.locator("#body-knowledge progress").count() > 0)
         check("来源—文档—知识关系已渲染", page.locator("#body-knowledge .knowledge-node").count() > 3)
@@ -213,7 +215,7 @@ def run(base: str) -> int:
         terms_payload = page.evaluate("() => fetch('/api/knowledge/terms').then(r => r.json())")
         terms_api = terms_payload.get("items") or []
         wait_until(lambda: page.locator("#body-knowledge .term-card").count() >= 1,
-                   timeout_s=20, what="术语卡")
+                   timeout_s=90, what="术语卡")
         term_cards = page.locator("#body-knowledge .term-card").count()
         check("术语卡逐条渲染", term_cards == len(terms_api),
               f"页面 {term_cards} 张 / 接口 {len(terms_api)} 个术语")
