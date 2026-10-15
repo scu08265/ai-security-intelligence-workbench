@@ -18,6 +18,11 @@ from . import agents, observability, sources, storage
 
 
 RETRYABLE_SOURCE_STATUSES = {"failed", "stale"}
+# 决策 1（2026-10-15 定稿，选项 A2）：撞抓取预算报 partial 是采集器的设计行为，
+# 不是故障，所以 partial 本身不算失败。只有"连续 partial 且零产出"才按失败累计——
+# 那才是"跑得起来但什么都采不到"的半坏状态。
+FAILURE_STATUSES = {"failed", "stale"}
+PRODUCTION_KEYS = ("kept", "events_added", "events_updated")
 MAX_RECOVERY_RETRIES = 1
 
 # A single retry is not a recovery policy.  Once a source has missed this many
@@ -65,59 +70,123 @@ def recovery_decision(source_id: str, state: dict[str, Any]) -> dict[str, Any]:
 
 
 def consecutive_failures(source_id: str, runs: list[dict] | None = None) -> int:
-    """How many recent collection attempts in a row did not succeed.
+    """How many recent collection attempts in a row count as failures.
 
     Only persisted ``collect`` runs count, newest first, and a source that has
     never been attempted has a streak of zero rather than a streak of success.
     Self-healing retries are ordinary attempts and therefore count too.
 
-    ``partial`` counts towards the streak: a collector that stopped at its fetch
-    budget did not fully succeed.  The human-readable reason says so, because a
-    source can be producing events and still be on this list.
+    An attempt counts as a failure when it is ``failed``/``stale``, or when it
+    is ``partial`` with no output.  ``ok`` and a *productive* ``partial`` both
+    break the streak: the collector ran, returned rows and kept some, which is
+    a working source even when it stopped at its fetch budget.
     """
     items = runs if runs is not None else storage.list_runs(limit=None)
     streak = 0
     for run in items:
-        if run.get("kind") != "collect":
+        result = _attempt_of(source_id, run)
+        if result is None:
             continue
-        status = next(
-            (
-                result.get("status")
-                for result in ((run.get("detail") or {}).get("results") or [])
-                if result.get("source_id") == source_id
-            ),
-            None,
-        )
-        if status is None:
+        if counts_as_failure(result.get("status"), produced(result)):
+            streak += 1
             continue
-        if status == "ok":
-            break
-        streak += 1
+        break
     return streak
 
 
-def degradation_for(source_id: str, streak: int) -> dict[str, Any] | None:
-    """Pick the bounded action for a source that keeps failing, if any."""
+def _attempt_of(source_id: str, run: dict) -> dict[str, Any] | None:
+    """The result row this run recorded for ``source_id``, if it attempted it."""
+    if run.get("kind") not in {"collect", "scheduled_collect"}:
+        return None
+    for result in ((run.get("detail") or {}).get("results") or []):
+        if result.get("source_id") == source_id:
+            return result
+    return None
+
+
+def produced(result: dict[str, Any]) -> bool:
+    """Whether an attempt put anything into the corpus.
+
+    ``fetched`` is deliberately excluded: it counts HTTP volume, and a partial
+    run that stopped at its budget can pull thousands of rows and keep none.
+    A record that carries no production counters at all counts as producing —
+    the policy must not degrade a source over missing metadata.
+    """
+    present = [key for key in PRODUCTION_KEYS
+               if key in result and result.get(key) is not None]
+    if not present:
+        return True
+    return any(int(result.get(key) or 0) > 0 for key in present)
+
+
+def counts_as_failure(status: str | None, produced_anything: bool) -> bool:
+    """决策 1/2 的判定：哪些取值计入降级 streak。"""
+    if status in FAILURE_STATUSES:
+        return True
+    if status == "partial":
+        return not produced_anything
+    return False
+
+
+def streak_detail(source_id: str, runs: list[dict] | None = None) -> dict[str, Any]:
+    """Streak plus the newest attempt it was derived from, for the run record."""
+    items = runs if runs is not None else storage.list_runs(limit=None)
+    newest: dict[str, Any] | None = None
+    for run in items:
+        result = _attempt_of(source_id, run)
+        if result is None:
+            continue
+        newest = {
+            "run_id": run.get("id"),
+            "started_at": run.get("started_at"),
+            "status": result.get("status"),
+            "produced": produced(result),
+            "counts_as_failure": counts_as_failure(result.get("status"), produced(result)),
+        }
+        break
+    return {"streak": consecutive_failures(source_id, items), "newest_attempt": newest}
+
+
+def degradation_for(
+    source_id: str,
+    streak: int,
+    state: dict[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    """Pick the bounded action for a source that keeps failing, if any.
+
+    ``state`` is the live ``source_state`` row.  Its ``status``/``last_error``
+    are the only real evidence about *why* the source is failing, so the
+    recorded ``failure_class`` comes from them; passing a hardcoded "failed"
+    made the field say ``unknown`` on every record while the answer sat right
+    there (决策 4).
+    """
     if streak < CONSECUTIVE_FAILURE_THRESHOLD:
         return None
+    current = state or {}
+    failure_class = classify_failure(current.get("status"), current.get("last_error"))
     spec = sources.get(source_id)
     backups = [item for item in (spec.backup_sources if spec else ()) if item]
+    reason_tail = "failed/stale，或零产出的 partial"
     if backups:
         return {
             "source_id": source_id,
             "action": "switch_backup",
             "backup_sources": backups,
-            "failure_class": classify_failure("failed", None),
+            "failure_class": failure_class,
             "consecutive_failures": streak,
-            "reason": f"连续 {streak} 次非完全成功（含 partial），切换到已登记的备用源",
+            "source_status": current.get("status"),
+            "last_error": current.get("last_error"),
+            "reason": f"连续 {streak} 次失败（{reason_tail}），切换到已登记的备用源",
         }
     return {
         "source_id": source_id,
         "action": "reduce_frequency",
         "backup_sources": [],
-        "failure_class": classify_failure("failed", None),
+        "failure_class": failure_class,
         "consecutive_failures": streak,
-        "reason": f"连续 {streak} 次非完全成功（含 partial），冷却期内不再进入无人值守采集",
+        "source_status": current.get("status"),
+        "last_error": current.get("last_error"),
+        "reason": f"连续 {streak} 次失败（{reason_tail}），冷却期内不再进入无人值守采集",
     }
 
 
@@ -240,9 +309,12 @@ def run_self_healing(
     # cooldown, and a source with a declared substitute hands over to it.
     runs = storage.list_runs(limit=None)
     fresh_states = storage.all_source_states()
-    streaks = {
-        source_id: consecutive_failures(source_id, runs)
+    details = {
+        source_id: streak_detail(source_id, runs)
         for source_id in sorted(set(fresh_states) | set(candidates))
+    }
+    streaks = {
+        source_id: detail["streak"] for source_id, detail in details.items()
     }
     degradations: list[dict[str, Any]] = []
     cleared: list[str] = []
@@ -255,7 +327,7 @@ def run_self_healing(
             if storage.clear_source_degradation(source_id):
                 cleared.append(source_id)
             continue
-        entry = degradation_for(source_id, streak)
+        entry = degradation_for(source_id, streak, fresh_states.get(source_id) or {})
         if not entry:
             continue
         entry["expires_at"] = _expiry()
@@ -264,7 +336,7 @@ def run_self_healing(
         observability.emit_alert(
             "source_degraded",
             (
-                f"{source_id} 连续 {streak} 次非完全成功（含 partial），"
+                f"{source_id} 连续 {streak} 次失败（failed/stale，或零产出的 partial），"
                 + (
                     f"已切换到备用源 {', '.join(entry['backup_sources'])}"
                     if entry["action"] == "switch_backup"
@@ -284,6 +356,7 @@ def run_self_healing(
         "consecutive_failures": {
             source_id: streak for source_id, streak in streaks.items() if streak
         },
+        "streak_detail": details,
         "degradations": degradations,
         "degradations_cleared": cleared,
         "active_degradations": storage.active_source_degradations(),
@@ -293,7 +366,7 @@ def run_self_healing(
         "policy": {
             "automatic_actions": [
                 "有限重试",
-                "连续非完全成功（含 partial）后降频（移出无人值守采集）",
+                "连续失败（failed/stale，或零产出的 partial）后降频（移出无人值守采集）",
                 "有备用源的来源切换到备用源",
                 "历史数据降级",
                 "来源跳过",
@@ -302,6 +375,8 @@ def run_self_healing(
             "retry_budget_per_source": max(0, max_retries),
             "consecutive_failure_threshold": CONSECUTIVE_FAILURE_THRESHOLD,
             "cooldown_hours": DEGRADE_COOLDOWN_HOURS,
+            "counted_as_failure": ["failed", "stale", "partial（零产出）"],
+            "not_counted_as_failure": ["ok", "partial（有产出）"],
         },
     }
     storage.save_run({

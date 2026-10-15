@@ -1,0 +1,409 @@
+{
+  "generated_at": "2026-10-15T14:19:38Z",
+  "policy": {
+    "threshold": 3,
+    "cooldown_hours": 6,
+    "counted_as_failure": [
+      "failed",
+      "stale",
+      "partial（零产出）"
+    ],
+    "not_counted_as_failure": [
+      "ok",
+      "partial（有产出）"
+    ]
+  },
+  "unattended_source_count": 18,
+  "would_degrade_today": [],
+  "currently_cooling_down": [],
+  "rows": [
+    {
+      "source_id": "anquanke",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:39Z",
+      "events_count": 9,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "arxiv",
+      "status": null,
+      "last_success": null,
+      "events_count": 0,
+      "last_error": null,
+      "newest_attempt": null,
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": false
+    },
+    {
+      "source_id": "butian_community",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:37Z",
+      "events_count": 1,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "cisa_kev",
+      "status": "ok",
+      "last_success": "2026-10-15T06:48:54Z",
+      "events_count": 26,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "eu_ai_act",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:36Z",
+      "events_count": 1,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": true,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "freebuf",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:38Z",
+      "events_count": 6,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "ghsa",
+      "status": null,
+      "last_success": null,
+      "events_count": 0,
+      "last_error": null,
+      "newest_attempt": null,
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": false
+    },
+    {
+      "source_id": "mitre_atlas",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:08Z",
+      "events_count": 0,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "mitre_cve",
+      "status": "ok",
+      "last_success": "2026-10-15T06:48:48Z",
+      "events_count": 136,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "msrc",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:05Z",
+      "events_count": 19,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "nist_ai_rmf",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:07Z",
+      "events_count": 1,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": true,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "nist_news",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:42Z",
+      "events_count": 0,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "nvd",
+      "status": "ok",
+      "last_success": "2026-10-15T06:48:38Z",
+      "events_count": 335,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": true,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "openalex",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:06Z",
+      "events_count": 82,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "osv",
+      "status": "ok",
+      "last_success": "2026-10-15T06:48:54Z",
+      "events_count": 52,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "owasp_genai",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:07Z",
+      "events_count": 1,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": true,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "qax_ti_blog",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:37Z",
+      "events_count": 0,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "securelist",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:41Z",
+      "events_count": 1,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "security_blog",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:06Z",
+      "events_count": 0,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
+      "source_id": "talos_blog",
+      "status": "ok",
+      "last_success": "2026-10-15T06:49:41Z",
+      "events_count": 5,
+      "last_error": null,
+      "newest_attempt": {
+        "run_id": "run-734e25e4c1e8",
+        "started_at": "2026-10-15T06:46:00Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
+      "streak": 0,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    }
+  ]
+}
