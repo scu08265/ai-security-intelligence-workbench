@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-10-15T06:31:14Z",
+  "timezone_note": "日期按 UTC 切分，与 /api/competition/scorecard 的日界一致（本机为 UTC+8）。",
+  "source": {
+    "database": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
+    "database_sha256": "25cc428274373e0b2b0d5ca215b20bffda75dd030704a3f7dd9b68c855d4628a",
+    "rule": "kind in {collect, scheduled_collect} 且 detail.trigger == 'scheduled'"
+  },
+  "scorecard_view": {
+    "target_days": 7,
+    "cumulative_actual_run_days": 10,
+    "cumulative_scheduled_run_days": 10,
+    "consecutive_scheduled_days": 2,
+    "scheduled_days_in_window": 3,
+    "target_met": false,
+    "note": "cumulative_* 是累计不同自然日，与 /api/competition/scorecard 的 actual_run_days / scheduled_run_days 同源；scheduled_days_in_window 是 7 天窗口内实际有计划运行的天数。"
+  },
+  "window": {
+    "from": "2026-10-09",
+    "to": "2026-10-15",
+    "days": [
+      {
+        "date": "2026-10-09",
+        "scheduled_run_count": 0,
+        "statuses": [],
+        "run_ids": [],
+        "first_started_at": null,
+        "last_started_at": null
+      },
+      {
+        "date": "2026-10-10",
+        "scheduled_run_count": 1,
+        "statuses": [
+          "partial"
+        ],
+        "run_ids": [
+          "run-501075d24ac6"
+        ],
+        "first_started_at": "2026-10-10T11:03:55Z",
+        "last_started_at": "2026-10-10T11:03:55Z"
+      },
+      {
+        "date": "2026-10-11",
+        "scheduled_run_count": 0,
+        "statuses": [],
+        "run_ids": [],
+        "first_started_at": null,
+        "last_started_at": null
+      },
+      {
+        "date": "2026-10-12",
+        "scheduled_run_count": 0,
+        "statuses": [],
+        "run_ids": [],
+        "first_started_at": null,
+        "last_started_at": null
+      },
+      {
+        "date": "2026-10-13",
+        "scheduled_run_count": 0,
+        "statuses": [],
+        "run_ids": [],
+        "first_started_at": null,
+        "last_started_at": null
+      },
+      {
+        "date": "2026-10-14",
+        "scheduled_run_count": 9,
+        "statuses": [
+          "partial",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ],
+        "run_ids": [
+          "run-d1415550c4e0",
+          "run-2bcf6d03ba83",
+          "run-c8ea6c49557b",
+          "run-064a6998979f",
+          "run-270b1d957eba",
+          "run-5adff233a4a4",
+          "run-a3095693c7a6",
+          "run-e5003f29eff1",
+          "run-b12055138005"
+        ],
+        "first_started_at": "2026-10-14T00:45:58Z",
+        "last_started_at": "2026-10-14T14:46:00Z"
+      },
+      {
+        "date": "2026-10-15",
+        "scheduled_run_count": 4,
+        "statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ],
+        "run_ids": [
+          "run-fc78a9eaacba",
+          "run-41bd2b22158b",
+          "run-9914dfc9d97b",
+          "run-21e0bbd6ea74"
+        ],
+        "first_started_at": "2026-10-15T01:46:01Z",
+        "last_started_at": "2026-10-15T05:46:01Z"
+      }
+    ],
+    "days_missing_scheduled_run": [
+      "2026-10-09",
+      "2026-10-11",
+      "2026-10-12",
+      "2026-10-13"
+    ]
+  },
+  "target_met_eta_utc": "2026-10-20",
+  "eta_note": "前提是自 2026-10-14 起每天至少一次计划运行；机器休眠或关机期间计划任务不会补触发，缺口不会被回填。"
+}
