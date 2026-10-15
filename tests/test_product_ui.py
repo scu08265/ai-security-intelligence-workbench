@@ -26,6 +26,14 @@ def test_scorecard_surfaces_source_health_and_system_health():
     assert 'consecutive_failures' in SCRIPT
 
 
+def test_closure_card_shows_the_composition_not_only_the_rate():
+    """One percentage reads as "remediation is poor"; the breakdown shows how
+    much of the denominator has not been picked up at all."""
+    assert '未开始处置' in SCRIPT
+    assert '已接受风险' in SCRIPT
+    assert 'disposal.status_breakdown' in SCRIPT
+
+
 def test_console_surfaces_the_dictionary_suggestions_chain_and_tech_details():
     """The four capabilities added after the reference-project review."""
     assert '术语语义字典' in SCRIPT

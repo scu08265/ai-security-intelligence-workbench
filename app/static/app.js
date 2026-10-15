@@ -1755,8 +1755,16 @@
         ['高优先级总数', disposal.high_priority_total, ' 条'],
         ['已复测关闭', disposal.high_priority_closed, ' 条'],
         ['闭环率', percentValue(disposal.closure_rate), ''],
-        ['平均关闭时长', disposal.mean_time_to_close_hours, ' 小时']
-      ], textOr(disposal.evidence_policy, '原始研判结论不会被处置记录覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。')),
+        ['平均关闭时长', disposal.mean_time_to_close_hours, ' 小时'],
+        /* 只给一个比率会让人以为是"处置能力差"；把构成摊开才看得出分母里
+         * 有多少条根本还没人接手。状态取自接口的 status_breakdown。 */
+        ['未开始处置', (disposal.status_breakdown || {}).open, ' 条'],
+        ['进行中 / 已修复待复测',
+          (disposal.status_breakdown || {}).in_progress + (disposal.status_breakdown || {}).fixed, ' 条'],
+        ['已接受风险', (disposal.status_breakdown || {}).accepted, ' 条']
+      ], textOr(disposal.evidence_policy, '原始研判结论不会被处置记录覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。')
+        + ' 闭环率 = （已复测关闭 + 已接受风险）/ 高优先级总数；已登记处置的条目锁定在分母内，'
+        + '所以"未开始处置"那一行才是拉低比率的直接原因，而不是处置失败。'),
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
         ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],
