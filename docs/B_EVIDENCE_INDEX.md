@@ -51,9 +51,15 @@
 | --- | --- | --- |
 | 题集 | `evaluation/b_multihop_candidates.json` | `cases[]`：问题、所需文档/实体、关系边、证据 ID、期望推理步骤 |
 | 路径验证 | `artifacts/b_eval/multihop_path_validation.json` | `counts.by_chain_type`（连通/未连通）、`missing_edge_summary`（缺失边类型与次数）、`limitations` |
+| **跨文档推理**（口径一） | `artifacts/b_eval/multihop_path_validation_*_v2.json` | `counts.by_chain_type.cross_document`：已连通 / 分母；缺口是 52 条 `document_to_document` 边。**不达标就不申报"跨文档推理"优秀档** |
+| **术语可达**（口径二） | 同上 | `counts.term_reachable / term_not_reachable`：衡量"给定术语能否被语料检索到"，属**检索覆盖**，不是推理证据 |
+| **术语 → 文档两跳**（口径三） | `GET /api/knowledge/terms` → `coverage.documents_referenced`；算法在 `app/term_dictionary.py::term_edges()` | 计数的是**术语命中了哪些文档**（A4 已接进知识图谱返回）。和口径二一样，不能替代口径一 |
 | 结构化路径检索器 | `tools/multihop_path_retriever.py` | 输出**节点列表 / 边列表 / 每边证据 ID**；不输出隐藏思维链（脚本 docstring 有边界说明） |
 | 测试 | `tests/test_b_multihop_candidates.py`、`tests/test_b_multihop_path.py` | 正例、反例、缺失证据、重复边 |
 | 报告 | `docs/B_MULTIHOP_DATASET_REPORT.md` | 数据来源、构造规则、局限 |
+
+**三个口径分列、不合并**：口径一是文档之间的引用，口径二是术语能否被检索到，口径三是术语命中了哪些文档。
+引用时永远分开写，任一都不能替代口径一；判定细则与档位映射见 `docs/COMPETITION_RUBRIC_MAPPING.md` §4 与 §6。
 
 ## 3. 问答性能评测（50 题固定集）
 
