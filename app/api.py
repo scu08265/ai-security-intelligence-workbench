@@ -579,13 +579,29 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
     }
     last_runs = [item.get("last_success") for item in items if item.get("last_success")]
     last_success = max(last_runs) if last_runs else None
-    degraded = [item for item in items if item.get("degradation")]
+    # "Degraded" must mean *currently* cooling down.  ``monitoring_summary``
+    # carries every historical degradation record on its items, so counting that
+    # field made this row report a cooldown that the footer (reading
+    # ``active_degradations`` from the same response) said had already expired.
+    all_degradations = storage.all_source_degradations()
+    active_degradations = storage.active_source_degradations()
+    active_degraded_ids = {entry.get("source_id") for entry in active_degradations}
+    degraded = [item for item in items if item.get("id") in active_degraded_ids]
+    expired_degradations = [
+        entry for entry in all_degradations if entry.get("source_id") not in active_degraded_ids
+    ]
     monitoring_state = (
         "ok" if statuses.get("failed", 0) == 0 and statuses.get("stale", 0) == 0
         else "degraded"
     )
     alerts = observability.recent_alerts(limit=20)
-    alert_items = alerts.get("items") if isinstance(alerts, dict) else alerts
+    alert_items = (alerts.get("items") if isinstance(alerts, dict) else alerts) or []
+    # An automatic-recovery notice is evidence the system worked, not a problem
+    # waiting for a human.  Only warning and above should light up the module.
+    actionable_alerts = [
+        item for item in alert_items
+        if str(item.get("severity") or "").strip().lower() not in {"info", "debug"}
+    ]
     knowledge_counts = knowledge_views.overview().get("counts") or {}
     modules = [
         {
@@ -604,9 +620,15 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "state": "degraded" if degraded else "ok",
             "detail": (
                 f"{len(degraded)} 个来源处于降级冷却中" if degraded
-                else f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次连续失败）"
+                else (
+                    f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次连续失败；"
+                    f"{len(expired_degradations)} 条历史降级记录已到期）"
+                    if expired_degradations
+                    else f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次连续失败）"
+                )
             ),
-            "counters": {"degraded_sources": len(degraded)},
+            "counters": {"degraded_sources": len(degraded),
+                         "expired_degradations": len(expired_degradations)},
         },
         {
             "id": "knowledge",
@@ -624,9 +646,9 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
         {
             "id": "alerts",
             "label": "告警",
-            "state": "degraded" if alert_items else "ok",
-            "detail": f"最近 {len(alert_items or [])} 条告警",
-            "counters": {},
+            "state": "degraded" if actionable_alerts else "ok",
+            "detail": f"最近 {len(alert_items)} 条告警，其中 {len(actionable_alerts)} 条需处理",
+            "counters": {"recent": len(alert_items), "actionable": len(actionable_alerts)},
         },
     ]
     return {
@@ -636,8 +658,13 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
         "coverage": sources_block["coverage"],
         "source_status_counts": dict(statuses),
         "consecutive_failure_streaks": streaks,
-        "active_degradations": storage.active_source_degradations(),
-        "recent_alerts": alert_items or [],
+        "active_degradations": active_degradations,
+        "expired_degradations": expired_degradations,
+        "recent_alerts": alert_items,
+        "actionable_alerts": actionable_alerts,
+        "alert_severity_counts": dict(
+            Counter(str(item.get("severity") or "unknown") for item in alert_items)
+        ),
         "policy": {
             "consecutive_failure_threshold": self_healing.CONSECUTIVE_FAILURE_THRESHOLD,
             "cooldown_hours": self_healing.DEGRADE_COOLDOWN_HOURS,

@@ -103,6 +103,65 @@ def test_system_health_reports_sources_without_inventing_health(client):
     assert all(item["consecutive_failures"] == 0 for item in idle)
 
 
+def test_health_module_only_counts_current_degradations(client):
+    """Regression: the row claimed a cooldown the footer said had expired.
+
+    ``monitoring_summary`` hangs every historical degradation record on its
+    items, so the row used to report "1 个来源处于降级冷却中" while
+    ``active_degradations`` in the very same response was empty.
+    """
+    from app import observability
+
+    storage.save_source_degradation({
+        "source_id": "ghsa", "action": "reduce_frequency",
+        "degraded_at": "2026-01-01T00:00:00Z", "expires_at": "2026-01-01T06:00:00+00:00",
+        "consecutive_failures": 30, "reason": "expired cooldown",
+    })
+    observability.emit_alert("self_healing_recovered", "演示：自动恢复成功", severity="info")
+
+    body = client.get("/api/system/health").json()
+    modules = {item["id"]: item for item in body["modules"]}
+    assert body["active_degradations"] == []
+    assert len(body["expired_degradations"]) == 1
+    assert modules["self_healing"]["state"] == "ok"
+    assert "已到期" in modules["self_healing"]["detail"]
+    assert modules["self_healing"]["counters"]["degraded_sources"] == 0
+
+
+def test_health_module_still_flags_a_live_cooldown(client):
+    storage.save_source_degradation({
+        "source_id": "ghsa", "action": "reduce_frequency",
+        "degraded_at": "2026-01-01T00:00:00Z", "expires_at": "2099-01-01T06:00:00+00:00",
+        "consecutive_failures": 30, "reason": "still cooling down",
+    })
+    body = client.get("/api/system/health").json()
+    modules = {item["id"]: item for item in body["modules"]}
+    assert len(body["active_degradations"]) == 1
+    assert body["expired_degradations"] == []
+    assert modules["self_healing"]["state"] == "degraded"
+    assert modules["self_healing"]["detail"] == "1 个来源处于降级冷却中"
+
+
+def test_health_alerts_module_ignores_info_only_recoveries(client):
+    """A recovery notice is evidence the system worked, not a problem to chase."""
+    from app import observability
+
+    observability.emit_alert("self_healing_recovered", "演示：自动恢复成功", severity="info")
+    body = client.get("/api/system/health").json()
+    modules = {item["id"]: item for item in body["modules"]}
+    assert modules["alerts"]["state"] == "ok"
+    assert modules["alerts"]["counters"] == {"recent": 1, "actionable": 0}
+    assert body["alert_severity_counts"] == {"info": 1}
+
+    observability.emit_alert("scheduled_collection_partial", "演示：计划采集部分成功",
+                             severity="warning")
+    body = client.get("/api/system/health").json()
+    modules = {item["id"]: item for item in body["modules"]}
+    assert modules["alerts"]["state"] == "degraded"
+    assert modules["alerts"]["counters"] == {"recent": 2, "actionable": 1}
+    assert len(body["actionable_alerts"]) == 1
+
+
 def test_seed_loads_research_cases_and_flags_demo_assets(client):
     _seed(client)
     events = client.get("/api/events").json()
