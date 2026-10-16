@@ -32,6 +32,10 @@ MAX_QUESTION = 2000
 MAX_QUERY = 200
 LOCAL_ORIGIN_PREFIXES = ("http://127.0.0.1", "http://localhost", "http://[::1]")
 
+# 决策 5（2026-10-15 定稿）：告警"需关注"的窗口维持条数制，不做时间基线。
+# 口径写进 /api/system/health 的 policy.alert_window，页面与答辩引用同一句话。
+ALERT_WINDOW_SIZE = 20
+
 # Upper bound on how many rows the events endpoint will read to compute the
 # type counts.  If the matching set is larger than this we return no counts at
 # all rather than counts that quietly describe only the first N rows.
@@ -594,7 +598,7 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
         "ok" if statuses.get("failed", 0) == 0 and statuses.get("stale", 0) == 0
         else "degraded"
     )
-    alerts = observability.recent_alerts(limit=20)
+    alerts = observability.recent_alerts(limit=ALERT_WINDOW_SIZE)
     alert_items = (alerts.get("items") if isinstance(alerts, dict) else alerts) or []
     # An automatic-recovery notice is evidence the system worked, not a problem
     # waiting for a human.  Only warning and above should light up the module.
@@ -610,7 +614,7 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "state": monitoring_state,
             "detail": (
                 f"{sources_block['coverage']['endpoints_with_data']} / {len(items)} 个来源产出数据，"
-                f"最近一次成功 {last_success or '未知'}"
+                f"最近一次成功（含部分成功）{last_success or '未知'}"
             ),
             "counters": statuses,
         },
@@ -621,12 +625,14 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "detail": (
                 f"{len(degraded)} 个来源处于降级冷却中" if degraded
                 else (
-                    f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次非完全成功，含 partial；"
+                    f"无降级中的来源（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次失败：failed/stale，"
+                    f"或零产出的 partial；"
                     f"{len(expired_degradations)} 条历史降级记录已到期）"
                     if expired_degradations
                     else (
                         "无降级中的来源"
-                        f"（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次非完全成功，含 partial）"
+                        f"（阈值 {self_healing.CONSECUTIVE_FAILURE_THRESHOLD} 次失败：failed/stale，"
+                        f"或零产出的 partial）"
                     )
                 )
             ),
@@ -650,7 +656,10 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "id": "alerts",
             "label": "告警",
             "state": "degraded" if actionable_alerts else "ok",
-            "detail": f"最近 {len(alert_items)} 条告警，其中 {len(actionable_alerts)} 条需处理",
+            "detail": (
+                f"最近 {len(alert_items)} 条告警，其中 {len(actionable_alerts)} 条需处理"
+                "（需关注 = 最近 20 条里存在 warning 及以上）"
+            ),
             "counters": {"recent": len(alert_items), "actionable": len(actionable_alerts)},
         },
     ]
@@ -671,7 +680,17 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
         "policy": {
             "consecutive_failure_threshold": self_healing.CONSECUTIVE_FAILURE_THRESHOLD,
             "cooldown_hours": self_healing.DEGRADE_COOLDOWN_HOURS,
-            "note": "连续非完全成功（含 partial）达到阈值后移出无人值守采集；配置了备用源的来源改由备用源代采。",
+            "counted_as_failure": ["failed", "stale", "partial（零产出）"],
+            "not_counted_as_failure": ["ok", "partial（有产出）"],
+            "note": (
+                "连续失败（failed/stale，或零产出的 partial）达到阈值后移出无人值守采集；"
+                "配置了备用源的来源改由备用源代采。撞抓取预算的 partial 是设计行为，有产出就不计失败。"
+            ),
+            "alert_window": {
+                "kind": "count",
+                "size": ALERT_WINDOW_SIZE,
+                "actionable_definition": "最近 20 条里存在 warning 及以上",
+            },
         },
     }
 

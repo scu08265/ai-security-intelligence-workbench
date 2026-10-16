@@ -70,12 +70,16 @@ def test_ghsa_without_token_is_not_auto_retried():
     assert "GITHUB_TOKEN" in decision["reason"]
 
 
-def _collect_run(source_id: str, status: str, day: int) -> None:
+def _collect_run(source_id: str, status: str, day: int, *, kept: int | None = None) -> None:
     stamp = f"2099-01-{day:02d}T00:00:00Z"
+    result = {"source_id": source_id, "status": status}
+    if kept is not None:
+        result["kept"] = kept
+        result["events_added"] = kept
     storage.save_run({
         "id": f"run-{source_id}-{day}", "kind": "collect", "status": "partial",
         "started_at": stamp, "finished_at": stamp, "summary": None,
-        "detail": {"results": [{"source_id": source_id, "status": status}]},
+        "detail": {"results": [result]},
     })
 
 
@@ -171,14 +175,89 @@ def test_selection_lifts_a_cooldown_once_the_source_answers_again():
     assert storage.source_degradation("msrc") is None
 
 
-def test_degradation_reason_says_partial_counts():
-    """The trigger counts ``partial``, so the reason must not claim a failure."""
+def test_degradation_reason_names_the_new_rule():
+    """决策 1 改成 A2 之后，理由不能再写成"非完全成功（含 partial）"。
+
+    触发条件现在是 failed/stale 或零产出的 partial；理由必须与之一致，
+    否则页面会继续按旧口径解释一次降级。
+    """
     decision = self_healing.degradation_for("osv", 33)
-    assert "非完全成功（含 partial）" in decision["reason"]
+    assert "failed/stale，或零产出的 partial" in decision["reason"]
+    assert "非完全成功" not in decision["reason"]
     assert "33" in decision["reason"]
     assert "33" == str(decision["consecutive_failures"])
     backup = self_healing.degradation_for("arxiv", 3)
-    assert "非完全成功（含 partial）" in backup["reason"]
+    assert "failed/stale，或零产出的 partial" in backup["reason"]
+
+
+def test_a_productive_partial_never_builds_a_streak():
+    """决策 1（A2）：ghsa 撞抓取预算报 partial，但它在产出，不算失败。
+
+    旧口径下这一串 partial 会累积到阈值并把 ghsa 反复降频；新口径要求
+    "有产出就不计失败"，因此既不该有 streak，也不该有降级记录。
+    """
+    for day in range(1, 29):
+        _collect_run("ghsa", "partial", day, kept=8)
+    assert self_healing.consecutive_failures("ghsa") == 0
+    assert self_healing.degradation_for("ghsa", 0) is None
+
+    result = self_healing.run_self_healing(["ghsa"])
+    assert result["degradations"] == []
+    assert "ghsa" not in result["consecutive_failures"]
+    assert storage.source_degradation("ghsa") is None
+
+
+def test_a_zero_output_partial_counts_as_a_failure():
+    """能跑但什么都采不到，才是 partial 里真正该降级的那一种。"""
+    for day in (1, 2, 3):
+        _collect_run("osv", "partial", day, kept=0)
+    assert self_healing.consecutive_failures("osv") == 3
+    decision = self_healing.degradation_for("osv", 3)
+    assert decision["action"] == "reduce_frequency"
+
+
+def test_a_productive_partial_breaks_a_failure_streak():
+    _collect_run("osv", "failed", 1)
+    _collect_run("osv", "partial", 2, kept=4)
+    _collect_run("osv", "failed", 3)
+    _collect_run("osv", "failed", 4)
+    assert self_healing.consecutive_failures("osv") == 2
+
+
+def test_missing_production_counters_are_not_read_as_a_failure():
+    """没有产出计数字段的旧记录不构成证据，不能据此降级。"""
+    for day in (1, 2, 3):
+        _collect_run("msrc", "partial", day)
+    assert self_healing.consecutive_failures("msrc") == 0
+
+
+def test_streak_detail_records_the_newest_attempt():
+    _collect_run("osv", "failed", 1)
+    _collect_run("osv", "partial", 2, kept=0)
+    detail = self_healing.streak_detail("osv")
+    assert detail["streak"] == 2
+    assert detail["newest_attempt"]["status"] == "partial"
+    assert detail["newest_attempt"]["produced"] is False
+    assert detail["newest_attempt"]["counts_as_failure"] is True
+
+
+def test_degradation_records_the_real_failure_class():
+    """决策 4：failure_class 必须由真实的 status/last_error 算出来。"""
+    decision = self_healing.degradation_for(
+        "osv", 3, {"status": "failed", "last_error": "incomplete chunked read"},
+    )
+    assert decision["failure_class"] == "connection_reset"
+    assert decision["last_error"] == "incomplete chunked read"
+    assert decision["source_status"] == "failed"
+
+    timeout = self_healing.degradation_for(
+        "ghsa", 3, {"status": "stale", "last_error": "ConnectTimeout: handshake timed out"},
+    )
+    assert timeout["failure_class"] == "upstream_timeout"
+
+    # 老调用点不传 state 时保持向后兼容，但不再冒充"已分类"。
+    legacy = self_healing.degradation_for("osv", 3)
+    assert legacy["failure_class"] == "unknown"
 
 
 def test_a_same_second_expiry_is_not_read_as_expired():
