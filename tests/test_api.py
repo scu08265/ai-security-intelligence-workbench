@@ -150,7 +150,8 @@ def test_health_alerts_module_ignores_info_only_recoveries(client):
     body = client.get("/api/system/health").json()
     modules = {item["id"]: item for item in body["modules"]}
     assert modules["alerts"]["state"] == "ok"
-    assert modules["alerts"]["counters"] == {"recent": 1, "actionable": 0}
+    assert modules["alerts"]["counters"]["recent"] == 1
+    assert modules["alerts"]["counters"]["actionable"] == 0
     assert body["alert_severity_counts"] == {"info": 1}
 
     observability.emit_alert("scheduled_collection_partial", "演示：计划采集部分成功",
@@ -158,8 +159,35 @@ def test_health_alerts_module_ignores_info_only_recoveries(client):
     body = client.get("/api/system/health").json()
     modules = {item["id"]: item for item in body["modules"]}
     assert modules["alerts"]["state"] == "degraded"
-    assert modules["alerts"]["counters"] == {"recent": 2, "actionable": 1}
+    assert modules["alerts"]["counters"]["recent"] == 2
+    assert modules["alerts"]["counters"]["actionable"] == 1
     assert len(body["actionable_alerts"]) == 1
+
+
+def test_health_stops_counting_a_warning_once_its_condition_clears(client):
+    """A degraded-source warning is "需处理" only while that source is degraded."""
+    from app import observability
+
+    storage.save_source_degradation({
+        "source_id": "nvd", "action": "reduce_frequency",
+        "degraded_at": "2026-01-01T00:00:00Z", "expires_at": "2099-01-01T00:00:00+00:00",
+        "consecutive_failures": 3,
+    })
+    observability.emit_alert("source_degraded", "演示：nvd 进入冷却", severity="warning",
+                             context={"source_id": "nvd"})
+    modules = {item["id"]: item for item in client.get("/api/system/health").json()["modules"]}
+    assert modules["alerts"]["counters"]["actionable"] == 1
+    assert modules["alerts"]["counters"]["resolved"] == 0
+
+    # No active degradation exists for nvd on a fresh database, so the same
+    # alert must drop out of "需处理" and be reported as recovered instead.
+    storage.clear_source_degradation("nvd")
+    body = client.get("/api/system/health").json()
+    modules = {item["id"]: item for item in body["modules"]}
+    assert modules["alerts"]["counters"]["actionable"] == 0
+    assert modules["alerts"]["counters"]["resolved"] == 1
+    assert modules["alerts"]["state"] == "ok"
+    assert body["resolved_alert_count"] == 1
 
 
 def test_seed_loads_research_cases_and_flags_demo_assets(client):

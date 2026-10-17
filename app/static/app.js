@@ -1714,7 +1714,7 @@
         : h('p', {}, '当前没有处于降级冷却中的来源。'),
       h('p', { class: 'plain-note' },
         `最近告警 ${recentAlerts.length} 条。` +
-        `需关注 = 最近 ${textOr((((health.policy || {}).alert_window || {}).size), 20)} 条里存在 warning 及以上。` +
+        `需关注 = 最近 ${textOr((((health.policy || {}).alert_window || {}).size), 20)} 条里存在尚未恢复的 warning 及以上。` +
         `自愈策略：连续失败（failed/stale，或零产出的 partial）${textOr((health.policy || {}).consecutive_failure_threshold, 3)} 次后进入 ` +
         `${textOr((health.policy || {}).cooldown_hours, 6)} 小时冷却；声明了备用源的来源由备用源代采。`));
 

@@ -1,12 +1,12 @@
 {
   "snapshot_date": "2026-10-18",
-  "snapshot_time_local": "2026-10-18 00:33 中国标准时间",
+  "snapshot_time_local": "2026-10-18 00:46 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
     "size_bytes": 15015936,
-    "sha256": "e23dfff53f2f2a66a18aa65a60303912475311b27cf9181d32251353c55bad72",
+    "sha256": "99acc062f16dbda1f87b41d230e399683552393671cf25b5d4979bb6bbfaf78c",
     "counts": {
-      "runs": 1335,
+      "runs": 1334,
       "events": 705,
       "event_aliases": 233,
       "assets": 8,
@@ -186,5 +186,5 @@
       "evidence_relationship": "relationships 中至少一条关系带 evidence_ids。"
     }
   },
-  "tests": "730 passed / 0 skipped"
+  "tests": "731 passed / 0 skipped"
 }

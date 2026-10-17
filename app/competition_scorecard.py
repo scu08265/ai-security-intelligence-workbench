@@ -164,6 +164,7 @@ def _monitoring_metrics(runs: list[dict] | None = None) -> dict:
             + " 时延指标与可靠性 Markdown/JSON 使用同一口径。"
 
             + " cumulative_actual_run_days / cumulative_scheduled_run_days 为累计不同自然日。"
+            + " 日界为 UTC 00:00（北京时间 08:00）：本地 00:16 的计划任务归入前一个 UTC 日。"
         ),
     }
 

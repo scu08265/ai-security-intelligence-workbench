@@ -155,7 +155,14 @@ def collect_arxiv(spec: SourceSpec, since: str | None) -> CollectOutcome:
 # --------------------------------------------------------------------------
 
 def collect_openalex(spec: SourceSpec, since: str | None) -> CollectOutcome:
-    """Collect AI-security papers from OpenAlex without requiring a token."""
+    """Collect AI-security papers from OpenAlex.
+
+    No key is required to *start*, but OpenAlex now meters the anonymous pool
+    per source-IP address: a shared or proxied address can exhaust the daily
+    budget and then answers 429 for hours ("Insufficient budget ... Use your
+    own key").  ``OPENALEX_API_KEY`` moves the call onto the caller's own
+    budget; ``OPENALEX_MAILTO`` only identifies the contact.
+    """
     outcome = CollectOutcome(source_id=spec.id, status="ok", cursor=_now().isoformat(timespec="milliseconds"))
     cutoff = _parse_iso(since) or (_now() - timedelta(days=30))
     params = {
@@ -167,6 +174,9 @@ def collect_openalex(spec: SourceSpec, since: str | None) -> CollectOutcome:
     mailto = os.getenv("OPENALEX_MAILTO", "").strip()
     if mailto:
         params["mailto"] = mailto
+    api_key = os.getenv("OPENALEX_API_KEY", "").strip()
+    if api_key:
+        params["api_key"] = api_key
     response = http_request(
         "GET", spec.url, params=params, timeout=60,
         headers={"Accept": "application/json"},

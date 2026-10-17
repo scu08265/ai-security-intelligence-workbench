@@ -602,10 +602,43 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
     alert_items = (alerts.get("items") if isinstance(alerts, dict) else alerts) or []
     # An automatic-recovery notice is evidence the system worked, not a problem
     # waiting for a human.  Only warning and above should light up the module.
-    actionable_alerts = [
+    state_by_source = {item.get("id"): item for item in items}
+    latest_scheduled_status = next(
+        (
+            run.get("status") for run in storage.list_runs(limit=None)
+            if run.get("kind") in {"collect", "scheduled_collect"}
+            and (run.get("detail") or {}).get("trigger") == "scheduled"
+        ),
+        None,
+    )
+
+    def _still_actionable(alert: dict) -> bool:
+        """A warning stops being "需处理" once its condition is gone.
+
+        Without this the count window kept reporting an outage that had
+        already been fixed: 12 ``source_degraded`` and one
+        ``self_healing_failed`` stayed in "需处理" long after the source
+        answered ok again.
+        """
+        code = str(alert.get("code") or "")
+        context = alert.get("context") or {}
+        if code == "source_degraded":
+            return context.get("source_id") in active_degraded_ids
+        if code == "self_healing_failed":
+            source_id = str(context.get("source_id") or "")
+            return (state_by_source.get(source_id) or {}).get("status") != "ok"
+        if code in {"scheduled_collection_partial", "scheduled_collection_failed"}:
+            # No scheduled run on record means there is no positive evidence
+            # that the condition cleared, so the warning stays open.
+            return latest_scheduled_status is None or latest_scheduled_status in {"partial", "failed"}
+        return True
+
+    warnings = [
         item for item in alert_items
         if str(item.get("severity") or "").strip().lower() not in {"info", "debug"}
     ]
+    actionable_alerts = [item for item in warnings if _still_actionable(item)]
+    resolved_alerts = [item for item in warnings if not _still_actionable(item)]
     knowledge_counts = knowledge_views.overview().get("counts") or {}
     modules = [
         {
@@ -658,9 +691,11 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "state": "degraded" if actionable_alerts else "ok",
             "detail": (
                 f"最近 {len(alert_items)} 条告警，其中 {len(actionable_alerts)} 条需处理"
-                "（需关注 = 最近 20 条里存在 warning 及以上）"
+                + (f"（{len(resolved_alerts)} 条对应的问题已恢复）" if resolved_alerts else "")
+                + "（需关注 = 最近 20 条里存在尚未恢复的 warning 及以上）"
             ),
-            "counters": {"recent": len(alert_items), "actionable": len(actionable_alerts)},
+            "counters": {"recent": len(alert_items), "actionable": len(actionable_alerts),
+                         "resolved": len(resolved_alerts)},
         },
     ]
     return {
@@ -674,6 +709,7 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
         "expired_degradations": expired_degradations,
         "recent_alerts": alert_items,
         "actionable_alerts": actionable_alerts,
+        "resolved_alert_count": len(resolved_alerts),
         "alert_severity_counts": dict(
             Counter(str(item.get("severity") or "unknown") for item in alert_items)
         ),
@@ -689,7 +725,7 @@ def system_health(days: int = Query(default=7, ge=1, le=31)) -> dict:
             "alert_window": {
                 "kind": "count",
                 "size": ALERT_WINDOW_SIZE,
-                "actionable_definition": "最近 20 条里存在 warning 及以上",
+                "actionable_definition": "最近 20 条里存在尚未恢复的 warning 及以上",
             },
         },
     }
