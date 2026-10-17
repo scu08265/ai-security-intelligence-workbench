@@ -7,6 +7,7 @@ records.  A metric that cannot be supported by those records is ``None``.
 from __future__ import annotations
 
 from collections import Counter
+from datetime import datetime, timedelta, timezone
 from statistics import mean
 from typing import Any
 
@@ -64,6 +65,22 @@ def _monitoring_metrics(runs: list[dict] | None = None) -> dict:
     cumulative = reliability.cumulative_run_evidence(runs)
     timeliness = report["timeliness"]
     continuous = report["continuous_runs"]
+    # ``continuous_run_evidence`` deliberately extends its ledger back to the
+    # first collection so zero-run days stay visible.  Reading its totals into
+    # this block made a "7 day window" report 13 days over a 23 day span, so the
+    # window figures are counted from the trailing seven dates here and the
+    # all-history totals stay in the cumulative_* fields.
+    today = datetime.now(timezone.utc).date()
+    window_dates = {(today - timedelta(days=offset)).isoformat() for offset in range(7)}
+    collect_dates = {
+        str(run.get("started_at"))[:10] for run in runs
+        if reliability._is_collect_run(run) and run.get("started_at")
+    }
+    scheduled_dates = {
+        str(run.get("started_at"))[:10] for run in runs
+        if reliability._is_collect_run(run) and reliability._is_scheduled_run(run)
+        and run.get("started_at")
+    }
     measured = timeliness["effective_denominator"]
     within_6h = timeliness["within_6h"]["count"]
     within_12h = timeliness["within_12h"]["count"]
@@ -77,13 +94,18 @@ def _monitoring_metrics(runs: list[dict] | None = None) -> dict:
             source="earliest persisted collect run started_at",
         ),
         "actual_run_days": _metric(
-            continuous["actual_run_days"],
-            source="runs(kind=collect)",
+            len(collect_dates & window_dates),
+            source="runs(kind=collect) within the trailing 7 days",
+            note="滚动 7 天窗口内有采集运行的日期数；累计值见 cumulative_actual_run_days。",
         ),
         "scheduled_run_days": _metric(
-            continuous["scheduled_run_days"],
-            source="runs(kind=collect,detail.trigger=scheduled)",
-            note="只有外部计划任务触发的采集才计入赛题连续运行天数。"),
+            len(scheduled_dates & window_dates),
+            source="runs(kind=collect,detail.trigger=scheduled) within the trailing 7 days",
+            note="滚动 7 天窗口内有计划任务运行的日期数；累计值见 cumulative_scheduled_run_days。"),
+        "continuous_executed_days": _metric(
+            continuous["consecutive_executed_days"],
+            source="runs(kind=collect,detail.trigger=scheduled) counted back from today",
+            note="从今天往前连续有定时运行的天数；这是赛题连续运行判定的依据。"),
         "scheduled_run_evidence": [{
             "id": run.get("id"), "started_at": run.get("started_at"),
             "status": run.get("status"),

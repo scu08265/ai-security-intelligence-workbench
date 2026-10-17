@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-from app import agents, sources, storage
+from app import agents, knowledge_views, sources, storage
 from app.api import app
 
 
@@ -19,7 +19,8 @@ def test_knowledge_overview_and_documents_are_grounded():
     overview = client.get("/api/knowledge/overview").json()
     documents = client.get("/api/knowledge/documents").json()
 
-    events, total = storage.list_events(limit=500)
+    # Aggregates describe the whole corpus, so the expectation must too.
+    events, total = storage.list_events(limit=None)
     expected_documents = sum(len(event.get("sources") or []) for event in events)
     assert overview["counts"]["events"] == total
     assert overview["counts"]["documents"] == expected_documents
@@ -27,6 +28,29 @@ def test_knowledge_overview_and_documents_are_grounded():
     assert all(item["provenance"] == "stored_event_source" for item in documents["items"])
     assert all(item["event_id"] for item in documents["items"])
     assert "不会补写" in documents["note"]
+
+
+def test_overview_counts_relationships_beyond_the_first_page(monkeypatch):
+    """Regression: "带证据关系" read 0 while the table held 38.
+
+    ``overview()`` used the page-limited reader, so once the corpus grew past
+    500 events the evidence-bound relationships - which sit on older events -
+    fell outside the window and the panel reported none.
+    """
+    for index in (1, 2):
+        storage.upsert_event({
+            "id": f"evt-rel-{index}", "kind": "vulnerability", "status": "published",
+            "title": f"fixture {index}",
+            "sources": [{"id": f"nvd:EVT-REL-{index}", "title": f"fixture {index}"}],
+            "relationships": [
+                {"kind": "paper_link", "evidence_ids": [f"nvd:EVT-REL-{index}"]}
+            ],
+        })
+    monkeypatch.setattr(knowledge_views, "MAX_PAGE_EVENTS", 1)
+
+    counts = knowledge_views.overview()["counts"]
+    assert counts["events"] == 2
+    assert counts["evidence_bound_relationships"] == 2
 
 
 def test_document_source_filter_only_accepts_registered_ids():

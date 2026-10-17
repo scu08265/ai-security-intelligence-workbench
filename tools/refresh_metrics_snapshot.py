@@ -146,6 +146,7 @@ def read_live() -> dict:
             "cumulative_actual_run_days": value(monitoring, "cumulative_actual_run_days"),
             "cumulative_scheduled_run_days": value(monitoring, "cumulative_scheduled_run_days"),
             "scheduled_run_days_7d": value(monitoring, "scheduled_run_days"),
+            "continuous_executed_days": value(monitoring, "continuous_executed_days"),
             "continuous_target_met": continuous["target_met"],
             "first_collection_date": value(monitoring, "cumulative_first_collection_date"),
             "events_loaded": card["corpus"]["events_loaded"],
@@ -223,8 +224,10 @@ def render_block(snapshot: dict) -> str:
         f"| 累计有采集日期 | {card['cumulative_actual_run_days']} 天"
         f"（首次采集 {card['first_collection_date']}） |",
         f"| 累计定时运行日期 | {card['cumulative_scheduled_run_days']} 天 |",
-        f"| 赛题连续运行（7 天窗口） | {card['scheduled_run_days_7d']} 天，"
-        f"`target_met = {str(card['continuous_target_met']).lower()}` |",
+        f"| 赛题连续运行（7 天窗口） | 窗口内 {card['scheduled_run_days_7d']} 天有定时运行，"
+        f"连续 {card['continuous_executed_days']} 天，"
+        f"`target_met = {str(card['continuous_target_met']).lower()}`"
+        f"（累计 {card['cumulative_scheduled_run_days']} 天） |",
         f"| 语料 | `events_loaded = {card['events_loaded']}` / "
         f"`events_total = {card['events_total']}`，`truncated = {str(card['truncated']).lower()}` |",
         f"| 监测时效性（混合口径，附录） | 6 小时内 {card['within_6h_rate']:.1%}，12 小时内 {card['within_12h_rate']:.1%}，"

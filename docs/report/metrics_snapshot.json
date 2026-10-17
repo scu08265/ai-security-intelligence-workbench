@@ -1,17 +1,17 @@
 {
-  "snapshot_date": "2026-10-17",
-  "snapshot_time_local": "2026-10-17 23:34 中国标准时间",
+  "snapshot_date": "2026-10-18",
+  "snapshot_time_local": "2026-10-18 00:33 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
-    "size_bytes": 14909440,
-    "sha256": "c8b07466002a2ec03df49a8af1f0616aa0c5aedebdfe90273664d4a55b19e387",
+    "size_bytes": 15015936,
+    "sha256": "e23dfff53f2f2a66a18aa65a60303912475311b27cf9181d32251353c55bad72",
     "counts": {
-      "runs": 1324,
+      "runs": 1335,
       "events": 705,
       "event_aliases": 233,
       "assets": 8,
-      "assessments": 192,
-      "assessment_dispositions": 48,
+      "assessments": 196,
+      "assessment_dispositions": 49,
       "rag_documents": 1,
       "rag_chunks": 849,
       "duplicate_candidates": 227
@@ -20,7 +20,8 @@
   "scorecard": {
     "cumulative_actual_run_days": 23,
     "cumulative_scheduled_run_days": 13,
-    "scheduled_run_days_7d": 13,
+    "scheduled_run_days_7d": 6,
+    "continuous_executed_days": 5,
     "continuous_target_met": false,
     "first_collection_date": "2026-09-25",
     "events_loaded": 705,
@@ -34,23 +35,23 @@
     "enrichment_sample": 705
   },
   "disposition": {
-    "high_priority_total": 53,
-    "high_priority_closed": 46,
+    "high_priority_total": 55,
+    "high_priority_closed": 47,
     "high_priority_verified": 3,
-    "high_priority_registered": 48,
-    "high_priority_unopened": 5,
-    "closure_rate": 0.8679,
-    "verified_rate": 0.0566,
-    "registered_closure_rate": 0.9583,
+    "high_priority_registered": 49,
+    "high_priority_unopened": 6,
+    "closure_rate": 0.8545,
+    "verified_rate": 0.0545,
+    "registered_closure_rate": 0.9592,
     "mean_time_to_close_hours": 0.0,
     "status_breakdown": {
-      "open": 5,
+      "open": 6,
       "in_progress": 1,
       "fixed": 1,
       "verified": 3,
-      "accepted": 43
+      "accepted": 44
     },
-    "findings_total": 128
+    "findings_total": 129
   },
   "relation": {
     "precision": 1.0,
@@ -146,9 +147,9 @@
         "source": "events.doc"
       },
       "asset_assessment": {
-        "present_events": 49,
+        "present_events": 50,
         "total_events": 705,
-        "coverage": 0.0695,
+        "coverage": 0.0709,
         "source": "assessments"
       },
       "poc": {
@@ -185,5 +186,5 @@
       "evidence_relationship": "relationships 中至少一条关系带 evidence_ids。"
     }
   },
-  "tests": "729 passed / 0 skipped"
+  "tests": "730 passed / 0 skipped"
 }

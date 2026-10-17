@@ -26,6 +26,7 @@ def _sample_snapshot() -> dict:
         "scorecard": {
             "cumulative_actual_run_days": 3, "cumulative_scheduled_run_days": 2,
             "scheduled_run_days_7d": 2, "continuous_target_met": False,
+            "continuous_executed_days": 2,
             "first_collection_date": "2098-12-30", "events_loaded": 7, "events_total": 7,
             "truncated": False, "within_6h_rate": 0.5, "within_12h_rate": 0.6,
             "within_24h_rate": 0.7, "effective_denominator": 4,

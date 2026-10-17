@@ -13,8 +13,21 @@ from typing import Any
 from . import agents, intelligence, sources, storage, streaming, task_dag, term_dictionary
 
 
-def _events(limit: int = 500) -> tuple[list[dict], int]:
-    return storage.list_events(limit=max(1, min(limit, 500)))
+MAX_PAGE_EVENTS = 500
+
+
+def _events(limit: int | None = MAX_PAGE_EVENTS) -> tuple[list[dict], int]:
+    """Read events for a projection.
+
+    ``limit=None`` reads the whole corpus and is what any aggregate must use:
+    a page-limited read makes the count depend on how many rows fit in one
+    page, so the corpus growing past the cap silently re-scopes the figure.
+    "带证据关系 0 条" was the visible symptom - the 38 evidence-bound
+    relationships lived on events older than the newest 500.
+    """
+    if limit is None:
+        return storage.list_events(limit=None)
+    return storage.list_events(limit=max(1, min(limit, MAX_PAGE_EVENTS)))
 
 
 def _source_prefix(evidence_id: str) -> str:
@@ -69,7 +82,8 @@ def documents(*, category: str = "", source_id: str = "", limit: int = 200) -> d
 
 
 def overview() -> dict:
-    events, event_total = _events()
+    # Aggregates describe the whole corpus, not the first page of it.
+    events, event_total = _events(None)
     docs = [_document(source, event) for event in events
             for source in (event.get("sources") or []) if source.get("id")]
     relationships = [rel for event in events for rel in (event.get("relationships") or [])

@@ -86,6 +86,8 @@ def test_cumulative_collection_days_survive_rolling_window_expiry():
     assert result["cumulative_first_collection_date"]["value"] == (today - timedelta(days=12)).isoformat()[:10]
     assert result["cumulative_last_collection_date"]["value"] == today.isoformat()[:10]
     # The rolling seven-day window sees three days; the cumulative count keeps all eight.
+    assert result["actual_run_days"]["value"] == 3, "the window figure must not be the all-history total"
+    assert result["scheduled_run_days"]["value"] == 3
     assert sum(1 for day in result["days"] if day["collection_runs"] > 0) == 3
 
 def test_enrichment_coverage_uses_exact_stored_fields():
