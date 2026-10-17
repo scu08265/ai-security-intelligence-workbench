@@ -36,7 +36,16 @@ def set_transport(transport: httpx.BaseTransport | None) -> None:
 
 
 class FetchError(RuntimeError):
-    """Raised when a request cannot be completed within the retry budget."""
+    """Raised when a request cannot be completed within the retry budget.
+
+    ``status`` carries the HTTP status when the failure was a completed
+    response (4xx/5xx) rather than a transport error, so a caller can tell
+    "this record does not exist" from "the source is down".
+    """
+
+    def __init__(self, message: str, *, status: int | None = None) -> None:
+        super().__init__(message)
+        self.status = status
 
 
 @dataclass
@@ -128,7 +137,7 @@ def get_json(url: str, **kwargs: Any) -> tuple[Any, str]:
     gets hashed and snapshotted, so the snapshot is the bytes we actually read."""
     response = http_request("GET", url, **kwargs)
     if response.status_code >= 400:
-        raise FetchError(_describe_http_error(response))
+        raise FetchError(_describe_http_error(response), status=response.status_code)
     try:
         return response.json(), response.text
     except ValueError as exc:
@@ -138,7 +147,7 @@ def get_json(url: str, **kwargs: Any) -> tuple[Any, str]:
 def post_json(url: str, body: Any, **kwargs: Any) -> tuple[Any, str]:
     response = http_request("POST", url, json_body=body, **kwargs)
     if response.status_code >= 400:
-        raise FetchError(_describe_http_error(response))
+        raise FetchError(_describe_http_error(response), status=response.status_code)
     try:
         return response.json(), response.text
     except ValueError as exc:

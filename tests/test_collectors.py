@@ -134,6 +134,50 @@ def test_nvd_collector_drains_all_pages_instead_of_stopping_at_two(monkeypatch):
     assert any("分 8 页扫描 1424 条" in note for note in outcome.notes)
 
 
+def test_one_missing_cve_record_does_not_abort_the_mitre_pass():
+    """Regression: a single 404 failed the whole source, every hour.
+
+    CVE Services answers 404 when an id we already hold has no published
+    record.  Letting that propagate made ``mitre_cve`` report ``stale`` for
+    eleven consecutive runs on the demo machine while the other ids in the same
+    batch were verifiable, which then fed the self-healing policy.
+    """
+    storage.upsert_event({"id": "CVE-2099-00003", "kind": "vulnerability",
+                          "status": "published", "title": "absent upstream"})
+    storage.upsert_event({"id": "CVE-2099-00004", "kind": "vulnerability",
+                          "status": "published", "title": "verifiable upstream"})
+
+    def mitre_router(request: httpx.Request) -> httpx.Response:
+        if request.url.host != "cveawg.mitre.org":
+            return httpx.Response(404, json={"detail": "unrouted"})
+        cve_id = request.url.path.rstrip("/").split("/")[-1]
+        if cve_id == "CVE-2099-00003":
+            return _json_response(
+                {"error": "CVE_RECORD_DNE",
+                 "message": "The cve record for the cve id does not exist."},
+                status=404,
+            )
+        return _json_response({
+            "cveMetadata": {"cveId": cve_id, "state": "PUBLISHED"},
+            "containers": {"cna": {
+                "title": "Synthetic vLLM record",
+                "descriptions": [{"lang": "en",
+                                  "value": "vLLM OpenAI-compatible server denial of service."}],
+            }},
+        })
+
+    collectors.set_transport(httpx.MockTransport(mitre_router))
+    outcome = collectors.collect("mitre_cve")
+
+    assert outcome.status == "ok", outcome.error
+    assert outcome.fetched == 1, "the verifiable id must still be fetched"
+    assert [event["id"] for event in outcome.events] == ["CVE-2099-00004"]
+    assert any(
+        "无公开记录（404）" in note and "CVE-2099-00003" in note
+        for note in outcome.notes
+    ), outcome.notes
+
+
 def test_osv_collector_resolves_ranges_and_fetches_details():
     outcome = collectors.collect("osv")
     assert outcome.status in {"ok", "partial"}

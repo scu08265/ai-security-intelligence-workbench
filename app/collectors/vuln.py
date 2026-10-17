@@ -164,13 +164,30 @@ def collect_mitre_cve(spec: SourceSpec, since: str | None) -> CollectOutcome:
         outcome.notes.append("库中没有待交叉核验的 CVE 编号（需先由其它来源发现）")
         return outcome
     hashes: list[str] = []
+    missing: list[str] = []
     for cve_id, _ in candidates:
-        payload, raw = get_json(f"{spec.url}/{cve_id}", timeout=30)
+        try:
+            payload, raw = get_json(f"{spec.url}/{cve_id}", timeout=30)
+        except FetchError as exc:
+            # A 404 from CVE Services means that id has no published record.
+            # That is a fact about the id we hold, not an outage.  Letting it
+            # propagate used to abort the whole pass: one absent id made the
+            # source report `stale` every hour while nine other ids were fine,
+            # and the self-healing policy eventually reduced its frequency.
+            if exc.status == 404:
+                missing.append(cve_id)
+                continue
+            raise
         hashes.append(record_snapshot(spec.id, raw, suffix="json"))
         outcome.fetched += 1
         _keep(normalize.mitre_to_event(payload), outcome)
     outcome.snapshot_hash = hashes[-1] if hashes else None
     outcome.notes.append(f"逐条核验 {outcome.fetched} 个已有 CVE 记录（单次上限 {MITRE_BUDGET}）")
+    if missing:
+        listed = "、".join(missing[:5]) + ("…" if len(missing) > 5 else "")
+        outcome.notes.append(
+            f"{len(missing)} 个 CVE 编号在 CVE Services 中无公开记录（404），已跳过：{listed}"
+        )
     return outcome
 
 

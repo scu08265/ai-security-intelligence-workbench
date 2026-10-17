@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T14:19:38Z",
+  "generated_at": "2026-10-17T15:21:42Z",
   "policy": {
     "threshold": 3,
     "cooldown_hours": 6,
@@ -13,19 +13,19 @@
       "partial（有产出）"
     ]
   },
-  "unattended_source_count": 18,
+  "unattended_source_count": 19,
   "would_degrade_today": [],
   "currently_cooling_down": [],
   "rows": [
     {
       "source_id": "anquanke",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:39Z",
-      "events_count": 9,
+      "last_success": "2026-10-17T15:20:58Z",
+      "events_count": 10,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -39,11 +39,17 @@
     },
     {
       "source_id": "arxiv",
-      "status": null,
-      "last_success": null,
-      "events_count": 0,
+      "status": "ok",
+      "last_success": "2026-10-14T02:58:27Z",
+      "events_count": 114,
       "last_error": null,
-      "newest_attempt": null,
+      "newest_attempt": {
+        "run_id": "run-180c4d64b260",
+        "started_at": "2026-10-05T01:19:34Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
       "streak": 0,
       "would_degrade": false,
       "action": null,
@@ -54,12 +60,12 @@
     {
       "source_id": "butian_community",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:37Z",
-      "events_count": 1,
+      "last_success": "2026-10-17T15:20:56Z",
+      "events_count": 0,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -74,12 +80,12 @@
     {
       "source_id": "cisa_kev",
       "status": "ok",
-      "last_success": "2026-10-15T06:48:54Z",
+      "last_success": "2026-10-17T15:16:44Z",
       "events_count": 26,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -94,12 +100,12 @@
     {
       "source_id": "eu_ai_act",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:36Z",
-      "events_count": 1,
+      "last_success": "2026-10-17T15:20:55Z",
+      "events_count": 2,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": true,
         "counts_as_failure": false
@@ -114,12 +120,12 @@
     {
       "source_id": "freebuf",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:38Z",
-      "events_count": 6,
+      "last_success": "2026-10-17T15:20:57Z",
+      "events_count": 18,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -133,27 +139,33 @@
     },
     {
       "source_id": "ghsa",
-      "status": null,
-      "last_success": null,
-      "events_count": 0,
+      "status": "ok",
+      "last_success": "2026-10-17T15:16:43Z",
+      "events_count": 111,
       "last_error": null,
-      "newest_attempt": null,
+      "newest_attempt": {
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
+        "status": "ok",
+        "produced": false,
+        "counts_as_failure": false
+      },
       "streak": 0,
       "would_degrade": false,
       "action": null,
       "failure_class": null,
       "currently_cooling_down": false,
-      "in_unattended_set": false
+      "in_unattended_set": true
     },
     {
       "source_id": "mitre_atlas",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:08Z",
+      "last_success": "2026-10-17T15:20:05Z",
       "events_count": 0,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -168,12 +180,12 @@
     {
       "source_id": "mitre_cve",
       "status": "ok",
-      "last_success": "2026-10-15T06:48:48Z",
-      "events_count": 136,
+      "last_success": "2026-10-17T15:21:36Z",
+      "events_count": 238,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-15a7d89c0908",
+        "started_at": "2026-10-17T15:21:25Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -188,12 +200,12 @@
     {
       "source_id": "msrc",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:05Z",
-      "events_count": 19,
+      "last_success": "2026-10-17T15:16:57Z",
+      "events_count": 10,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -208,12 +220,12 @@
     {
       "source_id": "nist_ai_rmf",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:07Z",
+      "last_success": "2026-10-17T15:20:04Z",
       "events_count": 1,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": true,
         "counts_as_failure": false
@@ -228,12 +240,12 @@
     {
       "source_id": "nist_news",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:42Z",
+      "last_success": "2026-10-17T15:21:02Z",
       "events_count": 0,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -248,32 +260,12 @@
     {
       "source_id": "nvd",
       "status": "ok",
-      "last_success": "2026-10-15T06:48:38Z",
-      "events_count": 335,
+      "last_success": "2026-10-17T15:16:34Z",
+      "events_count": 350,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
-        "status": "ok",
-        "produced": true,
-        "counts_as_failure": false
-      },
-      "streak": 0,
-      "would_degrade": false,
-      "action": null,
-      "failure_class": null,
-      "currently_cooling_down": false,
-      "in_unattended_set": true
-    },
-    {
-      "source_id": "openalex",
-      "status": "ok",
-      "last_success": "2026-10-15T06:49:06Z",
-      "events_count": 82,
-      "last_error": null,
-      "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -286,14 +278,34 @@
       "in_unattended_set": true
     },
     {
+      "source_id": "openalex",
+      "status": "stale",
+      "last_success": "2026-10-17T14:17:54Z",
+      "events_count": 36,
+      "last_error": "HTTP 429",
+      "newest_attempt": {
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
+        "status": "stale",
+        "produced": false,
+        "counts_as_failure": true
+      },
+      "streak": 1,
+      "would_degrade": false,
+      "action": null,
+      "failure_class": null,
+      "currently_cooling_down": false,
+      "in_unattended_set": true
+    },
+    {
       "source_id": "osv",
       "status": "ok",
-      "last_success": "2026-10-15T06:48:54Z",
-      "events_count": 52,
+      "last_success": "2026-10-17T15:16:42Z",
+      "events_count": 99,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -308,12 +320,12 @@
     {
       "source_id": "owasp_genai",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:07Z",
+      "last_success": "2026-10-17T15:20:03Z",
       "events_count": 1,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": true,
         "counts_as_failure": false
@@ -328,12 +340,12 @@
     {
       "source_id": "qax_ti_blog",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:37Z",
+      "last_success": "2026-10-17T15:20:56Z",
       "events_count": 0,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -348,12 +360,12 @@
     {
       "source_id": "securelist",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:41Z",
+      "last_success": "2026-10-17T15:21:01Z",
       "events_count": 1,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -368,12 +380,12 @@
     {
       "source_id": "security_blog",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:06Z",
+      "last_success": "2026-10-17T15:16:57Z",
       "events_count": 0,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
@@ -388,12 +400,12 @@
     {
       "source_id": "talos_blog",
       "status": "ok",
-      "last_success": "2026-10-15T06:49:41Z",
-      "events_count": 5,
+      "last_success": "2026-10-17T15:21:02Z",
+      "events_count": 6,
       "last_error": null,
       "newest_attempt": {
-        "run_id": "run-734e25e4c1e8",
-        "started_at": "2026-10-15T06:46:00Z",
+        "run_id": "run-391664e2378e",
+        "started_at": "2026-10-17T15:16:33Z",
         "status": "ok",
         "produced": false,
         "counts_as_failure": false
