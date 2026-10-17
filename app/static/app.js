@@ -1713,6 +1713,8 @@
           ]))
         : h('p', {}, '当前没有处于降级冷却中的来源。'),
       h('p', { class: 'plain-note' },
+        /* 面板只在打开/刷新时读数；把读取时间印出来，旧视图一眼可辨。 */
+        `数据读取于 ${textOr(fmtTime(health.generated_at), '未知')}（刷新页面或点「刷新」重新读取）。` +
         `最近告警 ${recentAlerts.length} 条。` +
         `需关注 = 最近 ${textOr((((health.policy || {}).alert_window || {}).size), 20)} 条里存在尚未恢复的 warning 及以上。` +
         `自愈策略：连续失败（failed/stale，或零产出的 partial）${textOr((health.policy || {}).consecutive_failure_threshold, 3)} 次后进入 ` +
