@@ -1754,7 +1754,10 @@
       ], '计划、检索、审核、停止条件和工具调用均可在任务运行记录中核查。'),
       scoreCapability('处置闭环', disposal.closure_rate !== null ? '已验证' : '待积累', [
         ['高优先级总数', disposal.high_priority_total, ' 条'],
-        ['已复测关闭', disposal.high_priority_closed, ' 条'],
+        /* high_priority_closed 含 accepted；把它标成"已复测关闭"会让接受风险
+         * 读成已修复。复测关闭单列，合计单列。 */
+        ['已复测关闭', disposal.high_priority_verified, ' 条'],
+        ['已关闭合计（复测 + 接受风险）', disposal.high_priority_closed, ' 条'],
         ['全队列闭环率', percentValue(disposal.closure_rate), ''],
         ['已登记处置', disposal.high_priority_registered, ' 条'],
         ['已登记处置内闭环率', percentValue(disposal.registered_closure_rate), ''],
@@ -1769,7 +1772,8 @@
       ], textOr(disposal.evidence_policy, '原始研判结论不会被处置记录覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。')
         + ' 全队列闭环率 = （已复测关闭 + 已接受风险）/ 高优先级总数；'
         + '已登记处置内闭环率只看已经开过处置的那几条，两者分母不同、不能互换。'
-        + '已登记处置的条目锁定在分母内，所以"从未登记处置"那一行才是拉低全队列比率的直接原因，而不是处置失败。'),
+        + '已登记处置的条目锁定在分母内；只要"从未登记处置"还不是 0，全队列闭环率就留着一块缺口，'
+        + '这块缺口记的是"还没人接手"，不是处置失败。'),
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
         ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],

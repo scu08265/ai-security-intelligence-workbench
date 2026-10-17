@@ -161,8 +161,16 @@ def read_live() -> dict:
         "disposition": {
             "high_priority_total": disposition["high_priority_total"],
             "high_priority_closed": disposition["high_priority_closed"],
+            # ``high_priority_closed`` counts verified *and* accepted; the two
+            # must stay separable or "accepted risk" reads as "repaired".
+            "high_priority_verified": disposition.get("high_priority_verified"),
+            "high_priority_registered": disposition.get("high_priority_registered"),
+            "high_priority_unopened": disposition.get("high_priority_unopened"),
             "closure_rate": disposition["closure_rate"],
             "verified_rate": disposition["verified_rate"],
+            "registered_closure_rate": disposition.get("registered_closure_rate"),
+            "mean_time_to_close_hours": disposition.get("mean_time_to_close_hours"),
+            "status_breakdown": disposition.get("status_breakdown"),
             "findings_total": disposition["findings_total"],
         },
         "relation": {
@@ -183,6 +191,7 @@ def render_block(snapshot: dict) -> str:
     counts = db["counts"]
     card = snapshot["scorecard"]
     disp = snapshot["disposition"]
+    accepted = (disp.get("status_breakdown") or {}).get("accepted")
     relation = snapshot["relation"]
     return "\n".join([
         f"{START} 由 tools/refresh_metrics_snapshot.py 重写，不要手工改这一段 -->",
@@ -221,8 +230,9 @@ def render_block(snapshot: dict) -> str:
         f"| 监测时效性（混合口径，附录） | 6 小时内 {card['within_6h_rate']:.1%}，12 小时内 {card['within_12h_rate']:.1%}，"
         f"24 小时内 {card['within_24h_rate']:.1%}；p50 = {card['latency_p50_hours']} 小时"
         f"（{card['effective_denominator']} 个有效样本） |",
-        f"| 处置闭环 | 高优先级 {disp['high_priority_total']} / 已复测关闭 "
-        f"{disp['high_priority_closed']} / `closure_rate = {disp['closure_rate']}` / "
+        f"| 处置闭环 | 高优先级 {disp['high_priority_total']} / 已关闭 "
+        f"{disp['high_priority_closed']}（复测 {disp.get('high_priority_verified')} / "
+        f"接受风险 {accepted}）/ `closure_rate = {disp['closure_rate']}` / "
         f"`verified_rate = {disp['verified_rate']}` / `findings_total = {disp['findings_total']}` |",
         f"| 关系评测（当前批次口径） | P = {relation['precision']}，R = {relation['recall']}，"
         f"F1 = {relation['f1']}（TP {relation['tp']} / FP {relation['fp']} / FN {relation['fn']}） |",

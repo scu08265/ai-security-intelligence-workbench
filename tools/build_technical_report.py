@@ -336,8 +336,10 @@ def headline_rows() -> list[list[str]]:
         ["问答命中", "引用命中 0.9722 / 预期词命中 0.9211",
          "50 题正式评测集，2026-10-12 批次"],
         ["处置闭环", f"高优先级 {disposition.get('high_priority_total')} / 已关闭 "
-                     f"{disposition.get('high_priority_closed')}"
-                     f"（{disposition.get('closure_rate'):.2%}）",
+                     f"{disposition.get('high_priority_closed')}（复测 "
+                     f"{disposition.get('high_priority_verified')} + 接受风险 "
+                     f"{(disposition.get('status_breakdown') or {}).get('accepted')}，"
+                     f"{disposition.get('closure_rate'):.2%}）",
          "仅计入系统复测通过的条目"],
         ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
          f"交付机全量 pytest（快照 {date}）"],

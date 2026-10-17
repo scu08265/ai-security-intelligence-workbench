@@ -43,6 +43,10 @@ def test_closure_card_and_queue_make_the_low_rate_actionable():
     assert '待处置队列' in SCRIPT
     assert "'/api/dispositions/pending" in SCRIPT
     assert "'/api/dispositions/batch'" in SCRIPT
+    # high_priority_closed counts verified *and* accepted; labelling it
+    # "已复测关闭" would report accepted risk as a completed fix.
+    assert "['已复测关闭', disposal.high_priority_verified" in SCRIPT
+    assert '已关闭合计（复测 + 接受风险）' in SCRIPT
 
 
 def test_console_surfaces_the_dictionary_suggestions_chain_and_tech_details():

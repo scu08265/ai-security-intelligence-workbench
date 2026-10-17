@@ -1,44 +1,56 @@
 {
-  "snapshot_date": "2026-10-14",
-  "snapshot_time_local": "2026-10-14 19:36 中国标准时间",
+  "snapshot_date": "2026-10-17",
+  "snapshot_time_local": "2026-10-17 23:34 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
-    "size_bytes": 12640256,
-    "sha256": "ce9cadf273fd865e4fa06d63e2e6fb6f77e82b4940ab22ac1da53b2b7aa0a73f",
+    "size_bytes": 14909440,
+    "sha256": "c8b07466002a2ec03df49a8af1f0616aa0c5aedebdfe90273664d4a55b19e387",
     "counts": {
-      "runs": 1013,
-      "events": 638,
-      "event_aliases": 211,
+      "runs": 1324,
+      "events": 705,
+      "event_aliases": 233,
       "assets": 8,
-      "assessments": 190,
-      "assessment_dispositions": 6,
+      "assessments": 192,
+      "assessment_dispositions": 48,
       "rag_documents": 1,
       "rag_chunks": 849,
-      "duplicate_candidates": 210
+      "duplicate_candidates": 227
     }
   },
   "scorecard": {
-    "cumulative_actual_run_days": 20,
-    "cumulative_scheduled_run_days": 10,
-    "scheduled_run_days_7d": 10,
+    "cumulative_actual_run_days": 23,
+    "cumulative_scheduled_run_days": 13,
+    "scheduled_run_days_7d": 13,
     "continuous_target_met": false,
     "first_collection_date": "2026-09-25",
-    "events_loaded": 638,
-    "events_total": 638,
+    "events_loaded": 705,
+    "events_total": 705,
     "truncated": false,
-    "within_6h_rate": 0.3199,
-    "within_12h_rate": 0.4512,
-    "within_24h_rate": 0.6195,
-    "effective_denominator": 297,
-    "latency_p50_hours": 15.58,
-    "enrichment_sample": 638
+    "within_6h_rate": 0.3244,
+    "within_12h_rate": 0.4762,
+    "within_24h_rate": 0.625,
+    "effective_denominator": 336,
+    "latency_p50_hours": 14.43,
+    "enrichment_sample": 705
   },
   "disposition": {
     "high_priority_total": 53,
-    "high_priority_closed": 4,
-    "closure_rate": 0.0755,
+    "high_priority_closed": 46,
+    "high_priority_verified": 3,
+    "high_priority_registered": 48,
+    "high_priority_unopened": 5,
+    "closure_rate": 0.8679,
     "verified_rate": 0.0566,
-    "findings_total": 126
+    "registered_closure_rate": 0.9583,
+    "mean_time_to_close_hours": 0.0,
+    "status_breakdown": {
+      "open": 5,
+      "in_progress": 1,
+      "fixed": 1,
+      "verified": 3,
+      "accepted": 43
+    },
+    "findings_total": 128
   },
   "relation": {
     "precision": 1.0,
@@ -50,27 +62,27 @@
   },
   "latency_by_class": {
     "mixed": {
-      "n": 297,
-      "p50_hours": 15.58,
-      "max_hours": 287.3,
-      "within_6h": 95,
-      "within_24h": 184
+      "n": 336,
+      "p50_hours": 14.43,
+      "max_hours": 358.0,
+      "within_6h": 109,
+      "within_24h": 210
     },
     "classes": [
       {
         "key": "vulnerability",
         "label": "漏洞类（赛题口径）",
-        "n": 217,
+        "n": 244,
         "p50_hours": 7.34,
-        "max_hours": 287.3,
-        "within_6h": 95,
-        "within_24h": 154
+        "max_hours": 358.0,
+        "within_6h": 109,
+        "within_24h": 180
       },
       {
         "key": "academic",
         "label": "学术类（不计入赛题分母）",
-        "n": 80,
-        "p50_hours": 37.46,
+        "n": 92,
+        "p50_hours": 44.9,
         "max_hours": 91.8,
         "within_6h": 0,
         "within_24h": 30
@@ -80,17 +92,17 @@
       {
         "source_id": "nvd",
         "class": "vulnerability",
-        "n": 147,
-        "p50_hours": 8.34,
-        "max_hours": 287.3,
-        "within_6h": 53,
-        "within_24h": 104
+        "n": 162,
+        "p50_hours": 8.27,
+        "max_hours": 358.0,
+        "within_6h": 57,
+        "within_24h": 118
       },
       {
         "source_id": "arxiv",
         "class": "academic",
-        "n": 76,
-        "p50_hours": 36.53,
+        "n": 88,
+        "p50_hours": 44.01,
         "max_hours": 91.8,
         "within_6h": 0,
         "within_24h": 29
@@ -98,11 +110,11 @@
       {
         "source_id": "ghsa",
         "class": "vulnerability",
-        "n": 69,
-        "p50_hours": 1.75,
+        "n": 81,
+        "p50_hours": 2.2,
         "max_hours": 129.4,
-        "within_6h": 42,
-        "within_24h": 50
+        "within_6h": 52,
+        "within_24h": 62
       },
       {
         "source_id": "openalex",
@@ -125,42 +137,42 @@
     ]
   },
   "enrichment": {
-    "event_sample_size": 638,
+    "event_sample_size": 705,
     "dimensions": {
       "paper_link": {
-        "present_events": 150,
-        "total_events": 638,
-        "coverage": 0.2351,
+        "present_events": 162,
+        "total_events": 705,
+        "coverage": 0.2298,
         "source": "events.doc"
       },
       "asset_assessment": {
-        "present_events": 48,
-        "total_events": 638,
-        "coverage": 0.0752,
+        "present_events": 49,
+        "total_events": 705,
+        "coverage": 0.0695,
         "source": "assessments"
       },
       "poc": {
-        "present_events": 82,
-        "total_events": 638,
-        "coverage": 0.1285,
+        "present_events": 96,
+        "total_events": 705,
+        "coverage": 0.1362,
         "source": "events.doc"
       },
       "cvss": {
-        "present_events": 427,
-        "total_events": 638,
-        "coverage": 0.6693,
+        "present_events": 480,
+        "total_events": 705,
+        "coverage": 0.6809,
         "source": "events.doc"
       },
       "fixed_version": {
-        "present_events": 107,
-        "total_events": 638,
-        "coverage": 0.1677,
+        "present_events": 110,
+        "total_events": 705,
+        "coverage": 0.156,
         "source": "events.doc"
       },
       "evidence_relationship": {
         "present_events": 26,
-        "total_events": 638,
-        "coverage": 0.0408,
+        "total_events": 705,
+        "coverage": 0.0369,
         "source": "events.doc"
       }
     },
@@ -173,5 +185,5 @@
       "evidence_relationship": "relationships 中至少一条关系带 evidence_ids。"
     }
   },
-  "tests": "702 passed, 0 skipped, 0 failed"
+  "tests": "729 passed / 0 skipped"
 }
