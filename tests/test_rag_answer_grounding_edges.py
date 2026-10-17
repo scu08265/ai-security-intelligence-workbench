@@ -14,7 +14,8 @@ import pytest
 from app import intelligence
 
 REFUSAL_FRAGMENT = "未找到可匹配的事件"
-DOCUMENT_TEMPLATE = "检索到的原文直接证据："
+# 文档答案必须以"答案："开头：证据清单不再是答案本体，只在后面作为原文依据。
+DOCUMENT_TEMPLATE = "答案："
 
 SUFFICIENT_TEXT = (
     "TrustedGuard enforces a signed allow list for every model asset before loading. " * 2
@@ -53,7 +54,7 @@ def test_sufficient_document_evidence_produces_a_grounded_answer():
                                                    document_id="d-1")]
     )
     assert result["document_citations"], "有充分证据时必须给出引用"
-    assert result["answer"].startswith(("检索到的原文直接证据：", "根据检索到的原文证据："))
+    assert result["answer"].startswith(DOCUMENT_TEMPLATE)
     assert REFUSAL_FRAGMENT not in result["answer"]
 
 

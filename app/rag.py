@@ -490,6 +490,12 @@ Generator = Callable[[str, str, Sequence[dict[str, Any]]], str]
 
 
 _ANSWER_SENTENCE_RE = re.compile(r"(?<=[.!?。！？])(?:\s+|(?=[\u4e00-\u9fff]))|\n+")
+# A sentence that starts with a capital letter, a CJK character or a digit can
+# stand alone as an answer line; one that starts mid-clause cannot.
+_ANSWER_CLEAN_START_RE = re.compile(r"^(?:[A-Z]|[\u4e00-\u9fff]|\d)")
+_ANSWER_FRAGMENT_START_RE = re.compile(
+    r"^(?:[a-z]|(?:of|and|but|which|that|to|for|with|in|on|as|by|from)\b)"
+)
 
 
 def _answer_sentences(text: str, *, max_chars: int = 420) -> list[str]:
@@ -542,6 +548,12 @@ def _extractive_answer(
     The function deliberately does not paraphrase.  It selects the sentences
     that overlap the user's terms most strongly and keeps the source/chunk id
     beside each sentence, so every claim remains directly auditable.
+
+    The selected sentence is presented *as the answer* first and only then
+    repeated in the verbatim-evidence list.  Leading with "检索到的原文直接证据："
+    and a bullet list of quotes made every response read as an evidence dump:
+    the evidence was there, but nothing answered the question, which is what
+    the human evaluation scored as "partial".
     """
     candidates = _answer_sentence_candidates(question, citations)
     if not candidates:
@@ -570,19 +582,36 @@ def _extractive_answer(
             break
     if not selected:
         return "", []
-    if re.search(r"哪些|有哪些|列出|list\b|which\s+(?:ones|documents)", question, re.I):
-        lead = "检索到的相关原文证据如下："
-    elif re.search(r"是什么|什么是|检测什么|做什么|what\s+(?:is|does)", question, re.I):
-        lead = "检索到的原文直接证据："
-    else:
-        lead = "根据检索到的原文证据："
-    lines = [lead]
-    claims: list[dict[str, Any]] = []
-    for _, citation, sentence in selected:
+
+    def suffix(citation: dict[str, Any]) -> str:
         label = _text(citation.get("title") or citation.get("source_id") or citation.get("document_id"))
         chunk_id = _text(citation.get("chunk_id"))
-        suffix = f" [{label} · {chunk_id}]" if label or chunk_id else ""
-        lines.append(f"- “{sentence}”{suffix}")
+        return f" [{label} · {chunk_id}]" if label or chunk_id else ""
+
+    lines: list[str] = []
+    if re.search(r"哪些|有哪些|列出|list\b|which\s+(?:ones|documents)", question, re.I):
+        lines.append("答案：检索到以下相关原文，逐条对应：")
+        for index, (_, citation, sentence) in enumerate(selected, 1):
+            lines.append(f"{index}. {sentence}{suffix(citation)}")
+    else:
+        # Lead with the best-scoring sentence that can stand on its own.  The
+        # ranking itself is untouched; this only decides which of the already
+        # selected sentences is quoted first, so an answer line never opens
+        # mid-clause ("of large language models, ...").
+        primary_entry = next(
+            (item for item in selected if _ANSWER_CLEAN_START_RE.match(item[2])),
+            selected[0],
+        )
+        rest = [item for item in selected if item is not primary_entry]
+        _, primary_citation, primary = primary_entry
+        lines.append(f"答案：{primary}{suffix(primary_citation)}")
+        for _, citation, sentence in rest[:1]:
+            lines.append(f"补充依据：{sentence}{suffix(citation)}")
+    lines.append("依据原文（逐字引用，未改写）：")
+    claims: list[dict[str, Any]] = []
+    for _, citation, sentence in selected:
+        chunk_id = _text(citation.get("chunk_id"))
+        lines.append(f"- “{sentence}”{suffix(citation)}")
         claims.append({
             "text": sentence,
             "evidence_ids": [chunk_id] if chunk_id else [],
