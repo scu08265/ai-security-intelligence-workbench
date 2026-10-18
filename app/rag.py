@@ -650,6 +650,9 @@ _LIST_INTENT = re.compile(
     r"哪些文档|哪些论文|出现在哪些|在哪些(?:文档|论文|研究)|哪些研究|which documents", re.I
 )
 
+# "在哪些文档里"不是地点问题，别把 located 之类的词塞进去稀释查询。
+_LOCATION_INTENT = re.compile(r"哪里|在哪里|在哪(?!些)|部署|位置|located|deployed|where", re.I)
+
 
 def _listing_answer(
     question: str, citations: Sequence[dict[str, Any]],
@@ -786,15 +789,20 @@ def answer_with_rag(
     focus_ids = {str(item) for item in (focus_document_ids or []) if str(item)}
     focused_chunks = [item for item in search_chunks if item.document_id in focus_ids] if focus_ids else []
     focused_retrieval = bool(focused_chunks)
+    # "部署在哪里"问的是地点，而原文写的是 "located in Frankfurt"。
+    # 不补这几个词，BM25 会命中一堆同主题但没写地点的段落。
+    search_query = question
+    if _LOCATION_INTENT.search(question):
+        search_query = question + " located deployed deployment location region"
     hits = retrieve_chunks(
-        question,
+        search_query,
         focused_chunks if focused_chunks else search_chunks,
         limit=max_chunks * 2,
         reranker=reranker,
     )
     focus_fallback = bool(focus_ids and not hits)
     if focus_fallback:
-        hits = retrieve_chunks(question, search_chunks, limit=max_chunks * 2, reranker=reranker)
+        hits = retrieve_chunks(search_query, search_chunks, limit=max_chunks * 2, reranker=reranker)
     required = {str(term).casefold() for term in (required_terms or []) if str(term)}
     if required:
         hits = [

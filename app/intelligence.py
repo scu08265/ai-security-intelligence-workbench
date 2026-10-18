@@ -65,6 +65,11 @@ def _missing_identifiers(question: str, events: list[dict]) -> list[str]:
     return sorted(item.upper() for item in wanted if item not in haystack)
 
 
+def _needs_intersection(question: str) -> bool:
+    """True for "哪些同时出现在 A 和 B 里" questions we cannot join."""
+    return bool(re.search(r"同时", question)) and bool(re.search(r"哪些|哪几|哪条", question))
+
+
 def _priority(event: dict, asset: dict, status: str) -> str:
     if status not in {"affected", "needs_confirmation"}:
         return "low" if status == "not_affected" else "unknown"
@@ -400,6 +405,15 @@ def answer_question(
             "refusal_reason": "ambiguous_context", "citations": [], "context_chunks": [],
             "context": {}, "retrieval": {"hits": 0, "input_mode": "not_run_ambiguous_context"},
         }
+    elif _needs_intersection(_text(question)):
+        # 交集题不检索：检索一定会给出"看起来相关"的单条记录，
+        # 而正确答案是"无法核验"，所以这一步直接短路成拒答。
+        rag_result = {
+            "answer": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
+            "refused": True, "refusal_reason": "ungrounded_intersection",
+            "citations": [], "context_chunks": [], "context": {},
+            "retrieval": {"hits": 0, "input_mode": "not_run_intersection"},
+        }
     else:
         # 有可用模型时，让它在**已检索到的证据**上组织答案；答案必须带引用，
         # 否则 answer_with_rag 会退回本地抽取，模型写不出无出处的话。
@@ -461,6 +475,20 @@ def answer_question(
         return payload
 
     trace = [{"step": 1, "role": "planner", "action": "parse_question", "evidence_ids": [], "result": "识别事件、资产与问题类型"}]
+    # 跨清单求交集（"哪些同时出现在 A 和 B 里"）需要显式的关联证据。
+    # 没有关联就作答，等于用一条无关记录冒充交集结果。
+    if _needs_intersection(_text(question)):
+        trace.append({
+            "step": 2, "role": "planner", "action": "refuse_ungrounded_intersection",
+            "evidence_ids": [], "result": "需要跨两份清单求交集，库中没有可核验的关联证据",
+            "stop_reason": "交集无法核验",
+        })
+        return with_rag({
+            "answer": rag_result.get("answer") or "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
+            "citations": [], "claims": [], "trace": trace,
+            "limitations": ["跨清单交集没有显式关联证据，系统拒绝用单条无关记录冒充结果"],
+            "mode": "ungrounded_intersection", "related_event_ids": [], "assessments": [],
+        })
     if context["needs_clarification"]:
         trace.append({
             "step": 2, "role": "planner", "action": "request_clarification",
@@ -517,11 +545,14 @@ def answer_question(
         any(entity in _event_haystack(event) for entity in question_entities)
         for event in selected
     )
-    if (paper_question and entity_in_documents) or entity_missing_from_events or (
+    prefer_docs = bool(
+        (paper_question and entity_in_documents) or entity_missing_from_events or (
         listing_question and rag_result.get("citations")
-    ) or (
+        ) or (
         definition_question and rag_result.get("citations")
-    ):
+        )
+    )
+    if prefer_docs:
         if rag_result.get("citations") and not rag_result.get("refused"):
             trace.append({
                 "step": len(trace) + 1, "role": "planner", "action": "prefer_document_evidence",
@@ -532,6 +563,20 @@ def answer_question(
                 "answer": rag_result.get("answer") or "", "citations": [], "claims": [],
                 "trace": trace,
                 "limitations": ["问题点名的对象不在命中事件里；本条答案来自文档证据，未使用事件摘要"],
+                "mode": "document_evidence", "related_event_ids": [], "assessments": [],
+            })
+        if rag_result.get("refused") and rag_result.get("answer"):
+            # 这类问题的事件摘要通常是无关段落；文档路径已经判定证据不足，
+            # 就保留拒答，不要退回事件路径拿无关内容凑数。
+            trace.append({
+                "step": len(trace) + 1, "role": "scheduler", "action": "stop_on_document_refusal",
+                "evidence_ids": [], "result": "文档证据不足，保留拒答",
+                "stop_reason": "证据不足",
+            })
+            return with_rag({
+                "answer": rag_result["answer"], "citations": [], "claims": [],
+                "trace": trace,
+                "limitations": ["文档证据不足，系统按规则拒答而不是用无关事件凑答案"],
                 "mode": "document_evidence", "related_event_ids": [], "assessments": [],
             })
     mode, limitations = "local_evidence_extraction", ["仅使用调用方提供的数据快照；未进行外部检索"]
