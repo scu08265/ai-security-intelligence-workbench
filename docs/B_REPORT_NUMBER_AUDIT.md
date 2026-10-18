@@ -9,12 +9,14 @@
 对不上就是某一处没刷新（`tests/test_metrics_snapshot.py` 会让它直接失败）。
 数据自然增长导致的过期**不算口径变更**（`METRICS_BASELINE.md` §4.4），刷新即可，不用把报告退回旧值。
 
-**当前快照**（`snapshot_date` = 2026-10-14）：`events 637`、`event_aliases 211`、`runs 1001`、
-`assets / assessments / assessment_dispositions 8 / 190 / 6`、
-`rag_documents / rag_chunks 1 / 849`、`duplicate_candidates 210`；
-累计采集日 **20**、累计定时运行 **10 天**、`continuous_target_met = false`、
-时效性 `p50 = 15.69 小时`（296 个有效样本）、处置闭环 48 / 4 / 8.33%；
+**当前快照**（`snapshot_date` = 2026-10-18）：`events 705`、`event_aliases 233`、`runs 1334`、
+`assets / assessments / assessment_dispositions 8 / 196 / 49`、
+`rag_documents / rag_chunks 1 / 849`、`duplicate_candidates 227`；
+累计采集日 **23**、累计定时运行 **13 天**、`continuous_target_met = false`、
+时效性 `p50 = 14.43 小时`（336 个有效样本）、处置闭环 55 / 47 / 85.45%；
 关系 P 1.0 / R 0.734 / F1 0.8466。
+（2026-10-14 的历史快照为 637 / 211 / 1001、8 / 190 / 6、1 / 849、210、20 / 10 天、15.69 小时 / 296、
+48 / 4 / 8.33%；本文下面凡写"历史读数"的段落都指那一期，不与当前快照混引。）
 
 **核对对象**
 
@@ -45,13 +47,13 @@
 
 | 数字 | 出现位置 | 与 `metrics_snapshot.json` 比对 | 结论 |
 | --- | --- | --- | --- |
-| 语料规模（事件数） | 关键数字表 | 报告已改为读 `scorecard.events_total` = 637 | 一致（快照驱动） |
-| 连续监测天数 | 关键数字表、第十章 | 报告读 `cumulative_actual_run_days` = 20 / `cumulative_scheduled_run_days` = 10 | 一致 |
+| 语料规模（事件数） | 关键数字表 | 报告已改为读 `scorecard.events_total` = 705 | 一致（快照驱动） |
+| 连续监测天数 | 关键数字表、第十章 | 报告读 `cumulative_actual_run_days` = 23 / `cumulative_scheduled_run_days` = 13 | 一致 |
 | 连续运行目标 | 第十章 | 报告读 `continuous_target_met`；当前 `false`，文案已改为"当前窗口未达成" | 一致；**false 不是 bug** |
-| 监测时效性 p50 | 关键数字表、第十章 | 报告读 `latency_p50_hours` = 15.69 | 一致 |
-| 有效样本数 | 第十章 | 报告读 `effective_denominator` = 296 | 一致 |
-| 处置闭环 48 / 4 / 8.33% | 关键数字表 | 快照 `disposition` = 48 / 4 / 0.0833 | 一致 |
-| 去重候选 210 条 | 第三章 | 快照 `database.counts.duplicate_candidates` = 210 | 一致 |
+| 监测时效性 p50 | 关键数字表、第十章 | 报告读 `latency_p50_hours` = 14.43 | 一致 |
+| 有效样本数 | 第十章 | 报告读 `effective_denominator` = 336 | 一致 |
+| 处置闭环 55 / 47 / 85.45% | 关键数字表 | 快照 `disposition` = 55 / 47 / 0.8545 | 一致 |
+| 去重候选 227 条 | 第三章 | 快照 `database.counts.duplicate_candidates` = 227 | 一致（10-14 时曾写死 210，10-18 已改为读快照） |
 | 容器验收 9 项 | 关键数字表 | `reports/docker-validation.json` | 一致 |
 | 语料规模（分块）3,639 | 关键数字表（原与事件数同格） | 3,639 是 **B 评测语料**的 `rag_chunks`；快照里演示机是 1 文档 / 849 分块 | 已拆行，各带数据集限定语 |
 | 来源产出 273 / 202 / 91 / 108 / 26 / 10 / 35 / 114 / 36 / 7 | 第三章来源表 | 快照里**没有**这些字段 | **仍写死**，见 §7 |
@@ -63,7 +65,7 @@
 
 | 原问题 | 现状 |
 | --- | --- |
-| 1. 自动化测试 675 通过 / 4 跳过 | **上游已改**：现在写 **691 通过 / 4 跳过**，而 `df90eaf` 自己新增的测试没同步进去——实际应为 **694 通过 / 4 跳过**（本机语料齐全时 698 passed / 0 skipped）。交付衍生副本后应为 **698 passed / 0 skipped**。我原先按 10-13 任务书建议的 682 已作废 |
+| 1. 自动化测试 675 通过 / 4 跳过 | **历史记录**：这一串（675 / 691 / 694 / 698）都是 10-13～10-14 的时点值。当前报告读快照 `tests` 字段，10-18 快照为 **731 passed / 0 skipped**；本分支（B4）实测 **748 passed / 0 skipped**，属"快照未刷新"，提交前用 `refresh_metrics_snapshot.py --write --tests` 对齐 |
 | 2. 语料规模一行把两个数据集并在一格 | **已解决**：该行改由快照驱动；B 评测语料的分块数在正文单列并带数据集限定语 |
 | 3. 596 事件 / 19 采集日 与基线 548 / 18 对不上 | **已闭环**，见 §2 末行 |
 
@@ -108,7 +110,7 @@
 | --- | --- | --- |
 | 第四章富化覆盖率表写死 `388 / 596`… | 改为 `_enrichment_row()` 读 `_snap("enrichment", "dimensions")` | **闭环** |
 | 第十章 A1 时效性归因段写死 `18.1 小时 / 267 样本` | 改为读 `_snap('scorecard', 'latency_p50_hours')` 与 `effective_denominator` | **闭环** |
-| 第十章自动化测试写死 `691 通过 / 4 跳过` | 快照新增 `tests` 字段（现为 702 passed / 0 skipped / 0 failed），报告改用 `_snap("tests")` | **闭环** |
+| 第十章自动化测试写死 `691 通过 / 4 跳过` | 快照新增 `tests` 字段（10-18 为 731 / 0；本分支实测 748 / 0，待队长刷新），报告改用 `_snap("tests")` | **闭环（数字待刷新）** |
 | 口径表 §3 写死"连续 19 天采集证据" | 改为"不写死天数，看 `docs/METRICS_BASELINE.md` §2 的 `cumulative_actual_run_days` 与 `target_met`" | **闭环** |
 | （上轮未列到）附录 A 写死"14 张术语卡" | 改为 `_term_dictionary_line()` 读 `GET /api/knowledge/terms` 的 `coverage.terms / covered_terms` | **闭环** |
 
@@ -145,9 +147,11 @@
 
 配套计数字段：`high_priority_registered`（已登记处置）、`high_priority_unopened`（从未登记处置）。
 
-**（2026-10-15 当日读数，引用时须带日期）**：高优先级 53 条 / 已复测关闭 4 条 /
-`closure_rate = 7.55%` / 已登记处置 6 条 / 从未登记处置 47 条 /
-`registered_closure_rate = 66.67%`。7.55% 低是因为 47 条从未被接手，不是处置失败。
+**（2026-10-18 快照读数，引用时须带日期）**：高优先级 55 条 / 已关闭 47 条（复测关闭 3 + 接受风险 44）/
+`closure_rate = 85.45%` / 已登记处置 49 条 / 从未登记处置 6 条 /
+`registered_closure_rate = 95.92%`。
+（2026-10-15 的历史读数为 53 / 4 / 7.55% / 6 / 47 / 66.67%，当时 47 条从未被接手；
+两期数字不可混引。）
 
 **三条必须一起引用的限定**（与接口 `limitations` 逐字一致，文档侧见
 `docs/DISPOSITION_CLOSURE.md` §4.4）：
