@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "acdfe243-6aee-4a83-b713-bd93a8ed7753",
+  "status": "current",
+  "command": "deliver",
+  "type": "sequence",
+  "input": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\sequence-qa-20261018-134500\\candidate.json",
+  "output": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\sequence-qa-20261018-134500\\qa.html",
+  "specification": {
+    "sha256": "65e56885817d9da116cd87293f54ed9995adac5d9b55e09ce98afe6bcaca9b67",
+    "bytes": 2226
+  },
+  "artifact": {
+    "sha256": "54a7a5ee761e4ab2b362cbfc26ba2c5d987c9702cfacc14c4739832c7620fc91",
+    "bytes": 809203
+  }
+}

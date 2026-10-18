@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "258f18e3-e2b3-418d-bb68-d8757cf53c29",
+  "status": "current",
+  "command": "deliver",
+  "type": "dataflow",
+  "input": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\dataflow-rag-20261018-140800\\candidate.json",
+  "output": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\dataflow-rag-20261018-140800\\rag.html",
+  "specification": {
+    "sha256": "20ecc91e82af5e23980ac570d1643c3d1a173c05a08fb86b9a67b3fb3320c300",
+    "bytes": 3008
+  },
+  "artifact": {
+    "sha256": "5d686afd7bcf266e9624ebdd5b2d96509e5e867732fd10d9b9dabfb52aa86b3f",
+    "bytes": 813754
+  }
+}

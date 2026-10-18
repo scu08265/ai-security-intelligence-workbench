@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "一次证据问答请求",
+    "output": ".archify/sequence-qa-20261018-134500/qa.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN"
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "用户", "sublabel": "自然语言提问" },
+    { "id": "console", "type": "frontend", "label": "控制台", "sublabel": "工作台" },
+    { "id": "retriever", "type": "backend", "label": "检索", "sublabel": "BM25 与同义词" },
+    { "id": "kb", "type": "database", "label": "知识库", "sublabel": "分块与偏移" },
+    { "id": "answer", "type": "backend", "label": "答案拼装", "sublabel": "逐句绑定" }
+  ],
+  "segments": [
+    { "from": 140, "to": 330, "label": "检索证据" },
+    { "from": 330, "to": 470, "label": "拼装与引用" }
+  ],
+  "messages": [
+    { "from": "user", "to": "console", "y": 175, "label": "提问", "variant": "emphasis" },
+    { "from": "console", "to": "retriever", "y": 220, "label": "检索请求" },
+    { "from": "retriever", "to": "kb", "y": 265, "label": "关键词与同义词" },
+    { "from": "kb", "to": "retriever", "y": 310, "label": "命中分块与字符偏移", "variant": "return" },
+    { "from": "retriever", "to": "answer", "y": 355, "label": "证据集", "variant": "emphasis" },
+    { "from": "answer", "to": "console", "y": 400, "label": "结论句与逐句引用", "variant": "return" },
+    { "from": "console", "to": "user", "y": 445, "label": "带引用回答", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "console", "from": 165, "to": 455, "type": "frontend" },
+    { "participant": "retriever", "from": 210, "to": 365, "type": "backend" },
+    { "participant": "kb", "from": 255, "to": 320, "type": "database" },
+    { "participant": "answer", "from": 345, "to": 410, "type": "backend" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "引用可追溯", "items": ["每个分块都带 chunk_id 与字符偏移", "答案里的句子必须来自引用原文"] },
+    { "dot": "rose", "title": "证据不足时", "items": ["检索无命中时明确拒答，不猜测", "拒答与 should_refuse 标签一致率 84%"] }
+  ]
+}

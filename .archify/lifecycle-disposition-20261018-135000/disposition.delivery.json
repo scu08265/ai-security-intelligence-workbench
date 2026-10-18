@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "1c254c63-d372-447f-a42f-0b59afb32711",
+  "status": "current",
+  "command": "deliver",
+  "type": "lifecycle",
+  "input": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\lifecycle-disposition-20261018-135000\\candidate.json",
+  "output": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\lifecycle-disposition-20261018-135000\\disposition.html",
+  "specification": {
+    "sha256": "c416e96deb3f4a834d2f73495d1f0270356ec4b19f774802ed3ec2dca4518ab6",
+    "bytes": 2098
+  },
+  "artifact": {
+    "sha256": "349ba582ebbce5415787f0aeb472730869ce876a7290c8c958f806f91891888f",
+    "bytes": 811404
+  }
+}

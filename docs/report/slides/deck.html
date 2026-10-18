@@ -97,6 +97,7 @@ img.shot {
 .frame-head.sky { background: var(--sky); }
 .frame img { display: block; width: 100%; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
 .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 38px; }
 .bartrack { height: 9px; background: #ECE7DC; border-radius: 5px; margin-top: 10px; }
 .barfill { height: 9px; border-radius: 5px; background: var(--coral); }
@@ -143,7 +144,7 @@ img.shot {
     <p class="lede">情报监测、知识富化、证据问答与处置闭环的一体化工作台</p>
   </div>
   <div class="cover-meta">
-    <span>演示机实测 2026-10-18</span><span>705 条事件</span><span>733 项自动化测试</span>
+    <span>演示机实测 2026-10-18</span><span>705 条事件</span><span>746 项自动化测试</span>
   </div>
   <div class="cover-mark">AI<br>SEC</div>
 </section>
@@ -161,7 +162,7 @@ img.shot {
   <div style="height: 2px; background: var(--line); margin: 56px 0 44px;"></div>
   <div class="grid4">
     <div><div class="num ink" style="font-size: 64px;">24</div><div class="cap">采集日<br>连续定时运行 6 天</div></div>
-    <div><div class="num ink" style="font-size: 64px;">733</div><div class="cap">自动化测试<br>0 跳过</div></div>
+    <div><div class="num ink" style="font-size: 64px;">746</div><div class="cap">自动化测试<br>0 跳过</div></div>
     <div><div class="num ink" style="font-size: 64px;">3 / 3</div><div class="cap">CI 作业全绿<br>容器、回滚、测试</div></div>
     <div><div class="num ink" style="font-size: 64px;">38</div><div class="cap">带证据关系<br>26 个术语</div></div>
   </div>
@@ -172,8 +173,8 @@ img.shot {
   <p class="eyebrow">系统总体架构</p>
   <h2>采集、富化、问答与处置在一份本地库上闭环</h2>
   <div class="bar"></div>
-  <div style="display: grid; grid-template-columns: 1110px 300px; gap: 56px;">
-    <img class="shot" src="../figures/fig1-architecture.png" alt="系统总体架构">
+  <div style="display: grid; grid-template-columns: 960px 400px; gap: 56px;">
+    <img class="shot" src="assets/arch-system.png" alt="系统总体架构">
     <div>
       <div class="layer"><b>采集层</b><span>20 个登记来源，HTTP 与 RSS 双通道，原文按 SHA-256 落盘</span></div>
       <div class="layer"><b>归一化</b><span>字段映射、去重与版本区间解析全部确定性完成</span></div>
@@ -188,34 +189,20 @@ img.shot {
   <p class="eyebrow">智能体方案</p>
   <h2>七个角色分工，模型只做它被允许做的事</h2>
   <div class="bar"></div>
-  <div style="display: grid; grid-template-columns: 700px 680px; gap: 56px;">
-    <div>
-      <img class="shot" src="../figures/fig2-agent-orchestration.png" alt="智能体编排">
-      <p class="note" style="margin-top: 18px;">计划器只能从允许的动作表里选择，看不到凭据，也无法编造来源参数。模型不可用时自动降级为本地证据抽取。</p>
-    </div>
-    <div>
-      <table>
-        <thead><tr><th>角色</th><th>用模型</th><th>约束</th></tr></thead>
-        <tbody>
-          <tr><td>计划器</td><td class="coral">是</td><td class="dim">受限动作表</td></tr>
-          <tr><td>采集</td><td class="dim">否</td><td class="dim">按来源定义抓取</td></tr>
-          <tr><td>归一化</td><td class="dim">否</td><td class="dim">确定性字段映射</td></tr>
-          <tr><td>检索</td><td class="dim">否</td><td class="dim">打分可复算</td></tr>
-          <tr><td>审核</td><td class="dim">否</td><td class="dim">规则标注证据缺口</td></tr>
-          <tr><td>调度</td><td class="dim">否</td><td class="dim">计划任务与自愈</td></tr>
-          <tr><td>答案组织</td><td class="coral">可选</td><td class="dim">两种模式都必须带引用</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <img class="shot" src="assets/arch-agent.png" alt="智能体编排" style="width: 1250px; margin: 0 auto;">
+  <div class="grid3" style="margin-top: 28px;">
+    <div class="note">计划器用模型，只能在受限动作表里选，看不到凭据</div>
+    <div class="note">采集、归一化、检索、审核、调度全部是确定性代码</div>
+    <div class="note">答案组织可选模型，两种模式都必须带引用</div>
   </div>
   <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">04</div>
 </section>
 
 <section class="slide a-teal">
-  <p class="eyebrow">系统工作流程</p>
-  <h2>一次采集到一条可追溯结论的完整链路</h2>
+  <p class="eyebrow">问答时序</p>
+  <h2>一次证据问答请求的处理链路</h2>
   <div class="bar"></div>
-  <img class="shot" src="../figures/fig3-workflow.png" alt="系统工作流程" style="width: 1240px; margin: 6px auto 0;">
+  <img class="shot" src="assets/arch-sequence.png" alt="一次证据问答请求" style="width: 1030px; margin: 0 auto;">
   <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">05</div>
 </section>
 
@@ -241,6 +228,19 @@ img.shot {
     <div><div class="num sky" style="font-size: 62px;">1334</div><div class="cap">持久化运行记录</div></div>
   </div>
   <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">06</div>
+</section>
+
+<section class="slide a-sun">
+  <p class="eyebrow">调度与自愈</p>
+  <h2>无人值守运行，失败源自动降级后重新归队</h2>
+  <div class="bar"></div>
+  <img class="shot" src="assets/arch-selfheal.png" alt="调度与自愈状态机" style="width: 1400px;">
+  <div class="grid3" style="margin-top: 26px;">
+    <div class="note">每小时由内置调度器触发，不依赖外部 cron</div>
+    <div class="note">连续 3 次 failed 或 stale 才降级，冷却 6 小时</div>
+    <div class="note">有产出的 partial 不算失败，零产出才计数</div>
+  </div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">07</div>
 </section>
 
 <section class="slide">
@@ -275,7 +275,7 @@ img.shot {
       <p class="note" style="margin-top: 30px;">时延只统计系统首次监测之后发布的样本，历史回填的 319 条单独排除。发布时间取自来源自带字段，不做前端估算。</p>
     </div>
   </div>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">07</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">08</div>
 </section>
 
 <section class="slide a-teal">
@@ -294,7 +294,7 @@ img.shot {
     </tbody>
   </table>
   <p class="note" style="margin-top: 26px;">分母是全部 705 条事件。没有证据的维度返回空值并计入缺口，不用估计值补齐。</p>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">08</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">09</div>
 </section>
 
 <section class="slide a-sun">
@@ -316,7 +316,20 @@ img.shot {
       <p class="note" style="margin-top: 28px;">分块记录 chunk_id、字符偏移、所属章节与快照哈希。术语字典把术语和原文证据绑定，页面上可以直接跳到命中的文档与字符位置。</p>
     </div>
   </div>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">09</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">10</div>
+</section>
+
+<section class="slide a-teal">
+  <p class="eyebrow">检索与打分</p>
+  <h2>两路召回合并打分，答案必须落回具体字符</h2>
+  <div class="bar"></div>
+  <img class="shot" src="assets/arch-rag.png" alt="检索与打分链路" style="width: 1400px;">
+  <div class="grid3" style="margin-top: 26px;">
+    <div class="note">精确编号走 BM25，口语与跨语言走同义词扩展</div>
+    <div class="note">同一分块只保留一条，分数可复算</div>
+    <div class="note">引用编号取不回就不写进答案</div>
+  </div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">11</div>
 </section>
 
 <section class="slide">
@@ -339,7 +352,7 @@ img.shot {
     <p style="margin: 0 0 10px; font-size: 21px; color: #5A6274;">依据原文</p>
     <p style="margin: 0; font-size: 24px; line-height: 1.5; color: #333B50;">“原文句子”<span style="color: #8A90A0; font-family: Bahnschrift, sans-serif; font-size: 21px;">　［文档 · chunk-id］</span></p>
   </div>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">10</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">12</div>
 </section>
 
 <section class="slide a-teal">
@@ -367,7 +380,20 @@ img.shot {
       </div>
     </div>
   </div>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">11</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">13</div>
+</section>
+
+<section class="slide a-sky">
+  <p class="eyebrow">处置状态机</p>
+  <h2>从待处置到关闭，每一步都有状态与证据</h2>
+  <div class="bar"></div>
+  <img class="shot" src="assets/arch-lifecycle.png" alt="处置状态机" style="width: 1400px;">
+  <div class="grid3" style="margin-top: 30px;">
+    <div class="note">关闭只能由系统复测确认，不能人工声明</div>
+    <div class="note">接受风险是显式决策，单独计数</div>
+    <div class="note">已登记条目锁定在分母内，修复后不消失</div>
+  </div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">14</div>
 </section>
 
 <section class="slide a-sky">
@@ -394,7 +420,7 @@ img.shot {
       <div class="layer"><b>精确率优先</b><span>FP 为 0，宁可少抽也不生成没有证据的关系边</span></div>
     </div>
   </div>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">12</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">15</div>
 </section>
 
 <section class="slide">
@@ -420,7 +446,7 @@ img.shot {
       <p class="note" style="margin-top: 16px;">每次推送自动跑容器构建、回滚验证与全量测试。</p>
     </div>
   </div>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">13</div>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">16</div>
 </section>
 
 <section class="slide a-teal">
@@ -434,8 +460,8 @@ img.shot {
     <div class="point"><b>04</b><p>三级降级链。模型不可用时自动落回本地证据抽取，答案仍然必须带引用，证据不足时同样拒答。</p></div>
   </div>
   <div style="height: 2px; background: var(--line); margin: 34px 0 22px;"></div>
-  <p class="lede" style="margin-top: 0;">705 条事件、1059 份文档、733 项自动化测试，全部可以在演示机上复跑。</p>
-  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">14</div>
+  <p class="lede" style="margin-top: 0;">705 条事件、1059 份文档、746 项自动化测试，全部可以在演示机上复跑。</p>
+  <div class="brand">AI SECURITY INTELLIGENCE</div><div class="pageno">17</div>
 </section>
 
 </body>
