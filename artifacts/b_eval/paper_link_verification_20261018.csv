@@ -1,0 +1,22 @@
+﻿relation_id,event_id,status,openalex_doi,pdf_doi,title_match,year_match,missing,evidence,pdf_url
+BREL-PA-0001,OPENALEX-W7214527440,doi_match,10.1186/s43556-026-00600-7,10.1186/s43556-026-00600-7,,,,DOI 逐字一致：10.1186/s43556-026-00600-7,https://link.springer.com/content/pdf/10.1186/s43556-026-00600-7.pdf
+BREL-PA-0002,OPENALEX-W7214558721,doi_match,10.1007/s44265-026-00088-7,10.1007/s44265-026-00088-7,,,,DOI 逐字一致：10.1007/s44265-026-00088-7,https://link.springer.com/content/pdf/10.1007/s44265-026-00088-7.pdf
+BREL-PA-0003,OPENALEX-W7214600341,doi_match,10.1186/s42400-026-00649-5,10.1186/s42400-026-00649-5,,,,DOI 逐字一致：10.1186/s42400-026-00649-5,https://link.springer.com/content/pdf/10.1186/s42400-026-00649-5.pdf
+BREL-PA-0004,OPENALEX-W7214526768,doi_match,10.1007/s44163-026-02344-3,10.1007/s44163-026-02344-3,,,,DOI 逐字一致：10.1007/s44163-026-02344-3,https://link.springer.com/content/pdf/10.1007/s44163-026-02344-3.pdf
+BREL-PA-0005,OPENALEX-W7214542908,unknown,10.1038/s41598-026-72755-w,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://www.nature.com/articles/s41598-026-72755-w_reference.pdf
+BREL-PA-0006,OPENALEX-W7214553113,unknown,10.33774/coe-2026-wp8dr,,True,False,pdf_url 里没有 DOI；URL 里没有年份，双匹配缺一项,,https://www.cambridge.org/engage/api-gateway/coe/assets/orp/resource/item/6ab904c4810b9dcc828178e4/original/override-theatre-governing-the-human-override-of-ai-agent-decisions-as-a-segregated-accountable-control.pdf
+BREL-PA-0007,OPENALEX-W7214449097,unknown,10.38124/ijisrt/26sep879,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://www.ijisrt.com/assets/upload/files/IJISRT26SEP879.pdf
+BREL-PA-0008,OPENALEX-W7214468787,doi_match,10.34218/ijaiml_05_02_007,10.34218/ijaiml_05_02_007,,,,DOI 逐字一致：10.34218/ijaiml_05_02_007,https://doi.org/10.34218/ijaiml_05_02_007
+BREL-PA-0010,OPENALEX-W7125151750,unknown,10.70777/si.v3i3.18747,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://s-rsa.com/index.php/agi/article/download/18747/12429
+BREL-PA-0011,OPENALEX-W7151534166,unknown,10.70777/si.v3i3.18746,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://s-rsa.com/index.php/agi/article/download/18746/12428
+BREL-PA-0012,OPENALEX-W7213611819,unknown,10.70777/si.v3i3.18734,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://s-rsa.com/index.php/agi/article/download/18734/12426
+BREL-PA-0013,OPENALEX-W7214295679,unknown,10.56201/rjpst.vol.8.no8.2025.pg142.212,,True,False,pdf_url 里没有 DOI；年份不一致（URL 2025 / OpenAlex 2026）,,https://iiardjournals.org/get/RJPST/VOL. 8 NO. 8 2025/Advances in NLP-Driven Analytics 142-212.pdf
+BREL-PA-0014,OPENALEX-W7214338629,unknown,10.37547/tajmei/volume08issue09-04,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://theamericanjournals.com/index.php/tajmei/article/download/8413/7697/12737
+BREL-PA-0015,OPENALEX-W7214339430,unknown,10.15439/2026f6361,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://annals-csis.org/Volume_48/drp/pdf/6361.pdf
+BREL-PA-0017,OPENALEX-W7214152392,doi_match,10.1007/s10270-026-01425-2,10.1007/s10270-026-01425-2,,,,DOI 逐字一致：10.1007/s10270-026-01425-2,https://link.springer.com/content/pdf/10.1007/s10270-026-01425-2.pdf
+BREL-PA-0018,OPENALEX-W7214194099,unknown,,,False,False,OpenAlex 记录缺 DOI；pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://jyx.jyu.fi/bitstreams/db4ece2d-fa81-48a1-b8aa-cc3ea87b9b85/download
+BREL-PA-0019,OPENALEX-W7214198864,unknown,,,False,False,OpenAlex 记录缺 DOI；pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://cdn.openai.com/pdf/d04913be-3f6f-4d2b-b283-ff432ef4aaa5/why-language-models-hallucinate.pdf
+BREL-PA-0020,OPENALEX-W7214222573,unknown,,,False,False,OpenAlex 记录缺 DOI；pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://jyx.jyu.fi/bitstreams/e176a9a3-450d-463a-b755-da56c748c709/download
+BREL-PA-0021,OPENALEX-W7214241047,unknown,10.64643/ijirt.208799-459,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://ijirt.org/publishedpaper/IJIRT208799_PAPER.pdf
+BREL-PA-0036,OPENALEX-W7214062101,unknown,10.1016/j.ecmx.2026.102287,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://www.sciencedirect.com/science/article/pii/S2590174526007701/pdf
+BREL-PA-0037,OPENALEX-W7214100311,unknown,10.56557/ajoair/2026/v9i1575,,False,False,pdf_url 里没有 DOI；URL 路径读不出标题（需抓取页面标题才能双匹配）,,https://jasianresearch.com/index.php/AJOAIR/article/download/575/832
