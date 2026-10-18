@@ -114,6 +114,19 @@ def test_generator_failure_degrades_to_local_evidence():
     assert result["citations"], "失败时仍必须返回可核对的原文本地答案"
 
 
+def test_model_refusal_is_kept_instead_of_replaced_by_a_fragment():
+    def generator(question, context, citations):
+        return "证据不足，无法回答。"
+
+    result = rag.answer_with_rag(
+        "OllamaDrama 中的 honeypot 部署在哪里？", chunks=_prose_chunks(), generator=generator,
+    )
+    assert result["answer"] == "证据不足，无法回答。"
+    assert result["refused"] is True
+    assert result["refusal_reason"] == "model_insufficient_evidence"
+    assert result["retrieval"]["generator_used"] is True
+
+
 def test_build_generator_passes_evidence_and_question_to_the_model(monkeypatch):
     captured = {}
 

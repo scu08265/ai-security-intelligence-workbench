@@ -25,7 +25,8 @@ SYSTEM_PROMPT = (
     "不得使用任何外部知识，不得推测证据里没有的内容。\n"
     "规则：\n"
     "1. 先用一句话直接回答问题，再补充一句必要的限定。\n"
-    "2. 每个句子末尾必须标注它依据的 chunk id，格式如 [chunk-1a2b3c4d]。\n"
+    "2. 每个句子末尾必须标注它依据的 chunk id，格式如 [chunk-1a2b3c4d]；"
+    "编号必须从下面给出的“可用引用”里原样复制，不要改写、缩写或省略。\n"
     "3. 如果证据不足以回答，只输出：证据不足，无法回答。\n"
     "4. 不要罗列证据清单，不要复述题目。"
 )
@@ -94,11 +95,20 @@ def build_generator(
         evidence = _evidence_block(citations)
         if not evidence:
             return ""
+        available = "\n".join(
+            f"- {str(item.get('chunk_id') or item.get('document_id') or '')}"
+            for item in citations
+            if item.get("chunk_id") or item.get("document_id")
+        )
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
             {
                 "role": "user",
-                "content": f"<evidence>\n{evidence}\n</evidence>\n\n问题：{question}",
+                "content": (
+                    f"<evidence>\n{evidence}\n</evidence>\n\n"
+                    f"可用引用（回答中只能出现这些编号）：\n{available}\n\n"
+                    f"问题：{question}"
+                ),
             },
         ]
         return _chat(model_config, messages)

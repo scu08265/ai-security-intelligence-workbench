@@ -385,7 +385,7 @@ def answer_question(
     # answer path.  Additive keys keep API/UI consumers compatible while
     # exposing paragraph-level, hash-bound evidence to newer Agent flows.
     from .conversation_context import apply_asset_constraints, resolve_conversation_context
-    from .rag import answer_with_rag
+    from .rag import answer_with_rag, named_entities
 
     history = history or []
     context = resolve_conversation_context(
@@ -489,6 +489,25 @@ def answer_question(
         selected = _select_events(_text(question), events or [], history)
         if selected:
             context["context_snapshot"]["selected_event_ids"] = [event.get("id") for event in selected if event.get("id")]
+    # 问题点名了一个具体对象（论文 / 产品 / 编号），但命中的事件里根本没有它：
+    # 此时用事件作答就是拿无关论文凑数。改为文档证据作答。
+    question_entities = named_entities(_text(question))
+    if question_entities and selected and not any(
+        any(entity in _event_haystack(event) for entity in question_entities)
+        for event in selected
+    ):
+        if rag_result.get("citations") and not rag_result.get("refused"):
+            trace.append({
+                "step": len(trace) + 1, "role": "planner", "action": "prefer_document_evidence",
+                "evidence_ids": [], "result": "点名对象不在命中事件中，改用文档证据作答",
+                "stop_reason": "事件路径会答非所问",
+            })
+            return with_rag({
+                "answer": rag_result.get("answer") or "", "citations": [], "claims": [],
+                "trace": trace,
+                "limitations": ["问题点名的对象不在命中事件里；本条答案来自文档证据，未使用事件摘要"],
+                "mode": "document_evidence", "related_event_ids": [], "assessments": [],
+            })
     mode, limitations = "local_evidence_extraction", ["仅使用调用方提供的数据快照；未进行外部检索"]
     if model_config and model_config.get("planner"):
         ids, failure = _model_select(_text(question), events or [], model_config)

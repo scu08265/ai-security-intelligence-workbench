@@ -550,6 +550,15 @@ _NAMED_ENTITY = re.compile(r"\b[A-Z][A-Za-z0-9]{2,}\b")
 _ENTITY_STOPWORDS = {"the", "this", "that", "what", "paper", "papers", "arxiv"}
 
 
+def named_entities(text: str) -> set[str]:
+    """CamelCase / acronym tokens a question uses to name a specific thing."""
+    return {
+        token.casefold()
+        for token in _NAMED_ENTITY.findall(_text(text))
+        if token.casefold() not in _ENTITY_STOPWORDS
+    }
+
+
 def _title_answer(
     question: str, citations: Sequence[dict[str, Any]],
 ) -> tuple[str, list[dict[str, Any]]] | None:
@@ -562,11 +571,7 @@ def _title_answer(
     """
     if not _TITLE_INTENT.search(question):
         return None
-    entities = {
-        token.casefold()
-        for token in _NAMED_ENTITY.findall(question)
-        if token.casefold() not in _ENTITY_STOPWORDS
-    }
+    entities = named_entities(question)
     if not entities:
         return None
     for citation in citations:
@@ -615,6 +620,15 @@ def _answer_cites_evidence(answer: str, citations: Sequence[dict[str, Any]]) -> 
         if citation.get("chunk_id")
     }
     return any(identifier in answer for identifier in identifiers)
+
+
+_MODEL_REFUSAL = re.compile(r"(证据不足|无法回答|无法根据|没有足够)")
+
+
+def _looks_like_model_refusal(text: str) -> bool:
+    """Short refusal sentences are a deliberate answer, not a failed format."""
+    value = _text(text)
+    return bool(value) and len(value) <= 60 and bool(_MODEL_REFUSAL.search(value))
 
 
 def _extractive_answer(
@@ -776,6 +790,9 @@ def answer_with_rag(
 
     generator_used = False
     generator_error: str | None = None
+    generator_rejected: str | None = None
+    refused = False
+    refusal_reason: str | None = None
     title_answer = _title_answer(question, citations)
     if title_answer is not None:
         answer, claims = title_answer
@@ -787,16 +804,23 @@ def answer_with_rag(
         if generated and _answer_cites_evidence(generated, citations):
             answer, claims = generated, []
             generator_used = True
+        elif generated and _looks_like_model_refusal(generated):
+            # 模型判断证据不足时，"证据不足，无法回答" 本身就是比残缺片段更
+            # 诚实的答案。把它当成答案返回，而不是退回碎片。
+            answer, claims = generated, []
+            generator_used = True
+            refused, refusal_reason = True, "model_insufficient_evidence"
         else:
             if not generator_error and generated:
                 generator_error = "missing_citation"
+                generator_rejected = generated[:300]
             answer, claims = _local_answer()
     else:
         answer, claims = _local_answer()
     return {
         "answer": answer,
-        "refused": False,
-        "refusal_reason": None,
+        "refused": refused,
+        "refusal_reason": refusal_reason,
         "citations": citations,
         "claims": claims,
         "context_chunks": citations,
@@ -812,5 +836,6 @@ def answer_with_rag(
             "bibliographic_filtered": bibliographic_filtered,
             "generator_used": generator_used,
             "generator_error": generator_error,
+            "generator_rejected": generator_rejected,
         },
     }
