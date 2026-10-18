@@ -1,0 +1,549 @@
+{
+  "generated_at": "2026-10-18T15:54:32Z",
+  "candidate_file": "evaluation\\b_relation_candidates_20261010.json",
+  "snapshot_dir": "data\\snapshots\\nvd",
+  "rule": "只读本地 NVD 快照的 cpeMatch；product 对不上不硬套；只有 `*`、没有版本边界的继续 unknown；原 source_id 保留。",
+  "indexed_cves": 12918,
+  "total": 37,
+  "summary": {
+    "unknown": 18,
+    "resolved": 19
+  },
+  "summary_by_reason": {
+    "cpeMatch 只有 `*`，没有版本边界": 8,
+    "本地 NVD 快照里没有该 CVE 的 cpeMatch": 1,
+    "cpeMatch 的 product 与 package 对不上": 9
+  },
+  "rows": [
+    {
+      "relation_id": "BREL-VE-0001",
+      "cve": "CVE-2026-41106",
+      "package": "Microsoft 365 Copilot",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:965ac81937",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "365_copilot"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0002",
+      "cve": "CVE-2026-41109",
+      "package": "Visual Studio Code",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:be7311139e",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 1.119.1",
+      "cpe_product": "visual_studio_code",
+      "snapshot": "live:CVE-2026-41109",
+      "evidence": "cpeMatch < 1.119.1"
+    },
+    {
+      "relation_id": "BREL-VE-0003",
+      "cve": "CVE-2026-45499",
+      "package": "Azure Open AI",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:fc713234bc",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "azure_openai"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0004",
+      "cve": "CVE-2026-47282",
+      "package": "Visual Studio Code",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:f0c1bd7783",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 1.128.1",
+      "cpe_product": "visual_studio_code",
+      "snapshot": "live:CVE-2026-47282",
+      "evidence": "cpeMatch < 1.128.1"
+    },
+    {
+      "relation_id": "BREL-VE-0005",
+      "cve": "CVE-2026-48561",
+      "package": "Microsoft Edge Copilot for Android",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:db40986f3a",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "365_copilot"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0006",
+      "cve": "CVE-2026-48561",
+      "package": "Microsoft Edge Copilot for IOS",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:a42308afa7",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "365_copilot"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0007",
+      "cve": "CVE-2026-50510",
+      "package": "GitHub Copilot Plugin for JetBrains IDEs",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:d9bec3708c",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 1.13.0-251",
+      "cpe_product": "github_copilot",
+      "snapshot": "live:CVE-2026-50510",
+      "evidence": "cpeMatch < 1.13.0-251"
+    },
+    {
+      "relation_id": "BREL-VE-0008",
+      "cve": "CVE-2026-50517",
+      "package": "Microsoft 365 Copilot",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:5ac70d5d54",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "365_copilot"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0009",
+      "cve": "CVE-2026-55145",
+      "package": "Microsoft Copilot",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:cc090e2b24",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "本地 NVD 快照里没有该 CVE 的 cpeMatch"
+    },
+    {
+      "relation_id": "BREL-VE-0010",
+      "cve": "CVE-2026-56167",
+      "package": "Azure AI Search",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:bc19886686",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "azure_ai_search"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0011",
+      "cve": "CVE-2026-58617",
+      "package": "Microsoft 365 Copilot for iOS",
+      "ecosystem": "Microsoft",
+      "source_id": "msrc:a4811c223f",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 2.111.4",
+      "cpe_product": "365_copilot",
+      "snapshot": "live:CVE-2026-58617",
+      "evidence": "cpeMatch < 2.111.4"
+    },
+    {
+      "relation_id": "BREL-VE-0023",
+      "cve": "CVE-2026-64849",
+      "package": "MLflow",
+      "ecosystem": "MLflow",
+      "source_id": "kev:9dd6ba7cd5",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": ">= 3.3.0, < 3.15.0",
+      "cpe_product": "mlflow",
+      "snapshot": "ecc3cc0fd718366aff6faf3f772076c2d02f106325ca018c1879d503230517c1.json",
+      "evidence": "cpeMatch >= 3.3.0, < 3.15.0"
+    },
+    {
+      "relation_id": "BREL-VE-0024",
+      "cve": "CVE-2025-62593",
+      "package": "Ray",
+      "ecosystem": "Ray-Project",
+      "source_id": "kev:a820ca6fd8",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 2.52.0",
+      "cpe_product": "ray",
+      "snapshot": "b52346e7b07feb68a274e5d2e1e3400cc6bbeb066eb07999ef7b7b3037dcf997.json",
+      "evidence": "cpeMatch < 2.52.0"
+    },
+    {
+      "relation_id": "BREL-VE-0025",
+      "cve": "CVE-2026-9198",
+      "package": "Langflow",
+      "ecosystem": "IBM",
+      "source_id": "kev:60fb54585b",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": ">= 1.0.0, < 1.10.1",
+      "cpe_product": "langflow",
+      "snapshot": "live:CVE-2026-9198",
+      "evidence": "cpeMatch >= 1.0.0, < 1.10.1"
+    },
+    {
+      "relation_id": "BREL-VE-0026",
+      "cve": "CVE-2026-0770",
+      "package": "Langflow",
+      "ecosystem": "Langflow",
+      "source_id": "kev:e2836e1985",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "<= 1.7.3",
+      "cpe_product": "langflow",
+      "snapshot": "live:CVE-2026-0770",
+      "evidence": "cpeMatch <= 1.7.3"
+    },
+    {
+      "relation_id": "BREL-VE-0027",
+      "cve": "CVE-2026-55255",
+      "package": "Langflow",
+      "ecosystem": "Langflow",
+      "source_id": "kev:17bfdcf2bb",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 1.9.1",
+      "cpe_product": "langflow",
+      "snapshot": "68ae5fce6e25f99fb971860dd3c8ada7792e3320c85c64290210be9246fbb5cc.json",
+      "evidence": "cpeMatch < 1.9.1"
+    },
+    {
+      "relation_id": "BREL-VE-0028",
+      "cve": "CVE-2025-34291",
+      "package": "Langflow",
+      "ecosystem": "Langflow",
+      "source_id": "kev:0238e5afaa",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "<= 1.6.9",
+      "cpe_product": "langflow",
+      "snapshot": "f286c7b841e676037166ef1aae0f236198e0b7ac0aab241d3dd0922b5e302c86.json",
+      "evidence": "cpeMatch <= 1.6.9"
+    },
+    {
+      "relation_id": "BREL-VE-0029",
+      "cve": "CVE-2026-33017",
+      "package": "Langflow",
+      "ecosystem": "Langflow",
+      "source_id": "kev:cc774f968c",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 1.8.2",
+      "cpe_product": "langflow",
+      "snapshot": "live:CVE-2026-33017",
+      "evidence": "cpeMatch < 1.8.2"
+    },
+    {
+      "relation_id": "BREL-VE-0030",
+      "cve": "CVE-2025-68613",
+      "package": "n8n",
+      "ecosystem": "n8n",
+      "source_id": "kev:bcf2511640",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": ">= 0.211.0, < 1.120.4",
+      "cpe_product": "n8n",
+      "snapshot": "d49bbae150374d249f47e23cfa3f922fc106ccb2a0257ac39c7b8f626829fffa.json",
+      "evidence": "cpeMatch >= 0.211.0, < 1.120.4"
+    },
+    {
+      "relation_id": "BREL-VE-0033",
+      "cve": "CVE-2025-6558",
+      "package": "Chromium",
+      "ecosystem": "Google",
+      "source_id": "kev:e46fde0723",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "chrome",
+        "debian_linux",
+        "ipados",
+        "iphone_os",
+        "macos",
+        "safari"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0034",
+      "cve": "CVE-2025-3248",
+      "package": "Langflow",
+      "ecosystem": "Langflow",
+      "source_id": "kev:1eacce3542",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 1.3.0",
+      "cpe_product": "langflow",
+      "snapshot": "e62bf6587478a8f7fd1314707d53e137a4007799d30544b1b29b2681622f2ff1.json",
+      "evidence": "cpeMatch < 1.3.0"
+    },
+    {
+      "relation_id": "BREL-VE-0035",
+      "cve": "CVE-2024-4610",
+      "package": "Mali GPU Kernel Driver",
+      "ecosystem": "Arm",
+      "source_id": "kev:c293276891",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": ">= r34p0, < r41p0",
+      "cpe_product": "bifrost_gpu_kernel_driver",
+      "snapshot": "live:CVE-2024-4610",
+      "evidence": "cpeMatch >= r34p0, < r41p0"
+    },
+    {
+      "relation_id": "BREL-VE-0036",
+      "cve": "CVE-2024-29988",
+      "package": "SmartScreen Prompt",
+      "ecosystem": "Microsoft",
+      "source_id": "kev:88cb839535",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "windows_10_1809",
+        "windows_10_21h2",
+        "windows_10_22h2",
+        "windows_11_21h2",
+        "windows_11_22h2",
+        "windows_11_23h2"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0037",
+      "cve": "CVE-2023-4211",
+      "package": "Mali GPU Kernel Driver",
+      "ecosystem": "Arm",
+      "source_id": "kev:dc65c96f55",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": ">= r0p0, < r43p0; >= r12p0, <= r32p0; >= r19p0, < r43p0; >= r41p0, < r43p0",
+      "cpe_product": "5th_gen_gpu_architecture_kernel_driver",
+      "snapshot": "live:CVE-2023-4211",
+      "evidence": "cpeMatch >= r0p0, < r43p0"
+    },
+    {
+      "relation_id": "BREL-VE-0038",
+      "cve": "CVE-2021-29256",
+      "package": "Mali Graphics Processing Unit (GPU)",
+      "ecosystem": "Arm",
+      "source_id": "kev:f041cb213d",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "bifrost_gpu_kernel_driver",
+        "midgard_gpu_kernel_driver",
+        "valhall_gpu_kernel_driver"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0039",
+      "cve": "CVE-2021-27876",
+      "package": "Backup Exec Agent",
+      "ecosystem": "Veritas",
+      "source_id": "kev:cd73f65cd7",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 21.2",
+      "cpe_product": "backup_exec",
+      "snapshot": "live:CVE-2021-27876",
+      "evidence": "cpeMatch < 21.2"
+    },
+    {
+      "relation_id": "BREL-VE-0040",
+      "cve": "CVE-2021-27877",
+      "package": "Backup Exec Agent",
+      "ecosystem": "Veritas",
+      "source_id": "kev:71ac15a41b",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 21.2",
+      "cpe_product": "backup_exec",
+      "snapshot": "live:CVE-2021-27877",
+      "evidence": "cpeMatch < 21.2"
+    },
+    {
+      "relation_id": "BREL-VE-0041",
+      "cve": "CVE-2021-27878",
+      "package": "Backup Exec Agent",
+      "ecosystem": "Veritas",
+      "source_id": "kev:e2e8e74de1",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 21.2",
+      "cpe_product": "backup_exec",
+      "snapshot": "live:CVE-2021-27878",
+      "evidence": "cpeMatch < 21.2"
+    },
+    {
+      "relation_id": "BREL-VE-0042",
+      "cve": "CVE-2023-26083",
+      "package": "Mali Graphics Processing Unit (GPU)",
+      "ecosystem": "Arm",
+      "source_id": "kev:61e498deab",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "5th_gen_gpu_architecture_kernel_driver",
+        "bifrost_gpu_kernel_driver",
+        "midgard_gpu_kernel_driver",
+        "valhall_gpu_kernel_driver"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0043",
+      "cve": "CVE-2022-22706",
+      "package": "Mali Graphics Processing Unit (GPU)",
+      "ecosystem": "Arm",
+      "source_id": "kev:b644099a5f",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "bifrost_gpu_kernel_driver",
+        "midgard_gpu_kernel_driver",
+        "valhall_gpu_kernel_driver"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0044",
+      "cve": "CVE-2022-38181",
+      "package": "Mali Graphics Processing Unit (GPU)",
+      "ecosystem": "Arm",
+      "source_id": "kev:c4b140217d",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "bifrost_gpu_kernel_driver",
+        "midgard_gpu_kernel_driver",
+        "valhall_gpu_kernel_driver"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0045",
+      "cve": "CVE-2022-4135",
+      "package": "Chromium GPU",
+      "ecosystem": "Google",
+      "source_id": "kev:ae99c22581",
+      "before_range": "unknown",
+      "status": "resolved",
+      "range": "< 107.0.5304.150",
+      "cpe_product": "edge_chromium",
+      "snapshot": "live:CVE-2022-4135",
+      "evidence": "cpeMatch < 107.0.5304.150"
+    },
+    {
+      "relation_id": "BREL-VE-0046",
+      "cve": "CVE-2014-6332",
+      "package": "Windows",
+      "ecosystem": "Microsoft",
+      "source_id": "kev:6e45befc4a",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "windows_7",
+        "windows_8",
+        "windows_8.1",
+        "windows_rt",
+        "windows_rt_8.1",
+        "windows_server_2003"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0047",
+      "cve": "CVE-2014-4114",
+      "package": "Windows",
+      "ecosystem": "Microsoft",
+      "source_id": "kev:eaf4f137b1",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 只有 `*`，没有版本边界",
+      "cpe_products": [
+        "windows_7",
+        "windows_8",
+        "windows_8.1",
+        "windows_rt",
+        "windows_rt_8.1",
+        "windows_server_2008"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0048",
+      "cve": "CVE-2020-10987",
+      "package": "AC1900 Router AC15 Model",
+      "ecosystem": "Tenda",
+      "source_id": "kev:6058689232",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "ac15",
+        "ac15_firmware"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0049",
+      "cve": "CVE-2021-28663",
+      "package": "Mali Graphics Processing Unit (GPU)",
+      "ecosystem": "Arm",
+      "source_id": "kev:e970a840a0",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "bifrost_gpu_kernel_driver",
+        "midgard_gpu_kernel_driver",
+        "valhall_gpu_kernel_driver"
+      ]
+    },
+    {
+      "relation_id": "BREL-VE-0050",
+      "cve": "CVE-2021-28664",
+      "package": "Mali Graphics Processing Unit (GPU)",
+      "ecosystem": "Arm",
+      "source_id": "kev:64634e014d",
+      "before_range": "unknown",
+      "status": "unknown",
+      "range": null,
+      "missing": "cpeMatch 的 product 与 package 对不上",
+      "cpe_products": [
+        "bifrost_gpu_kernel_driver",
+        "midgard_gpu_kernel_driver",
+        "valhall_gpu_kernel_driver"
+      ]
+    }
+  ]
+}
