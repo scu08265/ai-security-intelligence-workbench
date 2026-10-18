@@ -29,9 +29,13 @@ def test_scorecard_surfaces_source_health_and_system_health():
 def test_closure_card_shows_the_composition_not_only_the_rate():
     """One percentage reads as "remediation is poor"; the breakdown shows how
     much of the denominator has not been picked up at all."""
-    assert '未开始处置' in SCRIPT
+    assert '已复测关闭' in SCRIPT
+    assert '已关闭合计（复测 + 接受风险）' in SCRIPT
     assert '已接受风险' in SCRIPT
-    assert 'disposal.status_breakdown' in SCRIPT
+    # The queue-composition rows were removed from the card on purpose: they
+    # duplicated each other and read as noise once the queue was cleared.
+    assert '未开始处置' not in SCRIPT
+    assert '从未登记处置' not in SCRIPT
 
 
 def test_closure_card_and_queue_make_the_low_rate_actionable():

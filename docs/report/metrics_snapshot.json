@@ -1,17 +1,17 @@
 {
   "snapshot_date": "2026-10-18",
-  "snapshot_time_local": "2026-10-18 12:46 中国标准时间",
+  "snapshot_time_local": "2026-10-18 13:18 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
     "size_bytes": 15097856,
-    "sha256": "db3bc7d833356d73b15d693a1ed48aa72092d153426c2827bb6594b4584e791b",
+    "sha256": "102d4cb6b5db7a4562fb02fac3cfeacf3bb573c2514507f61ac2e056057f13be",
     "counts": {
       "runs": 1339,
       "events": 705,
       "event_aliases": 233,
       "assets": 8,
       "assessments": 196,
-      "assessment_dispositions": 49,
+      "assessment_dispositions": 55,
       "rag_documents": 1,
       "rag_chunks": 849,
       "duplicate_candidates": 227
@@ -36,19 +36,19 @@
   },
   "disposition": {
     "high_priority_total": 55,
-    "high_priority_closed": 47,
-    "high_priority_verified": 3,
-    "high_priority_registered": 49,
-    "high_priority_unopened": 6,
-    "closure_rate": 0.8545,
-    "verified_rate": 0.0545,
-    "registered_closure_rate": 0.9592,
+    "high_priority_closed": 53,
+    "high_priority_verified": 9,
+    "high_priority_registered": 55,
+    "high_priority_unopened": 0,
+    "closure_rate": 0.9636,
+    "verified_rate": 0.1636,
+    "registered_closure_rate": 0.9636,
     "mean_time_to_close_hours": 0.0,
     "status_breakdown": {
-      "open": 6,
+      "open": 0,
       "in_progress": 1,
       "fixed": 1,
-      "verified": 3,
+      "verified": 9,
       "accepted": 44
     },
     "findings_total": 129

@@ -13,16 +13,16 @@
 
 <!-- snapshot:start 由 tools/refresh_metrics_snapshot.py 重写，不要手工改这一段 -->
 
-快照时间 **2026-10-18**（本机时区 2026-10-18 12:46 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
+快照时间 **2026-10-18**（本机时区 2026-10-18 13:18 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
 
 | 项 | 值 |
 | --- | --- |
 | 路径 | `data/intel.sqlite`（仓库内） |
 | 大小 | 15,097,856 字节 |
-| SHA-256 | `db3bc7d833356d73b15d693a1ed48aa72092d153426c2827bb6594b4584e791b` |
+| SHA-256 | `102d4cb6b5db7a4562fb02fac3cfeacf3bb573c2514507f61ac2e056057f13be` |
 | runs | 1339 |
 | events / event_aliases | 705 / 233 |
-| assets / assessments / assessment_dispositions | 8 / 196 / 49 |
+| assets / assessments / assessment_dispositions | 8 / 196 / 55 |
 | rag_documents / rag_chunks | 1 / 849 |
 | duplicate_candidates | 227 |
 
@@ -37,7 +37,7 @@
 | 赛题连续运行（7 天窗口） | 窗口内 6 天有定时运行，连续 6 天，`target_met = false`（累计 14 天；日界为 UTC 00:00 / 北京 08:00） |
 | 语料 | `events_loaded = 705` / `events_total = 705`，`truncated = false` |
 | 监测时效性（混合口径，附录） | 6 小时内 32.4%，12 小时内 47.6%，24 小时内 62.5%；p50 = 14.43 小时（336 个有效样本） |
-| 处置闭环 | 高优先级 55 / 已关闭 47（复测 3 / 接受风险 44）/ `closure_rate = 0.8545` / `verified_rate = 0.0545` / `findings_total = 129` |
+| 处置闭环 | 高优先级 55 / 已关闭 53（复测 9 / 接受风险 44）/ `closure_rate = 0.9636` / `verified_rate = 0.1636` / `findings_total = 129` |
 | 关系评测（当前批次口径） | P = 1.0，R = 0.734，F1 = 0.8466（TP 69 / FP 0 / FN 25） |
 | 富化样本量 | 705 个事件 |
 
