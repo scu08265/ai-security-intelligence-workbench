@@ -654,6 +654,27 @@ _LIST_INTENT = re.compile(
 _LOCATION_INTENT = re.compile(r"哪里|在哪里|在哪(?!些)|部署|位置|located|deployed|where", re.I)
 
 
+def _expand_query(question: str) -> str:
+    """Add the wording the source paper probably uses.
+
+    "奖励机制" never appears verbatim in an English paper; "reward" does.
+    "kernel-level" is written "kernel evidence" in the text.  Without these
+    synonyms BM25 ranks a results sentence above the definition sentence.
+    """
+    extra: list[str] = []
+    if re.search(r"奖励|回报", question):
+        extra.extend(["reward", "verifiable"])
+    if re.search(r"机制", question):
+        extra.append("mechanism")
+    # 只拆 "kernel-level" 这类构词；"multi-agent" 已经是一个整体术语，
+    # 拆开会把查询稀释掉（测试 test_mid_frequency_technical_terms 覆盖）。
+    for token in re.findall(r"([A-Za-z]{4,})-level\b", question):
+        extra.append(token)
+    if _LOCATION_INTENT.search(question):
+        extra.extend(["located", "deployed", "deployment", "location", "region"])
+    return question + (" " + " ".join(dict.fromkeys(extra)) if extra else "")
+
+
 def _listing_answer(
     question: str, citations: Sequence[dict[str, Any]],
 ) -> tuple[str, list[dict[str, Any]]] | None:
@@ -791,9 +812,7 @@ def answer_with_rag(
     focused_retrieval = bool(focused_chunks)
     # "部署在哪里"问的是地点，而原文写的是 "located in Frankfurt"。
     # 不补这几个词，BM25 会命中一堆同主题但没写地点的段落。
-    search_query = question
-    if _LOCATION_INTENT.search(question):
-        search_query = question + " located deployed deployment location region"
+    search_query = _expand_query(question)
     hits = retrieve_chunks(
         search_query,
         focused_chunks if focused_chunks else search_chunks,

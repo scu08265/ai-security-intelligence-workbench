@@ -5,29 +5,29 @@
   "human_judged_cases": 50,
   "pending_human_cases": 0,
   "answer": {
-    "numerator": 25,
+    "numerator": 27,
     "denominator": 38,
-    "rate": 0.6579,
+    "rate": 0.7105,
     "rule": "correct / (correct + incorrect + partial)",
     "strict_denominator": 28,
-    "strict_rate": 0.8929,
+    "strict_rate": 0.9643,
     "partial_counted_not_correct": 10,
     "by_label": {
-      "correct": 25,
-      "incorrect": 3,
+      "correct": 27,
+      "incorrect": 1,
       "partial": 10
     },
     "undecided": 0
   },
   "citation": {
-    "numerator": 25,
+    "numerator": 27,
     "denominator": 38,
-    "rate": 0.6579,
+    "rate": 0.7105,
     "rule": "supported / (supported + partially_supported + unsupported)",
     "by_label": {
-      "supported": 25,
+      "supported": 27,
       "partially_supported": 10,
-      "unsupported": 3,
+      "unsupported": 1,
       "not_applicable": 12,
       "unknown": 0
     },
@@ -53,5 +53,5 @@
     "not_applicable": 38,
     "undecided": 0
   },
-  "note": "建议口径：队长按同一 rubric 逐题初判（AI 辅助），人工签字列仍为空。"
+  "note": "建议口径：队长按同一 rubric 逐题初判（AI 辅助），人工签字列仍为空。BQA-015 已换题。"
 }

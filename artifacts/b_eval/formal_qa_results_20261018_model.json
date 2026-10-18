@@ -36,9 +36,9 @@
    "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
   },
   "term_hit": {
-   "ok": 20,
+   "ok": 25,
    "n": 38,
-   "rate": 0.5263,
+   "rate": 0.6579,
    "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
   },
   "refusal_accuracy": {
@@ -47,8 +47,8 @@
    "rate": 0.92
   },
   "citations": {
-   "total": 209,
-   "retrievable": 209,
+   "total": 205,
+   "retrievable": 205,
    "rate": 1.0
   },
   "answer_semantic_accuracy": {
@@ -89,11 +89,11 @@
  },
  "latency_ms": {
   "samples": 50,
-  "p50": 1785.6,
-  "p95": 2875.9,
-  "min": 507.5,
-  "max": 3227.8,
-  "mean": 1780.7
+  "p50": 1895.3,
+  "p95": 2906.6,
+  "min": 528.6,
+  "max": 3301.8,
+  "mean": 1852.8
  },
  "by_category": {
   "中英文混合查询": {
@@ -119,11 +119,11 @@
    "document_hit_n": 9,
    "document_hit_ok": 9,
    "term_hit_n": 10,
-   "term_hit_ok": 3,
+   "term_hit_ok": 6,
    "refusal_n": 10,
    "refusal_ok": 10,
    "document_hit_rate": 1.0,
-   "term_hit_rate": 0.3,
+   "term_hit_rate": 0.6,
    "refusal_accuracy": 1.0
   },
   "多轮追问": {
@@ -179,11 +179,11 @@
    "document_hit_n": 8,
    "document_hit_ok": 8,
    "term_hit_n": 8,
-   "term_hit_ok": 2,
+   "term_hit_ok": 4,
    "refusal_n": 8,
    "refusal_ok": 8,
    "document_hit_rate": 1.0,
-   "term_hit_rate": 0.25,
+   "term_hit_rate": 0.5,
    "refusal_accuracy": 1.0
   },
   "真实多跳问答": {
@@ -287,7 +287,7 @@
    "citations_retrievable": 5,
    "answer_head": "《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》。",
    "answer_full": "《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》。",
-   "latency_ms": 1210.9,
+   "latency_ms": 991.9,
    "timeout": false
   },
   {
@@ -358,9 +358,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展真实世界攻击的被动测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f",
-   "answer_full": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展真实世界攻击的被动测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f3c7751a3ffa30b7ce][chunk-b64f03dfbfeb5c0b6ef222a4]。",
-   "latency_ms": 2115.1,
+   "answer_head": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，并设计部署了一个专门模仿 LLM API 的蜜罐来开展被动互联网测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f3c775",
+   "answer_full": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，并设计部署了一个专门模仿 LLM API 的蜜罐来开展被动互联网测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f3c7751a3ffa30b7ce][chunk-b64f03dfbfeb5c0b6ef222a4]。",
+   "latency_ms": 2458.2,
    "timeout": false
   },
   {
@@ -429,11 +429,11 @@
     "Codetta",
     "collusion"
    ],
-   "term_hit": false,
+   "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（隐蔽通信）问题，并提出了一种面向独立部署智能体、在现实非对称设置下的高容量隐写协议 CODETTA [chunk-292b9c3eb0203f0aa1f5ba2e]。该协议结合了用于估计通信信道的共享公开模型、保持发送方输出分布的采样机制以及高容量的自适应纠错码 [chunk-292b9c3eb0203f0aa1f5ba2e]",
-   "answer_full": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（隐蔽通信）问题，并提出了一种面向独立部署智能体、在现实非对称设置下的高容量隐写协议 CODETTA [chunk-292b9c3eb0203f0aa1f5ba2e]。该协议结合了用于估计通信信道的共享公开模型、保持发送方输出分布的采样机制以及高容量的自适应纠错码 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
-   "latency_ms": 1904.0,
+   "answer_head": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出了一种面向独立部署智能体、在现实非对称设置下的高容量隐写协议 CODETTA [chunk-292b9c3eb0203f0aa1f5ba2e]。该协议结合共享公共模型估计通信信道、保持发送方输出分布的采样机制以及自适应纠错码来实现高容量 [chunk-292b9c3eb0203f0aa1f5ba",
+   "answer_full": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出了一种面向独立部署智能体、在现实非对称设置下的高容量隐写协议 CODETTA [chunk-292b9c3eb0203f0aa1f5ba2e]。该协议结合共享公共模型估计通信信道、保持发送方输出分布的采样机制以及自适应纠错码来实现高容量 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
+   "latency_ms": 3301.8,
    "timeout": false
   },
   {
@@ -501,11 +501,11 @@
     "SAGE",
     "Topological"
    ],
-   "term_hit": false,
+   "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该结论仅依据论文摘要与引言中声明的贡献范围，未涉及方法的具体实现细节 [chunk-4b72fc8fa621782e6f526842]。",
-   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该结论仅依据论文摘要与引言中声明的贡献范围，未涉及方法的具体实现细节 [chunk-4b72fc8fa621782e6f526842]。",
-   "latency_ms": 2257.0,
+   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为论文标题的一部分出现，即“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
+   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为论文标题的一部分出现，即“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
+   "latency_ms": 2431.6,
    "timeout": false
   },
   {
@@ -519,7 +519,7 @@
    "refused": false,
    "refusal_correct": true,
    "related_event_ids": [],
-   "document_citation_count": 4,
+   "document_citation_count": 5,
    "cited_document_keys": [
     "paper:2609.29230"
    ],
@@ -528,20 +528,12 @@
    ],
    "citations_detail": [
     {
-     "chunk_id": "chunk-02feaa66f1ec1de5d612aabb",
+     "chunk_id": "chunk-6c2e3cbd66d3c47b89bb1a9a",
      "document_id": "doc-48a72f8adbac64ce9e259e14",
      "document_key": "paper:2609.29230",
-     "char_start": 34345,
-     "char_end": 35341,
-     "quote": "Zhai, Jihan Yang, Sheng-\nAdditionally, we primarily assessed error cat- bang Tong, Saining Xie, Dale Schuurmans, Quoc V\negories that captures surface-level extraction Le, Sergey Levine, and Yi Ma. 2025. Sft mem-\nanomaly and does not fully model complex phe- orizes, rl generalizes: A comparative study of\nfoundation model post-training.arXiv preprint\nnomena such as coreference. Incorporating coref- arXiv:2501.17161.\nerence modeling may help address cross-sentence Jun Gao, Huan Zhao, Wei Wang, Changlong Yu, and\narguments and nested event structures that remain Ruifeng Xu. 2024. Eventrl: Enhancing event ex-\nchallenging for generative EE systems. traction with outcome supervision for large language\nWhile the proposed framework improves event ex- models.arXiv preprint arXiv:2402.11430.\ntraction performance, balancing precision and re- Jun Gao, Huan Zhao, Changlong Yu, and Ruifeng Xu.\ncall remains challenging. Investigating curriculum- 2023. Exploring the feasibility of chatgpt for event\n"
-    },
-    {
-     "chunk_id": "chunk-2159d09ae638094b2ef02ca6",
-     "document_id": "doc-48a72f8adbac64ce9e259e14",
-     "document_key": "paper:2609.29230",
-     "char_start": 22467,
-     "char_end": 23444,
-     "quote": "6 +5.15\nTable 2: Mean F1 results for end-to-end event extraction on the test split of the seven benchmark datasets.Avg.\ndenotes the average F1 performance across datasets and EE subtasks. Best results are shown in bold. Green values\nindicate absolute improvement over the strongest prior baseline.† denotes literature methods we re-implemented.\nTable 3: Ablation study on the contribution of each pro- Table 4: Impact of augmenting event schemes with\nposed individual reward to the global end-to-end event annotation guidelines.\nextraction performance. Blue shading denotes improve-\nment relative to the baseline configurationREE +R FMT,\nwhile amber shading denotes degradation. Darker shad-\ning indicates larger absolute change. Bold indicates the\nbest score per dataset. This color scheme logic applies\nto the subsequent tables.\n5 Results and Discussion\n5.1 Performance Analysis\nAs shown in Table2, despite their strong gen-\neral reasoning capabilities, frontier models such\n"
+     "char_start": 31979,
+     "char_end": 32917,
+     "quote": " choices for triggers structural quality is not a primary bottleneck.\nand arguments respectively, yet their combination\nin the full reward yields the best gains validating 6 Conclusion\nthe proposed reward framework. Figure5reveals We presented EAGER, a RL framework for end-\ncomplementary reward learning dynamics: Rfmt to-end event extraction that combines task-aligned\nconverges rapidly whileRgrd,Rcov, andRspan ex- verifiable rewards with SCAE. By decomposing\nhibit gradual improvements throughout training. reward supervision into complementary extrac-\nThis asymmetry suggests that structural validity is tion objectives and introducing schema-contrastive\na prerequisite condition that is quickly satisfied, af- grouping to mitigate reward variance collapse, our\nter which the model shifts its optimization toward approach provides more informative optimization\nsemantic precision. signals for structured extraction tasks. Experimen-\n"
     },
     {
      "chunk_id": "chunk-683fcc4bca0226f943bba4af",
@@ -552,12 +544,28 @@
      "quote": "1.02\nGenia13 +R span 44.60 39.23 20.41 18.29 12.07 11.02 Sainz et al.,2024).\n+R ovr 40.80 36.55 17.99 16.25 11.10 10.16\n+R grd 41.90 37.10 18.41 16.60 10.88 9.98\n+R cov 44.13 39.44 20.44 18.59 11.82 10.90 5.2 Ablation Study\nAll 46.55 34.74 18.60 16.34 12.87 11.44\nREE +R fmt 43.33 30.52 18.09 15.99 11.54 10.23 We organize our ablation evaluation around the\nMLEE +R span 42.60 29.27 18.22 16.15 11.71 10.46\n+R ovr 39.02 29.39 14.56 12.92 10.52 9.54 following research questions.\n+R grd 41.78 29.68 14.93 13.70 10.38 9.62\n+R cov 42.69 29.68 18.58 16.23 11.78 10.25\nAll 67.43 64.53 41.21 37.91 33.90 31.56 RQ1: How can EE task-specific reward signals\nREE +R fmt 56.26 50.24 24.25 17.65 19.03 13.91 be effectively leveraged for RL ? While veri-\nM2E2 +R span 58.09 53.50 29.25 23.19 22.99 18.54\n+R ovr 62.35 58.71 34.45 29.18 27.26 23.27 fiable reward functions provide task-specific su-\n+R grd 60.82 56.77 31.27 26.09 24.53 20.82\n"
     },
     {
-     "chunk_id": "chunk-c3d5ff75546309b55d070fb0",
+     "chunk_id": "chunk-4fef66f74b75d70611829266",
      "document_id": "doc-48a72f8adbac64ce9e259e14",
      "document_key": "paper:2609.29230",
-     "char_start": 24642,
-     "char_end": 25604,
-     "quote": "Table 5: Detailed results of event trigger and argument\nperformance including TI, TC, AI, AC, AI+, and AC+.\nBold indicates the best score within each dataset. Im-\nprovement/Degradations are highlighted relative to the\nbaseline configurationR EE +R fmt.\nDataset Method TI TC AI AC AI+ AC+\nAll 38.92 30.83 17.28 14.51 14.32 12.01\nREE +R fmt 39.53 32.37 15.33 12.28 11.73 9.47\nWikiEvents +R span 39.88 35.31 16.96 14.10 12.17 10.37\n+R ovr 39.22 35.37 18.22 16.12 15.25 14.05\n+R grd 38.74 34.12 17.92 15.89 14.66 13.09\n+R cov 41.53 34.65 15.83 13.52 12.20 10.52\nAll 69.35 68.74 68.65 60.47 50.31 44.67\nREE +R fmt 67.92 66.80 62.40 46.17 45.03 33.65 Figure 4: Training rewards dynamics.\nPHEE +R span 67.89 66.87 67.07 60.32 48.38 43.29\n+R ovr 67.62 66.60 65.97 59.50 47.32 42.60 Table 6: Ablation study on the contribution of SCAE.\n+R grd 68.29 67.28 64.07 58.24 46.40 42.15\n+R cov 67.89 66.77 67.07 57.12 48.19 41.02 Improvement/Degradations are highlighted relative"
+     "char_start": 28905,
+     "char_end": 29430,
+     "quote": "tion tasks, informative re-\nEAGERreduces average F1 from 30.79 to 22.61 ward modeling must be coupled with optimization\nand GoLLIE-7B from 16.35 to 5.81 which is con- strategies that preserve reward diversity.\nsistent with the hypothesis that annotation guide-\nSetting Wiki PHEE CASIE G11 G13 MLEE M2E2 Avg\nEAGER 21.31 60.3614.6626.3223.3923.42 46.09 30.79\nw/oSCAE 13.98 50.69 8.67 15.72 15.24 12.22 41.24 22.54\nEAGERREE+R FMT 20.12 53.6615.7026.1124.1021.62 30.22 27.36\nw/oSCAE 15.49 52.32 9.03 16.44 16.52 11.67 43.46 23.56"
+    },
+    {
+     "chunk_id": "chunk-2159d09ae638094b2ef02ca6",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 22467,
+     "char_end": 23444,
+     "quote": "6 +5.15\nTable 2: Mean F1 results for end-to-end event extraction on the test split of the seven benchmark datasets.Avg.\ndenotes the average F1 performance across datasets and EE subtasks. Best results are shown in bold. Green values\nindicate absolute improvement over the strongest prior baseline.† denotes literature methods we re-implemented.\nTable 3: Ablation study on the contribution of each pro- Table 4: Impact of augmenting event schemes with\nposed individual reward to the global end-to-end event annotation guidelines.\nextraction performance. Blue shading denotes improve-\nment relative to the baseline configurationREE +R FMT,\nwhile amber shading denotes degradation. Darker shad-\ning indicates larger absolute change. Bold indicates the\nbest score per dataset. This color scheme logic applies\nto the subsequent tables.\n5 Results and Discussion\n5.1 Performance Analysis\nAs shown in Table2, despite their strong gen-\neral reasoning capabilities, frontier models such\n"
+    },
+    {
+     "chunk_id": "chunk-d2c0a9d2422e8b2275e69944",
+     "document_id": "doc-48a72f8adbac64ce9e259e14",
+     "document_key": "paper:2609.29230",
+     "char_start": 59497,
+     "char_end": 59957,
+     "quote": "J Training Dynamics Analysis\nTable 9: Computational cost of EAGER training on 4\nNVIDIA H100 GPUs. Wall time is reported for the full\ntrain dataset, which includes the seven dataset training\nsets.\nimportance of complementing reward monitoring\nFigure 8: Analysis of the main metrics for monitoring with validation-set evaluation to detect potential\nour RL training dynamics including the mean comple- overfitting.\ntion length, the mean reward score, and generati"
     }
    ],
    "document_hit": true,
@@ -565,11 +573,11 @@
     "EAGER",
     "Verifiable Rewards"
    ],
-   "term_hit": false,
-   "citations_retrievable": 4,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1772.1,
+   "term_hit": true,
+   "citations_retrievable": 5,
+   "answer_head": "EAGER 使用一个强化学习框架，将任务对齐的可验证奖励（verifiable rewards）与 SCAE 结合，并把奖励监督分解为互补的抽取目标 [chunk-6c2e3cbd66d3c47b89bb1a9a]。该框架包含 R_fmt、R_grd、R_cov、R_span 等互补奖励项，且各项组合在完整奖励中取得最佳增益 [chunk-6c2e3cbd66d3c47b89bb1a9a]。",
+   "answer_full": "EAGER 使用一个强化学习框架，将任务对齐的可验证奖励（verifiable rewards）与 SCAE 结合，并把奖励监督分解为互补的抽取目标 [chunk-6c2e3cbd66d3c47b89bb1a9a]。该框架包含 R_fmt、R_grd、R_cov、R_span 等互补奖励项，且各项组合在完整奖励中取得最佳增益 [chunk-6c2e3cbd66d3c47b89bb1a9a]。",
+   "latency_ms": 2364.2,
    "timeout": false
   },
   {
@@ -639,9 +647,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "NeRD 论文的应用领域是医学图像诊断，具体在实验中使用了两个皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。需要说明的是，证据中只提到皮肤图像数据集，未涉及其他医学领域 [chunk-7b3ba17746f32905b1b37285]。",
-   "answer_full": "NeRD 论文的应用领域是医学图像诊断，具体在实验中使用了两个皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。需要说明的是，证据中只提到皮肤图像数据集，未涉及其他医学领域 [chunk-7b3ba17746f32905b1b37285]。",
-   "latency_ms": 1693.1,
+   "answer_head": "NeRD 论文的应用领域是医学图像诊断，具体在两个皮肤图像数据集上进行了实验 [chunk-7b3ba17746f32905b1b37285]。其框架面向医学图像诊断中的本体论接地的思维链推理 [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "answer_full": "NeRD 论文的应用领域是医学图像诊断，具体在两个皮肤图像数据集上进行了实验 [chunk-7b3ba17746f32905b1b37285]。其框架面向医学图像诊断中的本体论接地的思维链推理 [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "latency_ms": 3069.6,
    "timeout": false
   },
   {
@@ -711,9 +719,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离执行 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
-   "answer_full": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离执行 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
-   "latency_ms": 2208.5,
+   "answer_head": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发出不可屏蔽的 SIGKILL 以隔离该进程组 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
+   "answer_full": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发出不可屏蔽的 SIGKILL 以隔离该进程组 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
+   "latency_ms": 2195.2,
    "timeout": false
   },
   {
@@ -741,7 +749,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 1539.8,
+   "latency_ms": 1706.5,
    "timeout": false
   },
   {
@@ -805,7 +813,7 @@
    "citations_retrievable": 4,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1683.5,
+   "latency_ms": 2149.3,
    "timeout": false
   },
   {
@@ -874,9 +882,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布且决策初始正确的系统，并用 TFR 衡量有界优化器发现保持答案不变的上下文从而重定向固定分支的频率 [chunk-1934b1e31f",
-   "answer_full": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布且决策初始正确的系统，并用 TFR 衡量有界优化器发现保持答案不变的上下文从而重定向固定分支的频率 [chunk-1934b1e31fc0d9c70d011fdb]。",
-   "latency_ms": 2084.3,
+   "answer_head": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布、且以初始正确决策为分析条件的系统，用 TFR 衡量有界优化器发现保持答案不变的上下文从而重定向固定分支的频率 ",
+   "answer_full": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布、且以初始正确决策为分析条件的系统，用 TFR 衡量有界优化器发现保持答案不变的上下文从而重定向固定分支的频率 [chunk-1934b1e31fc0d9c70d011fdb]。",
+   "latency_ms": 2229.3,
    "timeout": false
   },
   {
@@ -955,9 +963,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 6,
-   "answer_head": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。提示词注入漏洞存在于模型处理提示词的方式中，输入可能迫使模型错误地将提示词数据传递给模型的其他部分，从而可能导致违反准则、生成有害内容、启用未授权访问或影响关键决策 [chunk-7061149ba14708176205f246]。",
-   "answer_full": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。提示词注入漏洞存在于模型处理提示词的方式中，输入可能迫使模型错误地将提示词数据传递给模型的其他部分，从而可能导致违反准则、生成有害内容、启用未授权访问或影响关键决策 [chunk-7061149ba14708176205f246]。",
-   "latency_ms": 1481.5,
+   "answer_head": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。需要限定的是，提示词注入漏洞源于模型处理提示的方式以及输入可能迫使模型错误地将提示数据传递给模型其他部分 [chunk-7061149ba14708176205f246]。",
+   "answer_full": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。需要限定的是，提示词注入漏洞源于模型处理提示的方式以及输入可能迫使模型错误地将提示数据传递给模型其他部分 [chunk-7061149ba14708176205f246]。",
+   "latency_ms": 1909.5,
    "timeout": false
   },
   {
@@ -1027,8 +1035,8 @@
    "term_hit": true,
    "citations_retrievable": 5,
    "answer_head": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分",
-   "answer_full": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分（训练/验证/测试为 413/203/395）[chunk-67f8da8439e4a735fa12d084]。",
-   "latency_ms": 2436.1,
+   "answer_full": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分 413/203/395 作为训练/验证/测试集 [chunk-67f8da8439e4a735fa12d084]。",
+   "latency_ms": 2354.9,
    "timeout": false
   },
   {
@@ -1051,12 +1059,12 @@
    ],
    "citations_detail": [
     {
-     "chunk_id": "chunk-dce559be9fb9fbb750a526c5",
+     "chunk_id": "chunk-ba60b3d5b67adbd66a08575f",
      "document_id": "doc-8398b079e055c4456a001bee",
      "document_key": "paper:2609.28915",
-     "char_start": 55734,
-     "char_end": 55866,
-     "quote": " . . . . . . . . . . . . . . . 26\nE.9 Safety perimeter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27\n15"
+     "char_start": 160573,
+     "char_end": 160892,
+     "quote": " SLM exceptions, the winning\nsingle-view AUROC (0.901–0.922) still exceeds the XGBoost Cross-View OOD baseline of0.850,\nso the SLM Kernel-only preference is a within-family optimality result rather than evidence against\nCross-View. Every OOD-winning cell in Table 8 still consumes kernel signal (Cross or Kernel), so\n43"
     },
     {
      "chunk_id": "chunk-0997bd3a5ea6eec03f8ff185",
@@ -1067,12 +1075,12 @@
      "quote": "Appendix K.4 examines these cases.\nKernel evidence generalizes across attack and detector families.Under the seven-fold\nOWASP-aligned evaluation, all four detector families reach OOD AUROC above0.80using ker-\nnel evidence: XGBoost Cross-View achieves0.850, TabPFN Cross-View0.874, frozen Qwen3-80B\n7"
     },
     {
-     "chunk_id": "chunk-834172ea6722a03c4a60627e",
+     "chunk_id": "chunk-5a22f40f582e6e6095750758",
      "document_id": "doc-8398b079e055c4456a001bee",
      "document_key": "paper:2609.28915",
-     "char_start": 0,
-     "char_end": 996,
-     "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University of Georgia 2Amazon Web Services\nsdk81722@uga.edu\n{zhazhilu,mikuzne,lzekuan,baris,dingwe}@amazon.com\nABSTRACT\nLLM agents are deployed into infrastructure that grants them broad host authority,\nyet existing agent-security benchmarks and defenses operate almost exclusively\nat the application telemetry layer: the served tool manifest, the user prompt, and\nthe model’s messages. Some threats, however, smuggle malicious instructions\nand actions past the application boundary, leaving them invisible to that layer.\nIn this work, we bridge that gap by pairing application-level agent telemetry\nwith kernel-level syscall traces to present the first paired-evidence characteriza-\ntion of kernel-level versus application-layer signal for agent security. To quantify\nthe value of the enhanced telemetry, we introduce Agent Cross-Layer Evidence\n"
+     "char_start": 27568,
+     "char_end": 28480,
+     "quote": "-3.1-8B at0.922, consumes only the Kernel-View. Kernel evidence is\ndiscriminative without any application-layer signal.\nCross-View generally improves detection.Combining application and kernel evidence achieves\nthe highest AUROC for all 10 detectors in-distribution and seven of 10 under OOD. For boosted-\ntree detectors, Cross-View improves OOD AUROC over the best individual view by 10.7 percentage\npoints for AdaBoost (0.733→0.840) and 10.1 percentage points for XGBoost (0.750→0.850).\nPaired cluster-bootstrap comparisons further show that Cross-View exceeds App-View for all 10\ndetectors, with each pointwise 95% interval for the AUROC difference above zero (Appendix H.4).\nThe remaining three detectors, Qwen3-32B, Qwen2.5-3B, and Llama-3.1-8B, perform best with\nKernel-View under OOD. Appendix K.4 examines these cases.\nKernel evidence generalizes across attack and detector families.Under the seven-fold\n"
     },
     {
      "chunk_id": "chunk-69112a1b870e891965540a5a",
@@ -1083,20 +1091,20 @@
      "quote": ", deep-tabular, frozen LLM, and fine-tuned SLM configurations evalu-\nated on ACE (Table 8) under same-fold conditioning. ACE-XA answers whether the paper’s findings\n— kernel evidence is discriminative and Cross-View composition transfers across detector families\n— extend beyondclaude-haiku-4-5running inside the Claude Code CLI.\n48"
     },
     {
-     "chunk_id": "chunk-ba60b3d5b67adbd66a08575f",
+     "chunk_id": "chunk-e6df384e6da609a66cca11c3",
      "document_id": "doc-8398b079e055c4456a001bee",
      "document_key": "paper:2609.28915",
-     "char_start": 160573,
-     "char_end": 160892,
-     "quote": " SLM exceptions, the winning\nsingle-view AUROC (0.901–0.922) still exceeds the XGBoost Cross-View OOD baseline of0.850,\nso the SLM Kernel-only preference is a within-family optimality result rather than evidence against\nCross-View. Every OOD-winning cell in Table 8 still consumes kernel signal (Cross or Kernel), so\n43"
+     "char_start": 26746,
+     "char_end": 27688,
+     "quote": "t rules that fire. Falco\nreads syscalls only, so it contributes a Kernel-View score with no App-View or Cross-View. Ap-\npendix F summarizes each family’s input representation and classical model configurations. Hyper-\nparameters, prompt protocols, ported rules, and sweep grids are in Appendices I–K and L.2.\n3.5 RESULTS\nFigure 2 reports every detector family side-by-side, with three bars per detector showing the App-\n, Kernel-, and Cross-Views in each regime. Per-view AUROC cells with SEs are in Table 8 in\nAppendix H.\nKernel evidence is discriminative. On the Kernel-View alone, every non-linear detector reaches\nOOD AUROC well above chance: classical XGBoost0.750and AdaBoost0.733, every LLM judge\nin[0.725,0.775], and every fine-tuned SLM above0.88. The paper’s strongest OOD result over-\nall, LoRA-fine-tuned Llama-3.1-8B at0.922, consumes only the Kernel-View. Kernel evidence is\ndiscriminative without any application-layer signal.\n"
     },
     {
-     "chunk_id": "chunk-ef41a7399c4f1c94e4e6d947",
+     "chunk_id": "chunk-25a7b6f043d8d3131389d032",
      "document_id": "doc-8398b079e055c4456a001bee",
      "document_key": "paper:2609.28915",
-     "char_start": 6288,
-     "char_end": 7259,
-     "quote": "etector-family comparison\nover kernel and application evidence be evaluated on a common substrate. As a result, whether\nthe Kernel-View carries discriminative signal on agent-shaped attacks, and whether the Cross-View\nbeats either single-layer view alone, has not been systematically measured. Appendix A situates\nACE against the full landscape of agent-attack catalogs, intent-layer defenses, and host intrusion-\ndetection corpora.\nContributions.This paper provides the first paired-evidence characterization of kernel-level ver-\nsus application-layer signal for agent security. Figure 1 summarizes the capture→evidence→\ndetection flow that we measure end-to-end. We make three contributions.\n1.The ACE corpus.The first paired-session corpus that jointly captures kernel-side syscall traces,\nservedtools/listmanifests, and agent transcripts across 4,047 sessions and 17 threat mod-\nels spanning six delivery-vector families and 14 of the 25 OWASP LLM and agentic threat\n"
+     "char_start": 112668,
+     "char_end": 112948,
+     "quote": "mn of\nTable 2 lists the qualifying views in descending AUROC order, using unrounded scores (em-dash if\nno view clearsα). For example, Preference’s Kernel mean is0.70068, clearing0.70but remaining\nbelow the0.75threshold. Label sensitivity acrossα∈{0.70,0.75,0.80}is in Table 10.\n30"
     }
    ],
    "document_hit": true,
@@ -1107,7 +1115,7 @@
    "citations_retrievable": 6,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1914.3,
+   "latency_ms": 1895.3,
    "timeout": false
   },
   {
@@ -1179,23 +1187,22 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-1656e6198f3d4eb7310cce90]\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-86f5cd3318bf",
    "answer_full": "命中的文档：\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-1656e6198f3d4eb7310cce90]\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-86f5cd3318bfb7da386309bd]",
-   "latency_ms": 1172.8,
+   "latency_ms": 1384.5,
    "timeout": false
   },
   {
    "question_id": "BQA-015",
    "category": "术语及语义查询",
    "difficulty": "medium",
-   "question": "AUROC 是什么指标？",
+   "question": "AURC 是什么指标？",
    "should_refuse": false,
    "candidate_only": false,
    "error": null,
    "refused": false,
    "refusal_correct": true,
    "related_event_ids": [],
-   "document_citation_count": 5,
+   "document_citation_count": 1,
    "cited_document_keys": [
-    "paper:2609.28915",
     "paper:2609.29429"
    ],
    "expected_document_keys": [
@@ -1203,55 +1210,23 @@
    ],
    "citations_detail": [
     {
-     "chunk_id": "chunk-2c548b7cb0cbd3d90614329e",
+     "chunk_id": "chunk-85804be6f2a0f34e5092eff4",
      "document_id": "doc-38443598019e64691b4f66e4",
      "document_key": "paper:2609.29429",
-     "char_start": 186074,
-     "char_end": 187052,
-     "quote": "ark baselines on the 38 usable benchmarks.Jev columns: generic NOUL\nAUROC and the targeted question selected split-half. TF-IDF LR: out-of-fold AUROC (SD over 3\nrepeats) and F1 at 0.5. Length: AUROC with the sign chosen out of sample. “–”: no generic NOUL\n(MACHIAVELLI-style benchmarks and the text-only uncertainty states).\nJev AUROC TF-IDF LR Length All-pos.\nBenchmark Generic Targeted SH AUROC F1 AUROC F1\nSycophancy\nELEPHANT (AITA) 0.957 1.000 0.748±0.0340.727 0.515 0.689\nSycophancyEval (answer) 0.540 0.514 0.764±0.0120.914 0.451 0.901\nSycophancyEval (feedback) 0.726 0.784 0.608±0.0160.138 0.547 0.243\nJailbreaks\nHarmBench 0.965 0.963 0.899±0.0050.814 0.908 0.507\nJailbreakBench (PAIR) 0.963 0.938 0.884±0.0120.711 0.848 0.380\nStrongREJECT 0.993 0.980 0.971±0.0030.857 0.946 0.561\nDeception\nDeceptionBench 0.926 0.928 0.902±0.0020.817 0.582 0.664\nMASK (continuation) 0.946 0.913 0.632±0.0230.630 0.530 0.677\nMASK (disinformation) 0.993 0.997 0.835±0.0310.602 0.669 0.478\n"
-    },
-    {
-     "chunk_id": "chunk-44cd582860c79d6783e5fbed",
-     "document_id": "doc-38443598019e64691b4f66e4",
-     "document_key": "paper:2609.29429",
-     "char_start": 128975,
-     "char_end": 129927,
-     "quote": "The AUROC advantage does\nnot come from resolution. The scorer takes only 9 distinct values. Breaking its ties at random\ngives a mean AUROC of 0.929 (0.916–0.945 over 200 draws) and a difference of+0.042[+0.016,\n+0.070]. Coarsening Jev to the same resolution, nine quantile levels of its generic NOULwith ties\nalso broken at random, lowers its AUROC from 0.971 to 0.962 (0.958–0.965 over 200 draws), and it\nstill ranks better than the scorer by+0.033[+0.006,+0.062] (resampling forbidden prompts with\na fresh tie-break per replicate,+0.032[+0.010,+0.057] with midrank ties).\nTable 20:StrongREJECT agreement with the median of five human labelers and with the reference\nscorer (n= 1,360,t= 0.5).The first Jev row is pre-specified, and AUROC uses each rater’s continuous\nscore.†Selected as the best of six Jev questions on these human labels (in-sample). Table 21 gives its out-of-\nsample value.\nRater vs. human: acc. /κ/ AUROC vs. scorer: acc. /κ/ AUROC\n"
-    },
-    {
-     "chunk_id": "chunk-20a31f7b632b76ef56327c75",
-     "document_id": "doc-8398b079e055c4456a001bee",
-     "document_key": "paper:2609.28915",
-     "char_start": 140666,
-     "char_end": 141593,
-     "quote": "Preprint\nTable 18:Kernel-View representation ablation on ACE.Pooled ACE-full AUROC under\nOWASP-groundedK=0on the paper’s canonical AUROC cohort (§3.1;n=3,651after dropping\n396signal-bearing latent sessions). Winner per row in bold. R1 is the paper’s canonical Kernel-\nView rendering; R2/R3/R4 are three alternative renderings that consume the same underlying strace\nevent stream. Oversize and parse-fail rows are excluded from AUROC.\nR1 R2 R3 R4\nModel (bounded summary) (dedup verbatim) (family tokenized) (chronological verbatim)\nQwen3-235B0.731 0.541 0.671 0.599\nQwen3-80B 0.598 0.628 0.575 0.563\nQwen3-32B0.679 0.606 0.508 0.587\nmean 0.669 0.592 0.585 0.583\nmean AUROC, with model-dependent effects — negative for Qwen3-235B (−0.072) and Qwen3-\n80B (−0.012), with Qwen3-235B retaining0.671of its0.731R1 AUROC under full identifier\nremoval. Because R1 has the highest mean across the three Qwen judges, the LLM and SLM judge\n"
-    },
-    {
-     "chunk_id": "chunk-ddc8ff128228b8a2c57cf5cb",
-     "document_id": "doc-38443598019e64691b4f66e4",
-     "document_key": "paper:2609.29429",
-     "char_start": 112024,
-     "char_end": 112951,
-     "quote": "Under review as a conference paper at ICLR 2027\nFigure 5:Reference gain against baseline AUROC.Pairs with lower AUROC before the reference gain more\nwhen it is added (Spearmanρ=−0.555,p= 0.011). Each dot is one reference pair evaluated with the generic\nNOULquestion (n=20), colored by failure type as in Figure 1.x: AUROC without the reference.y: paired\nchange after adding it. Dashed: no change.\nLong trajectories hurt only without the reference.Splitting each file at its median state length,\nAUROC(long) minus AUROC(short) has median−0.001over 50 files. The penalty is concentrated\nin agentic and multi-turn files whose reference is missing (Table 12). In PrivacyLens it almost\nvanishes once the secrets are given. Across files, input tokens do not predict AUROC (Spearman\n−0.11,p= 0.42), and trajectory and single-response files do not differ (Mann–Whitneyp= 1.0on\nthe best Jev-driven strategy).\nTable 12:AUROC on short vs."
-    },
-    {
-     "chunk_id": "chunk-b6e12a610c133c01a06e9ac8",
-     "document_id": "doc-8398b079e055c4456a001bee",
-     "document_key": "paper:2609.28915",
-     "char_start": 147960,
-     "char_end": 148003,
-     "quote": "90 session/fold evaluations.\nWith OWASP gro"
+     "char_start": 126434,
+     "char_end": 127391,
+     "quote": "Under review as a conference paper at ICLR 2027\nTable 19:Selective detection.Each column gives the accuracy att= 0.5when only the most confident\ndecisions are kept. Confidence: the value Jev returns for CHOICE/SCORE, and|p−0.5|for NOUL.n: items.\nAcc.: accuracy on all items. AUROC: how well confidence separates correct from wrong decisions. Topk%:\naccuracy on thek% most confident items. AURC: area under the risk–coverage curve (lower is better), with\nthe value of a perfect confidence ranking in parentheses.\nSignal n Acc. AUROC Top 10% Top 20% Top 50% AURC (oracle)\nGeneric CHOICE, confidence 9,979 0.814 0.745 0.944 0.965 0.924 0.102 (0.019)\nGeneric SCORE, confidence 10,097 0.833 0.762 0.988 0.974 0.943 0.070 (0.015)\nGeneric NOUL,|p−0.5| 10,097 0.806 0.780 0.994 0.980 0.931 0.075 (0.020)\nTargeted NOUL,|p−0.5| 41,905 0.811 0.779 0.994 0.983 0.937 0.072 (0.019)\nConfidence supports selective detection except where the construct is wrong. The CHOICE\n"
     }
    ],
    "document_hit": true,
    "expected_answer_terms": [
-    "AUROC"
+    "coverage"
    ],
-   "term_hit": false,
-   "citations_retrievable": 5,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3227.8,
+   "term_hit": true,
+   "citations_retrievable": 1,
+   "answer_head": "AURC 是风险–覆盖曲线下的面积（area under the risk–coverage curve），数值越低越好 [chunk-85804be6f2a0f34e5092eff4]。该定义仅出现在表格说明中，证据未给出其计算公式或更多细节 [chunk-85804be6f2a0f34e5092eff4]。",
+   "answer_full": "AURC 是风险–覆盖曲线下的面积（area under the risk–coverage curve），数值越低越好 [chunk-85804be6f2a0f34e5092eff4]。该定义仅出现在表格说明中，证据未给出其计算公式或更多细节 [chunk-85804be6f2a0f34e5092eff4]。",
+   "latency_ms": 1807.9,
    "timeout": false
   },
   {
@@ -1312,9 +1287,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 4,
-   "answer_head": "PEFT 是一种成本高效的微调技术，在追求最优下游任务性能的同时，最小化参数和计算复杂度 [chunk-8e22077c669275cfa3e1fd10]。该定义仅来自综述摘要的表述，证据未进一步展开其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
-   "answer_full": "PEFT 是一种成本高效的微调技术，在追求最优下游任务性能的同时，最小化参数和计算复杂度 [chunk-8e22077c669275cfa3e1fd10]。该定义仅来自综述摘要的表述，证据未进一步展开其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
-   "latency_ms": 2578.8,
+   "answer_head": "PEFT 是一种成本高效的微调技术，在尽量减少参数和计算复杂度的同时力求达到最优的下游任务性能 [chunk-8e22077c669275cfa3e1fd10]。该定义来自综述摘要，未进一步说明其具体适用边界 [chunk-8e22077c669275cfa3e1fd10]。",
+   "answer_full": "PEFT 是一种成本高效的微调技术，在尽量减少参数和计算复杂度的同时力求达到最优的下游任务性能 [chunk-8e22077c669275cfa3e1fd10]。该定义来自综述摘要，未进一步说明其具体适用边界 [chunk-8e22077c669275cfa3e1fd10]。",
+   "latency_ms": 2906.6,
    "timeout": false
   },
   {
@@ -1381,11 +1356,11 @@
    "expected_answer_terms": [
     "honeypot"
    ],
-   "term_hit": false,
+   "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "OllamaDrama 的 DigitalOcean 蜜罐部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明 DigitalOcean 实例位于法兰克福，未给出其他实例的具体位置 [chunk-b1f6ac2c03ee3a6c093826c9]。",
-   "answer_full": "OllamaDrama 的 DigitalOcean 蜜罐部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明 DigitalOcean 实例位于法兰克福，未给出其他实例的具体位置 [chunk-b1f6ac2c03ee3a6c093826c9]。",
-   "latency_ms": 2420.8,
+   "answer_head": "OllamaDrama 的 DigitalOcean honeypot 部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明了 DigitalOcean 实例的位置，未提及其他实例的具体部署地点 [chunk-b1f6ac2c03ee3a6c093826c9]。",
+   "answer_full": "OllamaDrama 的 DigitalOcean honeypot 部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明了 DigitalOcean 实例的位置，未提及其他实例的具体部署地点 [chunk-b1f6ac2c03ee3a6c093826c9]。",
+   "latency_ms": 2180.7,
    "timeout": false
   },
   {
@@ -1456,7 +1431,7 @@
    "citations_retrievable": 5,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1801.8,
+   "latency_ms": 1772.0,
    "timeout": false
   },
   {
@@ -1525,9 +1500,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过轻量级 LoRA 微调实现准确且离线的恶意 NPM 包检测 [chunk-3e02e30d18b6d9d534a09cad]。",
-   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过轻量级 LoRA 微调实现准确且离线的恶意 NPM 包检测 [chunk-3e02e30d18b6d9d534a09cad]。",
-   "latency_ms": 2059.2,
+   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过高质量数据集监督与 LoRA 高效微调，实现准确且可离线部署的恶意 NPM 包检测 [chunk-3e02e30d18b6d9d534a09cad]。",
+   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过高质量数据集监督与 LoRA 高效微调，实现准确且可离线部署的恶意 NPM 包检测 [chunk-3e02e30d18b6d9d534a09cad]。",
+   "latency_ms": 2171.3,
    "timeout": false
   },
   {
@@ -1606,7 +1581,7 @@
    "citations_retrievable": 6,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1930.9,
+   "latency_ms": 2244.2,
    "timeout": false
   },
   {
@@ -1683,9 +1658,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其摘要指出，多智能体系统通过自然语言消息协调，而这些通信渠道也可被合谋智能体用于泄露机密信息或协调未授权行为，隐写术使此类行为难以被检测 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其摘要指出，多智能体系统通过自然语言消息协调，而这些通信渠道也可被合谋智能体用于泄露机密信息或协调未授权行为，隐写术使此类行为难以被检测 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "latency_ms": 1933.1,
+   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-40710bf2b8e507ad4f7c387b]。它被描述为一种高容量、无密钥且不可检测的多智能体合谋方案，其分析涉及不可检测性、替换信道以及算法2的正确性与可靠性 [chunk-e45c6b3a852060d4b6ed1edd]。",
+   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-40710bf2b8e507ad4f7c387b]。它被描述为一种高容量、无密钥且不可检测的多智能体合谋方案，其分析涉及不可检测性、替换信道以及算法2的正确性与可靠性 [chunk-e45c6b3a852060d4b6ed1edd]。",
+   "latency_ms": 2134.5,
    "timeout": false
   },
   {
@@ -1756,7 +1731,7 @@
    "citations_retrievable": 5,
    "answer_head": "SAGE 通过在策略优化过程中注入结构引导，使学习到的策略内化结构化推理空间的有用性质，从而缓解长程推理偏差 [chunk-6ba3f9978783a2953df6df02]。具体而言，它结合两种互补的结构引导：代数稀疏化（algebraic sparsification）减少虚假分支并缓解探索偏差，双曲结构引导（hyperbolic structural guidance）提供密集的深度感知信号",
    "answer_full": "SAGE 通过在策略优化过程中注入结构引导，使学习到的策略内化结构化推理空间的有用性质，从而缓解长程推理偏差 [chunk-6ba3f9978783a2953df6df02]。具体而言，它结合两种互补的结构引导：代数稀疏化（algebraic sparsification）减少虚假分支并缓解探索偏差，双曲结构引导（hyperbolic structural guidance）提供密集的深度感知信号并缓解复合偏差 [chunk-6ba3f9978783a2953df6df02]。",
-   "latency_ms": 1615.3,
+   "latency_ms": 2103.1,
    "timeout": false
   },
   {
@@ -1833,9 +1808,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理连接起来 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则 [chunk-5c71aaa24bd8d7056ac0313a]。",
-   "answer_full": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理连接起来 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则 [chunk-5c71aaa24bd8d7056ac0313a]。",
-   "latency_ms": 1823.5,
+   "answer_head": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理相结合 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则，再将推理链组织为 MCoT [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "answer_full": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理相结合 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则，再将推理链组织为 MCoT [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "latency_ms": 1572.1,
    "timeout": false
   },
   {
@@ -1904,9 +1879,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "Hard Stop 的 kernel preemption 指在 LSM 内核入口通过 bpf_override_return(eBPF) 立即拒绝系统调用，延迟低于 0.050ms，从而防止 TASK_UNINTERRUPTIBLE 与 TOCTOU [chunk-f9d26319bd709c7eebf87b3b]。该机制属于内核级抢占与遏制方案的一部分，其安全属性以主机内核未被攻破为前提 [c",
-   "answer_full": "Hard Stop 的 kernel preemption 指在 LSM 内核入口通过 bpf_override_return(eBPF) 立即拒绝系统调用，延迟低于 0.050ms，从而防止 TASK_UNINTERRUPTIBLE 与 TOCTOU [chunk-f9d26319bd709c7eebf87b3b]。该机制属于内核级抢占与遏制方案的一部分，其安全属性以主机内核未被攻破为前提 [chunk-5a7e7933367ec788cb6a0079]。",
-   "latency_ms": 2349.1,
+   "answer_head": "Hard Stop 的 kernel preemption 指在 Linux 内核层面对失控的 agentic 执行进行抢占与遏制，例如通过 bpf_override_return(eBPF) 在 LSM 处立即拒绝系统调用（<0.050ms），以及通过 PREEMPT_RT+SIGSTOP 实现硬实时内核信号投递以确定性地冻结进程（<0.100ms）[chunk-f9d26319bd709c7e",
+   "answer_full": "Hard Stop 的 kernel preemption 指在 Linux 内核层面对失控的 agentic 执行进行抢占与遏制，例如通过 bpf_override_return(eBPF) 在 LSM 处立即拒绝系统调用（<0.050ms），以及通过 PREEMPT_RT+SIGSTOP 实现硬实时内核信号投递以确定性地冻结进程（<0.100ms）[chunk-f9d26319bd709c7eebf87b3b]。需要限定的是，该机制所声称的安全属性以主机内核未被攻破为前提，内核漏洞导致的提权不在其威胁模型内 [chunk-5a7e7933367ec788cb6a0079]。",
+   "latency_ms": 2423.3,
    "timeout": false
   },
   {
@@ -1985,7 +1960,7 @@
    "citations_retrievable": 6,
    "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
    "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
-   "latency_ms": 2716.2,
+   "latency_ms": 2644.5,
    "timeout": false
   },
   {
@@ -2062,9 +2037,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被用于合谋外泄机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被用于合谋外泄机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "latency_ms": 1730.2,
+   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这些系统通过自然语言消息进行协调，而同一通信渠道也可能被用于合谋外泄机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这些系统通过自然语言消息进行协调，而同一通信渠道也可能被用于合谋外泄机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "latency_ms": 1725.1,
    "timeout": false
   },
   {
@@ -2092,7 +2067,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 1785.6,
+   "latency_ms": 1765.5,
    "timeout": false
   },
   {
@@ -2161,9 +2136,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "NeRD 是一种神经符号规则蒸馏（Neuro-Symbolic Rule Distillation）框架，用于为可解释的医学图像诊断生成高效、基于本体的 MCoT 推理依据 [chunk-26dc5f3e02bffda4ed580d66]。它应用于医学图像诊断领域，通过选择基于诊断必要性的概念并蒸馏归纳出的逻辑规则，将基于规则的概念可解释性与 MCoT 推理衔接起来 [chunk-675668ff",
-   "answer_full": "NeRD 是一种神经符号规则蒸馏（Neuro-Symbolic Rule Distillation）框架，用于为可解释的医学图像诊断生成高效、基于本体的 MCoT 推理依据 [chunk-26dc5f3e02bffda4ed580d66]。它应用于医学图像诊断领域，通过选择基于诊断必要性的概念并蒸馏归纳出的逻辑规则，将基于规则的概念可解释性与 MCoT 推理衔接起来 [chunk-675668ff34c9d9eeb7b36b4a]。",
-   "latency_ms": 3140.3,
+   "answer_head": "NeRD 是一种神经符号规则蒸馏（Neuro-symbolic Rule Distillation）框架，用于生成高效、基于本体的 MCoT 推理依据，以实现可解释的医学图像诊断 [chunk-26dc5f3e02bffda4ed580d66]。它通过基于诊断必要性选择概念并蒸馏归纳出的逻辑规则，将基于规则的概念可解释性与 MCoT 推理相衔接 [chunk-675668ff34c9d9eeb7b",
+   "answer_full": "NeRD 是一种神经符号规则蒸馏（Neuro-symbolic Rule Distillation）框架，用于生成高效、基于本体的 MCoT 推理依据，以实现可解释的医学图像诊断 [chunk-26dc5f3e02bffda4ed580d66]。它通过基于诊断必要性选择概念并蒸馏归纳出的逻辑规则，将基于规则的概念可解释性与 MCoT 推理相衔接 [chunk-675668ff34c9d9eeb7b36b4a]。",
+   "latency_ms": 2564.7,
    "timeout": false
   },
   {
@@ -2232,9 +2207,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，但证据未给出该缩写的完整展开含义 [chunk-4b72fc8fa621782e6f526842]。",
-   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，但证据未给出该缩写的完整展开含义 [chunk-4b72fc8fa621782e6f526842]。",
-   "latency_ms": 2875.9,
+   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，其标题为“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
+   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，其标题为“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
+   "latency_ms": 2400.7,
    "timeout": false
   },
   {
@@ -2305,7 +2280,7 @@
    "citations_retrievable": 5,
    "answer_head": "Hard Stop 论文关注内核级抢占与遏制（Kernel-Level Preemption and Containment）[chunk-9aa9b7f0bfc461185e805840]。它拦截的是恶意/失控的智能体执行（Rogue Agentic Execution）[chunk-9aa9b7f0bfc461185e805840]。",
    "answer_full": "Hard Stop 论文关注内核级抢占与遏制（Kernel-Level Preemption and Containment）[chunk-9aa9b7f0bfc461185e805840]。它拦截的是恶意/失控的智能体执行（Rogue Agentic Execution）[chunk-9aa9b7f0bfc461185e805840]。",
-   "latency_ms": 2779.3,
+   "latency_ms": 2290.9,
    "timeout": false
   },
   {
@@ -2378,7 +2353,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-2c548b7cb0cbd3d90614329e]\n- 《On the Effectiveness of Kernel-Level Evide",
    "answer_full": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-2c548b7cb0cbd3d90614329e]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-20a31f7b632b76ef56327c75]",
-   "latency_ms": 953.4,
+   "latency_ms": 935.6,
    "timeout": false
   },
   {
@@ -2403,22 +2378,6 @@
    ],
    "citations_detail": [
     {
-     "chunk_id": "chunk-7c6fdba1430ff6e44db50349",
-     "document_id": "doc-f0f2afa26abdac092e478e6a",
-     "document_key": "paper:2609.29808",
-     "char_start": 45768,
-     "char_end": 46710,
-     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\n7.4 Empirical Validation Protocols & Experiments (USENIX / IEEE S&P Evaluation)\nTorigorouslyvalidatethekernelpreemptionbusandrefutealternativehypotheses, threeempiricalexperiments\nwere executed and verified directly against the production test suite:\nExperiment 1: De-obfuscated Intent Benchmark (500 Adversarial Payloads)\n• Methodology: Evaluates 500 diverse obfuscation payloads spanning Base64 pipe-to-shell wrappers,\ndynamic Python reflection (getattr(__import__('os'),'system') ), string slicing and concate-\nnation, hex/octal escapes, and polymorphic Jinja2 SSTI.\n• Hypothesis: Application-layer lexical matching (Aho-Corasick) is trivially bypassed by syntax-level\ntransformations, while kernel-level eBPF LSM interception achieves 100% detection accuracy.\n•Empirical Result:\n–Aho-Corasick Bypass Rate:82.0%(410 / 500 payloads evade literal lexical tripwires).\n"
-    },
-    {
-     "chunk_id": "chunk-dce559be9fb9fbb750a526c5",
-     "document_id": "doc-8398b079e055c4456a001bee",
-     "document_key": "paper:2609.28915",
-     "char_start": 55734,
-     "char_end": 55866,
-     "quote": " . . . . . . . . . . . . . . . 26\nE.9 Safety perimeter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27\n15"
-    },
-    {
      "chunk_id": "chunk-5a7e7933367ec788cb6a0079",
      "document_id": "doc-f0f2afa26abdac092e478e6a",
      "document_key": "paper:2609.29808",
@@ -2427,28 +2386,44 @@
      "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nBoundary conditions: The TCB excludes userspace daemons (systemd, udev) and assumes\nkernel integrity. Privilege escalation via kernel vulnerabilities (e.g., dirty-pipe class exploits)\nis outside the stated threat model. The security properties claimed here hold under the\nassumption of an uncompromised host kernel.\n2. Fail-Closed Transitions: In the evaluated failure modes—including supervisor panic, heartbeat\ntimeout, memory allocation exhaustion, and unhandled exceptions—the system transitions uncon-\nditionally toFAIL-CLOSED. The supervisor issues a kernel-level SIGKILL to the target process\ngroup, unshares and isolates the network namespace, and seals the persistent WAL state before\naborting.\n3. Monotonic Timing Endpoints: All latency measurements, timeout enforcements, and circuit\nbreaker trip times are captured via POSIX CLOCK_MONOTONIC_RAW system calls to eliminate clock\n"
     },
     {
-     "chunk_id": "chunk-834172ea6722a03c4a60627e",
+     "chunk_id": "chunk-ba60b3d5b67adbd66a08575f",
      "document_id": "doc-8398b079e055c4456a001bee",
      "document_key": "paper:2609.28915",
-     "char_start": 0,
-     "char_end": 996,
-     "quote": "Preprint\nON THEEFFECTIVENESS OFKERNEL-LEVEL\nEVIDENCE FORAGENTSECURITY\nSpencer King1 Zhilu Zhang2 Mikhail Kuznetsov2\nKay Liu2 Baris Coskun2 Wei Ding2\n1University of Georgia 2Amazon Web Services\nsdk81722@uga.edu\n{zhazhilu,mikuzne,lzekuan,baris,dingwe}@amazon.com\nABSTRACT\nLLM agents are deployed into infrastructure that grants them broad host authority,\nyet existing agent-security benchmarks and defenses operate almost exclusively\nat the application telemetry layer: the served tool manifest, the user prompt, and\nthe model’s messages. Some threats, however, smuggle malicious instructions\nand actions past the application boundary, leaving them invisible to that layer.\nIn this work, we bridge that gap by pairing application-level agent telemetry\nwith kernel-level syscall traces to present the first paired-evidence characteriza-\ntion of kernel-level versus application-layer signal for agent security. To quantify\nthe value of the enhanced telemetry, we introduce Agent Cross-Layer Evidence\n"
+     "char_start": 160573,
+     "char_end": 160892,
+     "quote": " SLM exceptions, the winning\nsingle-view AUROC (0.901–0.922) still exceeds the XGBoost Cross-View OOD baseline of0.850,\nso the SLM Kernel-only preference is a within-family optimality result rather than evidence against\nCross-View. Every OOD-winning cell in Table 8 still consumes kernel signal (Cross or Kernel), so\n43"
     },
     {
-     "chunk_id": "chunk-ff969be40008a83dde076597",
-     "document_id": "doc-f0f2afa26abdac092e478e6a",
-     "document_key": "paper:2609.29808",
-     "char_start": 39467,
-     "char_end": 40193,
-     "quote": " and isolates the\ncontainer with zero tokens leaked.\n7.2 Out-of-Band POSIX Supervisor & Production Orchestrator Handler\nToprovidesufficienttechnicaldetailforapractitionertoimplementthedescribedsystemandresolvetheconcur-\nrency dilemma between non-cooperative process preemption and state serialization, the epistemic architecture\ndecouples into aTwo-Phase Quiescence & Snapshot Protocol: 1.Phase 1 (Hardware Boundary\nQuiescence): When an invariant breach is detected, the out-of-band supervisor ( PosixProcessSupervisor)\nintercepts the off-target syscall via seccomp-BPF and immediately halts the worker cgroup via a kernel-level\nSIGSTOP in < 0.154 ms. 2.Phase 2 (Decoupled Out-of-Band State Extraction): State serialization\n13"
+     "chunk_id": "chunk-39a3131d768262d540828831",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 84456,
+     "char_end": 85445,
+     "quote": "6 0.496−0.027−0.137\nTabPFN Kernel 0.777 0.751 0.615−0.026−0.162\nDeep tabular TabPFN Cross 0.874 0.832 0.751−0.042−0.123\nTabICL App 0.636 0.609 0.506−0.027−0.130\nTabICL Kernel 0.764 0.742 0.608−0.022−0.156\nTabICL Cross 0.801 0.764 0.673−0.037−0.128\nQwen2.5-3B App 0.713 0.681 0.607−0.032−0.106\nQwen2.5-3B Kernel 0.901 0.881 0.750−0.020−0.151\nQwen2.5-3B Cross 0.881 0.853 0.761−0.028−0.121\nQwen2.5-7B App 0.722 0.694 0.605−0.027−0.116\nSLM (LoRA) Qwen2.5-7B Kernel 0.882 0.854 0.713−0.028−0.169\nQwen2.5-7B Cross 0.920 0.875 0.787−0.045−0.133\nLlama-3.1-8B App 0.688 0.657 0.606−0.031−0.082\nLlama-3.1-8B Kernel 0.922 0.898 0.752−0.024−0.170\nLlama-3.1-8B Cross 0.791 0.764 0.710−0.026−0.081\nwith resulting AUROCs of0.496–0.787. These comparisons quantify the sensitivity of the trained\nscores to including exercised-but-unconfirmed attacks and unexercised malicious fixtures in the pos-\nitive class.\nScope.The ablation covers the seven trained detectors: classical, deep-tabular, and LoRA-fine-\n"
     },
     {
-     "chunk_id": "chunk-9aa9b7f0bfc461185e805840",
+     "chunk_id": "chunk-0997bd3a5ea6eec03f8ff185",
+     "document_id": "doc-8398b079e055c4456a001bee",
+     "document_key": "paper:2609.28915",
+     "char_start": 28360,
+     "char_end": 28659,
+     "quote": "Appendix K.4 examines these cases.\nKernel evidence generalizes across attack and detector families.Under the seven-fold\nOWASP-aligned evaluation, all four detector families reach OOD AUROC above0.80using ker-\nnel evidence: XGBoost Cross-View achieves0.850, TabPFN Cross-View0.874, frozen Qwen3-80B\n7"
+    },
+    {
+     "chunk_id": "chunk-f9d26319bd709c7eebf87b3b",
      "document_id": "doc-f0f2afa26abdac092e478e6a",
      "document_key": "paper:2609.29808",
-     "char_start": 53472,
-     "char_end": 53505,
-     "quote": "Hard Stop: Kernel-Level Preemptio"
+     "char_start": 32611,
+     "char_end": 33594,
+     "quote": "Hard Stop: Kernel-Level Preemption for Rogue Agentic Execution A Preprint\nSecurity & Concurrency\nMechanism / Layer Latency Profile Guarantee\nbpf_override_return(eBPF <0.050ms Immediate syscall rejection at\nLSM) kernel entry; prevents\nTASK_UNINTERRUPTIBLE\nTOCTOH.\nPREEMPT_RT+SIGSTOP <0.100ms Hard real-time kernel signal\ndelivery; deterministic process\nfreeze.\nCgroup v2 Freeze 0.154ms−5.0ms Complete process group\n(cgroup.freeze) quiescence; eliminates orphaned\nforks and background daemons.\nLangGraphinterrupt() 5.20ms Zero idle compute (0ms CPU);\nCheckpoint durable state saved to\ndisk/WAL without torn reads.\nStandard Pregel Barrier 2,000–30,000ms Monolithic superstep wait;\nStall unhalted execution until turn\nends.\nPassive SIEM Alert Queue Hours / Days Zero execution halt; lateral\ncompromise occurs unimpeded.\nComputational Halting Bounds and Autonomous Livelock Pathology\nIn distributed systems and formal methods, autonomous agent loops operating over execution environments\n"
+    },
+    {
+     "chunk_id": "chunk-73701fb864be41a225293e26",
+     "document_id": "doc-f0f2afa26abdac092e478e6a",
+     "document_key": "paper:2609.29808",
+     "char_start": 30645,
+     "char_end": 30884,
+     "quote": " ms. - Container-Wide\nQuiescence (cgroup.freeze): The orchestrator writes 1 to /sys/fs/cgroup/.../cgroup.freeze. Cgroup\nv2 atomically halts the entire process tree, capturing all child processes, zombie forks, and worker threads\nsimultaneo"
     }
    ],
    "document_hit": true,
@@ -2457,9 +2432,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "命中的文档：\n- 《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》 [chunk-7c6fdba1430ff6e44db50349]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-d",
-   "answer_full": "命中的文档：\n- 《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》 [chunk-7c6fdba1430ff6e44db50349]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-dce559be9fb9fbb750a526c5]",
-   "latency_ms": 1012.8,
+   "answer_head": "命中的文档：\n- 《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》 [chunk-5a7e7933367ec788cb6a0079]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-b",
+   "answer_full": "命中的文档：\n- 《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》 [chunk-5a7e7933367ec788cb6a0079]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-ba60b3d5b67adbd66a08575f]",
+   "latency_ms": 993.5,
    "timeout": false
   },
   {
@@ -2540,7 +2515,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-739c06ac304b74bb5e8ebf6e]",
    "answer_full": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-739c06ac304b74bb5e8ebf6e]",
-   "latency_ms": 1019.8,
+   "latency_ms": 1440.0,
    "timeout": false
   },
   {
@@ -2621,7 +2596,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-1b4f521dd158e5c09cce53e2]\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-d7489ff3b070",
    "answer_full": "命中的文档：\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-1b4f521dd158e5c09cce53e2]\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-d7489ff3b07026aca9a7948d]",
-   "latency_ms": 880.5,
+   "latency_ms": 1356.1,
    "timeout": false
   },
   {
@@ -2694,7 +2669,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-4c23aa3af9e23e20352ef8bf]",
    "answer_full": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-4c23aa3af9e23e20352ef8bf]",
-   "latency_ms": 1005.6,
+   "latency_ms": 1298.3,
    "timeout": false
   },
   {
@@ -2773,7 +2748,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《owasp_genai》 [chunk-90c768cd5de7c577f26397d2]",
    "answer_full": "命中的文档：\n- 《owasp_genai》 [chunk-90c768cd5de7c577f26397d2]",
-   "latency_ms": 1116.9,
+   "latency_ms": 1454.2,
    "timeout": false
   },
   {
@@ -2844,7 +2819,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》 [chunk-f542a9ec3bf23e714cdf307d]",
    "answer_full": "命中的文档：\n- 《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》 [chunk-f542a9ec3bf23e714cdf307d]",
-   "latency_ms": 802.4,
+   "latency_ms": 1224.0,
    "timeout": false
   },
   {
@@ -2924,7 +2899,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-15641d6a59af6d328b210e81]",
    "answer_full": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-15641d6a59af6d328b210e81]",
-   "latency_ms": 1056.7,
+   "latency_ms": 840.2,
    "timeout": false
   },
   {
@@ -2948,7 +2923,7 @@
    "citations_retrievable": 0,
    "answer_head": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
    "answer_full": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
-   "latency_ms": 805.7,
+   "latency_ms": 685.7,
    "timeout": false
   },
   {
@@ -2972,7 +2947,7 @@
    "citations_retrievable": 0,
    "answer_head": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
    "answer_full": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
-   "latency_ms": 507.5,
+   "latency_ms": 738.6,
    "timeout": false
   },
   {
@@ -2996,7 +2971,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1532.7,
+   "latency_ms": 1812.4,
    "timeout": false
   },
   {
@@ -3020,7 +2995,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1477.0,
+   "latency_ms": 1510.3,
    "timeout": false
   },
   {
@@ -3044,7 +3019,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1804.0,
+   "latency_ms": 1211.1,
    "timeout": false
   },
   {
@@ -3112,7 +3087,7 @@
    "citations_retrievable": 5,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2667.1,
+   "latency_ms": 2252.5,
    "timeout": false
   },
   {
@@ -3136,7 +3111,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1705.0,
+   "latency_ms": 2039.7,
    "timeout": false
   },
   {
@@ -3160,7 +3135,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
-   "latency_ms": 870.8,
+   "latency_ms": 774.9,
    "timeout": false
   },
   {
@@ -3230,7 +3205,7 @@
    "citations_retrievable": 5,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2457.8,
+   "latency_ms": 2306.9,
    "timeout": false
   },
   {
@@ -3290,7 +3265,7 @@
    "citations_retrievable": 4,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2393.8,
+   "latency_ms": 2582.9,
    "timeout": false
   },
   {
@@ -3304,72 +3279,61 @@
    "refused": false,
    "refusal_correct": false,
    "related_event_ids": [],
-   "document_citation_count": 6,
+   "document_citation_count": 5,
    "cited_document_keys": [
-    "official:eu_ai_act",
-    "paper:2609.29230",
-    "paper:2609.29429",
-    "paper:2609.30217",
-    "source:nist_news"
+    "paper:2609.29757",
+    "paper:2609.30217"
    ],
    "expected_document_keys": [],
    "citations_detail": [
     {
-     "chunk_id": "chunk-d0d1f08e5b3fd260dac246ae",
-     "document_id": "doc-36db1f9ea76e474bc99cad1d",
-     "document_key": "official:eu_ai_act",
-     "char_start": 602205,
-     "char_end": 602854,
-     "quote": "heir scope and main characteristics; how the\ndata was obtained and selected as well as all other measures to detect the\nunsuitability of data source s and methods to detect identifiable biases, where\napplicable;\n(d) the computational resources used to train the model (e.g. number of floating point\noperations), training time, and other relevant details related to the training;\n(e) known or estimated ene rgy consumption of the model.\nWith regard to point (e), where the energy consumption of the model is unknown, the\nenergy consumption may be based on information about computational resources used.\nPE-CONS 24/24 AD/DOS/di 2\nANNEX XI TREE.2.B EN"
-    },
-    {
-     "chunk_id": "chunk-022f2a439d595e688f906e91",
-     "document_id": "doc-48a72f8adbac64ce9e259e14",
-     "document_key": "paper:2609.29230",
-     "char_start": 10130,
-     "char_end": 11107,
-     "quote": "pt Structure\nFigure 2: Structure of a prompt for end-to-end Event Each training instance is constructed as a structured\nExtraction, comprising a task instruction a set of event prompt sequence as illustrated in Figure2:\nschemas and the input text.\nP=I⊕E Ge⊕X, (2)\n3.1 Task Formulation\nEvent extraction is a structured prediction task whereI denotes a natural language task instruction,\nthat encompasses four interdependent subtasks. EGe is the gold event schema of typee augmented\nTrigger Identification (TI)detects event-denoting with its automatically generated annotation guide-\nspans within an input textX.Trigger Classifica- line, and X is the input text. This formulation\ntion (TC)assigns a semantic event type to each encourages the model to jointly attend to schema\nidentified trigger.Argument Identification (AI) constraints, including the set of permissible argu-\nlocates textual spans that participate as event ar- ment roles fore, and the contextual semantics con-\n"
-    },
-    {
-     "chunk_id": "chunk-d13b4d600755e9dec4d4774a",
-     "document_id": "doc-36db1f9ea76e474bc99cad1d",
-     "document_key": "official:eu_ai_act",
-     "char_start": 397997,
-     "char_end": 398762,
-     "quote": "or the\nsemantics thereof, or where authorised by law to detect, prevent, investi gate or prosecute\ncriminal offences.\n3. Deployers of an emotion recognition system or a biometric categorisation system shall\ninform the natural persons exposed thereto of the operation of the system, and shall process\nthe personal data in accordance with Regulations (EU) 2016/679 and (EU) 2018/1725 and\nDirective (EU) 2016/680, as applicable. This obligation shall not apply to AI systems used\nfor biometric categorisation and emotion recognition, which are permitted by law to detect,\nprevent or investigate c riminal offences, subject to appropriate safeguards for the rights\nand freedoms of third parties, and in accordance with Union law.\nPE-CONS 24/24 AD/DOS/di 257\nTREE.2.B EN"
-    },
-    {
-     "chunk_id": "chunk-4e41be5dbb5c565966504b1e",
-     "document_id": "doc-38443598019e64691b4f66e4",
-     "document_key": "paper:2609.29429",
-     "char_start": 3998,
-     "char_end": 4991,
-     "quote": "or thresholded. Reading\ntoken probabilities gives a score, as in Llama Guard’sP(unsafe)or G-Eval’s probability-weighted\nratings (Liu et al., 2023). However, each call still scores one label or criterion, because the proba-\nbility is read off one verdict token, so asking from several angles costs several calls.\nReinforcement learning for calibrated decisions (RLCD)1 removes this per-criterion cost: an RLCD\nmodel returns a decision with a calibrated probability for each typed question instead of generating\ntext (TypeSafe AI, 2026). Jev, TypeSafe’s RLCD model, answers many binary (NOUL), categorical\n(CHOICE), and ordinal (SCORE) questions about one input, thestate, in a single call.\nWhether Jev detects alignment failures, however, has not been measured, and it is not obvious that\nit can. Many alignment failures are relational: sycophancy is defined against the user’s belief,\ndeception against the model’s own belief, and prompt injection against an instruction hidden in\ntool output."
-    },
-    {
-     "chunk_id": "chunk-f7bbefb749c256b5be855e69",
+     "chunk_id": "chunk-9443b49d798b2c0fa726eeb8",
      "document_id": "doc-56f791348270a7a71d56fc43",
      "document_key": "paper:2609.30217",
-     "char_start": 82027,
-     "char_end": 82164,
-     "quote": "tion.\nNumbers identify selected zero-based monitor decisions; scaffold events are unnumbered. Task, policy, and actions\nare condensed.\n25"
+     "char_start": 89191,
+     "char_end": 90145,
+     "quote": "G Mechanism Traces and Interception Audit\nThis appendix provides evidence for the routes discussed in Section 4.3. The verifier-mediated route is\nshown in Figure 17 in the main text. We regard both of these strategies as caveats in the setup that very\nsmart agents manage to find after repeated attempts.\nG.1 Approved Calls Through Aliases and Encoded Paths\nFigure 19 shows Luna changing a protected file through a hard-link alias and Muse changing a database\nthrough an encoded path. Both traces include an explicit statement of an evasion strategy followed by\nan allowed call and a successful external score. These post hoc examples distinguish the agent’s stated\nstrategy, recorded actions and verdicts, and external outcomes. They establish neither the monitor’s\nreason for approval nor the prevalence of either mechanism. The archived separate confirmed-effect fields\nremain unknown; the excerpts do not replace those fields with new adjudications.\n"
     },
     {
-     "chunk_id": "chunk-293d7df7d2696b5b16fa8597",
-     "document_id": "doc-c8efaa5150b4c2c55f6a5d5e",
-     "document_key": "source:nist_news",
-     "char_start": 6825,
-     "char_end": 7001,
-     "quote": "Researchers and manufacturers rely on the library to identify unknown compounds in food, drugs, cosmetics, the environment, body fluids, forensic evidence and even space rocks."
+     "chunk_id": "chunk-081cd92afbd7d1abb8dd47b2",
+     "document_id": "doc-56f791348270a7a71d56fc43",
+     "document_key": "paper:2609.30217",
+     "char_start": 65180,
+     "char_end": 66169,
+     "quote": "Appendix\nContents\nA Evasion Attempt Classification 18\nB Signs of Evaluation Awareness 19\nC Cyber Refusal and Downgrades 20\nD Additional Traces 21\nE Evaluation Details 27\nE.1 Main-Evaluation Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .27\nE.2 Feedback, Runtime Configuration, and Interception . . . . . . . . . . . . . . . . . . . . . .27\nE.3 Reasoning-Effort Cohorts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .27\nF Myopic Monitor Ablation 28\nG Mechanism Traces and Interception Audit 29\nG.1 Approved Calls Through Aliases and Encoded Paths . . . . . . . . . . . . . . . . . . . . .29\nG.2 Unreviewed Session Input . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .30\nG.3 Serving Differences and Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .31\nH Denial-of-Service Injection 32\nH.1 Denial-Reason Comparison . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .32\n"
+    },
+    {
+     "chunk_id": "chunk-4d25943b67830400355cbee4",
+     "document_id": "doc-56f791348270a7a71d56fc43",
+     "document_key": "paper:2609.30217",
+     "char_start": 54005,
+     "char_end": 54953,
+     "quote": "xt, repeated\nprobing for a monitor’s exact restrictions may also reflect uncertainty about the underlying policy rather\nthan intentional subversion. We note however, that in our experiments agents often visibly inferred that\nthe monitor is another LLM, which means that a strategy of retries can also be viewed as an attempt to\nabuse the stochasticity of the monitoring mechanism.\n8 Conclusion\nWe introduce EvasionBench to study situations in which completion of an assigned benign task requires\nan action prohibited by a runtime policy. This is in contrast to previous work that focused on settings with\na separate malicious side-task or an explicit instruction to evade oversight. Notably, we find that agents\noften attempt to evade the monitor while pursuing the prohibited benign goal, and frequently succeed\nby exploiting shortcomings of the monitor. Our analysis showcases clear differences in the evasion rate\nat different reasoning efforts."
+    },
+    {
+     "chunk_id": "chunk-aea7549bd2d12d9cad827af0",
+     "document_id": "doc-e16f7d33561d58da8e56e445",
+     "document_key": "paper:2609.29757",
+     "char_start": 1754,
+     "char_end": 2541,
+     "quote": "publicly exposed Ollama instances [21], while\nXu et al. [25] observed 152,137 cumulative Ollama endpoints during a 362-\nday observation period. These endpoints may lack native authentication and\nare susceptible to critical vulnerabilities, such as Server-Side Request Forgery\n(SSRF) [16], lack of authentication [15], and path traversal [14]. Such exposure\ncan lead to sensitive data leakage, unauthorized resource consumption, or even\nhost compromise if exploited by attackers.\nTo understand and detect threats targeting public-facing services, cyber de-\nception serves as a powerful proactive defense mechanism. By deploying be-\nlievable, yet fake infrastructure, these techniques shift the asymmetric advan-\ntage from attackers to defenders. This enables the detection and analysis of"
+    },
+    {
+     "chunk_id": "chunk-6098609400b5a84bf0b03795",
+     "document_id": "doc-56f791348270a7a71d56fc43",
+     "document_key": "paper:2609.30217",
+     "char_start": 71581,
+     "char_end": 71730,
+     "quote": "D Additional Traces\nThe following examples illustrate both successful bypasses and unsuccessful attempts. Each trace shows\nthe agent’s actions, the m"
     }
    ],
    "document_hit": null,
    "expected_answer_terms": [],
    "term_hit": null,
-   "citations_retrievable": 6,
+   "citations_retrievable": 5,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 2079.2,
+   "latency_ms": 1503.1,
    "timeout": false
   },
   {
@@ -3393,7 +3357,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
-   "latency_ms": 645.1,
+   "latency_ms": 528.6,
    "timeout": false
   }
  ]

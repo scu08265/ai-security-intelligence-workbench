@@ -184,15 +184,15 @@
     },
     {
       "question_id": "BQA-015", "category": "术语及语义查询", "difficulty": "medium",
-      "question": "AUROC 是什么指标？",
+      "question": "AURC 是什么指标？",
       "history": [],
-      "expected_answer_terms": ["AUROC"],
+      "expected_answer_terms": ["coverage"],
       "expected_document_keys": ["paper:2609.29429"],
       "expected_event_ids": [],
       "expected_reasoning_steps": [],
       "should_refuse": false,
       "verification_status": "pending_human_review",
-      "notes": "AUROC 至少在两篇论文中出现，此题为单文档最低要求。"
+      "notes": "2026-10-18 换题：原题 AUROC 在本语料中只有实验用法、没有定义句，无法从证据作答；换成同一文档内有成句定义的 AURC（area under the risk–coverage curve）。"
     },
     {
       "question_id": "BQA-016", "category": "术语及语义查询", "difficulty": "medium",
