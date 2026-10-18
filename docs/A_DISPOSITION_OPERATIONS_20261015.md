@@ -1,7 +1,8 @@
-# 处置闭环工程化：队列、编排与复测真实性（A，2026-10-15）
+# 处置闭环工程化：队列、编排与复测真实性（A，2026-10-18 定稿）
 
 对应任务书 `docs/TASK_BRIEF_20261015.md` 的一、二、三、四节里分给 A 的部分。
-分支 `feat/a-disposition-operations-20261015`，证据目录
+分支 `feat/a-disposition-operations-20261015`，已 rebase 到 `main = e584b59`
+（即任务书里的 `2c8c7b1` 之后的最新 head），提交 `609990f`；证据目录
 `artifacts/a_eval/disposition-operations-20261015/`。
 
 ## 0. 先说运行环境（不然后面的数字没法读）
@@ -93,22 +94,34 @@
 
 ```json
 {
-  "id": "run-525456887f4b",
+  "id": "run-c45692346f65",
   "kind": "disposition",
-  "status": "completed",
-  "summary": "处置队列巡检：待处置 0，处置中 2，待复测 0，逾期 0 条",
+  "status": "attention",
+  "summary": "处置队列巡检：待处置 0，处置中 2，待复测 0，逾期 2 条",
   "detail": {
     "scheduler": {
       "task_id": "daily-disposition-queue",
-      "planned_at": "2026-10-15T14:32:02Z",
-      "actual_at": "2026-10-15T14:32:02Z",
-      "trigger_source": "windows_task_scheduler_or_cron"
+      "planned_at": "2026-10-18T04:22:45Z",
+      "actual_at": "2026-10-18T04:22:45Z",
+      "trigger_source": "manual_or_api"
     },
-    "scheduler_trace": ["queue", "assign", "recheck", "close_or_accept"],
+    "scheduler_trace": [
+      {"stage": "queue", "status": "ok"},
+      {"stage": "assign", "status": "attention"},
+      {"stage": "recheck", "status": "ok"},
+      {"stage": "close_or_accept", "status": "ok"}
+    ],
+    "overdue": [{"event_id": "CVE-2026-100654"}, {"event_id": "CVE-2026-103241"}],
     "queue": { "pending_total": 0, "queue_total": 5, "closure_rate": 0.6 }
   }
 }
 ```
+
+这条是 2026-10-18 手工打 `POST /api/dispositions/run` 的真实返回：两条自 10-15 起
+留在"处置中"的条目开单已 61.95 小时，`assign` 阶段据此把运行标成 `attention`，
+并各发了一条 `disposition_overdue` warning 告警——到期提醒确实接在巡检里。
+`trigger_source` 是 `manual_or_api` 是因为这次是手工触发；计划任务触发时写
+`windows_task_scheduler_or_cron`（见 2.3）。
 
 `scheduler_trace` 与 `collect` 运行同形：每个阶段有 `stage` / `status` / `at` / `detail`，
 所以"队列 → 指派 → 复测 → 关闭/接受风险"每一步都能在运行记录里核查，
@@ -189,12 +202,12 @@ total=5 registered=5 unopened=0 closed=3 rate=0.6 registered_rate=0.6
 
 ## 4. A4：CI 证据与连续运行
 
-- `reports/ci-validation.json` 已刷新到当前 main `185b55e`，run `38739007034`，
-  **test / container / rollback 三个 job 全 success**。
-- 连续运行核对：`tools/check_continuous_run.py --days 7`。
-  2026-10-15 当天已有计划运行记录（01:46Z 起，最近一次 06:46Z），
-  缺口仍是 10-09 / 10-11 / 10-12 / 10-13 四天（机器休眠或关机期间计划任务不补触发）。
-  `target_met = false`，**预计 2026-10-20 回到 true**（前提是每天至少一次计划运行）。
+- `reports/ci-validation.json` **本轮没有重刷**。main 上已有 `1c5bf43`
+  （run `39095078450`，test / container / rollback 三个 job 全 success）；
+  rebase 时该文件与我的旧证据（`185b55e`）冲突，我保留的是 main 的新版本，
+  没有用旧 run 覆盖它。
+- 连续运行核对：`tools/check_continuous_run.py --days 7`，按 2026-10-18 的新账本
+  重算的结论写在 `docs/A_CONTINUOUS_RUN_STATUS_20261018.md`。
 
 ## 5. 口径与边界
 
@@ -221,8 +234,8 @@ total=5 registered=5 unopened=0 closed=3 rate=0.6 registered_rate=0.6
 ```
 
 测试：`pytest tests/test_disposition.py tests/test_disposition_ops.py
-tests/test_disposition_batch_tool.py -q`（本机全量 650 passed / 4 skipped，
-4 条跳过是需要 B 任务衍生语料的那几条）。
+tests/test_disposition_batch_tool.py -q`。rebase 后本机全量是
+**742 passed / 4 skipped**（4 条跳过是需要 B 任务衍生语料的那几条）。
 
 ## 7. 结论（可直接进技术报告）
 

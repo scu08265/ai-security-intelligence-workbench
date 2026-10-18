@@ -1,52 +1,24 @@
 {
-  "generated_at": "2026-10-15T14:36:09Z",
+  "generated_at": "2026-10-18T04:23:53Z",
   "timezone_note": "日期按 UTC 切分，与 /api/competition/scorecard 的日界一致（本机为 UTC+8）。",
   "source": {
     "database": "D:\\新建文件夹\\2026-09-26\\ba\\ai-security-intelligence-workbench\\data\\intel.sqlite",
-    "database_sha256": "0018a5eecd348da35cd80440bc8981a77106052aa22a77b679100192603406b9",
+    "database_sha256": "a838cc51c4b180fb2cb4a2888628a2e1d16da63bc4d810fd348afd9b931dd562",
     "rule": "kind in {collect, scheduled_collect} 且 detail.trigger == 'scheduled'"
   },
   "scorecard_view": {
     "target_days": 7,
-    "cumulative_actual_run_days": 10,
-    "cumulative_scheduled_run_days": 10,
-    "consecutive_scheduled_days": 2,
-    "scheduled_days_in_window": 3,
+    "cumulative_actual_run_days": 13,
+    "cumulative_scheduled_run_days": 13,
+    "consecutive_scheduled_days": 5,
+    "scheduled_days_in_window": 5,
     "target_met": false,
     "note": "cumulative_* 是累计不同自然日，与 /api/competition/scorecard 的 actual_run_days / scheduled_run_days 同源；scheduled_days_in_window 是 7 天窗口内实际有计划运行的天数。"
   },
   "window": {
-    "from": "2026-10-09",
-    "to": "2026-10-15",
+    "from": "2026-10-12",
+    "to": "2026-10-18",
     "days": [
-      {
-        "date": "2026-10-09",
-        "scheduled_run_count": 0,
-        "statuses": [],
-        "run_ids": [],
-        "first_started_at": null,
-        "last_started_at": null
-      },
-      {
-        "date": "2026-10-10",
-        "scheduled_run_count": 1,
-        "statuses": [
-          "partial"
-        ],
-        "run_ids": [
-          "run-501075d24ac6"
-        ],
-        "first_started_at": "2026-10-10T11:03:55Z",
-        "last_started_at": "2026-10-10T11:03:55Z"
-      },
-      {
-        "date": "2026-10-11",
-        "scheduled_run_count": 0,
-        "statuses": [],
-        "run_ids": [],
-        "first_started_at": null,
-        "last_started_at": null
-      },
       {
         "date": "2026-10-12",
         "scheduled_run_count": 0,
@@ -93,8 +65,10 @@
       },
       {
         "date": "2026-10-15",
-        "scheduled_run_count": 5,
+        "scheduled_run_count": 7,
         "statuses": [
+          "completed",
+          "completed",
           "completed",
           "completed",
           "completed",
@@ -106,15 +80,99 @@
           "run-41bd2b22158b",
           "run-9914dfc9d97b",
           "run-21e0bbd6ea74",
-          "run-734e25e4c1e8"
+          "run-734e25e4c1e8",
+          "run-a271dfe64257",
+          "run-3c47e56c58c4"
         ],
         "first_started_at": "2026-10-15T01:46:01Z",
-        "last_started_at": "2026-10-15T06:46:00Z"
+        "last_started_at": "2026-10-15T15:46:00Z"
+      },
+      {
+        "date": "2026-10-16",
+        "scheduled_run_count": 17,
+        "statuses": [
+          "partial",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "partial",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ],
+        "run_ids": [
+          "run-4563d29b5234",
+          "run-931da3539bd1",
+          "run-e5132b62b43b",
+          "run-d8f4b471d296",
+          "run-399501a18d12",
+          "run-15259ed7f8f6",
+          "run-7b9bc6057194",
+          "run-1ea4d3b14a64",
+          "run-bf1c9f0f62dd",
+          "run-06baf0cb0d88",
+          "run-4cd5ae1aa6fc",
+          "run-13851c58e735",
+          "run-a56d0dceca28",
+          "run-6b8efc6e04e1",
+          "run-aa0de5dc0c27",
+          "run-f6fccc12545f",
+          "run-cf23419e9d57"
+        ],
+        "first_started_at": "2026-10-16T03:40:54Z",
+        "last_started_at": "2026-10-16T23:46:00Z"
+      },
+      {
+        "date": "2026-10-17",
+        "scheduled_run_count": 9,
+        "statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ],
+        "run_ids": [
+          "run-25d2ab8c6a53",
+          "run-bf444a534703",
+          "run-fa96fb3f7e5d",
+          "run-f5933dd78d4f",
+          "run-07493221442a",
+          "run-c334d3e3d17d",
+          "run-936902c93499",
+          "run-364fdacc3f01",
+          "run-26d53fdfc04a"
+        ],
+        "first_started_at": "2026-10-17T00:46:00Z",
+        "last_started_at": "2026-10-17T09:46:03Z"
+      },
+      {
+        "date": "2026-10-18",
+        "scheduled_run_count": 1,
+        "statuses": [
+          "completed"
+        ],
+        "run_ids": [
+          "run-4a8e625c47fd"
+        ],
+        "first_started_at": "2026-10-18T03:46:03Z",
+        "last_started_at": "2026-10-18T03:46:03Z"
       }
     ],
     "days_missing_scheduled_run": [
-      "2026-10-09",
-      "2026-10-11",
       "2026-10-12",
       "2026-10-13"
     ]
