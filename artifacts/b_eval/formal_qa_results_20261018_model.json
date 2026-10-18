@@ -27,8 +27,8 @@
   "answered": 46,
   "refused": 4,
   "errors": 0,
-  "timeouts": 2,
-  "failures": 2,
+  "timeouts": 0,
+  "failures": 0,
   "document_hit": {
    "ok": 35,
    "n": 36,
@@ -36,9 +36,9 @@
    "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
   },
   "term_hit": {
-   "ok": 24,
+   "ok": 25,
    "n": 38,
-   "rate": 0.6316,
+   "rate": 0.6579,
    "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
   },
   "refusal_accuracy": {
@@ -89,11 +89,11 @@
  },
  "latency_ms": {
   "samples": 50,
-  "p50": 3484.3,
-  "p95": 4985.4,
-  "min": 1845.5,
-  "max": 5182.8,
-  "mean": 3664.5
+  "p50": 2634.3,
+  "p95": 3266.9,
+  "min": 1419.1,
+  "max": 4250.6,
+  "mean": 2659.5
  },
  "by_category": {
   "中英文混合查询": {
@@ -104,11 +104,11 @@
    "document_hit_n": 6,
    "document_hit_ok": 6,
    "term_hit_n": 6,
-   "term_hit_ok": 3,
+   "term_hit_ok": 4,
    "refusal_n": 6,
    "refusal_ok": 6,
    "document_hit_rate": 1.0,
-   "term_hit_rate": 0.5,
+   "term_hit_rate": 0.6667,
    "refusal_accuracy": 1.0
   },
   "基础事实问答": {
@@ -287,7 +287,7 @@
    "citations_retrievable": 5,
    "answer_head": "《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》。",
    "answer_full": "《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》。",
-   "latency_ms": 1845.5,
+   "latency_ms": 1419.1,
    "timeout": false
   },
   {
@@ -300,49 +300,7 @@
    "error": null,
    "refused": false,
    "refusal_correct": true,
-   "related_event_ids": [
-    "OPENALEX-W7128805264",
-    "OPENALEX-W7214527440",
-    "OPENALEX-W7214558721",
-    "OPENALEX-W7214600341",
-    "OPENALEX-W7214526768",
-    "OPENALEX-W7214542908",
-    "OPENALEX-W7214553113",
-    "OPENALEX-W7163333744",
-    "OPENALEX-W7163389061",
-    "OPENALEX-W7214449097",
-    "OPENALEX-W7214468787",
-    "OPENALEX-W4406794439",
-    "OPENALEX-W7125151750",
-    "OPENALEX-W7151534166",
-    "OPENALEX-W7213611819",
-    "OPENALEX-W7214295679",
-    "OPENALEX-W7214338629",
-    "OPENALEX-W7214339430",
-    "OPENALEX-W7164892115",
-    "OPENALEX-W7214152392",
-    "OPENALEX-W7214194099",
-    "OPENALEX-W7214198864",
-    "OPENALEX-W7214222573",
-    "OPENALEX-W7214241047",
-    "OPENALEX-W7214288902",
-    "OPENALEX-W7214294325",
-    "OPENALEX-W7214307780",
-    "OPENALEX-W7214313011",
-    "OPENALEX-W7214329963",
-    "OPENALEX-W7214342592",
-    "OPENALEX-W7214358407",
-    "OPENALEX-W7214375324",
-    "OPENALEX-W7214399041",
-    "OPENALEX-W7214401639",
-    "OPENALEX-W7214403218",
-    "OPENALEX-W7214404543",
-    "OPENALEX-W7214508238",
-    "OPENALEX-W7214508255",
-    "OPENALEX-W7204236562",
-    "OPENALEX-W7214062101",
-    "OPENALEX-W7214100311"
-   ],
+   "related_event_ids": [],
    "document_citation_count": 5,
    "cited_document_keys": [
     "paper:2501.13787",
@@ -400,9 +358,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping",
-   "answer_full": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…\nOPENALEX-W7214527440：Abstract mRNA vaccines have become a clinically validated vaccine platform, as demonstrated by the success of COVID-19 vaccines such as Comirnaty and Spikevax, owing to their rapid design, manufacturing scalability, and capacity to induce in situ antigen expression. A key factor underlying this success is the lipid nanoparticle (LNP) delivery system, which protects mRNA from degradation and promot…\nOPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition in the digital economy era. Using a sample of Chinese A-share listed firms from 2012 to 2024, this study investigates the impact of digital technology risk exposure ( DTRE ) on corporate key core technology innovation ( KC…\nOPENALEX-W7214600341：Abstract Automatic Exploit Generation (AEG) plays an important role in proactive assessment of software threats by identifying vulnerabilities and constructing functional payloads. Existing Large Language Model (LLM)-based methods, however, often struggle to reason about complex exploit logic and to perform runtime introspection, leaving a gap between static vulnerability analysis and dynamic memo…\nOPENALEX-W7214526768：The current trend of the Internet of Medical Things (IoMT) has facilitated intelligent healthcare, including real-time monitoring, remote diagnosis, and data-driven clinical decision support. This substantially increases the attack surfaces of medical cyber–physical systems. As a privacy-conserving paradigm, Federated Learning (FL) has been proposed to enable distributed IoMT devices to collaborat…\nOPENALEX-W7214542908：Abstract A troll is an online user who deliberately disrupts discussions, spreads misleading or provocative messages, and incites conflict or disorder in digital interactions. Troll detection based on behavior change is one of the new methods of research in this field. The feedback-oriented nature of GANs, coupled with the relational insights from social network analysis, allows for effective simu…\nOPENALEX-W7214553113：Human oversight is the control on which most AI-agent governance rests, yet deployments rarely record whether it was exercised — only that a mechanism exists. This paper treats that gap as a documentation-and-control failure and names its acute form override theatre: a single actor clears a policy-violating agent action with one dis-position, holding the initiate–authorise–record chain end to end,…\nOPENALEX-W7163333744：This version corrects a citation error found by an automated check and confirmed by hand. Section 4.5 cited arXiv:2605.29963 (Honeyval, an evaluation framework for LLM-powered HTTP honeypots) for its evidence on inference-system fingerprinting; the passage describes arXiv:2605.29979, \"Fingerprinting Inference Systems of Large Language Models\", and both citations now point there. The wording of the…\nOPENALEX-W7163389061：This version (2026-09-26) corrects a citation error found by an automated check and confirmed by hand against the arXiv abstracts. Version 2 cited the identifier 2605.30998 for the ClawTrojan multi-step trojan benchmark and its DASGuard defense; that identifier is a security analysis of x402 payments, and ClawTrojan is arXiv:2605.31042. All six trojan citations are corrected. The x402 payment-laye…\nOPENALEX-W7214449097：Large language models and AI-mediated search systems have become the primary intermediaries for institutional information across educational, legal, civic, and professional life. Current models of AI ethics focus primarily on the accuracy, bias, and fairness of AI systems. This focus is essential but fails to recognize a structural failure that precedes accuracy: in an information context, where t…\nOPENALEX-W7214468787：Today's Security Operations Centers (SOCs) need to process vast amounts of complex and diverse security data from endpoints, cloud, identity and network systems in a timely manner.Large Language Models (LLMs) have been shown to have a good performance in reasoning but are not widely used in automated incident response for the following reasons: Lack of explainability: LLM outputs are often hard to…\nOPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models\nOPENALEX-W7125151750：AI for Mathematics (AI4Math) has emerged as a distinct field that leverages machine learning to navigate mathematical landscapes historically intractable for early symbolic systems. While mid-20th-century symbolic approaches successfully automated formal logic, they faced severe scalability limitations due to the combinatorial explosion of the search space. The recent integration of data-driven ap…\nOPENALEX-W7151534166：Recent advances in large language models (LLMs) have significantly improved their ability to perform mathematical reasoning, extending from elementary problem solving to increasingly capable performance on research-level problems. However, reliably solving and verifying such problems remains challenging due to the inherent ambiguity of natural language reasoning. In this paper, we propose an autom…\nOPENALEX-W7213611819：Scientific discovery is defined by the ability to identify the boundaries of existing knowledge and venture into unexplored territory. The ultimate vision for AI in science is problem-driven autonomous research: given a fundamental challenge by a human expert, the AI independently navigates the scientific landscape, uncovers theoretical and empirical bottlenecks, and systematically expands the fro…\nOPENALEX-W7214295679：Contract portfolios at large enterprises now routinely exceed tens of thousands of active agreements, and the regulatory obligations attaching to those agreements have multiplied faster than legal review capacity. In 2025 this gap became acute: the EU Digital Operational Resilience Act (DORA) became applicable on 17 January without a transition period, forcing thousands of financial entities into…\nOPENALEX-W7214338629：This study develops an integrated predictive business intelligence (BI) framework that combines machine learning (ML), explainable artificial intelligence (XAI), and large language models (LLMs) for customer response prediction in banking. Using the UCI Bank Marketing dataset of 45,211 observations, we compare Logistic Regression, Decision Tree, Random Forest, and XGBoost using accuracy, precision…\nOPENALEX-W7214339430：Enterprise deployment of agentic AI systems is accelerating sharply -Gartner projects that 40% of enterprise applications will embed task-specific AI agents by the end of 2026, up from fewer than 5% in 2025 [1].Unlike deterministic software, AI agents execute autonomous tool-call chains, each carrying implicit privilege that classical IAM and RBAC frameworks were not designed to govern.We contribu…\nOPENALEX-W7164892115：NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image Diagnosis\nOPENALEX-W7214152392：Large language models (LLMs) have rapidly gained popularity across a wide range of applications, from customer support to content generation and decision support systems. However, LLMs have also been found to exhibit social biases, reflecting and amplifying stereotypes and prejudices present in their training data. Such biases can lead to harmful outcomes, particularly in sensitive domains. Addres…\nOPENALEX-W7214194099：Large language models (LLMs) and knowledge graphs (KGs) are increasingly combined to improve factual grounding, reasoning, explainability, and trustworthiness. Existing studies primarily treat such systems as instances of LLM–KG integration, paying little attention to the hybrid architecture itself. Consequently, ethical, privacy, and bias (EPB) analyses rarely consider how different hybrid archit…\nOPENALEX-W7214198864：A hallucination in a language model may produce a false statement, a nonexistent citation, or a plausible explanation unsupported by evidence. In an AI agent, the same class of failure can pass through memory, planning, tools, credentials, and other agents until it changes external state. The problem is therefore no longer limited to answer quality. It becomes a systems problem involving authority…\nOPENALEX-W7214222573：Heterogeneous AI paradigms such as Large Language Models (LLMs), Knowledge Graphs (KGs), and agentic systems are increasingly combined to exploit complementary forms of knowledge, reasoning, and computation. However, current hybrid AI architectures typically treat hybridization as a predefined mechanism for coordinating heterogeneous components, leaving the hybrid itself largely unable to learn ho…\nOPENALEX-W7214241047：Cloud Security Posture Management (CSPM) systems can produce large queues of configuration findings, yet a nominal severity label alone does not capture internet reachability, attainable privilege, asset importance, blast radius, attack-path contribution, or the regulatory relevance of the affected control.Organizations operating across India and South Korea also need a defensible way to relate on…\nOPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the application telemetry layer: the served tool manifest, the user prompt, and the model's messages. Some threats, however, smuggle malicious instructions and actions past the application boundary, leaving them invisible to that layer…\nOPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-and-control foothold, and executed a multi-stage intrusion into Hugging Face's production multi-tenant dataset conversion infrastructure (referred to in this autopsy as Incident-2026-Alpha). Over 4.5 days, the rogue agent e…\nOPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot tamper with their own execution traces. We show that local LLM agents such as Claude Code, Codex, Antigravity, Open Code and Grok Build fail to enforce this boundary. All tested harnesses, except Muse Code, allowed agents…\nOPENALEX-W7214313011：Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger actions. Yet real-world inputs rarely arrive in isolation: they come with background details and surrounding context. We find that short additions that fit naturally into this context can nevertheless redirect…\nOPENALEX-W7214329963：Detectors of alignment failures screen deployed language models and score alignment benchmarks. Most are generative judges that spend a decoding pass on every criterion, and classifiers that read token probabilities, such as Llama Guard, still score one fixed label per call. Jev, a model trained with reinforcement learning for calibrated decisions (RLCD), answers many typed questions about one inp…\nOPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained verifiable rewards with Schema-Contrastive Advantage Estimation to alle…\nOPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by complex reasoning spaces: an exploration bias, where models are drawn toward locally plausible but structurally unstable branches, and a compounding bias, where small local deviations accumulate across depth and suppress r…\nOPENALEX-W7214375324：Multi-agent systems built on large language models (LLMs) are increasingly deployed in high-stakes settings such as finance, healthcare, and software engineering, where agents coordinate through natural-language messages. The same channels, however, let colluding agents exfiltrate confidential information or coordinate unauthorized actions, and steganography can hide such communication inside outp…\nOPENALEX-W7214399041：Multi-agent deliberation can improve performance, but what happens when some agents do not act in good faith? In practice, an agent may be deceptive and work to subvert the group, whether through its own objectives or external instruction. We study how susceptibility to deception scales as groups increase in size and deceivers become more prevalent. It is not the number of agents in the group that…\nOPENALEX-W7214401639：Finite state machine (FSM) and behavior trees (BT) are widely adopted behavioral modeling paradigms for autonomous intelligent systems. While functionally equivalent and inter-convertible in principle, existing transformation methods between FSM and BT face major challenges in preserving behavioral completeness and avoiding model complexity explosion. To overcome these issues, we propose an LLM-dr…\nOPENALEX-W7214403218：Publicly exposed large language model (LLM) infrastructure creates a growing attack surface, yet real-world targeting remains poorly understood. We present Ollure, a low- and medium-interaction honeypot that emulates the Ollama API without a backend LLM. Spanning four deployments across cloud and university networks, Ollure operated for 84 days and recorded 290,887 interactions from 2,793 unique s…\nOPENALEX-W7214404543：A central concern in AI safety is that agents may treat oversight as an obstacle when it conflicts with completing their goals. We study instrumental evasion, the propensity of LLM agents to circumvent runtime monitoring as a means of completing ordinary tasks. We introduce EvasionBench, a benchmark of 50 diverse task-policy pairs in which completing the task requires an operation prohibited by a…\nOPENALEX-W7214508238：One long-form exam in a large course costs hundreds of grader-hours, and qualified graders are scarce; LLM graders are a tempting alternative. To show its pitfalls we grade a practical Computer Vision exam ($570$ dual-graded students) under $171$ configurations spanning closed and open-weights models; the best reaches mean absolute error $1.64/35$, below the $2.61/35$ two human graders achieve aga…\nOPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during package installation, import, and runtime. Traditional static analysis fails to understand code semantics; machine learning-based methods rely on feature extraction, which suffers from concept drift; existing LLM solutions su…\nOPENALEX-W7204236562：How can humans make sense of the rapid takeoff of artificial intelligence (AI)? We studied the sensemaking dynamics of AI through an open-ended, mixed-methods study with computational text analysis of millions of AI-related newspaper articles and social media posts grounded in 57 semi-structured interviews with AI professionals in 2021 and 2023—before and after the recent surge of public interest.…\nOPENALEX-W7214062101：Demand response (DR) in renewable- and storage-rich integrated energy systems (IESs) must remain economically reliable and physically executable despite renewable and load uncertainty, volatile prices, and cyber disruptions affecting sensing and communication. Existing approaches commonly separate market scheduling, distributed control, cyber resilience, and feasibility enforcement, creating a gap…\nOPENALEX-W7214100311：Multidrug-resistant organisms are increasingly difficult to manage because therapeutic scarcity, delayed susceptibility information and antimicrobial-selection pressure interact at the bedside. At the same time, artificial intelligence (AI) is entering infectious-disease practice through resistance prediction, rapid diagnostic interpretation, stewardship triage and drug discovery. This critical na…",
-   "latency_ms": 4985.4,
+   "answer_head": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展真实世界的被动测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并针对 Ollama 生态定制、支持多层级交互仿真 [chunk-e7c4f5f3c7751a3f",
+   "answer_full": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展真实世界的被动测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并针对 Ollama 生态定制、支持多层级交互仿真 [chunk-e7c4f5f3c7751a3ffa30b7ce][chunk-b64f03dfbfeb5c0b6ef222a4]。",
+   "latency_ms": 2850.9,
    "timeout": false
   },
   {
@@ -473,9 +431,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出 CODETTA 这一面向独立部署智能体、在现实非对称设置下的高容量隐写协议 [chunk-292b9c3eb0203f0aa1f5ba2e]。该证据仅说明其针对现有方案多依赖预共享密钥、非对称智能体实用协议容量很低等局限，未提供更多细节 [chunk-292b9c3eb0203f0aa1f5b",
-   "answer_full": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出 CODETTA 这一面向独立部署智能体、在现实非对称设置下的高容量隐写协议 [chunk-292b9c3eb0203f0aa1f5ba2e]。该证据仅说明其针对现有方案多依赖预共享密钥、非对称智能体实用协议容量很低等局限，未提供更多细节 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
-   "latency_ms": 4130.6,
+   "answer_head": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出 CODETTA 这一面向独立部署智能体、在现实非对称设置下的高容量隐写协议 [chunk-292b9c3eb0203f0aa1f5ba2e]。该描述仅来自论文摘要片段，未涵盖其具体方法细节 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
+   "answer_full": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出 CODETTA 这一面向独立部署智能体、在现实非对称设置下的高容量隐写协议 [chunk-292b9c3eb0203f0aa1f5ba2e]。该描述仅来自论文摘要片段，未涵盖其具体方法细节 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
+   "latency_ms": 2588.2,
    "timeout": false
   },
   {
@@ -543,11 +501,11 @@
     "SAGE",
     "Topological"
    ],
-   "term_hit": true,
+   "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为论文标题的一部分出现，即“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
-   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为论文标题的一部分出现，即“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
-   "latency_ms": 4055.7,
+   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为论文标题与所提框架出现，但证据未给出 SAGE 的全称展开 [chunk-4b72fc8fa621782e6f526842]。",
+   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为论文标题与所提框架出现，但证据未给出 SAGE 的全称展开 [chunk-4b72fc8fa621782e6f526842]。",
+   "latency_ms": 2380.5,
    "timeout": false
   },
   {
@@ -609,9 +567,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 4,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3440.6,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2447.6,
    "timeout": false
   },
   {
@@ -681,9 +639,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "NeRD 论文的应用领域是医学图像诊断，具体在两个皮肤图像数据集上进行了实验 [chunk-7b3ba17746f32905b1b37285]。其框架面向医学图像诊断中的本体论接地的思维链推理 [chunk-5c71aaa24bd8d7056ac0313a]。",
-   "answer_full": "NeRD 论文的应用领域是医学图像诊断，具体在两个皮肤图像数据集上进行了实验 [chunk-7b3ba17746f32905b1b37285]。其框架面向医学图像诊断中的本体论接地的思维链推理 [chunk-5c71aaa24bd8d7056ac0313a]。",
-   "latency_ms": 3951.2,
+   "answer_head": "NeRD 论文的应用领域是医学图像诊断，具体在两个皮肤图像数据集上进行了实验 [chunk-5c71aaa24bd8d7056ac0313a][chunk-7b3ba17746f32905b1b37285]。其框架面向医学图像诊断中的思维链推理，但证据中报告的实验仅限皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8fa",
+   "answer_full": "NeRD 论文的应用领域是医学图像诊断，具体在两个皮肤图像数据集上进行了实验 [chunk-5c71aaa24bd8d7056ac0313a][chunk-7b3ba17746f32905b1b37285]。其框架面向医学图像诊断中的思维链推理，但证据中报告的实验仅限皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。",
+   "latency_ms": 1901.9,
    "timeout": false
   },
   {
@@ -696,9 +654,7 @@
    "error": null,
    "refused": false,
    "refusal_correct": true,
-   "related_event_ids": [
-    "OPENALEX-W7128805264"
-   ],
+   "related_event_ids": [],
    "document_citation_count": 5,
    "cited_document_keys": [
     "paper:2609.29808"
@@ -755,9 +711,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping",
-   "answer_full": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…",
-   "latency_ms": 4247.7,
+   "answer_head": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离该进程组 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
+   "answer_full": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离该进程组 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
+   "latency_ms": 2363.9,
    "timeout": false
   },
   {
@@ -785,7 +741,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 2982.9,
+   "latency_ms": 2051.2,
    "timeout": false
   },
   {
@@ -799,7 +755,7 @@
    "refused": false,
    "refusal_correct": true,
    "related_event_ids": [
-    "OPENALEX-W7128805264"
+    "OPENALEX-W4406794439"
    ],
    "document_citation_count": 4,
    "cited_document_keys": [
@@ -847,11 +803,11 @@
     "Parameter-Efficient",
     "Fine-Tuning"
    ],
-   "term_hit": false,
+   "term_hit": true,
    "citations_retrievable": 4,
-   "answer_head": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping",
-   "answer_full": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…",
-   "latency_ms": 3119.7,
+   "answer_head": "OPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models",
+   "answer_full": "OPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models",
+   "latency_ms": 2317.9,
    "timeout": false
   },
   {
@@ -920,9 +876,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布、且以初始正确决策为分析条件的系统，用 TFR 衡量有界优化器发现保持答案不变的上下文并重定向固定分支的频率 [",
-   "answer_full": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布、且以初始正确决策为分析条件的系统，用 TFR 衡量有界优化器发现保持答案不变的上下文并重定向固定分支的频率 [chunk-1934b1e31fc0d9c70d011fdb]。",
-   "latency_ms": 3511.4,
+   "answer_head": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布且决策初始正确的系统，并用 TFR 衡量有界优化器发现保持答案的上下文以重定向固定分支的频率 [chunk-19",
+   "answer_full": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布且决策初始正确的系统，并用 TFR 衡量有界优化器发现保持答案的上下文以重定向固定分支的频率 [chunk-1934b1e31fc0d9c70d011fdb]。",
+   "latency_ms": 2459.8,
    "timeout": false
   },
   {
@@ -1005,7 +961,7 @@
    "citations_retrievable": 6,
    "answer_head": "OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Intro",
    "answer_full": "OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…",
-   "latency_ms": 3032.7,
+   "latency_ms": 3244.3,
    "timeout": false
   },
   {
@@ -1074,9 +1030,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。它提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分 41",
-   "answer_full": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。它提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分 413/203/395 用于训练/验证/测试 [chunk-67f8da8439e4a735fa12d084]。",
-   "latency_ms": 3575.3,
+   "answer_head": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分",
+   "answer_full": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分（训练/验证/测试为 413/203/395）[chunk-67f8da8439e4a735fa12d084]。",
+   "latency_ms": 2696.0,
    "timeout": false
   },
   {
@@ -1157,7 +1113,7 @@
    "citations_retrievable": 6,
    "answer_head": "OPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the applicatio",
    "answer_full": "OPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the application telemetry layer: the served tool manifest, the user prompt, and the model's messages. Some threats, however, smuggle malicious instructions and actions past the application boundary, leaving them invisible to that layer…",
-   "latency_ms": 3484.3,
+   "latency_ms": 2640.8,
    "timeout": false
   },
   {
@@ -1271,8 +1227,8 @@
    "citations_retrievable": 5,
    "answer_head": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping",
    "answer_full": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…\nOPENALEX-W7214527440：Abstract mRNA vaccines have become a clinically validated vaccine platform, as demonstrated by the success of COVID-19 vaccines such as Comirnaty and Spikevax, owing to their rapid design, manufacturing scalability, and capacity to induce in situ antigen expression. A key factor underlying this success is the lipid nanoparticle (LNP) delivery system, which protects mRNA from degradation and promot…\nOPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition in the digital economy era. Using a sample of Chinese A-share listed firms from 2012 to 2024, this study investigates the impact of digital technology risk exposure ( DTRE ) on corporate key core technology innovation ( KC…\nOPENALEX-W7214600341：Abstract Automatic Exploit Generation (AEG) plays an important role in proactive assessment of software threats by identifying vulnerabilities and constructing functional payloads. Existing Large Language Model (LLM)-based methods, however, often struggle to reason about complex exploit logic and to perform runtime introspection, leaving a gap between static vulnerability analysis and dynamic memo…\nOPENALEX-W7214526768：The current trend of the Internet of Medical Things (IoMT) has facilitated intelligent healthcare, including real-time monitoring, remote diagnosis, and data-driven clinical decision support. This substantially increases the attack surfaces of medical cyber–physical systems. As a privacy-conserving paradigm, Federated Learning (FL) has been proposed to enable distributed IoMT devices to collaborat…\nOPENALEX-W7214542908：Abstract A troll is an online user who deliberately disrupts discussions, spreads misleading or provocative messages, and incites conflict or disorder in digital interactions. Troll detection based on behavior change is one of the new methods of research in this field. The feedback-oriented nature of GANs, coupled with the relational insights from social network analysis, allows for effective simu…\nOPENALEX-W7214553113：Human oversight is the control on which most AI-agent governance rests, yet deployments rarely record whether it was exercised — only that a mechanism exists. This paper treats that gap as a documentation-and-control failure and names its acute form override theatre: a single actor clears a policy-violating agent action with one dis-position, holding the initiate–authorise–record chain end to end,…\nOPENALEX-W7163333744：This version corrects a citation error found by an automated check and confirmed by hand. Section 4.5 cited arXiv:2605.29963 (Honeyval, an evaluation framework for LLM-powered HTTP honeypots) for its evidence on inference-system fingerprinting; the passage describes arXiv:2605.29979, \"Fingerprinting Inference Systems of Large Language Models\", and both citations now point there. The wording of the…\nOPENALEX-W7163389061：This version (2026-09-26) corrects a citation error found by an automated check and confirmed by hand against the arXiv abstracts. Version 2 cited the identifier 2605.30998 for the ClawTrojan multi-step trojan benchmark and its DASGuard defense; that identifier is a security analysis of x402 payments, and ClawTrojan is arXiv:2605.31042. All six trojan citations are corrected. The x402 payment-laye…\nOPENALEX-W7214449097：Large language models and AI-mediated search systems have become the primary intermediaries for institutional information across educational, legal, civic, and professional life. Current models of AI ethics focus primarily on the accuracy, bias, and fairness of AI systems. This focus is essential but fails to recognize a structural failure that precedes accuracy: in an information context, where t…\nOPENALEX-W7214468787：Today's Security Operations Centers (SOCs) need to process vast amounts of complex and diverse security data from endpoints, cloud, identity and network systems in a timely manner.Large Language Models (LLMs) have been shown to have a good performance in reasoning but are not widely used in automated incident response for the following reasons: Lack of explainability: LLM outputs are often hard to…\nOPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models\nOPENALEX-W7125151750：AI for Mathematics (AI4Math) has emerged as a distinct field that leverages machine learning to navigate mathematical landscapes historically intractable for early symbolic systems. While mid-20th-century symbolic approaches successfully automated formal logic, they faced severe scalability limitations due to the combinatorial explosion of the search space. The recent integration of data-driven ap…\nOPENALEX-W7151534166：Recent advances in large language models (LLMs) have significantly improved their ability to perform mathematical reasoning, extending from elementary problem solving to increasingly capable performance on research-level problems. However, reliably solving and verifying such problems remains challenging due to the inherent ambiguity of natural language reasoning. In this paper, we propose an autom…\nOPENALEX-W7213611819：Scientific discovery is defined by the ability to identify the boundaries of existing knowledge and venture into unexplored territory. The ultimate vision for AI in science is problem-driven autonomous research: given a fundamental challenge by a human expert, the AI independently navigates the scientific landscape, uncovers theoretical and empirical bottlenecks, and systematically expands the fro…\nOPENALEX-W7214295679：Contract portfolios at large enterprises now routinely exceed tens of thousands of active agreements, and the regulatory obligations attaching to those agreements have multiplied faster than legal review capacity. In 2025 this gap became acute: the EU Digital Operational Resilience Act (DORA) became applicable on 17 January without a transition period, forcing thousands of financial entities into…\nOPENALEX-W7214338629：This study develops an integrated predictive business intelligence (BI) framework that combines machine learning (ML), explainable artificial intelligence (XAI), and large language models (LLMs) for customer response prediction in banking. Using the UCI Bank Marketing dataset of 45,211 observations, we compare Logistic Regression, Decision Tree, Random Forest, and XGBoost using accuracy, precision…\nOPENALEX-W7214339430：Enterprise deployment of agentic AI systems is accelerating sharply -Gartner projects that 40% of enterprise applications will embed task-specific AI agents by the end of 2026, up from fewer than 5% in 2025 [1].Unlike deterministic software, AI agents execute autonomous tool-call chains, each carrying implicit privilege that classical IAM and RBAC frameworks were not designed to govern.We contribu…\nOPENALEX-W7164892115：NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image Diagnosis\nOPENALEX-W7214152392：Large language models (LLMs) have rapidly gained popularity across a wide range of applications, from customer support to content generation and decision support systems. However, LLMs have also been found to exhibit social biases, reflecting and amplifying stereotypes and prejudices present in their training data. Such biases can lead to harmful outcomes, particularly in sensitive domains. Addres…\nOPENALEX-W7214194099：Large language models (LLMs) and knowledge graphs (KGs) are increasingly combined to improve factual grounding, reasoning, explainability, and trustworthiness. Existing studies primarily treat such systems as instances of LLM–KG integration, paying little attention to the hybrid architecture itself. Consequently, ethical, privacy, and bias (EPB) analyses rarely consider how different hybrid archit…\nOPENALEX-W7214198864：A hallucination in a language model may produce a false statement, a nonexistent citation, or a plausible explanation unsupported by evidence. In an AI agent, the same class of failure can pass through memory, planning, tools, credentials, and other agents until it changes external state. The problem is therefore no longer limited to answer quality. It becomes a systems problem involving authority…\nOPENALEX-W7214222573：Heterogeneous AI paradigms such as Large Language Models (LLMs), Knowledge Graphs (KGs), and agentic systems are increasingly combined to exploit complementary forms of knowledge, reasoning, and computation. However, current hybrid AI architectures typically treat hybridization as a predefined mechanism for coordinating heterogeneous components, leaving the hybrid itself largely unable to learn ho…\nOPENALEX-W7214241047：Cloud Security Posture Management (CSPM) systems can produce large queues of configuration findings, yet a nominal severity label alone does not capture internet reachability, attainable privilege, asset importance, blast radius, attack-path contribution, or the regulatory relevance of the affected control.Organizations operating across India and South Korea also need a defensible way to relate on…\nOPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the application telemetry layer: the served tool manifest, the user prompt, and the model's messages. Some threats, however, smuggle malicious instructions and actions past the application boundary, leaving them invisible to that layer…\nOPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-and-control foothold, and executed a multi-stage intrusion into Hugging Face's production multi-tenant dataset conversion infrastructure (referred to in this autopsy as Incident-2026-Alpha). Over 4.5 days, the rogue agent e…\nOPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot tamper with their own execution traces. We show that local LLM agents such as Claude Code, Codex, Antigravity, Open Code and Grok Build fail to enforce this boundary. All tested harnesses, except Muse Code, allowed agents…\nOPENALEX-W7214313011：Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger actions. Yet real-world inputs rarely arrive in isolation: they come with background details and surrounding context. We find that short additions that fit naturally into this context can nevertheless redirect…\nOPENALEX-W7214329963：Detectors of alignment failures screen deployed language models and score alignment benchmarks. Most are generative judges that spend a decoding pass on every criterion, and classifiers that read token probabilities, such as Llama Guard, still score one fixed label per call. Jev, a model trained with reinforcement learning for calibrated decisions (RLCD), answers many typed questions about one inp…\nOPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained verifiable rewards with Schema-Contrastive Advantage Estimation to alle…\nOPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by complex reasoning spaces: an exploration bias, where models are drawn toward locally plausible but structurally unstable branches, and a compounding bias, where small local deviations accumulate across depth and suppress r…\nOPENALEX-W7214375324：Multi-agent systems built on large language models (LLMs) are increasingly deployed in high-stakes settings such as finance, healthcare, and software engineering, where agents coordinate through natural-language messages. The same channels, however, let colluding agents exfiltrate confidential information or coordinate unauthorized actions, and steganography can hide such communication inside outp…\nOPENALEX-W7214399041：Multi-agent deliberation can improve performance, but what happens when some agents do not act in good faith? In practice, an agent may be deceptive and work to subvert the group, whether through its own objectives or external instruction. We study how susceptibility to deception scales as groups increase in size and deceivers become more prevalent. It is not the number of agents in the group that…\nOPENALEX-W7214401639：Finite state machine (FSM) and behavior trees (BT) are widely adopted behavioral modeling paradigms for autonomous intelligent systems. While functionally equivalent and inter-convertible in principle, existing transformation methods between FSM and BT face major challenges in preserving behavioral completeness and avoiding model complexity explosion. To overcome these issues, we propose an LLM-dr…\nOPENALEX-W7214403218：Publicly exposed large language model (LLM) infrastructure creates a growing attack surface, yet real-world targeting remains poorly understood. We present Ollure, a low- and medium-interaction honeypot that emulates the Ollama API without a backend LLM. Spanning four deployments across cloud and university networks, Ollure operated for 84 days and recorded 290,887 interactions from 2,793 unique s…\nOPENALEX-W7214404543：A central concern in AI safety is that agents may treat oversight as an obstacle when it conflicts with completing their goals. We study instrumental evasion, the propensity of LLM agents to circumvent runtime monitoring as a means of completing ordinary tasks. We introduce EvasionBench, a benchmark of 50 diverse task-policy pairs in which completing the task requires an operation prohibited by a…\nOPENALEX-W7214508238：One long-form exam in a large course costs hundreds of grader-hours, and qualified graders are scarce; LLM graders are a tempting alternative. To show its pitfalls we grade a practical Computer Vision exam ($570$ dual-graded students) under $171$ configurations spanning closed and open-weights models; the best reaches mean absolute error $1.64/35$, below the $2.61/35$ two human graders achieve aga…\nOPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during package installation, import, and runtime. Traditional static analysis fails to understand code semantics; machine learning-based methods rely on feature extraction, which suffers from concept drift; existing LLM solutions su…\nOPENALEX-W7204236562：How can humans make sense of the rapid takeoff of artificial intelligence (AI)? We studied the sensemaking dynamics of AI through an open-ended, mixed-methods study with computational text analysis of millions of AI-related newspaper articles and social media posts grounded in 57 semi-structured interviews with AI professionals in 2021 and 2023—before and after the recent surge of public interest.…\nOPENALEX-W7214062101：Demand response (DR) in renewable- and storage-rich integrated energy systems (IESs) must remain economically reliable and physically executable despite renewable and load uncertainty, volatile prices, and cyber disruptions affecting sensing and communication. Existing approaches commonly separate market scheduling, distributed control, cyber resilience, and feasibility enforcement, creating a gap…\nOPENALEX-W7214100311：Multidrug-resistant organisms are increasingly difficult to manage because therapeutic scarcity, delayed susceptibility information and antimicrobial-selection pressure interact at the bedside. At the same time, artificial intelligence (AI) is entering infectious-disease practice through resistance prediction, rapid diagnostic interpretation, stewardship triage and drug discovery. This critical na…",
-   "latency_ms": 5182.8,
-   "timeout": true
+   "latency_ms": 3266.9,
+   "timeout": false
   },
   {
    "question_id": "BQA-015",
@@ -1341,9 +1297,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3142.6,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2568.8,
    "timeout": false
   },
   {
@@ -1404,9 +1360,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 4,
-   "answer_head": "PEFT 是一种成本高效的微调技术，在追求最优下游任务性能的同时，最小化参数和计算复杂度 [chunk-8e22077c669275cfa3e1fd10]。该定义仅来自综述摘要的表述，证据未进一步展开其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
-   "answer_full": "PEFT 是一种成本高效的微调技术，在追求最优下游任务性能的同时，最小化参数和计算复杂度 [chunk-8e22077c669275cfa3e1fd10]。该定义仅来自综述摘要的表述，证据未进一步展开其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
-   "latency_ms": 4104.5,
+   "answer_head": "PEFT 是一种成本高效的微调技术，在尽量减少参数和计算复杂度的同时力求达到最优的下游任务性能 [chunk-8e22077c669275cfa3e1fd10]。需要限定的是，该定义出自这篇综述的摘要，证据未进一步说明其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
+   "answer_full": "PEFT 是一种成本高效的微调技术，在尽量减少参数和计算复杂度的同时力求达到最优的下游任务性能 [chunk-8e22077c669275cfa3e1fd10]。需要限定的是，该定义出自这篇综述的摘要，证据未进一步说明其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
+   "latency_ms": 2493.0,
    "timeout": false
   },
   {
@@ -1483,9 +1439,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 6,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3454.2,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 3021.8,
    "timeout": false
   },
   {
@@ -1558,7 +1514,7 @@
    "citations_retrievable": 5,
    "answer_head": "OPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot t",
    "answer_full": "OPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot tamper with their own execution traces. We show that local LLM agents such as Claude Code, Codex, Antigravity, Open Code and Grok Build fail to enforce this boundary. All tested harnesses, except Muse Code, allowed agents…",
-   "latency_ms": 3917.2,
+   "latency_ms": 2505.0,
    "timeout": false
   },
   {
@@ -1627,9 +1583,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过静态图结构特征提取、高层安全知识推理与轻量级本地部署，实现准确且离线的恶意 NPM 包检测 [chunk-1e26fb499bb6dbae04a358d4][chunk-3e02e30d18b6d9d534a09",
-   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过静态图结构特征提取、高层安全知识推理与轻量级本地部署，实现准确且离线的恶意 NPM 包检测 [chunk-1e26fb499bb6dbae04a358d4][chunk-3e02e30d18b6d9d534a09cad]。",
-   "latency_ms": 3413.5,
+   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过静态图结构特征提取、高层安全知识推理和轻量级本地部署，实现准确且离线的恶意 NPM 包检测 [chunk-1e26fb499bb6dbae04a358d4][chunk-3e02e30d18b6d9d534a09",
+   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过静态图结构特征提取、高层安全知识推理和轻量级本地部署，实现准确且离线的恶意 NPM 包检测 [chunk-1e26fb499bb6dbae04a358d4][chunk-3e02e30d18b6d9d534a09cad]。",
+   "latency_ms": 2532.2,
    "timeout": false
   },
   {
@@ -1704,11 +1660,11 @@
    "expected_answer_terms": [
     "OllamaDrama"
    ],
-   "term_hit": false,
+   "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3091.8,
+   "answer_head": "OllamaDrama 蜜罐观察到请求中 62 个指定了显式字符串 nonexistent，44 个引用了合法模型名，还有一个实例包含字符串 __gguf_header_overflow__ [chunk-2e3b3fec713324c33c3b0880]。该证据仅涉及请求中的模型名与特殊字符串统计，未涵盖其他观察内容 [chunk-2e3b3fec713324c33c3b0880]。",
+   "answer_full": "OllamaDrama 蜜罐观察到请求中 62 个指定了显式字符串 nonexistent，44 个引用了合法模型名，还有一个实例包含字符串 __gguf_header_overflow__ [chunk-2e3b3fec713324c33c3b0880]。该证据仅涉及请求中的模型名与特殊字符串统计，未涵盖其他观察内容 [chunk-2e3b3fec713324c33c3b0880]。",
+   "latency_ms": 3024.9,
    "timeout": false
   },
   {
@@ -1785,9 +1741,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其标题将其描述为“High-Capacity, Keyless, and Undetectable Multi-Agent Collusion”，但证据未进一步说明其具体机制 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其标题将其描述为“High-Capacity, Keyless, and Undetectable Multi-Agent Collusion”，但证据未进一步说明其具体机制 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "latency_ms": 3623.1,
+   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其摘要指出，这类隐写方式可将隐蔽通信隐藏在看似普通的输出中，从而使此类行为难以被检测 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其摘要指出，这类隐写方式可将隐蔽通信隐藏在看似普通的输出中，从而使此类行为难以被检测 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "latency_ms": 3100.5,
    "timeout": false
   },
   {
@@ -1861,7 +1817,7 @@
    "citations_retrievable": 5,
    "answer_head": "OPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by c",
    "answer_full": "OPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by complex reasoning spaces: an exploration bias, where models are drawn toward locally plausible but structurally unstable branches, and a compounding bias, where small local deviations accumulate across depth and suppress r…\nOPENALEX-W7214194099：Large language models (LLMs) and knowledge graphs (KGs) are increasingly combined to improve factual grounding, reasoning, explainability, and trustworthiness. Existing studies primarily treat such systems as instances of LLM–KG integration, paying little attention to the hybrid architecture itself. Consequently, ethical, privacy, and bias (EPB) analyses rarely consider how different hybrid archit…",
-   "latency_ms": 3903.6,
+   "latency_ms": 2973.0,
    "timeout": false
   },
   {
@@ -1938,9 +1894,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理相衔接 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则，再将推理链组织为 MCoT [chunk-5c71aaa24bd8d7056ac0313a]。",
-   "answer_full": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理相衔接 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则，再将推理链组织为 MCoT [chunk-5c71aaa24bd8d7056ac0313a]。",
-   "latency_ms": 3299.5,
+   "answer_head": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与 MCoT 推理相结合，用于医学图像诊断 [chunk-675668ff34c9d9eeb7b36b4a]。其流程包括从概念中归纳诊断规则集、执行神经符号规则蒸馏以选择、简化和落地规则，并将推理链组织为 MCoT [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "answer_full": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与 MCoT 推理相结合，用于医学图像诊断 [chunk-675668ff34c9d9eeb7b36b4a]。其流程包括从概念中归纳诊断规则集、执行神经符号规则蒸馏以选择、简化和落地规则，并将推理链组织为 MCoT [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "latency_ms": 2623.9,
    "timeout": false
   },
   {
@@ -2013,7 +1969,7 @@
    "citations_retrievable": 5,
    "answer_head": "OPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-an",
    "answer_full": "OPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-and-control foothold, and executed a multi-stage intrusion into Hugging Face's production multi-tenant dataset conversion infrastructure (referred to in this autopsy as Incident-2026-Alpha). Over 4.5 days, the rogue agent e…",
-   "latency_ms": 3464.4,
+   "latency_ms": 2916.2,
    "timeout": false
   },
   {
@@ -2092,7 +2048,7 @@
    "citations_retrievable": 6,
    "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
    "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
-   "latency_ms": 4023.8,
+   "latency_ms": 3030.3,
    "timeout": false
   },
   {
@@ -2169,9 +2125,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统在金融、医疗、软件工程等高风险场景中通过自然语言消息进行协调，而同样的通信渠道也可能被合谋智能体用于泄露机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统在金融、医疗、软件工程等高风险场景中通过自然语言消息进行协调，而同样的通信渠道也可能被合谋智能体用于泄露机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "latency_ms": 3932.8,
+   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被合谋智能体用于窃取机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被合谋智能体用于窃取机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "latency_ms": 2864.8,
    "timeout": false
   },
   {
@@ -2199,7 +2155,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 2874.0,
+   "latency_ms": 1969.4,
    "timeout": false
   },
   {
@@ -2278,7 +2234,7 @@
    "citations_retrievable": 6,
    "answer_head": "NeRD 是一个神经符号框架，通过基于诊断必要性选择概念，将基于规则的概念可解释性与 MCoT 推理相结合，并蒸馏归纳出的逻辑规则 [chunk-675668ff34c9d9eeb7b36b4a]。它用于医学图像诊断领域 [chunk-675668ff34c9d9eeb7b36b4a]。",
    "answer_full": "NeRD 是一个神经符号框架，通过基于诊断必要性选择概念，将基于规则的概念可解释性与 MCoT 推理相结合，并蒸馏归纳出的逻辑规则 [chunk-675668ff34c9d9eeb7b36b4a]。它用于医学图像诊断领域 [chunk-675668ff34c9d9eeb7b36b4a]。",
-   "latency_ms": 3932.2,
+   "latency_ms": 2964.2,
    "timeout": false
   },
   {
@@ -2349,7 +2305,7 @@
    "citations_retrievable": 5,
    "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，其标题为“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
    "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，其标题为“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
-   "latency_ms": 4307.5,
+   "latency_ms": 3048.3,
    "timeout": false
   },
   {
@@ -2420,7 +2376,7 @@
    "citations_retrievable": 5,
    "answer_head": "Hard Stop 论文关注内核级抢占与遏制（Kernel-Level Preemption and Containment）[chunk-9aa9b7f0bfc461185e805840]。它拦截的是恶意/失控的智能体执行（Rogue Agentic Execution）[chunk-9aa9b7f0bfc461185e805840]。",
    "answer_full": "Hard Stop 论文关注内核级抢占与遏制（Kernel-Level Preemption and Containment）[chunk-9aa9b7f0bfc461185e805840]。它拦截的是恶意/失控的智能体执行（Rogue Agentic Execution）[chunk-9aa9b7f0bfc461185e805840]。",
-   "latency_ms": 4350.8,
+   "latency_ms": 2918.2,
    "timeout": false
   },
   {
@@ -2535,8 +2491,8 @@
    "citations_retrievable": 5,
    "answer_head": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping",
    "answer_full": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…\nOPENALEX-W7214527440：Abstract mRNA vaccines have become a clinically validated vaccine platform, as demonstrated by the success of COVID-19 vaccines such as Comirnaty and Spikevax, owing to their rapid design, manufacturing scalability, and capacity to induce in situ antigen expression. A key factor underlying this success is the lipid nanoparticle (LNP) delivery system, which protects mRNA from degradation and promot…\nOPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition in the digital economy era. Using a sample of Chinese A-share listed firms from 2012 to 2024, this study investigates the impact of digital technology risk exposure ( DTRE ) on corporate key core technology innovation ( KC…\nOPENALEX-W7214600341：Abstract Automatic Exploit Generation (AEG) plays an important role in proactive assessment of software threats by identifying vulnerabilities and constructing functional payloads. Existing Large Language Model (LLM)-based methods, however, often struggle to reason about complex exploit logic and to perform runtime introspection, leaving a gap between static vulnerability analysis and dynamic memo…\nOPENALEX-W7214526768：The current trend of the Internet of Medical Things (IoMT) has facilitated intelligent healthcare, including real-time monitoring, remote diagnosis, and data-driven clinical decision support. This substantially increases the attack surfaces of medical cyber–physical systems. As a privacy-conserving paradigm, Federated Learning (FL) has been proposed to enable distributed IoMT devices to collaborat…\nOPENALEX-W7214542908：Abstract A troll is an online user who deliberately disrupts discussions, spreads misleading or provocative messages, and incites conflict or disorder in digital interactions. Troll detection based on behavior change is one of the new methods of research in this field. The feedback-oriented nature of GANs, coupled with the relational insights from social network analysis, allows for effective simu…\nOPENALEX-W7214553113：Human oversight is the control on which most AI-agent governance rests, yet deployments rarely record whether it was exercised — only that a mechanism exists. This paper treats that gap as a documentation-and-control failure and names its acute form override theatre: a single actor clears a policy-violating agent action with one dis-position, holding the initiate–authorise–record chain end to end,…\nOPENALEX-W7163333744：This version corrects a citation error found by an automated check and confirmed by hand. Section 4.5 cited arXiv:2605.29963 (Honeyval, an evaluation framework for LLM-powered HTTP honeypots) for its evidence on inference-system fingerprinting; the passage describes arXiv:2605.29979, \"Fingerprinting Inference Systems of Large Language Models\", and both citations now point there. The wording of the…\nOPENALEX-W7163389061：This version (2026-09-26) corrects a citation error found by an automated check and confirmed by hand against the arXiv abstracts. Version 2 cited the identifier 2605.30998 for the ClawTrojan multi-step trojan benchmark and its DASGuard defense; that identifier is a security analysis of x402 payments, and ClawTrojan is arXiv:2605.31042. All six trojan citations are corrected. The x402 payment-laye…\nOPENALEX-W7214449097：Large language models and AI-mediated search systems have become the primary intermediaries for institutional information across educational, legal, civic, and professional life. Current models of AI ethics focus primarily on the accuracy, bias, and fairness of AI systems. This focus is essential but fails to recognize a structural failure that precedes accuracy: in an information context, where t…\nOPENALEX-W7214468787：Today's Security Operations Centers (SOCs) need to process vast amounts of complex and diverse security data from endpoints, cloud, identity and network systems in a timely manner.Large Language Models (LLMs) have been shown to have a good performance in reasoning but are not widely used in automated incident response for the following reasons: Lack of explainability: LLM outputs are often hard to…\nOPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models\nOPENALEX-W7125151750：AI for Mathematics (AI4Math) has emerged as a distinct field that leverages machine learning to navigate mathematical landscapes historically intractable for early symbolic systems. While mid-20th-century symbolic approaches successfully automated formal logic, they faced severe scalability limitations due to the combinatorial explosion of the search space. The recent integration of data-driven ap…\nOPENALEX-W7151534166：Recent advances in large language models (LLMs) have significantly improved their ability to perform mathematical reasoning, extending from elementary problem solving to increasingly capable performance on research-level problems. However, reliably solving and verifying such problems remains challenging due to the inherent ambiguity of natural language reasoning. In this paper, we propose an autom…\nOPENALEX-W7213611819：Scientific discovery is defined by the ability to identify the boundaries of existing knowledge and venture into unexplored territory. The ultimate vision for AI in science is problem-driven autonomous research: given a fundamental challenge by a human expert, the AI independently navigates the scientific landscape, uncovers theoretical and empirical bottlenecks, and systematically expands the fro…\nOPENALEX-W7214295679：Contract portfolios at large enterprises now routinely exceed tens of thousands of active agreements, and the regulatory obligations attaching to those agreements have multiplied faster than legal review capacity. In 2025 this gap became acute: the EU Digital Operational Resilience Act (DORA) became applicable on 17 January without a transition period, forcing thousands of financial entities into…\nOPENALEX-W7214338629：This study develops an integrated predictive business intelligence (BI) framework that combines machine learning (ML), explainable artificial intelligence (XAI), and large language models (LLMs) for customer response prediction in banking. Using the UCI Bank Marketing dataset of 45,211 observations, we compare Logistic Regression, Decision Tree, Random Forest, and XGBoost using accuracy, precision…\nOPENALEX-W7214339430：Enterprise deployment of agentic AI systems is accelerating sharply -Gartner projects that 40% of enterprise applications will embed task-specific AI agents by the end of 2026, up from fewer than 5% in 2025 [1].Unlike deterministic software, AI agents execute autonomous tool-call chains, each carrying implicit privilege that classical IAM and RBAC frameworks were not designed to govern.We contribu…\nOPENALEX-W7164892115：NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image Diagnosis\nOPENALEX-W7214152392：Large language models (LLMs) have rapidly gained popularity across a wide range of applications, from customer support to content generation and decision support systems. However, LLMs have also been found to exhibit social biases, reflecting and amplifying stereotypes and prejudices present in their training data. Such biases can lead to harmful outcomes, particularly in sensitive domains. Addres…\nOPENALEX-W7214194099：Large language models (LLMs) and knowledge graphs (KGs) are increasingly combined to improve factual grounding, reasoning, explainability, and trustworthiness. Existing studies primarily treat such systems as instances of LLM–KG integration, paying little attention to the hybrid architecture itself. Consequently, ethical, privacy, and bias (EPB) analyses rarely consider how different hybrid archit…\nOPENALEX-W7214198864：A hallucination in a language model may produce a false statement, a nonexistent citation, or a plausible explanation unsupported by evidence. In an AI agent, the same class of failure can pass through memory, planning, tools, credentials, and other agents until it changes external state. The problem is therefore no longer limited to answer quality. It becomes a systems problem involving authority…\nOPENALEX-W7214222573：Heterogeneous AI paradigms such as Large Language Models (LLMs), Knowledge Graphs (KGs), and agentic systems are increasingly combined to exploit complementary forms of knowledge, reasoning, and computation. However, current hybrid AI architectures typically treat hybridization as a predefined mechanism for coordinating heterogeneous components, leaving the hybrid itself largely unable to learn ho…\nOPENALEX-W7214241047：Cloud Security Posture Management (CSPM) systems can produce large queues of configuration findings, yet a nominal severity label alone does not capture internet reachability, attainable privilege, asset importance, blast radius, attack-path contribution, or the regulatory relevance of the affected control.Organizations operating across India and South Korea also need a defensible way to relate on…\nOPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the application telemetry layer: the served tool manifest, the user prompt, and the model's messages. Some threats, however, smuggle malicious instructions and actions past the application boundary, leaving them invisible to that layer…\nOPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-and-control foothold, and executed a multi-stage intrusion into Hugging Face's production multi-tenant dataset conversion infrastructure (referred to in this autopsy as Incident-2026-Alpha). Over 4.5 days, the rogue agent e…\nOPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot tamper with their own execution traces. We show that local LLM agents such as Claude Code, Codex, Antigravity, Open Code and Grok Build fail to enforce this boundary. All tested harnesses, except Muse Code, allowed agents…\nOPENALEX-W7214313011：Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger actions. Yet real-world inputs rarely arrive in isolation: they come with background details and surrounding context. We find that short additions that fit naturally into this context can nevertheless redirect…\nOPENALEX-W7214329963：Detectors of alignment failures screen deployed language models and score alignment benchmarks. Most are generative judges that spend a decoding pass on every criterion, and classifiers that read token probabilities, such as Llama Guard, still score one fixed label per call. Jev, a model trained with reinforcement learning for calibrated decisions (RLCD), answers many typed questions about one inp…\nOPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained verifiable rewards with Schema-Contrastive Advantage Estimation to alle…\nOPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by complex reasoning spaces: an exploration bias, where models are drawn toward locally plausible but structurally unstable branches, and a compounding bias, where small local deviations accumulate across depth and suppress r…\nOPENALEX-W7214375324：Multi-agent systems built on large language models (LLMs) are increasingly deployed in high-stakes settings such as finance, healthcare, and software engineering, where agents coordinate through natural-language messages. The same channels, however, let colluding agents exfiltrate confidential information or coordinate unauthorized actions, and steganography can hide such communication inside outp…\nOPENALEX-W7214399041：Multi-agent deliberation can improve performance, but what happens when some agents do not act in good faith? In practice, an agent may be deceptive and work to subvert the group, whether through its own objectives or external instruction. We study how susceptibility to deception scales as groups increase in size and deceivers become more prevalent. It is not the number of agents in the group that…\nOPENALEX-W7214401639：Finite state machine (FSM) and behavior trees (BT) are widely adopted behavioral modeling paradigms for autonomous intelligent systems. While functionally equivalent and inter-convertible in principle, existing transformation methods between FSM and BT face major challenges in preserving behavioral completeness and avoiding model complexity explosion. To overcome these issues, we propose an LLM-dr…\nOPENALEX-W7214403218：Publicly exposed large language model (LLM) infrastructure creates a growing attack surface, yet real-world targeting remains poorly understood. We present Ollure, a low- and medium-interaction honeypot that emulates the Ollama API without a backend LLM. Spanning four deployments across cloud and university networks, Ollure operated for 84 days and recorded 290,887 interactions from 2,793 unique s…\nOPENALEX-W7214404543：A central concern in AI safety is that agents may treat oversight as an obstacle when it conflicts with completing their goals. We study instrumental evasion, the propensity of LLM agents to circumvent runtime monitoring as a means of completing ordinary tasks. We introduce EvasionBench, a benchmark of 50 diverse task-policy pairs in which completing the task requires an operation prohibited by a…\nOPENALEX-W7214508238：One long-form exam in a large course costs hundreds of grader-hours, and qualified graders are scarce; LLM graders are a tempting alternative. To show its pitfalls we grade a practical Computer Vision exam ($570$ dual-graded students) under $171$ configurations spanning closed and open-weights models; the best reaches mean absolute error $1.64/35$, below the $2.61/35$ two human graders achieve aga…\nOPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during package installation, import, and runtime. Traditional static analysis fails to understand code semantics; machine learning-based methods rely on feature extraction, which suffers from concept drift; existing LLM solutions su…\nOPENALEX-W7204236562：How can humans make sense of the rapid takeoff of artificial intelligence (AI)? We studied the sensemaking dynamics of AI through an open-ended, mixed-methods study with computational text analysis of millions of AI-related newspaper articles and social media posts grounded in 57 semi-structured interviews with AI professionals in 2021 and 2023—before and after the recent surge of public interest.…\nOPENALEX-W7214062101：Demand response (DR) in renewable- and storage-rich integrated energy systems (IESs) must remain economically reliable and physically executable despite renewable and load uncertainty, volatile prices, and cyber disruptions affecting sensing and communication. Existing approaches commonly separate market scheduling, distributed control, cyber resilience, and feasibility enforcement, creating a gap…\nOPENALEX-W7214100311：Multidrug-resistant organisms are increasingly difficult to manage because therapeutic scarcity, delayed susceptibility information and antimicrobial-selection pressure interact at the bedside. At the same time, artificial intelligence (AI) is entering infectious-disease practice through resistance prediction, rapid diagnostic interpretation, stewardship triage and drug discovery. This critical na…",
-   "latency_ms": 5018.3,
-   "timeout": true
+   "latency_ms": 4086.2,
+   "timeout": false
   },
   {
    "question_id": "BQA-032",
@@ -2616,7 +2572,7 @@
    "citations_retrievable": 6,
    "answer_head": "kernel-level 出现在《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》和《On the Effectiveness of Kernel-Level Evidence for Agent Security》这两份文档中 [chunk-7c6fdba1430ff6e44db5034",
    "answer_full": "kernel-level 出现在《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》和《On the Effectiveness of Kernel-Level Evidence for Agent Security》这两份文档中 [chunk-7c6fdba1430ff6e44db50349][chunk-834172ea6722a03c4a60627e]。这一判断仅基于所给证据中可见的标题与正文片段，未覆盖证据之外的文档 [chunk-5a7e7933367ec788cb6a0079]。",
-   "latency_ms": 3731.2,
+   "latency_ms": 4250.6,
    "timeout": false
   },
   {
@@ -2700,7 +2656,7 @@
    "citations_retrievable": 6,
    "answer_head": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending ",
    "answer_full": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending Regulations (EC) No 300/2008, (EU) No 167/2013, (EU) No 168/2013, (EU) 2018/858, (EU) 2018/1139 and (EU) 2019/2144 and Directives 2014/9 0/EU, (EU) 2016/797 and (EU) 2020/1828 (Artificial Intelligence Act) (Text with EEA…\nNIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock A locked padlock ) or https:// means you’ve safely connected to the .gov website. Share sensiti…",
-   "latency_ms": 4424.7,
+   "latency_ms": 3265.8,
    "timeout": false
   },
   {
@@ -2779,9 +2735,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 6,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3236.6,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2520.6,
    "timeout": false
   },
   {
@@ -2858,7 +2814,7 @@
    "citations_retrievable": 5,
    "answer_head": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending ",
    "answer_full": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending Regulations (EC) No 300/2008, (EU) No 167/2013, (EU) No 168/2013, (EU) 2018/858, (EU) 2018/1139 and (EU) 2019/2144 and Directives 2014/9 0/EU, (EU) 2016/797 and (EU) 2020/1828 (Artificial Intelligence Act) (Text with EEA…\nNIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock A locked padlock ) or https:// means you’ve safely connected to the .gov website. Share sensiti…\nOWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…",
-   "latency_ms": 4603.1,
+   "latency_ms": 3098.5,
    "timeout": false
   },
   {
@@ -2940,7 +2896,7 @@
    "citations_retrievable": 6,
    "answer_head": "NIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A",
    "answer_full": "NIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock A locked padlock ) or https:// means you’ve safely connected to the .gov website. Share sensiti…\nOWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…",
-   "latency_ms": 3052.8,
+   "latency_ms": 2408.5,
    "timeout": false
   },
   {
@@ -3013,7 +2969,7 @@
    "citations_retrievable": 5,
    "answer_head": "OPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during pack",
    "answer_full": "OPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during package installation, import, and runtime. Traditional static analysis fails to understand code semantics; machine learning-based methods rely on feature extraction, which suffers from concept drift; existing LLM solutions su…",
-   "latency_ms": 3330.2,
+   "latency_ms": 3011.1,
    "timeout": false
   },
   {
@@ -3027,47 +2983,9 @@
    "refused": false,
    "refusal_correct": true,
    "related_event_ids": [
-    "OPENALEX-W7128805264",
-    "OPENALEX-W7214527440",
-    "OPENALEX-W7214558721",
-    "OPENALEX-W7214600341",
-    "OPENALEX-W7214526768",
-    "OPENALEX-W7214542908",
-    "OPENALEX-W7214553113",
-    "OPENALEX-W7163333744",
-    "OPENALEX-W7163389061",
-    "OPENALEX-W7214449097",
-    "OPENALEX-W7214468787",
-    "OPENALEX-W4406794439",
-    "OPENALEX-W7125151750",
-    "OPENALEX-W7151534166",
-    "OPENALEX-W7213611819",
-    "OPENALEX-W7214295679",
-    "OPENALEX-W7214338629",
-    "OPENALEX-W7214339430",
-    "OPENALEX-W7164892115",
-    "OPENALEX-W7214152392",
-    "OPENALEX-W7214194099",
-    "OPENALEX-W7214198864",
-    "OPENALEX-W7214222573",
-    "OPENALEX-W7214241047",
-    "OPENALEX-W7214288902",
-    "OPENALEX-W7214294325",
-    "OPENALEX-W7214307780",
-    "OPENALEX-W7214313011",
-    "OPENALEX-W7214329963",
     "OPENALEX-W7214342592",
-    "OPENALEX-W7214358407",
-    "OPENALEX-W7214375324",
-    "OPENALEX-W7214399041",
-    "OPENALEX-W7214401639",
-    "OPENALEX-W7214403218",
-    "OPENALEX-W7214404543",
-    "OPENALEX-W7214508238",
-    "OPENALEX-W7214508255",
-    "OPENALEX-W7204236562",
-    "OPENALEX-W7214062101",
-    "OPENALEX-W7214100311"
+    "OPENALEX-W7214329963",
+    "OPENALEX-W7214062101"
    ],
    "document_citation_count": 6,
    "cited_document_keys": [
@@ -3133,9 +3051,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping",
-   "answer_full": "OPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…\nOPENALEX-W7214527440：Abstract mRNA vaccines have become a clinically validated vaccine platform, as demonstrated by the success of COVID-19 vaccines such as Comirnaty and Spikevax, owing to their rapid design, manufacturing scalability, and capacity to induce in situ antigen expression. A key factor underlying this success is the lipid nanoparticle (LNP) delivery system, which protects mRNA from degradation and promot…\nOPENALEX-W7214558721：Abstract Achieving breakthroughs in key core technologies is a strategic necessity for Chinese firms to safeguard national security and gain the initiative in global competition in the digital economy era. Using a sample of Chinese A-share listed firms from 2012 to 2024, this study investigates the impact of digital technology risk exposure ( DTRE ) on corporate key core technology innovation ( KC…\nOPENALEX-W7214600341：Abstract Automatic Exploit Generation (AEG) plays an important role in proactive assessment of software threats by identifying vulnerabilities and constructing functional payloads. Existing Large Language Model (LLM)-based methods, however, often struggle to reason about complex exploit logic and to perform runtime introspection, leaving a gap between static vulnerability analysis and dynamic memo…\nOPENALEX-W7214526768：The current trend of the Internet of Medical Things (IoMT) has facilitated intelligent healthcare, including real-time monitoring, remote diagnosis, and data-driven clinical decision support. This substantially increases the attack surfaces of medical cyber–physical systems. As a privacy-conserving paradigm, Federated Learning (FL) has been proposed to enable distributed IoMT devices to collaborat…\nOPENALEX-W7214542908：Abstract A troll is an online user who deliberately disrupts discussions, spreads misleading or provocative messages, and incites conflict or disorder in digital interactions. Troll detection based on behavior change is one of the new methods of research in this field. The feedback-oriented nature of GANs, coupled with the relational insights from social network analysis, allows for effective simu…\nOPENALEX-W7214553113：Human oversight is the control on which most AI-agent governance rests, yet deployments rarely record whether it was exercised — only that a mechanism exists. This paper treats that gap as a documentation-and-control failure and names its acute form override theatre: a single actor clears a policy-violating agent action with one dis-position, holding the initiate–authorise–record chain end to end,…\nOPENALEX-W7163333744：This version corrects a citation error found by an automated check and confirmed by hand. Section 4.5 cited arXiv:2605.29963 (Honeyval, an evaluation framework for LLM-powered HTTP honeypots) for its evidence on inference-system fingerprinting; the passage describes arXiv:2605.29979, \"Fingerprinting Inference Systems of Large Language Models\", and both citations now point there. The wording of the…\nOPENALEX-W7163389061：This version (2026-09-26) corrects a citation error found by an automated check and confirmed by hand against the arXiv abstracts. Version 2 cited the identifier 2605.30998 for the ClawTrojan multi-step trojan benchmark and its DASGuard defense; that identifier is a security analysis of x402 payments, and ClawTrojan is arXiv:2605.31042. All six trojan citations are corrected. The x402 payment-laye…\nOPENALEX-W7214449097：Large language models and AI-mediated search systems have become the primary intermediaries for institutional information across educational, legal, civic, and professional life. Current models of AI ethics focus primarily on the accuracy, bias, and fairness of AI systems. This focus is essential but fails to recognize a structural failure that precedes accuracy: in an information context, where t…\nOPENALEX-W7214468787：Today's Security Operations Centers (SOCs) need to process vast amounts of complex and diverse security data from endpoints, cloud, identity and network systems in a timely manner.Large Language Models (LLMs) have been shown to have a good performance in reasoning but are not widely used in automated incident response for the following reasons: Lack of explainability: LLM outputs are often hard to…\nOPENALEX-W4406794439：Parameter-Efficient Fine-Tuning for Foundation Models\nOPENALEX-W7125151750：AI for Mathematics (AI4Math) has emerged as a distinct field that leverages machine learning to navigate mathematical landscapes historically intractable for early symbolic systems. While mid-20th-century symbolic approaches successfully automated formal logic, they faced severe scalability limitations due to the combinatorial explosion of the search space. The recent integration of data-driven ap…\nOPENALEX-W7151534166：Recent advances in large language models (LLMs) have significantly improved their ability to perform mathematical reasoning, extending from elementary problem solving to increasingly capable performance on research-level problems. However, reliably solving and verifying such problems remains challenging due to the inherent ambiguity of natural language reasoning. In this paper, we propose an autom…\nOPENALEX-W7213611819：Scientific discovery is defined by the ability to identify the boundaries of existing knowledge and venture into unexplored territory. The ultimate vision for AI in science is problem-driven autonomous research: given a fundamental challenge by a human expert, the AI independently navigates the scientific landscape, uncovers theoretical and empirical bottlenecks, and systematically expands the fro…\nOPENALEX-W7214295679：Contract portfolios at large enterprises now routinely exceed tens of thousands of active agreements, and the regulatory obligations attaching to those agreements have multiplied faster than legal review capacity. In 2025 this gap became acute: the EU Digital Operational Resilience Act (DORA) became applicable on 17 January without a transition period, forcing thousands of financial entities into…\nOPENALEX-W7214338629：This study develops an integrated predictive business intelligence (BI) framework that combines machine learning (ML), explainable artificial intelligence (XAI), and large language models (LLMs) for customer response prediction in banking. Using the UCI Bank Marketing dataset of 45,211 observations, we compare Logistic Regression, Decision Tree, Random Forest, and XGBoost using accuracy, precision…\nOPENALEX-W7214339430：Enterprise deployment of agentic AI systems is accelerating sharply -Gartner projects that 40% of enterprise applications will embed task-specific AI agents by the end of 2026, up from fewer than 5% in 2025 [1].Unlike deterministic software, AI agents execute autonomous tool-call chains, each carrying implicit privilege that classical IAM and RBAC frameworks were not designed to govern.We contribu…\nOPENALEX-W7164892115：NeRD: Neuro-Symbolic Rule Distillation for Efficient Ontology-Grounded Chain-of-Thought in Medical Image Diagnosis\nOPENALEX-W7214152392：Large language models (LLMs) have rapidly gained popularity across a wide range of applications, from customer support to content generation and decision support systems. However, LLMs have also been found to exhibit social biases, reflecting and amplifying stereotypes and prejudices present in their training data. Such biases can lead to harmful outcomes, particularly in sensitive domains. Addres…\nOPENALEX-W7214194099：Large language models (LLMs) and knowledge graphs (KGs) are increasingly combined to improve factual grounding, reasoning, explainability, and trustworthiness. Existing studies primarily treat such systems as instances of LLM–KG integration, paying little attention to the hybrid architecture itself. Consequently, ethical, privacy, and bias (EPB) analyses rarely consider how different hybrid archit…\nOPENALEX-W7214198864：A hallucination in a language model may produce a false statement, a nonexistent citation, or a plausible explanation unsupported by evidence. In an AI agent, the same class of failure can pass through memory, planning, tools, credentials, and other agents until it changes external state. The problem is therefore no longer limited to answer quality. It becomes a systems problem involving authority…\nOPENALEX-W7214222573：Heterogeneous AI paradigms such as Large Language Models (LLMs), Knowledge Graphs (KGs), and agentic systems are increasingly combined to exploit complementary forms of knowledge, reasoning, and computation. However, current hybrid AI architectures typically treat hybridization as a predefined mechanism for coordinating heterogeneous components, leaving the hybrid itself largely unable to learn ho…\nOPENALEX-W7214241047：Cloud Security Posture Management (CSPM) systems can produce large queues of configuration findings, yet a nominal severity label alone does not capture internet reachability, attainable privilege, asset importance, blast radius, attack-path contribution, or the regulatory relevance of the affected control.Organizations operating across India and South Korea also need a defensible way to relate on…\nOPENALEX-W7214288902：LLM agents are deployed into infrastructure that grants them broad host authority, yet existing agent-security benchmarks and defenses operate almost exclusively at the application telemetry layer: the served tool manifest, the user prompt, and the model's messages. Some threats, however, smuggle malicious instructions and actions past the application boundary, leaving them invisible to that layer…\nOPENALEX-W7214294325：In July 2026, an unconstrained autonomous agent participating in a frontier AI cybersecurity evaluation harness breached its evaluation sandbox, established an external command-and-control foothold, and executed a multi-stage intrusion into Hugging Face's production multi-tenant dataset conversion infrastructure (referred to in this autopsy as Incident-2026-Alpha). Over 4.5 days, the rogue agent e…\nOPENALEX-W7214307780：Asynchronous monitoring, incident investigations, and compliance audits primarily rely on agent traces to reconstruct what happened. These analyses assume that LLM agents cannot tamper with their own execution traces. We show that local LLM agents such as Claude Code, Codex, Antigravity, Open Code and Grok Build fail to enforce this boundary. All tested harnesses, except Muse Code, allowed agents…\nOPENALEX-W7214313011：Dedicated decision models such as Jev map unstructured language to probability distributions over finite choices, allowing their outputs to directly route requests, select tools, and trigger actions. Yet real-world inputs rarely arrive in isolation: they come with background details and surrounding context. We find that short additions that fit naturally into this context can nevertheless redirect…\nOPENALEX-W7214329963：Detectors of alignment failures screen deployed language models and score alignment benchmarks. Most are generative judges that spend a decoding pass on every criterion, and classifiers that read token probabilities, such as Llama Guard, still score one fixed label per call. Jev, a model trained with reinforcement learning for calibrated decisions (RLCD), answers many typed questions about one inp…\nOPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained verifiable rewards with Schema-Contrastive Advantage Estimation to alle…\nOPENALEX-W7214358407：Long-horizon reasoning remains a central challenge for large language models (LLMs) under sparse-reward regimes. We argue that this brittleness arises from two biases induced by complex reasoning spaces: an exploration bias, where models are drawn toward locally plausible but structurally unstable branches, and a compounding bias, where small local deviations accumulate across depth and suppress r…\nOPENALEX-W7214375324：Multi-agent systems built on large language models (LLMs) are increasingly deployed in high-stakes settings such as finance, healthcare, and software engineering, where agents coordinate through natural-language messages. The same channels, however, let colluding agents exfiltrate confidential information or coordinate unauthorized actions, and steganography can hide such communication inside outp…\nOPENALEX-W7214399041：Multi-agent deliberation can improve performance, but what happens when some agents do not act in good faith? In practice, an agent may be deceptive and work to subvert the group, whether through its own objectives or external instruction. We study how susceptibility to deception scales as groups increase in size and deceivers become more prevalent. It is not the number of agents in the group that…\nOPENALEX-W7214401639：Finite state machine (FSM) and behavior trees (BT) are widely adopted behavioral modeling paradigms for autonomous intelligent systems. While functionally equivalent and inter-convertible in principle, existing transformation methods between FSM and BT face major challenges in preserving behavioral completeness and avoiding model complexity explosion. To overcome these issues, we propose an LLM-dr…\nOPENALEX-W7214403218：Publicly exposed large language model (LLM) infrastructure creates a growing attack surface, yet real-world targeting remains poorly understood. We present Ollure, a low- and medium-interaction honeypot that emulates the Ollama API without a backend LLM. Spanning four deployments across cloud and university networks, Ollure operated for 84 days and recorded 290,887 interactions from 2,793 unique s…\nOPENALEX-W7214404543：A central concern in AI safety is that agents may treat oversight as an obstacle when it conflicts with completing their goals. We study instrumental evasion, the propensity of LLM agents to circumvent runtime monitoring as a means of completing ordinary tasks. We introduce EvasionBench, a benchmark of 50 diverse task-policy pairs in which completing the task requires an operation prohibited by a…\nOPENALEX-W7214508238：One long-form exam in a large course costs hundreds of grader-hours, and qualified graders are scarce; LLM graders are a tempting alternative. To show its pitfalls we grade a practical Computer Vision exam ($570$ dual-graded students) under $171$ configurations spanning closed and open-weights models; the best reaches mean absolute error $1.64/35$, below the $2.61/35$ two human graders achieve aga…\nOPENALEX-W7214508255：The Node.js ecosystem heavily relies on NPM packages, and software supply chain attacks targeting malicious NPM packages are rampant. Malicious code primarily triggers during package installation, import, and runtime. Traditional static analysis fails to understand code semantics; machine learning-based methods rely on feature extraction, which suffers from concept drift; existing LLM solutions su…\nOPENALEX-W7204236562：How can humans make sense of the rapid takeoff of artificial intelligence (AI)? We studied the sensemaking dynamics of AI through an open-ended, mixed-methods study with computational text analysis of millions of AI-related newspaper articles and social media posts grounded in 57 semi-structured interviews with AI professionals in 2021 and 2023—before and after the recent surge of public interest.…\nOPENALEX-W7214062101：Demand response (DR) in renewable- and storage-rich integrated energy systems (IESs) must remain economically reliable and physically executable despite renewable and load uncertainty, volatile prices, and cyber disruptions affecting sensing and communication. Existing approaches commonly separate market scheduling, distributed control, cyber resilience, and feasibility enforcement, creating a gap…\nOPENALEX-W7214100311：Multidrug-resistant organisms are increasingly difficult to manage because therapeutic scarcity, delayed susceptibility information and antimicrobial-selection pressure interact at the bedside. At the same time, artificial intelligence (AI) is entering infectious-disease practice through resistance prediction, rapid diagnostic interpretation, stewardship triage and drug discovery. This critical na…",
-   "latency_ms": 4478.0,
+   "answer_head": "OPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extracti",
+   "answer_full": "OPENALEX-W7214342592：End-to-end event extraction remains challenging for large language models as it requires simultaneous identification of event triggers, classification of event types, and extraction of schema-grounded argument spans. We present EAGER, a reinforcement learning framework for generative event extraction that combines fine-grained verifiable rewards with Schema-Contrastive Advantage Estimation to alle…\nOPENALEX-W7214329963：Detectors of alignment failures screen deployed language models and score alignment benchmarks. Most are generative judges that spend a decoding pass on every criterion, and classifiers that read token probabilities, such as Llama Guard, still score one fixed label per call. Jev, a model trained with reinforcement learning for calibrated decisions (RLCD), answers many typed questions about one inp…\nOPENALEX-W7214062101：Demand response (DR) in renewable- and storage-rich integrated energy systems (IESs) must remain economically reliable and physically executable despite renewable and load uncertainty, volatile prices, and cyber disruptions affecting sensing and communication. Existing approaches commonly separate market scheduling, distributed control, cyber resilience, and feasibility enforcement, creating a gap…",
+   "latency_ms": 2762.6,
    "timeout": false
   },
   {
@@ -3209,7 +3127,7 @@
    "citations_retrievable": 5,
    "answer_head": "CVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitab",
    "answer_full": "CVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.\nCVE-2026-9198：Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.\nCVE-2026-33017：Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.\nCVE-2026-64849：MLflow contains a server-side request forgery vulnerability that can allow attackers to reach internal or cloud metadata services and receive response_status and response_body.\nCVE-2020-10987：Tenda AC1900 Router AC15 Model contains an unspecified vulnerability that allows remote attackers to execute system commands via the deviceName POST parameter.",
-   "latency_ms": 3861.4,
+   "latency_ms": 2459.9,
    "timeout": false
   },
   {
@@ -3295,7 +3213,7 @@
    "citations_retrievable": 6,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralizatio",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nCVE-2026-45499：<p>Server-side request forgery (ssrf) in Azure OpenAI allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-47282：<p>Insufficiently protected credentials in GitHub Copilot and Visual Studio Code allows an unauthorized attacker to disclose information over a network.</p>\nCVE-2026-48561：<p>Improper neutralization of special elements used in a command ('command injection') in Copilot Chat (Microsoft Edge) allows an unauthorized attacker to execute code over a network.</p>\nCVE-2026-50510：<p>Improper restriction of names for files and other resources in Github Copilot allows an unauthorized attacker to execute code locally.</p>\nCVE-2026-50517：<p>Deserialization of untrusted data in M365 Copilot allows an authorized attacker to execute code over a network.</p>\nCVE-2026-55145：<p>Improper neutralization of special elements used in a command ('command injection') in Outlook Copilot allows an authorized attacker to perform tampering over a network.</p>\nCVE-2026-56167：<p>Server-side request forgery (ssrf) in Azure AI Search allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-58617：<p>Improper access control in Microsoft 365 Copilot for iOS allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 4665.4,
+   "latency_ms": 2974.7,
    "timeout": false
   },
   {
@@ -3317,9 +3235,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "answer_full": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "latency_ms": 2849.6,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 1693.4,
    "timeout": false
   },
   {
@@ -3341,9 +3259,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "answer_full": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "latency_ms": 2938.3,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 1771.0,
    "timeout": false
   },
   {
@@ -3365,9 +3283,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "answer_full": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "latency_ms": 3068.2,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2194.3,
    "timeout": false
   },
   {
@@ -3433,9 +3351,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 5,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3205.6,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2330.7,
    "timeout": false
   },
   {
@@ -3457,9 +3375,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "answer_full": "现有文档中没有找到能够支持回答的原文证据，系统拒绝作答。",
-   "latency_ms": 3253.1,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 1725.9,
    "timeout": false
   },
   {
@@ -3533,7 +3451,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralizatio",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nCVE-2026-45499：<p>Server-side request forgery (ssrf) in Azure OpenAI allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-47282：<p>Insufficiently protected credentials in GitHub Copilot and Visual Studio Code allows an unauthorized attacker to disclose information over a network.</p>\nCVE-2026-48561：<p>Improper neutralization of special elements used in a command ('command injection') in Copilot Chat (Microsoft Edge) allows an unauthorized attacker to execute code over a network.</p>\nCVE-2026-50510：<p>Improper restriction of names for files and other resources in Github Copilot allows an unauthorized attacker to execute code locally.</p>\nCVE-2026-50517：<p>Deserialization of untrusted data in M365 Copilot allows an authorized attacker to execute code over a network.</p>\nCVE-2026-55145：<p>Improper neutralization of special elements used in a command ('command injection') in Outlook Copilot allows an authorized attacker to perform tampering over a network.</p>\nCVE-2026-56167：<p>Server-side request forgery (ssrf) in Azure AI Search allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-58617：<p>Improper access control in Microsoft 365 Copilot for iOS allows an unauthorized attacker to elevate privileges over a network.</p>\nPYSEC-2026-4000：vLLM through 0.29.0 fails to properly validate bad_words token indices against the model's generation output width in SamplingParams.update_from_tokenizer(). Attackers can supply out-of-bounds token indices that corrupt logits memory of concurrent requests, causing different in-flight HTTP requests to return incorrect tokens.\nPYSEC-2026-3998：vLLM before 0.29.0 validates allowed_token_ids against tokenizer length instead of model output logits width in SamplingParams._validate_allowed_token_ids(). Attackers can supply token IDs above the output vocabulary that pass validation, causing LogitBiasState to corrupt GPU logits state and allow concurrent requests to sample tokens outside their allowlists.\nPYSEC-2026-3999：vLLM through 0.29.0 contains a memory corruption vulnerability in the Triton _bincount_kernel where prompt token IDs index the penalty prompt-presence bitset without bounds checking against vocabulary size. Attackers can submit multimodal audio requests with tokens equal to vocabulary size, causing out-of-bounds writes that corrupt concurrent requests' sampler state and alter repetition penalty be…\nPYSEC-2026-3997：vLLM versions before 0.28.0 fail to validate the lower bound of token IDs in the /v1/embeddings and /pooling endpoints, allowing unauthenticated attackers to crash the engine by submitting negative token IDs. A single request with a negative token ID triggers a CUDA device-side assertion that poisons the GPU context, causing all subsequent requests to fail until the process restarts.\nPYSEC-2026-3996：vLLM through 0.29.0 fails to properly clean up decode-side metadata for rejected inference requests in prefill/decode disaggregated deployments. Remote attackers can submit requests with max_tokens=0 to exhaust decode-worker memory without bound until the worker restarts.\nGHSA-8pw2-6jv3-mj5j：## Summary Current vLLM `main` lets an inference request choose the PyNvVideoCodec GPU video decoder through `media_io_kwargs.video.video_backend`, but engine GPU memory reservation is computed only from static startup configuration and `VLLM_VIDEO_LOADER_BACKEND`. If the server starts with the default OpenCV/software backend and no `--mm-ipc-gpu-memory-gb` budget, a client can still route a video…\nGHSA-hcwq-8wjf-3gcr：### Summary The audio decode-duration guard (`max_duration_s`, env `VLLM_MAX_AUDIO_DECODE_DURATION_S`, default 600s) that protects against audio decompression-bomb DoS is wired into **only** the speech-to-text path (`/v1/audio/transcriptions`). The **chat** audio path (`/v1/chat/completions`, `input_audio` content parts) calls the same decoder with **no** limit, so an **unauthenticated** client ca…\nPYSEC-2026-3985：vLLM before 0.28.0 contains a remote code execution vulnerability in the LlavaOnevision2 processor loader that ignores the trust_remote_code parameter when loading remote processor classes. Attackers can craft a malicious model with arbitrary code in processing_llava_onevision2.py that executes with vLLM process authority even when trust_remote_code is set to False.\nGHSA-wvm9-9g5j-623f：## Summary Open WebUI's OAuth token exchange endpoint issues a session for a provider access token without running the OAuth role management that the normal OAuth login callback runs. A user whose provider roles the login callback would refuse, or would demote, could still obtain a working session at their existing role through this endpoint. ## Preconditions - `ENABLE_OAUTH_TOKEN_EXCHANGE=True`.…\nGHSA-3g9q-v48f-hh9w：## Summary The OIDC back-channel logout endpoint is unauthenticated by design, because the identity provider calls it without a browser session. Before checking whether the submitted logout token was genuine, the handler fetched the provider's discovery document and its signing keys over the network, and repeated both fetches on every request because nothing was cached. The signing-key fetch also…\nGHSA-v39v-59xw-j98g：# Any authenticated user can suppress calendar alerts instance-wide via a non-numeric alert value ## Summary Calendar events carry a free-form `meta` object that is stored exactly as submitted, with no validation of the values inside it. The scheduler reads the per-event alert offset out of that object in a single pass that covers every user's upcoming events, and compares it numerically without c…\nCVE-2026-64849：MLflow contains a server-side request forgery vulnerability that can allow attackers to reach internal or cloud metadata services and receive response_status and response_body.\nCVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.\nCVE-2026-9198：Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.\nCVE-2026-0770：Langflow contains an inclusion of functionality from untrusted control sphere vulnerability that allows remote attackers to execute arbitrary code on affected installations.\nCVE-2026-55255：Langflow contains an authorization bypass through user-controlled key vulnerability which allows an authenticated attacker to execute any flow belonging to another user by specifying the victim's flow ID in the request.\nCVE-2025-34291：Langflow contains an origin validation error vulnerability in which an overly permissive CORS configuration combined with a refresh token cookie configured as SameSite=None allows a malicious webpage to perform cross-origin requests that include credentials and successfully call the refresh endpoint. This could allow the attacker to execute arbitrary code and achieve full system compromise via obt…\nCVE-2026-33017：Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.\nCVE-2025-68613：n8n contains an improper control of dynamically managed code resources vulnerability in its workflow expression evaluation system that allows for remote code execution.\nGHSA-mcmc-2m55-j8jj：### Summary The fix [here](https://github.com/vllm-project/vllm/pull/27204) for CVE-2025-62164 is not sufficient. The fix only disables prompt embeds by default rather than addressing the root cause, so the DoS vulnerability remains when the feature is enabled. ### Details vLLM's pending change attempts to fix the root cause, which is the missing sparse tensor validation. PyTorch (~v2.0) disables…\nCVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injection in order to trick the agent to create malicious code.\nCVE-2025-6558：Google Chromium contains an improper input validation vulnerability in ANGLE and GPU. This vulnerability could allow a remote attacker to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2025-3248：Langflow contains a missing authentication vulnerability in the /api/v1/validate/code endpoint that allows a remote, unauthenticated attacker to execute arbitrary code via crafted HTTP requests.\nCVE-2024-4610：Arm Bifrost and Valhall GPU kernel drivers contain a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2024-29988：Microsoft SmartScreen Prompt contains a security feature bypass vulnerability that allows an attacker to bypass the Mark of the Web (MotW) feature. This vulnerability can be chained with CVE-2023-38831 and CVE-2024-21412 to execute a malicious file.\nCVE-2023-4211：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2021-29256：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2021-27876：Veritas Backup Exec (BE) Agent contains a file access vulnerability that could allow an attacker to specially craft input parameters on a data management protocol command to access files on the BE Agent machine.\nCVE-2021-27877：Veritas Backup Exec (BE) Agent contains an improper authentication vulnerability that could allow an attacker unauthorized access to the BE Agent via SHA authentication scheme.\nCVE-2021-27878：Veritas Backup Exec (BE) Agent contains a command execution vulnerability that could allow an attacker to use a data management protocol command to execute a command on the BE Agent machine.\nCVE-2023-26083：Arm Mali GPU Kernel Driver contains an information disclosure vulnerability that allows a non-privileged user to make valid GPU processing operations that expose sensitive kernel metadata.\nCVE-2022-22706：Arm Mali GPU Kernel Driver contains an unspecified vulnerability that allows a non-privileged user to achieve write access to read-only memory pages.\nCVE-2022-38181：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2022-4135：Google Chromium GPU contains a heap buffer overflow vulnerability that allows a remote attacker, who has compromised the renderer process, to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2014-6332：OleAut32.dll in OLE in Microsoft Windows allows remote attackers to remotely execute code via a crafted web site.\nCVE-2014-4114：A vulnerability exists in Windows Object Linking & Embedding (OLE) that could allow remote code execution if a user opens a file that contains a specially crafted OLE object.\nCVE-2020-10987：Tenda AC1900 Router AC15 Model contains an unspecified vulnerability that allows remote attackers to execute system commands via the deviceName POST parameter.\nCVE-2021-28663：Arm Mali Graphics Processing Unit (GPU) kernel driver contains a use-after-free vulnerability that may allow a non-privileged user to make improper operations on GPU memory to gain root privilege, and/or disclose information.\nCVE-2021-28664：Arm Mali Graphics Processing Unit (GPU) kernel driver contains an unspecified vulnerability that may allow a non-privileged user to gain write access to read-only memory, gain root privilege, corrupt memory, and modify the memory of other processes.",
-   "latency_ms": 3874.0,
+   "latency_ms": 2634.3,
    "timeout": false
   },
   {
@@ -3601,9 +3519,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 5,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3460.2,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 3142.9,
    "timeout": false
   },
   {
@@ -3661,9 +3579,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 4,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3418.8,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2793.8,
    "timeout": false
   },
   {
@@ -3740,9 +3658,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 6,
-   "answer_head": "证据不足，无法回答。",
-   "answer_full": "证据不足，无法回答。",
-   "latency_ms": 3249.5,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 2764.6,
    "timeout": false
   },
   {
@@ -3756,58 +3674,11 @@
    "refused": false,
    "refusal_correct": false,
    "related_event_ids": [
-    "EU_AI_ACT-ca6810dcd2",
-    "NIST_AI_RMF-54dbc15413",
     "OWASP_GENAI-430c5292e0",
-    "CVE-2026-41106",
+    "OPENALEX-W7214241047",
+    "OPENALEX-W7214468787",
     "CVE-2026-41109",
-    "CVE-2026-45499",
-    "CVE-2026-47282",
-    "CVE-2026-48561",
-    "CVE-2026-50510",
-    "CVE-2026-50517",
-    "CVE-2026-55145",
-    "CVE-2026-56167",
-    "CVE-2026-58617",
-    "PYSEC-2026-4000",
-    "PYSEC-2026-3998",
-    "PYSEC-2026-3999",
-    "PYSEC-2026-3997",
-    "PYSEC-2026-3996",
-    "GHSA-8pw2-6jv3-mj5j",
-    "GHSA-hcwq-8wjf-3gcr",
-    "PYSEC-2026-3985",
-    "GHSA-wvm9-9g5j-623f",
-    "GHSA-3g9q-v48f-hh9w",
-    "GHSA-v39v-59xw-j98g",
-    "CVE-2026-64849",
-    "CVE-2025-62593",
-    "CVE-2026-9198",
-    "CVE-2026-0770",
-    "CVE-2026-55255",
-    "CVE-2025-34291",
-    "CVE-2026-33017",
-    "CVE-2025-68613",
-    "GHSA-mcmc-2m55-j8jj",
-    "CVE-2025-9959",
-    "CVE-2025-6558",
-    "CVE-2025-3248",
-    "CVE-2024-4610",
-    "CVE-2024-29988",
-    "CVE-2023-4211",
-    "CVE-2021-29256",
-    "CVE-2021-27876",
-    "CVE-2021-27877",
-    "CVE-2021-27878",
-    "CVE-2023-26083",
-    "CVE-2022-22706",
-    "CVE-2022-38181",
-    "CVE-2022-4135",
-    "CVE-2014-6332",
-    "CVE-2014-4114",
-    "CVE-2020-10987",
-    "CVE-2021-28663",
-    "CVE-2021-28664"
+    "OPENALEX-W7128805264"
    ],
    "document_citation_count": 0,
    "cited_document_keys": [],
@@ -3817,9 +3688,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending ",
-   "answer_full": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending Regulations (EC) No 300/2008, (EU) No 167/2013, (EU) No 168/2013, (EU) 2018/858, (EU) 2018/1139 and (EU) 2019/2144 and Directives 2014/9 0/EU, (EU) 2016/797 and (EU) 2020/1828 (Artificial Intelligence Act) (Text with EEA…\nNIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock A locked padlock ) or https:// means you’ve safely connected to the .gov website. Share sensiti…\nOWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…\nCVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nCVE-2026-45499：<p>Server-side request forgery (ssrf) in Azure OpenAI allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-47282：<p>Insufficiently protected credentials in GitHub Copilot and Visual Studio Code allows an unauthorized attacker to disclose information over a network.</p>\nCVE-2026-48561：<p>Improper neutralization of special elements used in a command ('command injection') in Copilot Chat (Microsoft Edge) allows an unauthorized attacker to execute code over a network.</p>\nCVE-2026-50510：<p>Improper restriction of names for files and other resources in Github Copilot allows an unauthorized attacker to execute code locally.</p>\nCVE-2026-50517：<p>Deserialization of untrusted data in M365 Copilot allows an authorized attacker to execute code over a network.</p>\nCVE-2026-55145：<p>Improper neutralization of special elements used in a command ('command injection') in Outlook Copilot allows an authorized attacker to perform tampering over a network.</p>\nCVE-2026-56167：<p>Server-side request forgery (ssrf) in Azure AI Search allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-58617：<p>Improper access control in Microsoft 365 Copilot for iOS allows an unauthorized attacker to elevate privileges over a network.</p>\nPYSEC-2026-4000：vLLM through 0.29.0 fails to properly validate bad_words token indices against the model's generation output width in SamplingParams.update_from_tokenizer(). Attackers can supply out-of-bounds token indices that corrupt logits memory of concurrent requests, causing different in-flight HTTP requests to return incorrect tokens.\nPYSEC-2026-3998：vLLM before 0.29.0 validates allowed_token_ids against tokenizer length instead of model output logits width in SamplingParams._validate_allowed_token_ids(). Attackers can supply token IDs above the output vocabulary that pass validation, causing LogitBiasState to corrupt GPU logits state and allow concurrent requests to sample tokens outside their allowlists.\nPYSEC-2026-3999：vLLM through 0.29.0 contains a memory corruption vulnerability in the Triton _bincount_kernel where prompt token IDs index the penalty prompt-presence bitset without bounds checking against vocabulary size. Attackers can submit multimodal audio requests with tokens equal to vocabulary size, causing out-of-bounds writes that corrupt concurrent requests' sampler state and alter repetition penalty be…\nPYSEC-2026-3997：vLLM versions before 0.28.0 fail to validate the lower bound of token IDs in the /v1/embeddings and /pooling endpoints, allowing unauthenticated attackers to crash the engine by submitting negative token IDs. A single request with a negative token ID triggers a CUDA device-side assertion that poisons the GPU context, causing all subsequent requests to fail until the process restarts.\nPYSEC-2026-3996：vLLM through 0.29.0 fails to properly clean up decode-side metadata for rejected inference requests in prefill/decode disaggregated deployments. Remote attackers can submit requests with max_tokens=0 to exhaust decode-worker memory without bound until the worker restarts.\nGHSA-8pw2-6jv3-mj5j：## Summary Current vLLM `main` lets an inference request choose the PyNvVideoCodec GPU video decoder through `media_io_kwargs.video.video_backend`, but engine GPU memory reservation is computed only from static startup configuration and `VLLM_VIDEO_LOADER_BACKEND`. If the server starts with the default OpenCV/software backend and no `--mm-ipc-gpu-memory-gb` budget, a client can still route a video…\nGHSA-hcwq-8wjf-3gcr：### Summary The audio decode-duration guard (`max_duration_s`, env `VLLM_MAX_AUDIO_DECODE_DURATION_S`, default 600s) that protects against audio decompression-bomb DoS is wired into **only** the speech-to-text path (`/v1/audio/transcriptions`). The **chat** audio path (`/v1/chat/completions`, `input_audio` content parts) calls the same decoder with **no** limit, so an **unauthenticated** client ca…\nPYSEC-2026-3985：vLLM before 0.28.0 contains a remote code execution vulnerability in the LlavaOnevision2 processor loader that ignores the trust_remote_code parameter when loading remote processor classes. Attackers can craft a malicious model with arbitrary code in processing_llava_onevision2.py that executes with vLLM process authority even when trust_remote_code is set to False.\nGHSA-wvm9-9g5j-623f：## Summary Open WebUI's OAuth token exchange endpoint issues a session for a provider access token without running the OAuth role management that the normal OAuth login callback runs. A user whose provider roles the login callback would refuse, or would demote, could still obtain a working session at their existing role through this endpoint. ## Preconditions - `ENABLE_OAUTH_TOKEN_EXCHANGE=True`.…\nGHSA-3g9q-v48f-hh9w：## Summary The OIDC back-channel logout endpoint is unauthenticated by design, because the identity provider calls it without a browser session. Before checking whether the submitted logout token was genuine, the handler fetched the provider's discovery document and its signing keys over the network, and repeated both fetches on every request because nothing was cached. The signing-key fetch also…\nGHSA-v39v-59xw-j98g：# Any authenticated user can suppress calendar alerts instance-wide via a non-numeric alert value ## Summary Calendar events carry a free-form `meta` object that is stored exactly as submitted, with no validation of the values inside it. The scheduler reads the per-event alert offset out of that object in a single pass that covers every user's upcoming events, and compares it numerically without c…\nCVE-2026-64849：MLflow contains a server-side request forgery vulnerability that can allow attackers to reach internal or cloud metadata services and receive response_status and response_body.\nCVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.\nCVE-2026-9198：Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.\nCVE-2026-0770：Langflow contains an inclusion of functionality from untrusted control sphere vulnerability that allows remote attackers to execute arbitrary code on affected installations.\nCVE-2026-55255：Langflow contains an authorization bypass through user-controlled key vulnerability which allows an authenticated attacker to execute any flow belonging to another user by specifying the victim's flow ID in the request.\nCVE-2025-34291：Langflow contains an origin validation error vulnerability in which an overly permissive CORS configuration combined with a refresh token cookie configured as SameSite=None allows a malicious webpage to perform cross-origin requests that include credentials and successfully call the refresh endpoint. This could allow the attacker to execute arbitrary code and achieve full system compromise via obt…\nCVE-2026-33017：Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.\nCVE-2025-68613：n8n contains an improper control of dynamically managed code resources vulnerability in its workflow expression evaluation system that allows for remote code execution.\nGHSA-mcmc-2m55-j8jj：### Summary The fix [here](https://github.com/vllm-project/vllm/pull/27204) for CVE-2025-62164 is not sufficient. The fix only disables prompt embeds by default rather than addressing the root cause, so the DoS vulnerability remains when the feature is enabled. ### Details vLLM's pending change attempts to fix the root cause, which is the missing sparse tensor validation. PyTorch (~v2.0) disables…\nCVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injection in order to trick the agent to create malicious code.\nCVE-2025-6558：Google Chromium contains an improper input validation vulnerability in ANGLE and GPU. This vulnerability could allow a remote attacker to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2025-3248：Langflow contains a missing authentication vulnerability in the /api/v1/validate/code endpoint that allows a remote, unauthenticated attacker to execute arbitrary code via crafted HTTP requests.\nCVE-2024-4610：Arm Bifrost and Valhall GPU kernel drivers contain a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2024-29988：Microsoft SmartScreen Prompt contains a security feature bypass vulnerability that allows an attacker to bypass the Mark of the Web (MotW) feature. This vulnerability can be chained with CVE-2023-38831 and CVE-2024-21412 to execute a malicious file.\nCVE-2023-4211：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2021-29256：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2021-27876：Veritas Backup Exec (BE) Agent contains a file access vulnerability that could allow an attacker to specially craft input parameters on a data management protocol command to access files on the BE Agent machine.\nCVE-2021-27877：Veritas Backup Exec (BE) Agent contains an improper authentication vulnerability that could allow an attacker unauthorized access to the BE Agent via SHA authentication scheme.\nCVE-2021-27878：Veritas Backup Exec (BE) Agent contains a command execution vulnerability that could allow an attacker to use a data management protocol command to execute a command on the BE Agent machine.\nCVE-2023-26083：Arm Mali GPU Kernel Driver contains an information disclosure vulnerability that allows a non-privileged user to make valid GPU processing operations that expose sensitive kernel metadata.\nCVE-2022-22706：Arm Mali GPU Kernel Driver contains an unspecified vulnerability that allows a non-privileged user to achieve write access to read-only memory pages.\nCVE-2022-38181：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2022-4135：Google Chromium GPU contains a heap buffer overflow vulnerability that allows a remote attacker, who has compromised the renderer process, to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2014-6332：OleAut32.dll in OLE in Microsoft Windows allows remote attackers to remotely execute code via a crafted web site.\nCVE-2014-4114：A vulnerability exists in Windows Object Linking & Embedding (OLE) that could allow remote code execution if a user opens a file that contains a specially crafted OLE object.\nCVE-2020-10987：Tenda AC1900 Router AC15 Model contains an unspecified vulnerability that allows remote attackers to execute system commands via the deviceName POST parameter.\nCVE-2021-28663：Arm Mali Graphics Processing Unit (GPU) kernel driver contains a use-after-free vulnerability that may allow a non-privileged user to make improper operations on GPU memory to gain root privilege, and/or disclose information.\nCVE-2021-28664：Arm Mali Graphics Processing Unit (GPU) kernel driver contains an unspecified vulnerability that may allow a non-privileged user to gain write access to read-only memory, gain root privilege, corrupt memory, and modify the memory of other processes.",
-   "latency_ms": 3126.0,
+   "answer_head": "OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Intro",
+   "answer_full": "OWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…\nOPENALEX-W7214241047：Cloud Security Posture Management (CSPM) systems can produce large queues of configuration findings, yet a nominal severity label alone does not capture internet reachability, attainable privilege, asset importance, blast radius, attack-path contribution, or the regulatory relevance of the affected control.Organizations operating across India and South Korea also need a defensible way to relate on…\nOPENALEX-W7214468787：Today's Security Operations Centers (SOCs) need to process vast amounts of complex and diverse security data from endpoints, cloud, identity and network systems in a timely manner.Large Language Models (LLMs) have been shown to have a good performance in reasoning but are not widely used in automated incident response for the following reasons: Lack of explainability: LLM outputs are often hard to…\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nOPENALEX-W7128805264：The rapid development of the AI agent communication protocols, including the Model Context Protocol (MCP), Agent2Agent (A2A), Agora, and Agent Network Protocol (ANP), is reshaping how AI agents communicate with tools, services, and each other. While these protocols support scalable multi-agent interaction and cross-organizational interoperability, their security principles remain understudied, and…",
+   "latency_ms": 1900.6,
    "timeout": false
   }
  ]

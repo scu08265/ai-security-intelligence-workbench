@@ -492,10 +492,18 @@ def answer_question(
     # 问题点名了一个具体对象（论文 / 产品 / 编号），但命中的事件里根本没有它：
     # 此时用事件作答就是拿无关论文凑数。改为文档证据作答。
     question_entities = named_entities(_text(question))
-    if question_entities and selected and not any(
+    # 论文类问题优先文档证据：事件摘要里常混入同一来源的其它论文，
+    # 用它作答会答非所问（BQA-002/007/009 都踩过）。
+    paper_question = bool(re.search(r"论文|paper|研究|标题|题目|主题|方法名称", _text(question), re.I))
+    entity_in_documents = bool(question_entities) and any(
+        any(entity in _text(citation.get("title")).casefold() for entity in question_entities)
+        for citation in (rag_result.get("citations") or [])
+    )
+    entity_missing_from_events = bool(question_entities) and bool(selected) and not any(
         any(entity in _event_haystack(event) for entity in question_entities)
         for event in selected
-    ):
+    )
+    if (paper_question and entity_in_documents) or entity_missing_from_events:
         if rag_result.get("citations") and not rag_result.get("refused"):
             trace.append({
                 "step": len(trace) + 1, "role": "planner", "action": "prefer_document_evidence",

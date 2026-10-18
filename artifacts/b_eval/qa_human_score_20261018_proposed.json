@@ -1,0 +1,57 @@
+{
+  "schema_version": "b-qa-human-score-1.0",
+  "computable": true,
+  "cases_total": 50,
+  "human_judged_cases": 50,
+  "pending_human_cases": 0,
+  "answer": {
+    "numerator": 19,
+    "denominator": 38,
+    "rate": 0.5,
+    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
+    "strict_denominator": 29,
+    "strict_rate": 0.6552,
+    "partial_counted_not_correct": 9,
+    "by_label": {
+      "correct": 19,
+      "incorrect": 10,
+      "partial": 9
+    },
+    "undecided": 0
+  },
+  "citation": {
+    "numerator": 19,
+    "denominator": 38,
+    "rate": 0.5,
+    "rule": "supported / (supported + partially_supported + unsupported)",
+    "by_label": {
+      "supported": 19,
+      "partially_supported": 9,
+      "unsupported": 10,
+      "not_applicable": 12,
+      "unknown": 0
+    },
+    "not_applicable": 12,
+    "undecided": 0
+  },
+  "refusal": {
+    "judged_cases": 12,
+    "should_refuse": {
+      "n": 12,
+      "correctly_refused": 8,
+      "refused_recall": 0.6667,
+      "answered_by_system": 4
+    },
+    "should_answer": {
+      "n": 0,
+      "answered_correctly": 0,
+      "wrongly_refused": 0
+    },
+    "refused_precision": 1.0,
+    "refusal_accuracy": 0.6667,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母",
+    "not_applicable": 38,
+    "undecided": 0
+  },
+  "note": "建议口径：队长按 B 的同一份 rubric 逐题初判（AI 辅助），人工签字列仍为空。签字确认后把文件名改为 qa_human_score_20261018.json 才会成为活动批次。"
+}
