@@ -1,0 +1,30 @@
+{
+  "schema_version": 3,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "处置状态机",
+    "output": ".archify/lifecycle-disposition-20261018-135000/disposition.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN"
+  },
+  "mainPath": ["open", "in_progress", "fixed", "verified"],
+  "states": [
+    { "id": "open", "type": "start", "label": "待处置", "sublabel": "尚无处置记录", "tag": "47 条曾在此", "step": "01" },
+    { "id": "in_progress", "type": "active", "label": "处置中", "sublabel": "已指派负责人", "tag": "留处置人与时间", "step": "02" },
+    { "id": "fixed", "type": "waiting", "label": "已修复待复测", "sublabel": "等待系统复测", "tag": "不能人工声明关闭", "step": "03" },
+    { "id": "verified", "type": "success", "label": "已复测关闭", "sublabel": "资产已不在区间", "tag": "9 条", "step": "04" },
+    { "id": "accepted", "type": "success", "label": "已接受风险", "sublabel": "显式处置决策", "tag": "44 条" }
+  ],
+  "transitions": [
+    { "id": "open-in-progress", "from": "open", "to": "in_progress", "label": "指派负责人" },
+    { "id": "in-progress-fixed", "from": "in_progress", "to": "fixed", "label": "修复完成" },
+    { "id": "fixed-verified", "from": "fixed", "to": "verified", "label": "复测通过" },
+    { "id": "fixed-in-progress", "from": "fixed", "to": "in_progress", "label": "复测未通过", "variant": "security" },
+    { "id": "open-accepted", "from": "open", "to": "accepted", "label": "接受风险", "variant": "security" },
+    { "id": "in-progress-accepted", "from": "in_progress", "to": "accepted", "label": "接受风险", "variant": "security" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "判定口径", "items": ["闭环率 =（复测关闭 + 接受风险）/ 高优先级总数", "已登记处置的条目锁定在分母内，不因资产修复而消失"] },
+    { "dot": "rose", "title": "当前读数", "items": ["55 条高优先级，53 条已关闭，闭环率 96.36%", "接受风险是处置决策，不代表风险已消除"] }
+  ]
+}

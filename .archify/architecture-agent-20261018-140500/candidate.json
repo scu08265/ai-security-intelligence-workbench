@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "智能体编排 · 角色与交接",
+    "output": ".archify/architecture-agent-20261018-140500/agent.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN"
+  },
+  "components": [
+    { "id": "request", "type": "external", "label": "任务与上下文", "sublabel": "问题、资产、约束", "pos": [20, 140], "size": [150, 78] },
+    { "id": "planner", "type": "backend", "label": "受限计划器", "sublabel": "只选允许的动作", "tag": "看不到凭据", "pos": [250, 140], "size": [150, 78] },
+    { "id": "tools", "type": "backend", "label": "工具执行", "sublabel": "检索与富化", "tag": "20 个已登记工具", "pos": [480, 140], "size": [150, 78] },
+    { "id": "auditor", "type": "security", "label": "审核", "sublabel": "证据缺口标注", "tag": "规则判定", "pos": [710, 140], "size": [150, 78] },
+    { "id": "answer", "type": "frontend", "label": "答案组织", "sublabel": "逐句绑定引用", "tag": "两种模式都带引用", "pos": [940, 140], "size": [150, 78] },
+    { "id": "scheduler", "type": "messagebus", "label": "调度", "sublabel": "预算与自愈", "tag": "停止条件", "pos": [250, 340], "size": [150, 78] },
+    { "id": "store", "type": "database", "label": "运行记录", "sublabel": "runs 与 trace", "tag": "每步可核查", "pos": [710, 340], "size": [150, 78] }
+  ],
+  "connections": [
+    { "id": "request-planner", "from": "request", "to": "planner", "label": "任务", "variant": "emphasis" },
+    { "id": "planner-tools", "from": "planner", "to": "tools", "label": "选择动作", "variant": "emphasis" },
+    { "id": "tools-auditor", "from": "tools", "to": "auditor", "label": "证据", "variant": "emphasis" },
+    { "id": "auditor-answer", "from": "auditor", "to": "answer", "label": "通过", "variant": "emphasis" },
+    { "id": "auditor-planner", "from": "auditor", "to": "planner", "label": "补证或停止", "variant": "security", "fromSide": "left", "toSide": "top" },
+    { "id": "scheduler-planner", "from": "scheduler", "to": "planner", "label": "预算与降级", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "id": "tools-store", "from": "tools", "to": "store", "label": "写入轨迹", "variant": "dashed", "fromSide": "bottom", "toSide": "top" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "受限而非自治", "items": ["计划器只能从允许的动作表里选择", "看不到凭据，也无法编造来源参数"] },
+    { "dot": "rose", "title": "证据优先", "items": ["审核按规则标注证据缺口，不由模型判断对错", "证据不足时直接拒答，不进入答案组织"] }
+  ]
+}

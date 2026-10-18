@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "3a4c7c6c-904c-4326-90e6-a07f26ae889b",
+  "status": "current",
+  "command": "deliver",
+  "type": "lifecycle",
+  "input": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\lifecycle-selfheal-20261018-140800\\candidate.json",
+  "output": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\lifecycle-selfheal-20261018-140800\\selfheal.html",
+  "specification": {
+    "sha256": "d47f6739068dffb0bb5c6ca40c6c52a345473add06709c60655ad8fe27bac828",
+    "bytes": 2557
+  },
+  "artifact": {
+    "sha256": "694fbbcc3db82576475777193b6b133d076166675e581758b8ff250e83051e9f",
+    "bytes": 813547
+  }
+}

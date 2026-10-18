@@ -1,13 +1,13 @@
 ﻿报告文件,页码/章节/位置,报告原值,证据文件路径,JSON字段/原始记录,复算公式,复算值,状态,处理结果/原因
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表标题,关键数字（2026-10-13 快照）,docs/report/metrics_snapshot.json,snapshot_date = 2026-10-18,标题日期 = snapshot_date,2026-10-18,不一致-已修复,标题改为读 snapshot_date，不再写死 10-13
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·语料规模,705 个事件 / 705 个富化样本,docs/report/metrics_snapshot.json,scorecard.events_total=705 / enrichment_sample=705,直接读取,705 / 705,一致,—
-docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·连续监测,累计 23 个采集日，定时运行 13 天,docs/report/metrics_snapshot.json,scorecard.cumulative_actual_run_days=23 / cumulative_scheduled_run_days=13,直接读取,23 / 13,一致,—
+docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·连续监测,累计 23 个采集日，定时运行 13 天（审计时）→ 24 / 14（main@615eeea 新快照）,docs/report/metrics_snapshot.json,scorecard.cumulative_actual_run_days=24 / cumulative_scheduled_run_days=14,直接读取,24 / 14,一致（快照刷新后）,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·监测时效性,p50 = 14.43 小时；6 小时内 32.4%；336 有效样本,docs/report/metrics_snapshot.json,scorecard.latency_p50_hours=14.43 / within_6h_rate=0.3244 / effective_denominator=336,直接读取；0.3244→32.4%,14.43 / 32.4% / 336,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·富化准确率,Precision 1.0 / Recall 0.734；94 条可判定,artifacts/b_eval/relation_score_gold_20261010.json,micro.precision=1.0 / micro.recall=0.734 / micro.evaluable_samples=94,TP/(TP+FP)=69/69；TP/(TP+FN)=69/94；TP+FP+FN=94,1.0 / 0.734 / 94,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·问答命中,0.9722 / 0.9211；50 题；2026-10-12 批次,artifacts/b_eval/formal_qa_results_20261012.json,totals.document_hit.rate / term_hit.rate / cases,35/36=0.9722；35/38=0.9211,0.9722 / 0.9211 / 50,一致,—
-docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·处置闭环,55 / 47（复测 3 + 接受风险 44，85.45%）,docs/report/metrics_snapshot.json,disposition.high_priority_total=55 / high_priority_closed=47 / verified=3 / status_breakdown.accepted=44 / closure_rate=0.8545,3+44=47；47/55=0.8545,55 / 47 / 3+44 / 85.45%,一致,—
+docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·处置闭环,55 / 47（复测 3 + 接受风险 44，85.45%；审计时）→ 55 / 53（复测 9 + 接受风险 44，96.36%；main@615eeea）,docs/report/metrics_snapshot.json,disposition.high_priority_total=55 / high_priority_closed=53 / verified=9 / status_breakdown.accepted=44 / closure_rate=0.9636,9+44=53；53/55=0.9636,55 / 53 / 9+44 / 96.36%,一致（快照刷新后）,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·处置闭环口径,"""仅计入系统复测通过的条目""",docs/report/metrics_snapshot.json,disposition.status_breakdown,closed 含 verified 3 + accepted 44，不只复测,47 = 3 + 44,不一致-已修复,"口径改为""已关闭=复测关闭+接受风险；verified_rate 只计复测关闭"""
-docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·自动化测试,731 passed / 0 skipped,docs/report/metrics_snapshot.json,"tests = ""748 passed / 0 skipped""（10-18 快照，按本分支全量 pytest 写入）",本分支实测 pytest 748 passed / 0 skipped,748 / 748,待队长刷新,"本分支实测 748 passed / 0 skipped；快照仍是 731（不改数据源）。队长提交前跑 refresh_metrics_snapshot.py --write --tests ""748 passed / 0 skipped"" 即对齐"
+docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·自动化测试,731 passed / 0 skipped,docs/report/metrics_snapshot.json,"tests = ""733 passed / 0 skipped""（main@615eeea 新快照）；audit 时快照为 731",本分支实测 pytest 750 passed / 0 skipped,快照 733 / 本分支 750,待队长刷新,"本分支实测 750 passed / 0 skipped；快照为 733（不改数据源）。队长提交前跑 refresh_metrics_snapshot.py --write --tests ""750 passed / 0 skipped"" 即对齐"
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 关键数字表·容器验收,9 项检查全部通过,reports/docker-validation.json,checks.*（9 个布尔键）,count(checks)==9 且全 true,9 / 9 true,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 边界段·五项缺口,"""以下五项""（无实时/档位/10-21/POC资产/连续运行）",docs/COMPETITION_RUBRIC_MAPPING.md §4 + docs/report/metrics_snapshot.json,四类缺口 + 连续运行 target_met=false,逐条计数 = 5,5,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P2 边界段·连续运行,预计 2026-10-20 回到目标；引用 A_CONTINUOUS_RUN_STATUS_20261015,docs/A_CONTINUOUS_RUN_STATUS_20261018.md,continuous_executed_days=5；缺口 10-12、10-13；ETA 2026-10-20,滚动 7 天窗口，最后一个缺口 10-13 出窗日为 10-20,5 天 / 缺口 2 天 / ETA 10-20,不一致-已修复,"原文写""10-09/11/12/13 四天""并引用已被取代的 10-15 文档；改为窗口内 10-12/10-13 并引用 10-18 账本"
@@ -35,7 +35,7 @@ docs/report/AI安全知识情报系统技术报告.docx / .pdf,P9 第十章·混
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P9 第十章·漏洞类分列,GHSA 2.2；NVD 8.27；样本 81/162,docs/report/metrics_snapshot.json,latency_by_class.per_source[ghsa/nvd],直接读取,2.2 / 8.27 / 81 / 162,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P9 第十章·修复前引用命中,0.8889,docs/B_REEVAL_20261012_REPORT.md,32/36 = 0.8889（b020090 对照运行）,32/36,0.8889,一致,历史对照，带批次限定
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P9 第十章·问答延迟,p50 449.9 / p95 627.9 ms,artifacts/b_eval/formal_qa_results_20261012.json,latency_ms.p50 / p95,直接读取（50 样本）,449.9 / 627.9,一致,—
-docs/report/AI安全知识情报系统技术报告.docx / .pdf,P9 第十章·连续运行,累计 23 采集日、定时 13 天；窗口未达成,docs/report/metrics_snapshot.json,cumulative_actual_run_days=23 / cumulative_scheduled_run_days=13 / continuous_target_met=false,直接读取,23 / 13 / false,一致,false 是事实，不是 bug
+docs/report/AI安全知识情报系统技术报告.docx / .pdf,P9 第十章·连续运行,累计 23 采集日、定时 13 天（审计时）→ 24 / 14（新快照）；窗口未达成,docs/report/metrics_snapshot.json,cumulative_actual_run_days=24 / cumulative_scheduled_run_days=14 / continuous_target_met=false,直接读取,24 / 14 / false,一致,false 是事实，不是 bug
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P10 第十章·上游归因,mitre_cve→nvd 中位 0.68 小时（79 对）,reports/timeliness-attribution.json,"upstream.publish_deltas[""mitre_cve -> nvd""]{n:79,p50_hours:0.68}",直接读取,79 / 0.68,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P10 第十章·学术源延迟,arxiv 44.01 / openalex 61.81,docs/report/metrics_snapshot.json,latency_by_class.per_source,直接读取,44.01 / 61.81,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P10 第十章·档位判定,GHSA/NVD 均 ≤12 小时，按漏洞类判良好,docs/report/metrics_snapshot.json,per_source p50 2.2 / 8.27；classes.vulnerability p50 7.34,2.2≤12；8.27≤12；7.34>6 且≤12,良好档,一致,—
@@ -60,15 +60,15 @@ docs/COMPETITION_RUBRIC_MAPPING.md,§3 决赛·富化召回,R=0.734（抽样）,
 docs/COMPETITION_RUBRIC_MAPPING.md,§3 决赛·问答,引用命中 0.9722,artifacts/b_eval/formal_qa_results_20261012.json,totals.document_hit.rate,35/36,0.9722,一致,—
 docs/COMPETITION_RUBRIC_MAPPING.md,§4 缺口2·时效性,7.34 / 1.75 / 8.34 / 混合 15.58,docs/report/metrics_snapshot.json,per_source 与 mixed,直接读取,7.34 / 2.2 / 8.27 / 14.43,不一致-已修复,—
 docs/COMPETITION_RUBRIC_MAPPING.md,§5/§6 术语→文档两跳,26 条命中 82 份文档,app/term_dictionary.py + 各语料实测,演示机 83 / intel-data-b 37 / colfix 36,不同语料分别复算,26 固定；83/37/36,不一致-已修复,82 是 10-14 旧读数；改为三套语料分列 + 报告只指向接口
-docs/METRICS_BASELINE.md,§1 快照块,705 / 233 / 1334 / 8-196-49 / 1-849 / 227；23 / 13 天,docs/report/metrics_snapshot.json,snapshot 全字段,脚本重写块，逐字段比对,同值,一致,—
+docs/METRICS_BASELINE.md,§1 快照块,705 / 233 / 1339 / 8-196-55 / 1-849 / 227；24 / 14 天（合并 main 后）,docs/report/metrics_snapshot.json,snapshot 全字段,脚本重写块，逐字段比对,同值,一致,—
 docs/METRICS_BASELINE.md,§2.1 漏洞类,7.34（1.75 / 8.34）,docs/report/metrics_snapshot.json,per_source / classes,直接读取,7.34（2.2 / 8.27）,不一致-已修复,—
 docs/METRICS_BASELINE.md,§2.1 混合口径,297 样本 / 15.58 小时,docs/report/metrics_snapshot.json,latency_by_class.mixed,直接读取,336 / 14.43,不一致-已修复,10-13 的 267/18.1 作为历史读数保留
-docs/METRICS_BASELINE.md,§3 全量测试,698 passed / 0 skipped,本分支 pytest 实测,pytest tests -q,用例计数,748 passed / 0 skipped,不一致-已修复,同时列出 10-14=698、10-18 快照=731 两个时点值
-docs/METRICS_BASELINE.md,§3.1 处置队列,53 条 / 192 研判 / 48 记录 / 已关闭 46 / 接受 43,docs/report/metrics_snapshot.json,disposition 与 database.counts,直接读取,55 / 129 / 49 / 47 / 44,不一致-已修复,—
+docs/METRICS_BASELINE.md,§3 全量测试,698 passed / 0 skipped,本分支 pytest 实测,pytest tests -q,用例计数,750 passed / 0 skipped,不一致-已修复,同时列出 10-14=698、10-18 快照=733 两个时点值
+docs/METRICS_BASELINE.md,§3.1 处置队列,53 条 / 192 研判 / 48 记录 / 已关闭 46 / 接受 43,docs/report/metrics_snapshot.json,disposition 与 database.counts,直接读取,55 / 129 / 55 / 53 / 44,不一致-已修复,—
 docs/METRICS_BASELINE.md,§3 语料指纹,"8,183,808 B / 4095a5b1 / 139 文件 / FCD31963 / CEC88D75",D:/ICT/intel-data-b 与 _handoff/*.zip,Get-FileHash；zip MANIFEST 139 行,逐项比对,全部相等,一致,本机实测核验
 docs/B_EVIDENCE_INDEX.md,数据可达性·主语料,"47/47 通过；8,183,808 B；4095a5b1…",D:/ICT/_handoff/B_CORPUS_20261012.zip,MANIFEST.sha256 47 行；库文件哈希,行数 + sha256,47 / 8183808 / 4095a5b1…,一致,—
 docs/B_EVIDENCE_INDEX.md,数据可达性·衍生副本,"139 文件 / 172 条目 / 80,208,714 B / 98bd19c5…961674a",D:/ICT/_handoff/B_DERIVATIVE_CORPORA_20261012.zip,zip 172 条目；MANIFEST 139 行；整包 SHA-256,len(namelist)=172；manifest 行数=139,172 / 139 / 80208714 / 98bd19c5…,一致,—
-docs/B_EVIDENCE_INDEX.md,数据可达性·测试时点,698 passed / 0 skipped（10-14）,本分支 pytest 实测 + docs/report/metrics_snapshot.json,pytest 748；snapshot tests 748,用例计数,748（两处一致）,不一致-已修复,补 10-18 快照与本分支两个时点值
+docs/B_EVIDENCE_INDEX.md,数据可达性·测试时点,698 passed / 0 skipped（10-14）,本分支 pytest 实测 + docs/report/metrics_snapshot.json,pytest 750；snapshot tests 733,用例计数,750（本分支）/ 733（快照）,不一致-已修复,补 10-18 快照与本分支两个时点值
 docs/B_EVIDENCE_INDEX.md,§1 标注表行数,121 / 34 / 87 行,artifacts/b_eval/*.csv,CSV 数据行（去掉表头）,wc -l - 1,121 / 34 / 87,一致,—
 docs/B_EVIDENCE_INDEX.md,§2 多跳题量,31 条题,artifacts/b_eval/multihop_path_validation_20261002_v2.json,counts.candidates=31,直接读取,31,一致,—
 docs/B_EVIDENCE_INDEX.md,§6 POC/资产缺口,93 事件、poc 0、assets/assessments 0,D:/ICT/intel-data-b/intel.sqlite,count(*),直接读取,93 / 0 / 0 / 0,一致,—
@@ -77,9 +77,9 @@ docs/B_CORPUS_HANDOVER_REQUEST.md,§0 主语料,"8,183,808 B / 4095a5b1…825428
 docs/B_CORPUS_HANDOVER_REQUEST.md,§0 测试变化,618 passed / 60 skipped → 674 passed / 4 skipped,—,10-12 历史时点值,历史记录,不可复算,历史口径-已标注,文件本身标注为 10-12 状态；保留
 docs/B_CORPUS_HANDOVER_REQUEST.md,§4 跳过条数,58 条 → 54 条通过 → 4 条,—,10-12 历史记录,58-54=4,4,历史口径-已标注,保留
 docs/B_CORPUS_HANDOVER_REQUEST.md,§4/§6 衍生副本,"139/139 通过；80,208,714 B；98bd19c5…",D:/ICT/_handoff/B_DERIVATIVE_CORPORA_20261012.zip,MANIFEST 139 行；整包哈希,实测,"139 / 80,208,714 / 98bd19c5…",一致,—
-docs/B_REPORT_NUMBER_AUDIT.md,文件头·当前快照,637 / 211 / 1001 / 8-190-6 / 1-849 / 210；20/10 天；15.69/296；48-4-8.33%,docs/report/metrics_snapshot.json,10-18 快照全字段,逐字段比对,705 / 233 / 1334 / 8-196-49 / 1-849 / 227；23/13；14.43/336；55-47-85.45%,不一致-已修复,当前快照块改为 10-18，10-14 值保留为历史
+docs/B_REPORT_NUMBER_AUDIT.md,文件头·当前快照,637 / 211 / 1001 / 8-190-6 / 1-849 / 210；20/10 天；15.69/296；48-4-8.33%,docs/report/metrics_snapshot.json,10-18 快照全字段,逐字段比对,705 / 233 / 1339 / 8-196-55 / 1-849 / 227；24/14；14.43/336；55-53-96.36%（main@615eeea）,不一致-已修复,当前快照块改为 10-18，10-14 值保留为历史
 docs/B_REPORT_NUMBER_AUDIT.md,§2 去重候选,210 条（10-14）,docs/report/metrics_snapshot.json,duplicate_candidates=227,直接读取,227,不一致-已修复,改为 227 并注明 10-14 曾为 210
-docs/B_REPORT_NUMBER_AUDIT.md,§8 处置双口径,53 / 4 / 7.55% / 6 / 47 / 66.67%,docs/report/metrics_snapshot.json,disposition,47/55=0.8545；47/49=0.9592,55 / 47 / 85.45% / 49 / 6 / 95.92%,不一致-已修复,按 10-18 快照重写；10-15 读数保留为历史
+docs/B_REPORT_NUMBER_AUDIT.md,§8 处置双口径,53 / 4 / 7.55% / 6 / 47 / 66.67%,docs/report/metrics_snapshot.json,disposition,53/55=0.9636；53/55=0.9636,55 / 53 / 96.36% / 55 / 0 / 96.36%,不一致-已修复,按 10-18 快照重写；10-15 读数保留为历史
 docs/A_TIMELINESS_ATTRIBUTION.md,§5 混合快照行,297 / 15.58,docs/report/metrics_snapshot.json,latency_by_class.mixed,直接读取,336 / 14.43,不一致-未修复（A 文件）,A 文件已回退，本轮未改；待 A 刷新到 10-18 读数
 docs/A_TIMELINESS_ATTRIBUTION.md,§5 漏洞类,217 / 7.34；GHSA 1.75；NVD 8.34,docs/report/metrics_snapshot.json,classes.vulnerability / per_source,直接读取,244 / 7.34；2.2；8.27,不一致-未修复（A 文件）,A 文件已回退，本轮未改；待 A 刷新到 10-18 读数
 docs/A_TIMELINESS_ATTRIBUTION.md,§5 10-13 历史行,267 / 18.1,docs/A_TIMELINESS_ATTRIBUTION.md §5,历史读数,不可复算（当时库）,保留,历史口径-已标注,已明确标注 2026-10-13
@@ -89,7 +89,7 @@ reports/self-healing-drill.json,断言,四项断言,reports/self-healing-drill.j
 reports/ci-validation.json,CI,三个 job,reports/ci-validation.json,jobs[] 3 项，conclusion=success,len(jobs)=3,3,一致,—
 reports/docker-validation.json,容器,9 项检查,reports/docker-validation.json,checks 9 键全 true,len=9,9,一致,—
 docs/report/AI安全知识情报系统技术报告.docx / .pdf,P7 第八章·备份与回滚,停服务→保留当前库→备份覆盖→重启→校验健康接口,reports/backup-restore-validation.json,integrity_check=ok；source_events=124；restored_events=124；counts_match=true（无停服务/重启/健康接口字段）,只可复算“备份与恢复后计数一致”,124/124 一致；停服务与重启无证据,UNVERIFIED,该 JSON 只证明计数一致；四步流程中“停服务/重启/健康接口”没有机读证据，建议补 runbook 日志或改写措辞
-docs/DISPOSITION_CLOSURE.md,§4.5 当前读数（2026-10-15）,53 条 / 已复测 4 / 7.55% / 已登记 6 / 未登记 47 / 66.67%,docs/report/metrics_snapshot.json,disposition 55 / 47 / 85.45% / 49 / 6 / 95.92%,47/55=0.8545；47/49=0.9592,55 / 47 / 85.45% / 49 / 6 / 95.92%,不一致-未修复（A 文件）,这是 A 侧文件，按“不误改队友 A 任务文件”的边界未改；标题写着“当前读数（2026-10-15）”，现已过期，需 A 侧更新或改为历史段
+docs/DISPOSITION_CLOSURE.md,§4.5 当前读数（2026-10-15）,53 条 / 已复测 4 / 7.55% / 已登记 6 / 未登记 47 / 66.67%,docs/report/metrics_snapshot.json,disposition 55 / 47 / 85.45% / 49 / 6 / 95.92%,53/55=0.9636；53/55=0.9636,55 / 53 / 96.36% / 55 / 0 / 96.36%,不一致-未修复（A 文件）,这是 A 侧文件，按“不误改队友 A 任务文件”的边界未改；标题写着“当前读数（2026-10-15）”，现已过期，需 A 侧更新或改为历史段
 docs/B_TERM_SEED_REVIEW.md,§2 新增 12 条术语的命中数,3/5、6/8、1/1、1/2、2/18、1/4、2/3、5/5、11/18、3/24、10/39、1/4,D:/ICT/intel-data-b/intel.sqlite,term_dictionary.entries() 的 document_count / chunk_count,逐条读取（INTEL_DATA_DIR=intel-data-b）,12 条全部相等,一致,24 个数对逐条复算通过
 docs/B_REPORT_NUMBER_AUDIT.md,§6 术语字典旧读数,14 个种子 / 10 个覆盖 / 44 份文档,app/term_dictionary.py,SEED_TERMS=26；B 语料 25 覆盖 / 37 文档,当前值对比,26 / 25 / 37,历史口径-已标注,该节已写明“已过期”，保留作历史记录
 docs/report/figures/fig4-rubric.png（嵌入 DOCX/PDF 图 4）,监测时效性自评,3 / 5,docs/COMPETITION_RUBRIC_MAPPING.md §2 与 §2.1,档位=良好（4）；漏洞类中位 7.34 小时落在 ≤12 小时区间,档位表 vs 图中柱值,4 / 5,不一致-已修复,生成器 ours[3] 由 3 改为 4（3 是混合口径 18.1 小时时代的合格档），重生成图并嵌入 docx/pdf

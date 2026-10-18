@@ -135,17 +135,17 @@ def build_figures() -> dict[str, Path]:
     ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
     _style_axes(ax, "图 3  系统工作流：采集 → 富化 → 问答 → 处置闭环")
     steps = [
-        (0.02, "小时间隔采集\n19 个推荐来源"),
-        (0.21, "归一化与去重\n事件 + 别名 + 快照"),
-        (0.40, "多维富化\nCVSS / 区间 / 修复版本 / 论文"),
-        (0.59, "关系与跨文档\n带证据 ID 的边"),
+        (0.02, "小时间隔采集\n20 个登记来源"),
+        (0.21, "归一化与去重\n事件、别名、快照"),
+        (0.40, "多维富化\nCVSS、修复版本"),
+        (0.59, "关系与跨文档\n带证据的关系边"),
         (0.78, "问答与研判\n引用可回溯"),
     ]
     for x, label in steps:
-        _box(ax, x, 0.52, 0.18, 0.26, label)
+        _box(ax, x, 0.52, 0.18, 0.26, label, fontsize=7.2)
     for index in range(len(steps) - 1):
         _arrow(ax, (steps[index][0] + 0.18, 0.65), (steps[index + 1][0], 0.65))
-    _box(ax, 0.21, 0.16, 0.56, 0.20, "自愈与降级：失败分类 → 有限重试 → 连续失败降级或切备用源 → 告警",
+    _box(ax, 0.21, 0.16, 0.56, 0.20, "自愈与降级：失败分类 → 有限重试 → 降级或切备用源 → 告警",
          facecolor="#fdf3e3", edgecolor="#c99a4e")
     _arrow(ax, (0.5, 0.52), (0.5, 0.36))
     path = FIGURES_DIR / "fig3-workflow.png"

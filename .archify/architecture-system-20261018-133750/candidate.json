@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "AI 安全知识情报系统 · 组件拓扑",
+    "output": ".archify/architecture-system-20261018-133750/system.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN"
+  },
+  "components": [
+    { "id": "sources", "type": "external", "label": "情报来源", "sublabel": "20 个登记来源", "tag": "NVD · KEV · arXiv", "pos": [20, 120], "size": [150, 78] },
+    { "id": "collector", "type": "backend", "label": "采集器", "sublabel": "HTTP 与 RSS", "tag": "快照落盘", "pos": [300, 120], "size": [150, 78] },
+    { "id": "normalizer", "type": "backend", "label": "归一化", "sublabel": "字段映射与去重", "pos": [510, 120], "size": [150, 78] },
+    { "id": "enricher", "type": "backend", "label": "富化", "sublabel": "CVSS 与修复版本", "tag": "POC 与论文", "pos": [720, 120], "size": [150, 78] },
+    { "id": "kb", "type": "database", "label": "知识库", "sublabel": "SQLite 与快照", "tag": "705 事件", "pos": [930, 120], "size": [150, 78] },
+    { "id": "retriever", "type": "backend", "label": "检索", "sublabel": "BM25 与同义词扩展", "tag": "打分可复算", "pos": [930, 320], "size": [150, 78] },
+    { "id": "answer", "type": "backend", "label": "答案拼装", "sublabel": "逐句绑定 chunk", "tag": "必须带引用", "pos": [720, 320], "size": [150, 78] },
+    { "id": "console", "type": "frontend", "label": "控制台", "sublabel": "工作台与指标", "tag": "4 个模块", "pos": [510, 320], "size": [150, 78] },
+    { "id": "disposition", "type": "backend", "label": "处置闭环", "sublabel": "复测与接受风险", "tag": "53 / 55 已关闭", "pos": [510, 520], "size": [150, 78] },
+    { "id": "scheduler", "type": "messagebus", "label": "调度器", "sublabel": "每小时触发", "tag": "自愈降级", "pos": [300, 320], "size": [150, 78] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "本地单机部署 · SQLite 单库", "wraps": ["collector", "normalizer", "enricher", "kb", "retriever", "answer", "console", "disposition", "scheduler"] }
+  ],
+  "connections": [
+    { "id": "sources-collector", "from": "sources", "to": "collector", "label": "抓取", "variant": "emphasis" },
+    { "id": "collector-normalizer", "from": "collector", "to": "normalizer", "variant": "emphasis" },
+    { "id": "normalizer-enricher", "from": "normalizer", "to": "enricher", "variant": "emphasis" },
+    { "id": "enricher-kb", "from": "enricher", "to": "kb", "label": "入库", "variant": "emphasis" },
+    { "id": "kb-retriever", "from": "kb", "to": "retriever", "label": "分块检索", "fromSide": "bottom", "toSide": "top" },
+    { "id": "retriever-answer", "from": "retriever", "to": "answer", "label": "证据", "fromSide": "left", "toSide": "right" },
+    { "id": "answer-console", "from": "answer", "to": "console", "label": "带引用回答", "variant": "emphasis", "fromSide": "left", "toSide": "right" },
+    { "id": "console-disposition", "from": "console", "to": "disposition", "label": "处置队列", "fromSide": "bottom", "toSide": "top" },
+    { "id": "scheduler-collector", "from": "scheduler", "to": "collector", "label": "定时触发", "variant": "dashed", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "部署形态", "items": ["单机 SQLite 单库，页面与接口读同一份数据", "原始载荷按 SHA-256 落盘，结论可回溯到字节"] },
+    { "dot": "emerald", "title": "数据与证据", "items": ["705 条事件、1059 份文档、38 条带证据关系", "分块记录 chunk_id、字符偏移与快照哈希"] },
+    { "dot": "rose", "title": "降级设计", "items": ["远端模型不可用时自动落回本地证据抽取", "答案仍然必须带引用，证据不足时拒答"] }
+  ]
+}

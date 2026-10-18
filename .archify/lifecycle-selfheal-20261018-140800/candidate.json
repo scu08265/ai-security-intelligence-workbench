@@ -1,0 +1,32 @@
+{
+  "schema_version": 3,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "调度与自愈状态机",
+    "output": ".archify/lifecycle-selfheal-20261018-140800/selfheal.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN"
+  },
+  "mainPath": ["tick", "collect", "ingest", "healthy"],
+  "states": [
+    { "id": "tick", "type": "start", "label": "定时触发", "sublabel": "内置调度器每小时发起", "tag": "无人值守", "step": "01" },
+    { "id": "collect", "type": "active", "label": "分源并发采集", "sublabel": "HTTP 与 RSS 双通道", "tag": "单源预算", "step": "02" },
+    { "id": "ingest", "type": "active", "label": "归一与入库", "sublabel": "去重后按 SHA-256 落盘", "tag": "幂等写入", "step": "03" },
+    { "id": "healthy", "type": "success", "label": "本轮正常收尾", "sublabel": "产出计入运行统计", "tag": "15 个源持续产出", "step": "04" },
+    { "id": "degraded", "type": "failure", "label": "源降级冷却", "sublabel": "退出无人值守集合 6 小时", "tag": "连续 3 次 failed 或 stale" },
+    { "id": "recovered", "type": "success", "label": "自动恢复", "sublabel": "冷却到期重试成功即归队", "tag": "不人工改状态" }
+  ],
+  "transitions": [
+    { "id": "tick-collect", "from": "tick", "to": "collect", "label": "开始本轮" },
+    { "id": "collect-ingest", "from": "collect", "to": "ingest", "label": "抓取返回" },
+    { "id": "ingest-healthy", "from": "ingest", "to": "healthy", "label": "写入成功" },
+    { "id": "ingest-degraded", "from": "ingest", "to": "degraded", "label": "连续 3 次失败或陈旧", "variant": "security" },
+    { "id": "degraded-recovered", "from": "degraded", "to": "recovered", "label": "冷却到期重试成功" },
+    { "id": "recovered-healthy", "from": "recovered", "to": "healthy", "label": "归队" },
+    { "id": "healthy-tick", "from": "healthy", "to": "tick", "label": "下一轮定时" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "判定口径", "items": ["partial 只要有产出就不算失败，零产出的 partial 才计入连续失败", "stale 与 failed 同等计入；skipped 根本不算一次尝试", "降级只影响无人值守排程，手动重跑永远可用"] },
+    { "dot": "emerald", "title": "恢复闭环", "items": ["降级期间保留历史快照，页面标注 stale 而不是清空数据", "恢复由冷却到期后的真实抓取结果决定，不靠人工改状态", "每次降级记录 failure_class、last_error 与来源状态，可逐条复核"] }
+  ]
+}

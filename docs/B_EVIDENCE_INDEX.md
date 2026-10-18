@@ -24,9 +24,9 @@
 > 主语料与两个衍生副本都已到位：**B 项评测可以在交付机上复跑验证**，不再只是引用历史数字。
 > 测试数是**时点值**：主语料到位当天（10-12）由 618 passed / 60 skipped 变为 674 passed / 4 skipped；
 > 衍生副本到位后（10-14）为 **698 passed / 0 skipped / 0 failed**；10-18 快照的 `tests` 字段为
-> **731 passed / 0 skipped**，本分支（B4）实测 **748 passed / 0 skipped**——差异是"代码加了用例、
+> **733 passed / 0 skipped**，本分支（B4）实测 **750 passed / 0 skipped**——差异是"代码加了用例、
 > 快照还没刷"，提交前由队长执行
-> `python tools/refresh_metrics_snapshot.py --write --tests "748 passed / 0 skipped"` 对齐。
+> `python tools/refresh_metrics_snapshot.py --write --tests "750 passed / 0 skipped"` 对齐。
 > 语料交接记录见 `docs/B_CORPUS_HANDOVER_REQUEST.md`。
 > 语料本身仍不进仓库（`.gitignore` 排除 `data/*.sqlite*`），这是既定约定；
 > 交付方式固定为整包外发 + 哈希核验。

@@ -13,16 +13,16 @@
 
 <!-- snapshot:start 由 tools/refresh_metrics_snapshot.py 重写，不要手工改这一段 -->
 
-快照时间 **2026-10-18**（本机时区 2026-10-18 00:46 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
+快照时间 **2026-10-18**（本机时区 2026-10-18 13:18 中国标准时间），取自演示机本仓库 `data/intel.sqlite`。采集计划任务每小时运行，数据库持续增长，因此这份快照会过期——刷新方式是重跑 `python tools/refresh_metrics_snapshot.py --write`，报告里的数字来自同一个快照文件，所以两边不会各写一份。
 
 | 项 | 值 |
 | --- | --- |
 | 路径 | `data/intel.sqlite`（仓库内） |
-| 大小 | 15,015,936 字节 |
-| SHA-256 | `99acc062f16dbda1f87b41d230e399683552393671cf25b5d4979bb6bbfaf78c` |
-| runs | 1334 |
+| 大小 | 15,097,856 字节 |
+| SHA-256 | `102d4cb6b5db7a4562fb02fac3cfeacf3bb573c2514507f61ac2e056057f13be` |
+| runs | 1339 |
 | events / event_aliases | 705 / 233 |
-| assets / assessments / assessment_dispositions | 8 / 196 / 49 |
+| assets / assessments / assessment_dispositions | 8 / 196 / 55 |
 | rag_documents / rag_chunks | 1 / 849 |
 | duplicate_candidates | 227 |
 
@@ -32,12 +32,12 @@
 
 | 指标 | 值 |
 | --- | --- |
-| 累计有采集日期 | 23 天（首次采集 2026-09-25） |
-| 累计定时运行日期 | 13 天 |
-| 赛题连续运行（7 天窗口） | 窗口内 6 天有定时运行，连续 5 天，`target_met = false`（累计 13 天；日界为 UTC 00:00 / 北京 08:00） |
+| 累计有采集日期 | 24 天（首次采集 2026-09-25） |
+| 累计定时运行日期 | 14 天 |
+| 赛题连续运行（7 天窗口） | 窗口内 6 天有定时运行，连续 6 天，`target_met = false`（累计 14 天；日界为 UTC 00:00 / 北京 08:00） |
 | 语料 | `events_loaded = 705` / `events_total = 705`，`truncated = false` |
 | 监测时效性（混合口径，附录） | 6 小时内 32.4%，12 小时内 47.6%，24 小时内 62.5%；p50 = 14.43 小时（336 个有效样本） |
-| 处置闭环 | 高优先级 55 / 已关闭 47（复测 3 / 接受风险 44）/ `closure_rate = 0.8545` / `verified_rate = 0.0545` / `findings_total = 129` |
+| 处置闭环 | 高优先级 55 / 已关闭 53（复测 9 / 接受风险 44）/ `closure_rate = 0.9636` / `verified_rate = 0.1636` / `findings_total = 129` |
 | 关系评测（当前批次口径） | P = 1.0，R = 0.734，F1 = 0.8466（TP 69 / FP 0 / FN 25） |
 | 富化样本量 | 705 个事件 |
 
@@ -86,9 +86,9 @@
 | A 的处置闭环 live 证据（4 条队列 / 3 条关闭 / 0.75） | A 的机器，`D:\新建文件夹\2026-09-26\ba\...\data\intel.sqlite` 的副本，本机不存在 | 注明是 A 机器上的流程落地演示；**交付闭环率一律写本文件第 2 节的快照数字，不要引用任何历史数值** |
 
 2026-10-14 两个衍生副本到位后，全量测试**已无跳过**；本分支（B4，2026-10-18）实测
-**748 passed / 0 skipped / 0 failed**（`pytest tests -q`），而快照 `tests` 字段仍是合并前的
-**731 passed / 0 skipped**。两者不冲突，是"代码变了、快照没刷"：队长提交前在持有基线库的机器上跑
-`python tools/refresh_metrics_snapshot.py --write --tests "748 passed / 0 skipped"`，
+**750 passed / 0 skipped / 0 failed**（`pytest tests -q`），而快照 `tests` 字段仍是合并前的
+**733 passed / 0 skipped**。两者不冲突，是"代码变了、快照没刷"：队长提交前在持有基线库的机器上跑
+`python tools/refresh_metrics_snapshot.py --write --tests "750 passed / 0 skipped"`，
 快照与本文件快照块会一起对齐（报告读同一字段）。
 此前 4 条跳过依赖 `intel-data-b-cvss-20261006` 与 `intel-data-b-poc-20261002`，
 两者随 `B_DERIVATIVE_CORPORA_20261012.zip`（80,208,714 字节 / SHA-256 `98bd19c5…961674a`）
@@ -102,12 +102,12 @@
 
 不是算错，是分母不同。A 那份库生成前 `assets = 0`、`assessments = 0`、`assessment_dispositions = 0`，
 他是在副本上自行登记处置后才得到 4 条队列，4 条里 3 条关闭，所以是 3/4 = 0.75。
-本机这份库的高优先级队列是 55 条（研判总数 129、处置记录 49），已关闭 47 条。
+本机这份库的高优先级队列是 55 条（研判总数 129、处置记录 55），已关闭 53 条。
 `closure_rate = 已关闭 / 高优先级总数`，两边分子分母都不同，不能互相换算。
 
-**本机这 47 条必须拆开讲**：复测关闭 3 条 + 显式接受风险 44 条。44 条接受风险全部落在
+**本机这 53 条必须拆开讲**：复测关闭 9 条 + 显式接受风险 44 条。44 条接受风险全部落在
 合成演示资产上（无真实补丁可实施），处置记录里逐条写了依据与决策人。
-引用时不能说成"修复了 46 条"——页面卡片也是分列的（已复测关闭 / 已关闭合计 / 已接受风险），
+引用时不能说成"修复了 53 条"——页面卡片也是分列的（已复测关闭 / 已关闭合计 / 已接受风险），
 报告只能照这个分列写。
 
 ## 4. 引用规则

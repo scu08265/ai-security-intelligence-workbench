@@ -1,27 +1,27 @@
 {
   "snapshot_date": "2026-10-18",
-  "snapshot_time_local": "2026-10-18 00:46 中国标准时间",
+  "snapshot_time_local": "2026-10-18 13:18 中国标准时间",
   "database": {
     "path": "data/intel.sqlite",
-    "size_bytes": 15015936,
-    "sha256": "99acc062f16dbda1f87b41d230e399683552393671cf25b5d4979bb6bbfaf78c",
+    "size_bytes": 15097856,
+    "sha256": "102d4cb6b5db7a4562fb02fac3cfeacf3bb573c2514507f61ac2e056057f13be",
     "counts": {
-      "runs": 1334,
+      "runs": 1339,
       "events": 705,
       "event_aliases": 233,
       "assets": 8,
       "assessments": 196,
-      "assessment_dispositions": 49,
+      "assessment_dispositions": 55,
       "rag_documents": 1,
       "rag_chunks": 849,
       "duplicate_candidates": 227
     }
   },
   "scorecard": {
-    "cumulative_actual_run_days": 23,
-    "cumulative_scheduled_run_days": 13,
+    "cumulative_actual_run_days": 24,
+    "cumulative_scheduled_run_days": 14,
     "scheduled_run_days_7d": 6,
-    "continuous_executed_days": 5,
+    "continuous_executed_days": 6,
     "continuous_target_met": false,
     "first_collection_date": "2026-09-25",
     "events_loaded": 705,
@@ -36,19 +36,19 @@
   },
   "disposition": {
     "high_priority_total": 55,
-    "high_priority_closed": 47,
-    "high_priority_verified": 3,
-    "high_priority_registered": 49,
-    "high_priority_unopened": 6,
-    "closure_rate": 0.8545,
-    "verified_rate": 0.0545,
-    "registered_closure_rate": 0.9592,
+    "high_priority_closed": 53,
+    "high_priority_verified": 9,
+    "high_priority_registered": 55,
+    "high_priority_unopened": 0,
+    "closure_rate": 0.9636,
+    "verified_rate": 0.1636,
+    "registered_closure_rate": 0.9636,
     "mean_time_to_close_hours": 0.0,
     "status_breakdown": {
-      "open": 6,
+      "open": 0,
       "in_progress": 1,
       "fixed": 1,
-      "verified": 3,
+      "verified": 9,
       "accepted": 44
     },
     "findings_total": 129
@@ -186,5 +186,5 @@
       "evidence_relationship": "relationships 中至少一条关系带 evidence_ids。"
     }
   },
-  "tests": "731 passed / 0 skipped"
+  "tests": "733 passed / 0 skipped"
 }

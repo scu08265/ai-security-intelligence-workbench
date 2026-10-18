@@ -155,3 +155,30 @@ def test_singular_component_question_ranks_one_but_plural_keeps_many():
     plural = answer_question("vLLM has which vulnerabilities?", [temperature, video], [])
     assert singular["related_event_ids"] == ["CVE-2026-20001"]
     assert set(plural["related_event_ids"]) == {"CVE-2026-20001", "CVE-2026-20002"}
+
+
+def test_unknown_advisory_id_is_refused_instead_of_answered_from_unrelated_events():
+    blog = event(
+        id="https://example.invalid/fix-notes",
+        title="How to read a fixed version in an advisory",
+        summary="修复版本通常写在受影响范围之后，读错就会误判。",
+        component="",
+    )
+    result = answer_question("CVE-2099-99999 的修复版本是什么？", [blog], [])
+    assert result["mode"] == "unknown_identifier"
+    assert result["related_event_ids"] == []
+    assert result["citations"] == []
+    assert "CVE-2099-99999" in result["answer"]
+
+
+def test_blog_events_are_labelled_by_title_not_by_url():
+    blog = event(
+        id="https://example.invalid/prompt-injection-primer",
+        title="Prompt injection primer",
+        summary="Prompt injection bends an instruction boundary.",
+        component="",
+    )
+    result = answer_question("prompt injection 是什么？", [blog], [])
+    assert result["related_event_ids"] == [blog["id"]]
+    assert "https://" not in result["answer"]
+    assert result["answer"].startswith("Prompt injection primer")

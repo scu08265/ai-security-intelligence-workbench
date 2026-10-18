@@ -362,7 +362,7 @@ def _pipeline_body(
 
     total_calls = 0
     for event in pending:
-        label = event.get("id") or event.get("title") or "未命名事件"
+        label = intelligence.event_label(event)
         before = set(((intelligence.enrich_event(event).get("enrichment") or {}).get("gaps")) or [])
 
         yield _stage(
@@ -643,7 +643,7 @@ def stream_answer(
         seq, phase="answer", role="retriever",
         title=f"命中 {len(selected)} 条相关事件",
         action="列出命中的事件",
-        obtained="、".join(str(e.get("id")) for e in selected[:8]),
+        obtained="、".join(intelligence.event_label(e) for e in selected[:8]),
         output=f"共 {len(selected)} 条",
         effect="下面逐条读它们的证据，一条读完就输出一条结论。",
         refs=[str(e.get("id")) for e in selected],
@@ -657,7 +657,7 @@ def stream_answer(
 
     for event in selected:
         evidence = _evidence_ids(event)
-        label = event.get("id") or event.get("title") or "该事件"
+        label = intelligence.event_label(event)
         withdrawn = bool(event.get("withdrawn") or event.get("status") == "withdrawn")
 
         yield _stage(
@@ -765,7 +765,8 @@ def stream_answer(
         title="回答结束",
         action="收尾并记录",
         obtained=f"引用 {len(result.get('citations') or [])} 个来源，"
-                 f"结论 {assessments_seen or len(result.get('assessments') or [])} 条",
+                 f"结论段落 {len(result.get('claims') or [])} 条，"
+                 f"研判 {assessments_seen or len(result.get('assessments') or [])} 条",
         output="缺证据的部分已明确拒答，并在下方列出局限",
         effect="整个过程写入运行日志，可复查。",
     )

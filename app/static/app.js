@@ -1223,7 +1223,7 @@
       seedResult);
 
     const tiles = h('div', { class: 'tiles' });
-    const cards = h('div', { class: 'grid-cards grid-cards--wide' });
+    const cards = h('div', { class: 'grid-cards grid-cards--wide grid-cards--priority' });
 
     state.dom.overview = { tiles: tiles, cards: cards };
     body.append(actions, tiles, cards);
@@ -1726,6 +1726,11 @@
         h('span', {}, officialReady
           ? '当前优先消费 /api/competition/scorecard。'
           : '统一计分接口尚未提供，当前由现有监测、评测和编排接口汇总；接口上线后会自动优先使用。')));
+    /* 队列清空后"已登记处置"等于总数、两个闭环率也相等，这几行会变成
+     * 两两重复的噪声；只在两种分母真的不同时才展示。 */
+    const disposalRateGap = disposal.registered_closure_rate !== null
+      && disposal.closure_rate !== null
+      && Math.abs(disposal.registered_closure_rate - disposal.closure_rate) > 0.0005;
     setBox(view.grid,
       scoreCapability('持续监测', scheduledDays !== null && scheduledDays >= 7 ? '已验证' : '待积累', [
         ['累计有采集日期', cumulativeCollectionDays, ' 天'],
@@ -1761,21 +1766,15 @@
         ['已复测关闭', disposal.high_priority_verified, ' 条'],
         ['已关闭合计（复测 + 接受风险）', disposal.high_priority_closed, ' 条'],
         ['全队列闭环率', percentValue(disposal.closure_rate), ''],
-        ['已登记处置', disposal.high_priority_registered, ' 条'],
-        ['已登记处置内闭环率', percentValue(disposal.registered_closure_rate), ''],
-        ['从未登记处置', disposal.high_priority_unopened, ' 条'],
+        ...(disposalRateGap ? [
+          ['已登记处置', disposal.high_priority_registered, ' 条'],
+          ['已登记处置内闭环率', percentValue(disposal.registered_closure_rate), '']
+        ] : []),
         ['平均关闭时长', disposal.mean_time_to_close_hours, ' 小时'],
-        /* 只给一个比率会让人以为是"处置能力差"；把构成摊开才看得出分母里
-         * 有多少条根本还没人接手。状态取自接口的 status_breakdown。 */
-        ['未开始处置', (disposal.status_breakdown || {}).open, ' 条'],
-        ['进行中 / 已修复待复测',
-          (disposal.status_breakdown || {}).in_progress + (disposal.status_breakdown || {}).fixed, ' 条'],
         ['已接受风险', (disposal.status_breakdown || {}).accepted, ' 条']
       ], textOr(disposal.evidence_policy, '原始研判结论不会被处置记录覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。')
         + ' 全队列闭环率 = （已复测关闭 + 已接受风险）/ 高优先级总数；'
-        + '已登记处置内闭环率只看已经开过处置的那几条，两者分母不同、不能互换。'
-        + '已登记处置的条目锁定在分母内；只要"从未登记处置"还不是 0，全队列闭环率就留着一块缺口，'
-        + '这块缺口记的是"还没人接手"，不是处置失败。'),
+        + '已登记处置的条目锁定在分母内，原始受影响结论不会被处置覆盖。'),
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
         ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],
@@ -1924,11 +1923,11 @@
 
     const queue = urgent.concat(uncertain).slice(0, 6);
     const queueBody = queue.length
-      ? dataTable([{ text: '风险' }, { text: '资产' }, { text: '结论' }, { text: '优先级' }, { text: '下一步' }],
+      ? dataTable([{ text: '风险', cls: 'col-risk' }, { text: '资产', cls: 'col-asset' }, { text: '结论', cls: 'col-verdict' }, { text: '优先级', cls: 'col-priority' }, { text: '下一步', cls: 'col-next' }],
         queue.map((item) => [
-          h('button', { type: 'button', class: 'link-button', onclick: () => openKnowledgeEvent(item.event_id) }, textOr(item.event_title, item.event_id)),
+          h('button', { type: 'button', class: 'link-button cell-clamp', title: textOr(item.event_title, item.event_id), onclick: () => openKnowledgeEvent(item.event_id) }, textOr(item.event_title, item.event_id)),
           textOr(item.asset_name, item.asset_id), assessStatusBadge(item.status), priorityBadge(item.priority),
-          item.status === 'affected' ? '核对修复版本并安排升级' : '补齐版本或关键配置'
+          item.status === 'affected' ? '核对修复版本' : '补齐版本或配置'
         ]))
       : assetCount === 0
         ? emptyState('现在还不能判断你的资产风险', '系统已有情报，但资产清单为空。请先添加资产，或在顶部点击“一键体验完整流程”。')
