@@ -156,7 +156,7 @@ img.shot {
     <div><div class="num">20</div><div class="cap">登记数据来源<br>覆盖 10 类情报</div></div>
     <div><div class="num sun">705</div><div class="cap">入库事件<br>1059 份文档</div></div>
     <div><div class="num teal">92.11<small>%</small></div><div class="cap">预期要点命中<br>引用可追溯 100%</div></div>
-    <div><div class="num sky">85.45<small>%</small></div><div class="cap">高优先级处置闭环<br>47 / 55</div></div>
+    <div><div class="num sky">96.36<small>%</small></div><div class="cap">高优先级处置闭环<br>53 / 55</div></div>
   </div>
   <div style="height: 2px; background: var(--line); margin: 56px 0 44px;"></div>
   <div class="grid4">
@@ -344,10 +344,10 @@ img.shot {
 
 <section class="slide a-teal">
   <p class="eyebrow">处置闭环</p>
-  <h2>55 条高优先级里 47 条已有明确处置结论</h2>
+  <h2>55 条高优先级里 53 条已经关闭</h2>
   <div class="bar"></div>
-  <div style="display: grid; grid-template-columns: 604px 800px; gap: 60px;">
-    <div class="frame" style="width: 604px;">
+  <div style="display: grid; grid-template-columns: 583px 810px; gap: 64px;">
+    <div class="frame" style="width: 583px;">
       <div class="frame-head teal">DISPOSITION · 闭环卡片</div>
       <img src="assets/closure-card.png" alt="处置闭环卡片">
     </div>
@@ -355,16 +355,15 @@ img.shot {
       <table>
         <thead><tr><th>处置状态</th><th>条数</th><th>含义</th></tr></thead>
         <tbody>
-          <tr><td>已复测关闭</td><td class="teal">3</td><td class="dim">系统复测确认资产已不在受影响区间</td></tr>
+          <tr><td>已复测关闭</td><td class="teal">9</td><td class="dim">系统复测确认资产已不在受影响区间</td></tr>
           <tr><td>已接受风险</td><td class="teal">44</td><td class="dim">合成演示资产，无真实补丁路径，显式接受</td></tr>
           <tr><td>处置中与待复测</td><td class="n">2</td><td class="dim">已指派负责人，等待复测</td></tr>
-          <tr><td>从未登记</td><td class="n">6</td><td class="dim">vllm 资产，保留真实升级路径</td></tr>
         </tbody>
       </table>
-      <p class="note" style="margin-top: 26px;">闭环率 = 已关闭 / 高优先级总数。接受风险是处置决策，不代表风险已消除。页面把复测关闭、关闭合计与接受风险分三列展示，报告沿用同一口径。</p>
+      <p class="note" style="margin-top: 26px;">闭环率 = 已关闭 / 高优先级总数。9 条经系统复测确认资产已不命中受影响区间，44 条是对合成演示资产的显式风险接受。接受风险是处置决策，不代表风险已消除。</p>
       <div style="display: flex; gap: 74px; margin-top: 44px;">
-        <div><div class="num teal" style="font-size: 72px;">85.45<small>%</small></div><div class="cap">全队列闭环率</div></div>
-        <div><div class="num ink" style="font-size: 72px;">95.92<small>%</small></div><div class="cap">已登记处置内闭环率</div></div>
+        <div><div class="num teal" style="font-size: 72px;">96.36<small>%</small></div><div class="cap">全队列闭环率</div></div>
+        <div><div class="num ink" style="font-size: 72px;">53 / 55</div><div class="cap">已关闭 / 高优先级总数</div></div>
       </div>
     </div>
   </div>
