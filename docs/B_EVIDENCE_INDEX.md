@@ -23,7 +23,10 @@
 > 两个主库哈希与记录一致（`FCD31963…` / `CEC88D75…`），落位后**跳过归零**。
 > 主语料与两个衍生副本都已到位：**B 项评测可以在交付机上复跑验证**，不再只是引用历史数字。
 > 测试数是**时点值**：主语料到位当天（10-12）由 618 passed / 60 skipped 变为 674 passed / 4 skipped；
-> 此后测试集随主分支增长，衍生副本到位后为 **698 passed / 0 skipped / 0 failed**（本机语料齐全时实测同值）。
+> 衍生副本到位后（10-14）为 **698 passed / 0 skipped / 0 failed**；10-18 快照的 `tests` 字段为
+> **733 passed / 0 skipped**，本分支（B4）实测 **750 passed / 0 skipped**——差异是"代码加了用例、
+> 快照还没刷"，提交前由队长执行
+> `python tools/refresh_metrics_snapshot.py --write --tests "750 passed / 0 skipped"` 对齐。
 > 语料交接记录见 `docs/B_CORPUS_HANDOVER_REQUEST.md`。
 > 语料本身仍不进仓库（`.gitignore` 排除 `data/*.sqlite*`），这是既定约定；
 > 交付方式固定为整包外发 + 哈希核验。
@@ -176,8 +179,9 @@
   （`nvd_poc_backfill_20261002.json` 实测 `events_updated = 0`），只有按库内 CVE 定向抓取后
   回填副本才有数据（`nvd_poc_backfill_cve_scope_20261002.json`：16 个事件）。口径见
   `docs/B_DIMENSION_SCOPE_POC_ASSET.md`。
-* 跨文档路径：语料内论文无互引、论文正文 CVE 与库内 CVE 无交集，0/21 无法在不造假的
-  前提下提升，需新增来源。
+* 跨文档路径（**2026-10-02 当时的读数**）：语料内论文无互引、论文正文 CVE 与库内 CVE 无交集，
+  0/21 无法在不造假的前提下提升，需新增来源。后续 v2 图加载了 95 条人工核验的文档边，
+  当前口径为 **10/21**（见第 2 节与 `multihop_path_validation_20261002_v2.json`）。
 * 共享问答主链路回归**已关闭（2026-10-12）**：`tests/test_rag_mixed_language_query.py` 的中频词用例
   已随 `9ff7383` 修复转绿（该模块 30 passed）。根因不是 `len(chunks) // 10` 阈值——`kernel-level`
   （df 9.0%）本来就通过守卫，失败的是 `multi-agent` 那条，且输在排序：中文短语的同义词组
@@ -202,6 +206,24 @@
 **边界**：09-30 基线的 `formal_qa_results.json` 未改动；由它派生的
 `qa_auto_review*` / `qa_candidate_answers*` / 复核工作包 / 拒答分类 / 性能统计等产物本批次**未重跑**，
 口径仍是 09-30 基线。是否整体刷新到 10-12 批次（涉及人工标签是否重签）由队长决定。
+
+## 11. 2026-10-18 机器批次（人工判定未完成，不作正式结论）
+
+**背景**：`feat/b-pdf-extraction-and-qa-corpus-20261018` 修了论文 PDF 双栏抽取
+（`app/rag_corpus.py`，`PARSER_VERSION` 1.2 → 1.3），在新语料
+`D:\ICT\intel-data-b-colfix-20261018`（22 文档 / 3,681 当前版本分块，旧目录未动）上重跑 50 题。
+
+| 环节 | 权威产物 | 读数 |
+| --- | --- | --- |
+| 问答机器评测 | `artifacts/b_eval/formal_qa_results_20261018.json` | 50 题；answered 46 / refused 4；errors 0 / timeouts 0；document_hit 35/36 = 0.9722；term_hit 35/38 = 0.9211；refusal 42/50 = 0.84；citations 229（全部可回溯）；p50 523.7 / p95 669.9 ms |
+| 与 10-12 的差异 | 同上 `records[]` 逐题比对 | 31 题答案正文变化；引用 document_key 集合只有 BQA-047 / BQA-048 变化；三项机器指标同值，引用总数 222 → 229 |
+| 人工确认表 | `artifacts/b_eval/qa_final_confirmation_worksheet_20261018.csv` | 50 行，人工列与署名列**全空**（待签） |
+| 预审清单 | `artifacts/b_eval/B4_HUMAN_REVIEW_20261018.csv` | 50 题复核状态，逐题标出机器可判事实与需人判项 |
+
+**口径**：正式对外结论仍为 **20261012 批次 / 2026-10-15 人工判定**。10-18 只作为新一轮机器结果
+与待人工确认结果；在 10-18 人工表签核完成、且 `qa_human_score_20261018.json` 与
+`qa_performance_20261018.json` 同时存在之前，页面批次不切换。批次说明见
+`docs/B4_BATCH_CONSISTENCY_20261018.md`。
 
 ## 8. 维护约定
 

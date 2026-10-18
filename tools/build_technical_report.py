@@ -33,6 +33,15 @@ def _term_dictionary_line() -> str:
         from app import term_dictionary
 
         coverage = term_dictionary.coverage()
+        if not coverage.get("covered_terms"):
+            # Building on a machine without the evaluation corpus would print
+            # "0 covered", which is a fact about this checkout, not about the
+            # product.  Say where the number lives instead of printing a zero.
+            return (
+                f"知识图谱页：{coverage['terms']} 张术语卡（种子表固定条数）；"
+                "覆盖数与关联文档数随语料变化，以接口返回为准"
+                "（GET /api/knowledge/terms），不在此处写死"
+            )
         return (
             f"知识图谱页：{coverage['terms']} 张术语卡，其中 {coverage['covered_terms']} 条语料已覆盖、"
             f"共关联 {coverage['documents_referenced']} 份文档；已覆盖的标出关联文档数并给出语料原文定义句"
@@ -148,7 +157,7 @@ def build_figures() -> dict[str, Path]:
     fig, ax = plt.subplots(figsize=(7.4, 3.4), dpi=200)
     labels = ["情报监测", "情报富化", "情报问答", "监测时效性", "富化准确率",
               "问答深度", "智能体架构", "自动化程度"]
-    ours = [12, 13.5, 12, 3, 4, 4, 12, 10]
+    ours = [12, 13.5, 12, 4, 4, 4, 12, 10]
     full = [15, 15, 15, 5, 5, 5, 15, 10]
     positions = range(len(labels))
     ax.barh(list(positions), full, color="#e9eef6", height=0.6, label="该项满分")
@@ -287,6 +296,12 @@ def _term_two_hop_line() -> str:
 
         coverage = term_dictionary.coverage()
         edges = term_dictionary.term_edges()
+        if not coverage.get("covered_terms"):
+            return (
+                f"知识图谱页：术语节点与文档节点分型渲染的两跳关系；"
+                f"种子表固定 {coverage['terms']} 条术语，边数随语料变化，"
+                "以 GET /api/knowledge/terms 的返回为准"
+            )
         return (
             f"知识图谱页：术语节点与文档节点分型渲染的两跳关系；"
             f"{coverage['terms']} 条术语命中 {coverage['documents_referenced']} 份文档，共 {len(edges)} 条边"
@@ -340,9 +355,9 @@ def headline_rows() -> list[list[str]]:
                      f"{disposition.get('high_priority_verified')} + 接受风险 "
                      f"{(disposition.get('status_breakdown') or {}).get('accepted')}，"
                      f"{disposition.get('closure_rate'):.2%}）",
-         "仅计入系统复测通过的条目"],
+         "已关闭 = 复测关闭 + 接受风险；verified_rate 只计复测关闭"],
         ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
-         f"交付机全量 pytest（快照 {date}）"],
+         f"全量 pytest（快照 {date}；数字随提交更新）"],
         ["容器验收", "9 项检查全部通过", "reports/docker-validation.json"],
     ]
 
@@ -359,7 +374,7 @@ OVERVIEW = [
         "可执行的自愈：失败分类 → 有限重试 → 连续失败降级或切换备用源 → 告警，并有可复现的演练证据。",
         "工程化交付：容器九项验收、CI 三个 job、回滚演练、结构化日志与告警 webhook。",
     ]),
-    ("h2", "关键数字（2026-10-13 快照，取演示机数据库）"),
+    ("h2", f"关键数字（{_snap('snapshot_date', default='未标注')} 快照，取演示机数据库）"),
     ("table", ["项目", "数值", "口径"], headline_rows()),
     ("h2", "如实说明的边界"),
     ("p", "为避免把缺口说成能力，以下五项在正文中同样保留：没有实时监测（全部来源 realtime=false）；"
@@ -420,9 +435,10 @@ SECTIONS = [
           "系统会把未处理完的部分留到下一轮而不是标记成功；skipped 表示主动跳过，"
           "例如缺少只读令牌的 GHSA。把这五种状态区分开，是为了让“部分成功”不被读成“成功”。"),
     ("figure", "fig5", "图 5  采集状态机：五种状态的定义与迁移"),
-    ("p", "重复信息在采集后会进入去重候选表（当前 210 条候选），同一漏洞的多来源记录不会各自成为独立知识点，"
-          "而是合并成一个事件并保留各自的来源标识。这样问答引用到的是一条事件，"
-          "但答题时仍能指出这条结论来自 NVD 还是 OSV。"),
+    ("p", f"重复信息在采集后会进入去重候选表（当前 "
+          f"{_snap('database', 'counts', 'duplicate_candidates', default='—')} 条候选），"
+          "同一漏洞的多来源记录不会各自成为独立知识点，而是合并成一个事件并保留各自的来源标识。"
+          "这样问答引用到的是一条事件，但答题时仍能指出这条结论来自 NVD 还是 OSV。"),
     ("h1", "四、情报富化模块详细设计"),
     ("p", "富化对采集到的事件做多维扩展。六个维度在演示机上都有数据："
           + "、".join(
@@ -450,7 +466,10 @@ SECTIONS = [
     ("p", "评测集为固定 50 题，覆盖基础事实问答 10 题、术语与语义查询 8 题、中英文混合查询 6 题、"
           "多轮追问 6 题、跨文档问答 8 题、真实多跳问答 2 题，以及无证据与拒答各 5 题。"
           "2026-10-12 批次实测：引用命中 35/36 = 0.9722，预期词命中 35/38 = 0.9211，"
-          "拒答一致率 42/50 = 0.84，引用总数 222。完整演示脚本见 docs/CASE_QA_MULTITURN_CROSSDOC.md。"),
+          "拒答一致率 42/50 = 0.84，引用总数 222。完整演示脚本见 docs/CASE_QA_MULTITURN_CROSSDOC.md。"
+          "2026-10-18 另有一轮机器重跑（同 50 题、新语料），三项机器指标同值、引用总数 229；"
+          "该轮人工判定尚未完成，因此本报告的正式结论仍按 2026-10-12 批次与 2026-10-15 判定引用，"
+          "批次关系见 docs/B4_BATCH_CONSISTENCY_20261018.md。"),
     ("p", "跨文档能力需要区分两个层次：在评测集上，跨文档题能答对，因为期望文档确实存在于语料中；"
           "但在知识图谱层面，跨文档路径只通过 10/21，仍缺 52 条文档间引用边。"
           "另有一项独立的检索覆盖指标：术语可达 29/31，衡量的是“给定术语能否在语料中被检索到”，"
@@ -555,7 +574,7 @@ SECTIONS = [
              "10-15 已触发，但 10-09/11/12/13 无计划运行；连续天数需重新累积，"
              "预计 2026-10-20 回到目标（见 docs/A_CONTINUOUS_RUN_STATUS_20261015.md）")],
       ["自动化测试", _snap("tests", default="提交前重跑全量 pytest 并刷新快照"),
-       "交付机全量 pytest；语料与衍生副本均已交付核验"]]),
+       "全量 pytest；语料与衍生副本均已交付核验"]]),
     ("figure", "fig4", "图 4  校内初赛功能与性能项自评（按评分细则档位）"),
     ("p", f"对时效性的归因：混合口径的中位延迟是 "
           f"{_snap('latency_by_class', 'mixed', 'p50_hours')} 小时，但如果就此说“采集慢”是错的。"
@@ -598,9 +617,8 @@ SECTIONS = [
           f"12 小时内 {_snap('scorecard', 'within_12h_rate', default=0):.1%}、"
           f"24 小时内 {_snap('scorecard', 'within_24h_rate', default=0):.1%}。"
           "混合口径只用于说明瓶颈在上游，不作为本项判定分母——本项判的是漏洞类，档位是良好。"
-          "下面这张表是 2026-10-13 交付机的一次读数，与第十章主表第一行的快照读数日期和样本量都不同",
-          "（基线库每小时增长），不是同一时点，不得混引在一张表里。"
-          "本表与第十章共用同一份快照，不单独维护。"),
+          f"下面这张表与第十章主表读的是同一份快照（{_snap('snapshot_date', default='未标注')}），"
+          "日期与样本量一致，不再各自维护一份。"),
     ("table", ["口径", "来源", "样本", "中位延迟", "最大延迟"], _latency_class_rows()),
     ("p", "类别归属取自 app/sources.py 的 category 字段：漏洞类含 cve_database、ecosystem_advisory、"
           "community_advisory、exploitation_intel、vendor_advisory 与 security_blog；"
