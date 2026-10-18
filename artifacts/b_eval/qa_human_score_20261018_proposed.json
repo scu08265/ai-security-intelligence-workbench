@@ -5,29 +5,29 @@
   "human_judged_cases": 50,
   "pending_human_cases": 0,
   "answer": {
-    "numerator": 19,
+    "numerator": 24,
     "denominator": 38,
-    "rate": 0.5,
-    "rule": "correct / (correct + incorrect + partial)；partial 按不完全正确计入分母",
-    "strict_denominator": 29,
-    "strict_rate": 0.6552,
-    "partial_counted_not_correct": 9,
+    "rate": 0.6316,
+    "rule": "correct / (correct + incorrect + partial)",
+    "strict_denominator": 28,
+    "strict_rate": 0.8571,
+    "partial_counted_not_correct": 10,
     "by_label": {
-      "correct": 19,
-      "incorrect": 10,
-      "partial": 9
+      "correct": 24,
+      "incorrect": 4,
+      "partial": 10
     },
     "undecided": 0
   },
   "citation": {
-    "numerator": 19,
+    "numerator": 24,
     "denominator": 38,
-    "rate": 0.5,
+    "rate": 0.6316,
     "rule": "supported / (supported + partially_supported + unsupported)",
     "by_label": {
-      "supported": 19,
-      "partially_supported": 9,
-      "unsupported": 10,
+      "supported": 24,
+      "partially_supported": 10,
+      "unsupported": 4,
       "not_applicable": 12,
       "unknown": 0
     },
@@ -53,5 +53,5 @@
     "not_applicable": 38,
     "undecided": 0
   },
-  "note": "建议口径：队长按 B 的同一份 rubric 逐题初判（AI 辅助），人工签字列仍为空。签字确认后把文件名改为 qa_human_score_20261018.json 才会成为活动批次。"
+  "note": "建议口径：队长按同一 rubric 逐题初判（AI 辅助），人工签字列仍为空。"
 }

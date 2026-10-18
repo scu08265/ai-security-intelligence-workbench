@@ -495,6 +495,20 @@ def answer_question(
     # 论文类问题优先文档证据：事件摘要里常混入同一来源的其它论文，
     # 用它作答会答非所问（BQA-002/007/009 都踩过）。
     paper_question = bool(re.search(r"论文|paper|研究|标题|题目|主题|方法名称", _text(question), re.I))
+    # 列举题（哪些文档/哪些论文/出现在哪些）也必须走文档证据：事件摘要
+    # 给不出"哪几份文档"，只会答成一篇综述。
+    listing_question = bool(re.search(
+        r"哪些文档|哪些论文|出现在哪些|在哪些(?:文档|论文|研究)|哪些研究", _text(question), re.I
+    ))
+    # 定义/解释类问题同理：事件摘要常是网页导航或无关段落，文档证据更贴近原文。
+    # 攻击链、资产影响、修复版本这类问题依赖事件里的结构化字段，
+    # 不能因为带"是什么"就改走文档。
+    structured_ask = bool(re.search(
+        r"攻击链|利用链|影响|资产|受影响|修复|升级|处置|版本|CVSS|优先级", _text(question), re.I
+    )) or bool(re.search(r"cve-\d{4}-\d{4,}|ghsa-[a-z0-9-]+", _text(question), re.I))
+    definition_question = bool(
+        re.search(r"什么是|是什么|定义|什么意思|如何|怎么", _text(question), re.I)
+    ) and not structured_ask
     entity_in_documents = bool(question_entities) and any(
         any(entity in _text(citation.get("title")).casefold() for entity in question_entities)
         for citation in (rag_result.get("citations") or [])
@@ -503,7 +517,11 @@ def answer_question(
         any(entity in _event_haystack(event) for entity in question_entities)
         for event in selected
     )
-    if (paper_question and entity_in_documents) or entity_missing_from_events:
+    if (paper_question and entity_in_documents) or entity_missing_from_events or (
+        listing_question and rag_result.get("citations")
+    ) or (
+        definition_question and rag_result.get("citations")
+    ):
         if rag_result.get("citations") and not rag_result.get("refused"):
             trace.append({
                 "step": len(trace) + 1, "role": "planner", "action": "prefer_document_evidence",

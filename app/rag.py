@@ -631,6 +631,55 @@ def _looks_like_model_refusal(text: str) -> bool:
     return bool(value) and len(value) <= 60 and bool(_MODEL_REFUSAL.search(value))
 
 
+_NAVIGATION_MARKERS = (
+    "skip to content", "skip to main content", "join us in",
+    "an official website of the united states government", "here's how you know",
+    "toggle navigation", "accept all cookies", "sign in", "main menu",
+)
+
+
+def _looks_like_navigation(text: str) -> bool:
+    """Web page chrome is not evidence: drop nav bars, cookie banners, menus."""
+    value = _text(text).casefold()
+    if len(value) > 1500:
+        return False
+    return sum(1 for marker in _NAVIGATION_MARKERS if marker in value) >= 2
+
+
+_LIST_INTENT = re.compile(
+    r"哪些文档|哪些论文|出现在哪些|在哪些(?:文档|论文|研究)|哪些研究|which documents", re.I
+)
+
+
+def _listing_answer(
+    question: str, citations: Sequence[dict[str, Any]],
+) -> tuple[str, list[dict[str, Any]]] | None:
+    """Answer "哪些文档讨论了 X" with the documents retrieval actually found.
+
+    A narrative paragraph does not satisfy a listing question, and inventing
+    documents is worse.  This enumerates the distinct source titles behind the
+    retrieved chunks, each with its chunk id.
+    """
+    if not _LIST_INTENT.search(question):
+        return None
+    seen: set[str] = set()
+    lines: list[str] = []
+    claims: list[dict[str, Any]] = []
+    for citation in citations:
+        title = _text(citation.get("title")) or _text(citation.get("document_id"))
+        chunk_id = _text(citation.get("chunk_id"))
+        if not title or title in seen:
+            continue
+        seen.add(title)
+        lines.append(f"- 《{title}》 [{chunk_id}]")
+        claims.append({"text": f"《{title}》讨论了该主题", "evidence_ids": [chunk_id] if chunk_id else []})
+        if len(lines) >= 5:
+            break
+    if not lines:
+        return None
+    return "命中的文档：\n" + "\n".join(lines), claims
+
+
 def _extractive_answer(
     question: str, citations: Sequence[dict[str, Any]],
 ) -> tuple[str, list[dict[str, Any]]]:
@@ -757,7 +806,11 @@ def answer_with_rag(
         ]
     # 参考文献残句会挤进候选项，把答案撑成"证据堆"。过滤掉，但永不清空证据：
     # 全部被判定为书目时退回原结果，宁可保留也不误拒答。
-    kept = [hit for hit in hits if not _looks_bibliographic(hit.chunk.text)]
+    kept = [
+        hit for hit in hits
+        if not _looks_bibliographic(hit.chunk.text)
+        and not _looks_like_navigation(hit.chunk.text)
+    ]
     bibliographic_filtered = len(hits) - len(kept)
     if kept:
         hits = kept
@@ -794,8 +847,11 @@ def answer_with_rag(
     refused = False
     refusal_reason: str | None = None
     title_answer = _title_answer(question, citations)
+    listing_answer = _listing_answer(question, citations)
     if title_answer is not None:
         answer, claims = title_answer
+    elif listing_answer is not None:
+        answer, claims = listing_answer
     elif generator is not None:
         try:
             generated = _text(generator(question, context["text"], citations))
