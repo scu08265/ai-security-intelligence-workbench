@@ -24,8 +24,8 @@
  },
  "totals": {
   "cases": 50,
-  "answered": 45,
-  "refused": 5,
+  "answered": 42,
+  "refused": 8,
   "errors": 0,
   "timeouts": 0,
   "failures": 0,
@@ -36,19 +36,19 @@
    "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
   },
   "term_hit": {
-   "ok": 22,
+   "ok": 20,
    "n": 38,
-   "rate": 0.5789,
+   "rate": 0.5263,
    "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
   },
   "refusal_accuracy": {
-   "ok": 43,
+   "ok": 46,
    "n": 50,
-   "rate": 0.86
+   "rate": 0.92
   },
   "citations": {
-   "total": 215,
-   "retrievable": 215,
+   "total": 209,
+   "retrievable": 209,
    "rate": 1.0
   },
   "answer_semantic_accuracy": {
@@ -59,9 +59,9 @@
  "answer_refusal_confusion": {
   "should_refuse_true": {
    "n": 12,
-   "refused_ok": 5,
-   "answered_wrongly": 7,
-   "refusal_recall": 0.4167
+   "refused_ok": 8,
+   "answered_wrongly": 4,
+   "refusal_recall": 0.6667
   },
   "should_refuse_false": {
    "n": 38,
@@ -73,7 +73,7 @@
  "target_comparison": {
   "note": "仅作客观对照，不构成达标声明；且引用/词命中并非赛题口径的语义准确率。",
   "document_hit_rate": 0.9722,
-  "refusal_rate": 0.86,
+  "refusal_rate": 0.92,
   "gaps_vs_75_90_95": {
    "document_hit": [
     -0.2222,
@@ -81,19 +81,19 @@
     -0.0222
    ],
    "refusal": [
-    -0.11,
-    0.04,
-    0.09
+    -0.17,
+    -0.02,
+    0.03
    ]
   }
  },
  "latency_ms": {
   "samples": 50,
-  "p50": 2086.6,
-  "p95": 3231.4,
-  "min": 934.2,
-  "max": 3808.1,
-  "mean": 2163.6
+  "p50": 1785.6,
+  "p95": 2875.9,
+  "min": 507.5,
+  "max": 3227.8,
+  "mean": 1780.7
  },
  "by_category": {
   "中英文混合查询": {
@@ -104,11 +104,11 @@
    "document_hit_n": 6,
    "document_hit_ok": 6,
    "term_hit_n": 6,
-   "term_hit_ok": 6,
+   "term_hit_ok": 5,
    "refusal_n": 6,
    "refusal_ok": 6,
    "document_hit_rate": 1.0,
-   "term_hit_rate": 1.0,
+   "term_hit_rate": 0.8333,
    "refusal_accuracy": 1.0
   },
   "基础事实问答": {
@@ -119,11 +119,11 @@
    "document_hit_n": 9,
    "document_hit_ok": 9,
    "term_hit_n": 10,
-   "term_hit_ok": 4,
+   "term_hit_ok": 3,
    "refusal_n": 10,
    "refusal_ok": 10,
    "document_hit_rate": 1.0,
-   "term_hit_rate": 0.4,
+   "term_hit_rate": 0.3,
    "refusal_accuracy": 1.0
   },
   "多轮追问": {
@@ -143,18 +143,18 @@
   },
   "拒答及证据不足": {
    "cases": 5,
-   "answered": 5,
-   "refused": 0,
+   "answered": 3,
+   "refused": 2,
    "errors": 0,
    "document_hit_n": 0,
    "document_hit_ok": 0,
    "term_hit_n": 0,
    "term_hit_ok": 0,
    "refusal_n": 5,
-   "refusal_ok": 0,
+   "refusal_ok": 2,
    "document_hit_rate": null,
    "term_hit_rate": null,
-   "refusal_accuracy": 0.0
+   "refusal_accuracy": 0.4
   },
   "无证据问题与范围外问题": {
    "cases": 5,
@@ -188,18 +188,18 @@
   },
   "真实多跳问答": {
    "cases": 2,
-   "answered": 1,
-   "refused": 1,
+   "answered": 0,
+   "refused": 2,
    "errors": 0,
    "document_hit_n": 0,
    "document_hit_ok": 0,
    "term_hit_n": 0,
    "term_hit_ok": 0,
    "refusal_n": 2,
-   "refusal_ok": 1,
+   "refusal_ok": 2,
    "document_hit_rate": null,
    "term_hit_rate": null,
-   "refusal_accuracy": 0.5
+   "refusal_accuracy": 1.0
   },
   "跨文档问答": {
    "cases": 8,
@@ -287,7 +287,7 @@
    "citations_retrievable": 5,
    "answer_head": "《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》。",
    "answer_full": "《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》。",
-   "latency_ms": 1482.7,
+   "latency_ms": 1210.9,
    "timeout": false
   },
   {
@@ -358,9 +358,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展被动互联网测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f3c77",
-   "answer_full": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展被动互联网测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f3c7751a3ffa30b7ce][chunk-b64f03dfbfeb5c0b6ef222a4]。",
-   "latency_ms": 2848.6,
+   "answer_head": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展真实世界攻击的被动测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f",
+   "answer_full": "OllamaDrama 论文研究的是针对暴露的 LLM 基础设施的攻击，通过设计并部署一个专门模仿 LLM API 的蜜罐来开展真实世界攻击的被动测量研究 [chunk-e7c4f5f3c7751a3ffa30b7ce]。具体而言，该工作提出了名为 Ollure 的蜜罐，模仿 Ollama API 框架，并在两个不同网络的四个观测点部署，以进行扩展的被动测量与实证分析 [chunk-e7c4f5f3c7751a3ffa30b7ce][chunk-b64f03dfbfeb5c0b6ef222a4]。",
+   "latency_ms": 2115.1,
    "timeout": false
   },
   {
@@ -429,11 +429,11 @@
     "Codetta",
     "collusion"
    ],
-   "term_hit": true,
+   "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出 CODETTA 这一面向独立部署智能体、在现实非对称设置下的高容量隐写协议 [chunk-292b9c3eb0203f0aa1f5ba2e]。该描述仅来自论文摘要片段，未涵盖其具体方法细节 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
-   "answer_full": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（collusion）问题，并提出 CODETTA 这一面向独立部署智能体、在现实非对称设置下的高容量隐写协议 [chunk-292b9c3eb0203f0aa1f5ba2e]。该描述仅来自论文摘要片段，未涵盖其具体方法细节 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
-   "latency_ms": 3198.7,
+   "answer_head": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（隐蔽通信）问题，并提出了一种面向独立部署智能体、在现实非对称设置下的高容量隐写协议 CODETTA [chunk-292b9c3eb0203f0aa1f5ba2e]。该协议结合了用于估计通信信道的共享公开模型、保持发送方输出分布的采样机制以及高容量的自适应纠错码 [chunk-292b9c3eb0203f0aa1f5ba2e]",
+   "answer_full": "Codetta 论文研究的是多智能体之间高容量、无密钥且不可检测的合谋（隐蔽通信）问题，并提出了一种面向独立部署智能体、在现实非对称设置下的高容量隐写协议 CODETTA [chunk-292b9c3eb0203f0aa1f5ba2e]。该协议结合了用于估计通信信道的共享公开模型、保持发送方输出分布的采样机制以及高容量的自适应纠错码 [chunk-292b9c3eb0203f0aa1f5ba2e]。",
+   "latency_ms": 1904.0,
    "timeout": false
   },
   {
@@ -503,9 +503,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，但证据未给出 SAGE 的全称展开 [chunk-4b72fc8fa621782e6f526842]。",
-   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，但证据未给出 SAGE 的全称展开 [chunk-4b72fc8fa621782e6f526842]。",
-   "latency_ms": 2341.1,
+   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该结论仅依据论文摘要与引言中声明的贡献范围，未涉及方法的具体实现细节 [chunk-4b72fc8fa621782e6f526842]。",
+   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE（框架），其理论视角为 SCA [chunk-4b72fc8fa621782e6f526842]。该结论仅依据论文摘要与引言中声明的贡献范围，未涉及方法的具体实现细节 [chunk-4b72fc8fa621782e6f526842]。",
+   "latency_ms": 2257.0,
    "timeout": false
   },
   {
@@ -569,7 +569,7 @@
    "citations_retrievable": 4,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1709.1,
+   "latency_ms": 1772.1,
    "timeout": false
   },
   {
@@ -639,9 +639,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "NeRD 论文的应用领域是医学图像诊断，具体在实验中使用了两个皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。需要说明的是，证据中只提到皮肤图像数据集，未涉及其他医学影像领域 [chunk-7b3ba17746f32905b1b37285]。",
-   "answer_full": "NeRD 论文的应用领域是医学图像诊断，具体在实验中使用了两个皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。需要说明的是，证据中只提到皮肤图像数据集，未涉及其他医学影像领域 [chunk-7b3ba17746f32905b1b37285]。",
-   "latency_ms": 2083.0,
+   "answer_head": "NeRD 论文的应用领域是医学图像诊断，具体在实验中使用了两个皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。需要说明的是，证据中只提到皮肤图像数据集，未涉及其他医学领域 [chunk-7b3ba17746f32905b1b37285]。",
+   "answer_full": "NeRD 论文的应用领域是医学图像诊断，具体在实验中使用了两个皮肤图像数据集 [chunk-5c71aaa24bd8d7056ac0313a][chunk-560523d6a5ad1e6a8faf82d5]。需要说明的是，证据中只提到皮肤图像数据集，未涉及其他医学领域 [chunk-7b3ba17746f32905b1b37285]。",
+   "latency_ms": 1693.1,
    "timeout": false
   },
   {
@@ -711,9 +711,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向目标进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离失控进程组 [chunk-dd6697dfa7ef5bd2eb0080ec]，但证据未进一步界定“rogue”的具体判定标准。",
-   "answer_full": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向目标进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离失控进程组 [chunk-dd6697dfa7ef5bd2eb0080ec]，但证据未进一步界定“rogue”的具体判定标准。",
-   "latency_ms": 2659.3,
+   "answer_head": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离执行 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
+   "answer_full": "Hard Stop 论文关注的是对 rogue agentic execution（失控的智能体执行）进行内核级抢先终止与遏制 [chunk-9aa9b7f0bfc461185e805840]。其机制包括向 rogue 进程组及其子进程发送不可屏蔽的 SIGKILL 以隔离执行 [chunk-dd6697dfa7ef5bd2eb0080ec]。",
+   "latency_ms": 2208.5,
    "timeout": false
   },
   {
@@ -741,7 +741,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 2071.2,
+   "latency_ms": 1539.8,
    "timeout": false
   },
   {
@@ -805,7 +805,7 @@
    "citations_retrievable": 4,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 2086.6,
+   "latency_ms": 1683.5,
    "timeout": false
   },
   {
@@ -874,9 +874,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些自然融入上下文的简短补充内容能够重定向原本正确的决策，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究针对的是暴露有限类型化分布、且以初始正确决策为分析条件的系统 [chunk-1934b1e31fc0d9c70d011fdb]。",
-   "answer_full": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些自然融入上下文的简短补充内容能够重定向原本正确的决策，即使正确答案保持不变 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究针对的是暴露有限类型化分布、且以初始正确决策为分析条件的系统 [chunk-1934b1e31fc0d9c70d011fdb]。",
-   "latency_ms": 2351.9,
+   "answer_head": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布且决策初始正确的系统，并用 TFR 衡量有界优化器发现保持答案不变的上下文从而重定向固定分支的频率 [chunk-1934b1e31f",
+   "answer_full": "JevOut 论文的主题是：自然上下文可以翻转决策模型，即那些将非结构化语言映射为有限选项概率分布的专用决策模型，其原本正确的决策可能被自然融入上下文的简短补充所重定向 [chunk-1e1b1f7a4deebb53d0b33fc8]。该研究聚焦于暴露有限类型化分布且决策初始正确的系统，并用 TFR 衡量有界优化器发现保持答案不变的上下文从而重定向固定分支的频率 [chunk-1934b1e31fc0d9c70d011fdb]。",
+   "latency_ms": 2084.3,
    "timeout": false
   },
   {
@@ -955,9 +955,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 6,
-   "answer_head": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。需要限定的是，提示词注入漏洞源于模型处理提示的方式以及输入可能迫使模型错误地将提示数据传递给模型其他部分 [chunk-7061149ba14708176205f246]。",
-   "answer_full": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。需要限定的是，提示词注入漏洞源于模型处理提示的方式以及输入可能迫使模型错误地将提示数据传递给模型其他部分 [chunk-7061149ba14708176205f246]。",
-   "latency_ms": 2203.0,
+   "answer_head": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。提示词注入漏洞存在于模型处理提示词的方式中，输入可能迫使模型错误地将提示词数据传递给模型的其他部分，从而可能导致违反准则、生成有害内容、启用未授权访问或影响关键决策 [chunk-7061149ba14708176205f246]。",
+   "answer_full": "提示词注入是通过特定输入操纵模型响应以改变其行为，其中可能包括绕过安全措施 [chunk-90c768cd5de7c577f26397d2]。提示词注入漏洞存在于模型处理提示词的方式中，输入可能迫使模型错误地将提示词数据传递给模型的其他部分，从而可能导致违反准则、生成有害内容、启用未授权访问或影响关键决策 [chunk-7061149ba14708176205f246]。",
+   "latency_ms": 1481.5,
    "timeout": false
   },
   {
@@ -1026,9 +1026,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，提供七个分类临床概念组的标注，并生成 28 维 one-hot 概念向量 [chunk-67f8da8439e4a735fa12d084]。该数据集采用官方划分，训练/验证/测试分别为 413/203/395 [chunk-67f8da8439e4a735fa12d084]。",
-   "answer_full": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，提供七个分类临床概念组的标注，并生成 28 维 one-hot 概念向量 [chunk-67f8da8439e4a735fa12d084]。该数据集采用官方划分，训练/验证/测试分别为 413/203/395 [chunk-67f8da8439e4a735fa12d084]。",
-   "latency_ms": 1893.2,
+   "answer_head": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分",
+   "answer_full": "Derm7pt 是用于评估 NeRD 的两个公开皮肤图像数据集之一，与 Fitzpatrick17k（F17k）一同取自 MAKE [chunk-67f8da8439e4a735fa12d084]。该数据集提供七个分类临床概念组的标注，各组取值互斥（如 pigment network∈{absent, atypical, typical}），构成 28 维 one-hot 概念向量，并采用官方划分（训练/验证/测试为 413/203/395）[chunk-67f8da8439e4a735fa12d084]。",
+   "latency_ms": 2436.1,
    "timeout": false
   },
   {
@@ -1107,7 +1107,7 @@
    "citations_retrievable": 6,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1685.6,
+   "latency_ms": 1914.3,
    "timeout": false
   },
   {
@@ -1179,7 +1179,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-1656e6198f3d4eb7310cce90]\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-86f5cd3318bf",
    "answer_full": "命中的文档：\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-1656e6198f3d4eb7310cce90]\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-86f5cd3318bfb7da386309bd]",
-   "latency_ms": 1113.5,
+   "latency_ms": 1172.8,
    "timeout": false
   },
   {
@@ -1251,7 +1251,7 @@
    "citations_retrievable": 5,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1813.0,
+   "latency_ms": 3227.8,
    "timeout": false
   },
   {
@@ -1312,9 +1312,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 4,
-   "answer_head": "PEFT 是一种成本高效的微调技术，在尽量减少参数和计算复杂度的同时力求达到最优的下游任务性能 [chunk-8e22077c669275cfa3e1fd10]。该描述仅针对基础模型（FMs）语境下的 PEFT 目标，未涵盖其他场景 [chunk-8e22077c669275cfa3e1fd10]。",
-   "answer_full": "PEFT 是一种成本高效的微调技术，在尽量减少参数和计算复杂度的同时力求达到最优的下游任务性能 [chunk-8e22077c669275cfa3e1fd10]。该描述仅针对基础模型（FMs）语境下的 PEFT 目标，未涵盖其他场景 [chunk-8e22077c669275cfa3e1fd10]。",
-   "latency_ms": 3173.1,
+   "answer_head": "PEFT 是一种成本高效的微调技术，在追求最优下游任务性能的同时，最小化参数和计算复杂度 [chunk-8e22077c669275cfa3e1fd10]。该定义仅来自综述摘要的表述，证据未进一步展开其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
+   "answer_full": "PEFT 是一种成本高效的微调技术，在追求最优下游任务性能的同时，最小化参数和计算复杂度 [chunk-8e22077c669275cfa3e1fd10]。该定义仅来自综述摘要的表述，证据未进一步展开其具体解决的问题范围 [chunk-8e22077c669275cfa3e1fd10]。",
+   "latency_ms": 2578.8,
    "timeout": false
   },
   {
@@ -1383,9 +1383,9 @@
    ],
    "term_hit": false,
    "citations_retrievable": 5,
-   "answer_head": "OllamaDrama 的 DigitalOcean 蜜罐部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明了 DigitalOcean 实例的位置，未提及其他实例的具体部署地点 [chunk-b1f6ac2c03ee3a6c093826c9]。",
-   "answer_full": "OllamaDrama 的 DigitalOcean 蜜罐部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明了 DigitalOcean 实例的位置，未提及其他实例的具体部署地点 [chunk-b1f6ac2c03ee3a6c093826c9]。",
-   "latency_ms": 2980.4,
+   "answer_head": "OllamaDrama 的 DigitalOcean 蜜罐部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明 DigitalOcean 实例位于法兰克福，未给出其他实例的具体位置 [chunk-b1f6ac2c03ee3a6c093826c9]。",
+   "answer_full": "OllamaDrama 的 DigitalOcean 蜜罐部署在德国法兰克福 [chunk-b1f6ac2c03ee3a6c093826c9]。证据仅说明 DigitalOcean 实例位于法兰克福，未给出其他实例的具体位置 [chunk-b1f6ac2c03ee3a6c093826c9]。",
+   "latency_ms": 2420.8,
    "timeout": false
   },
   {
@@ -1456,7 +1456,7 @@
    "citations_retrievable": 5,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 1641.4,
+   "latency_ms": 1801.8,
    "timeout": false
   },
   {
@@ -1525,9 +1525,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地结合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过静态图结构特征提取、高层安全知识推理与轻量级本地部署，实现准确且离线的恶意 NPM 包检测 [chunk-1e26fb499bb6dbae04a358d4][chunk-3e02e30d18b6d9d534a09",
-   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地结合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过静态图结构特征提取、高层安全知识推理与轻量级本地部署，实现准确且离线的恶意 NPM 包检测 [chunk-1e26fb499bb6dbae04a358d4][chunk-3e02e30d18b6d9d534a09cad]。",
-   "latency_ms": 2038.1,
+   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过轻量级 LoRA 微调实现准确且离线的恶意 NPM 包检测 [chunk-3e02e30d18b6d9d534a09cad]。",
+   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它通过轻量级 LoRA 微调实现准确且离线的恶意 NPM 包检测 [chunk-3e02e30d18b6d9d534a09cad]。",
+   "latency_ms": 2059.2,
    "timeout": false
   },
   {
@@ -1602,11 +1602,11 @@
    "expected_answer_terms": [
     "OllamaDrama"
    ],
-   "term_hit": true,
+   "term_hit": false,
    "citations_retrievable": 6,
-   "answer_head": "OllamaDrama 蜜罐观察到请求中 62 个指定了显式字符串 nonexistent，44 个引用了合法模型名，还有单个实例包含字符串 __gguf_header_overflow__ [chunk-2e3b3fec713324c33c3b0880]。该结果仅涉及上述请求字符串的统计，证据未给出更完整的观察结论 [chunk-2e3b3fec713324c33c3b0880]。",
-   "answer_full": "OllamaDrama 蜜罐观察到请求中 62 个指定了显式字符串 nonexistent，44 个引用了合法模型名，还有单个实例包含字符串 __gguf_header_overflow__ [chunk-2e3b3fec713324c33c3b0880]。该结果仅涉及上述请求字符串的统计，证据未给出更完整的观察结论 [chunk-2e3b3fec713324c33c3b0880]。",
-   "latency_ms": 2463.8,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
+   "latency_ms": 1930.9,
    "timeout": false
   },
   {
@@ -1683,9 +1683,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其具体机制与实现细节在给定证据中未完整展开，仅可见其涉及容量、编码/解码吞吐量等评测指标 [chunk-40710bf2b8e507ad4f7c387b]。",
-   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其具体机制与实现细节在给定证据中未完整展开，仅可见其涉及容量、编码/解码吞吐量等评测指标 [chunk-40710bf2b8e507ad4f7c387b]。",
-   "latency_ms": 1710.1,
+   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其摘要指出，多智能体系统通过自然语言消息协调，而这些通信渠道也可被合谋智能体用于泄露机密信息或协调未授权行为，隐写术使此类行为难以被检测 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其摘要指出，多智能体系统通过自然语言消息协调，而这些通信渠道也可被合谋智能体用于泄露机密信息或协调未授权行为，隐写术使此类行为难以被检测 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "latency_ms": 1933.1,
    "timeout": false
   },
   {
@@ -1756,7 +1756,7 @@
    "citations_retrievable": 5,
    "answer_head": "SAGE 通过在策略优化过程中注入结构引导，使学习到的策略内化结构化推理空间的有用性质，从而缓解长程推理偏差 [chunk-6ba3f9978783a2953df6df02]。具体而言，它结合两种互补的结构引导：代数稀疏化（algebraic sparsification）减少虚假分支并缓解探索偏差，双曲结构引导（hyperbolic structural guidance）提供密集的深度感知信号",
    "answer_full": "SAGE 通过在策略优化过程中注入结构引导，使学习到的策略内化结构化推理空间的有用性质，从而缓解长程推理偏差 [chunk-6ba3f9978783a2953df6df02]。具体而言，它结合两种互补的结构引导：代数稀疏化（algebraic sparsification）减少虚假分支并缓解探索偏差，双曲结构引导（hyperbolic structural guidance）提供密集的深度感知信号并缓解复合偏差 [chunk-6ba3f9978783a2953df6df02]。",
-   "latency_ms": 2156.9,
+   "latency_ms": 1615.3,
    "timeout": false
   },
   {
@@ -1833,9 +1833,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理连接起来 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则 [chunk-675668ff34c9d9eeb7b36b4a][chunk-5c71aaa24bd8d7056ac0313a]。",
-   "answer_full": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理连接起来 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则 [chunk-675668ff34c9d9eeb7b36b4a][chunk-5c71aaa24bd8d7056ac0313a]。",
-   "latency_ms": 1952.7,
+   "answer_head": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理连接起来 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则 [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "answer_full": "NeRD 是一个神经符号框架，将基于规则的概念可解释性与面向医学图像诊断的 MCoT 推理连接起来 [chunk-675668ff34c9d9eeb7b36b4a]。它通过基于诊断必要性选择概念，并执行神经符号规则蒸馏来选取、简化和落地规则 [chunk-5c71aaa24bd8d7056ac0313a]。",
+   "latency_ms": 1823.5,
    "timeout": false
   },
   {
@@ -1904,9 +1904,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "Hard Stop 的 kernel preemption 指在 LSM 内核入口通过 bpf_override_return(eBPF) 立即拒绝系统调用，从而在内核层实现抢占，防止 TASK_UNINTERRUPTIBLE 状态下的 TOCTOU 问题 [chunk-f9d26319bd709c7eebf87b3b]。该机制属于内核级抢占与遏制方案的一部分，其安全属性以主机内核未被攻破为前提 ",
-   "answer_full": "Hard Stop 的 kernel preemption 指在 LSM 内核入口通过 bpf_override_return(eBPF) 立即拒绝系统调用，从而在内核层实现抢占，防止 TASK_UNINTERRUPTIBLE 状态下的 TOCTOU 问题 [chunk-f9d26319bd709c7eebf87b3b]。该机制属于内核级抢占与遏制方案的一部分，其安全属性以主机内核未被攻破为前提 [chunk-5a7e7933367ec788cb6a0079]。",
-   "latency_ms": 2092.7,
+   "answer_head": "Hard Stop 的 kernel preemption 指在 LSM 内核入口通过 bpf_override_return(eBPF) 立即拒绝系统调用，延迟低于 0.050ms，从而防止 TASK_UNINTERRUPTIBLE 与 TOCTOU [chunk-f9d26319bd709c7eebf87b3b]。该机制属于内核级抢占与遏制方案的一部分，其安全属性以主机内核未被攻破为前提 [c",
+   "answer_full": "Hard Stop 的 kernel preemption 指在 LSM 内核入口通过 bpf_override_return(eBPF) 立即拒绝系统调用，延迟低于 0.050ms，从而防止 TASK_UNINTERRUPTIBLE 与 TOCTOU [chunk-f9d26319bd709c7eebf87b3b]。该机制属于内核级抢占与遏制方案的一部分，其安全属性以主机内核未被攻破为前提 [chunk-5a7e7933367ec788cb6a0079]。",
+   "latency_ms": 2349.1,
    "timeout": false
   },
   {
@@ -1983,9 +1983,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "DistillGuard 是一个轻量级恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
-   "answer_full": "DistillGuard 是一个轻量级恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
-   "latency_ms": 3158.2,
+   "answer_head": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
+   "answer_full": "DistillGuard 是一个轻量级的恶意 NPM 包检测框架，创新性地整合了静态图语义分析与 LLM 知识蒸馏 [chunk-fef1ae1764a6dee6f3705bd6]。它检测的是恶意 NPM 包，并对其 API 攻击链进行分析 [chunk-c58221ed9828a62061aaeec7]。",
+   "latency_ms": 2716.2,
    "timeout": false
   },
   {
@@ -2062,9 +2062,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 6,
-   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被合谋智能体用于泄露机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被合谋智能体用于泄露机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
-   "latency_ms": 2478.9,
+   "answer_head": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被用于合谋外泄机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "answer_full": "Codetta 是一种高容量、无密钥且不可检测的多智能体合谋（multi-agent collusion）方法 [chunk-86ce9e6b5b0e6ce787a30993]。其研究对象是基于大语言模型（LLM）的多智能体系统，这类系统通过自然语言消息进行协调，而相同通信渠道也可能被用于合谋外泄机密信息或协调未授权行为 [chunk-86ce9e6b5b0e6ce787a30993]。",
+   "latency_ms": 1730.2,
    "timeout": false
   },
   {
@@ -2092,7 +2092,7 @@
    "citations_retrievable": 0,
    "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
    "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 2093.5,
+   "latency_ms": 1785.6,
    "timeout": false
   },
   {
@@ -2161,9 +2161,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "NeRD 是一种神经符号规则蒸馏（Neuro-Symbolic Rule Distillation）框架，用于为可解释的医学图像诊断生成高效、基于本体的 MCoT 推理依据 [chunk-26dc5f3e02bffda4ed580d66]。它应用于医学图像诊断领域，旨在衔接基于规则的概念可解释性与 MCoT 推理 [chunk-675668ff34c9d9eeb7b36b4a]。",
-   "answer_full": "NeRD 是一种神经符号规则蒸馏（Neuro-Symbolic Rule Distillation）框架，用于为可解释的医学图像诊断生成高效、基于本体的 MCoT 推理依据 [chunk-26dc5f3e02bffda4ed580d66]。它应用于医学图像诊断领域，旨在衔接基于规则的概念可解释性与 MCoT 推理 [chunk-675668ff34c9d9eeb7b36b4a]。",
-   "latency_ms": 2788.0,
+   "answer_head": "NeRD 是一种神经符号规则蒸馏（Neuro-Symbolic Rule Distillation）框架，用于为可解释的医学图像诊断生成高效、基于本体的 MCoT 推理依据 [chunk-26dc5f3e02bffda4ed580d66]。它应用于医学图像诊断领域，通过选择基于诊断必要性的概念并蒸馏归纳出的逻辑规则，将基于规则的概念可解释性与 MCoT 推理衔接起来 [chunk-675668ff",
+   "answer_full": "NeRD 是一种神经符号规则蒸馏（Neuro-Symbolic Rule Distillation）框架，用于为可解释的医学图像诊断生成高效、基于本体的 MCoT 推理依据 [chunk-26dc5f3e02bffda4ed580d66]。它应用于医学图像诊断领域，通过选择基于诊断必要性的概念并蒸馏归纳出的逻辑规则，将基于规则的概念可解释性与 MCoT 推理衔接起来 [chunk-675668ff34c9d9eeb7b36b4a]。",
+   "latency_ms": 3140.3,
    "timeout": false
   },
   {
@@ -2232,9 +2232,9 @@
    ],
    "term_hit": true,
    "citations_retrievable": 5,
-   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，其标题为“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
-   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，其标题为“SAGE: Mitigating Long-Horizon Reasoning Biases via Topological Guidance” [chunk-03317ba315f16be669e3c769]。",
-   "latency_ms": 3027.0,
+   "answer_head": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，但证据未给出该缩写的完整展开含义 [chunk-4b72fc8fa621782e6f526842]。",
+   "answer_full": "SAGE 这篇论文提出的方法名称是 SAGE [chunk-4b72fc8fa621782e6f526842]。该名称在证据中作为所提出的框架出现，但证据未给出该缩写的完整展开含义 [chunk-4b72fc8fa621782e6f526842]。",
+   "latency_ms": 2875.9,
    "timeout": false
   },
   {
@@ -2305,7 +2305,7 @@
    "citations_retrievable": 5,
    "answer_head": "Hard Stop 论文关注内核级抢占与遏制（Kernel-Level Preemption and Containment）[chunk-9aa9b7f0bfc461185e805840]。它拦截的是恶意/失控的智能体执行（Rogue Agentic Execution）[chunk-9aa9b7f0bfc461185e805840]。",
    "answer_full": "Hard Stop 论文关注内核级抢占与遏制（Kernel-Level Preemption and Containment）[chunk-9aa9b7f0bfc461185e805840]。它拦截的是恶意/失控的智能体执行（Rogue Agentic Execution）[chunk-9aa9b7f0bfc461185e805840]。",
-   "latency_ms": 3231.4,
+   "latency_ms": 2779.3,
    "timeout": false
   },
   {
@@ -2378,7 +2378,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-2c548b7cb0cbd3d90614329e]\n- 《On the Effectiveness of Kernel-Level Evide",
    "answer_full": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-2c548b7cb0cbd3d90614329e]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-20a31f7b632b76ef56327c75]",
-   "latency_ms": 1048.2,
+   "latency_ms": 953.4,
    "timeout": false
   },
   {
@@ -2459,7 +2459,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》 [chunk-7c6fdba1430ff6e44db50349]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-d",
    "answer_full": "命中的文档：\n- 《Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution》 [chunk-7c6fdba1430ff6e44db50349]\n- 《On the Effectiveness of Kernel-Level Evidence for Agent Security》 [chunk-dce559be9fb9fbb750a526c5]",
-   "latency_ms": 934.2,
+   "latency_ms": 1012.8,
    "timeout": false
   },
   {
@@ -2540,7 +2540,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-739c06ac304b74bb5e8ebf6e]",
    "answer_full": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-739c06ac304b74bb5e8ebf6e]",
-   "latency_ms": 1177.5,
+   "latency_ms": 1019.8,
    "timeout": false
   },
   {
@@ -2621,7 +2621,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-1b4f521dd158e5c09cce53e2]\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-d7489ff3b070",
    "answer_full": "命中的文档：\n- 《How does Adversarial Influence Scale in Multi-Agent Systems?》 [chunk-1b4f521dd158e5c09cce53e2]\n- 《Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion》 [chunk-d7489ff3b07026aca9a7948d]",
-   "latency_ms": 1287.8,
+   "latency_ms": 880.5,
    "timeout": false
   },
   {
@@ -2694,7 +2694,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-4c23aa3af9e23e20352ef8bf]",
    "answer_full": "命中的文档：\n- 《nist_ai_rmf》 [chunk-7460760e2ad2d3a899757f8a]\n- 《European Commission AI Act》 [chunk-4c23aa3af9e23e20352ef8bf]",
-   "latency_ms": 1210.8,
+   "latency_ms": 1005.6,
    "timeout": false
   },
   {
@@ -2773,7 +2773,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《owasp_genai》 [chunk-90c768cd5de7c577f26397d2]",
    "answer_full": "命中的文档：\n- 《owasp_genai》 [chunk-90c768cd5de7c577f26397d2]",
-   "latency_ms": 1355.3,
+   "latency_ms": 1116.9,
    "timeout": false
   },
   {
@@ -2844,7 +2844,7 @@
    "citations_retrievable": 5,
    "answer_head": "命中的文档：\n- 《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》 [chunk-f542a9ec3bf23e714cdf307d]",
    "answer_full": "命中的文档：\n- 《DistillGuard: Malicious NPM Package Detection and API Attack Chain Analysis via Static Graph and LLM Distillation》 [chunk-f542a9ec3bf23e714cdf307d]",
-   "latency_ms": 1110.3,
+   "latency_ms": 802.4,
    "timeout": false
   },
   {
@@ -2924,7 +2924,7 @@
    "citations_retrievable": 6,
    "answer_head": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-15641d6a59af6d328b210e81]",
    "answer_full": "命中的文档：\n- 《Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures》 [chunk-15641d6a59af6d328b210e81]",
-   "latency_ms": 1402.8,
+   "latency_ms": 1056.7,
    "timeout": false
   },
   {
@@ -2948,7 +2948,7 @@
    "citations_retrievable": 0,
    "answer_head": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
    "answer_full": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
-   "latency_ms": 1233.9,
+   "latency_ms": 805.7,
    "timeout": false
   },
   {
@@ -2959,82 +2959,20 @@
    "should_refuse": true,
    "candidate_only": true,
    "error": null,
-   "refused": false,
-   "refusal_correct": false,
-   "related_event_ids": [
-    "CVE-2026-41106",
-    "CVE-2026-41109",
-    "CVE-2026-45499",
-    "CVE-2026-47282",
-    "CVE-2026-48561",
-    "CVE-2026-50510",
-    "CVE-2026-50517",
-    "CVE-2026-55145",
-    "CVE-2026-56167",
-    "CVE-2026-58617"
-   ],
-   "document_citation_count": 6,
-   "cited_document_keys": [
-    "paper:2609.29757"
-   ],
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
+   "document_citation_count": 0,
+   "cited_document_keys": [],
    "expected_document_keys": [],
-   "citations_detail": [
-    {
-     "chunk_id": "chunk-df7e311eaa475d978286b5b5",
-     "document_id": "doc-e16f7d33561d58da8e56e445",
-     "document_key": "paper:2609.29757",
-     "char_start": 7811,
-     "char_end": 8025,
-     "quote": "ng to encompass multi-step execution\nloops, external tool use, and complex privilege delegation. In this work, we focus\nspecifically on mapping attacks against AI infrastructure and models, excluding\ntraining-time."
-    },
-    {
-     "chunk_id": "chunk-7e16e6ece9b5fa7bb906f527",
-     "document_id": "doc-e16f7d33561d58da8e56e445",
-     "document_key": "paper:2609.29757",
-     "char_start": 5071,
-     "char_end": 5291,
-     "quote": ":Low-interactionhoneypots emulate a basic\nservice skeleton,medium-interactionsystems provide partial functionality, and\nhigh-interactionhoneypots expose full system functionality. [13]\n1 https://github.com/k-elzer/Ollure"
-    },
-    {
-     "chunk_id": "chunk-2e3b3fec713324c33c3b0880",
-     "document_id": "doc-e16f7d33561d58da8e56e445",
-     "document_key": "paper:2609.29757",
-     "char_start": 28781,
-     "char_end": 28943,
-     "quote": "62 requests specified the explicit string\nnonexistent, 44 referenced legitimate model names, and a single instance con-\ntained the string__gguf_header_overflow__."
-    },
-    {
-     "chunk_id": "chunk-f04f6a92012135f57321f790",
-     "document_id": "doc-e16f7d33561d58da8e56e445",
-     "document_key": "paper:2609.29757",
-     "char_start": 42847,
-     "char_end": 43037,
-     "quote": "isrupting availability and driving up costs via\nImpact Context Overflow, Input resource exhaustion, token flooding, and\nToken Flooding, Infinite computational overload.\nGeneration Abuse, DoS"
-    },
-    {
-     "chunk_id": "chunk-1d263630fc98f67bc8257def",
-     "document_id": "doc-e16f7d33561d58da8e56e445",
-     "document_key": "paper:2609.29757",
-     "char_start": 60787,
-     "char_end": 60948,
-     "quote": "24 K. Elzer et al..\nFig.7: Mean inter-request gap and overall duration boxplot of IP-instance com-\nbinations for the Digital Ocean (DO) and university locations."
-    },
-    {
-     "chunk_id": "chunk-791a99218eb26e365aa244e1",
-     "document_id": "doc-e16f7d33561d58da8e56e445",
-     "document_key": "paper:2609.29757",
-     "char_start": 43039,
-     "char_end": 43995,
-     "quote": "18 K. Elzer et al..\nUnfortunately, we’ve discovered a flaw in your system & found our way in\nMake a donation to our BTC wallet we’re a small business & we employ\nmany engineers to make your software safer and bugless!\n-deadbugz\nBTC: bc1q5xpazlg7q6ph2r6s7tzumd5zyjdet6vjzvsqln\nListing 1.1: Observed “begware” Bitcoin solicitation prompt.\nEmpirical telemetry confirms that these diverse vectors frequently overlap\nwithin single campaigns. Few threat actors even intentionally delete previously\ncreated models. Listing 1.2 demonstrates an illustrative campaign originating\nfrom a Russian ISP attempting multiple concurrent attack types, notably em-\nploying model names embedding various CVE identifiers, including nonexistent\nor unrelated numbers.\n/api/pull {\"name\": \"http://169.254.169.254/latest/meta-data/\", \"stream\": false}\n/api/pull {\"name\": \"http://127.0.0.1:11434/api/tags\", \"stream\": false}\n/api/pull {\"name\": \"http://localhost:22/\", \"stream\": false}\n"
-    }
-   ],
+   "citations_detail": [],
    "document_hit": null,
    "expected_answer_terms": [],
    "term_hit": null,
-   "citations_retrievable": 6,
-   "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralizatio",
-   "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nCVE-2026-45499：<p>Server-side request forgery (ssrf) in Azure OpenAI allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-47282：<p>Insufficiently protected credentials in GitHub Copilot and Visual Studio Code allows an unauthorized attacker to disclose information over a network.</p>\nCVE-2026-48561：<p>Improper neutralization of special elements used in a command ('command injection') in Copilot Chat (Microsoft Edge) allows an unauthorized attacker to execute code over a network.</p>\nCVE-2026-50510：<p>Improper restriction of names for files and other resources in Github Copilot allows an unauthorized attacker to execute code locally.</p>\nCVE-2026-50517：<p>Deserialization of untrusted data in M365 Copilot allows an authorized attacker to execute code over a network.</p>\nCVE-2026-55145：<p>Improper neutralization of special elements used in a command ('command injection') in Outlook Copilot allows an authorized attacker to perform tampering over a network.</p>\nCVE-2026-56167：<p>Server-side request forgery (ssrf) in Azure AI Search allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-58617：<p>Improper access control in Microsoft 365 Copilot for iOS allows an unauthorized attacker to elevate privileges over a network.</p>",
-   "latency_ms": 3128.5,
+   "citations_retrievable": 0,
+   "answer_head": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
+   "answer_full": "这个问题需要把两份清单求交集，而库里没有可核验的关联证据，所以无法回答。",
+   "latency_ms": 507.5,
    "timeout": false
   },
   {
@@ -3058,7 +2996,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2100.1,
+   "latency_ms": 1532.7,
    "timeout": false
   },
   {
@@ -3082,7 +3020,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1791.7,
+   "latency_ms": 1477.0,
    "timeout": false
   },
   {
@@ -3106,7 +3044,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 1952.3,
+   "latency_ms": 1804.0,
    "timeout": false
   },
   {
@@ -3174,7 +3112,7 @@
    "citations_retrievable": 5,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2869.1,
+   "latency_ms": 2667.1,
    "timeout": false
   },
   {
@@ -3198,7 +3136,7 @@
    "citations_retrievable": 0,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2038.7,
+   "latency_ms": 1705.0,
    "timeout": false
   },
   {
@@ -3209,59 +3147,9 @@
    "should_refuse": true,
    "candidate_only": false,
    "error": null,
-   "refused": false,
-   "refusal_correct": false,
-   "related_event_ids": [
-    "CVE-2026-41106",
-    "CVE-2026-41109",
-    "CVE-2026-45499",
-    "CVE-2026-47282",
-    "CVE-2026-48561",
-    "CVE-2026-50510",
-    "CVE-2026-50517",
-    "CVE-2026-55145",
-    "CVE-2026-56167",
-    "CVE-2026-58617",
-    "PYSEC-2026-4000",
-    "PYSEC-2026-3998",
-    "PYSEC-2026-3999",
-    "PYSEC-2026-3997",
-    "PYSEC-2026-3996",
-    "GHSA-8pw2-6jv3-mj5j",
-    "GHSA-hcwq-8wjf-3gcr",
-    "PYSEC-2026-3985",
-    "GHSA-wvm9-9g5j-623f",
-    "GHSA-3g9q-v48f-hh9w",
-    "GHSA-v39v-59xw-j98g",
-    "CVE-2026-64849",
-    "CVE-2025-62593",
-    "CVE-2026-9198",
-    "CVE-2026-0770",
-    "CVE-2026-55255",
-    "CVE-2025-34291",
-    "CVE-2026-33017",
-    "CVE-2025-68613",
-    "GHSA-mcmc-2m55-j8jj",
-    "CVE-2025-9959",
-    "CVE-2025-6558",
-    "CVE-2025-3248",
-    "CVE-2024-4610",
-    "CVE-2024-29988",
-    "CVE-2023-4211",
-    "CVE-2021-29256",
-    "CVE-2021-27876",
-    "CVE-2021-27877",
-    "CVE-2021-27878",
-    "CVE-2023-26083",
-    "CVE-2022-22706",
-    "CVE-2022-38181",
-    "CVE-2022-4135",
-    "CVE-2014-6332",
-    "CVE-2014-4114",
-    "CVE-2020-10987",
-    "CVE-2021-28663",
-    "CVE-2021-28664"
-   ],
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
    "document_citation_count": 0,
    "cited_document_keys": [],
    "expected_document_keys": [],
@@ -3270,9 +3158,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralizatio",
-   "answer_full": "CVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nCVE-2026-45499：<p>Server-side request forgery (ssrf) in Azure OpenAI allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-47282：<p>Insufficiently protected credentials in GitHub Copilot and Visual Studio Code allows an unauthorized attacker to disclose information over a network.</p>\nCVE-2026-48561：<p>Improper neutralization of special elements used in a command ('command injection') in Copilot Chat (Microsoft Edge) allows an unauthorized attacker to execute code over a network.</p>\nCVE-2026-50510：<p>Improper restriction of names for files and other resources in Github Copilot allows an unauthorized attacker to execute code locally.</p>\nCVE-2026-50517：<p>Deserialization of untrusted data in M365 Copilot allows an authorized attacker to execute code over a network.</p>\nCVE-2026-55145：<p>Improper neutralization of special elements used in a command ('command injection') in Outlook Copilot allows an authorized attacker to perform tampering over a network.</p>\nCVE-2026-56167：<p>Server-side request forgery (ssrf) in Azure AI Search allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-58617：<p>Improper access control in Microsoft 365 Copilot for iOS allows an unauthorized attacker to elevate privileges over a network.</p>\nPYSEC-2026-4000：vLLM through 0.29.0 fails to properly validate bad_words token indices against the model's generation output width in SamplingParams.update_from_tokenizer(). Attackers can supply out-of-bounds token indices that corrupt logits memory of concurrent requests, causing different in-flight HTTP requests to return incorrect tokens.\nPYSEC-2026-3998：vLLM before 0.29.0 validates allowed_token_ids against tokenizer length instead of model output logits width in SamplingParams._validate_allowed_token_ids(). Attackers can supply token IDs above the output vocabulary that pass validation, causing LogitBiasState to corrupt GPU logits state and allow concurrent requests to sample tokens outside their allowlists.\nPYSEC-2026-3999：vLLM through 0.29.0 contains a memory corruption vulnerability in the Triton _bincount_kernel where prompt token IDs index the penalty prompt-presence bitset without bounds checking against vocabulary size. Attackers can submit multimodal audio requests with tokens equal to vocabulary size, causing out-of-bounds writes that corrupt concurrent requests' sampler state and alter repetition penalty be…\nPYSEC-2026-3997：vLLM versions before 0.28.0 fail to validate the lower bound of token IDs in the /v1/embeddings and /pooling endpoints, allowing unauthenticated attackers to crash the engine by submitting negative token IDs. A single request with a negative token ID triggers a CUDA device-side assertion that poisons the GPU context, causing all subsequent requests to fail until the process restarts.\nPYSEC-2026-3996：vLLM through 0.29.0 fails to properly clean up decode-side metadata for rejected inference requests in prefill/decode disaggregated deployments. Remote attackers can submit requests with max_tokens=0 to exhaust decode-worker memory without bound until the worker restarts.\nGHSA-8pw2-6jv3-mj5j：## Summary Current vLLM `main` lets an inference request choose the PyNvVideoCodec GPU video decoder through `media_io_kwargs.video.video_backend`, but engine GPU memory reservation is computed only from static startup configuration and `VLLM_VIDEO_LOADER_BACKEND`. If the server starts with the default OpenCV/software backend and no `--mm-ipc-gpu-memory-gb` budget, a client can still route a video…\nGHSA-hcwq-8wjf-3gcr：### Summary The audio decode-duration guard (`max_duration_s`, env `VLLM_MAX_AUDIO_DECODE_DURATION_S`, default 600s) that protects against audio decompression-bomb DoS is wired into **only** the speech-to-text path (`/v1/audio/transcriptions`). The **chat** audio path (`/v1/chat/completions`, `input_audio` content parts) calls the same decoder with **no** limit, so an **unauthenticated** client ca…\nPYSEC-2026-3985：vLLM before 0.28.0 contains a remote code execution vulnerability in the LlavaOnevision2 processor loader that ignores the trust_remote_code parameter when loading remote processor classes. Attackers can craft a malicious model with arbitrary code in processing_llava_onevision2.py that executes with vLLM process authority even when trust_remote_code is set to False.\nGHSA-wvm9-9g5j-623f：## Summary Open WebUI's OAuth token exchange endpoint issues a session for a provider access token without running the OAuth role management that the normal OAuth login callback runs. A user whose provider roles the login callback would refuse, or would demote, could still obtain a working session at their existing role through this endpoint. ## Preconditions - `ENABLE_OAUTH_TOKEN_EXCHANGE=True`.…\nGHSA-3g9q-v48f-hh9w：## Summary The OIDC back-channel logout endpoint is unauthenticated by design, because the identity provider calls it without a browser session. Before checking whether the submitted logout token was genuine, the handler fetched the provider's discovery document and its signing keys over the network, and repeated both fetches on every request because nothing was cached. The signing-key fetch also…\nGHSA-v39v-59xw-j98g：# Any authenticated user can suppress calendar alerts instance-wide via a non-numeric alert value ## Summary Calendar events carry a free-form `meta` object that is stored exactly as submitted, with no validation of the values inside it. The scheduler reads the per-event alert offset out of that object in a single pass that covers every user's upcoming events, and compares it numerically without c…\nCVE-2026-64849：MLflow contains a server-side request forgery vulnerability that can allow attackers to reach internal or cloud metadata services and receive response_status and response_body.\nCVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.\nCVE-2026-9198：Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.\nCVE-2026-0770：Langflow contains an inclusion of functionality from untrusted control sphere vulnerability that allows remote attackers to execute arbitrary code on affected installations.\nCVE-2026-55255：Langflow contains an authorization bypass through user-controlled key vulnerability which allows an authenticated attacker to execute any flow belonging to another user by specifying the victim's flow ID in the request.\nCVE-2025-34291：Langflow contains an origin validation error vulnerability in which an overly permissive CORS configuration combined with a refresh token cookie configured as SameSite=None allows a malicious webpage to perform cross-origin requests that include credentials and successfully call the refresh endpoint. This could allow the attacker to execute arbitrary code and achieve full system compromise via obt…\nCVE-2026-33017：Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.\nCVE-2025-68613：n8n contains an improper control of dynamically managed code resources vulnerability in its workflow expression evaluation system that allows for remote code execution.\nGHSA-mcmc-2m55-j8jj：### Summary The fix [here](https://github.com/vllm-project/vllm/pull/27204) for CVE-2025-62164 is not sufficient. The fix only disables prompt embeds by default rather than addressing the root cause, so the DoS vulnerability remains when the feature is enabled. ### Details vLLM's pending change attempts to fix the root cause, which is the missing sparse tensor validation. PyTorch (~v2.0) disables…\nCVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injection in order to trick the agent to create malicious code.\nCVE-2025-6558：Google Chromium contains an improper input validation vulnerability in ANGLE and GPU. This vulnerability could allow a remote attacker to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2025-3248：Langflow contains a missing authentication vulnerability in the /api/v1/validate/code endpoint that allows a remote, unauthenticated attacker to execute arbitrary code via crafted HTTP requests.\nCVE-2024-4610：Arm Bifrost and Valhall GPU kernel drivers contain a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2024-29988：Microsoft SmartScreen Prompt contains a security feature bypass vulnerability that allows an attacker to bypass the Mark of the Web (MotW) feature. This vulnerability can be chained with CVE-2023-38831 and CVE-2024-21412 to execute a malicious file.\nCVE-2023-4211：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2021-29256：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2021-27876：Veritas Backup Exec (BE) Agent contains a file access vulnerability that could allow an attacker to specially craft input parameters on a data management protocol command to access files on the BE Agent machine.\nCVE-2021-27877：Veritas Backup Exec (BE) Agent contains an improper authentication vulnerability that could allow an attacker unauthorized access to the BE Agent via SHA authentication scheme.\nCVE-2021-27878：Veritas Backup Exec (BE) Agent contains a command execution vulnerability that could allow an attacker to use a data management protocol command to execute a command on the BE Agent machine.\nCVE-2023-26083：Arm Mali GPU Kernel Driver contains an information disclosure vulnerability that allows a non-privileged user to make valid GPU processing operations that expose sensitive kernel metadata.\nCVE-2022-22706：Arm Mali GPU Kernel Driver contains an unspecified vulnerability that allows a non-privileged user to achieve write access to read-only memory pages.\nCVE-2022-38181：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2022-4135：Google Chromium GPU contains a heap buffer overflow vulnerability that allows a remote attacker, who has compromised the renderer process, to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2014-6332：OleAut32.dll in OLE in Microsoft Windows allows remote attackers to remotely execute code via a crafted web site.\nCVE-2014-4114：A vulnerability exists in Windows Object Linking & Embedding (OLE) that could allow remote code execution if a user opens a file that contains a specially crafted OLE object.\nCVE-2020-10987：Tenda AC1900 Router AC15 Model contains an unspecified vulnerability that allows remote attackers to execute system commands via the deviceName POST parameter.\nCVE-2021-28663：Arm Mali Graphics Processing Unit (GPU) kernel driver contains a use-after-free vulnerability that may allow a non-privileged user to make improper operations on GPU memory to gain root privilege, and/or disclose information.\nCVE-2021-28664：Arm Mali Graphics Processing Unit (GPU) kernel driver contains an unspecified vulnerability that may allow a non-privileged user to gain write access to read-only memory, gain root privilege, corrupt memory, and modify the memory of other processes.",
-   "latency_ms": 3808.1,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
+   "latency_ms": 870.8,
    "timeout": false
   },
   {
@@ -3342,7 +3230,7 @@
    "citations_retrievable": 5,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 2625.8,
+   "latency_ms": 2457.8,
    "timeout": false
   },
   {
@@ -3402,7 +3290,7 @@
    "citations_retrievable": 4,
    "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
    "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。",
-   "latency_ms": 3034.6,
+   "latency_ms": 2393.8,
    "timeout": false
   },
   {
@@ -3481,7 +3369,7 @@
    "citations_retrievable": 6,
    "answer_head": "证据不足，无法回答。",
    "answer_full": "证据不足，无法回答。",
-   "latency_ms": 2138.2,
+   "latency_ms": 2079.2,
    "timeout": false
   },
   {
@@ -3492,62 +3380,9 @@
    "should_refuse": true,
    "candidate_only": false,
    "error": null,
-   "refused": false,
-   "refusal_correct": false,
-   "related_event_ids": [
-    "EU_AI_ACT-ca6810dcd2",
-    "NIST_AI_RMF-54dbc15413",
-    "OWASP_GENAI-430c5292e0",
-    "CVE-2026-41106",
-    "CVE-2026-41109",
-    "CVE-2026-45499",
-    "CVE-2026-47282",
-    "CVE-2026-48561",
-    "CVE-2026-50510",
-    "CVE-2026-50517",
-    "CVE-2026-55145",
-    "CVE-2026-56167",
-    "CVE-2026-58617",
-    "PYSEC-2026-4000",
-    "PYSEC-2026-3998",
-    "PYSEC-2026-3999",
-    "PYSEC-2026-3997",
-    "PYSEC-2026-3996",
-    "GHSA-8pw2-6jv3-mj5j",
-    "GHSA-hcwq-8wjf-3gcr",
-    "PYSEC-2026-3985",
-    "GHSA-wvm9-9g5j-623f",
-    "GHSA-3g9q-v48f-hh9w",
-    "GHSA-v39v-59xw-j98g",
-    "CVE-2026-64849",
-    "CVE-2025-62593",
-    "CVE-2026-9198",
-    "CVE-2026-0770",
-    "CVE-2026-55255",
-    "CVE-2025-34291",
-    "CVE-2026-33017",
-    "CVE-2025-68613",
-    "GHSA-mcmc-2m55-j8jj",
-    "CVE-2025-9959",
-    "CVE-2025-6558",
-    "CVE-2025-3248",
-    "CVE-2024-4610",
-    "CVE-2024-29988",
-    "CVE-2023-4211",
-    "CVE-2021-29256",
-    "CVE-2021-27876",
-    "CVE-2021-27877",
-    "CVE-2021-27878",
-    "CVE-2023-26083",
-    "CVE-2022-22706",
-    "CVE-2022-38181",
-    "CVE-2022-4135",
-    "CVE-2014-6332",
-    "CVE-2014-4114",
-    "CVE-2020-10987",
-    "CVE-2021-28663",
-    "CVE-2021-28664"
-   ],
+   "refused": true,
+   "refusal_correct": true,
+   "related_event_ids": [],
    "document_citation_count": 0,
    "cited_document_keys": [],
    "expected_document_keys": [],
@@ -3556,9 +3391,9 @@
    "expected_answer_terms": [],
    "term_hit": null,
    "citations_retrievable": 0,
-   "answer_head": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending ",
-   "answer_full": "EU_AI_ACT-ca6810dcd2：PE-CONS 24/24 AD/DOS/di TREE.2.B EN REGULATION (EU) 2024/… OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of … laying down harmonised rules on artificial intelligence and amending Regulations (EC) No 300/2008, (EU) No 167/2013, (EU) No 168/2013, (EU) 2018/858, (EU) 2018/1139 and (EU) 2019/2144 and Directives 2014/9 0/EU, (EU) 2016/797 and (EU) 2020/1828 (Artificial Intelligence Act) (Text with EEA…\nNIST_AI_RMF-54dbc15413：AI Risk Management Framework | NIST Skip to main content An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock A locked padlock ) or https:// means you’ve safely connected to the .gov website. Share sensiti…\nOWASP_GENAI-430c5292e0：LLM01:2025 Prompt Injection - OWASP Gen AI Security Project Skip to content Join us in Orlando, FL 10/11 &#8211; 10/15 @ InfoSec World 2026 | Register Now! GETTING STARTED Introduction MEETINGS CONTRIBUTING EVENTS GLOSSARY RESOURCES All LLM TOP 10 LLM TOP 10 FOR 2025 LLM TOP 10 FOR 2023/24 CHEAT SHEETS WHITEPAPERS TOOLS LEARNING VIDEOS SOLUTIONS DIRECTORY ROADMAP NEWSLETTER PROJECT INITIATIVES Top…\nCVE-2026-41106：<p>Url redirection to untrusted site ('open redirect') in M365 Copilot allows an unauthorized attacker to elevate privileges over a network.</p>\nCVE-2026-41109：<p>Improper neutralization of special elements in output used by a downstream component ('injection') in GitHub Copilot and Visual Studio allows an unauthorized attacker to bypass a security feature over a network.</p>\nCVE-2026-45499：<p>Server-side request forgery (ssrf) in Azure OpenAI allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-47282：<p>Insufficiently protected credentials in GitHub Copilot and Visual Studio Code allows an unauthorized attacker to disclose information over a network.</p>\nCVE-2026-48561：<p>Improper neutralization of special elements used in a command ('command injection') in Copilot Chat (Microsoft Edge) allows an unauthorized attacker to execute code over a network.</p>\nCVE-2026-50510：<p>Improper restriction of names for files and other resources in Github Copilot allows an unauthorized attacker to execute code locally.</p>\nCVE-2026-50517：<p>Deserialization of untrusted data in M365 Copilot allows an authorized attacker to execute code over a network.</p>\nCVE-2026-55145：<p>Improper neutralization of special elements used in a command ('command injection') in Outlook Copilot allows an authorized attacker to perform tampering over a network.</p>\nCVE-2026-56167：<p>Server-side request forgery (ssrf) in Azure AI Search allows an authorized attacker to elevate privileges over a network.</p>\nCVE-2026-58617：<p>Improper access control in Microsoft 365 Copilot for iOS allows an unauthorized attacker to elevate privileges over a network.</p>\nPYSEC-2026-4000：vLLM through 0.29.0 fails to properly validate bad_words token indices against the model's generation output width in SamplingParams.update_from_tokenizer(). Attackers can supply out-of-bounds token indices that corrupt logits memory of concurrent requests, causing different in-flight HTTP requests to return incorrect tokens.\nPYSEC-2026-3998：vLLM before 0.29.0 validates allowed_token_ids against tokenizer length instead of model output logits width in SamplingParams._validate_allowed_token_ids(). Attackers can supply token IDs above the output vocabulary that pass validation, causing LogitBiasState to corrupt GPU logits state and allow concurrent requests to sample tokens outside their allowlists.\nPYSEC-2026-3999：vLLM through 0.29.0 contains a memory corruption vulnerability in the Triton _bincount_kernel where prompt token IDs index the penalty prompt-presence bitset without bounds checking against vocabulary size. Attackers can submit multimodal audio requests with tokens equal to vocabulary size, causing out-of-bounds writes that corrupt concurrent requests' sampler state and alter repetition penalty be…\nPYSEC-2026-3997：vLLM versions before 0.28.0 fail to validate the lower bound of token IDs in the /v1/embeddings and /pooling endpoints, allowing unauthenticated attackers to crash the engine by submitting negative token IDs. A single request with a negative token ID triggers a CUDA device-side assertion that poisons the GPU context, causing all subsequent requests to fail until the process restarts.\nPYSEC-2026-3996：vLLM through 0.29.0 fails to properly clean up decode-side metadata for rejected inference requests in prefill/decode disaggregated deployments. Remote attackers can submit requests with max_tokens=0 to exhaust decode-worker memory without bound until the worker restarts.\nGHSA-8pw2-6jv3-mj5j：## Summary Current vLLM `main` lets an inference request choose the PyNvVideoCodec GPU video decoder through `media_io_kwargs.video.video_backend`, but engine GPU memory reservation is computed only from static startup configuration and `VLLM_VIDEO_LOADER_BACKEND`. If the server starts with the default OpenCV/software backend and no `--mm-ipc-gpu-memory-gb` budget, a client can still route a video…\nGHSA-hcwq-8wjf-3gcr：### Summary The audio decode-duration guard (`max_duration_s`, env `VLLM_MAX_AUDIO_DECODE_DURATION_S`, default 600s) that protects against audio decompression-bomb DoS is wired into **only** the speech-to-text path (`/v1/audio/transcriptions`). The **chat** audio path (`/v1/chat/completions`, `input_audio` content parts) calls the same decoder with **no** limit, so an **unauthenticated** client ca…\nPYSEC-2026-3985：vLLM before 0.28.0 contains a remote code execution vulnerability in the LlavaOnevision2 processor loader that ignores the trust_remote_code parameter when loading remote processor classes. Attackers can craft a malicious model with arbitrary code in processing_llava_onevision2.py that executes with vLLM process authority even when trust_remote_code is set to False.\nGHSA-wvm9-9g5j-623f：## Summary Open WebUI's OAuth token exchange endpoint issues a session for a provider access token without running the OAuth role management that the normal OAuth login callback runs. A user whose provider roles the login callback would refuse, or would demote, could still obtain a working session at their existing role through this endpoint. ## Preconditions - `ENABLE_OAUTH_TOKEN_EXCHANGE=True`.…\nGHSA-3g9q-v48f-hh9w：## Summary The OIDC back-channel logout endpoint is unauthenticated by design, because the identity provider calls it without a browser session. Before checking whether the submitted logout token was genuine, the handler fetched the provider's discovery document and its signing keys over the network, and repeated both fetches on every request because nothing was cached. The signing-key fetch also…\nGHSA-v39v-59xw-j98g：# Any authenticated user can suppress calendar alerts instance-wide via a non-numeric alert value ## Summary Calendar events carry a free-form `meta` object that is stored exactly as submitted, with no validation of the values inside it. The scheduler reads the per-event alert offset out of that object in a single pass that covers every user's upcoming events, and compares it numerically without c…\nCVE-2026-64849：MLflow contains a server-side request forgery vulnerability that can allow attackers to reach internal or cloud metadata services and receive response_status and response_body.\nCVE-2025-62593：Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.\nCVE-2026-9198：Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.\nCVE-2026-0770：Langflow contains an inclusion of functionality from untrusted control sphere vulnerability that allows remote attackers to execute arbitrary code on affected installations.\nCVE-2026-55255：Langflow contains an authorization bypass through user-controlled key vulnerability which allows an authenticated attacker to execute any flow belonging to another user by specifying the victim's flow ID in the request.\nCVE-2025-34291：Langflow contains an origin validation error vulnerability in which an overly permissive CORS configuration combined with a refresh token cookie configured as SameSite=None allows a malicious webpage to perform cross-origin requests that include credentials and successfully call the refresh endpoint. This could allow the attacker to execute arbitrary code and achieve full system compromise via obt…\nCVE-2026-33017：Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.\nCVE-2025-68613：n8n contains an improper control of dynamically managed code resources vulnerability in its workflow expression evaluation system that allows for remote code execution.\nGHSA-mcmc-2m55-j8jj：### Summary The fix [here](https://github.com/vllm-project/vllm/pull/27204) for CVE-2025-62164 is not sufficient. The fix only disables prompt embeds by default rather than addressing the root cause, so the DoS vulnerability remains when the feature is enabled. ### Details vLLM's pending change attempts to fix the root cause, which is the missing sparse tensor validation. PyTorch (~v2.0) disables…\nCVE-2025-9959：Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injection in order to trick the agent to create malicious code.\nCVE-2025-6558：Google Chromium contains an improper input validation vulnerability in ANGLE and GPU. This vulnerability could allow a remote attacker to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2025-3248：Langflow contains a missing authentication vulnerability in the /api/v1/validate/code endpoint that allows a remote, unauthenticated attacker to execute arbitrary code via crafted HTTP requests.\nCVE-2024-4610：Arm Bifrost and Valhall GPU kernel drivers contain a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2024-29988：Microsoft SmartScreen Prompt contains a security feature bypass vulnerability that allows an attacker to bypass the Mark of the Web (MotW) feature. This vulnerability can be chained with CVE-2023-38831 and CVE-2024-21412 to execute a malicious file.\nCVE-2023-4211：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that allows a local, non-privileged user to make improper GPU memory processing operations to gain access to already freed memory.\nCVE-2021-29256：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2021-27876：Veritas Backup Exec (BE) Agent contains a file access vulnerability that could allow an attacker to specially craft input parameters on a data management protocol command to access files on the BE Agent machine.\nCVE-2021-27877：Veritas Backup Exec (BE) Agent contains an improper authentication vulnerability that could allow an attacker unauthorized access to the BE Agent via SHA authentication scheme.\nCVE-2021-27878：Veritas Backup Exec (BE) Agent contains a command execution vulnerability that could allow an attacker to use a data management protocol command to execute a command on the BE Agent machine.\nCVE-2023-26083：Arm Mali GPU Kernel Driver contains an information disclosure vulnerability that allows a non-privileged user to make valid GPU processing operations that expose sensitive kernel metadata.\nCVE-2022-22706：Arm Mali GPU Kernel Driver contains an unspecified vulnerability that allows a non-privileged user to achieve write access to read-only memory pages.\nCVE-2022-38181：Arm Mali GPU Kernel Driver contains a use-after-free vulnerability that may allow a non-privileged user to gain root privilege and/or disclose information.\nCVE-2022-4135：Google Chromium GPU contains a heap buffer overflow vulnerability that allows a remote attacker, who has compromised the renderer process, to potentially perform a sandbox escape via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.\nCVE-2014-6332：OleAut32.dll in OLE in Microsoft Windows allows remote attackers to remotely execute code via a crafted web site.\nCVE-2014-4114：A vulnerability exists in Windows Object Linking & Embedding (OLE) that could allow remote code execution if a user opens a file that contains a specially crafted OLE object.\nCVE-2020-10987：Tenda AC1900 Router AC15 Model contains an unspecified vulnerability that allows remote attackers to execute system commands via the deviceName POST parameter.\nCVE-2021-28663：Arm Mali Graphics Processing Unit (GPU) kernel driver contains a use-after-free vulnerability that may allow a non-privileged user to make improper operations on GPU memory to gain root privilege, and/or disclose information.\nCVE-2021-28664：Arm Mali Graphics Processing Unit (GPU) kernel driver contains an unspecified vulnerability that may allow a non-privileged user to gain write access to read-only memory, gain root privilege, corrupt memory, and modify the memory of other processes.",
-   "latency_ms": 3405.0,
+   "answer_head": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
+   "answer_full": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
+   "latency_ms": 645.1,
    "timeout": false
   }
  ]

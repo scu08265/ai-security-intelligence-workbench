@@ -67,7 +67,24 @@ def _missing_identifiers(question: str, events: list[dict]) -> list[str]:
 
 def _needs_intersection(question: str) -> bool:
     """True for "哪些同时出现在 A 和 B 里" questions we cannot join."""
-    return bool(re.search(r"同时", question)) and bool(re.search(r"哪些|哪几|哪条", question))
+    asks_which = bool(re.search(r"哪些|哪几|哪条", question))
+    if not asks_which:
+        return False
+    # "同时出现"是求交集，"与…对应/匹配"同样是跨两份清单的连接，
+    # 没有显式关联证据时都不能用单条记录作答。
+    return bool(re.search(r"同时", question)) or bool(re.search(r"对应|匹配|重合|交集", question))
+
+
+_VAGUE_TERMS = {
+    "vulnerability", "vulnerabilities", "security", "risk", "threat", "issue",
+    "漏洞", "安全", "风险", "威胁", "问题",
+}
+
+
+def _is_vague_query(question: str) -> bool:
+    """A single generic word is not a question; ask for something specific."""
+    compact = re.sub(r"[\s\W_]+", "", question, flags=re.UNICODE).casefold()
+    return compact in _VAGUE_TERMS
 
 
 def _priority(event: dict, asset: dict, status: str) -> str:
@@ -414,6 +431,13 @@ def answer_question(
             "citations": [], "context_chunks": [], "context": {},
             "retrieval": {"hits": 0, "input_mode": "not_run_intersection"},
         }
+    elif _is_vague_query(_text(question)):
+        rag_result = {
+            "answer": "现有证据中未找到可匹配的事件，无法可靠回答。这个问题太宽泛，请补充组件名、漏洞编号或想了解的主题。",
+            "refused": True, "refusal_reason": "vague_query",
+            "citations": [], "context_chunks": [], "context": {},
+            "retrieval": {"hits": 0, "input_mode": "not_run_vague_query"},
+        }
     else:
         # 有可用模型时，让它在**已检索到的证据**上组织答案；答案必须带引用，
         # 否则 answer_with_rag 会退回本地抽取，模型写不出无出处的话。
@@ -488,6 +512,18 @@ def answer_question(
             "citations": [], "claims": [], "trace": trace,
             "limitations": ["跨清单交集没有显式关联证据，系统拒绝用单条无关记录冒充结果"],
             "mode": "ungrounded_intersection", "related_event_ids": [], "assessments": [],
+        })
+    if _is_vague_query(_text(question)):
+        trace.append({
+            "step": 2, "role": "planner", "action": "request_more_specific_question",
+            "evidence_ids": [], "result": "查询只有一个通用词，无法定位证据",
+            "stop_reason": "问题过于宽泛",
+        })
+        return with_rag({
+            "answer": rag_result.get("answer") or "现有证据中未找到可匹配的事件，无法可靠回答。",
+            "citations": [], "claims": [], "trace": trace,
+            "limitations": ["问题只包含一个通用词，系统拒绝在没有具体对象时作答"],
+            "mode": "vague_query", "related_event_ids": [], "assessments": [],
         })
     if context["needs_clarification"]:
         trace.append({

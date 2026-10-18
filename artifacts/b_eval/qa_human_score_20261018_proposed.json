@@ -38,9 +38,9 @@
     "judged_cases": 12,
     "should_refuse": {
       "n": 12,
-      "correctly_refused": 9,
-      "refused_recall": 0.75,
-      "answered_by_system": 3
+      "correctly_refused": 12,
+      "refused_recall": 1.0,
+      "answered_by_system": 0
     },
     "should_answer": {
       "n": 0,
@@ -48,7 +48,7 @@
       "wrongly_refused": 0
     },
     "refused_precision": 1.0,
-    "refusal_accuracy": 0.75,
+    "refusal_accuracy": 1.0,
     "rule": "只有人工已判定 correct/incorrect 的题进入分母",
     "not_applicable": 38,
     "undecided": 0
