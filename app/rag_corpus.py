@@ -19,7 +19,9 @@ from xml.etree import ElementTree
 
 from . import config, storage
 
-PARSER_VERSION = "fulltext-1.2"
+# 1.3：PDF 抽取不再用 extraction_mode="layout"（双栏论文会被织在一起）。解析器变了，
+# 版本号必须跟着变——否则 ingest 会因 version_id 未变而 skip，旧文本被静默保留。
+PARSER_VERSION = "fulltext-1.3"
 MAX_INPUT_BYTES = 20 * 1024 * 1024
 DEFAULT_CHUNK_CHARS = 1000
 DEFAULT_OVERLAP_CHARS = 120
@@ -191,10 +193,12 @@ def _parse_pdf(raw: bytes) -> list[Section]:
             raise ValueError("PDF已加密，无法提取正文")
         sections: list[Section] = []
         for number, page in enumerate(reader.pages, start=1):
-            try:
-                text = page.extract_text(extraction_mode="layout") or ""
-            except TypeError:  # Older pypdf versions have no layout option.
-                text = page.extract_text() or ""
+            # 用 pypdf 默认的内容流顺序，**不要**用 extraction_mode="layout"。
+            # layout 会保留视觉版式：双栏论文因此变成“左栏一行 + 右栏一行”交替，
+            # 抽出来的句子读不通（例：“GRPO … and DAPO (Yu et al.,    outcome rewards… /
+            # 2026), has demonstrated…”）。默认顺序通常逐栏读出，句子连续。
+            # 只改抽取，不动后面的分块参数——否则无法归因。
+            text = page.extract_text() or ""
             text = _clean(text)
             if text:
                 sections.append(Section((f"第 {number} 页",), text, page=number))

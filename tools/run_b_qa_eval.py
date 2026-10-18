@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import statistics
 import sys
@@ -33,7 +34,9 @@ if str(ROOT) not in sys.path:
 from app import agents, config, rag_corpus, storage  # noqa: E402
 
 DATASET = ROOT / "evaluation" / "b_formal_qa_set.json"
-SOURCE_DATA_DIR = Path(r"D:\ICT\intel-data-b")
+# 默认评测语料；可用 B_QA_CORPUS_DIR 指向别的目录（例如修完 PDF 抽取后重建的新语料），
+# 这样"换语料重跑"不需要改代码，也不会误跑旧语料。
+SOURCE_DATA_DIR = Path(os.environ.get("B_QA_CORPUS_DIR") or r"D:\ICT\intel-data-b")
 TIMEOUT_MS = 5000  # 赛题"完整响应 ≤5s"的合格线，仅用于统计超时数
 
 

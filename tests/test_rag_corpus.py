@@ -140,3 +140,53 @@ def test_snapshot_filename_hash_is_verified_before_ingestion():
         assert "SHA-256" in str(exc)
     else:
         raise AssertionError("tampered snapshot must not be ingested")
+
+
+def test_pdf_extraction_does_not_use_layout_mode(monkeypatch):
+    """PDF 抽取必须走 pypdf 默认的内容流顺序。
+
+    ``extraction_mode="layout"`` 会保留视觉版式，双栏论文因此变成"左栏一行 + 右栏一行"
+    交替，抽出来的句子读不通（见 docs/B_PDF_EXTRACTION_FIX_20261018.md 的 before/after）。
+    这里用假的 PdfReader 记录调用参数，确保没有人再把 layout 加回来。
+    """
+    import pypdf
+
+    calls: list[dict] = []
+
+    class FakePage:
+        def extract_text(self, *args, **kwargs):
+            calls.append(dict(kwargs))
+            return "first column line\nsecond column line\n"
+
+    class FakeReader:
+        is_encrypted = False
+        pages = [FakePage()]
+
+    monkeypatch.setattr(pypdf, "PdfReader", lambda raw: FakeReader())
+    sections = rag_corpus._parse_pdf(b"%PDF-1.4 fixture")
+    assert sections and "first column line" in sections[0].text
+    assert calls == [{}], f"抽取不该传 extraction_mode：{calls}"
+
+
+def test_two_column_interleaving_is_measurable():
+    """把"分栏交错"写成可量化判据：交错文本的长空白（栏间距）占比明显更高。
+
+    这是判定"哪一份更干净"的口径。真实双栏 PDF 属外部语料、不入库，
+    所以这里做文本级断言——覆盖的是**判据本身**，不是 PDF 解析链路（后者由上一条测试守）。
+    """
+    import re
+
+    def gap_share(text: str) -> float:
+        lines = [ln for ln in text.splitlines() if ln.strip()]
+        return sum(1 for ln in lines if re.search(r"\S {3,}\S", ln)) / len(lines)
+
+    interleaved = (
+        "GRPO (Shao et al.,2024) and DAPO (Yu et al.,      outcome rewards and estimates the per-\n"
+        "2026), has demonstrated strong effectiveness      token advantage as the group-normalized reward:\n"
+    )
+    columnwise = (
+        "GRPO (Shao et al., 2024) and DAPO (Yu et al.,\n"
+        "2026), has demonstrated strong effectiveness\n"
+    )
+    assert gap_share(interleaved) > 0.5
+    assert gap_share(columnwise) == 0.0
