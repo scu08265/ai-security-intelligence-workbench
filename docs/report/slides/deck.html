@@ -340,15 +340,15 @@ img.shot {
     <thead><tr><th style="width: 24%;">指标</th><th style="width: 18%;">实测值</th><th>口径</th></tr></thead>
     <tbody>
       <tr><td>文档命中</td><td class="coral">97.22%</td><td class="dim">预期文档是否被引用，35 / 36</td></tr>
-      <tr><td>要点命中</td><td class="coral">92.11%</td><td class="dim">预期术语是否逐字出现，35 / 38</td></tr>
-      <tr><td>引用可追溯</td><td class="coral">100%</td><td class="dim">引用 ID 能否在库中取回，222 / 222</td></tr>
-      <tr><td>拒答一致</td><td class="coral">84%</td><td class="dim">与 should_refuse 标签一致，42 / 50</td></tr>
-      <tr><td>响应时延</td><td class="coral">P50 459 ms</td><td class="dim">同一批 50 题，P95 640 ms</td></tr>
+      <tr><td>要点命中</td><td class="coral">65.79%</td><td class="dim">逐字口径，25 / 38；模型改写会降低此项</td></tr>
+      <tr><td>引用可追溯</td><td class="coral">100%</td><td class="dim">引用 ID 能否在库中取回，205 / 205</td></tr>
+      <tr><td>拒答一致</td><td class="coral">92%</td><td class="dim">与 should_refuse 标签一致，46 / 50</td></tr>
+      <tr><td>响应时延</td><td class="coral">P50 1.9 s</td><td class="dim">同一批 50 题，P95 2.9 s，5 秒线内</td></tr>
     </tbody>
   </table>
   <p class="note" style="margin-top: 18px;">B 人工问答评测：10-12 批次 15.79%（6/38）→ 10-18 批次 71.05%（27/38，负责人复核待签字）</p>
   <div style="margin-top: 32px; border-left: 6px solid var(--teal); padding-left: 30px; width: 1300px;">
-    <p style="margin: 0 0 12px; font-size: 21px; color: #5A6274;">回答格式，句子逐字取自证据，不做改写</p>
+    <p style="margin: 0 0 12px; font-size: 21px; color: #5A6274;">回答格式：结论句 + 逐句引用；模型改写时同样必须标注依据</p>
     <p style="margin: 0 0 16px; font-size: 27px; line-height: 1.4;">答案：结论句<span style="color: #8A90A0; font-family: Bahnschrift, sans-serif; font-size: 23px;">　［文档标题 · chunk-id］</span></p>
     <p style="margin: 0 0 10px; font-size: 21px; color: #5A6274;">依据原文</p>
     <p style="margin: 0; font-size: 24px; line-height: 1.5; color: #333B50;">“原文句子”<span style="color: #8A90A0; font-family: Bahnschrift, sans-serif; font-size: 21px;">　［文档 · chunk-id］</span></p>
