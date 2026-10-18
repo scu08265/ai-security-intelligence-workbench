@@ -1,0 +1,189 @@
+{
+ "schema_version": "b-qa-performance-1.0",
+ "batches": [
+  {
+   "label": "20261018",
+   "source": "artifacts\\b_eval\\formal_qa_results_20261018_model.json",
+   "cases": 50,
+   "latency_ms": {
+    "samples": 50,
+    "mean": 1852.8,
+    "p50": 1895.3,
+    "p95": 2906.6,
+    "min": 528.6,
+    "max": 3301.8,
+    "scope": "单题端到端耗时（含本地检索），同一批次内统计；最近秩分位数、不做插值；超时阈值 5000 ms"
+   },
+   "outcomes": {
+    "answered": 42,
+    "refused": 8,
+    "errors": 0,
+    "timeouts": 0,
+    "failures": 0
+   },
+   "quality": {
+    "document_hit": {
+     "ok": 35,
+     "n": 36,
+     "rate": 0.9722,
+     "scope": "只表示预期 document_key 是否被引用命中；不代表引用内容支持答案"
+    },
+    "term_hit": {
+     "ok": 25,
+     "n": 38,
+     "rate": 0.6579,
+     "scope": "预期要点是否逐字出现在答案里；**不是**语义答案准确率"
+    },
+    "refusal_accuracy": {
+     "ok": 46,
+     "n": 50,
+     "rate": 0.92
+    },
+    "citations": {
+     "total": 205,
+     "retrievable": 205,
+     "rate": 1.0
+    },
+    "answer_semantic_accuracy": {
+     "value": null,
+     "reason": "无人工核验标准答案，按规则不计入正式准确率"
+    }
+   },
+   "per_category": {
+    "中英文混合查询": {
+     "cases": 6,
+     "answered": 6,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 6,
+     "document_hit_ok": 6,
+     "term_hit_n": 6,
+     "term_hit_ok": 5,
+     "refusal_n": 6,
+     "refusal_ok": 6,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.8333,
+     "refusal_accuracy": 1.0
+    },
+    "基础事实问答": {
+     "cases": 10,
+     "answered": 10,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 9,
+     "document_hit_ok": 9,
+     "term_hit_n": 10,
+     "term_hit_ok": 6,
+     "refusal_n": 10,
+     "refusal_ok": 10,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.6,
+     "refusal_accuracy": 1.0
+    },
+    "多轮追问": {
+     "cases": 6,
+     "answered": 6,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 5,
+     "document_hit_ok": 5,
+     "term_hit_n": 6,
+     "term_hit_ok": 6,
+     "refusal_n": 6,
+     "refusal_ok": 6,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 1.0,
+     "refusal_accuracy": 1.0
+    },
+    "拒答及证据不足": {
+     "cases": 5,
+     "answered": 3,
+     "refused": 2,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 2,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.4
+    },
+    "无证据问题与范围外问题": {
+     "cases": 5,
+     "answered": 1,
+     "refused": 4,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 5,
+     "refusal_ok": 4,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 0.8
+    },
+    "术语及语义查询": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 8,
+     "term_hit_n": 8,
+     "term_hit_ok": 4,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 1.0,
+     "term_hit_rate": 0.5,
+     "refusal_accuracy": 1.0
+    },
+    "真实多跳问答": {
+     "cases": 2,
+     "answered": 0,
+     "refused": 2,
+     "errors": 0,
+     "document_hit_n": 0,
+     "document_hit_ok": 0,
+     "term_hit_n": 0,
+     "term_hit_ok": 0,
+     "refusal_n": 2,
+     "refusal_ok": 2,
+     "document_hit_rate": null,
+     "term_hit_rate": null,
+     "refusal_accuracy": 1.0
+    },
+    "跨文档问答": {
+     "cases": 8,
+     "answered": 8,
+     "refused": 0,
+     "errors": 0,
+     "document_hit_n": 8,
+     "document_hit_ok": 7,
+     "term_hit_n": 8,
+     "term_hit_ok": 4,
+     "refusal_n": 8,
+     "refusal_ok": 8,
+     "document_hit_rate": 0.875,
+     "term_hit_rate": 0.5,
+     "refusal_accuracy": 1.0
+    }
+   }
+  }
+ ],
+ "comparison": {
+  "same_question_ids": true,
+  "question_count": 50,
+  "rule": "只有题号集合完全一致时才逐题对照；不同批次的分位数不得合并计算",
+  "per_question": [],
+  "outcome_changes": []
+ },
+ "notes": {
+  "no_mixing": "每个批次的分位数独立计算，绝不合并；逐题对照只展示差异",
+  "env": "本机 .venv、本地 RAG（临时数据库副本）、串行执行、无网络问答服务",
+  "scope": "计时覆盖单题端到端（检索+作答），不含进程启动",
+  "quality_caveat": "文档/词命中为机械指标；语义答案准确率在人工金标准前不可计算"
+ }
+}

@@ -1788,6 +1788,7 @@
       ], (bQa.batch_id
         ? `口径：答案正确率 = 完全正确 /（完全正确 + 判错 + 部分正确），partial 不计为正确；`
           + `已判定内正确率只统计明确判对或判错的题。当前展示 ${bQa.batch_id} 批次，旧基线保留。`
+          + (bQa.adjudication_note ? `　${bQa.adjudication_note}` : '')
         : '这是改造前的冻结人工基线；partial、unknown 不按正确回填，代码修改后需重新人工核验。')),
       scoreCapability('关系与多跳评测', bRelation.available ? '已验证' : '待读取', [
         ['可判定关系', bRelation.evaluable_samples, ' 条'],

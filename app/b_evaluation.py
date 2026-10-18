@@ -66,6 +66,7 @@ def _qa_quality(payload: dict[str, Any] | None, batch: dict[str, Any] | None = N
         "target_comparison": payload.get("target_comparison") or {},
         "basis": ("B 任务 2026-10-02 重评测批次；人工复核完成，当前作为活动批次展示。" if batch else "B 任务 2026-09-30 冻结人工基线；本次问答链路修改后尚未重新人工标注。"),
         "source": source or "artifacts/b_eval/qa_human_score.json",
+        "adjudication_note": payload.get("note"),
     }
 
 

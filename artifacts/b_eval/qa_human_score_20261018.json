@@ -1,0 +1,57 @@
+{
+  "schema_version": "b-qa-human-score-1.0",
+  "computable": true,
+  "cases_total": 50,
+  "human_judged_cases": 50,
+  "pending_human_cases": 0,
+  "answer": {
+    "numerator": 27,
+    "denominator": 38,
+    "rate": 0.7105,
+    "rule": "correct / (correct + incorrect + partial)",
+    "strict_denominator": 28,
+    "strict_rate": 0.9643,
+    "partial_counted_not_correct": 10,
+    "by_label": {
+      "correct": 27,
+      "incorrect": 1,
+      "partial": 10
+    },
+    "undecided": 0
+  },
+  "citation": {
+    "numerator": 27,
+    "denominator": 38,
+    "rate": 0.7105,
+    "rule": "supported / (supported + partially_supported + unsupported)",
+    "by_label": {
+      "supported": 27,
+      "partially_supported": 10,
+      "unsupported": 1,
+      "not_applicable": 12,
+      "unknown": 0
+    },
+    "not_applicable": 12,
+    "undecided": 0
+  },
+  "refusal": {
+    "judged_cases": 12,
+    "should_refuse": {
+      "n": 12,
+      "correctly_refused": 12,
+      "refused_recall": 1.0,
+      "answered_by_system": 0
+    },
+    "should_answer": {
+      "n": 0,
+      "answered_correctly": 0,
+      "wrongly_refused": 0
+    },
+    "refused_precision": 1.0,
+    "refusal_accuracy": 1.0,
+    "rule": "只有人工已判定 correct/incorrect 的题进入分母",
+    "not_applicable": 38,
+    "undecided": 0
+  },
+  "note": "负责人复核（AI 辅助逐题判定，逐题依据见 B5_ADJUDICATION_PROPOSAL_20261018.csv）；BQA-015 已换题。"
+}
