@@ -1223,7 +1223,7 @@
       seedResult);
 
     const tiles = h('div', { class: 'tiles' });
-    const cards = h('div', { class: 'grid-cards grid-cards--wide' });
+    const cards = h('div', { class: 'grid-cards grid-cards--wide grid-cards--priority' });
 
     state.dom.overview = { tiles: tiles, cards: cards };
     body.append(actions, tiles, cards);
@@ -1923,11 +1923,11 @@
 
     const queue = urgent.concat(uncertain).slice(0, 6);
     const queueBody = queue.length
-      ? dataTable([{ text: '风险' }, { text: '资产' }, { text: '结论' }, { text: '优先级' }, { text: '下一步' }],
+      ? dataTable([{ text: '风险', cls: 'col-risk' }, { text: '资产', cls: 'col-asset' }, { text: '结论', cls: 'col-verdict' }, { text: '优先级', cls: 'col-priority' }, { text: '下一步', cls: 'col-next' }],
         queue.map((item) => [
-          h('button', { type: 'button', class: 'link-button', onclick: () => openKnowledgeEvent(item.event_id) }, textOr(item.event_title, item.event_id)),
+          h('button', { type: 'button', class: 'link-button cell-clamp', title: textOr(item.event_title, item.event_id), onclick: () => openKnowledgeEvent(item.event_id) }, textOr(item.event_title, item.event_id)),
           textOr(item.asset_name, item.asset_id), assessStatusBadge(item.status), priorityBadge(item.priority),
-          item.status === 'affected' ? '核对修复版本并安排升级' : '补齐版本或关键配置'
+          item.status === 'affected' ? '核对修复版本' : '补齐版本或配置'
         ]))
       : assetCount === 0
         ? emptyState('现在还不能判断你的资产风险', '系统已有情报，但资产清单为空。请先添加资产，或在顶部点击“一键体验完整流程”。')

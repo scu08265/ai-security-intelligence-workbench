@@ -35,6 +35,36 @@ def _evidence_ids(event: dict) -> list[str]:
     return [str(s["id"]) for s in event.get("sources", []) if s.get("id")]
 
 
+_URL_IDENTIFIER = re.compile(r"^https?://", re.I)
+_QUESTION_IDENTIFIER = re.compile(r"(?:cve-\d{4}-\d{4,}|ghsa-[a-z0-9-]+)", re.I)
+
+
+def event_label(event: dict) -> str:
+    """Human label for one event.
+
+    Blog, paper and feed events use their URL as the primary key, so printing
+    ``event["id"]`` put a raw link at the head of every answer sentence.  Keep
+    the identifier when it *is* an identifier (CVE / GHSA / arXiv id) and fall
+    back to the title when it is just a URL.
+    """
+    identifier = _text(event.get("id"))
+    if identifier and not _URL_IDENTIFIER.match(identifier):
+        return identifier
+    title = _text(event.get("title"))
+    if title:
+        return title if len(title) <= 48 else title[:47] + "…"
+    return identifier or "该事件"
+
+
+def _missing_identifiers(question: str, events: list[dict]) -> list[str]:
+    """Explicit CVE / GHSA ids in the question that the corpus does not hold."""
+    wanted = {item.casefold() for item in _QUESTION_IDENTIFIER.findall(_text(question))}
+    if not wanted:
+        return []
+    haystack = " ".join(_event_haystack(event) for event in events)
+    return sorted(item.upper() for item in wanted if item not in haystack)
+
+
 def _priority(event: dict, asset: dict, status: str) -> str:
     if status not in {"affected", "needs_confirmation"}:
         return "low" if status == "not_affected" else "unknown"
@@ -267,6 +297,11 @@ def _select_events(question: str, events: list[dict], history: list[dict]) -> li
     asks_many = bool(re.search(r"哪些|有哪些|列出|all\b|which\s+(?:ones|issues|vulnerabilities)", q, re.I))
     identifiers = set(re.findall(r"(?:cve-\d{4}-\d{4,}|ghsa-[a-z0-9-]+)", q, re.I))
     selected = [e for e in events if any(i.casefold() in _event_haystack(e) for i in identifiers)]
+    if identifiers and not selected:
+        # The question names a specific advisory that this snapshot does not
+        # hold.  Falling through to fuzzy matching answers a different question
+        # with unrelated events, so stop here and let the caller refuse.
+        return []
     if not selected:
         selected = [e for e in events if _norm(e.get("component")) and _norm(e.get("component")) in _norm(q)]
         if len(selected) > 1 and asks_single and not asks_many:
@@ -458,6 +493,21 @@ def answer_question(
             trace.append({"step": 2, "role": "bounded_model_planner", "action": "degrade", "evidence_ids": [], "result": "切换本地证据抽取"})
     citations, claims, assessments, parts = [], [], [], []
     if not selected:
+        missing = _missing_identifiers(_text(question), events or [])
+        if missing:
+            listed = "、".join(missing)
+            answer = f"知识库里没有 {listed} 的记录，无法回答这个问题。请核对编号，或先采集对应来源后再问。"
+            limitations.append(f"{listed} 不在当前证据库中，系统只用已入库资料作答")
+            trace.append({
+                "step": len(trace) + 1, "role": "scheduler", "action": "stop",
+                "evidence_ids": [], "result": f"指定的编号未入库：{listed}",
+                "stop_reason": "指定编号不在库中",
+            })
+            return with_rag({
+                "answer": answer, "citations": [], "claims": [], "trace": trace,
+                "limitations": limitations, "mode": "unknown_identifier",
+                "related_event_ids": [], "assessments": [],
+            })
         limitations.append("未定位到匹配事件；请提供CVE/GHSA编号或组件名称")
         trace.append({"step": len(trace) + 1, "role": "scheduler", "action": "stop", "evidence_ids": [], "result": "无匹配事件", "stop_reason": "缺少可引用证据"})
         return with_rag({"answer": "现有证据中未找到可匹配的事件，无法可靠回答。请提供事件编号或组件名称。", "citations": [], "claims": [], "trace": trace, "limitations": limitations, "mode": mode, "related_event_ids": [], "assessments": []})
@@ -503,7 +553,7 @@ def answer_question(
         sources = event.get("sources") or []
         citations.extend(sources)
         ids = _evidence_ids(event)
-        label = event.get("id") or event.get("title") or "该事件"
+        label = event_label(event)
         if event.get("withdrawn") or event.get("status") == "withdrawn":
             text = f"{label} 已标记撤回，不能继续作为当前有效影响结论。"
         else:

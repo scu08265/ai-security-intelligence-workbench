@@ -424,6 +424,8 @@ a:hover { text-decoration: underline; }
   gap: 13px;
 }
 .grid-cards--wide { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+/* 概览的“优先处置”是一张五列表格，右卡片常是空态，把宽度让给左边。 */
+.grid-cards--priority { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
 
 .split {
   display: grid;
@@ -511,6 +513,20 @@ tbody tr:hover { background: #10151d; }
 td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .cell-list { margin: 0; padding-left: 15px; }
 .cell-list li { margin: 1px 0; }
+
+/* 优先处置：给中文列一个下限宽度，否则窄列会把“演示资产：推理服务 C”拆成一字一行。 */
+th.col-risk, td.col-risk { width: 34%; min-width: 148px; }
+th.col-asset, td.col-asset { width: 22%; min-width: 92px; }
+th.col-verdict, td.col-verdict,
+th.col-priority, td.col-priority { white-space: nowrap; }
+th.col-next, td.col-next { width: 18%; min-width: 76px; }
+td.col-risk .cell-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
 
 /* --------------------------------------------------------------- badges */
 
