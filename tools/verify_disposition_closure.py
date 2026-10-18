@@ -25,6 +25,8 @@ from pathlib import Path
 from typing import Any
 
 import httpx
+from packaging.specifiers import InvalidSpecifier, SpecifierSet
+from packaging.version import InvalidVersion, Version
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -43,7 +45,8 @@ def _dispositions(client: httpx.Client) -> list[dict[str, Any]]:
 
 
 def run(base: str, output_dir: Path, *, target_closes: int, operator: str,
-        dry_run: bool, reset_to_version: str | None = None) -> dict[str, Any]:
+        dry_run: bool, reset_to_version: str | None = None,
+        skip_counterexample: bool = False) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     evidence = Evidence(base, "a-ops", operator)
     result: dict[str, Any] = {"generated_at": _now(), "base_url": base, "dry_run": dry_run}
@@ -113,6 +116,16 @@ def run(base: str, output_dir: Path, *, target_closes: int, operator: str,
         target_version = smallest_safe_version(specs)
         if target_version is None:
             raise SystemExit(f"算不出安全版本，受影响区间：{specs}")
+        # 资产可能已经在安全版本上（例如上一轮已经升过）。这时不能再按
+        # "最小安全版本"回写，否则会变成降级。当前版本已经躲开所有区间就保持不变。
+        current = str(asset.get("version") or "").strip()
+        if current:
+            try:
+                specs_parsed = [SpecifierSet(item) for item in specs]
+                if all(Version(current) not in item for item in specs_parsed):
+                    target_version = current
+            except (InvalidSpecifier, InvalidVersion):
+                pass
         result["subject"] = {
             "asset_id": asset_id,
             "component": asset.get("component"),
@@ -124,36 +137,39 @@ def run(base: str, output_dir: Path, *, target_closes: int, operator: str,
         }
 
         # ---- 边界 1：仍在区间内，关闭必须被拒绝 ----
-        counterexample = targets[0]
-        body = {
-            "event_id": counterexample["event_id"],
-            "asset_id": asset_id,
-            "status": "verified",
-            "assignee": "a-ops",
-            "operator": operator,
-            "note": "A3 反例：资产仍在受影响区间，验证系统是否拒绝关闭",
-        }
-        step = evidence.call(client, "PUT",
-                             f"/api/dispositions/{counterexample['event_id']}/{asset_id}", body)
-        payload = step["response"] or {}
-        after = evidence.call(
-            client, "GET",
-            f"/api/dispositions/{counterexample['event_id']}/{asset_id}")["response"]
-        # GET /api/dispositions/{event}/{asset} returns the disposition itself.
-        disposition = after if isinstance(after, dict) else {}
-        result["counterexample"] = {
-            "event_id": counterexample["event_id"],
-            "requested_status": body["status"],
-            "applied_status": payload.get("applied_status"),
-            "verification": payload.get("verification"),
-            "closed_at": disposition.get("closed_at"),
-            "stored_status": disposition.get("status"),
-            "rejected": (
-                payload.get("applied_status") == "fixed"
-                and not disposition.get("closed_at")
-                and (payload.get("verification") or {}).get("passed") is False
-            ),
-        }
+        if skip_counterexample:
+            result["counterexample"] = None
+        else:
+            counterexample = targets[0]
+            body = {
+                "event_id": counterexample["event_id"],
+                "asset_id": asset_id,
+                "status": "verified",
+                "assignee": "a-ops",
+                "operator": operator,
+                "note": "A3 反例：资产仍在受影响区间，验证系统是否拒绝关闭",
+            }
+            step = evidence.call(client, "PUT",
+                                 f"/api/dispositions/{counterexample['event_id']}/{asset_id}", body)
+            payload = step["response"] or {}
+            after = evidence.call(
+                client, "GET",
+                f"/api/dispositions/{counterexample['event_id']}/{asset_id}")["response"]
+            # GET /api/dispositions/{event}/{asset} returns the disposition itself.
+            disposition = after if isinstance(after, dict) else {}
+            result["counterexample"] = {
+                "event_id": counterexample["event_id"],
+                "requested_status": body["status"],
+                "applied_status": payload.get("applied_status"),
+                "verification": payload.get("verification"),
+                "closed_at": disposition.get("closed_at"),
+                "stored_status": disposition.get("status"),
+                "rejected": (
+                    payload.get("applied_status") == "fixed"
+                    and not disposition.get("closed_at")
+                    and (payload.get("verification") or {}).get("passed") is False
+                ),
+            }
 
         # ---- 真实改一次资产版本（合成演示资产） ----
         upgrade = None
@@ -244,11 +260,14 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--reset-to-version", default=None,
                         help="先把演示资产放回该版本并重算研判，用于生成干净的 before/after")
+    parser.add_argument("--skip-counterexample", action="store_true",
+                        help="A2 收尾用：资产已在区间外时不制造反例，只逐条复测关闭")
     args = parser.parse_args()
 
     result = run(args.base, args.output_dir, target_closes=args.closes,
                  operator=args.operator, dry_run=args.dry_run,
-                 reset_to_version=args.reset_to_version)
+                 reset_to_version=args.reset_to_version,
+                 skip_counterexample=args.skip_counterexample)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     print(f"\noutput dir: {args.output_dir}", file=sys.stderr)
     return 0
