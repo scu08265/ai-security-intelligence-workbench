@@ -1778,10 +1778,17 @@
       scoreCapability('B 人工问答评测', bQa.available ? '已验证' : '待读取', [
         ['当前批次', bQa.batch_id || '旧基线', ''],
         ['人工核验题数', bQa.human_judged_cases, ' 个'],
-        ['答案准确率', percentValue(bQa.answer_accuracy), ''],
+        ['答案正确率', percentValue(bQa.answer_accuracy),
+          bQa.answer_denominator ? `（${textOr(bQa.answer_numerator, 0)}/${bQa.answer_denominator}）` : ''],
+        ['已判定内正确率', percentValue(bQa.strict_answer_rate),
+          bQa.strict_answer_denominator ? `（${bQa.strict_answer_denominator} 题明确判对或判错）` : ''],
+        ['部分正确', textOr(bQa.answer_partial_count, 0), ' 题（按不完全正确计入分母）'],
         ['引用支持率', percentValue(bQa.citation_support), ''],
         ['拒答召回率', percentValue(bQa.refusal_recall), '']
-      ], (bQa.batch_id ? `当前展示 ${bQa.batch_id} 重评测批次；旧基线保留；partial/unknown 不按正确回填。` : '这是改造前的冻结人工基线；partial、unknown 不按正确回填，代码修改后需重新人工核验。')),
+      ], (bQa.batch_id
+        ? `口径：答案正确率 = 完全正确 /（完全正确 + 判错 + 部分正确），partial 不计为正确；`
+          + `已判定内正确率只统计明确判对或判错的题。当前展示 ${bQa.batch_id} 批次，旧基线保留。`
+        : '这是改造前的冻结人工基线；partial、unknown 不按正确回填，代码修改后需重新人工核验。')),
       scoreCapability('关系与多跳评测', bRelation.available ? '已验证' : '待读取', [
         ['可判定关系', bRelation.evaluable_samples, ' 条'],
         ['关系 Precision', percentValue(bRelation.precision), ''],

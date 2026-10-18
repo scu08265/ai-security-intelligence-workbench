@@ -534,10 +534,77 @@ def _answer_sentence_candidates(
                 score += 2.0
             if index == 0:
                 score += 0.25
+            # 分块边界会把句子截断（"…a novel NPM mali"）。这类残句作为
+            # "直接回答"读起来像没答完，人工判定只能给 partial；完整句优先。
+            stripped = sentence.rstrip()
+            if len(stripped) > 40 and stripped[-1] not in ".。！？!?":
+                score -= 3.0
             if query_terms and not overlap:
                 score -= 1.0
             candidates.append((score, citation, sentence))
     return candidates
+
+
+_TITLE_INTENT = re.compile(r"标题|题目|名叫什么|叫什么名字|\btitle\b", re.I)
+_NAMED_ENTITY = re.compile(r"\b[A-Z][A-Za-z0-9]{2,}\b")
+_ENTITY_STOPWORDS = {"the", "this", "that", "what", "paper", "papers", "arxiv"}
+
+
+def _title_answer(
+    question: str, citations: Sequence[dict[str, Any]],
+) -> tuple[str, list[dict[str, Any]]] | None:
+    """Answer "X 的标题是什么" from document metadata instead of a sentence.
+
+    The paper title usually sits in the document metadata and in the citation
+    label, not inside the abstract sentence the retriever picks.  Asking for a
+    title and returning a sentence fragment is a formatting failure, not a
+    retrieval failure, so it is answered directly.
+    """
+    if not _TITLE_INTENT.search(question):
+        return None
+    entities = {
+        token.casefold()
+        for token in _NAMED_ENTITY.findall(question)
+        if token.casefold() not in _ENTITY_STOPWORDS
+    }
+    if not entities:
+        return None
+    for citation in citations:
+        title = _text(citation.get("title"))
+        if not title:
+            continue
+        if any(entity in title.casefold() for entity in entities):
+            evidence = _text(citation.get("chunk_id") or citation.get("document_id"))
+            return (
+                f"《{title}》。",
+                [{"text": f"《{title}》", "evidence_ids": [evidence] if evidence else []}],
+            )
+    return None
+
+
+def _looks_bibliographic(text: str) -> bool:
+    """Recognise reference-list fragments that the chunker cut out of a paper.
+
+    ``of large language models," ArXiv, vol.`` is a bibliography line, not a
+    claim about the paper being asked about.  Such chunks used to be offered as
+    "supplementary evidence", which made every answer look padded and wrong.
+
+    The test is deliberately narrow: a chunk only counts as a reference list
+    when most of its lines are citation entries.  A body paragraph that happens
+    to contain "vol." must survive, otherwise the filter hides real evidence.
+    """
+    value = _text(text)
+    if not value or len(value) > 1500:
+        return False
+    lines = [line.strip() for line in value.splitlines() if line.strip()]
+    if len(lines) < 3:
+        return False
+    marker = re.compile(
+        r"(arxiv preprint|arxiv,\s*vol|\bdoi\b|\bvol\.|\bpp\.|proceedings of|et al\.,|\bisbn\b)",
+        re.I,
+    )
+    hit_lines = sum(1 for line in lines if marker.search(line))
+    return hit_lines / len(lines) >= 0.5
 
 
 def _extractive_answer(
@@ -664,6 +731,14 @@ def answer_with_rag(
                 for term in required
             )
         ]
+    # 参考文献残句会挤进候选项，把答案撑成"证据堆"。过滤掉，但永不清空证据：
+    # 全部被判定为书目时退回原结果，宁可保留也不误拒答。
+    kept = [hit for hit in hits if not _looks_bibliographic(hit.chunk.text)]
+    bibliographic_filtered = len(hits) - len(kept)
+    if kept:
+        hits = kept
+    else:
+        bibliographic_filtered = 0
     context = assemble_context(hits, max_chars=max_context_chars, max_chunks=max_chunks)
     citations = context["citations"]
     if not citations:
@@ -681,7 +756,10 @@ def answer_with_rag(
                           "focus_fallback": focus_fallback,
                           "required_terms": sorted(required)},
         }
-    if generator is not None:
+    title_answer = _title_answer(question, citations)
+    if title_answer is not None:
+        answer, claims = title_answer
+    elif generator is not None:
         answer = _text(generator(question, context["text"], citations))
         if not answer:
             answer = "生成器未返回答案；请直接核对所附原文证据。"
@@ -708,5 +786,6 @@ def answer_with_rag(
             "focused_retrieval": focused_retrieval,
             "focus_fallback": focus_fallback,
             "required_terms": sorted(required),
+            "bibliographic_filtered": bibliographic_filtered,
         },
     }
