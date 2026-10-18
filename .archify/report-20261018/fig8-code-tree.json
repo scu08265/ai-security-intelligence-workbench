@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "diagram_type": "tree",
+  "meta": {
+    "title": "系统代码结构与模块边界",
+    "output": ".archify/report-20261018/fig8-code-tree.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN"
+  },
+  "layout": { "direction": "right", "gapX": 46, "gapY": 26, "nodeW": 210, "nodeMaxW": 260 },
+  "nodes": [
+    { "id": "root", "label": "AI 安全知识情报系统", "sublabel": "单仓库 · 单进程" },
+    { "id": "app", "parent": "root", "label": "app/", "sublabel": "服务端与前端资源" },
+    { "id": "api", "parent": "app", "label": "api.py", "sublabel": "HTTP 接口与启动入口" },
+    { "id": "storage", "parent": "app", "label": "storage.py", "sublabel": "SQLite 持久化与聚合" },
+    { "id": "collect", "parent": "app", "label": "sources.py / normalize.py", "sublabel": "来源登记、归一与去重" },
+    { "id": "intel", "parent": "app", "label": "intelligence.py / rag.py", "sublabel": "检索打分、证据作答" },
+    { "id": "agent", "parent": "app", "label": "agents.py / agent_orchestration.py", "sublabel": "任务、角色与多 Agent 运行时" },
+    { "id": "ops", "parent": "app", "label": "self_healing.py / disposition.py", "sublabel": "自愈降级与处置闭环" },
+    { "id": "static", "parent": "app", "label": "static/", "sublabel": "index.html · app.js · styles.css" },
+    { "id": "tools", "parent": "root", "label": "tools/", "sublabel": "证据生成与指标刷新脚本" },
+    { "id": "tests", "parent": "root", "label": "tests/", "sublabel": "748 项自动化测试" },
+    { "id": "docs", "parent": "root", "label": "docs/", "sublabel": "口径文档与交付报告" },
+    { "id": "deploy", "parent": "root", "label": "Dockerfile · compose · .github/", "sublabel": "容器与持续集成" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "分层原则", "items": ["接口层只做参数校验与编排，不藏业务规则"] },
+    { "dot": "emerald", "title": "可测试性", "items": ["核心逻辑与 HTTP 层分离，测试直接调用模块函数"] }
+  ]
+}

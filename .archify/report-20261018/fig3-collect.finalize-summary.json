@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "dataflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig3-collect.json",
+    "sha256": "b33e544fcf233cf9d2e8926715d2b12aa2df5492978c7dd654684ae65ec6881e",
+    "bytes": 3225
+  },
+  "artifact": {
+    "path": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig3-collect.html",
+    "sha256": "110ee7e438caaaf17578a8dbe3131188c44f72b709520ff7bc7c9cac96761d43",
+    "bytes": 814043
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig3-collect.finalize.json",
+    "summaryReceipt": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig3-collect.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig3-collect.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-18T05:38:07.818Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 6518
+}

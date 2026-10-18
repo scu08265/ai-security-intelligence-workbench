@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b67ef34c-18e2-4e40-81ef-0979e946f3e3",
+  "status": "current",
+  "command": "deliver",
+  "type": "tree",
+  "input": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig8-code-tree.json",
+  "output": "C:\\Users\\lenovo\\Desktop\\比赛二：ICT大赛\\ai-security-intelligence-workbench-main\\ai-security-intelligence-workbench-main\\.archify\\report-20261018\\fig8-code-tree.html",
+  "specification": {
+    "sha256": "bbebdcc4ffda1b75d184c0242a6e7d38bcdbf81277c0d6e133e06ec7972d1da1",
+    "bytes": 2071
+  },
+  "artifact": {
+    "sha256": "15d68addeb4c10d450426877de78d5ec23b7fcc0aef95aa49d2756249cc81e69",
+    "bytes": 821864
+  }
+}

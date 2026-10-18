@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "情报采集与归一流水线",
+    "output": ".archify/report-20261018/fig3-collect.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN",
+    "legend": { "mode": "hidden" }
+  },
+  "stages": [
+    { "label": "来源登记" },
+    { "label": "抓取" },
+    { "label": "归一" },
+    { "label": "过滤" },
+    { "label": "入库与留痕" }
+  ],
+  "nodes": [
+    { "id": "registry", "type": "database", "label": "来源登记表", "sublabel": "20 个来源 · 10 类情报", "stage": 0, "row": 0, "tag": "静态定义" },
+    { "id": "scheduler", "type": "backend", "label": "调度器", "sublabel": "每小时触发一次", "stage": 0, "row": 2, "tag": "内置计划任务" },
+    { "id": "fetch", "type": "backend", "label": "抓取执行", "sublabel": "HTTP 接口与 RSS 双通道", "stage": 1, "row": 1, "tag": "单源预算" },
+    { "id": "normalize", "type": "backend", "label": "字段归一", "sublabel": "统一标题、时间、组件与版本", "stage": 2, "row": 0, "tag": "确定性映射" },
+    { "id": "dedupe", "type": "backend", "label": "去重与合并", "sublabel": "内容哈希与别名归并", "stage": 2, "row": 2, "tag": "同一事实多源保留" },
+    { "id": "filter", "type": "security", "label": "AI 相关性判定", "sublabel": "保留、过滤及理由逐条记录", "stage": 3, "row": 1, "tag": "不静默丢弃" },
+    { "id": "events", "type": "database", "label": "情报事件库", "sublabel": "SQLite 单库 · 705 条事件", "stage": 4, "row": 0, "tag": "可追溯" },
+    { "id": "runs", "type": "database", "label": "运行与健康记录", "sublabel": "批次统计 · 来源状态", "stage": 4, "row": 2, "tag": "可复查" }
+  ],
+  "flows": [
+    { "id": "registry-fetch", "from": "registry", "to": "fetch", "label": "读取来源清单", "classification": "配置驱动", "variant": "default" },
+    { "id": "scheduler-fetch", "from": "scheduler", "to": "fetch", "label": "定时唤起", "classification": "无人值守", "variant": "dashed" },
+    { "id": "fetch-normalize", "from": "fetch", "to": "normalize", "label": "原始响应", "classification": "JSON / RSS / PDF", "variant": "emphasis" },
+    { "id": "normalize-dedupe", "from": "normalize", "to": "dedupe", "label": "标准字段", "classification": "统一结构", "variant": "emphasis" },
+    { "id": "dedupe-filter", "from": "dedupe", "to": "filter", "label": "候选事件", "classification": "去重后", "variant": "default" },
+    { "id": "filter-events", "from": "filter", "to": "events", "label": "保留事件", "classification": "带判定理由", "variant": "emphasis" },
+    { "id": "events-runs", "from": "events", "to": "runs", "label": "批次统计", "classification": "写入计数", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "采集边界", "items": ["只抓取登记在册的来源，不临时拼接外部地址", "每个来源有独立预算，单个来源失败不影响整批"] },
+    { "dot": "emerald", "title": "可追溯", "items": ["原文按内容哈希落盘，正文与元数据一并保存", "相关性过滤保留理由，评审可以逐条核对"] }
+  ]
+}

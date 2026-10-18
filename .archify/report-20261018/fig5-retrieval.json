@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "检索与打分链路",
+    "output": ".archify/report-20261018/fig5-retrieval.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "stages": [
+    {
+      "label": "提问"
+    },
+    {
+      "label": "双路召回"
+    },
+    {
+      "label": "融合排序"
+    },
+    {
+      "label": "定位证据"
+    },
+    {
+      "label": "作答"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "q",
+      "type": "frontend",
+      "label": "用户问题",
+      "sublabel": "自然语言提问",
+      "stage": 0,
+      "row": 1,
+      "tag": "入口"
+    },
+    {
+      "id": "kw",
+      "type": "backend",
+      "label": "关键词召回",
+      "sublabel": "BM25 与术语词典",
+      "stage": 1,
+      "row": 0,
+      "tag": "精确匹配"
+    },
+    {
+      "id": "sem",
+      "type": "backend",
+      "label": "语义召回",
+      "sublabel": "同义词与向量扩展",
+      "stage": 1,
+      "row": 2,
+      "tag": "模糊匹配"
+    },
+    {
+      "id": "fusion",
+      "type": "backend",
+      "label": "融合打分",
+      "sublabel": "加权合并后去重",
+      "stage": 2,
+      "row": 1,
+      "tag": "可复算"
+    },
+    {
+      "id": "expand",
+      "type": "backend",
+      "label": "上下文扩展",
+      "sublabel": "相邻分块与同章节补齐",
+      "stage": 3,
+      "row": 0,
+      "tag": "补全语义"
+    },
+    {
+      "id": "cite",
+      "type": "security",
+      "label": "引用定位",
+      "sublabel": "chunk_id 与字符偏移",
+      "stage": 3,
+      "row": 2,
+      "tag": "可追溯"
+    },
+    {
+      "id": "answer",
+      "type": "frontend",
+      "label": "证据出答",
+      "sublabel": "结论句加逐句原文",
+      "stage": 4,
+      "row": 1,
+      "tag": "不生成无据内容"
+    }
+  ],
+  "flows": [
+    {
+      "id": "q-kw",
+      "from": "q",
+      "to": "kw",
+      "label": "分词与术语归一",
+      "classification": "查询改写",
+      "variant": "default"
+    },
+    {
+      "id": "q-sem",
+      "from": "q",
+      "to": "sem",
+      "label": "同义词扩展",
+      "classification": "查询改写",
+      "variant": "default"
+    },
+    {
+      "id": "kw-fusion",
+      "from": "kw",
+      "to": "fusion",
+      "label": "词频得分",
+      "classification": "单一分数",
+      "variant": "emphasis"
+    },
+    {
+      "id": "sem-fusion",
+      "from": "sem",
+      "to": "fusion",
+      "label": "语义得分",
+      "classification": "单一分数",
+      "variant": "emphasis"
+    },
+    {
+      "id": "fusion-expand",
+      "from": "fusion",
+      "to": "expand",
+      "label": "Top-K 分块",
+      "classification": "候选集",
+      "variant": "emphasis"
+    },
+    {
+      "id": "expand-cite",
+      "from": "expand",
+      "to": "cite",
+      "label": "命中位置",
+      "classification": "证据锁定",
+      "variant": "security"
+    },
+    {
+      "id": "cite-answer",
+      "from": "cite",
+      "to": "answer",
+      "label": "逐句引用",
+      "classification": "可核验输出",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "为什么两路召回",
+      "items": [
+        "CVE 编号、产品名这类精确词靠 BM25 直接命中",
+        "口语化描述与跨语言术语靠同义词与向量补齐",
+        "两路分数合并后统一排序，同一分块只保留一条"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "引用怎么落回原文",
+      "items": [
+        "每个分块记录 chunk_id、字符偏移与所在章节",
+        "引用编号必须能在库里取回，取不回就不写进答案",
+        "同一批 50 题实测：引用可追溯 100%"
+      ]
+    }
+  ]
+}

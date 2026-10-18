@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "meta": {
+    "title": "核心数据模型",
+    "output": ".archify/report-20261018/fig9-data-model.html",
+    "quality_profile": "showcase",
+    "locale": "zh-CN",
+    "legend": { "mode": "hidden" }
+  },
+  "layout": { "mode": "grid", "gapY": 42, "gapX": 78 },
+  "entities": [
+    {
+      "id": "source_state",
+      "label": "source_state",
+      "tag": "采集与运行",
+      "row": 0,
+      "col": 0,
+      "width": 250,
+      "attributes": [
+        { "name": "id", "type": "TEXT", "key": "pk" },
+        { "name": "status", "type": "TEXT" },
+        { "name": "last_run", "type": "TEXT" },
+        { "name": "last_success", "type": "TEXT" },
+        { "name": "last_error", "type": "TEXT" },
+        { "name": "events_count", "type": "INTEGER" },
+        { "name": "cursor", "type": "TEXT" }
+      ]
+    },
+    {
+      "id": "runs",
+      "label": "runs",
+      "tag": "采集与运行",
+      "row": 1,
+      "col": 0,
+      "width": 250,
+      "attributes": [
+        { "name": "id", "type": "TEXT", "key": "pk" },
+        { "name": "kind", "type": "TEXT" },
+        { "name": "status", "type": "TEXT" },
+        { "name": "started_at", "type": "TEXT" },
+        { "name": "finished_at", "type": "TEXT" },
+        { "name": "detail", "type": "TEXT" }
+      ]
+    },
+    {
+      "id": "events",
+      "label": "events",
+      "tag": "情报主体",
+      "row": 0,
+      "col": 1,
+      "width": 260,
+      "attributes": [
+        { "name": "id", "type": "TEXT", "key": "pk" },
+        { "name": "kind", "type": "TEXT" },
+        { "name": "status", "type": "TEXT" },
+        { "name": "component", "type": "TEXT" },
+        { "name": "ecosystem", "type": "TEXT" },
+        { "name": "published_at", "type": "TEXT" },
+        { "name": "collected_at", "type": "TEXT" },
+        { "name": "content_hash", "type": "TEXT" },
+        { "name": "doc", "type": "TEXT" }
+      ]
+    },
+    {
+      "id": "event_aliases",
+      "label": "event_aliases",
+      "tag": "情报主体",
+      "row": 1,
+      "col": 1,
+      "width": 260,
+      "attributes": [
+        { "name": "alias", "type": "TEXT", "key": "pk" },
+        { "name": "event_id", "type": "TEXT", "key": "fk", "references": "events.id" }
+      ]
+    },
+    {
+      "id": "assessments",
+      "label": "assessments",
+      "tag": "研判与处置",
+      "row": 0,
+      "col": 2,
+      "width": 250,
+      "attributes": [
+        { "name": "id", "type": "INTEGER", "key": "pk" },
+        { "name": "event_id", "type": "TEXT", "key": "fk", "references": "events.id" },
+        { "name": "asset_id", "type": "TEXT", "key": "fk", "references": "assets.id" },
+        { "name": "status", "type": "TEXT" },
+        { "name": "priority", "type": "TEXT" },
+        { "name": "created_at", "type": "TEXT" }
+      ]
+    },
+    {
+      "id": "assessment_dispositions",
+      "label": "assessment_dispositions",
+      "tag": "研判与处置",
+      "row": 1,
+      "col": 2,
+      "width": 250,
+      "attributes": [
+        { "name": "event_id", "type": "TEXT", "key": "fk", "references": "events.id" },
+        { "name": "asset_id", "type": "TEXT", "key": "fk", "references": "assets.id" },
+        { "name": "status", "type": "TEXT" },
+        { "name": "assignee", "type": "TEXT" },
+        { "name": "evidence_ids", "type": "TEXT" },
+        { "name": "version_before", "type": "TEXT" },
+        { "name": "version_after", "type": "TEXT" },
+        { "name": "verification", "type": "TEXT" },
+        { "name": "closed_at", "type": "TEXT" }
+      ]
+    },
+    {
+      "id": "assets",
+      "label": "assets",
+      "tag": "资产",
+      "row": 0,
+      "col": 3,
+      "width": 240,
+      "attributes": [
+        { "name": "id", "type": "TEXT", "key": "pk" },
+        { "name": "name", "type": "TEXT" },
+        { "name": "component", "type": "TEXT" },
+        { "name": "ecosystem", "type": "TEXT" },
+        { "name": "version", "type": "TEXT" },
+        { "name": "is_demo", "type": "INTEGER" },
+        { "name": "authorized", "type": "INTEGER" }
+      ]
+    }
+  ],
+  "relationships": [
+    { "id": "alias-event", "from": "event_aliases", "to": "events", "label": "别名归并", "fromCardinality": "many", "toCardinality": "one" },
+    { "id": "assessment-event", "from": "assessments", "to": "events", "label": "研判", "fromCardinality": "many", "toCardinality": "one" },
+    { "id": "assessment-asset", "from": "assessments", "to": "assets", "label": "命中资产", "fromCardinality": "many", "toCardinality": "one" },
+    { "id": "disposition-event", "from": "assessment_dispositions", "to": "events", "label": "处置", "fromCardinality": "many", "toCardinality": "one" },
+    { "id": "disposition-asset", "from": "assessment_dispositions", "to": "assets", "label": "处置对象", "fromCardinality": "many", "toCardinality": "one" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "事实与研判分离", "items": ["events 只存来自外部来源的事实", "assessments 与 assessment_dispositions 存本系统自己的判断和处置"] },
+    { "dot": "emerald", "title": "演示资产标注", "items": ["assets.is_demo 明确标记合成资产，报告与页面都不把它当作真实资产"] }
+  ]
+}
