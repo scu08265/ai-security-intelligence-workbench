@@ -38,7 +38,7 @@ ROLE_BINDINGS: tuple[dict[str, Any], ...] = (
 
 
 def _key_present() -> bool:
-    return bool(os.getenv(config.API_KEY_ENV, "").strip())
+    return bool(os.getenv(config.model_api_key_env(), "").strip())
 
 
 def chain() -> dict[str, Any]:

@@ -21,6 +21,9 @@ ENV_FILE = Path(os.getenv("INTEL_ENV_FILE") or (BASE_DIR / ".env"))
 
 # The only environment variable names this project understands.
 API_KEY_ENV = "DEEPSEEK_API_KEY"
+# 默认变量名保持 DEEPSEEK_API_KEY 以兼容既有部署；换供应商时设置
+# INTEL_MODEL_API_KEY_ENV=OPENAI_API_KEY 即可，不必把别人的密钥塞进 DeepSeek 的名字里。
+API_KEY_ENV_OVERRIDE = "INTEL_MODEL_API_KEY_ENV"
 GITHUB_TOKEN_ENV = "GITHUB_TOKEN"
 
 DEFAULT_MODEL_BASE_URL = "https://api.deepseek.com/v1"
@@ -94,13 +97,18 @@ def _flag(name: str, default: bool) -> bool:
     return raw.strip().casefold() not in {"0", "false", "no", "off", "disabled"}
 
 
+def model_api_key_env() -> str:
+    """Environment variable that holds the model key."""
+    return os.getenv(API_KEY_ENV_OVERRIDE, "").strip() or API_KEY_ENV
+
+
 def model_enabled() -> bool:
     """Whether model-assisted selection should be attempted.
 
     Off unless a key is actually available, so the system never advertises a
     model path it cannot run.
     """
-    if not os.getenv(API_KEY_ENV, "").strip():
+    if not os.getenv(model_api_key_env(), "").strip():
         return False
     return _flag("INTEL_USE_MODEL", True)
 
@@ -118,7 +126,7 @@ def model_config() -> dict:
         "planner": True,
         "base_url": os.getenv("INTEL_MODEL_BASE_URL", "").strip() or DEFAULT_MODEL_BASE_URL,
         "model": os.getenv("INTEL_MODEL_NAME", "").strip() or DEFAULT_MODEL_NAME,
-        "api_key_env": API_KEY_ENV,
+        "api_key_env": model_api_key_env(),
         "timeout": float(os.getenv("INTEL_MODEL_TIMEOUT", "8") or 8),
     }
 

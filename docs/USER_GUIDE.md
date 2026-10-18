@@ -214,6 +214,7 @@ cp .env.example .env
 | 变量 | 默认 | 作用 |
 | --- | --- | --- |
 | `DEEPSEEK_API_KEY` | 空 | 留空 = 不启用模型（本地证据抽取模式） |
+| `INTEL_MODEL_API_KEY_ENV` | 空（用 `DEEPSEEK_API_KEY`） | 换供应商时指向自己的变量名，例如 `OPENAI_API_KEY`，不必把别家密钥塞进 DeepSeek 的名字里 |
 | `INTEL_USE_MODEL` | 开（`1`） | 设为 `0/false/no/off/disabled` 可强制关闭模型，即使有密钥 |
 | `INTEL_MODEL_BASE_URL` | `https://api.deepseek.com/v1` | OpenAI 兼容端点 |
 | `INTEL_MODEL_NAME` | `deepseek-chat` | 模型名 |
