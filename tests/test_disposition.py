@@ -251,3 +251,67 @@ def test_batch_endpoint_reports_each_item_outcome():
 
     pending = client.get("/api/dispositions/pending").json()
     assert "pending_total" in pending
+
+
+def test_closure_scope_is_documented_verbatim():
+    """两个比率与四条限定必须逐字出现在口径文档里，不能只存在于代码。"""
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    doc = (root / "docs" / "DISPOSITION_CLOSURE.md").read_text(encoding="utf-8")
+    metrics = disposition.metrics()
+    for line in metrics["limitations"]:
+        assert line in doc, f"口径文档缺这一句，或改写了标点：{line}"
+    # 两个分母、从未登记数、以及"不可互换"的措辞都要在文档里
+    for token in ("closure_rate", "registered_closure_rate",
+                  "high_priority_registered", "high_priority_unopened", "不可互换"):
+        assert token in doc, f"口径文档缺字段或口径说明：{token}"
+
+
+def test_scorecard_disposition_matches_the_metrics_endpoint():
+    """页面卡片口径必须与 /api/dispositions/metrics 逐字段一致，且内部自洽。
+
+    一致性核对沿用 tools/check_b_scorecard_consistency.py 的方式（同一份只读脚本），
+    因此这里不另写一套比较逻辑，避免两边判定标准漂移。
+    """
+    import importlib.util
+    import sys
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location(
+        "check_b_scorecard_consistency", root / "tools" / "check_b_scorecard_consistency.py")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+
+    payload = module.build()
+    disposition_checks = [c for c in payload["checks"] if c["field"].startswith("disposition.")]
+    assert disposition_checks, "一致性核对里没有 disposition 段"
+    assert [c for c in disposition_checks if not c["match"]] == []
+
+    client = TestClient(app)
+    body = client.get("/api/competition/scorecard").json()["disposition"]
+    # 页面处置闭环卡片实际读取的三个字段必须在位（改名要在这里断，而不是页面上显示“—”）
+    for field in ("closure_rate", "registered_closure_rate", "high_priority_unopened"):
+        assert field in body, f"分数卡缺页面读取的字段：{field}"
+    assert field_is_consistent(body)
+
+    # 内部自洽：状态分布求和 = 全队列；已登记 + 未登记 = 全队列
+    total = body["high_priority_total"]
+    assert sum((body.get("status_breakdown") or {}).values()) == total
+    assert body["high_priority_registered"] + body["high_priority_unopened"] == total
+
+
+def field_is_consistent(body: dict) -> bool:
+    """两个比率必须能由各自的分子分母重算出来（分母不同，不能互换）。"""
+    total = body["high_priority_total"]
+    registered = body["high_priority_registered"]
+    closed = body["high_priority_closed"]
+    expected = round(closed / total, 4) if total else None
+    assert body["closure_rate"] == expected
+    if registered:
+        assert body["registered_closure_rate"] == round(closed / registered, 4)
+    else:
+        assert body["registered_closure_rate"] is None
+    return True
