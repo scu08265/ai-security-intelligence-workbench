@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-10-15T14:25:27.561987+00:00",
+  "high_priority_total": 5,
+  "high_priority_closed": 0,
+  "high_priority_verified": 0,
+  "high_priority_in_progress": 0,
+  "high_priority_registered": 0,
+  "high_priority_unopened": 5,
+  "closure_rate": 0.0,
+  "verified_rate": 0.0,
+  "registered_closure_rate": null,
+  "mean_time_to_close_hours": null,
+  "status_breakdown": {
+    "open": 5,
+    "in_progress": 0,
+    "fixed": 0,
+    "verified": 0,
+    "accepted": 0
+  },
+  "findings_total": 35,
+  "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+  "limitations": [
+    "合成演示资产上的处置记录不等于生产环境的真实修复。",
+    "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+    "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。",
+    "closure_rate 的分母是全队列；registered_closure_rate 的分母只含已登记处置的条目，两者不可互换。"
+  ]
+}

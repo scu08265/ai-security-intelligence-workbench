@@ -1,0 +1,103 @@
+{
+  "generated_at": "2026-10-18T04:27:32Z",
+  "base_url": "http://127.0.0.1:8020",
+  "dry_run": false,
+  "reset": {
+    "applied": false
+  },
+  "subject": {
+    "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+    "component": "vllm",
+    "version_before": "0.30.0",
+    "is_demo": true,
+    "target_version": "0.30.0",
+    "affected_ranges": [
+      "< 0.27.0",
+      "< 0.29.0",
+      "<= 0.26.0"
+    ],
+    "queue": [
+      "CVE-2026-100654",
+      "CVE-2026-103241"
+    ]
+  },
+  "counterexample": null,
+  "upgrade": {
+    "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+    "version_before": "0.30.0",
+    "version_after": "0.30.0",
+    "response_version": "0.30.0"
+  },
+  "closes": [
+    {
+      "event_id": "CVE-2026-100654",
+      "requested_status": "verified",
+      "applied_status": "verified",
+      "verification": {
+        "assessment_status_before": "not_affected",
+        "assessment_status_after": "not_affected",
+        "passed": true,
+        "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+      },
+      "closed_at": "2026-10-18T04:27:33.318437+00:00",
+      "stored_status": "verified",
+      "version_after": "0.30.0"
+    },
+    {
+      "event_id": "CVE-2026-103241",
+      "requested_status": "verified",
+      "applied_status": "verified",
+      "verification": {
+        "assessment_status_before": "not_affected",
+        "assessment_status_after": "not_affected",
+        "passed": true,
+        "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+      },
+      "closed_at": "2026-10-18T04:27:33.743000+00:00",
+      "stored_status": "verified",
+      "version_after": "0.30.0"
+    }
+  ],
+  "five_numbers": {
+    "high_priority_total": {
+      "before": 5,
+      "after": 5
+    },
+    "high_priority_closed": {
+      "before": 3,
+      "after": 5
+    },
+    "high_priority_registered": {
+      "before": 5,
+      "after": 5
+    },
+    "high_priority_unopened": {
+      "before": 0,
+      "after": 0
+    },
+    "closure_rate": {
+      "before": 0.6,
+      "after": 1.0
+    },
+    "registered_closure_rate": {
+      "before": 0.6,
+      "after": 1.0
+    }
+  },
+  "status_breakdown": {
+    "before": {
+      "open": 0,
+      "in_progress": 2,
+      "fixed": 0,
+      "verified": 3,
+      "accepted": 0
+    },
+    "after": {
+      "open": 0,
+      "in_progress": 0,
+      "fixed": 0,
+      "verified": 5,
+      "accepted": 0
+    }
+  }
+}

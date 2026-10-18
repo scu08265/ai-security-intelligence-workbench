@@ -1,0 +1,1722 @@
+{
+  "generated_at": "2026-10-15T14:25:28Z",
+  "base_url": "http://127.0.0.1:8020",
+  "assignee": "a-ops",
+  "operator": "tools/run_disposition_batch.py",
+  "steps": [
+    {
+      "at": "2026-10-15T14:25:27Z",
+      "method": "GET",
+      "path": "/api/dispositions/metrics",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "generated_at": "2026-10-15T14:25:27.561987+00:00",
+        "high_priority_total": 5,
+        "high_priority_closed": 0,
+        "high_priority_verified": 0,
+        "high_priority_in_progress": 0,
+        "high_priority_registered": 0,
+        "high_priority_unopened": 5,
+        "closure_rate": 0.0,
+        "verified_rate": 0.0,
+        "registered_closure_rate": null,
+        "mean_time_to_close_hours": null,
+        "status_breakdown": {
+          "open": 5,
+          "in_progress": 0,
+          "fixed": 0,
+          "verified": 0,
+          "accepted": 0
+        },
+        "findings_total": 35,
+        "evidence_policy": "原始研判结论不会被处置覆盖；只有系统复测确认资产已不命中受影响区间，才计入已关闭。接受风险不改变原始受影响事实。已登记处置的条目锁定在分母内，不因资产修复后研判转为不受影响而消失。",
+        "limitations": [
+          "合成演示资产上的处置记录不等于生产环境的真实修复。",
+          "接受风险（accepted）只表示处置决策，不代表风险已消除。",
+          "平均关闭时长只统计已有 opened_at 与 closed_at 的记录。",
+          "closure_rate 的分母是全队列；registered_closure_rate 的分母只含已登记处置的条目，两者不可互换。"
+        ]
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:27Z",
+      "method": "GET",
+      "path": "/api/dispositions/pending",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "generated_at": "2026-10-15T14:25:28.029770+00:00",
+        "pending_total": 5,
+        "returned": 5,
+        "by_priority": {
+          "high": 5
+        },
+        "items": [
+          {
+            "event_id": "CVE-2026-100651",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "event_title": "disclosure@vulncheck.com",
+            "asset_name": "vllm",
+            "assessment_status": "affected",
+            "priority": "high"
+          },
+          {
+            "event_id": "CVE-2026-100650",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "event_title": "disclosure@vulncheck.com",
+            "asset_name": "vllm",
+            "assessment_status": "affected",
+            "priority": "high"
+          },
+          {
+            "event_id": "CVE-2026-100647",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "event_title": "disclosure@vulncheck.com",
+            "asset_name": "vllm",
+            "assessment_status": "affected",
+            "priority": "high"
+          },
+          {
+            "event_id": "CVE-2026-100654",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "event_title": "disclosure@vulncheck.com",
+            "asset_name": "vllm",
+            "assessment_status": "affected",
+            "priority": "high"
+          },
+          {
+            "event_id": "CVE-2026-103241",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "event_title": "PYSEC-2026-4186",
+            "asset_name": "vllm",
+            "assessment_status": "affected",
+            "priority": "high"
+          }
+        ],
+        "note": "只列出尚无处置记录的条目；比率低是因为这些还没被接手，不是处置失败。"
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:28Z",
+      "method": "GET",
+      "path": "/api/assets",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "items": [
+          {
+            "id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "name": "vllm",
+            "component": "vllm",
+            "ecosystem": "pypi",
+            "version": "0.10.0",
+            "authorized": true,
+            "is_demo": true,
+            "policy": null,
+            "sbom": {
+              "bom_ref": "pkg:pypi/vllm@0.10.0",
+              "name": "vllm",
+              "version": "0.10.0",
+              "type": "library",
+              "group": null,
+              "purl": "pkg:pypi/vllm@0.10.0",
+              "cpe": null,
+              "batch_id": "cdx-26880f4037b33c93c832",
+              "serial_number": "urn:uuid:5bd17420-42cc-4be7-b1cc-competition-demo",
+              "sbom_version": 1,
+              "spec_version": "1.6",
+              "inventory_timestamp": "2026-09-20T12:25:00Z",
+              "generation_tools": [
+                {
+                  "name": "Syft",
+                  "version": "1.52.0"
+                }
+              ],
+              "source": {
+                "format": "CycloneDX JSON",
+                "root_bom_ref": "app:vllm-video-simulation",
+                "root_name": "vLLM 视频推理服务（标准SBOM仿真）"
+              }
+            },
+            "deployment_context": {
+              "exposure": null,
+              "business_criticality": null,
+              "conditions": null,
+              "status": "not_asserted_by_sbom"
+            },
+            "authorization_assertion": {
+              "value": true,
+              "source": "cyclonedx import request",
+              "note": "调用方声明是否允许本系统对该批次执行影响研判；不是 SBOM 字段。"
+            },
+            "updated_at": "2026-10-15T14:22:09Z"
+          },
+          {
+            "id": "asset-cdx-40e33baaf24e6fabfb48",
+            "name": "uvicorn",
+            "component": "uvicorn",
+            "ecosystem": "pypi",
+            "version": "0.30.6",
+            "authorized": true,
+            "is_demo": true,
+            "policy": null,
+            "sbom": {
+              "bom_ref": "pkg:pypi/uvicorn@0.30.6",
+              "name": "uvicorn",
+              "version": "0.30.6",
+              "type": "library",
+              "group": null,
+              "purl": "pkg:pypi/uvicorn@0.30.6",
+              "cpe": null,
+              "batch_id": "cdx-26880f4037b33c93c832",
+              "serial_number": "urn:uuid:5bd17420-42cc-4be7-b1cc-competition-demo",
+              "sbom_version": 1,
+              "spec_version": "1.6",
+              "inventory_timestamp": "2026-09-20T12:25:00Z",
+              "generation_tools": [
+                {
+                  "name": "Syft",
+                  "version": "1.52.0"
+                }
+              ],
+              "source": {
+                "format": "CycloneDX JSON",
+                "root_bom_ref": "app:vllm-video-simulation",
+                "root_name": "vLLM 视频推理服务（标准SBOM仿真）"
+              }
+            },
+            "deployment_context": {
+              "exposure": null,
+              "business_criticality": null,
+              "conditions": null,
+              "status": "not_asserted_by_sbom"
+            },
+            "authorization_assertion": {
+              "value": true,
+              "source": "cyclonedx import request",
+              "note": "调用方声明是否允许本系统对该批次执行影响研判；不是 SBOM 字段。"
+            },
+            "updated_at": "2026-10-15T14:22:09Z"
+          },
+          {
+            "id": "asset-cdx-6d9ebfb2718fc70b18fc",
+            "name": "fastapi",
+            "component": "fastapi",
+            "ecosystem": "pypi",
+            "version": "0.115.0",
+            "authorized": true,
+            "is_demo": true,
+            "policy": null,
+            "sbom": {
+              "bom_ref": "pkg:pypi/fastapi@0.115.0",
+              "name": "fastapi",
+              "version": "0.115.0",
+              "type": "library",
+              "group": null,
+              "purl": "pkg:pypi/fastapi@0.115.0",
+              "cpe": null,
+              "batch_id": "cdx-26880f4037b33c93c832",
+              "serial_number": "urn:uuid:5bd17420-42cc-4be7-b1cc-competition-demo",
+              "sbom_version": 1,
+              "spec_version": "1.6",
+              "inventory_timestamp": "2026-09-20T12:25:00Z",
+              "generation_tools": [
+                {
+                  "name": "Syft",
+                  "version": "1.52.0"
+                }
+              ],
+              "source": {
+                "format": "CycloneDX JSON",
+                "root_bom_ref": "app:vllm-video-simulation",
+                "root_name": "vLLM 视频推理服务（标准SBOM仿真）"
+              }
+            },
+            "deployment_context": {
+              "exposure": null,
+              "business_criticality": null,
+              "conditions": null,
+              "status": "not_asserted_by_sbom"
+            },
+            "authorization_assertion": {
+              "value": true,
+              "source": "cyclonedx import request",
+              "note": "调用方声明是否允许本系统对该批次执行影响研判；不是 SBOM 字段。"
+            },
+            "updated_at": "2026-10-15T14:22:09Z"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:28Z",
+      "method": "GET",
+      "path": "/api/events/CVE-2026-100651",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "id": "CVE-2026-100651",
+        "kind": "vulnerability",
+        "aliases": [],
+        "title": "disclosure@vulncheck.com",
+        "summary": "vLLM before 0.29.0 fails to enforce decoder prompt-length validation on the disaggregated serving endpoint /inference/v1/generate. When the request contains a 'features' (multimodal) payload, vllm/entrypoints/serve/disagg/serving.py builds a multimodal EngineInput directly from the caller-supplied token_ids, and GenerateRequest.token_ids (vllm/entrypoints/serve/disagg/protocol.py) is not checked a…",
+        "component": "vllm",
+        "ecosystem": "",
+        "published_at": "2026-09-26T14:16:47Z",
+        "modified_at": "2026-10-06T19:30:25Z",
+        "collected_at": "2026-10-14T01:00:12Z",
+        "withdrawn": false,
+        "status": "confirmed",
+        "affected": [
+          {
+            "package": "vllm",
+            "ecosystem": "",
+            "range": "< 0.29.0",
+            "fixed_version": null,
+            "source_id": "nvd:fbf5614573"
+          }
+        ],
+        "conditions": [],
+        "severity": "high",
+        "cvss": [
+          {
+            "version": "4.0",
+            "score": 7.1,
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+            "source_id": "nvd:f69d0cac9d"
+          },
+          {
+            "version": "3.1",
+            "score": 6.5,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+            "source_id": "nvd:1498aa000c"
+          }
+        ],
+        "cwes": [
+          "CWE-400"
+        ],
+        "sources": [
+          {
+            "id": "nvd:0086870179",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100651",
+            "title": "NVD record CVE-2026-100651",
+            "publisher": "NIST NVD",
+            "source_type": "vulnerability_database",
+            "excerpt": "vLLM before 0.29.0 fails to enforce decoder prompt-length validation on the disaggregated serving endpoint /inference/v1/generate. When the request contains a 'features' (multimodal) payload, vllm/entrypoints/serve/disagg/serving.py builds a multimodal EngineInput directly from the caller-supplied token_ids, and GenerateRequest.token_ids (vllm/entrypoints/serve/disagg/protocol.py) is not checked against model_config.max_model_len. For multimodal processors that report skip_prompt_length_check=True (for example Nemotron Parse, Whisper, and FireRedLID), InputProcessor._validate_prompt_len() returns immediately for both encoder and decoder prompts, so an overlong prompt becomes an EngineCoreReq…",
+            "published_at": "2026-09-26T14:16:47Z",
+            "collected_at": "2026-10-14T01:00:12Z",
+            "content_hash": "a619a9cc495c6e5a4af386f50894c072b8de2a8161a11ee299315ee1c67dcf15",
+            "trust": "authoritative",
+            "discovered_at": "2026-10-14T00:45:58Z"
+          }
+        ],
+        "references": [
+          "https://github.com/vllm-project/vllm/security/advisories/GHSA-3mqx-f33v-vgp9",
+          "https://www.vulncheck.com/advisories/vllm-before-0.29.0-denial-of-service-via-decoder-prompt-length-bypass"
+        ],
+        "poc": [
+          {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-3mqx-f33v-vgp9",
+            "status": "public_exploit_reference",
+            "reason": "NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。",
+            "source_id": "nvd:7f848f5887",
+            "tags": [
+              "Exploit",
+              "Vendor Advisory"
+            ],
+            "verified": false
+          },
+          {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-3mqx-f33v-vgp9",
+            "status": "public_exploit_reference",
+            "reason": "NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。",
+            "source_id": "nvd:7f848f5887",
+            "tags": [
+              "Exploit",
+              "Vendor Advisory"
+            ],
+            "verified": false
+          }
+        ],
+        "ai_relevance": {
+          "included": true,
+          "reason": "受影响包名 'vllm' 属于已知 AI 基础设施组件"
+        },
+        "tags": [],
+        "relationships": [],
+        "content_hash": "a619a9cc495c6e5a4af386f50894c072b8de2a8161a11ee299315ee1c67dcf15",
+        "monitoring": {
+          "source_id": "nvd",
+          "source_published_at": "2026-09-26T14:16:47Z",
+          "discovered_at": "2026-10-14T00:45:58Z",
+          "ingested_at": "2026-10-14T01:10:52Z",
+          "publication_to_discovery_seconds": 1506551.0,
+          "within_24h": false,
+          "latency_basis": "publisher timestamp to collector observation",
+          "discovery_to_ingest_seconds": 1494.0
+        },
+        "monitoring_observations": [
+          {
+            "source_id": "nvd",
+            "source_published_at": "2026-09-26T14:16:47Z",
+            "discovered_at": "2026-10-14T00:45:58Z",
+            "ingested_at": "2026-10-14T01:10:52Z",
+            "publication_to_discovery_seconds": 1506551.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 1494.0
+          }
+        ],
+        "pipeline": {
+          "state": "pending_enrichment",
+          "history": [
+            {
+              "state": "discovered",
+              "role": "collector",
+              "note": "从登记来源采集到原始记录",
+              "at": "2026-10-14T01:10:52Z"
+            },
+            {
+              "state": "normalized",
+              "role": "normalizer",
+              "note": "已转换为规范事件文档",
+              "at": "2026-10-14T01:10:52Z"
+            },
+            {
+              "state": "pending_enrichment",
+              "role": "scheduler",
+              "note": "本次未执行富化，证据完整性尚未评估（不等于无缺口）",
+              "at": "2026-10-14T01:10:52Z"
+            }
+          ],
+          "scheduler_trace": [],
+          "stop_reason": null,
+          "tool_calls": 0
+        },
+        "category": "漏洞",
+        "enrichment": {
+          "dimensions": [
+            {
+              "name": "affected_versions",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "1 个版本范围"
+            },
+            {
+              "name": "remediation",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 个修复版本"
+            },
+            {
+              "name": "severity",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "已有严重性或CVSS记录"
+            },
+            {
+              "name": "poc",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "public_exploit_reference: NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。; public_exploit_reference: NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。"
+            },
+            {
+              "name": "exploitation_status",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "尚无已接入来源确认在野利用；不等同于未被利用"
+            },
+            {
+              "name": "relationships",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 条有证据关系"
+            },
+            {
+              "name": "official_sources",
+              "status": "present",
+              "evidence_ids": [
+                "nvd:0086870179"
+              ],
+              "detail": "1 个来源"
+            }
+          ],
+          "gaps": [
+            "修复版本或缓解措施",
+            "在野利用状态",
+            "关系或攻击链证据"
+          ],
+          "trace": [
+            {
+              "step": 1,
+              "role": "evidence_auditor",
+              "action": "check_affected_versions",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 2,
+              "role": "evidence_auditor",
+              "action": "check_remediation",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 3,
+              "role": "evidence_auditor",
+              "action": "check_severity",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 4,
+              "role": "evidence_auditor",
+              "action": "check_poc",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 5,
+              "role": "evidence_auditor",
+              "action": "check_exploitation_status",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 6,
+              "role": "evidence_auditor",
+              "action": "check_relationships",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 7,
+              "role": "evidence_auditor",
+              "action": "check_official_sources",
+              "evidence_ids": [
+                "nvd:0086870179"
+              ],
+              "result": "present"
+            },
+            {
+              "step": 8,
+              "role": "scheduler",
+              "action": "stop",
+              "evidence_ids": [],
+              "result": "识别 3 个证据缺口",
+              "stop_reason": "仅审计传入快照；禁止网络抓取和任意工具执行"
+            }
+          ],
+          "poc_status": {
+            "status": "collected",
+            "records": 2,
+            "executed": false,
+            "meaning": "已记录来源明确给出的POC线索；系统从不执行POC"
+          }
+        },
+        "assessments": [
+          {
+            "event_id": "CVE-2026-100651",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "affected",
+            "reasons": [
+              "资产版本 0.10.0 命中受影响区间"
+            ],
+            "evidence_ids": [
+              "nvd:fbf5614573"
+            ],
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:28Z",
+      "method": "GET",
+      "path": "/api/events/CVE-2026-100650",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "id": "CVE-2026-100650",
+        "kind": "vulnerability",
+        "aliases": [
+          "GHSA-p6g9-7v3x-m8mv",
+          "PYSEC-2026-4184"
+        ],
+        "title": "disclosure@vulncheck.com",
+        "summary": "vLLM through 0.29.0 fetches and fully materializes remote or inline media before enforcing its documented media controls (the VLLM_MAX_AUDIO_CLIP_FILESIZE_MB compressed-audio size cap, default 25 MB, and the per-modality --limit-mm-per-prompt item limits). Across four ingress paths — the shared media-acquisition layer (HTTPConnection.get_bytes()/async_get_bytes()), the chat completions audio_url/b…",
+        "component": "vllm",
+        "ecosystem": "PyPI",
+        "published_at": "2026-09-26T14:16:47Z",
+        "modified_at": "2026-10-07T10:00:03Z",
+        "collected_at": "2026-10-14T01:00:12Z",
+        "withdrawn": false,
+        "status": "confirmed",
+        "affected": [
+          {
+            "package": "vllm",
+            "ecosystem": "",
+            "range": "<= 0.29.0",
+            "fixed_version": null,
+            "source_id": "nvd:270594acfd",
+            "source_ids": [
+              "nvd:270594acfd"
+            ]
+          },
+          {
+            "package": "vllm",
+            "ecosystem": "PyPI",
+            "range": "< 0.30.0",
+            "fixed_version": "0.30.0",
+            "source_id": "osv:673f4214e5",
+            "source_ids": [
+              "osv:673f4214e5"
+            ]
+          }
+        ],
+        "conditions": [],
+        "severity": "high",
+        "cvss": [
+          {
+            "version": "4.0",
+            "score": 7.1,
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+            "source_id": "nvd:5f4169c907"
+          },
+          {
+            "version": "3.1",
+            "score": 6.5,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+            "source_id": "nvd:5cb613744d"
+          }
+        ],
+        "cwes": [
+          "CWE-400"
+        ],
+        "sources": [
+          {
+            "id": "nvd:982cdf4b6c",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100650",
+            "title": "NVD record CVE-2026-100650",
+            "publisher": "NIST NVD",
+            "source_type": "vulnerability_database",
+            "excerpt": "vLLM through 0.29.0 fetches and fully materializes remote or inline media before enforcing its documented media controls (the VLLM_MAX_AUDIO_CLIP_FILESIZE_MB compressed-audio size cap, default 25 MB, and the per-modality --limit-mm-per-prompt item limits). Across four ingress paths — the shared media-acquisition layer (HTTPConnection.get_bytes()/async_get_bytes()), the chat completions audio_url/base64 path, the batch speech runner, and the Rust frontend POST /tokenize route — the server reads the entire HTTP response body, base64-decodes the inline payload, or spawns one fetch/decode task per media part, and only then applies the limit (or, on some paths, never applies it). A remote attacke…",
+            "published_at": "2026-09-26T14:16:47Z",
+            "collected_at": "2026-10-14T01:00:12Z",
+            "content_hash": "3da4f0d9a665c5373529791378ea52514d97db41a9526089bd0ed8a4319c2dcf",
+            "trust": "authoritative",
+            "discovered_at": "2026-10-14T00:45:58Z"
+          },
+          {
+            "id": "osv:4019e54631",
+            "url": "https://osv.dev/vulnerability/PYSEC-2026-4184",
+            "title": "OSV record PYSEC-2026-4184",
+            "publisher": "OSV (Google)",
+            "source_type": "vulnerability_database",
+            "excerpt": "vLLM through 0.29.0 fetches and fully materializes remote or inline media before enforcing its documented media controls (the VLLM_MAX_AUDIO_CLIP_FILESIZE_MB compressed-audio size cap, default 25 MB, and the per-modality --limit-mm-per-prompt item limits). Across four ingress paths — the shared media-acquisition layer (HTTPConnection.get_bytes()/async_get_bytes()), the chat completions audio_url/base64 path, the batch speech runner, and the Rust frontend POST /tokenize route — the server reads the entire HTTP response body, base64-decodes the inline payload, or spawns one fetch/decode task per media part, and only then applies the limit (or, on some paths, never applies it). A remote attacke…",
+            "published_at": "2026-09-26T14:16:47Z",
+            "collected_at": "2026-10-14T01:11:25Z",
+            "content_hash": "3da4f0d9a665c5373529791378ea52514d97db41a9526089bd0ed8a4319c2dcf",
+            "trust": "aggregated",
+            "discovered_at": "2026-10-14T01:11:19Z"
+          }
+        ],
+        "references": [
+          "https://github.com/vllm-project/vllm/commit/752a3a504485790a2e8491cacbb35c137339ad34",
+          "https://github.com/vllm-project/vllm/security/advisories/GHSA-p6g9-7v3x-m8mv",
+          "https://www.vulncheck.com/advisories/vllm-before-0.29.0-resource-exhaustion-via-unbounded-media-materialization"
+        ],
+        "poc": [
+          {
+            "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-p6g9-7v3x-m8mv",
+            "status": "public_exploit_reference",
+            "reason": "NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。",
+            "source_id": "nvd:56236978ae",
+            "tags": [
+              "Exploit",
+              "Mitigation",
+              "Vendor Advisory"
+            ],
+            "verified": false
+          }
+        ],
+        "ai_relevance": {
+          "included": true,
+          "reason": "受影响包名 'vllm' 属于已知 AI 基础设施组件"
+        },
+        "tags": [
+          "CVE-2026-100650",
+          "GHSA-p6g9-7v3x-m8mv"
+        ],
+        "relationships": [],
+        "content_hash": "3da4f0d9a665c5373529791378ea52514d97db41a9526089bd0ed8a4319c2dcf",
+        "monitoring": {
+          "source_id": "osv",
+          "source_published_at": "2026-09-26T14:16:47Z",
+          "discovered_at": "2026-10-14T01:11:19Z",
+          "ingested_at": "2026-10-14T01:11:25Z",
+          "publication_to_discovery_seconds": 1508072.0,
+          "within_24h": false,
+          "latency_basis": "publisher timestamp to collector observation",
+          "discovery_to_ingest_seconds": 6.0
+        },
+        "monitoring_observations": [
+          {
+            "source_id": "nvd",
+            "source_published_at": "2026-09-26T14:16:47Z",
+            "discovered_at": "2026-10-14T00:45:58Z",
+            "ingested_at": "2026-10-14T01:10:52Z",
+            "publication_to_discovery_seconds": 1506551.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 1494.0
+          },
+          {
+            "source_id": "osv",
+            "source_published_at": "2026-09-26T14:16:47Z",
+            "discovered_at": "2026-10-14T01:11:19Z",
+            "ingested_at": "2026-10-14T01:11:25Z",
+            "publication_to_discovery_seconds": 1508072.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 6.0
+          }
+        ],
+        "pipeline": {
+          "state": "pending_enrichment",
+          "history": [
+            {
+              "state": "discovered",
+              "role": "collector",
+              "note": "从登记来源采集到原始记录",
+              "at": "2026-10-14T01:11:25Z"
+            },
+            {
+              "state": "normalized",
+              "role": "normalizer",
+              "note": "已转换为规范事件文档",
+              "at": "2026-10-14T01:11:25Z"
+            },
+            {
+              "state": "pending_enrichment",
+              "role": "scheduler",
+              "note": "本次未执行富化，证据完整性尚未评估（不等于无缺口）",
+              "at": "2026-10-14T01:11:25Z"
+            }
+          ],
+          "scheduler_trace": [],
+          "stop_reason": null,
+          "tool_calls": 0
+        },
+        "conflicts": [
+          {
+            "field": "affected.range",
+            "package": "vllm",
+            "values": [
+              "< 0.30.0",
+              "<= 0.29.0"
+            ],
+            "note": "不同来源给出的受影响区间不一致，系统并列保留，未做取舍"
+          }
+        ],
+        "category": "漏洞",
+        "enrichment": {
+          "dimensions": [
+            {
+              "name": "affected_versions",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "2 个版本范围"
+            },
+            {
+              "name": "remediation",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "1 个修复版本"
+            },
+            {
+              "name": "severity",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "已有严重性或CVSS记录"
+            },
+            {
+              "name": "poc",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "public_exploit_reference: NVD reference 标注为 Exploit；仅表示公开利用参考存在，不代表已由本系统验证或执行。"
+            },
+            {
+              "name": "exploitation_status",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "尚无已接入来源确认在野利用；不等同于未被利用"
+            },
+            {
+              "name": "relationships",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 条有证据关系"
+            },
+            {
+              "name": "official_sources",
+              "status": "present",
+              "evidence_ids": [
+                "nvd:982cdf4b6c",
+                "osv:4019e54631"
+              ],
+              "detail": "2 个来源"
+            }
+          ],
+          "gaps": [
+            "在野利用状态",
+            "关系或攻击链证据"
+          ],
+          "trace": [
+            {
+              "step": 1,
+              "role": "evidence_auditor",
+              "action": "check_affected_versions",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 2,
+              "role": "evidence_auditor",
+              "action": "check_remediation",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 3,
+              "role": "evidence_auditor",
+              "action": "check_severity",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 4,
+              "role": "evidence_auditor",
+              "action": "check_poc",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 5,
+              "role": "evidence_auditor",
+              "action": "check_exploitation_status",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 6,
+              "role": "evidence_auditor",
+              "action": "check_relationships",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 7,
+              "role": "evidence_auditor",
+              "action": "check_official_sources",
+              "evidence_ids": [
+                "nvd:982cdf4b6c",
+                "osv:4019e54631"
+              ],
+              "result": "present"
+            },
+            {
+              "step": 8,
+              "role": "scheduler",
+              "action": "stop",
+              "evidence_ids": [],
+              "result": "识别 2 个证据缺口",
+              "stop_reason": "仅审计传入快照；禁止网络抓取和任意工具执行"
+            }
+          ],
+          "poc_status": {
+            "status": "collected",
+            "records": 1,
+            "executed": false,
+            "meaning": "已记录来源明确给出的POC线索；系统从不执行POC"
+          }
+        },
+        "assessments": [
+          {
+            "event_id": "CVE-2026-100650",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "affected",
+            "reasons": [
+              "资产版本 0.10.0 命中受影响区间"
+            ],
+            "evidence_ids": [
+              "nvd:270594acfd",
+              "osv:673f4214e5"
+            ],
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:28Z",
+      "method": "GET",
+      "path": "/api/events/CVE-2026-100647",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "id": "CVE-2026-100647",
+        "kind": "vulnerability",
+        "aliases": [],
+        "title": "disclosure@vulncheck.com",
+        "summary": "vLLM versions before 0.29.0 contain a denial-of-service vulnerability in the cache_salt parameter accepted on OpenAI-compatible and Anthropic API endpoints, which lacks maximum length validation and is processed on the single EngineCore scheduler thread. Unauthenticated attackers can send HTTP requests with multi-hundred-megabyte salt values that trigger expensive pickle serialization and SHA-256…",
+        "component": "vllm",
+        "ecosystem": "",
+        "published_at": "2026-09-26T14:16:47Z",
+        "modified_at": "2026-10-06T19:46:06Z",
+        "collected_at": "2026-10-14T01:00:12Z",
+        "withdrawn": false,
+        "status": "confirmed",
+        "affected": [
+          {
+            "package": "vllm",
+            "ecosystem": "",
+            "range": "< 0.29.0",
+            "fixed_version": null,
+            "source_id": "nvd:41b1e9ca20"
+          }
+        ],
+        "conditions": [],
+        "severity": "medium",
+        "cvss": [
+          {
+            "version": "4.0",
+            "score": 6.9,
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+            "source_id": "nvd:6cdf191c6b"
+          },
+          {
+            "version": "3.1",
+            "score": 5.3,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+            "source_id": "nvd:63058738ac"
+          },
+          {
+            "version": "3.1",
+            "score": 7.5,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "source_id": "nvd:a0e2386ffc"
+          }
+        ],
+        "cwes": [
+          "CWE-20"
+        ],
+        "sources": [
+          {
+            "id": "nvd:73a6f13d0c",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100647",
+            "title": "NVD record CVE-2026-100647",
+            "publisher": "NIST NVD",
+            "source_type": "vulnerability_database",
+            "excerpt": "vLLM versions before 0.29.0 contain a denial-of-service vulnerability in the cache_salt parameter accepted on OpenAI-compatible and Anthropic API endpoints, which lacks maximum length validation and is processed on the single EngineCore scheduler thread. Unauthenticated attackers can send HTTP requests with multi-hundred-megabyte salt values that trigger expensive pickle serialization and SHA-256 hashing, stalling the scheduler thread and denying service to all concurrent requests.",
+            "published_at": "2026-09-26T14:16:47Z",
+            "collected_at": "2026-10-14T01:00:12Z",
+            "content_hash": "ffb0174d738ed11190dc924f5e6c3700f76a5e97e9d2b2b690c3c68fd3f3994a",
+            "trust": "authoritative",
+            "discovered_at": "2026-10-14T00:45:58Z"
+          }
+        ],
+        "references": [
+          "https://github.com/vllm-project/vllm/security/advisories/GHSA-wpww-v874-ph2p",
+          "https://www.vulncheck.com/advisories/vllm-before-0.29.0-cpu-exhaustion-via-unbounded-cache-salt"
+        ],
+        "poc": [],
+        "ai_relevance": {
+          "included": true,
+          "reason": "受影响包名 'vllm' 属于已知 AI 基础设施组件"
+        },
+        "tags": [],
+        "relationships": [],
+        "content_hash": "ffb0174d738ed11190dc924f5e6c3700f76a5e97e9d2b2b690c3c68fd3f3994a",
+        "monitoring": {
+          "source_id": "nvd",
+          "source_published_at": "2026-09-26T14:16:47Z",
+          "discovered_at": "2026-10-14T00:45:58Z",
+          "ingested_at": "2026-10-14T01:10:52Z",
+          "publication_to_discovery_seconds": 1506551.0,
+          "within_24h": false,
+          "latency_basis": "publisher timestamp to collector observation",
+          "discovery_to_ingest_seconds": 1494.0
+        },
+        "monitoring_observations": [
+          {
+            "source_id": "nvd",
+            "source_published_at": "2026-09-26T14:16:47Z",
+            "discovered_at": "2026-10-14T00:45:58Z",
+            "ingested_at": "2026-10-14T01:10:52Z",
+            "publication_to_discovery_seconds": 1506551.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 1494.0
+          }
+        ],
+        "pipeline": {
+          "state": "pending_enrichment",
+          "history": [
+            {
+              "state": "discovered",
+              "role": "collector",
+              "note": "从登记来源采集到原始记录",
+              "at": "2026-10-14T01:10:52Z"
+            },
+            {
+              "state": "normalized",
+              "role": "normalizer",
+              "note": "已转换为规范事件文档",
+              "at": "2026-10-14T01:10:52Z"
+            },
+            {
+              "state": "pending_enrichment",
+              "role": "scheduler",
+              "note": "本次未执行富化，证据完整性尚未评估（不等于无缺口）",
+              "at": "2026-10-14T01:10:52Z"
+            }
+          ],
+          "scheduler_trace": [],
+          "stop_reason": null,
+          "tool_calls": 0
+        },
+        "category": "漏洞",
+        "enrichment": {
+          "dimensions": [
+            {
+              "name": "affected_versions",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "1 个版本范围"
+            },
+            {
+              "name": "remediation",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 个修复版本"
+            },
+            {
+              "name": "severity",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "已有严重性或CVSS记录"
+            },
+            {
+              "name": "poc",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "未收录POC（不等同于不存在）"
+            },
+            {
+              "name": "exploitation_status",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "尚无已接入来源确认在野利用；不等同于未被利用"
+            },
+            {
+              "name": "relationships",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 条有证据关系"
+            },
+            {
+              "name": "official_sources",
+              "status": "present",
+              "evidence_ids": [
+                "nvd:73a6f13d0c"
+              ],
+              "detail": "1 个来源"
+            }
+          ],
+          "gaps": [
+            "修复版本或缓解措施",
+            "POC资料与验证状态",
+            "在野利用状态",
+            "关系或攻击链证据"
+          ],
+          "trace": [
+            {
+              "step": 1,
+              "role": "evidence_auditor",
+              "action": "check_affected_versions",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 2,
+              "role": "evidence_auditor",
+              "action": "check_remediation",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 3,
+              "role": "evidence_auditor",
+              "action": "check_severity",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 4,
+              "role": "evidence_auditor",
+              "action": "check_poc",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 5,
+              "role": "evidence_auditor",
+              "action": "check_exploitation_status",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 6,
+              "role": "evidence_auditor",
+              "action": "check_relationships",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 7,
+              "role": "evidence_auditor",
+              "action": "check_official_sources",
+              "evidence_ids": [
+                "nvd:73a6f13d0c"
+              ],
+              "result": "present"
+            },
+            {
+              "step": 8,
+              "role": "scheduler",
+              "action": "stop",
+              "evidence_ids": [],
+              "result": "识别 4 个证据缺口",
+              "stop_reason": "仅审计传入快照；禁止网络抓取和任意工具执行"
+            }
+          ],
+          "poc_status": {
+            "status": "not_collected",
+            "records": 0,
+            "executed": false,
+            "meaning": "当前接入证据未收录POC；不能据此推断POC不存在"
+          }
+        },
+        "assessments": [
+          {
+            "event_id": "CVE-2026-100647",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "affected",
+            "reasons": [
+              "资产版本 0.10.0 命中受影响区间"
+            ],
+            "evidence_ids": [
+              "nvd:41b1e9ca20"
+            ],
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:28Z",
+      "method": "GET",
+      "path": "/api/events/CVE-2026-100654",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "id": "CVE-2026-100654",
+        "kind": "vulnerability",
+        "aliases": [],
+        "title": "disclosure@vulncheck.com",
+        "summary": "vLLM before 0.29.0 accepts user-controlled stop_token_ids on the OpenAI-compatible POST /v1/completions and POST /v1/chat/completions endpoints but validates only that the values are integers, not that each token id is within the model vocabulary/logits range. When min_tokens > 0, the stop token ids are used as logits indices to suppress stop tokens, so an out-of-range id reaches a CUDA indexing o…",
+        "component": "vllm",
+        "ecosystem": "",
+        "published_at": "2026-09-26T14:16:48Z",
+        "modified_at": "2026-10-07T17:33:53Z",
+        "collected_at": "2026-10-14T01:00:12Z",
+        "withdrawn": false,
+        "status": "confirmed",
+        "affected": [
+          {
+            "package": "vllm",
+            "ecosystem": "",
+            "range": "< 0.29.0",
+            "fixed_version": null,
+            "source_id": "nvd:afd315119d"
+          }
+        ],
+        "conditions": [],
+        "severity": "high",
+        "cvss": [
+          {
+            "version": "4.0",
+            "score": 7.1,
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+            "source_id": "nvd:ca78808dee"
+          },
+          {
+            "version": "3.1",
+            "score": 6.5,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+            "source_id": "nvd:d63242e896"
+          }
+        ],
+        "cwes": [
+          "CWE-129"
+        ],
+        "sources": [
+          {
+            "id": "nvd:0ad05ee994",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100654",
+            "title": "NVD record CVE-2026-100654",
+            "publisher": "NIST NVD",
+            "source_type": "vulnerability_database",
+            "excerpt": "vLLM before 0.29.0 accepts user-controlled stop_token_ids on the OpenAI-compatible POST /v1/completions and POST /v1/chat/completions endpoints but validates only that the values are integers, not that each token id is within the model vocabulary/logits range. When min_tokens > 0, the stop token ids are used as logits indices to suppress stop tokens, so an out-of-range id reaches a CUDA indexing operation (index_put_) and triggers a device-side assertion. An authenticated API user can send a single malformed completion request that returns 500 Internal Server Error and puts EngineCore into a fatal state, causing subsequent requests to fail until the service is restarted (denial of service).",
+            "published_at": "2026-09-26T14:16:48Z",
+            "collected_at": "2026-10-14T01:00:12Z",
+            "content_hash": "f7c7b0964aed4a0934a3eaf7de7f47a670b4b7b80f00d8286bff806b864d0aa8",
+            "trust": "authoritative",
+            "discovered_at": "2026-10-14T00:45:58Z"
+          }
+        ],
+        "references": [
+          "https://github.com/vllm-project/vllm/security/advisories/GHSA-v5gm-qgmv-gc6c",
+          "https://www.vulncheck.com/advisories/vllm-before-0.29.0-denial-of-service-via-out-of-range-stop-token-ids"
+        ],
+        "poc": [],
+        "ai_relevance": {
+          "included": true,
+          "reason": "受影响包名 'vllm' 属于已知 AI 基础设施组件"
+        },
+        "tags": [],
+        "relationships": [],
+        "content_hash": "f7c7b0964aed4a0934a3eaf7de7f47a670b4b7b80f00d8286bff806b864d0aa8",
+        "monitoring": {
+          "source_id": "nvd",
+          "source_published_at": "2026-09-26T14:16:48Z",
+          "discovered_at": "2026-10-14T00:45:58Z",
+          "ingested_at": "2026-10-14T01:10:52Z",
+          "publication_to_discovery_seconds": 1506550.0,
+          "within_24h": false,
+          "latency_basis": "publisher timestamp to collector observation",
+          "discovery_to_ingest_seconds": 1494.0
+        },
+        "monitoring_observations": [
+          {
+            "source_id": "nvd",
+            "source_published_at": "2026-09-26T14:16:48Z",
+            "discovered_at": "2026-10-14T00:45:58Z",
+            "ingested_at": "2026-10-14T01:10:52Z",
+            "publication_to_discovery_seconds": 1506550.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 1494.0
+          }
+        ],
+        "pipeline": {
+          "state": "pending_enrichment",
+          "history": [
+            {
+              "state": "discovered",
+              "role": "collector",
+              "note": "从登记来源采集到原始记录",
+              "at": "2026-10-14T01:10:52Z"
+            },
+            {
+              "state": "normalized",
+              "role": "normalizer",
+              "note": "已转换为规范事件文档",
+              "at": "2026-10-14T01:10:52Z"
+            },
+            {
+              "state": "pending_enrichment",
+              "role": "scheduler",
+              "note": "本次未执行富化，证据完整性尚未评估（不等于无缺口）",
+              "at": "2026-10-14T01:10:52Z"
+            }
+          ],
+          "scheduler_trace": [],
+          "stop_reason": null,
+          "tool_calls": 0
+        },
+        "category": "漏洞",
+        "enrichment": {
+          "dimensions": [
+            {
+              "name": "affected_versions",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "1 个版本范围"
+            },
+            {
+              "name": "remediation",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 个修复版本"
+            },
+            {
+              "name": "severity",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "已有严重性或CVSS记录"
+            },
+            {
+              "name": "poc",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "未收录POC（不等同于不存在）"
+            },
+            {
+              "name": "exploitation_status",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "尚无已接入来源确认在野利用；不等同于未被利用"
+            },
+            {
+              "name": "relationships",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 条有证据关系"
+            },
+            {
+              "name": "official_sources",
+              "status": "present",
+              "evidence_ids": [
+                "nvd:0ad05ee994"
+              ],
+              "detail": "1 个来源"
+            }
+          ],
+          "gaps": [
+            "修复版本或缓解措施",
+            "POC资料与验证状态",
+            "在野利用状态",
+            "关系或攻击链证据"
+          ],
+          "trace": [
+            {
+              "step": 1,
+              "role": "evidence_auditor",
+              "action": "check_affected_versions",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 2,
+              "role": "evidence_auditor",
+              "action": "check_remediation",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 3,
+              "role": "evidence_auditor",
+              "action": "check_severity",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 4,
+              "role": "evidence_auditor",
+              "action": "check_poc",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 5,
+              "role": "evidence_auditor",
+              "action": "check_exploitation_status",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 6,
+              "role": "evidence_auditor",
+              "action": "check_relationships",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 7,
+              "role": "evidence_auditor",
+              "action": "check_official_sources",
+              "evidence_ids": [
+                "nvd:0ad05ee994"
+              ],
+              "result": "present"
+            },
+            {
+              "step": 8,
+              "role": "scheduler",
+              "action": "stop",
+              "evidence_ids": [],
+              "result": "识别 4 个证据缺口",
+              "stop_reason": "仅审计传入快照；禁止网络抓取和任意工具执行"
+            }
+          ],
+          "poc_status": {
+            "status": "not_collected",
+            "records": 0,
+            "executed": false,
+            "meaning": "当前接入证据未收录POC；不能据此推断POC不存在"
+          }
+        },
+        "assessments": [
+          {
+            "event_id": "CVE-2026-100654",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "affected",
+            "reasons": [
+              "资产版本 0.10.0 命中受影响区间"
+            ],
+            "evidence_ids": [
+              "nvd:afd315119d"
+            ],
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-15T14:25:28Z",
+      "method": "GET",
+      "path": "/api/events/CVE-2026-103241",
+      "request": null,
+      "status_code": 200,
+      "response": {
+        "id": "CVE-2026-103241",
+        "kind": "vulnerability",
+        "aliases": [
+          "PYSEC-2026-4186"
+        ],
+        "title": "PYSEC-2026-4186",
+        "summary": "A flaw has been found in vllm-project vLLM up to 0.26.0. This vulnerability affects unknown code of the file rust/src/parser/src/unified/gemma4.rs of the component Gemma4UnifiedParser. Executing a manipulation can lead to denial of service. The attack may be launched remotely. The exploit has been published and may be used. Upgrading to version 0.29.1rc0 is able to resolve this issue. This patch i…",
+        "component": "vllm",
+        "ecosystem": "PyPI",
+        "published_at": "2026-09-30T17:16:42Z",
+        "modified_at": "2026-10-07T10:00:03Z",
+        "collected_at": "2026-10-14T01:00:46Z",
+        "withdrawn": false,
+        "status": "confirmed",
+        "affected": [
+          {
+            "package": "vllm",
+            "ecosystem": "",
+            "range": "<= 0.26.0",
+            "fixed_version": null,
+            "source_id": "nvd:5499704840",
+            "source_ids": [
+              "nvd:5499704840"
+            ]
+          },
+          {
+            "package": "vllm",
+            "ecosystem": "PyPI",
+            "range": "< 0.27.0",
+            "fixed_version": "0.27.0",
+            "source_id": "osv:066b835f6d",
+            "source_ids": [
+              "osv:066b835f6d"
+            ]
+          }
+        ],
+        "conditions": [],
+        "severity": "medium",
+        "cvss": [
+          {
+            "version": "4.0",
+            "score": 5.5,
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+            "source_id": "nvd:d8de57aa07"
+          },
+          {
+            "version": "3.1",
+            "score": 5.3,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+            "source_id": "nvd:d4c56b8ef2"
+          },
+          {
+            "version": "3.1",
+            "score": 7.5,
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "source_id": "nvd:7ff2e33f52"
+          },
+          {
+            "version": "2.0",
+            "score": 5.0,
+            "vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "source_id": "nvd:095e136435"
+          }
+        ],
+        "cwes": [
+          "CWE-404"
+        ],
+        "sources": [
+          {
+            "id": "nvd:5f88834572",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-103241",
+            "title": "NVD record CVE-2026-103241",
+            "publisher": "NIST NVD",
+            "source_type": "vulnerability_database",
+            "excerpt": "A flaw has been found in vllm-project vLLM up to 0.26.0. This vulnerability affects unknown code of the file rust/src/parser/src/unified/gemma4.rs of the component Gemma4UnifiedParser. Executing a manipulation can lead to denial of service. The attack may be launched remotely. The exploit has been published and may be used. Upgrading to version 0.29.1rc0 is able to resolve this issue. This patch is called 3439bad37e68ba9755a46f4f6b44a4aeaf1f60a9. Upgrading the affected component is advised.",
+            "published_at": "2026-09-30T17:16:42Z",
+            "collected_at": "2026-10-14T01:00:46Z",
+            "content_hash": "6c20c5e5863f66deabcb1ea7474fc3e5f1f2e5a0b5b19d7b8e1ae85818980bad",
+            "trust": "authoritative",
+            "discovered_at": "2026-10-14T00:45:58Z"
+          },
+          {
+            "id": "osv:71695235ef",
+            "url": "https://osv.dev/vulnerability/PYSEC-2026-4186",
+            "title": "OSV record PYSEC-2026-4186",
+            "publisher": "OSV (Google)",
+            "source_type": "vulnerability_database",
+            "excerpt": "A flaw has been found in vllm-project vLLM up to 0.26.0. This vulnerability affects unknown code of the file rust/src/parser/src/unified/gemma4.rs of the component Gemma4UnifiedParser. Executing a manipulation can lead to denial of service. The attack may be launched remotely. The exploit has been published and may be used. Upgrading to version 0.29.1rc0 is able to resolve this issue. This patch is called 3439bad37e68ba9755a46f4f6b44a4aeaf1f60a9. Upgrading the affected component is advised.",
+            "published_at": "2026-09-30T17:16:42Z",
+            "collected_at": "2026-10-14T01:11:25Z",
+            "content_hash": "6c20c5e5863f66deabcb1ea7474fc3e5f1f2e5a0b5b19d7b8e1ae85818980bad",
+            "trust": "aggregated",
+            "discovered_at": "2026-10-14T01:11:19Z"
+          }
+        ],
+        "references": [
+          "https://gist.github.com/Yunzez/8e98d656aa667095b513161eb056d28e",
+          "https://github.com/vllm-project/vllm/",
+          "https://github.com/vllm-project/vllm/commit/3439bad37e68ba9755a46f4f6b44a4aeaf1f60a9",
+          "https://github.com/vllm-project/vllm/issues/50927",
+          "https://github.com/vllm-project/vllm/pull/54303",
+          "https://github.com/vllm-project/vllm/releases/tag/v0.29.1rc0",
+          "https://vuldb.com/cve/CVE-2026-103241",
+          "https://vuldb.com/submit/956250",
+          "https://vuldb.com/vuln/411965",
+          "https://vuldb.com/vuln/411965/cti"
+        ],
+        "poc": [],
+        "ai_relevance": {
+          "included": true,
+          "reason": "受影响包名 'vllm' 属于已知 AI 基础设施组件"
+        },
+        "tags": [
+          "CVE-2026-103241"
+        ],
+        "relationships": [],
+        "content_hash": "6c20c5e5863f66deabcb1ea7474fc3e5f1f2e5a0b5b19d7b8e1ae85818980bad",
+        "monitoring": {
+          "source_id": "osv",
+          "source_published_at": "2026-09-30T17:16:42Z",
+          "discovered_at": "2026-10-14T01:11:19Z",
+          "ingested_at": "2026-10-14T01:11:25Z",
+          "publication_to_discovery_seconds": 1151677.0,
+          "within_24h": false,
+          "latency_basis": "publisher timestamp to collector observation",
+          "discovery_to_ingest_seconds": 6.0
+        },
+        "monitoring_observations": [
+          {
+            "source_id": "nvd",
+            "source_published_at": "2026-09-30T17:16:42Z",
+            "discovered_at": "2026-10-14T00:45:58Z",
+            "ingested_at": "2026-10-14T01:10:52Z",
+            "publication_to_discovery_seconds": 1150156.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 1494.0
+          },
+          {
+            "source_id": "osv",
+            "source_published_at": "2026-09-30T17:16:42Z",
+            "discovered_at": "2026-10-14T01:11:19Z",
+            "ingested_at": "2026-10-14T01:11:25Z",
+            "publication_to_discovery_seconds": 1151677.0,
+            "within_24h": false,
+            "latency_basis": "publisher timestamp to collector observation",
+            "discovery_to_ingest_seconds": 6.0
+          }
+        ],
+        "pipeline": {
+          "state": "pending_enrichment",
+          "history": [
+            {
+              "state": "discovered",
+              "role": "collector",
+              "note": "从登记来源采集到原始记录",
+              "at": "2026-10-14T01:11:25Z"
+            },
+            {
+              "state": "normalized",
+              "role": "normalizer",
+              "note": "已转换为规范事件文档",
+              "at": "2026-10-14T01:11:25Z"
+            },
+            {
+              "state": "pending_enrichment",
+              "role": "scheduler",
+              "note": "本次未执行富化，证据完整性尚未评估（不等于无缺口）",
+              "at": "2026-10-14T01:11:25Z"
+            }
+          ],
+          "scheduler_trace": [],
+          "stop_reason": null,
+          "tool_calls": 0
+        },
+        "conflicts": [
+          {
+            "field": "affected.range",
+            "package": "vllm",
+            "values": [
+              "< 0.27.0",
+              "<= 0.26.0"
+            ],
+            "note": "不同来源给出的受影响区间不一致，系统并列保留，未做取舍"
+          }
+        ],
+        "category": "漏洞",
+        "enrichment": {
+          "dimensions": [
+            {
+              "name": "affected_versions",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "2 个版本范围"
+            },
+            {
+              "name": "remediation",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "1 个修复版本"
+            },
+            {
+              "name": "severity",
+              "status": "present",
+              "evidence_ids": [],
+              "detail": "已有严重性或CVSS记录"
+            },
+            {
+              "name": "poc",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "未收录POC（不等同于不存在）"
+            },
+            {
+              "name": "exploitation_status",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "尚无已接入来源确认在野利用；不等同于未被利用"
+            },
+            {
+              "name": "relationships",
+              "status": "missing",
+              "evidence_ids": [],
+              "detail": "0 条有证据关系"
+            },
+            {
+              "name": "official_sources",
+              "status": "present",
+              "evidence_ids": [
+                "nvd:5f88834572",
+                "osv:71695235ef"
+              ],
+              "detail": "2 个来源"
+            }
+          ],
+          "gaps": [
+            "POC资料与验证状态",
+            "在野利用状态",
+            "关系或攻击链证据"
+          ],
+          "trace": [
+            {
+              "step": 1,
+              "role": "evidence_auditor",
+              "action": "check_affected_versions",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 2,
+              "role": "evidence_auditor",
+              "action": "check_remediation",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 3,
+              "role": "evidence_auditor",
+              "action": "check_severity",
+              "evidence_ids": [],
+              "result": "present"
+            },
+            {
+              "step": 4,
+              "role": "evidence_auditor",
+              "action": "check_poc",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 5,
+              "role": "evidence_auditor",
+              "action": "check_exploitation_status",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 6,
+              "role": "evidence_auditor",
+              "action": "check_relationships",
+              "evidence_ids": [],
+              "result": "missing"
+            },
+            {
+              "step": 7,
+              "role": "evidence_auditor",
+              "action": "check_official_sources",
+              "evidence_ids": [
+                "nvd:5f88834572",
+                "osv:71695235ef"
+              ],
+              "result": "present"
+            },
+            {
+              "step": 8,
+              "role": "scheduler",
+              "action": "stop",
+              "evidence_ids": [],
+              "result": "识别 3 个证据缺口",
+              "stop_reason": "仅审计传入快照；禁止网络抓取和任意工具执行"
+            }
+          ],
+          "poc_status": {
+            "status": "not_collected",
+            "records": 0,
+            "executed": false,
+            "meaning": "当前接入证据未收录POC；不能据此推断POC不存在"
+          }
+        },
+        "assessments": [
+          {
+            "event_id": "CVE-2026-103241",
+            "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+            "status": "affected",
+            "reasons": [
+              "资产版本 0.10.0 命中受影响区间"
+            ],
+            "evidence_ids": [
+              "nvd:5499704840",
+              "osv:066b835f6d"
+            ],
+            "priority": "high"
+          }
+        ]
+      }
+    }
+  ]
+}

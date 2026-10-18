@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-10-15T14:25:53Z",
+  "items": [
+    {
+      "event_id": "CVE-2026-100651",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "priority": "high",
+      "assessment_status": "affected",
+      "component": "vllm",
+      "asset_version": "0.10.0",
+      "asset_is_demo": true,
+      "affected_ranges": [
+        "< 0.29.0"
+      ],
+      "category": "synthetic_actionable",
+      "reason": "合成资产且升级目标可判定：0.10.0 → 0.29.0",
+      "target_version": "0.29.0",
+      "action": "batch_in_progress"
+    },
+    {
+      "event_id": "CVE-2026-100650",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "priority": "high",
+      "assessment_status": "affected",
+      "component": "vllm",
+      "asset_version": "0.10.0",
+      "asset_is_demo": true,
+      "affected_ranges": [
+        "<= 0.29.0",
+        "< 0.30.0"
+      ],
+      "category": "synthetic_actionable",
+      "reason": "合成资产且升级目标可判定：0.10.0 → 0.30.0",
+      "target_version": "0.30.0",
+      "action": "batch_in_progress"
+    },
+    {
+      "event_id": "CVE-2026-100647",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "priority": "high",
+      "assessment_status": "affected",
+      "component": "vllm",
+      "asset_version": "0.10.0",
+      "asset_is_demo": true,
+      "affected_ranges": [
+        "< 0.29.0"
+      ],
+      "category": "synthetic_actionable",
+      "reason": "合成资产且升级目标可判定：0.10.0 → 0.29.0",
+      "target_version": "0.29.0",
+      "action": "batch_in_progress"
+    },
+    {
+      "event_id": "CVE-2026-100654",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "priority": "high",
+      "assessment_status": "affected",
+      "component": "vllm",
+      "asset_version": "0.10.0",
+      "asset_is_demo": true,
+      "affected_ranges": [
+        "< 0.29.0"
+      ],
+      "category": "synthetic_actionable",
+      "reason": "合成资产且升级目标可判定：0.10.0 → 0.29.0",
+      "target_version": "0.29.0",
+      "action": "batch_in_progress"
+    },
+    {
+      "event_id": "CVE-2026-103241",
+      "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+      "priority": "high",
+      "assessment_status": "affected",
+      "component": "vllm",
+      "asset_version": "0.10.0",
+      "asset_is_demo": true,
+      "affected_ranges": [
+        "<= 0.26.0",
+        "< 0.27.0"
+      ],
+      "category": "synthetic_actionable",
+      "reason": "合成资产且升级目标可判定：0.10.0 → 0.27.0",
+      "target_version": "0.27.0",
+      "action": "batch_in_progress"
+    }
+  ]
+}

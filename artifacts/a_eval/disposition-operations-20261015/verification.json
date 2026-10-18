@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-10-15T14:36:34Z",
+  "base_url": "http://127.0.0.1:8020",
+  "dry_run": false,
+  "reset": {
+    "applied": true,
+    "version": "0.10.0",
+    "reopened": [
+      "CVE-2026-100647",
+      "CVE-2026-100650",
+      "CVE-2026-100651",
+      "CVE-2026-103241",
+      "CVE-2026-100654"
+    ],
+    "metrics_after_reset": {
+      "high_priority_total": 5,
+      "high_priority_closed": 0,
+      "high_priority_registered": 5,
+      "high_priority_unopened": 0,
+      "closure_rate": 0.0,
+      "registered_closure_rate": 0.0
+    }
+  },
+  "subject": {
+    "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+    "component": "vllm",
+    "version_before": "0.10.0",
+    "is_demo": true,
+    "target_version": "0.30.0",
+    "affected_ranges": [
+      "< 0.27.0",
+      "< 0.29.0",
+      "< 0.30.0",
+      "<= 0.26.0",
+      "<= 0.29.0"
+    ],
+    "queue": [
+      "CVE-2026-100647",
+      "CVE-2026-100650",
+      "CVE-2026-100651",
+      "CVE-2026-103241",
+      "CVE-2026-100654"
+    ]
+  },
+  "counterexample": {
+    "event_id": "CVE-2026-100647",
+    "requested_status": "verified",
+    "applied_status": "fixed",
+    "verification": {
+      "checked_at": "2026-10-15T14:36:40.791311+00:00",
+      "assessment_status_before": "affected",
+      "assessment_status_after": "affected",
+      "priority_after": "high",
+      "reasons_after": [
+        "资产版本 0.10.0 命中受影响区间"
+      ],
+      "passed": false,
+      "verdict": "复测未通过：资产仍命中受影响区间，不能标记为已关闭。"
+    },
+    "closed_at": null,
+    "stored_status": "fixed",
+    "rejected": true
+  },
+  "upgrade": {
+    "asset_id": "asset-cdx-1edc4e88dbcd6acebb9a",
+    "version_before": "0.10.0",
+    "version_after": "0.30.0",
+    "response_version": "0.30.0"
+  },
+  "closes": [
+    {
+      "event_id": "CVE-2026-100647",
+      "requested_status": "verified",
+      "applied_status": "verified",
+      "verification": {
+        "assessment_status_before": "affected",
+        "assessment_status_after": "not_affected",
+        "passed": true,
+        "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+      },
+      "closed_at": "2026-10-15T14:36:41.877547+00:00",
+      "stored_status": "verified",
+      "version_after": "0.30.0"
+    },
+    {
+      "event_id": "CVE-2026-100650",
+      "requested_status": "verified",
+      "applied_status": "verified",
+      "verification": {
+        "assessment_status_before": "affected",
+        "assessment_status_after": "not_affected",
+        "passed": true,
+        "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+      },
+      "closed_at": "2026-10-15T14:36:42.959783+00:00",
+      "stored_status": "verified",
+      "version_after": "0.30.0"
+    },
+    {
+      "event_id": "CVE-2026-100651",
+      "requested_status": "verified",
+      "applied_status": "verified",
+      "verification": {
+        "assessment_status_before": "affected",
+        "assessment_status_after": "not_affected",
+        "passed": true,
+        "verdict": "复测通过：按当前资产事实，该资产已不命中受影响区间。"
+      },
+      "closed_at": "2026-10-15T14:36:44.074061+00:00",
+      "stored_status": "verified",
+      "version_after": "0.30.0"
+    }
+  ],
+  "five_numbers": {
+    "high_priority_total": {
+      "before": 5,
+      "after": 5
+    },
+    "high_priority_closed": {
+      "before": 3,
+      "after": 3
+    },
+    "high_priority_registered": {
+      "before": 5,
+      "after": 5
+    },
+    "high_priority_unopened": {
+      "before": 0,
+      "after": 0
+    },
+    "closure_rate": {
+      "before": 0.6,
+      "after": 0.6
+    },
+    "registered_closure_rate": {
+      "before": 0.6,
+      "after": 0.6
+    }
+  },
+  "status_breakdown": {
+    "before": {
+      "open": 0,
+      "in_progress": 2,
+      "fixed": 0,
+      "verified": 3,
+      "accepted": 0
+    },
+    "after": {
+      "open": 0,
+      "in_progress": 2,
+      "fixed": 0,
+      "verified": 3,
+      "accepted": 0
+    }
+  }
+}
