@@ -401,10 +401,18 @@ def answer_question(
             "context": {}, "retrieval": {"hits": 0, "input_mode": "not_run_ambiguous_context"},
         }
     else:
+        # 有可用模型时，让它在**已检索到的证据**上组织答案；答案必须带引用，
+        # 否则 answer_with_rag 会退回本地抽取，模型写不出无出处的话。
+        generator = None
+        if model_config:
+            from .answer_generator import build_generator
+
+            generator = build_generator(model_config)
         rag_result = answer_with_rag(
             rag_question, events or [], chunks=rag_chunks,
             focus_document_ids=focus_document_ids,
             required_terms=required_terms,
+            generator=generator,
         )
         rag_result.setdefault("retrieval", {})["query"] = rag_question
         rag_result["retrieval"]["original_question"] = _text(question)

@@ -6,7 +6,7 @@
 
 from __future__ import annotations
 
-from app import rag
+from app import answer_generator, rag
 
 
 def _chunk(text: str, *, chunk_id: str, document_id: str = "doc-1",
@@ -63,3 +63,71 @@ def test_body_paragraph_with_a_volume_marker_is_not_dropped():
         "It covers exposed LLM APIs and shows how probes escalate over time."
     )
     assert rag._looks_bibliographic(body) is False
+
+
+def _prose_chunks():
+    return [
+        _chunk(
+            "OllamaDrama deploys a dedicated honeypot that mimics an LLM API "
+            "and measures attacks against exposed inference services.",
+            chunk_id="chunk-honeypot",
+            title="OllamaDrama: Designing and Deploying a Honeypot",
+        )
+    ]
+
+
+def test_generated_answer_must_cite_a_retrieved_chunk():
+    def generator(question, context, citations):
+        return "OllamaDrama 部署了一个模仿 LLM API 的蜜罐 [chunk-honeypot]。"
+
+    result = rag.answer_with_rag(
+        "OllamaDrama 中的 honeypot 部署在哪里？",
+        chunks=_prose_chunks(), generator=generator,
+    )
+    assert result["answer"].startswith("OllamaDrama 部署了一个模仿")
+    assert result["retrieval"]["generator_used"] is True
+
+
+def test_generated_answer_without_a_citation_falls_back_to_local_evidence():
+    def generator(question, context, citations):
+        return "部署在一个蜜罐服务里，但没有给出任何引用。"
+
+    result = rag.answer_with_rag(
+        "OllamaDrama 中的 honeypot 部署在哪里？",
+        chunks=_prose_chunks(), generator=generator,
+    )
+    assert result["retrieval"]["generator_used"] is False
+    assert result["retrieval"]["generator_error"] == "missing_citation"
+    assert "chunk-honeypot" in result["answer"]
+
+
+def test_generator_failure_degrades_to_local_evidence():
+    def generator(question, context, citations):
+        raise answer_generator.GeneratorError("upstream_timeout")
+
+    result = rag.answer_with_rag(
+        "OllamaDrama 中的 honeypot 部署在哪里？",
+        chunks=_prose_chunks(), generator=generator,
+    )
+    assert result["retrieval"]["generator_used"] is False
+    assert result["retrieval"]["generator_error"] == "GeneratorError"
+    assert result["citations"], "失败时仍必须返回可核对的原文本地答案"
+
+
+def test_build_generator_passes_evidence_and_question_to_the_model(monkeypatch):
+    captured = {}
+
+    def fake_chat(model_config, messages):
+        captured["messages"] = messages
+        return "答案 [chunk-honeypot]。"
+
+    monkeypatch.setattr(answer_generator, "_chat", fake_chat)
+    generator = answer_generator.build_generator({
+        "base_url": "https://example.invalid/v1",
+        "model": "synthetic",
+        "api_key_env": "SYNTHETIC_KEY",
+    })
+    citations = [{"chunk_id": "chunk-honeypot", "title": "T", "quote": "Q"}]
+    assert generator("问题", "ctx", citations) == "答案 [chunk-honeypot]。"
+    joined = " ".join(item["content"] for item in captured["messages"])
+    assert "chunk-honeypot" in joined and "问题" in joined

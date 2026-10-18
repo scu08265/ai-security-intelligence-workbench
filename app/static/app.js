@@ -3388,7 +3388,7 @@
 
     const modelToggle = h('input', { type: 'checkbox' });
     const modelCheck = h('label', { class: 'live-check' }, modelToggle,
-      '让大模型换个说法（可选，需已配置密钥）');
+      '再让大模型换个说法（可选，需已配置密钥）');
     modelToggle.addEventListener('change', () => { state.chat.useModel = modelToggle.checked; });
 
     const context = h('div', { class: 'context-snapshot', 'aria-live': 'polite' });
@@ -3410,7 +3410,8 @@
         h('p', { class: 'chat-hints' },
           '回车发送，Shift+回车换行。回答只使用本地已经存下来的资料，资料里没有的会直接说不知道。'),
         h('p', { class: 'chat-hints' },
-          '打开上面的开关后，大模型会把已有结论换个更口语的说法，并逐字实时显示出来。它只能改措辞、不能加事实；两边的说法不一致时，一律以本地结论为准。')));
+          '配置密钥后，答案默认由模型在已检索到的证据上组织，每句都必须带 chunk 引用，取不回的引用会被拒绝并退回本地抽取。'
+          + '上面的开关只控制“把已完成的答案再换一种说法并逐字显示”，不改证据、不加事实；两边不一致时以本地结论为准。')));
 
     renderChat();
     renderChatContext();
@@ -4340,7 +4341,8 @@
           h('span', {}, '没有配置大模型时使用。答案完全由本地已存的资料拼装，系统不会声称用了大模型。')),
         h('div', { class: 'legend-row' },
           badge('model', '模型辅助模式'),
-          h('span', {}, '配置了密钥时可用。大模型只能做两件事：从候选列表里挑事件、把已有结论换个说法。它不能新增事实。')),
+          h('span', {}, '配置了密钥时可用。大模型做两件事：在已检索的证据上组织带引用的答案、把已有结论换个说法。'
+            + '两条路径都必须带引用，引用取不回就退回本地抽取，不能新增事实。')),
         h('p', { class: 'plain-note' },
           '“提问”页有一个“让大模型换个说法”的开关，默认关闭。开启后模型逐字返回的内容会用紫色虚线标出来，并注明“以本地结论为准”。')),
 

@@ -607,6 +607,16 @@ def _looks_bibliographic(text: str) -> bool:
     return hit_lines / len(lines) >= 0.5
 
 
+def _answer_cites_evidence(answer: str, citations: Sequence[dict[str, Any]]) -> bool:
+    """A generated answer is only accepted when it cites a retrieved chunk."""
+    identifiers = {
+        str(citation.get("chunk_id"))
+        for citation in citations
+        if citation.get("chunk_id")
+    }
+    return any(identifier in answer for identifier in identifiers)
+
+
 def _extractive_answer(
     question: str, citations: Sequence[dict[str, Any]],
 ) -> tuple[str, list[dict[str, Any]]]:
@@ -756,20 +766,33 @@ def answer_with_rag(
                           "focus_fallback": focus_fallback,
                           "required_terms": sorted(required)},
         }
+    def _local_answer() -> tuple[str, list[dict[str, Any]]]:
+        local, local_claims = _extractive_answer(question, citations)
+        if not local:
+            local = "根据命中的原文证据：\n" + "\n".join(
+                f"- {item['quote']}" for item in citations[:3]
+            )
+        return local, local_claims
+
+    generator_used = False
+    generator_error: str | None = None
     title_answer = _title_answer(question, citations)
     if title_answer is not None:
         answer, claims = title_answer
     elif generator is not None:
-        answer = _text(generator(question, context["text"], citations))
-        if not answer:
-            answer = "生成器未返回答案；请直接核对所附原文证据。"
-        claims: list[dict[str, Any]] = []
+        try:
+            generated = _text(generator(question, context["text"], citations))
+        except Exception as exc:  # noqa: BLE001 - 任何失败都退回本地抽取
+            generated, generator_error = "", type(exc).__name__
+        if generated and _answer_cites_evidence(generated, citations):
+            answer, claims = generated, []
+            generator_used = True
+        else:
+            if not generator_error and generated:
+                generator_error = "missing_citation"
+            answer, claims = _local_answer()
     else:
-        answer, claims = _extractive_answer(question, citations)
-        if not answer:
-            answer = "根据命中的原文证据：\n" + "\n".join(
-                f"- {item['quote']}" for item in citations[:3]
-            )
+        answer, claims = _local_answer()
     return {
         "answer": answer,
         "refused": False,
@@ -787,5 +810,7 @@ def answer_with_rag(
             "focus_fallback": focus_fallback,
             "required_terms": sorted(required),
             "bibliographic_filtered": bibliographic_filtered,
+            "generator_used": generator_used,
+            "generator_error": generator_error,
         },
     }
